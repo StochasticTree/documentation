@@ -33,6 +33,11 @@ jobs:
           path: 'stochtree-repo'
           submodules: 'recursive'
 
+      # Verify Makevars in Source
+      - name: List Contents of stochtree-repo/src
+        run: |
+          ls -la stochtree-repo/src
+
       # Build Python Documentation
       - name: Setup Python 3.10
         uses: actions/setup-python@v5
@@ -78,12 +83,23 @@ jobs:
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo/R
         run: |
+          set -e
           mkdir -p stochtree_cran/src
           cp ../src/Makevars stochtree_cran/src/Makevars
           cp ../DESCRIPTION stochtree_cran/
           cp ../cran-bootstrap.R stochtree_cran/
           cp ../_pkgdown.yml stochtree_cran/
           cp ../R_README.md stochtree_cran/README.md
+
+      - name: List Contents of stochtree_cran/src
+        working-directory: stochtree-repo/R
+        run: |
+          ls -la stochtree_cran/src
+
+      - name: List Contents of stochtree_cran
+        working-directory: stochtree-repo/R
+        run: |
+          ls -la stochtree_cran
 
       - name: Run cran-bootstrap.R
         working-directory: stochtree-repo/R/stochtree_cran
