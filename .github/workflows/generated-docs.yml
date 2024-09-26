@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # Grants permission to push to the repository
+      pull-requests: write # Grants permission to create and manage pull requests
 
     env:
       BRANCH_NAME: python-docs-temp-${{ github.run_id }}
@@ -60,6 +60,7 @@ jobs:
           cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation/
 
       - name: Commit and Push Documentation Changes
+        id: commit_and_push
         run: |
           # Configure Git
           git config user.name "${{ github.actor }}"
@@ -73,30 +74,30 @@ jobs:
             git commit -m "Updated the Python documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
+            echo "::set-output name=changes::true"
           else
             echo "No changes to commit."
+            echo "::set-output name=changes::false"
           fi
 
-      - name: Create Pull Request in Documentation Repo
-        if: ${{ steps.commit_and_push.outcome == 'success' }}
+      - name: Merge Temporary Branch into Main
+        if: steps.commit_and_push.outputs.changes == 'true'
         run: |
-          gh pr create --title "Updated the Python documentation" --body "This PR updates the Python documentation." --base main --head $BRANCH_NAME
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Configure Git
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          # Fetch the latest main
+          git fetch origin main
+          # Checkout main
+          git checkout main
+          # Merge the temporary branch
+          git merge --no-ff $BRANCH_NAME -m "Merge updated documentation"
+          # Push changes to main
+          git push origin main
 
-      - name: Enable Auto-Merge on the PR
-        if: ${{ steps.commit_and_push.outcome == 'success' }}
+      - name: Delete Temporary Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
         run: |
-          PR_NUMBER=$(gh pr list --head $BRANCH_NAME --json number --jq '.[0].number')
-          gh pr merge $PR_NUMBER --auto --merge
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Delete Branch After Merge
-        if: ${{ steps.commit_and_push.outcome == 'success' }}
-        run: |
-          gh api repos/:owner/:repo/git/refs/heads/$BRANCH_NAME -X DELETE
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.event.repository.name }}
+          # Delete the temporary branch locally and remotely
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME
