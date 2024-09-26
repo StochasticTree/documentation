@@ -76,11 +76,12 @@ jobs:
           Rscript -e 'install.packages(c("pkgdown", "ggplot2", "latex2exp", "decor"))'
 
       - name: Build R Documentation
-        working-directory: stochtree-repo/R
+        working-directory: stochtree-repo
         run: |
           Rscript cran-bootstrap.R
-          cp _pkgdown.yml stochtree_cran/_pkgdown.yml
-          cp R_README.md stochtree_cran/README.md
+          cp _pkgdown.yml R/stochtree_cran/_pkgdown.yml
+          cp R_README.md R/stochtree_cran/README.md
+          cd R
           Rscript -e 'pkgdown::build_site(install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
