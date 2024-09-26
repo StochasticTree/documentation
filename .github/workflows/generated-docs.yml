@@ -14,6 +14,10 @@ jobs:
     name: Build Python Documentation
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     env:
       BRANCH_NAME: python-docs-temp-${{ github.run_id }}
 
