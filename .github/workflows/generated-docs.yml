@@ -75,12 +75,18 @@ jobs:
         run: |
           Rscript -e 'install.packages(c("pkgdown", "ggplot2", "latex2exp", "decor"))'
 
+      - name: Create stochtree_cran Directory and Copy Makevars
+        working-directory: stochtree-repo/R
+        run: |
+          mkdir -p stochtree_cran/src
+          cp ../src/Makevars stochtree_cran/src/Makevars
+
       - name: Build R Documentation
         working-directory: stochtree-repo/R
         run: |
           Rscript ../cran-bootstrap.R
-          cp ../_pkgdown.yml ./
-          cp ../R_README.md README.md
+          cp ../_pkgdown.yml stochtree_cran/
+          cp ../R_README.md stochtree_cran/README.md
           Rscript -e 'pkgdown::build_site(install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
