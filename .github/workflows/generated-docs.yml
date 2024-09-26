@@ -73,47 +73,34 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo/R
         run: |
-          Rscript -e 'install.packages(c("pkgdown", "ggplot2", "latex2exp", "decor"))'
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
 
-      - name: Create stochtree_cran Directory and Copy Makevars
+      - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo/R
         run: |
           mkdir -p stochtree_cran/src
           cp ../src/Makevars stochtree_cran/src/Makevars
-
-      - name: Run cran-bootstrap.R
-        working-directory: stochtree-repo/R
-        run: |
-          Rscript ../cran-bootstrap.R
-
-      - name: Copy Necessary Files into stochtree_cran
-        working-directory: stochtree-repo/R
-        run: |
           cp ../DESCRIPTION stochtree_cran/
+          cp ../cran-bootstrap.R stochtree_cran/
           cp ../_pkgdown.yml stochtree_cran/
           cp ../R_README.md stochtree_cran/README.md
 
-      - name: List Contents of stochtree_cran
+      - name: Run cran-bootstrap.R
         working-directory: stochtree-repo/R/stochtree_cran
         run: |
-          ls -la src
-          ls -la
+          Rscript cran-bootstrap.R
+
+      - name: Install Package Dependencies
+        working-directory: stochtree-repo/R/stochtree_cran
+        run: |
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - name: Build R Documentation Site
         working-directory: stochtree-repo/R/stochtree_cran
         run: |
-          Rscript -e 'pkgdown::build_site(install = TRUE)'
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../../../docs/r-documentation"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Copy R Documentation to Docs Directory
-        run: |
-          # Ensure the target directory exists
-          mkdir -p docs/r-documentation
-          # Clear existing content
-          rm -rf docs/r-documentation/*
-          # Copy the built documentation
-          cp -r stochtree-repo/R/stochtree_cran/docs/* docs/r-documentation/
 
       # Commit and Push Changes
       - name: Commit and Push Documentation Changes
@@ -131,10 +118,10 @@ jobs:
             git commit -m "Updated the Python and R documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
-            echo "::set-output name=changes::true"
+            echo "changes=true" >> $GITHUB_OUTPUT
           else
             echo "No changes to commit."
-            echo "::set-output name=changes::false"
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Merge Temporary Branch into Main
