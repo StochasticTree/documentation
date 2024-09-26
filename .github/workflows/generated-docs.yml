@@ -14,18 +14,18 @@ jobs:
     name: Build Python Documentation
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-      pull-requests: write # Grant permissions to create and manage pull requests
-
     env:
       BRANCH_NAME: python-docs-temp-${{ github.run_id }}
 
     steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
       - name: Checkout Stochtree Monorepo
         uses: actions/checkout@v4
         with:
           repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
           submodules: 'recursive'
 
       - name: Setup Python 3.10
@@ -35,77 +35,62 @@ jobs:
           cache: 'pip'
 
       - name: Install Package with Relevant Dependencies
+        working-directory: stochtree-repo
         run: |
           pip install --upgrade pip
           pip install -r python_docs/requirements.txt
           pip install .
 
       - name: Build HTML Documentation
+        working-directory: stochtree-repo
         run: |
           sphinx-build -M html python_docs/source/ python_docs/_build/
 
-      - name: Prepare Documentation Directory
+      - name: Copy Documentation to Docs Directory
         run: |
           # Ensure the target directory exists
           mkdir -p docs/python-documentation
           # Clear existing content, if present
-          if [ -d docs/python-documentation ]; then rm -rf docs/python-documentation/*; fi
+          rm -rf docs/python-documentation/*
+          # Copy the built documentation
+          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation/
 
-      - name: Move Documentation to Docs Directory
+      - name: Commit and Push Documentation Changes
         run: |
-          cp -r python_docs/_build/html/* docs/python-documentation/
+          # Configure Git
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          # Check for changes
+          if [ -n "$(git status --porcelain)" ]; then
+            # Create and switch to new branch
+            git checkout -b $BRANCH_NAME
+            # Add changes
+            git add docs/python-documentation
+            git commit -m "Updated the Python documentation"
+            # Push changes to new branch
+            git push origin $BRANCH_NAME
+          else
+            echo "No changes to commit."
+          fi
 
-      - name: Commit and Push Documentation to New Branch
+      - name: Create Pull Request in Documentation Repo
+        if: ${{ steps.commit_and_push.outcome == 'success' }}
         run: |
-          # Configure Git to use the GitHub actor for commits
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
-          # Create and switch to the new branch
-          git checkout -b $BRANCH_NAME
-
-          # Add the generated documentation and commit
-          git add docs/python-documentation
-          git commit -m "Updated the Python documentation"
-
-          # Push the changes to the new unique branch
-          git push -u origin $BRANCH_NAME
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Pull Request Using GitHub CLI
-        run: |
-          # Create a pull request using the unique branch name
           gh pr create --title "Updated the Python documentation" --body "This PR updates the Python documentation." --base main --head $BRANCH_NAME
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable Auto-Merge on the PR
+        if: ${{ steps.commit_and_push.outcome == 'success' }}
         run: |
-          # Enable auto-merge on the created PR
           PR_NUMBER=$(gh pr list --head $BRANCH_NAME --json number --jq '.[0].number')
           gh pr merge $PR_NUMBER --auto --merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout Main Branch and Merge Documentation
-        run: |
-          # Fetch the latest main branch
-          git fetch origin main
-          git checkout main
-
-          # Merge the changes from the temporary branch into main
-          git merge $BRANCH_NAME
-
-          # Push the changes to the main branch
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Delete Branch After Merge
-        if: success() # Only delete if previous steps were successful
+        if: ${{ steps.commit_and_push.outcome == 'success' }}
         run: |
-          # Delete the temporary branch after switching away from it
           gh api repos/:owner/:repo/git/refs/heads/$BRANCH_NAME -X DELETE
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
