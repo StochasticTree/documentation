@@ -33,11 +33,6 @@ jobs:
           path: 'stochtree-repo'
           submodules: 'recursive'
 
-      # Verify Makevars in Source
-      - name: List Contents of stochtree-repo/src
-        run: |
-          ls -la stochtree-repo/src
-
       # Build Python Documentation
       - name: Setup Python 3.10
         uses: actions/setup-python@v5
@@ -76,45 +71,43 @@ jobs:
           use-public-rspm: true
 
       - name: Install R Dependencies
-        working-directory: stochtree-repo/R
+        working-directory: stochtree-repo
         run: |
           Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
 
       - name: Create stochtree_cran Directory and Copy Files
-        working-directory: stochtree-repo/R
+        working-directory: stochtree-repo
         run: |
-          set -e
           mkdir -p stochtree_cran/src
-          cp ../src/Makevars stochtree_cran/src/Makevars
-          cp ../DESCRIPTION stochtree_cran/
-          cp ../cran-bootstrap.R stochtree_cran/
-          cp ../_pkgdown.yml stochtree_cran/
-          cp ../R_README.md stochtree_cran/README.md
+          cp src/Makevars stochtree_cran/src/Makevars
+          cp DESCRIPTION stochtree_cran/
+          cp _pkgdown.yml stochtree_cran/
+          cp R_README.md stochtree_cran/README.md
 
       - name: List Contents of stochtree_cran/src
-        working-directory: stochtree-repo/R
+        working-directory: stochtree-repo
         run: |
           ls -la stochtree_cran/src
 
       - name: List Contents of stochtree_cran
-        working-directory: stochtree-repo/R
+        working-directory: stochtree-repo
         run: |
           ls -la stochtree_cran
 
       - name: Run cran-bootstrap.R
-        working-directory: stochtree-repo/R/stochtree_cran
+        working-directory: stochtree-repo
         run: |
           Rscript cran-bootstrap.R
 
       - name: Install Package Dependencies
-        working-directory: stochtree-repo/R/stochtree_cran
+        working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - name: Build R Documentation Site
-        working-directory: stochtree-repo/R/stochtree_cran
+        working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../../../docs/r-documentation"), install = TRUE)'
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
