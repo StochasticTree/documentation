@@ -72,13 +72,8 @@ jobs:
 
       - name: Install R Dependencies
         working-directory: stochtree-repo/R
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::pkgdown
-            any::ggplot2
-            any::latex2exp
-            any::decor
+        run: |
+          Rscript -e 'install.packages(c("pkgdown", "ggplot2", "latex2exp", "decor"))'
 
       - name: Build R Documentation
         working-directory: stochtree-repo/R
