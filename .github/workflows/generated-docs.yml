@@ -1,4 +1,4 @@
-name: Generate Python Documentation
+name: Generate Documentation
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_python_docs:
-    name: Build Python Documentation
+  build_docs:
+    name: Build Documentation
     runs-on: ubuntu-latest
 
     permissions:
@@ -19,38 +19,40 @@ jobs:
       pull-requests: write # Grants permission to create and manage pull requests
 
     env:
-      BRANCH_NAME: python-docs-temp-${{ github.run_id }}
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout Documentation Repo
         uses: actions/checkout@v4
 
-      - name: Checkout Stochtree Monorepo
+      - name: Checkout Stochtree Repository
         uses: actions/checkout@v4
         with:
           repository: 'StochasticTree/stochtree'
           path: 'stochtree-repo'
           submodules: 'recursive'
 
+      # Build Python Documentation
       - name: Setup Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
           cache: 'pip'
 
-      - name: Install Package with Relevant Dependencies
+      - name: Install Python Package with Relevant Dependencies
         working-directory: stochtree-repo
         run: |
           pip install --upgrade pip
           pip install -r python_docs/requirements.txt
           pip install .
 
-      - name: Build HTML Documentation
+      - name: Build Python HTML Documentation
         working-directory: stochtree-repo
         run: |
           sphinx-build -M html python_docs/source/ python_docs/_build/
 
-      - name: Copy Documentation to Docs Directory
+      - name: Copy Python Documentation to Docs Directory
         run: |
           # Ensure the target directory exists
           mkdir -p docs/python-documentation
@@ -59,6 +61,45 @@ jobs:
           # Copy the built documentation
           cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation/
 
+      # Build R Documentation
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R Dependencies
+        working-directory: stochtree-repo/R
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::pkgdown
+            any::ggplot2
+            any::latex2exp
+            any::decor
+
+      - name: Build R Documentation
+        working-directory: stochtree-repo/R
+        run: |
+          Rscript cran-bootstrap.R
+          cp _pkgdown.yml stochtree_cran/_pkgdown.yml
+          cp R_README.md stochtree_cran/README.md
+          Rscript -e 'pkgdown::build_site(install = TRUE)'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy R Documentation to Docs Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/r-documentation
+          # Clear existing content, if present
+          rm -rf docs/r-documentation/*
+          # Copy the built documentation
+          cp -r stochtree-repo/R/stochtree_cran/docs/* docs/r-documentation/
+
+      # Commit and Push Changes
       - name: Commit and Push Documentation Changes
         id: commit_and_push
         run: |
@@ -70,8 +111,8 @@ jobs:
             # Create and switch to new branch
             git checkout -b $BRANCH_NAME
             # Add changes
-            git add docs/python-documentation
-            git commit -m "Updated the Python documentation"
+            git add docs/python-documentation docs/r-documentation
+            git commit -m "Updated the Python and R documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
             echo "::set-output name=changes::true"
