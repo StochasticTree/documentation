@@ -111,6 +111,15 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Copy R Documentation to Docs Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/r-documentation
+          # Clear existing content, if present
+          rm -rf docs/r-documentation/*
+          # Copy the built documentation
+          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
+
       # Commit and Push Changes
       - name: Commit and Push Documentation Changes
         id: commit_and_push
