@@ -45,6 +45,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r python_docs/requirements.txt
+          pip install sphinx-markdown-builder
           pip install .
 
       - name: Build Python HTML Documentation
@@ -52,14 +53,28 @@ jobs:
         run: |
           sphinx-build -M html python_docs/source/ python_docs/_build/
 
-      - name: Copy Python Documentation to Docs Directory
+      - name: Build Python Markdown Documentation
+        working-directory: stochtree-repo
+        run: |
+          sphinx-build -b markdown python_docs/source/ python_docs/_build/markdown/
+
+      - name: Copy Python HTML Documentation to Docs Directory
         run: |
           # Ensure the target directory exists
-          mkdir -p docs/python-documentation
+          mkdir -p docs/python-documentation-html
           # Clear existing content, if present
-          rm -rf docs/python-documentation/*
-          # Copy the built documentation
-          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation/
+          rm -rf docs/python-documentation-html/*
+          # Copy the built HTML documentation
+          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
+
+      - name: Copy Python Markdown Documentation to Docs Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/python-documentation-markdown
+          # Clear existing content, if present
+          rm -rf docs/python-documentation-markdown/*
+          # Copy the built Markdown documentation
+          cp -r stochtree-repo/python_docs/_build/markdown/* docs/python-documentation-markdown/
 
       # Build R Documentation
       - name: Setup Pandoc
@@ -184,7 +199,7 @@ jobs:
             # Create and switch to new branch
             git checkout -b $BRANCH_NAME
             # Add changes
-            git add docs/python-documentation docs/r-documentation docs/c-documentation
+            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation docs/c-documentation
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
