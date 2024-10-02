@@ -102,13 +102,13 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "rd2markdown"), repos = "https://cloud.r-project.org")'
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "Rd2md"), repos = "https://cloud.r-project.org")'
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
-      - name: Verify rd2markdown Installation
+      - name: Verify Rd2md Installation
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'if (!require("rd2markdown")) { quit(status=1) }'
+          Rscript -e 'if (!require("Rd2md")) { quit(status=1) }'
 
       - name: Run cran-bootstrap.R
         working-directory: stochtree-repo/stochtree_cran
@@ -139,7 +139,7 @@ jobs:
       - name: Convert Rd Files to Markdown
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'rd2markdown::rd2markdown_package(".", outdir = "../../docs/r-documentation-markdown")'
+          Rscript -e 'Rd2md::Rd2md_package(".", outdir = "../../docs/r-documentation-markdown")'
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
