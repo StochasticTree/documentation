@@ -142,14 +142,14 @@ jobs:
             }
           '
 
-      - name: Copy R HTML Documentation to Docs Directory
-        run: |
-          # Ensure the target directory exists
-          mkdir -p docs/r-documentation-html
-          # Clear existing content, if present
-          rm -rf docs/r-documentation-html/*
-          # Copy the built HTML documentation
-          cp -r stochtree-repo/docs/r-documentation-html/* docs/r-documentation-html/
+      # - name: Copy R HTML Documentation to Docs Directory
+      #   run: |
+      #     # Ensure the target directory exists
+      #     mkdir -p docs/r-documentation-html
+      #     # Clear existing content, if present
+      #     rm -rf docs/r-documentation-html/*
+      #     # Copy the built HTML documentation
+      #     cp -r stochtree-repo/docs/r-documentation-html/* docs/r-documentation-html/
 
       - name: Copy R Markdown Documentation to Docs Directory
         run: |
