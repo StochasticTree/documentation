@@ -25,6 +25,7 @@ jobs:
     env:
       BRANCH_NAME: docs-temp-${{ github.run_id }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_LIBS_USER: ${{ runner.temp }}/R/library
 
     steps:
       - name: Checkout Documentation Repo
@@ -89,6 +90,28 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Set R Library Path
+        run: |
+          echo "R_LIBS_USER=${R_LIBS_USER}" >> $GITHUB_ENV
+
+      - name: Check R Library Paths
+        run: |
+          Rscript -e 'print(.libPaths())'
+
+      - name: Install R Dependencies
+        run: |
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "Rd2md"), repos = "https://cloud.r-project.org")'
+          Rscript -e 'remotes::install_deps("stochtree-repo/stochtree_cran", dependencies = TRUE)'
+        env:
+          R_LIBS_USER: ${{ env.R_LIBS_USER }}
+
+      - name: Verify Rd2md and pkgdown Installation
+        run: |
+          Rscript -e 'if (!require("Rd2md")) { quit(status=1) }'
+          Rscript -e 'if (!require("pkgdown")) { quit(status=1) }'
+        env:
+          R_LIBS_USER: ${{ env.R_LIBS_USER }}
+
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo
         run: |
@@ -98,29 +121,12 @@ jobs:
           cp _pkgdown.yml stochtree_cran/
           cp R_README.md stochtree_cran/README.md
 
-      - name: Verify Makevars File
-        working-directory: stochtree-repo
-        run: |
-          if [ ! -f stochtree_cran/src/Makevars ]; then
-            echo "Makevars file is missing in stochtree_cran/src/"
-            exit 1
-          fi
-
-      - name: Install R Dependencies
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "Rd2md"), repos = "https://cloud.r-project.org")'
-          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
-
-      - name: Verify Rd2md Installation
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e 'if (!require("Rd2md")) { quit(status=1) }'
-
       - name: Run cran-bootstrap.R
         working-directory: stochtree-repo
         run: |
           Rscript cran-bootstrap.R
+        env:
+          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
       - name: Prepare R HTML Documentation Directory
         run: |
@@ -135,6 +141,7 @@ jobs:
           Rscript -e 'pkgdown::build_site(override = list(destination = "../../docs/r-documentation-html"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
       - name: Prepare R Markdown Documentation Directory
         run: |
@@ -147,6 +154,8 @@ jobs:
         working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript -e 'Rd2md::Rd2md_package(".", outdir = "../../docs/r-documentation-markdown")'
+        env:
+          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
