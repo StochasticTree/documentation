@@ -62,14 +62,14 @@ jobs:
         run: |
           sphinx-build -b markdown python_docs/source/ python_docs/_build/markdown/
 
-      - name: Copy Python HTML Documentation to Docs Directory
-        run: |
-          # Ensure the target directory exists
-          mkdir -p docs/python-documentation-html
-          # Clear existing content, if present
-          rm -rf docs/python-documentation-html/*
-          # Copy the built HTML documentation
-          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
+      # - name: Copy Python HTML Documentation to Docs Directory
+      #   run: |
+      #     # Ensure the target directory exists
+      #     mkdir -p docs/python-documentation-html
+      #     # Clear existing content, if present
+      #     rm -rf docs/python-documentation-html/*
+      #     # Copy the built HTML documentation
+      #     cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
 
       - name: Copy Python Markdown Documentation to Docs Directory
         run: |
