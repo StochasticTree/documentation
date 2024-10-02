@@ -118,17 +118,29 @@ jobs:
         run: |
           Rscript -e 'roxygen2::roxygenise()'
 
-      - name: Build R HTML Documentation
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation-html"), install = TRUE)'
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build R HTML Documentation
+      #   working-directory: stochtree-repo/stochtree_cran
+      #   run: |
+      #     Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation-html"), install = TRUE)'
+      #   env:
+      #     GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate R Markdown Documentation
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'Rd2md::package2md(pkgdir = ".", outdir = "../docs/r-documentation-markdown")'
+          Rscript -e '
+            files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$"); 
+            for (file in files) { 
+              tryCatch({
+                rd_content <- Rd2md::read_rdfile(file);
+                md_content <- Rd2md::as_markdown(rd_content);
+                output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md");
+                writeLines(md_content, output_file);
+              }, error = function(e) {
+                cat("Error processing", file, ":", e$message, "\n");
+              })
+            }
+          '
 
       - name: Copy R HTML Documentation to Docs Directory
         run: |
