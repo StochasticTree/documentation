@@ -266,6 +266,9 @@ jobs:
             changes=true
           fi
 
+          # Ensure we're not adding the stochtree-repo directory
+          git reset stochtree-repo
+
           if [ "$changes" = true ]; then
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
