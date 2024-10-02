@@ -25,7 +25,6 @@ jobs:
     env:
       BRANCH_NAME: docs-temp-${{ github.run_id }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_LIBS_USER: ${{ runner.temp }}/R/library
 
     steps:
       - name: Checkout Documentation Repo
@@ -90,27 +89,27 @@ jobs:
         with:
           use-public-rspm: true
 
+      # Set R Library Path
       - name: Set R Library Path
         run: |
-          echo "R_LIBS_USER=${R_LIBS_USER}" >> $GITHUB_ENV
+          echo "R_LIBS_USER=${{ runner.temp }}/R/library" >> $GITHUB_ENV
 
+      # Check R Library Paths
       - name: Check R Library Paths
         run: |
           Rscript -e 'print(.libPaths())'
 
+      # Install R Dependencies
       - name: Install R Dependencies
         run: |
           Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "Rd2md"), repos = "https://cloud.r-project.org")'
           Rscript -e 'remotes::install_deps("stochtree-repo/stochtree_cran", dependencies = TRUE)'
-        env:
-          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
+      # Verify Rd2md and pkgdown Installation
       - name: Verify Rd2md and pkgdown Installation
         run: |
           Rscript -e 'if (!require("Rd2md")) { quit(status=1) }'
           Rscript -e 'if (!require("pkgdown")) { quit(status=1) }'
-        env:
-          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo
@@ -125,9 +124,8 @@ jobs:
         working-directory: stochtree-repo
         run: |
           Rscript cran-bootstrap.R
-        env:
-          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
+      # Prepare R HTML Documentation Directory
       - name: Prepare R HTML Documentation Directory
         run: |
           # Ensure the target directory exists
@@ -135,14 +133,15 @@ jobs:
           # Clear existing content, if present
           rm -rf docs/r-documentation-html/*
 
+      # Build R HTML Documentation Site
       - name: Build R HTML Documentation Site
         working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript -e 'pkgdown::build_site(override = list(destination = "../../docs/r-documentation-html"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
+      # Prepare R Markdown Documentation Directory
       - name: Prepare R Markdown Documentation Directory
         run: |
           # Ensure the target directory exists
@@ -150,12 +149,11 @@ jobs:
           # Clear existing content, if present
           rm -rf docs/r-documentation-markdown/*
 
+      # Convert Rd Files to Markdown
       - name: Convert Rd Files to Markdown
         working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript -e 'Rd2md::Rd2md_package(".", outdir = "../../docs/r-documentation-markdown")'
-        env:
-          R_LIBS_USER: ${{ env.R_LIBS_USER }}
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
