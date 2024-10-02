@@ -85,30 +85,31 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Create stochtree_cran Directory and Copy Files
+        working-directory: stochtree-repo
+        run: |
+          mkdir -p stochtree_cran/src
+          cp src/Makevars stochtree_cran/src/Makevars
+          cp DESCRIPTION stochtree_cran/
+          cp _pkgdown.yml stochtree_cran/
+          cp R_README.md stochtree_cran/README.md
+          cp cran-bootstrap.R stochtree_cran/
+
       - name: Install R Dependencies
         working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "rd2markdown"), repos = "https://cloud.r-project.org")'
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
-      - name: Create stochtree_cran Directory and Copy Files
+      - name: Verify rd2markdown Installation
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          mkdir -p src
-          cp ../src/Makevars src/Makevars
-          cp ../DESCRIPTION .
-          cp ../_pkgdown.yml .
-          cp ../R_README.md README.md
+          Rscript -e 'if (!require("rd2markdown")) { quit(status=1) }'
 
       - name: Run cran-bootstrap.R
         working-directory: stochtree-repo/stochtree_cran
         run: |
           Rscript cran-bootstrap.R
-
-      - name: Install Package Dependencies
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - name: Prepare R HTML Documentation Directory
         run: |
