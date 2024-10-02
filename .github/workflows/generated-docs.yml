@@ -109,21 +109,36 @@ jobs:
         run: |
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
-      - name: Build R Documentation Site
+      - name: Prepare R HTML Documentation Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/r-documentation-html
+          # Clear existing content, if present
+          rm -rf docs/r-documentation-html/*
+
+      - name: Build R HTML Documentation Site
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../../docs/r-documentation-html"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Copy R Documentation to Docs Directory
+      - name: Prepare R Markdown Documentation Directory
         run: |
           # Ensure the target directory exists
-          mkdir -p docs/r-documentation
+          mkdir -p docs/r-documentation-markdown
           # Clear existing content, if present
-          rm -rf docs/r-documentation/*
-          # Copy the built documentation
-          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
+          rm -rf docs/r-documentation-markdown/*
+
+      - name: Install rd2markdown Package
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'install.packages("rd2markdown")'
+
+      - name: Convert Rd Files to Markdown
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'rd2markdown::rd2markdown_package(".", outdir = "../../docs/r-documentation-markdown")'
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
@@ -199,7 +214,7 @@ jobs:
             # Create and switch to new branch
             git checkout -b $BRANCH_NAME
             # Add changes
-            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation docs/c-documentation
+            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation-html docs/r-documentation-markdown docs/c-documentation
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
