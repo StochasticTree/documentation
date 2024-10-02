@@ -142,6 +142,10 @@ jobs:
             }
           '
 
+      - name: List generated R Markdown files
+        run: |
+          ls -l stochtree-repo/docs/r-documentation-markdown || echo "No R Markdown files generated"
+
       # - name: Copy R HTML Documentation to Docs Directory
       #   run: |
       #     # Ensure the target directory exists
@@ -153,12 +157,14 @@ jobs:
 
       - name: Copy R Markdown Documentation to Docs Directory
         run: |
-          # Ensure the target directory exists
-          mkdir -p docs/r-documentation-markdown
-          # Clear existing content, if present
-          rm -rf docs/r-documentation-markdown/*
-          # Copy the built Markdown documentation
-          cp -r stochtree-repo/docs/r-documentation-markdown/* docs/r-documentation-markdown/
+          # Ensure the target directory exists and is non-empty
+          if [ -d "stochtree-repo/docs/r-documentation-markdown" ] && [ "$(ls -A stochtree-repo/docs/r-documentation-markdown)" ]; then
+            mkdir -p docs/r-documentation-markdown
+            rm -rf docs/r-documentation-markdown/*
+            cp -r stochtree-repo/docs/r-documentation-markdown/* docs/r-documentation-markdown/
+          else
+            echo "No R Markdown documentation to copy."
+          fi
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
