@@ -3,12 +3,8 @@ name: Generate Documentation
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
   pull_request:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
   release:
     types: [published]
   workflow_dispatch:
@@ -89,27 +85,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      # Set R Library Path
-      - name: Set R Library Path
-        run: |
-          echo "R_LIBS_USER=${{ runner.temp }}/R/library" >> $GITHUB_ENV
-
-      # Check R Library Paths
-      - name: Check R Library Paths
-        run: |
-          Rscript -e 'print(.libPaths())'
-
-      # Install R Dependencies
       - name: Install R Dependencies
+        working-directory: stochtree-repo
         run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "Rd2md"), repos = "https://cloud.r-project.org")'
-          Rscript -e 'remotes::install_deps("stochtree-repo/stochtree_cran", dependencies = TRUE)'
-
-      # Verify Rd2md and pkgdown Installation
-      - name: Verify Rd2md and pkgdown Installation
-        run: |
-          Rscript -e 'if (!require("Rd2md")) { quit(status=1) }'
-          Rscript -e 'if (!require("pkgdown")) { quit(status=1) }'
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
 
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo
@@ -125,35 +104,26 @@ jobs:
         run: |
           Rscript cran-bootstrap.R
 
-      # Prepare R HTML Documentation Directory
-      - name: Prepare R HTML Documentation Directory
-        run: |
-          # Ensure the target directory exists
-          mkdir -p docs/r-documentation-html
-          # Clear existing content, if present
-          rm -rf docs/r-documentation-html/*
-
-      # Build R HTML Documentation Site
-      - name: Build R HTML Documentation Site
+      - name: Install Package Dependencies
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../../docs/r-documentation-html"), install = TRUE)'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+
+      - name: Build R Documentation Site
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      # Prepare R Markdown Documentation Directory
-      - name: Prepare R Markdown Documentation Directory
+      - name: Copy R Documentation to Docs Directory
         run: |
           # Ensure the target directory exists
-          mkdir -p docs/r-documentation-markdown
+          mkdir -p docs/r-documentation
           # Clear existing content, if present
-          rm -rf docs/r-documentation-markdown/*
-
-      # Convert Rd Files to Markdown
-      - name: Convert Rd Files to Markdown
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e 'Rd2md::Rd2md_package(".", outdir = "../../docs/r-documentation-markdown")'
+          rm -rf docs/r-documentation/*
+          # Copy the built documentation
+          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
@@ -187,12 +157,12 @@ jobs:
           doxygen Doxyfile
 
       - name: Setup Sphinx Documentation
-        working-directory: stochtree-repo/docs/cpp
+        working-directory: stochtree-repo
         run: |
-          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep source
+          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep docs/cpp
 
       - name: Configure Sphinx for Breathe
-        working-directory: stochtree-repo/docs/cpp/source
+        working-directory: stochtree-repo/docs/cpp
         run: |
           echo "extensions.append('breathe')" >> conf.py
           echo "breathe_projects = {'stochtree': '../../doxygen_output/xml'}" >> conf.py
@@ -229,7 +199,7 @@ jobs:
             # Create and switch to new branch
             git checkout -b $BRANCH_NAME
             # Add changes
-            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation-html docs/r-documentation-markdown docs/c-documentation
+            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation docs/c-documentation
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
