@@ -168,12 +168,12 @@ jobs:
           doxygen Doxyfile
 
       - name: Setup Sphinx Documentation
-        working-directory: stochtree-repo
+        working-directory: stochtree-repo/docs/cpp
         run: |
-          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep docs/cpp
+          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep source
 
       - name: Configure Sphinx for Breathe
-        working-directory: stochtree-repo/docs/cpp
+        working-directory: stochtree-repo/docs/cpp/source
         run: |
           echo "extensions.append('breathe')" >> conf.py
           echo "breathe_projects = {'stochtree': '../../doxygen_output/xml'}" >> conf.py
