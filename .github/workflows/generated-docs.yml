@@ -128,7 +128,7 @@ jobs:
       - name: Generate R Markdown Documentation
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'Rd2md::Rd2markdown(rdpath = "man", outdir = "../docs/r-documentation-markdown")'
+          Rscript -e 'Rd2md::package2md(pkgdir = ".", outdir = "../docs/r-documentation-markdown")'
 
       - name: Copy R HTML Documentation to Docs Directory
         run: |
