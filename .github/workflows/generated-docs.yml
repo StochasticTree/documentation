@@ -3,8 +3,12 @@ name: Generate Documentation
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
   release:
     types: [published]
   workflow_dispatch:
@@ -88,7 +92,7 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo
         run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "roxygen2", "Rd2md"))'
 
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo
@@ -109,21 +113,40 @@ jobs:
         run: |
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
-      - name: Build R Documentation Site
+      - name: Generate Rd Files
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
+          Rscript -e 'roxygen2::roxygenise()'
+
+      - name: Build R HTML Documentation
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation-html"), install = TRUE)'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Copy R Documentation to Docs Directory
+      - name: Generate R Markdown Documentation
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'Rd2md::Rd2markdown(rdpath = "man", outdir = "../docs/r-documentation-markdown")'
+
+      - name: Copy R HTML Documentation to Docs Directory
         run: |
           # Ensure the target directory exists
-          mkdir -p docs/r-documentation
+          mkdir -p docs/r-documentation-html
           # Clear existing content, if present
-          rm -rf docs/r-documentation/*
-          # Copy the built documentation
-          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
+          rm -rf docs/r-documentation-html/*
+          # Copy the built HTML documentation
+          cp -r stochtree-repo/docs/r-documentation-html/* docs/r-documentation-html/
+
+      - name: Copy R Markdown Documentation to Docs Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/r-documentation-markdown
+          # Clear existing content, if present
+          rm -rf docs/r-documentation-markdown/*
+          # Copy the built Markdown documentation
+          cp -r stochtree-repo/docs/r-documentation-markdown/* docs/r-documentation-markdown/
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
@@ -199,7 +222,7 @@ jobs:
             # Create and switch to new branch
             git checkout -b $BRANCH_NAME
             # Add changes
-            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation docs/c-documentation
+            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation-html docs/r-documentation-markdown docs/c-documentation
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
