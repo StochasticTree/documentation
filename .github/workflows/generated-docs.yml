@@ -249,34 +249,31 @@ jobs:
           git checkout -b $BRANCH_NAME
 
           # Add changes only if documentation directories exist and contain files
-          changes=false
-
           if [ -d "docs/python-documentation-markdown" ] && [ "$(ls -A docs/python-documentation-markdown)" ]; then
             git add docs/python-documentation-markdown
-            changes=true
           fi
 
           if [ -d "docs/r-documentation-markdown" ] && [ "$(ls -A docs/r-documentation-markdown)" ]; then
             git add docs/r-documentation-markdown
-            changes=true
           fi
 
           if [ -d "docs/c-documentation" ] && [ "$(ls -A docs/c-documentation)" ]; then
             git add docs/c-documentation
-            changes=true
           fi
 
           # Ensure we're not adding the stochtree-repo directory
-          git reset stochtree-repo/
+          echo 'stochtree-repo/' >> .gitignore
+          git add .gitignore
 
-          if [ "$changes" = true ]; then
+          # Check if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          else
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "No changes to commit."
-            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Merge Temporary Branch into Main
