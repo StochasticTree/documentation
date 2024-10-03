@@ -139,7 +139,7 @@ jobs:
               files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$"); 
               for (file in files) { 
                 tryCatch({
-                  md_content <- Rd2md::rd2markdown(file);
+                  md_content <- Rd2md::rd2md(file);
                   output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md");
                   writeLines(md_content, output_file);
                 }, error = function(e) {
