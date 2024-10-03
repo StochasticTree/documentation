@@ -133,23 +133,20 @@ jobs:
       - name: Generate R Markdown Documentation
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          if [ -d "man" ] && [ "$(ls -A man)" ]; then
-            Rscript -e '
-              library(Rd2md)
-              files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$"); 
-              for (file in files) { 
-                tryCatch({
-                  md_content <- Rd2md::rd2md(file);
-                  output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md");
-                  writeLines(md_content, output_file);
-                }, error = function(e) {
-                  cat("Error processing", file, ":", e$message, "\n");
-                })
-              }
-            '
-          else
-            echo "No Rd files to process for markdown generation."
-          fi
+          Rscript -e '
+            files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$")
+            dir.create("../docs/r-documentation-markdown", showWarnings = FALSE)
+            for (file in files) {
+              tryCatch({
+                rd <- Rd2md::read_rdfile(file)
+                md_content <- Rd2md::as_markdown(rd)
+                output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md")
+                writeLines(md_content, output_file)
+              }, error = function(e) {
+                cat("Error processing", file, ":", e$message, "\n")
+              })
+            }
+          '
 
       - name: List generated R Markdown files
         run: |
