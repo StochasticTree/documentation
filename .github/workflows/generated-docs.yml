@@ -3,12 +3,8 @@ name: Generate Documentation
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
   pull_request:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
   release:
     types: [published]
   workflow_dispatch:
@@ -52,24 +48,24 @@ jobs:
           pip install sphinx-markdown-builder
           pip install .
 
-      # - name: Build Python HTML Documentation
-      #   working-directory: stochtree-repo
-      #   run: |
-      #     sphinx-build -M html python_docs/source/ python_docs/_build/
+      - name: Build Python HTML Documentation
+        working-directory: stochtree-repo
+        run: |
+          sphinx-build -M html python_docs/source/ python_docs/_build/
 
       - name: Build Python Markdown Documentation
         working-directory: stochtree-repo
         run: |
           sphinx-build -b markdown python_docs/source/ python_docs/_build/markdown/
 
-      # - name: Copy Python HTML Documentation to Docs Directory
-      #   run: |
-      #     # Ensure the target directory exists
-      #     mkdir -p docs/python-documentation-html
-      #     # Clear existing content, if present
-      #     rm -rf docs/python-documentation-html/*
-      #     # Copy the built HTML documentation
-      #     cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
+      - name: Copy Python HTML Documentation to Docs Directory
+        run: |
+          # Ensure the target directory exists
+          mkdir -p docs/python-documentation-html
+          # Clear existing content, if present
+          rm -rf docs/python-documentation-html/*
+          # Copy the built HTML documentation
+          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
 
       - name: Copy Python Markdown Documentation to Docs Directory
         run: |
@@ -92,7 +88,7 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo
         run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor", "roxygen2", "Rd2md"))'
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
 
       - name: Create stochtree_cran Directory and Copy Files
         working-directory: stochtree-repo
@@ -113,64 +109,21 @@ jobs:
         run: |
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
-      - name: Generate Rd Files
+      - name: Build R Documentation Site
         working-directory: stochtree-repo/stochtree_cran
         run: |
-          Rscript -e 'roxygen2::roxygenise()'
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: List generated Rd files
-        working-directory: stochtree-repo/stochtree_cran
+      - name: Copy R Documentation to Docs Directory
         run: |
-          ls -l man || echo "No Rd files found"
-
-      # - name: Build R HTML Documentation
-      #   working-directory: stochtree-repo/stochtree_cran
-      #   run: |
-      #     Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation-html"), install = TRUE)'
-      #   env:
-      #     GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate R Markdown Documentation
-        working-directory: stochtree-repo/stochtree_cran
-        run: |
-          Rscript -e '
-            files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$")
-            dir.create("../docs/r-documentation-markdown", showWarnings = FALSE)
-            for (file in files) {
-              tryCatch({
-                rd <- Rd2md::read_rdfile(file)
-                md_content <- Rd2md::as_markdown(rd)
-                output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md")
-                writeLines(md_content, output_file)
-              }, error = function(e) {
-                cat("Error processing", file, ":", e$message, "\n")
-              })
-            }
-          '
-
-      - name: List generated R Markdown files
-        run: |
-          ls -l stochtree-repo/docs/r-documentation-markdown || echo "No R Markdown files generated"
-
-      # - name: Copy R HTML Documentation to Docs Directory
-      #   run: |
-      #     # Ensure the target directory exists
-      #     mkdir -p docs/r-documentation-html
-      #     # Clear existing content, if present
-      #     rm -rf docs/r-documentation-html/*
-      #     # Copy the built HTML documentation
-      #     cp -r stochtree-repo/docs/r-documentation-html/* docs/r-documentation-html/
-
-      - name: Copy R Markdown Documentation to Docs Directory
-        run: |
-          # Ensure the target directory exists and is non-empty
-          if [ -d "stochtree-repo/docs/r-documentation-markdown" ] && [ "$(ls -A stochtree-repo/docs/r-documentation-markdown)" ]; then
-            mkdir -p docs/r-documentation-markdown
-            rm -rf docs/r-documentation-markdown/*
-            cp -r stochtree-repo/docs/r-documentation-markdown/* docs/r-documentation-markdown/
-          else
-            echo "No R Markdown documentation to copy."
-          fi
+          # Ensure the target directory exists
+          mkdir -p docs/r-documentation
+          # Clear existing content, if present
+          rm -rf docs/r-documentation/*
+          # Copy the built documentation
+          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
 
       # Build C++ Documentation
       - name: Install Doxygen and Graphviz
@@ -241,36 +194,19 @@ jobs:
           # Configure Git
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
-
-          # Create and switch to the new branch
-          git checkout -b $BRANCH_NAME
-
-          # Add changes only if documentation directories exist and contain files
-          if [ -d "docs/python-documentation-markdown" ] && [ "$(ls -A docs/python-documentation-markdown)" ]; then
-            git add docs/python-documentation-markdown
-          fi
-
-          if [ -d "docs/r-documentation-markdown" ] && [ "$(ls -A docs/r-documentation-markdown)" ]; then
-            git add docs/r-documentation-markdown
-          fi
-
-          if [ -d "docs/c-documentation" ] && [ "$(ls -A docs/c-documentation)" ]; then
-            git add docs/c-documentation
-          fi
-
-          # Ensure we're not adding the stochtree-repo directory
-          echo 'stochtree-repo/' >> .gitignore
-          git add .gitignore
-
-          # Check if there are staged changes
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            echo "changes=false" >> $GITHUB_OUTPUT
-          else
+          # Check for changes
+          if [ -n "$(git status --porcelain)" ]; then
+            # Create and switch to new branch
+            git checkout -b $BRANCH_NAME
+            # Add changes
+            git add docs/python-documentation-html docs/python-documentation-markdown docs/r-documentation docs/c-documentation
             git commit -m "Updated the Python, R, and C++ documentation"
             # Push changes to new branch
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Merge Temporary Branch into Main
