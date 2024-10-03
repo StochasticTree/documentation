@@ -135,11 +135,11 @@ jobs:
         run: |
           if [ -d "man" ] && [ "$(ls -A man)" ]; then
             Rscript -e '
+              library(Rd2md)
               files <- list.files("man", full.names = TRUE, pattern = "\\.Rd$"); 
               for (file in files) { 
                 tryCatch({
-                  rd_content <- Rd2md::read_rdfile(file);
-                  md_content <- Rd2md::as_markdown(rd_content);
+                  md_content <- Rd2md::rd2markdown(file);
                   output_file <- paste0("../docs/r-documentation-markdown/", tools::file_path_sans_ext(basename(file)), ".md");
                   writeLines(md_content, output_file);
                 }, error = function(e) {
