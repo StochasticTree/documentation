@@ -8,6 +8,8 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run the workflow daily at midnight UTC
 
 jobs:
   build_docs:
