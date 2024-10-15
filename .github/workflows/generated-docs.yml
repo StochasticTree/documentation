@@ -7,7 +7,7 @@ on:
     types: [published]
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *' # Run the workflow every 30 minutes
+    - cron: '0 0 * * *' # Run the workflow daily at midnight UTC
 
 jobs:
   build_docs:
