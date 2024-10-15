@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StochTree Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      iframe {
+        width: 100%;
+        height: 90vh;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+      }
+      .buttons {
+        margin-bottom: 20px;
+      }
+      button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>StochTree Documentation Portal</h1>
+    <div class="buttons">
+      <button onclick="loadDoc('docs/python-documentation-html/index.html')">
+        Python Docs
+      </button>
+      <button onclick="loadDoc('docs/r-documentation/index.html')">
+        R Docs
+      </button>
+      <button onclick="loadDoc('docs/c-documentation/index.html')">
+        C++ Docs
+      </button>
+    </div>
+    <iframe
+      id="doc-frame"
+      src="docs/python-documentation-html/index.html"
+      frameborder="0"
+    ></iframe>
+
+    <script>
+      function loadDoc(docPath) {
+        document.getElementById('doc-frame').src = docPath;
+      }
+    </script>
+  </body>
+</html>
