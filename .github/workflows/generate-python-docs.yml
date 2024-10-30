@@ -1,0 +1,96 @@
+name: Generate Python Documentation
+
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    # - cron: '0 0 * * *' # Run daily at midnight UTC
+    - cron: '*/10 * * * *' # Run every 10 minutes
+
+jobs:
+  build_python_docs:
+    name: Build Python Documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Stochtree Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
+          submodules: 'recursive'
+
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Package with Relevant Dependencies
+        working-directory: stochtree-repo
+        run: |
+          pip install --upgrade pip
+          pip install -r python_docs/requirements.txt
+          pip install sphinx-markdown-builder
+          pip install .
+
+      - name: Build Python HTML Documentation
+        working-directory: stochtree-repo
+        run: |
+          sphinx-build -M html python_docs/source/ python_docs/_build/
+
+      - name: Build Python Markdown Documentation
+        working-directory: stochtree-repo
+        run: |
+          sphinx-build -b markdown python_docs/source/ python_docs/_build/markdown/
+
+      - name: Copy Python Documentation to Docs Directory
+        run: |
+          mkdir -p docs/python-documentation-html
+          rm -rf docs/python-documentation-html/*
+          cp -r stochtree-repo/python_docs/_build/html/* docs/python-documentation-html/
+          mkdir -p docs/python-documentation-markdown
+          rm -rf docs/python-documentation-markdown/*
+          cp -r stochtree-repo/python_docs/_build/markdown/* docs/python-documentation-markdown/
+
+      - name: Commit and Push Python Documentation Changes
+        id: commit_and_push
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git checkout -b $BRANCH_NAME
+            git add docs/python-documentation-html docs/python-documentation-markdown
+            git commit -m "Updated Python documentation"
+            git push origin $BRANCH_NAME
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge and Clean Up Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-ff $BRANCH_NAME -m "Merge updated Python documentation"
+          git push origin main
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME
