@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Run daily at midnight UTC
-    # - cron: '*/10 * * * *' # Run every 10 minutes
 
 jobs:
   build_r_docs:
@@ -34,6 +33,10 @@ jobs:
           path: 'stochtree-repo'
           submodules: 'recursive'
 
+      - name: List Contents of stochtree-repo
+        run: |
+          ls -R stochtree-repo
+
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
@@ -45,20 +48,27 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo
         run: |
-          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
+          Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor"))'
 
-      - name: Build R Documentation Site
-        working-directory: stochtree-repo/stochtree_cran
+      - name: Build R Documentation
+        working-directory: stochtree-repo
         run: |
-          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
+          Rscript -e '
+            devtools::document()
+            devtools::install(dependencies = TRUE)
+            library(tools)
+            rd_files <- list.files("man", pattern = "\\.Rd$", full.names = TRUE)
+            output_dir <- "../docs/r-documentation"
+            dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+            for (rd_file in rd_files) {
+              rd <- parse_Rd(rd_file)
+              rd_text <- capture.output(Rd2txt(rd))
+              md_file <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(rd_file)), ".md"))
+              writeLines(rd_text, md_file)
+            }
+          '
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Copy R Documentation to Docs Directory
-        run: |
-          mkdir -p docs/r-documentation
-          rm -rf docs/r-documentation/*
-          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
 
       - name: Commit and Push R Documentation Changes
         id: commit_and_push
