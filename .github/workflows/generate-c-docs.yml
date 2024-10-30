@@ -33,14 +33,15 @@ jobs:
           path: 'stochtree-repo'
           submodules: 'recursive'
 
-      - name: Install Doxygen and Graphviz
+      - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install doxygen graphviz -y
+          sudo apt-get install doxygen nodejs npm -y
+          sudo npm install -g moxygen
 
-      - name: Configure Doxyfile and Generate XML
-        working-directory: stochtree-repo
+      - name: Generate Documentation
         run: |
+          cd stochtree-repo
           doxygen -g Doxyfile
           sed -i 's|^INPUT *=.*|INPUT = src|' Doxyfile
           sed -i 's|^GENERATE_XML *= NO|GENERATE_XML = YES|' Doxyfile
@@ -49,35 +50,17 @@ jobs:
           sed -i 's|^PROJECT_NAME *=.*|PROJECT_NAME = "stochtree"|' Doxyfile
           doxygen Doxyfile
 
-      - name: Setup Sphinx for C++ Documentation
-        working-directory: stochtree-repo
-        run: |
-          pip install sphinx breathe
-          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep docs/cpp
-          echo "extensions.append('breathe')" >> docs/cpp/source/conf.py
-          echo "breathe_projects = {'stochtree': '../../doxygen_output/xml'}" >> docs/cpp/source/conf.py
-          echo "breathe_default_project = 'stochtree'" >> docs/cpp/source/conf.py
-          echo ".. doxygenfile:: index.xml" > docs/cpp/source/index.rst
+          mkdir -p ../docs/c-documentation-markdown
+          moxygen --output ../docs/c-documentation-markdown/index.md doxygen_output/xml
 
-      - name: Build C++ HTML Documentation
-        working-directory: stochtree-repo/docs/cpp
-        run: |
-          make html
-
-      - name: Copy C++ Documentation to Docs Directory
-        run: |
-          mkdir -p docs/c-documentation
-          rm -rf docs/c-documentation/*
-          cp -r stochtree-repo/docs/cpp/build/html/* docs/c-documentation/
-
-      - name: Commit and Push C++ Documentation Changes
+      - name: Commit and Push Documentation Changes
         id: commit_and_push
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
             git checkout -b $BRANCH_NAME
-            git add docs/c-documentation
+            git add docs/c-documentation-markdown
             git commit -m "Updated C++ documentation"
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
