@@ -1,0 +1,89 @@
+name: Generate R Documentation
+
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    # - cron: '0 0 * * *' # Run daily at midnight UTC
+    - cron: '*/10 * * * *' # Run every 10 minutes
+
+jobs:
+  build_r_docs:
+    name: Build R Documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Stochtree Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
+          submodules: 'recursive'
+
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R Dependencies
+        working-directory: stochtree-repo
+        run: |
+          Rscript -e 'install.packages(c("remotes", "pkgdown", "ggplot2", "latex2exp", "decor"))'
+
+      - name: Build R Documentation Site
+        working-directory: stochtree-repo/stochtree_cran
+        run: |
+          Rscript -e 'pkgdown::build_site(override = list(destination = "../docs/r-documentation"), install = TRUE)'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy R Documentation to Docs Directory
+        run: |
+          mkdir -p docs/r-documentation
+          rm -rf docs/r-documentation/*
+          cp -r stochtree-repo/docs/r-documentation/* docs/r-documentation/
+
+      - name: Commit and Push R Documentation Changes
+        id: commit_and_push
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git checkout -b $BRANCH_NAME
+            git add docs/r-documentation
+            git commit -m "Updated R documentation"
+            git push origin $BRANCH_NAME
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge and Clean Up Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-ff $BRANCH_NAME -m "Merge updated R documentation"
+          git push origin main
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME
