@@ -1,0 +1,99 @@
+name: Generate C++ Documentation
+
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
+
+jobs:
+  build_cpp_docs:
+    name: Build C++ Documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Stochtree Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
+          submodules: 'recursive'
+
+      - name: Install Doxygen and Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install doxygen graphviz -y
+
+      - name: Configure Doxyfile and Generate XML
+        working-directory: stochtree-repo
+        run: |
+          doxygen -g Doxyfile
+          sed -i 's|^INPUT *=.*|INPUT = src|' Doxyfile
+          sed -i 's|^GENERATE_XML *= NO|GENERATE_XML = YES|' Doxyfile
+          sed -i 's|^RECURSIVE *= NO|RECURSIVE = YES|' Doxyfile
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = doxygen_output|' Doxyfile
+          sed -i 's|^PROJECT_NAME *=.*|PROJECT_NAME = "stochtree"|' Doxyfile
+          doxygen Doxyfile
+
+      - name: Setup Sphinx for C++ Documentation
+        working-directory: stochtree-repo
+        run: |
+          pip install sphinx breathe
+          sphinx-quickstart -q -p "stochtree" -a "StochasticTree" -v "1.0" -l en --ext-autodoc --ext-viewcode --ext-intersphinx --makefile --sep docs/cpp
+          echo "extensions.append('breathe')" >> docs/cpp/source/conf.py
+          echo "breathe_projects = {'stochtree': '../../doxygen_output/xml'}" >> docs/cpp/source/conf.py
+          echo "breathe_default_project = 'stochtree'" >> docs/cpp/source/conf.py
+          echo ".. doxygenfile:: index.xml" > docs/cpp/source/index.rst
+
+      - name: Build C++ HTML Documentation
+        working-directory: stochtree-repo/docs/cpp
+        run: |
+          make html
+
+      - name: Copy C++ Documentation to Docs Directory
+        run: |
+          mkdir -p docs/c-documentation
+          rm -rf docs/c-documentation/*
+          cp -r stochtree-repo/docs/cpp/build/html/* docs/c-documentation/
+
+      - name: Commit and Push C++ Documentation Changes
+        id: commit_and_push
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git checkout -b $BRANCH_NAME
+            git add docs/c-documentation
+            git commit -m "Updated C++ documentation"
+            git push origin $BRANCH_NAME
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge and Clean Up Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-ff $BRANCH_NAME -m "Merge updated C++ documentation"
+          git push origin main
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME
