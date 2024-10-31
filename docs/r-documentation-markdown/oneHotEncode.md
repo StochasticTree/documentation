@@ -1,3 +1,7 @@
+---
+title: oneHotEncode
+---
+
 # Convert a vector of unordered categorical data (either numeric or character
 
 ## Description
@@ -29,8 +33,8 @@ Binary one-hot matrix
 ## Examples
 
 ```r
-x <- sample(1:8, 100, TRUE)
-x_test <- sample(1:9, 10, TRUE)
-x_onehot <- oneHotEncode(x_test, levels(factor(x)))
+x \<- sample(1:8, 100, TRUE)
+x_test \<- sample(1:9, 10, TRUE)
+x_onehot \<- oneHotEncode(x_test, levels(factor(x)))
 ```
 

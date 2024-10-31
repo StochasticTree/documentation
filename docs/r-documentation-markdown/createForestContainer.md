@@ -1,3 +1,7 @@
+---
+title: createForestContainer
+---
+
 # Create a container of forest samples
 
 ## Description

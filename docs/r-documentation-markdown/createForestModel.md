@@ -1,3 +1,7 @@
+---
+title: createForestModel
+---
+
 # Create a forest model object
 
 ## Description

@@ -1,3 +1,7 @@
+---
+title: ForestSamples
+---
+
 # Class that stores draws from an random ensemble of decision trees
 
 ## Description
@@ -383,7 +387,7 @@ ForestSamples$add_forest_with_constant_leaves(leaf_value)
 
 ### Method `add_numeric_split_tree()`
 
-Add a numeric (i.e. X[,i](,i) <= c) split to a given tree in the ensemble
+Add a numeric (i.e. X[,i](,i) \<= c) split to a given tree in the ensemble
 
 #### Usage
 

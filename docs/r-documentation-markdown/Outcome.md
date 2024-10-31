@@ -1,3 +1,7 @@
+---
+title: Outcome
+---
+
 # Outcome / partial residual used to sample an additive model.
 
 ## Description

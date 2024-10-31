@@ -1,3 +1,7 @@
+---
+title: getRandomEffectSamples
+---
+
 # Generic function for extracting random effect samples from a model object (BCF, BART, etc...)
 
 ## Description

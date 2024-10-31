@@ -1,3 +1,7 @@
+---
+title: loadVectorJson
+---
+
 # Load a vector from json
 
 ## Description

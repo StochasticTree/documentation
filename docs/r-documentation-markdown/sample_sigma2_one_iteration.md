@@ -1,3 +1,7 @@
+---
+title: sample_sigma2_one_iteration
+---
+
 # Sample one iteration of the (inverse gamma) global variance model
 
 ## Description

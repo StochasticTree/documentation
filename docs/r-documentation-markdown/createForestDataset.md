@@ -1,3 +1,7 @@
+---
+title: createForestDataset
+---
+
 # Create a forest dataset object
 
 ## Description

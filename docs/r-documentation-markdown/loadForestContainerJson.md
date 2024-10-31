@@ -1,3 +1,7 @@
+---
+title: loadForestContainerJson
+---
+
 # Load a container of forest samples from json
 
 ## Description

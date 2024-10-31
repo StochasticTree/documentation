@@ -1,3 +1,7 @@
+---
+title: computeMaxLeafIndex
+---
+
 # Compute and return the largest possible leaf index computable by
 
 ## Description

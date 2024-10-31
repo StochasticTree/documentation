@@ -1,3 +1,7 @@
+---
+title: computeForestLeafVariances
+---
+
 # Compute vector of forest leaf scale parameters
 
 ## Description

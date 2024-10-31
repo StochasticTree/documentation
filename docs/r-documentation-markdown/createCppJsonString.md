@@ -1,3 +1,7 @@
+---
+title: createCppJsonString
+---
+
 # Create a C++ Json object from a Json string
 
 ## Description

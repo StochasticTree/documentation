@@ -1,3 +1,7 @@
+---
+title: preprocessBartParams
+---
+
 # Preprocess BART parameter list. Override defaults with any provided parameters.
 
 ## Description

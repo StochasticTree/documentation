@@ -1,3 +1,7 @@
+---
+title: createOutcome
+---
+
 # Create an outcome object
 
 ## Description

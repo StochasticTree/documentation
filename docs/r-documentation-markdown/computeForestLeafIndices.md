@@ -1,3 +1,7 @@
+---
+title: computeForestLeafIndices
+---
+
 # Compute vector of forest leaf indices
 
 ## Description

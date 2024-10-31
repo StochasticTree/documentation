@@ -1,3 +1,7 @@
+---
+title: stochtree-package
+---
+
 # stochtree: Stochastic tree ensembles (XBART and BART) for supervised learning and causal inference
 
 ## Description

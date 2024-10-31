@@ -1,3 +1,7 @@
+---
+title: preprocessTrainMatrix
+---
+
 # Preprocess a matrix of covariate values, assuming all columns are numeric.
 
 ## Description
@@ -24,8 +28,8 @@ vector of feature types needed for calls to BART and BCF.
 ## Examples
 
 ```r
-cov_mat <- matrix(1:12, ncol = 3)
-preprocess_list <- preprocessTrainMatrix(cov_mat)
-X <- preprocess_list$X
+cov_mat \<- matrix(1:12, ncol = 3)
+preprocess_list \<- preprocessTrainMatrix(cov_mat)
+X \<- preprocess_list$X
 ```
 

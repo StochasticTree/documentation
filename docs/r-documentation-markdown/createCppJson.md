@@ -1,3 +1,7 @@
+---
+title: createCppJson
+---
+
 # Create a new (empty) C++ Json object
 
 ## Description

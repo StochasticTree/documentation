@@ -1,3 +1,7 @@
+---
+title: loadRandomEffectSamplesCombinedJson
+---
+
 # Combine multiple JSON model objects containing random effects (with the same hierarchy / schema) into a single container
 
 ## Description

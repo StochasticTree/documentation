@@ -1,3 +1,7 @@
+---
+title: createRandomEffectSamples
+---
+
 # Create a
 
 ## Description

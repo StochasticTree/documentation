@@ -1,3 +1,7 @@
+---
+title: createRandomEffectsTracker
+---
+
 # Create a
 
 ## Description

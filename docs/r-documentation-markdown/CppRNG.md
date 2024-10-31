@@ -1,3 +1,7 @@
+---
+title: CppRNG
+---
+
 # Class that wraps a C++ random number generator (for reproducibility)
 
 ## Description

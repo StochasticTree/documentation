@@ -1,3 +1,7 @@
+---
+title: preprocessTrainData
+---
+
 # Preprocess covariates. DataFrames will be preprocessed based on their column
 
 ## Description
@@ -25,8 +29,8 @@ vector of feature types needed for calls to BART and BCF.
 ## Examples
 
 ```r
-cov_mat <- matrix(1:12, ncol = 3)
-preprocess_list <- preprocessTrainData(cov_mat)
-X <- preprocess_list$X
+cov_mat \<- matrix(1:12, ncol = 3)
+preprocess_list \<- preprocessTrainData(cov_mat)
+X \<- preprocess_list$X
 ```
 

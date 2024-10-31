@@ -1,3 +1,7 @@
+---
+title: oneHotInitializeAndEncode
+---
+
 # Convert a vector of unordered categorical data (either numeric or character
 
 ## Description
@@ -25,7 +29,7 @@ input variable. These unique levels are used in the BCF and BART functions.
 ## Examples
 
 ```r
-x <- c("a","c","b","c","d","a","c","a","b","d")
-x_onehot <- oneHotInitializeAndEncode(x)
+x \<- c("a","c","b","c","d","a","c","a","b","d")
+x_onehot \<- oneHotInitializeAndEncode(x)
 ```
 

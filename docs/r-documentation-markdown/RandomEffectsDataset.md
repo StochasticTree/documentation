@@ -1,3 +1,7 @@
+---
+title: RandomEffectsDataset
+---
+
 # Dataset used to sample a random effects model
 
 ## Description

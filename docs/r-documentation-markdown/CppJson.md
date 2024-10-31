@@ -1,3 +1,7 @@
+---
+title: CppJson
+---
+
 # Class that stores draws from an random ensemble of decision trees
 
 ## Description
