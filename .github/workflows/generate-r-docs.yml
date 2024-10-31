@@ -37,9 +37,6 @@ jobs:
         run: |
           ls -R stochtree-repo
 
-      - name: Setup Pandoc
-        uses: r-lib/actions/setup-pandoc@v2
-
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
@@ -48,7 +45,7 @@ jobs:
       - name: Install R Dependencies
         working-directory: stochtree-repo
         run: |
-          Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor"))'
+          Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor", "Rd2md"))'
 
       - name: Build R Documentation
         working-directory: stochtree-repo
@@ -56,15 +53,13 @@ jobs:
           Rscript -e '
             devtools::document()
             devtools::install(dependencies = TRUE)
-            library(tools)
+            library(Rd2md)
             rd_files <- list.files("man", pattern = "\\.Rd$", full.names = TRUE)
             output_dir <- "../docs/r-documentation"
             dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
             for (rd_file in rd_files) {
-              rd <- parse_Rd(rd_file)
-              rd_text <- capture.output(Rd2txt(rd))
               md_file <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(rd_file)), ".md"))
-              writeLines(rd_text, md_file)
+              Rd2markdown(rd_file, out = md_file)
             }
           '
         env:
