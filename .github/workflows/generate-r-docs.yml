@@ -57,9 +57,48 @@ jobs:
             rd_files <- list.files("man", pattern = "\\.Rd$", full.names = TRUE)
             output_dir <- "../docs/r-documentation-markdown"
             dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+            
+            fence_code_blocks <- function(content) {
+              in_code_block <- FALSE
+              fenced_content <- sapply(content, function(line) {
+                if (grepl("^    ", line)) {  # Indented code block
+                  if (!in_code_block) {
+                    in_code_block <<- TRUE
+                    return(paste0("```r\n", sub("^    ", "", line)))
+                  } else {
+                    return(sub("^    ", "", line))
+                  }
+                } else {
+                  if (in_code_block) {
+                    in_code_block <<- FALSE
+                    return(paste0("```\n", line))
+                  } else {
+                    return(line)
+                  }
+                }
+              })
+              # Close any unclosed code blocks
+              if (in_code_block) {
+                fenced_content <- c(fenced_content, "```")
+              }
+              return(fenced_content)
+            }
+            
             for (rd_file in rd_files) {
               md_file <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(rd_file)), ".md"))
               Rd2markdown(rd_file, out = md_file)
+              # Read the generated Markdown file
+              md_content <- readLines(md_file)
+              # Escape problematic characters
+              md_content <- gsub("([{}<>])", "\\\\\\1", md_content)
+              # Fence code blocks
+              md_content <- fence_code_blocks(md_content)
+              # Add front matter
+              title <- tools::file_path_sans_ext(basename(md_file))
+              frontmatter <- c("---", paste0("title: ", title), "---", "")
+              md_content <- c(frontmatter, md_content)
+              # Write back the modified content
+              writeLines(md_content, md_file)
             }
           '
         env:
