@@ -55,7 +55,7 @@ jobs:
             devtools::install(dependencies = TRUE)
             library(Rd2md)
             rd_files <- list.files("man", pattern = "\\.Rd$", full.names = TRUE)
-            output_dir <- "../docs/r-documentation"
+            output_dir <- "../docs/r-documentation-markdown"
             dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
             for (rd_file in rd_files) {
               md_file <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(rd_file)), ".md"))
@@ -72,7 +72,7 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
             git checkout -b $BRANCH_NAME
-            git add docs/r-documentation
+            git add docs/r-documentation-markdown
             git commit -m "Updated R documentation"
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
