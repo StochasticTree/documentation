@@ -1,3 +1,7 @@
+---
+title: sample_tau_one_iteration
+---
+
 # Sample one iteration of the leaf parameter variance model (only for univariate basis and constant leaf!)
 
 ## Description

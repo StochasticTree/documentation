@@ -1,3 +1,7 @@
+---
+title: RandomEffectsModel
+---
+
 # The core "model" class for sampling random effects.
 
 ## Description

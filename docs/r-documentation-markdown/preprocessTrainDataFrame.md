@@ -1,3 +1,7 @@
+---
+title: preprocessTrainDataFrame
+---
+
 # Preprocess a dataframe of covariate values, converting categorical variables
 
 ## Description
@@ -26,8 +30,8 @@ vector of feature types needed for calls to BART and BCF.
 ## Examples
 
 ```r
-cov_df <- data.frame(x1 = 1:5, x2 = 5:1, x3 = 6:10)
-preprocess_list <- preprocessTrainDataFrame(cov_df)
-X <- preprocess_list$X
+cov_df \<- data.frame(x1 = 1:5, x2 = 5:1, x3 = 6:10)
+preprocess_list \<- preprocessTrainDataFrame(cov_df)
+X \<- preprocess_list$X
 ```
 

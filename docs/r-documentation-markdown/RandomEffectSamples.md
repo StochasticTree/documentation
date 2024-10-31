@@ -1,3 +1,7 @@
+---
+title: RandomEffectSamples
+---
+
 # Class that wraps the "persistent" aspects of a C++ random effects model
 
 ## Description

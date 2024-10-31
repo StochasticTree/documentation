@@ -1,3 +1,7 @@
+---
+title: preprocessBcfParams
+---
+
 # Preprocess BCF parameter list. Override defaults with any provided parameters.
 
 ## Description

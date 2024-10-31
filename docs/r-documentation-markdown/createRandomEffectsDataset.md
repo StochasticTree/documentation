@@ -1,3 +1,7 @@
+---
+title: createRandomEffectsDataset
+---
+
 # Create a random effects dataset object
 
 ## Description

@@ -1,3 +1,7 @@
+---
+title: loadRandomEffectSamplesJson
+---
+
 # Load a container of random effect samples from json
 
 ## Description

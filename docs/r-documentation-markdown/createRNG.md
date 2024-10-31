@@ -1,3 +1,7 @@
+---
+title: createRNG
+---
+
 # Create an R class that wraps a C++ random number generator
 
 ## Description

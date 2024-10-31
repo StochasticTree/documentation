@@ -1,3 +1,7 @@
+---
+title: loadScalarJson
+---
+
 # Load a scalar from json
 
 ## Description

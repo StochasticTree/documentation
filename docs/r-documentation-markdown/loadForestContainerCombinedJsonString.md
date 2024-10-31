@@ -1,3 +1,7 @@
+---
+title: loadForestContainerCombinedJsonString
+---
+
 # Combine multiple JSON strings representing model objects containing forests (with the same hierarchy / schema) into a single forest_container
 
 ## Description

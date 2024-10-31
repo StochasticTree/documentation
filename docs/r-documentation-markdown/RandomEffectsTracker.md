@@ -1,3 +1,7 @@
+---
+title: RandomEffectsTracker
+---
+
 # Class that defines a "tracker" for random effects models, most notably
 
 ## Description

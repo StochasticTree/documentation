@@ -1,3 +1,7 @@
+---
+title: calibrate_inverse_gamma_error_variance
+---
+
 # Calibrate the scale parameter on an inverse gamma prior for the global error variance as in Chipman et al (2022)
 
 ## Description
@@ -33,13 +37,13 @@ Value of `lambda` which determines the scale parameter of the global error varia
 ## Examples
 
 ```r
-n <- 100
-p <- 5
-X <- matrix(runif(n*p), ncol = p)
-y <- 10*X[,1] - 20*X[,2] + rnorm(n)
-nu <- 3
-lambda <- calibrate_inverse_gamma_error_variance(y, X, nu = nu)
-sigma2hat <- mean(resid(lm(y~X))^2)
-mean(var(y)/rgamma(100000, nu, rate = nu*lambda) < sigma2hat)
+n \<- 100
+p \<- 5
+X \<- matrix(runif(n*p), ncol = p)
+y \<- 10*X[,1] - 20*X[,2] + rnorm(n)
+nu \<- 3
+lambda \<- calibrate_inverse_gamma_error_variance(y, X, nu = nu)
+sigma2hat \<- mean(resid(lm(y~X))^2)
+mean(var(y)/rgamma(100000, nu, rate = nu*lambda) \< sigma2hat)
 ```
 

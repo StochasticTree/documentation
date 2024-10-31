@@ -1,3 +1,7 @@
+---
+title: ForestDataset
+---
+
 # Dataset used to sample a forest
 
 ## Description

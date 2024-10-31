@@ -1,3 +1,7 @@
+---
+title: ForestModel
+---
+
 # Class that defines and samples a forest model
 
 ## Description
@@ -87,7 +91,7 @@ ForestModel$sample_one_iteration(
 * `rng`: Wrapper around C++ random number generator
 * `feature_types`: Vector specifying the type of all p covariates in `forest_dataset` (0 = numeric, 1 = ordered categorical, 2 = unordered categorical)
 * `leaf_model_int`: Integer specifying the leaf model type (0 = constant leaf, 1 = univariate leaf regression, 2 = multivariate leaf regression)
-* `leaf_model_scale`: Scale parameter used in the leaf node model (should be a q x q matrix where q is the dimensionality of the basis and is only >1 when `leaf_model_int = 2`)
+* `leaf_model_scale`: Scale parameter used in the leaf node model (should be a q x q matrix where q is the dimensionality of the basis and is only \>1 when `leaf_model_int = 2`)
 * `variable_weights`: Vector specifying sampling probability for all p covariates in `forest_dataset`
 * `a_forest`: Shape parameter on variance forest model (if applicable)
 * `b_forest`: Scale parameter on variance forest model (if applicable)
