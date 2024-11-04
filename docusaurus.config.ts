@@ -69,13 +69,13 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        { to: '/blog', label: 'Roadmap', position: 'left' },
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Docs',
         },
+        { to: '/blog', label: 'Roadmap', position: 'left' },
         { to: '/team', label: 'Team', position: 'left' },
         {
           href: 'https://github.com/StochasticTree',
