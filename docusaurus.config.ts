@@ -87,11 +87,23 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'GitHub Repos',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Arborist App',
+              href: 'https://github.com/silicontwin/arborist-app',
+            },
+            {
+              label: 'StochTree C++ Core',
+              href: 'https://github.com/StochasticTree/stochtree',
+            },
+            {
+              label: 'StochTree R',
+              href: 'https://github.com/StochasticTree/stochtree/tree/main/R',
+            },
+            {
+              label: 'StochTree Python',
+              href: 'https://github.com/StochasticTree/stochtree/tree/main/stochtree',
             },
           ],
         },
