@@ -1,0 +1,135 @@
+name: Generate C++ Documentation
+
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
+
+jobs:
+  build_cpp_docs:
+    name: Build C++ Documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Stochtree Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
+          submodules: 'recursive'
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install doxygen nodejs npm -y
+          sudo npm install -g moxygen
+
+      - name: Generate Doxygen XML
+        run: |
+          cd stochtree-repo
+          # Generate Doxygen configuration file if it doesn't exist
+          if [ ! -f Doxyfile ]; then
+            doxygen -g Doxyfile
+          fi
+          # Update Doxygen configuration
+          sed -i 's|^INPUT *=.*|INPUT = src|' Doxyfile
+          sed -i 's|^RECURSIVE *= NO|RECURSIVE = YES|' Doxyfile
+          sed -i 's|^GENERATE_XML *= NO|GENERATE_XML = YES|' Doxyfile
+          sed -i 's|^XML_OUTPUT *= xml|XML_OUTPUT = doxygen_xml|' Doxyfile
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = doxygen_output|' Doxyfile
+          sed -i 's|^PROJECT_NAME *=.*|PROJECT_NAME = "stochtree"|' Doxyfile
+          sed -i 's|^GENERATE_HTML *= YES|GENERATE_HTML = NO|' Doxyfile
+          # Run Doxygen
+          doxygen Doxyfile
+
+      - name: Generate Single Markdown File with moxygen
+        run: |
+          cd stochtree-repo
+          mkdir -p ../docs/c-documentation-markdown
+          moxygen doxygen_output/doxygen_xml -o ../docs/c-documentation-markdown/combined.md
+
+      - name: Split Combined Markdown into Multiple Files
+        run: |
+          cd stochtree-repo
+          # Create splitMarkdown.js
+          cat > splitMarkdown.js << 'END_SCRIPT'
+          const fs = require('fs');
+          const path = require('path');
+
+          const inputFile = '../docs/c-documentation-markdown/combined.md';
+          const outputDir = '../docs/c-documentation-markdown';
+
+          if (!fs.existsSync(inputFile)) {
+            console.error(`Input file ${inputFile} does not exist.`);
+            process.exit(1);
+          }
+
+          const data = fs.readFileSync(inputFile, 'utf8');
+
+          // Split the file on level 1 headers (e.g., "# ClassName")
+          const sections = data.split(/^# /gm).filter(section => section.trim() !== '');
+
+          sections.forEach(section => {
+            // Get the title of the section
+            const lines = section.split('\n');
+            const title = lines[0].trim();
+            const content = lines.slice(1).join('\n');
+
+            // Sanitize the title to create a filename
+            const filename = title.replace(/[<>:"\/\\|?*]/g, '').replace(/\s+/g, '_') + '.md';
+            const filepath = path.join(outputDir, filename);
+
+            // Write the section to a file with front matter
+            const frontMatter = `---\n` +
+                                `title: ${title}\n` +
+                                `---\n\n`;
+            fs.writeFileSync(filepath, frontMatter + `# ${title}\n${content}`, 'utf8');
+          });
+          END_SCRIPT
+          # Run the script
+          node splitMarkdown.js
+          # Remove the combined markdown file
+          rm ../docs/c-documentation-markdown/combined.md
+
+      - name: Commit and Push Documentation Changes
+        id: commit_and_push
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git checkout -b $BRANCH_NAME
+            git add docs/c-documentation-markdown
+            git commit -m "Updated C++ documentation"
+            git push origin $BRANCH_NAME
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge and Clean Up Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-ff $BRANCH_NAME -m "Merge updated C++ documentation"
+          git push origin main
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME

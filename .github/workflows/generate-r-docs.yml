@@ -1,0 +1,133 @@
+name: Generate R Documentation
+
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
+
+jobs:
+  build_r_docs:
+    name: Build R Documentation
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    env:
+      BRANCH_NAME: docs-temp-${{ github.run_id }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Documentation Repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Stochtree Repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree-repo'
+          submodules: 'recursive'
+
+      - name: List Contents of stochtree-repo
+        run: |
+          ls -R stochtree-repo
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R Dependencies
+        working-directory: stochtree-repo
+        run: |
+          Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor", "Rd2md"))'
+
+      - name: Build R Documentation
+        working-directory: stochtree-repo
+        run: |
+          Rscript -e '
+            devtools::document()
+            devtools::install(dependencies = TRUE)
+            library(Rd2md)
+            rd_files <- list.files("man", pattern = "\\.Rd$", full.names = TRUE)
+            output_dir <- "../docs/r-documentation-markdown"
+            dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
+            
+            fence_code_blocks <- function(content) {
+              in_code_block <- FALSE
+              fenced_content <- sapply(content, function(line) {
+                if (grepl("^    ", line)) {  # Indented code block
+                  if (!in_code_block) {
+                    in_code_block <<- TRUE
+                    return(paste0("```r\n", sub("^    ", "", line)))
+                  } else {
+                    return(sub("^    ", "", line))
+                  }
+                } else {
+                  if (in_code_block) {
+                    in_code_block <<- FALSE
+                    return(paste0("```\n", line))
+                  } else {
+                    return(line)
+                  }
+                }
+              })
+              # Close any unclosed code blocks
+              if (in_code_block) {
+                fenced_content <- c(fenced_content, "```")
+              }
+              return(fenced_content)
+            }
+            
+            for (rd_file in rd_files) {
+              md_file <- file.path(output_dir, paste0(tools::file_path_sans_ext(basename(rd_file)), ".md"))
+              Rd2markdown(rd_file, out = md_file)
+              # Read the generated Markdown file
+              md_content <- readLines(md_file)
+              # Escape problematic characters
+              md_content <- gsub("([{}<>])", "\\\\\\1", md_content)
+              # Fence code blocks
+              md_content <- fence_code_blocks(md_content)
+              # Add front matter
+              title <- tools::file_path_sans_ext(basename(md_file))
+              frontmatter <- c("---", paste0("title: ", title), "---", "")
+              md_content <- c(frontmatter, md_content)
+              # Write back the modified content
+              writeLines(md_content, md_file)
+            }
+          '
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and Push R Documentation Changes
+        id: commit_and_push
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git checkout -b $BRANCH_NAME
+            git add docs/r-documentation-markdown
+            git commit -m "Updated R documentation"
+            git push origin $BRANCH_NAME
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Merge and Clean Up Branch
+        if: steps.commit_and_push.outputs.changes == 'true'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+          git merge --no-ff $BRANCH_NAME -m "Merge updated R documentation"
+          git push origin main
+          git branch -D $BRANCH_NAME
+          git push origin --delete $BRANCH_NAME
