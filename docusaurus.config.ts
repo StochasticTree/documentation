@@ -8,7 +8,7 @@ const config: Config = {
     'Go bare metal with StochTree or use the Arborist app to get started in minutes.',
   favicon: 'img/favicon.ico',
 
-  url: 'https://stochtree.vercel.app',
+  url: 'https://stochtree.ai',
   baseUrl: '/',
 
   // GitHub pages deployment config.
