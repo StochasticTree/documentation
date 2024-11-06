@@ -9,7 +9,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://stochtree.vercel.app',
-  baseUrl: '/documentation',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   organizationName: 'StochasticTree',
