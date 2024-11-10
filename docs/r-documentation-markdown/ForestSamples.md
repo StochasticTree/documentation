@@ -43,6 +43,8 @@ Wrapper around a C++ container of tree ensembles
 * [`ForestSamples$ensemble_tree_max_depth()`](#method-ForestSamples-ensemble_tree_max_depth)
 * [`ForestSamples$average_ensemble_max_depth()`](#method-ForestSamples-average_ensemble_max_depth)
 * [`ForestSamples$average_max_depth()`](#method-ForestSamples-average_max_depth)
+* [`ForestSamples$num_leaves()`](#method-ForestSamples-num_leaves)
+* [`ForestSamples$sum_leaves_squared()`](#method-ForestSamples-sum_leaves_squared)
 
 ### Method `new()`
 
@@ -533,6 +535,42 @@ Average the maximum depth of each tree in each ensemble in a `ForestContainer` o
 ```
 ForestSamples$average_max_depth()
 ```
+
+#### Returns
+
+Average maximum depth
+
+### Method `num_leaves()`
+
+Number of leaves in a given ensemble in a `ForestContainer` object
+
+#### Usage
+
+```
+ForestSamples$num_leaves(forest_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the ensemble to be queried
+
+#### Returns
+
+Count of leaves in the ensemble stored at `forest_num`
+
+### Method `sum_leaves_squared()`
+
+Sum of squared (raw) leaf values in a given ensemble in a `ForestContainer` object
+
+#### Usage
+
+```
+ForestSamples$sum_leaves_squared(forest_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the ensemble to be queried
 
 #### Returns
 
