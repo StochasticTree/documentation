@@ -12,6 +12,7 @@ title: class `JsonCpp`
 `public inline  `[`~JsonCpp`](#classJsonCpp_1a9a2addd32da5664837830db3d55a6cd8)`()` | 
 `public inline void `[`LoadFile`](#classJsonCpp_1ab74bad931397c3c8fea780c1d592f54a)`(std::string filename)` | 
 `public inline void `[`SaveFile`](#classJsonCpp_1adaca7db574f603f43f514541ec93c466)`(std::string filename)` | 
+`public inline void `[`LoadFromString`](#classJsonCpp_1ad47ae83c8a7c0eaa8c545d7b7e13d06d)`(std::string & json_string)` | 
 `public inline std::string `[`DumpJson`](#classJsonCpp_1a6a7d2af034373a6a04d290410ad8d324)`()` | 
 `public inline std::string `[`AddForest`](#classJsonCpp_1a2d3e0410f56f10a4bfc4b4371b5fca80)`(`[`ForestContainerCpp`](#classForestContainerCpp)` & forest_samples)` | 
 `public inline void `[`AddDouble`](#classJsonCpp_1a1333ac93e1734bf36880302aed0d3c3e)`(std::string field_name,double field_value)` | 
@@ -47,6 +48,8 @@ title: class `JsonCpp`
 #### `public inline void `[`LoadFile`](#classJsonCpp_1ab74bad931397c3c8fea780c1d592f54a)`(std::string filename)` 
 
 #### `public inline void `[`SaveFile`](#classJsonCpp_1adaca7db574f603f43f514541ec93c466)`(std::string filename)` 
+
+#### `public inline void `[`LoadFromString`](#classJsonCpp_1ad47ae83c8a7c0eaa8c545d7b7e13d06d)`(std::string & json_string)` 
 
 #### `public inline std::string `[`DumpJson`](#classJsonCpp_1a6a7d2af034373a6a04d290410ad8d324)`()` 
 
