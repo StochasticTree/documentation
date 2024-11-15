@@ -12,7 +12,7 @@ title: class `ForestContainerCpp`
 `public inline  `[`~ForestContainerCpp`](#classForestContainerCpp_1aaf6e33c00c6b6c4838079ea3cbf53674)`()` | 
 `public inline int `[`OutputDimension`](#classForestContainerCpp_1a13c991845a804a8f39b7b05d93a88dc0)`()` | 
 `public inline int `[`NumSamples`](#classForestContainerCpp_1a79d220afd860e3697fb20b4ba0ed6e6e)`()` | 
-`public inline int `[`NumLeaves`](#classForestContainerCpp_1abcf447da6b4fa02603baa19033073fe0)`(int forest_num)` | 
+`public inline int `[`NumLeavesForest`](#classForestContainerCpp_1aaef9c9d9c0463a71571308981a2929ad)`(int forest_num)` | 
 `public inline double `[`SumLeafSquared`](#classForestContainerCpp_1a7d625fdf2b189349aa9d5c0c86606965)`(int forest_num)` | 
 `public inline py::array_t< double > `[`Predict`](#classForestContainerCpp_1a2db2e6b954f08a94cd1eb6119f2ee768)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset)` | 
 `public inline py::array_t< double > `[`PredictRaw`](#classForestContainerCpp_1a7571c4ffe69a319360e485b697a5ba12)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset)` | 
@@ -40,6 +40,23 @@ title: class `ForestContainerCpp`
 `public inline py::array_t< int > `[`GetForestSplitCounts`](#classForestContainerCpp_1a2d0a8067ddfb2d3b703307725205f002)`(int forest_num,int num_features)` | 
 `public inline py::array_t< int > `[`GetOverallSplitCounts`](#classForestContainerCpp_1a3b2bff3c52a603480ffe77b1671eae61)`(int num_features)` | 
 `public inline py::array_t< int > `[`GetGranularSplitCounts`](#classForestContainerCpp_1a64428c5deaaf26733a8d94cd7bd5fb71)`(int num_features)` | 
+`public inline bool `[`IsLeafNode`](#classForestContainerCpp_1a37e496b5c0caa7a0420e073607d32fa0)`(int forest_id,int tree_id,int node_id)` | 
+`public inline bool `[`IsNumericSplitNode`](#classForestContainerCpp_1a86154e0a0f794637a748d62cdd3b662a)`(int forest_id,int tree_id,int node_id)` | 
+`public inline bool `[`IsCategoricalSplitNode`](#classForestContainerCpp_1a0f542f3cca9b87a72dde44910db5d27f)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`ParentNode`](#classForestContainerCpp_1a4064dfbf5232aee6fd80c8b86774eee1)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`LeftChildNode`](#classForestContainerCpp_1a8d529a702c1ca97266bb72f05eda37be)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`RightChildNode`](#classForestContainerCpp_1ac7950e8703636f8bb235fe75dd960265)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`SplitIndex`](#classForestContainerCpp_1a7dd8e6e0282043920a503581e9b43cd3)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`NodeDepth`](#classForestContainerCpp_1ae73b1c0fdc9ab3a3c30c31c2e4b7cb9a)`(int forest_id,int tree_id,int node_id)` | 
+`public inline double `[`SplitThreshold`](#classForestContainerCpp_1a4bac1c1cdd1a56bdfff32cb0ff576142)`(int forest_id,int tree_id,int node_id)` | 
+`public inline py::array_t< int > `[`SplitCategories`](#classForestContainerCpp_1a62d0aadc6af7218e808c825fff561661)`(int forest_id,int tree_id,int node_id)` | 
+`public inline py::array_t< double > `[`NodeLeafValues`](#classForestContainerCpp_1a27def7ae5ea2272274518280882f6b87)`(int forest_id,int tree_id,int node_id)` | 
+`public inline int `[`NumNodes`](#classForestContainerCpp_1ad456f4a52d2cef77cf72939e992ebd3b)`(int forest_id,int tree_id)` | 
+`public inline int `[`NumLeaves`](#classForestContainerCpp_1a5e567f2b6c4291bc061358616c259de0)`(int forest_id,int tree_id)` | 
+`public inline int `[`NumLeafParents`](#classForestContainerCpp_1a1bc9fb5b355a50d8439dd5a46a7da17e)`(int forest_id,int tree_id)` | 
+`public inline int `[`NumSplitNodes`](#classForestContainerCpp_1a4a97cc11868360dd617236319dec49f8)`(int forest_id,int tree_id)` | 
+`public inline py::array_t< int > `[`Nodes`](#classForestContainerCpp_1a95b373bbda33767a1c939587571d9b91)`(int forest_id,int tree_id)` | 
+`public inline py::array_t< int > `[`Leaves`](#classForestContainerCpp_1a496ea57b9cbe444f66c810476e21bf0e)`(int forest_id,int tree_id)` | 
 
 ## Members
 
@@ -51,7 +68,7 @@ title: class `ForestContainerCpp`
 
 #### `public inline int `[`NumSamples`](#classForestContainerCpp_1a79d220afd860e3697fb20b4ba0ed6e6e)`()` 
 
-#### `public inline int `[`NumLeaves`](#classForestContainerCpp_1abcf447da6b4fa02603baa19033073fe0)`(int forest_num)` 
+#### `public inline int `[`NumLeavesForest`](#classForestContainerCpp_1aaef9c9d9c0463a71571308981a2929ad)`(int forest_num)` 
 
 #### `public inline double `[`SumLeafSquared`](#classForestContainerCpp_1a7d625fdf2b189349aa9d5c0c86606965)`(int forest_num)` 
 
@@ -106,4 +123,38 @@ title: class `ForestContainerCpp`
 #### `public inline py::array_t< int > `[`GetOverallSplitCounts`](#classForestContainerCpp_1a3b2bff3c52a603480ffe77b1671eae61)`(int num_features)` 
 
 #### `public inline py::array_t< int > `[`GetGranularSplitCounts`](#classForestContainerCpp_1a64428c5deaaf26733a8d94cd7bd5fb71)`(int num_features)` 
+
+#### `public inline bool `[`IsLeafNode`](#classForestContainerCpp_1a37e496b5c0caa7a0420e073607d32fa0)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline bool `[`IsNumericSplitNode`](#classForestContainerCpp_1a86154e0a0f794637a748d62cdd3b662a)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline bool `[`IsCategoricalSplitNode`](#classForestContainerCpp_1a0f542f3cca9b87a72dde44910db5d27f)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`ParentNode`](#classForestContainerCpp_1a4064dfbf5232aee6fd80c8b86774eee1)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`LeftChildNode`](#classForestContainerCpp_1a8d529a702c1ca97266bb72f05eda37be)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`RightChildNode`](#classForestContainerCpp_1ac7950e8703636f8bb235fe75dd960265)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`SplitIndex`](#classForestContainerCpp_1a7dd8e6e0282043920a503581e9b43cd3)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`NodeDepth`](#classForestContainerCpp_1ae73b1c0fdc9ab3a3c30c31c2e4b7cb9a)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline double `[`SplitThreshold`](#classForestContainerCpp_1a4bac1c1cdd1a56bdfff32cb0ff576142)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline py::array_t< int > `[`SplitCategories`](#classForestContainerCpp_1a62d0aadc6af7218e808c825fff561661)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline py::array_t< double > `[`NodeLeafValues`](#classForestContainerCpp_1a27def7ae5ea2272274518280882f6b87)`(int forest_id,int tree_id,int node_id)` 
+
+#### `public inline int `[`NumNodes`](#classForestContainerCpp_1ad456f4a52d2cef77cf72939e992ebd3b)`(int forest_id,int tree_id)` 
+
+#### `public inline int `[`NumLeaves`](#classForestContainerCpp_1a5e567f2b6c4291bc061358616c259de0)`(int forest_id,int tree_id)` 
+
+#### `public inline int `[`NumLeafParents`](#classForestContainerCpp_1a1bc9fb5b355a50d8439dd5a46a7da17e)`(int forest_id,int tree_id)` 
+
+#### `public inline int `[`NumSplitNodes`](#classForestContainerCpp_1a4a97cc11868360dd617236319dec49f8)`(int forest_id,int tree_id)` 
+
+#### `public inline py::array_t< int > `[`Nodes`](#classForestContainerCpp_1a95b373bbda33767a1c939587571d9b91)`(int forest_id,int tree_id)` 
+
+#### `public inline py::array_t< int > `[`Leaves`](#classForestContainerCpp_1a496ea57b9cbe444f66c810476e21bf0e)`(int forest_id,int tree_id)` 
 
