@@ -70,6 +70,7 @@ that were not in the training set.
 * `random_seed` Integer parameterizing the C++ random number generator. If not specified, the C++ random number generator is seeded according to `std::random_device`.
 * `keep_burnin` Whether or not "burnin" samples should be included in cached predictions. Default `FALSE`. Ignored if `num_mcmc = 0`.
 * `keep_gfr` Whether or not "grow-from-root" samples should be included in cached predictions. Default `FALSE`. Ignored if `num_mcmc = 0`.
+* `standardize` Whether or not to standardize the outcome (and store the offset / scale in the model object). Default: `TRUE`.
 * `verbose` Whether or not to print progress during the sampling loops. Default: `FALSE`.
 * `sample_sigma_global` Whether or not to update the `sigma^2` global error variance parameter based on `IG(a_global, b_global)`. Default: `TRUE`.***2. Prognostic Forest Parameters***
 * `num_trees_mu` Number of trees in the prognostic forest. Default: `200`.
