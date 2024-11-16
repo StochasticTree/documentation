@@ -43,8 +43,25 @@ Wrapper around a C++ container of tree ensembles
 * [`ForestSamples$ensemble_tree_max_depth()`](#method-ForestSamples-ensemble_tree_max_depth)
 * [`ForestSamples$average_ensemble_max_depth()`](#method-ForestSamples-average_ensemble_max_depth)
 * [`ForestSamples$average_max_depth()`](#method-ForestSamples-average_max_depth)
-* [`ForestSamples$num_leaves()`](#method-ForestSamples-num_leaves)
+* [`ForestSamples$num_forest_leaves()`](#method-ForestSamples-num_forest_leaves)
 * [`ForestSamples$sum_leaves_squared()`](#method-ForestSamples-sum_leaves_squared)
+* [`ForestSamples$is_leaf_node()`](#method-ForestSamples-is_leaf_node)
+* [`ForestSamples$is_numeric_split_node()`](#method-ForestSamples-is_numeric_split_node)
+* [`ForestSamples$is_categorical_split_node()`](#method-ForestSamples-is_categorical_split_node)
+* [`ForestSamples$parent_node()`](#method-ForestSamples-parent_node)
+* [`ForestSamples$left_child_node()`](#method-ForestSamples-left_child_node)
+* [`ForestSamples$right_child_node()`](#method-ForestSamples-right_child_node)
+* [`ForestSamples$node_depth()`](#method-ForestSamples-node_depth)
+* [`ForestSamples$node_split_index()`](#method-ForestSamples-node_split_index)
+* [`ForestSamples$node_split_threshold()`](#method-ForestSamples-node_split_threshold)
+* [`ForestSamples$node_split_categories()`](#method-ForestSamples-node_split_categories)
+* [`ForestSamples$node_leaf_values()`](#method-ForestSamples-node_leaf_values)
+* [`ForestSamples$num_nodes()`](#method-ForestSamples-num_nodes)
+* [`ForestSamples$num_leaves()`](#method-ForestSamples-num_leaves)
+* [`ForestSamples$num_leaf_parents()`](#method-ForestSamples-num_leaf_parents)
+* [`ForestSamples$num_split_nodes()`](#method-ForestSamples-num_split_nodes)
+* [`ForestSamples$nodes()`](#method-ForestSamples-nodes)
+* [`ForestSamples$leaves()`](#method-ForestSamples-leaves)
 
 ### Method `new()`
 
@@ -491,7 +508,7 @@ ForestSamples$get_granular_split_counts(num_features)
 
 ### Method `ensemble_tree_max_depth()`
 
-Maximum depth of a specific tree in a specific ensemble in a `ForestContainer` object
+Maximum depth of a specific tree in a specific ensemble in a `ForestSamples` object
 
 #### Usage
 
@@ -510,7 +527,7 @@ Maximum leaf depth
 
 ### Method `average_ensemble_max_depth()`
 
-Average the maximum depth of each tree in a given ensemble in a `ForestContainer` object
+Average the maximum depth of each tree in a given ensemble in a `ForestSamples` object
 
 #### Usage
 
@@ -540,14 +557,14 @@ ForestSamples$average_max_depth()
 
 Average maximum depth
 
-### Method `num_leaves()`
+### Method `num_forest_leaves()`
 
-Number of leaves in a given ensemble in a `ForestContainer` object
+Number of leaves in a given ensemble in a `ForestSamples` object
 
 #### Usage
 
 ```
-ForestSamples$num_leaves(forest_num)
+ForestSamples$num_forest_leaves(forest_num)
 ```
 
 #### Arguments
@@ -560,7 +577,7 @@ Count of leaves in the ensemble stored at `forest_num`
 
 ### Method `sum_leaves_squared()`
 
-Sum of squared (raw) leaf values in a given ensemble in a `ForestContainer` object
+Sum of squared (raw) leaf values in a given ensemble in a `ForestSamples` object
 
 #### Usage
 
@@ -575,4 +592,341 @@ ForestSamples$sum_leaves_squared(forest_num)
 #### Returns
 
 Average maximum depth
+
+### Method `is_leaf_node()`
+
+Whether or not a given node of a given tree in a given forest in the `ForestSamples` is a leaf
+
+#### Usage
+
+```
+ForestSamples$is_leaf_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+`TRUE` if node is a leaf, `FALSE` otherwise
+
+### Method `is_numeric_split_node()`
+
+Whether or not a given node of a given tree in a given forest in the `ForestSamples` is a numeric split node
+
+#### Usage
+
+```
+ForestSamples$is_numeric_split_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+`TRUE` if node is a numeric split node, `FALSE` otherwise
+
+### Method `is_categorical_split_node()`
+
+Whether or not a given node of a given tree in a given forest in the `ForestSamples` is a categorical split node
+
+#### Usage
+
+```
+ForestSamples$is_categorical_split_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+`TRUE` if node is a categorical split node, `FALSE` otherwise
+
+### Method `parent_node()`
+
+Parent node of given node of a given tree in a given forest in a `ForestSamples` object
+
+#### Usage
+
+```
+ForestSamples$parent_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Integer ID of the parent node
+
+### Method `left_child_node()`
+
+Left child node of given node of a given tree in a given forest in a `ForestSamples` object
+
+#### Usage
+
+```
+ForestSamples$left_child_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Integer ID of the left child node
+
+### Method `right_child_node()`
+
+Right child node of given node of a given tree in a given forest in a `ForestSamples` object
+
+#### Usage
+
+```
+ForestSamples$right_child_node(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Integer ID of the right child node
+
+### Method `node_depth()`
+
+Depth of given node of a given tree in a given forest in a `ForestSamples` object, with 0 depth for the root node.
+
+#### Usage
+
+```
+ForestSamples$node_depth(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Integer valued depth of the node
+
+### Method `node_split_index()`
+
+Split index of given node of a given tree in a given forest in a `ForestSamples` object. Returns `-1` is node is a leaf.
+
+#### Usage
+
+```
+ForestSamples$node_split_index(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Integer valued depth of the node
+
+### Method `node_split_threshold()`
+
+Threshold that defines a numeric split for a given node of a given tree in a given forest in a `ForestSamples` object.
+Returns `Inf` if the node is a leaf or a categorical split node.
+
+#### Usage
+
+```
+ForestSamples$node_split_threshold(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Threshold defining a split for the node
+
+### Method `node_split_categories()`
+
+Array of category indices that define a categorical split for a given node of a given tree in a given forest in a `ForestSamples` object.
+Returns `c(Inf)` if the node is a leaf or a numeric split node.
+
+#### Usage
+
+```
+ForestSamples$node_split_categories(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Categories defining a split for the node
+
+### Method `node_leaf_values()`
+
+Leaf node value(s) for a given node of a given tree in a given forest in a `ForestSamples` object.
+Values are stale if the node is a split node.
+
+#### Usage
+
+```
+ForestSamples$node_leaf_values(forest_num, tree_num, node_id)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+* `node_id`: Index of the node to be queried
+
+#### Returns
+
+Vector (often univariate) of leaf values
+
+### Method `num_nodes()`
+
+Number of nodes in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$num_nodes(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Count of total tree nodes
+
+### Method `num_leaves()`
+
+Number of leaves in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$num_leaves(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Count of total tree leaves
+
+### Method `num_leaf_parents()`
+
+Number of leaf parents (split nodes with two leaves as children) in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$num_leaf_parents(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Count of total tree leaf parents
+
+### Method `num_split_nodes()`
+
+Number of split nodes in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$num_split_nodes(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Count of total tree split nodes
+
+### Method `nodes()`
+
+Array of node indices in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$nodes(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Indices of tree nodes
+
+### Method `leaves()`
+
+Array of leaf indices in a given tree in a given forest in a `ForestSamples` object.
+
+#### Usage
+
+```
+ForestSamples$leaves(forest_num, tree_num)
+```
+
+#### Arguments
+
+* `forest_num`: Index of the forest to be queried
+* `tree_num`: Index of the tree to be queried
+
+#### Returns
+
+Indices of leaf nodes
 

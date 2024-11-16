@@ -68,6 +68,7 @@ that were not in the training set.
 * `sample_sigma_global` Whether or not to update the `sigma^2` global error variance parameter based on `IG(a_global, b_global)`. Default: `TRUE`.
 * `keep_burnin` Whether or not "burnin" samples should be included in cached predictions. Default `FALSE`. Ignored if `num_mcmc = 0`.
 * `keep_gfr` Whether or not "grow-from-root" samples should be included in cached predictions. Default `TRUE`. Ignored if `num_mcmc = 0`.
+* `standardize` Whether or not to standardize the outcome (and store the offset / scale in the model object). Default: `TRUE`.
 * `verbose` Whether or not to print progress during the sampling loops. Default: `FALSE`.***2. Mean Forest Parameters***
 * `num_trees_mean` Number of trees in the ensemble for the conditional mean model. Default: `200`. If `num_trees_mean = 0`, the conditional mean will not be modeled using a forest, and the function will only proceed if `num_trees_variance \> 0`.
 * `sample_sigma_leaf` Whether or not to update the `tau` leaf scale variance parameter based on `IG(a_leaf, b_leaf)`. Cannot (currently) be set to true if `ncol(W_train)\>1`. Default: `FALSE`.***2.1. Tree Prior Parameters***
