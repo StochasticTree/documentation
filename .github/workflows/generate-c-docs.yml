@@ -32,6 +32,7 @@ jobs:
           repository: 'StochasticTree/stochtree'
           path: 'stochtree-repo'
           submodules: 'recursive'
+          persist-credentials: false
 
       - name: Install Dependencies
         run: |
@@ -106,14 +107,18 @@ jobs:
           # Remove the combined markdown file
           rm ../docs/c-documentation-markdown/combined.md
 
+      - name: Ensure docs/c-documentation-markdown is not ignored
+        run: |
+          echo '!docs/c-documentation-markdown/' >> .gitignore
+
       - name: Commit and Push Documentation Changes
         id: commit_and_push
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add docs/c-documentation-markdown
           if [ -n "$(git status --porcelain)" ]; then
             git checkout -b $BRANCH_NAME
-            git add docs/c-documentation-markdown
             git commit -m "Updated C++ documentation"
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
