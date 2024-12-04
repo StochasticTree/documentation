@@ -88,6 +88,7 @@ params
   * `random_seed` (`int`): Integer parameterizing the C++ random number generator. If not specified, the C++ random number generator is seeded according to `std::random_device`.
   * `keep_burnin` (`bool`): Whether or not “burnin” samples should be included in predictions. Defaults to `False`. Ignored if `num_mcmc == 0`.
   * `keep_gfr` (`bool`): Whether or not “warm-start” / grow-from-root samples should be included in predictions. Defaults to `False`. Ignored if `num_mcmc == 0`.
+  * `keep_every` (`int`): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to `1`. Setting `keep_every = k` for some `k > 1` will “thin” the MCMC samples by retaining every `k`-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.
 
 ### Returns
 
@@ -233,6 +234,7 @@ params
   * `random_seed` (`int`): Integer parameterizing the C++ random number generator. If not specified, the C++ random number generator is seeded according to `std::random_device`.
   * `keep_burnin` (`bool`): Whether or not “burnin” samples should be included in predictions. Defaults to `False`. Ignored if `num_mcmc == 0`.
   * `keep_gfr` (`bool`): Whether or not “warm-start” / grow-from-root samples should be included in predictions. Defaults to `False`. Ignored if `num_mcmc == 0`.
+  * `keep_every` (`int`): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to `1`. Setting `keep_every = k` for some `k > 1` will “thin” the MCMC samples by retaining every `k`-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.
 
 ### Returns
 
