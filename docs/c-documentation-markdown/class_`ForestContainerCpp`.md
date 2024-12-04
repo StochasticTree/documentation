@@ -14,6 +14,7 @@ title: class `ForestContainerCpp`
 `public inline int `[`NumSamples`](#classForestContainerCpp_1a79d220afd860e3697fb20b4ba0ed6e6e)`()` | 
 `public inline int `[`NumLeavesForest`](#classForestContainerCpp_1aaef9c9d9c0463a71571308981a2929ad)`(int forest_num)` | 
 `public inline double `[`SumLeafSquared`](#classForestContainerCpp_1a7d625fdf2b189349aa9d5c0c86606965)`(int forest_num)` | 
+`public inline void `[`DeleteSample`](#classForestContainerCpp_1aa326d10037e7ce6a141e647b1c8987ef)`(int forest_num)` | 
 `public inline py::array_t< double > `[`Predict`](#classForestContainerCpp_1a2db2e6b954f08a94cd1eb6119f2ee768)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset)` | 
 `public inline py::array_t< double > `[`PredictRaw`](#classForestContainerCpp_1a7571c4ffe69a319360e485b697a5ba12)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset)` | 
 `public inline py::array_t< double > `[`PredictRawSingleForest`](#classForestContainerCpp_1abb59e21562dd76e6eaf467f443ca8eb9)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset,int forest_num)` | 
@@ -71,6 +72,8 @@ title: class `ForestContainerCpp`
 #### `public inline int `[`NumLeavesForest`](#classForestContainerCpp_1aaef9c9d9c0463a71571308981a2929ad)`(int forest_num)` 
 
 #### `public inline double `[`SumLeafSquared`](#classForestContainerCpp_1a7d625fdf2b189349aa9d5c0c86606965)`(int forest_num)` 
+
+#### `public inline void `[`DeleteSample`](#classForestContainerCpp_1aa326d10037e7ce6a141e647b1c8987ef)`(int forest_num)` 
 
 #### `public inline py::array_t< double > `[`Predict`](#classForestContainerCpp_1a2db2e6b954f08a94cd1eb6119f2ee768)`(`[`ForestDatasetCpp`](#classForestDatasetCpp)` & dataset)` 
 
