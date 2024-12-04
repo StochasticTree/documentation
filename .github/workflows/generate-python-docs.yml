@@ -33,6 +33,7 @@ jobs:
           repository: 'StochasticTree/stochtree'
           path: 'stochtree-repo'
           submodules: 'recursive'
+          persist-credentials: false
 
       - name: Setup Python 3.10
         uses: actions/setup-python@v5
@@ -67,15 +68,19 @@ jobs:
           rm -rf docs/python-documentation-markdown/*
           cp -r stochtree-repo/python_docs/_build/markdown/* docs/python-documentation-markdown/
 
+      - name: Ensure docs/python-documentation-markdown is not ignored
+        run: |
+          echo '!docs/python-documentation-markdown/' >> .gitignore
+
       - name: Commit and Push Python Documentation Changes
         id: commit_and_push
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
+          # git add docs/python-documentation-html docs/python-documentation-markdown
+          git add docs/python-documentation-markdown
           if [ -n "$(git status --porcelain)" ]; then
             git checkout -b $BRANCH_NAME
-            # git add docs/python-documentation-html docs/python-documentation-markdown
-            git add docs/python-documentation-markdown
             git commit -m "Updated Python documentation"
             git push origin $BRANCH_NAME
             echo "changes=true" >> $GITHUB_OUTPUT
