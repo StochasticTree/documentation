@@ -15,7 +15,7 @@ title: class `ForestDatasetCpp`
 `public inline void `[`UpdateBasis`](#classForestDatasetCpp_1a41aa7a00787f8ddc1897f656884c3582)`(py::array_t< double > basis_matrix,data_size_t num_row,int num_col,bool row_major)` | 
 `public inline void `[`AddVarianceWeights`](#classForestDatasetCpp_1ac8d722192ac8d8b36434deb2892d5db2)`(py::array_t< double > weight_vector,data_size_t num_row)` | 
 `public inline data_size_t `[`NumRows`](#classForestDatasetCpp_1a8b11609225839609d6bcbc05e8e5a81e)`()` | 
-`public inline StochTree::ForestDataset * `[`GetDataset`](#classForestDatasetCpp_1a931778b318957e9d7da00a6d4710132b)`()` | 
+`public inline StochTree::ForestDataset * `[`GetDataset`](#classForestDatasetCpp_1adb1a0267f8e1f6debcfa5e6f43d69b4e)`()` | 
 
 ## Members
 
@@ -33,5 +33,5 @@ title: class `ForestDatasetCpp`
 
 #### `public inline data_size_t `[`NumRows`](#classForestDatasetCpp_1a8b11609225839609d6bcbc05e8e5a81e)`()` 
 
-#### `public inline StochTree::ForestDataset * `[`GetDataset`](#classForestDatasetCpp_1a931778b318957e9d7da00a6d4710132b)`()` 
+#### `public inline StochTree::ForestDataset * `[`GetDataset`](#classForestDatasetCpp_1adb1a0267f8e1f6debcfa5e6f43d69b4e)`()` 
 

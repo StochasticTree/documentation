@@ -26,7 +26,7 @@ Inspired by the design of the tree in the xgboost and treelite package, both rel
 `public int `[`GetLabelIdxForTSV`](#namespaceStochTree_1aaab0b5a0c1e3a110b07d583a31ef0204)`(const std::string & str,int num_features,int label_idx)`            | 
 `public int `[`GetLabelIdxForCSV`](#namespaceStochTree_1ae848b1ac95793c76ca4ed0da9b0d0c68)`(const std::string & str,int num_features,int label_idx)`            | 
 `public void `[`GetLine`](#namespaceStochTree_1a42736434dc1da3b939c67f1d18703ae6)`(std::stringstream * ss,std::string * line,const VirtualFileReader * reader,std::vector< char > * buffer,size_t buffer_size)`            | 
-`public std::vector< std::string > `[`ReadKLineFromFile`](#namespaceStochTree_1ad0d56e7e54c33c79beb8b8c6ddd25c5b)`(const char * filename,bool header,int k)`            | 
+`public std::vector< std::string > `[`ReadKLineFromFile`](#namespaceStochTree_1ab4d25456f1457e33bc011d0ac619cbc6)`(const char * filename,bool header,int k)`            | 
 `public int `[`GetNumColFromLIBSVMFile`](#namespaceStochTree_1a73eb7b1b4cbc5dc88be3454e5e9fcfbf)`(const char * filename,bool header)`            | 
 `public DataType `[`GetDataType`](#namespaceStochTree_1a13ee5cdb09aa6e4fcab6b5d46653e4e4)`(const char * filename,bool header,const std::vector< std::string > & lines,int * num_col)`            | 
 `public void `[`TreeNodeVectorsToJson`](#namespaceStochTree_1ab98c941b48d9e2d5688e0cc92a53f0cc)`(json & obj,Tree * tree)`            | 
@@ -64,7 +64,7 @@ LIBSVM            |
 
 #### `public void `[`GetLine`](#namespaceStochTree_1a42736434dc1da3b939c67f1d18703ae6)`(std::stringstream * ss,std::string * line,const VirtualFileReader * reader,std::vector< char > * buffer,size_t buffer_size)` 
 
-#### `public std::vector< std::string > `[`ReadKLineFromFile`](#namespaceStochTree_1ad0d56e7e54c33c79beb8b8c6ddd25c5b)`(const char * filename,bool header,int k)` 
+#### `public std::vector< std::string > `[`ReadKLineFromFile`](#namespaceStochTree_1ab4d25456f1457e33bc011d0ac619cbc6)`(const char * filename,bool header,int k)` 
 
 #### `public int `[`GetNumColFromLIBSVMFile`](#namespaceStochTree_1a73eb7b1b4cbc5dc88be3454e5e9fcfbf)`(const char * filename,bool header)` 
 
