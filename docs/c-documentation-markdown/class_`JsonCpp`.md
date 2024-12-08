@@ -33,10 +33,10 @@ title: class `JsonCpp`
 `public inline bool `[`ExtractBoolSubfolder`](#classJsonCpp_1ae040b066fc7c7ae34cc4147b9a60175e)`(std::string subfolder_name,std::string field_name)` | 
 `public inline std::string `[`ExtractString`](#classJsonCpp_1ab0b6b218f814bfa9b34e93d5b868386a)`(std::string field_name)` | 
 `public inline std::string `[`ExtractStringSubfolder`](#classJsonCpp_1a8654f6e9a42841a88a6309584306ebd2)`(std::string subfolder_name,std::string field_name)` | 
-`public inline py::array_t< double > `[`ExtractDoubleVector`](#classJsonCpp_1aa1dae9756f87ce20be18ddf40444740e)`(std::string field_name)` | 
-`public inline py::array_t< double > `[`ExtractDoubleVectorSubfolder`](#classJsonCpp_1acb5dbc28a3c8eafad03d9ea7b8416eb6)`(std::string subfolder_name,std::string field_name)` | 
-`public inline std::vector< std::string > `[`ExtractStringVector`](#classJsonCpp_1a1e643cadad2cca2d10b6a5fec165320b)`(std::string field_name)` | 
-`public inline std::vector< std::string > `[`ExtractStringVectorSubfolder`](#classJsonCpp_1a730ce7e046e63bdc93214bb5c8aee749)`(std::string subfolder_name,std::string field_name)` | 
+`public inline py::array_t< double > `[`ExtractDoubleVector`](#classJsonCpp_1ac71eff7e2832e3f70bd992de3817085c)`(std::string field_name)` | 
+`public inline py::array_t< double > `[`ExtractDoubleVectorSubfolder`](#classJsonCpp_1a2c6861d2c23e2b3c6a5ac3c1ca20f6b6)`(std::string subfolder_name,std::string field_name)` | 
+`public inline std::vector< std::string > `[`ExtractStringVector`](#classJsonCpp_1a15339f9324472de7cc20ac8150e54e62)`(std::string field_name)` | 
+`public inline std::vector< std::string > `[`ExtractStringVectorSubfolder`](#classJsonCpp_1a42b03d1192062d6b89c37a3380e43a97)`(std::string subfolder_name,std::string field_name)` | 
 `public inline nlohmann::json `[`SubsetJsonForest`](#classJsonCpp_1a104498c45cc52bebae67b35e73d2c8d1)`(std::string forest_label)` | 
 
 ## Members
@@ -91,13 +91,13 @@ title: class `JsonCpp`
 
 #### `public inline std::string `[`ExtractStringSubfolder`](#classJsonCpp_1a8654f6e9a42841a88a6309584306ebd2)`(std::string subfolder_name,std::string field_name)` 
 
-#### `public inline py::array_t< double > `[`ExtractDoubleVector`](#classJsonCpp_1aa1dae9756f87ce20be18ddf40444740e)`(std::string field_name)` 
+#### `public inline py::array_t< double > `[`ExtractDoubleVector`](#classJsonCpp_1ac71eff7e2832e3f70bd992de3817085c)`(std::string field_name)` 
 
-#### `public inline py::array_t< double > `[`ExtractDoubleVectorSubfolder`](#classJsonCpp_1acb5dbc28a3c8eafad03d9ea7b8416eb6)`(std::string subfolder_name,std::string field_name)` 
+#### `public inline py::array_t< double > `[`ExtractDoubleVectorSubfolder`](#classJsonCpp_1a2c6861d2c23e2b3c6a5ac3c1ca20f6b6)`(std::string subfolder_name,std::string field_name)` 
 
-#### `public inline std::vector< std::string > `[`ExtractStringVector`](#classJsonCpp_1a1e643cadad2cca2d10b6a5fec165320b)`(std::string field_name)` 
+#### `public inline std::vector< std::string > `[`ExtractStringVector`](#classJsonCpp_1a15339f9324472de7cc20ac8150e54e62)`(std::string field_name)` 
 
-#### `public inline std::vector< std::string > `[`ExtractStringVectorSubfolder`](#classJsonCpp_1a730ce7e046e63bdc93214bb5c8aee749)`(std::string subfolder_name,std::string field_name)` 
+#### `public inline std::vector< std::string > `[`ExtractStringVectorSubfolder`](#classJsonCpp_1a42b03d1192062d6b89c37a3380e43a97)`(std::string subfolder_name,std::string field_name)` 
 
 #### `public inline nlohmann::json `[`SubsetJsonForest`](#classJsonCpp_1a104498c45cc52bebae67b35e73d2c8d1)`(std::string forest_label)` 
 
