@@ -51,7 +51,7 @@ The GitHub Actions workflow for our `documentation` repository automates the pro
    - **Build HTML Documentation**: Uses Sphinx to build the HTML documentation from the Doxygen XML output.
 
 10. **Copies C++ Documentation to Docs Directory**:
-    - The generated C++ documentation is copied from `stochtree-repo/docs/cpp/build/html/` to `docs/c-documentation/` in the root of the `documentation` repository. This ensures that the C++ documentation is located within the `docs/` directory alongside the Python and R documentation.
+    - The generated C++ documentation is copied from `stochtree-repo/docs/cpp/build/html/` to `docs/cpp-documentation/` in the root of the `documentation` repository. This ensures that the C++ documentation is located within the `docs/` directory alongside the Python and R documentation.
 
 11. **Commits and Pushes the Updated Documentation**:
     - **Branch Creation**: The workflow checks if there are any changes to the documentation. If there are, it creates a new temporary branch (e.g., `docs-temp-11060215628`).

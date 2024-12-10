@@ -91,20 +91,8 @@ const config: Config = {
           title: 'GitHub Repos',
           items: [
             {
-              label: 'Arborist App',
-              href: 'https://github.com/silicontwin/arborist-app',
-            },
-            {
-              label: 'StochTree C++ Core',
+              label: 'StochTree',
               href: 'https://github.com/StochasticTree/stochtree',
-            },
-            {
-              label: 'StochTree R',
-              href: 'https://github.com/StochasticTree/stochtree/tree/main/R',
-            },
-            {
-              label: 'StochTree Python',
-              href: 'https://github.com/StochasticTree/stochtree/tree/main/stochtree',
             },
           ],
         },
@@ -115,18 +103,19 @@ const config: Config = {
               label: 'Blog',
               to: '/blog',
             },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/StochasticTree',
-            },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Andrew Herren, Jared Murray, and Nicholas Warren.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Andrew Herren, Carlos Carvalho, Richard Hahn, Jared Murray, and Nicholas Warren.`,
+    },
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.nightOwlLight,
+      darkTheme: prismThemes.nightOwl,
     },
   } satisfies Preset.ThemeConfig,
 };
