@@ -76,28 +76,40 @@ source python_venv/bin/activate
 cd stochtree-repo
 pip install --upgrade pip
 pip install -r python_docs/requirements.txt
-pip install sphinx-markdown-builder
 pip install .
-cd ..
 ```
 
-Build the sphinx documentation as markdown output
+<!-- Build the sphinx documentation as markdown output
 
 ```{bash}
 sphinx-build -b markdown stochtree-repo/python_docs/source/ stochtree-repo/python_docs/_build/markdown/
-```
+``` -->
 
-Copy results into the `docs/` folder
+<!-- Copy results into the `docs/` folder
 
 ```{bash}
 mkdir -p docs/python-documentation-markdown
 rm -rf docs/python-documentation-markdown/*
 cp -r stochtree-repo/python_docs/_build/markdown/* docs/python-documentation-markdown/
+``` -->
+
+Build the sphinx documentation
+
+```{bash}
+sphinx-build -M html python_docs/source/ ../static/python_docs/
+cd ..
 ```
 
 ### Building the R docs
 
-
+```{bash}
+cd stochtree-repo
+Rscript cran-bootstrap.R 
+cp _pkgdown.yml stochtree_cran/_pkgdown.yml
+cp R_README.md stochtree_cran/README.md
+Rscript -e 'pkgdown::build_site_github_pages("stochtree_cran", dest_dir = "../../static/R_docs", install = TRUE)'
+cd ..
+```
 
 ### Building the doc site
 

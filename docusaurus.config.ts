@@ -73,9 +73,20 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'Getting Started',
         },
-        { to: '/blog', label: 'Roadmap', position: 'left' },
+        {
+          href: 'pathname:///R_docs/index.html',
+          label: 'R Package Docs',
+          position: 'left',
+        },
+        {
+          href: 'pathname:///python_docs/html/index.html',
+          label: 'Python Package Docs',
+          position: 'left',
+        },
+        { to: '/roadmap', label: 'Roadmap', position: 'left' },
+        { to: '/blog', label: 'Blog', position: 'left' },
         { to: '/team', label: 'Team', position: 'left' },
         {
           href: 'https://github.com/StochasticTree',
