@@ -21,7 +21,8 @@ git clone --recursive git@github.com:StochasticTree/stochtree.git stochtree_repo
 
 #### Setting up build dependencies
 
-The docs are largely built using [`Sphinx`](https://www.sphinx-doc.org/en/master/) and [`pkgdown`](https://pkgdown.r-lib.org). 
+The docs are largely built using [`Sphinx`](https://www.sphinx-doc.org/en/master/) and [`pkgdown`](https://pkgdown.r-lib.org), 
+with everything tied together using the ["Material for MkDocs"](https://squidfunk.github.io/mkdocs-material/) theme. 
 
 ##### Sphinx
 
@@ -31,7 +32,23 @@ To use Sphinx, you need to install a working verion of python, probably the simp
 python -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r sphinx_docs/requirements.txt
+pip install -r requirements.txt
+```
+
+##### mkdocs-material
+
+Install the `mkdocs-material` package in the same virtual environment
+
+```{bash}
+pip install mkdocs-material
+```
+
+##### stochtree
+
+Some of the vignettes also require having the current version of `stochtree` installed. 
+We install this into the same virtual environment as `sphinx` and `mkdocs-material`.
+
+```{bash}
 cd stochtree_repo
 pip install .
 cd ..
@@ -65,9 +82,9 @@ mkdir -p sphinx_docs/source/_static/R_docs
 Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../sphinx_docs/source/_static/R_docs", install = TRUE)'
 ```
 
-### Building the doc site
+### Building the sphinx doc sites for the Python and C++ APIs
 
-Build the sphinx documentation
+Build the sphinx documentation for the C++ API
 
 ```{bash}
 source venv/bin/activate
@@ -77,3 +94,7 @@ doxygen stochtree_repo/cpp_docs/Doxyfile
 sphinx-build -M html sphinx_docs/source/ sphinx_docs/_build/
 source deactivate
 ```
+
+### Building the overall website
+
+
