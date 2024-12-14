@@ -68,9 +68,9 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          working_directory: 'stochtree_repo'
           extra-packages: any::latex2exp, any::ggplot2, any::decor, any::pkgdown
           needs: website
-          working_directory: 'stochtree_repo'
 
       - name: Build R doc site
         run: |
