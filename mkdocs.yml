@@ -1,0 +1,60 @@
+site_name: StochTree
+site_url: "https://andrewherren.github.io/stochtree-documentation/"
+site_description: "Stochastic tree ensembles (i.e. BART, XBART) for supervised learning and causal inference"
+repo_url: "https://github.com/StochasticTree/stochtree"
+repo_name: "StochasticTree/stochtree"
+theme:
+  name: material
+  features:
+    - navigation.indexes 
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.footer
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+nav:
+  - Home: index.md
+  - 'Getting Started': getting-started.md
+  - 'R Package': 'R_docs/index.html'
+  - 'Python Package':
+    - python_docs/index.md
+    - 'BART': python_docs/bart.md
+  - 'C++ Core API and Architecture':
+    - cpp_docs/index.md
+    - 'C++ Doxygen Site': 'cpp_docs/doxygen/index.html'
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/StochasticTree/stochtree
+      name: stochtree on Github
+  generator: false
+copyright: Copyright &copy; 2023 - 2024 Drew Herren, Carlos Carvalho, Richard Hahn, Jared Murray
+plugins:
+  - offline
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            show_signature: true
+            line_length: 60
+            heading_level: 2
+            show_root_heading: true
