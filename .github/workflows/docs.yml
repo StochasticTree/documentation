@@ -47,7 +47,7 @@ jobs:
       - name: Install stochtree python package
         run: |
           pip install --upgrade pip
-          pip install numpy scipy pytest pandas scikit-learn pybind11
+          pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
           cd stochtree_repo
           pip install .
           cd ..
@@ -56,6 +56,7 @@ jobs:
         run: |
           pip install mkdocs-material
           pip install mkdocstrings-python
+          pip install mkdocs-jupyter
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -87,6 +88,11 @@ jobs:
           cd stochtree_repo
           Rscript cran-cleanup.R 
           cd ..
+
+      - name: Copy Jupyter notebook demos over to docs directory
+        run: |
+          cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+          cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
       
       - name: Build the overall doc site
         run: |

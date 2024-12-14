@@ -18,6 +18,7 @@ cd ..
 # Install python dependencies for the doc site
 pip install mkdocs-material
 pip install mkdocstrings-python
+pip install mkdocs-jupyter
 
 # Build the C++ doxygen output
 sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
@@ -39,6 +40,10 @@ cp R_README.md stochtree_cran/README.md
 cd ..
 mkdir -p docs/R_docs
 Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
+
+# Copy Jupyter notebook demos over to docs directory
+cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
 
 # Build the doc site
 mkdocs build
