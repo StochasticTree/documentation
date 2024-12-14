@@ -6,11 +6,15 @@ repo_name: "StochasticTree/stochtree"
 theme:
   name: material
   features:
-    - navigation.indexes 
+    - navigation.expand
+    - navigation.indexes
+    - navigation.footer
+    - navigation.path
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.footer
+    - toc.follow
+    - toc.integrate
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -33,10 +37,12 @@ theme:
 nav:
   - Home: index.md
   - 'Getting Started': getting-started.md
+  - 'Demo': demo.md
   - 'R Package': 'R_docs/index.html'
   - 'Python Package':
     - python_docs/index.md
     - 'BART': python_docs/bart.md
+    - 'BCF': python_docs/bcf.md
   - 'C++ Core API and Architecture':
     - cpp_docs/index.md
     - 'C++ Doxygen Site': 'cpp_docs/doxygen/index.html'
@@ -47,6 +53,19 @@ extra:
       name: stochtree on Github
   generator: false
 copyright: Copyright &copy; 2023 - 2024 Drew Herren, Carlos Carvalho, Richard Hahn, Jared Murray
+markdown_extensions:
+  - toc:
+      permalink: "#"
+      toc_depth: 3
+      baselevel: 1
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
 plugins:
   - offline
   - mkdocstrings:
