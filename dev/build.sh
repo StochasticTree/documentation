@@ -1,53 +1,44 @@
 #!/bin/bash
-sed -i '' 's|^INPUT *=.*|INPUT = stochtree-repo/include/stochtree|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^RECURSIVE *= NO|RECURSIVE = YES|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^GENERATE_XML *= NO|GENERATE_XML = YES|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^XML_OUTPUT *= xml|XML_OUTPUT = doxygen_xml|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = doxygen_output|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^PROJECT_NAME *=.*|PROJECT_NAME = "stochtree"|' stochtree-repo/cpp_docs/Doxyfile
-sed -i '' 's|^GENERATE_HTML *= YES|GENERATE_HTML = NO|' stochtree-repo/cpp_docs/Doxyfile
 
-doxygen stochtree-repo/cpp_docs/Doxyfile
-mkdir -p docs/c-documentation-markdown
-moxygen doxygen_output/doxygen_xml -o docs/c-documentation-markdown/combined.md
+# Clone stochtree repo
+git clone --recursive git@github.com:StochasticTree/stochtree.git stochtree_repo
+cd stochtree_repo
+git checkout documentation-overhaul
+cd ..
 
-cat > splitMarkdown.js << 'END_SCRIPT'
-const fs = require('fs');
-const path = require('path');
+# Setup python virtual environment and the stochtree python package
+python -m venv venv
+source venv/bin/activate
+cd stochtree_repo
+pip install --upgrade pip
+pip install numpy scipy pytest pandas scikit-learn pybind11
+pip install .
+cd ..
 
-const inputFile = 'docs/c-documentation-markdown/combined.md';
-const outputDir = 'docs/c-documentation-markdown';
+# Install python dependencies for the doc site
+pip install mkdocs-material
+pip install mkdocstrings-python
 
-if (!fs.existsSync(inputFile)) {
-console.error(`Input file ${inputFile} does not exist.`);
-process.exit(1);
-}
+# Build the C++ doxygen output
+sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
+sed -i '' 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/cpp_docs/Doxyfile
+sed -i '' 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/cpp_docs/Doxyfile
+mkdir -p docs/cpp_docs/
+cd stochtree_repo
+doxygen cpp_docs/Doxyfile
+cd ..
 
-const data = fs.readFileSync(inputFile, 'utf8');
+# Install R package dependencies
+Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor", "pkgdown", "cpp11", "BH", "doParallel", "foreach", "knitr", "Matrix", "MASS", "mvtnorm", "rmarkdown", "testthat", "tgp"), repos="https://cloud.r-project.org/")'
 
-// Split the file on level 1 headers (e.g., "# ClassName")
-const sections = data.split(/^# /gm).filter(section => section.trim() !== '');
+# Build the R package doc site
+cd stochtree_repo
+Rscript cran-bootstrap.R 
+cp _pkgdown.yml stochtree_cran/_pkgdown.yml
+cp R_README.md stochtree_cran/README.md
+cd ..
+mkdir -p docs/R_docs
+Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
 
-sections.forEach(section => {
-// Get the title of the section
-const lines = section.split('\n');
-const title = lines[0].trim();
-const content = lines.slice(1).join('\n');
-
-// Sanitize the title to create a filename
-const filename = title.replace(/[<>:"\/\\|?*]/g, '').replace(/\s+/g, '_') + '.md';
-const filepath = path.join(outputDir, filename);
-
-// Write the section to a file with front matter
-const frontMatter = `---\n` +
-                    `title: ${title}\n` +
-                    `---\n\n`;
-fs.writeFileSync(filepath, frontMatter + `# ${title}\n${content}`, 'utf8');
-});
-END_SCRIPT
-
-node splitMarkdown.js
-
-rm docs/c-documentation-markdown/combined.md
-
-yarn build
+# Build the doc site
+mkdocs build
