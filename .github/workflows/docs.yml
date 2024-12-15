@@ -1,5 +1,11 @@
 on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
 
 name: docs
 
