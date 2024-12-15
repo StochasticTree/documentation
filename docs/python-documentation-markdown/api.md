@@ -15,7 +15,7 @@ Return predictions from every forest sampled (either / both of mean and variance
 covariates
 : Test set covariates.
 
-basis_train
+basis
 : Optional test set basis vector, must be provided if the model was trained with a leaf regression basis.
 
 ### Returns
