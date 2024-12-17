@@ -34,7 +34,7 @@ python -m venv venv
 source venv/bin/activate
 cd stochtree_repo
 pip install --upgrade pip
-pip install numpy scipy pytest pandas scikit-learn pybind11
+pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
 pip install .
 cd ..
 ```
@@ -46,6 +46,7 @@ Install the `mkdocs-material` and `mkdocstrings-python` packages in the same vir
 ```{bash}
 pip install mkdocs-material
 pip install mkdocstrings-python
+pip install mkdocs-jupyter
 ```
 
 ##### pkgdown
@@ -91,6 +92,13 @@ mkdir -p docs/cpp_docs/
 cd stochtree_repo
 doxygen cpp_docs/Doxyfile
 cd ..
+```
+
+### Copying Jupyter notebook demos to the docs directory
+
+```{bash}
+cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
 ```
 
 ### Building the overall website

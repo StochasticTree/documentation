@@ -1,5 +1,11 @@
 on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
 
 name: docs
 
@@ -23,6 +29,7 @@ jobs:
           repository: 'StochasticTree/stochtree'
           path: 'stochtree_repo'
           submodules: 'recursive'
+          ref: 'documentation-updates'
     
       - name: Install doxygen and graphviz
         run: |
@@ -30,9 +37,9 @@ jobs:
     
       - name: Build the C++ doxygen output
         run: |
-          sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
-          sed -i '' 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/cpp_docs/Doxyfile
-          sed -i '' 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/cpp_docs/Doxyfile
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
+          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/cpp_docs/Doxyfile
+          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/cpp_docs/Doxyfile
           mkdir -p docs/cpp_docs/
           cd stochtree_repo
           doxygen cpp_docs/Doxyfile
@@ -47,7 +54,7 @@ jobs:
       - name: Install stochtree python package
         run: |
           pip install --upgrade pip
-          pip install numpy scipy pytest pandas scikit-learn pybind11
+          pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
           cd stochtree_repo
           pip install .
           cd ..
@@ -56,6 +63,7 @@ jobs:
         run: |
           pip install mkdocs-material
           pip install mkdocstrings-python
+          pip install mkdocs-jupyter
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -68,6 +76,7 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          working-directory: 'stochtree_repo'
           extra-packages: any::latex2exp, any::ggplot2, any::decor, any::pkgdown
           needs: website
 
@@ -86,6 +95,11 @@ jobs:
           cd stochtree_repo
           Rscript cran-cleanup.R 
           cd ..
+
+      - name: Copy Jupyter notebook demos over to docs directory
+        run: |
+          cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+          cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
       
       - name: Build the overall doc site
         run: |
