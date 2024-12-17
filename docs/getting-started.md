@@ -3,10 +3,6 @@
 `stochtree` is composed of a C++ "core" and R / Python interfaces to that core.
 Details on installation and use are available below:
 
-* [Python](#python-package)
-* [R](#r-package)
-* [C++ core](#c-core)
-
 ## Python Package
 
 The python package is not yet on PyPI but can be installed from source using pip's [git interface](https://pip.pypa.io/en/stable/topics/vcs-support/). 

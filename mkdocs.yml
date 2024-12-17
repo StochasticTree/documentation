@@ -50,6 +50,8 @@ nav:
       - 'BCF': python_docs/demo/causal_inference.ipynb
   - 'C++ Core API and Architecture':
     - cpp_docs/index.md
+    - 'Tree Data Structure': cpp_docs/tree.md
+    - 'Tracking Data Structure': cpp_docs/tracking.md
     - 'C++ Doxygen Site': 'cpp_docs/doxygen/index.html'
 extra:
   social:
@@ -71,6 +73,8 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.arithmatex:
+      generic: true
 plugins:
   - offline
   - mkdocstrings:
@@ -84,4 +88,7 @@ plugins:
             show_root_heading: true
   - mkdocs-jupyter:
       execute: true
-      include_source: True      
+      include_source: True
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js

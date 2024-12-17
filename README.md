@@ -98,6 +98,7 @@ cd ..
 
 ```{bash}
 cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
 ```
 
 ### Building the overall website
