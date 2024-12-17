@@ -1,0 +1,114 @@
+on:
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight UTC
+
+name: docs
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    # Only restrict concurrency for non-PR jobs
+    concurrency:
+      group: docs-${{ github.event_name != 'pull_request' || github.run_id }}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout documentation repo
+        uses: actions/checkout@v4
+
+      - name: Checkout stochtree repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          path: 'stochtree_repo'
+          submodules: 'recursive'
+          ref: 'documentation-updates'
+    
+      - name: Install doxygen and graphviz
+        run: |
+          sudo apt-get install doxygen graphviz -y
+    
+      - name: Build the C++ doxygen output
+        run: |
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
+          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/cpp_docs/Doxyfile
+          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/cpp_docs/Doxyfile
+          mkdir -p docs/cpp_docs/
+          cd stochtree_repo
+          doxygen cpp_docs/Doxyfile
+          cd ..
+      
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install stochtree python package
+        run: |
+          pip install --upgrade pip
+          pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
+          cd stochtree_repo
+          pip install .
+          cd ..
+
+      - name: Install python dependencies for the doc site
+        run: |
+          pip install mkdocs-material
+          pip install mkdocstrings-python
+          pip install mkdocs-jupyter
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          working-directory: 'stochtree_repo'
+          extra-packages: any::latex2exp, any::ggplot2, any::decor, any::pkgdown
+          needs: website
+
+      - name: Build R doc site
+        run: |
+          cd stochtree_repo
+          Rscript cran-bootstrap.R 
+          cp _pkgdown.yml stochtree_cran/_pkgdown.yml
+          cp R_README.md stochtree_cran/README.md
+          cd ..
+          mkdir -p docs/R_docs
+          Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
+
+      - name: Clean up the temporary stochtree_cran directory created
+        run: |
+          cd stochtree_repo
+          Rscript cran-cleanup.R 
+          cd ..
+
+      - name: Copy Jupyter notebook demos over to docs directory
+        run: |
+          cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
+          cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
+      
+      - name: Build the overall doc site
+        run: |
+          mkdocs build
+
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          clean: false
+          branch: gh-pages
+          folder: site
