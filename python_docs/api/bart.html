@@ -1,0 +1,1712 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Stochastic tree ensembles (i.e. BART, XBART) for supervised learning and causal inference">
+      
+      
+      
+        <link rel="canonical" href="https://andrewherren.github.io/stochtree-documentation/python_docs/api/bart.html">
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="bcf.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>BART - StochTree</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="StochTree" class="md-header__button md-logo" aria-label="StochTree" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            StochTree
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BART
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/StochasticTree/stochtree" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    StochasticTree/stochtree
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started.html" class="md-tabs__link">
+        
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../R_docs/index.html" class="md-tabs__link">
+        
+  
+    
+  
+  R Package
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../index.html" class="md-tabs__link">
+          
+  
+    
+  
+  Python Package
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cpp_docs/index.html" class="md-tabs__link">
+          
+  
+    
+  
+  C++ Core API and Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="StochTree" class="md-nav__button md-logo" aria-label="StochTree" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    StochTree
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/StochasticTree/stochtree" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    StochasticTree/stochtree
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../R_docs/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    R Package
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python Package
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Python Package
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    BART
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="bart.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    BART
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      BARTModel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BARTModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      sample
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      predict
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.predict_mean" class="md-nav__link">
+    <span class="md-ellipsis">
+      predict_mean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.predict_variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      predict_variance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.to_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.from_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="bcf.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BCF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../demo/index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Demo
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Demo
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/supervised_learning.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supervised Learning Demo Notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/causal_inference.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Causal Inference Demo Notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../cpp_docs/index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    C++ Core API and Architecture
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            C++ Core API and Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp_docs/tree.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tree Data Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp_docs/tracking.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracking Data Structure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp_docs/doxygen/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++ Doxygen Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="bart">BART<a class="headerlink" href="#bart" title="Permanent link">#</a></h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="stochtree.bart.BARTModel" class="doc doc-heading">
+            <code>stochtree.bart.BARTModel</code>
+
+
+<a href="#stochtree.bart.BARTModel" class="headerlink" title="Permanent link">#</a></h2>
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>Class that handles sampling, storage, and serialization of stochastic forest models for supervised learning. 
+The class takes its name from Bayesian Additive Regression Trees, an MCMC sampler originally developed in 
+Chipman, George, McCulloch (2010), but supports several sampling algorithms:</p>
+<ul>
+<li>MCMC: The "classic" sampler defined in Chipman, George, McCulloch (2010). In order to run the MCMC sampler, set <code>num_gfr = 0</code> (explained below) and then define a sampler according to several parameters:<ul>
+<li><code>num_burnin</code>: the number of iterations to run before "retaining" samples for further analysis. These "burned in" samples are helpful for allowing a sampler to converge before retaining samples.</li>
+<li><code>num_chains</code>: the number of independent sequences of MCMC samples to generate (typically referred to in the literature as "chains")</li>
+<li><code>num_mcmc</code>: the number of "retained" samples of the posterior distribution</li>
+<li><code>keep_every</code>: after a sampler has "burned in", we will run the sampler for <code>keep_every</code> * <code>num_mcmc</code> iterations, retaining one of each <code>keep_every</code> iteration in a chain.</li>
+</ul>
+</li>
+<li>GFR (Grow-From-Root): A fast, greedy approximation of the BART MCMC sampling algorithm introduced in He and Hahn (2021). GFR sampler iterations are governed by the <code>num_gfr</code> parameter, and there are two primary ways to use this sampler:<ul>
+<li>Standalone: setting <code>num_gfr &gt; 0</code> and both <code>num_burnin = 0</code> and <code>num_mcmc = 0</code> will only run and retain GFR samples of the posterior. This is typically referred to as "XBART" (accelerated BART).</li>
+<li>Initializer for MCMC: setting <code>num_gfr &gt; 0</code> and <code>num_mcmc &gt; 0</code> will use ensembles from the GFR algorithm to initialize <code>num_chains</code> independent MCMC BART samplers, which are run for <code>num_mcmc</code> iterations. This is typically referred to as "warm start BART".</li>
+</ul>
+</li>
+</ul>
+<p>In addition to enabling multiple samplers, we support a broad set of models. First, note that the original BART model of Chipman, George, McCulloch (2010) is</p>
+<div class="arithmatex">\[\begin{equation*}
+\begin{aligned}
+y &amp;= f(X) + \epsilon\\
+f(X) &amp;\sim \text{BART}(\cdot)\\
+\epsilon &amp;\sim N(0, \sigma^2)\\
+\sigma^2 &amp;\sim IG(\nu, \nu\lambda)
+\end{aligned}
+\end{equation*}\]</div>
+<p>In words, there is a nonparametric mean function governed by a tree ensemble with a BART prior and an additive (mean-zero) Gaussian error 
+term, whose variance is parameterized with an inverse gamma prior.</p>
+<p>The <code>BARTModel</code> class supports the following extensions of this model:</p>
+<ul>
+<li>Leaf Regression: Rather than letting <code>f(X)</code> define a standard decision tree ensemble, in which each tree uses <code>X</code> to partition the data and then serve up constant predictions, we allow for models <code>f(X,Z)</code> in which <code>X</code> and <code>Z</code> together define a partitioned linear model (<code>X</code> partitions the data and <code>Z</code> serves as the basis for regression models). This model can be run by specifying <code>basis_train</code> in the <code>sample</code> method.</li>
+<li>Heteroskedasticity: Rather than define <span class="arithmatex">\(\epsilon\)</span> parameterically, we can let a forest <span class="arithmatex">\(\sigma^2(X)\)</span> model a conditional error variance function. This can be done by setting <code>num_trees_variance &gt; 0</code> in the <code>params</code> dictionary passed to the <code>sample</code> method.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.sample" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.sample" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Runs a BART sampler on provided training set. Predictions will be cached for the training set and (if provided) the test set. 
+Does not require a leaf regression basis. </p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_train</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Training set covariates on which trees may be partitioned.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>y_train</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Training set outcome.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis_train</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional training set basis vector used to define a regression to be run in the leaves of each tree.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>X_test</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional test set covariates.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis_test</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional test set basis vector used to define a regression to be run in the leaves of each tree. 
+Must be included / omitted consistently (i.e. if basis_train is provided, then basis_test must be provided alongside X_test).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>num_gfr</code>
+            </td>
+            <td>
+                  <code>`int`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of "warm-start" iterations run using the grow-from-root algorithm (He and Hahn, 2021). Defaults to <code>5</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>5</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>num_burnin</code>
+            </td>
+            <td>
+                  <code>`int`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of "burn-in" iterations of the MCMC sampler. Defaults to <code>0</code>. Ignored if <code>num_gfr &gt; 0</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>num_mcmc</code>
+            </td>
+            <td>
+                  <code>`int`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of "retained" iterations of the MCMC sampler. Defaults to <code>100</code>. If this is set to 0, GFR (XBART) samples will be retained.</p>
+              </div>
+            </td>
+            <td>
+                  <code>100</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>params</code>
+            </td>
+            <td>
+                  <code>`dict`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary of model parameters, each of which has a default value.</p>
+<ul>
+<li><code>cutpoint_grid_size</code> (<code>int</code>): Maximum number of cutpoints to consider for each feature. Defaults to <code>100</code>.</li>
+<li><code>sigma_leaf</code> (<code>float</code>): Scale parameter on the (conditional mean) leaf node regression model.</li>
+<li><code>alpha_mean</code> (<code>float</code>): Prior probability of splitting for a tree of depth 0 in the conditional mean model. Tree split prior combines <code>alpha_mean</code> and <code>beta_mean</code> via <code>alpha_mean*(1+node_depth)^-beta_mean</code>.</li>
+<li><code>beta_mean</code> (<code>float</code>): Exponent that decreases split probabilities for nodes of depth &gt; 0 in the conditional mean model. Tree split prior combines <code>alpha_mean</code> and <code>beta_mean</code> via <code>alpha_mean*(1+node_depth)^-beta_mean</code>.</li>
+<li><code>min_samples_leaf_mean</code> (<code>int</code>): Minimum allowable size of a leaf, in terms of training samples, in the conditional mean model. Defaults to <code>5</code>.</li>
+<li><code>max_depth_mean</code> (<code>int</code>): Maximum depth of any tree in the ensemble in the conditional mean model. Defaults to <code>10</code>. Can be overriden with <code>-1</code> which does not enforce any depth limits on trees.</li>
+<li><code>alpha_variance</code> (<code>float</code>): Prior probability of splitting for a tree of depth 0 in the conditional variance model. Tree split prior combines <code>alpha_variance</code> and <code>beta_variance</code> via <code>alpha_variance*(1+node_depth)^-beta_variance</code>.</li>
+<li><code>beta_variance</code> (<code>float</code>): Exponent that decreases split probabilities for nodes of depth &gt; 0 in the conditional variance model. Tree split prior combines <code>alpha_variance</code> and <code>beta_variance</code> via <code>alpha_variance*(1+node_depth)^-beta_variance</code>.</li>
+<li><code>min_samples_leaf_variance</code> (<code>int</code>): Minimum allowable size of a leaf, in terms of training samples in the conditional variance model. Defaults to <code>5</code>.</li>
+<li><code>max_depth_variance</code> (<code>int</code>): Maximum depth of any tree in the ensemble in the conditional variance model. Defaults to <code>10</code>. Can be overriden with <code>-1</code> which does not enforce any depth limits on trees.</li>
+<li><code>a_global</code> (<code>float</code>): Shape parameter in the <code>IG(a_global, b_global)</code> global error variance model. Defaults to <code>0</code>.</li>
+<li><code>b_global</code> (<code>float</code>): Scale parameter in the <code>IG(a_global, b_global)</code> global error variance prior. Defaults to <code>0</code>.</li>
+<li><code>a_leaf</code> (<code>float</code>): Shape parameter in the <code>IG(a_leaf, b_leaf)</code> leaf node parameter variance model. Defaults to <code>3</code>.</li>
+<li><code>b_leaf</code> (<code>float</code>): Scale parameter in the <code>IG(a_leaf, b_leaf)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees_mean</code> if not set here.</li>
+<li><code>a_forest</code> (<code>float</code>): Shape parameter in the [optional] <code>IG(a_forest, b_forest)</code> conditional error variance forest (which is only sampled if <code>num_trees_variance &gt; 0</code>). Calibrated internally as <code>num_trees_variance / 1.5^2 + 0.5</code> if not set here.</li>
+<li><code>b_forest</code> (<code>float</code>): Scale parameter in the [optional] <code>IG(a_forest, b_forest)</code> conditional error variance forest (which is only sampled if <code>num_trees_variance &gt; 0</code>). Calibrated internally as <code>num_trees_variance / 1.5^2</code> if not set here.</li>
+<li><code>sigma2_init</code> (<code>float</code>): Starting value of global variance parameter. Set internally as a percentage of the standardized outcome variance if not set here.</li>
+<li><code>variance_forest_leaf_init</code> (<code>float</code>): Starting value of root forest prediction in conditional (heteroskedastic) error variance model. Calibrated internally as <code>np.log(pct_var_variance_forest_init*np.var((y-np.mean(y))/np.std(y)))/num_trees_variance</code> if not set.</li>
+<li><code>pct_var_sigma2_init</code> (<code>float</code>): Percentage of standardized outcome variance used to initialize global error variance parameter. Superseded by <code>sigma2</code>. Defaults to <code>1</code>.</li>
+<li><code>pct_var_variance_forest_init</code> (<code>float</code>): Percentage of standardized outcome variance used to initialize global error variance parameter. Default: <code>1</code>. Superseded by <code>variance_forest_init</code>.</li>
+<li><code>variance_scale</code> (<code>float</code>): Variance after the data have been scaled. Default: <code>1</code>.</li>
+<li><code>variable_weights_mean</code> (<code>np.array</code>): Numeric weights reflecting the relative probability of splitting on each variable in the mean forest. Does not need to sum to 1 but cannot be negative. Defaults to uniform over the columns of <code>X_train</code> if not provided.</li>
+<li><code>variable_weights_variance</code> (<code>np.array</code>): Numeric weights reflecting the relative probability of splitting on each variable in the variance forest. Does not need to sum to 1 but cannot be negative. Defaults to uniform over the columns of <code>X_train</code> if not provided.</li>
+<li><code>num_trees_mean</code> (<code>int</code>): Number of trees in the ensemble for the conditional mean model. Defaults to <code>200</code>. If <code>num_trees_mean = 0</code>, the conditional mean will not be modeled using a forest and the function will only proceed if <code>num_trees_variance &gt; 0</code>.</li>
+<li><code>num_trees_variance</code> (<code>int</code>): Number of trees in the ensemble for the conditional variance model. Defaults to <code>0</code>. Variance is only modeled using a tree / forest if <code>num_trees_variance &gt; 0</code>.</li>
+<li><code>sample_sigma_global</code> (<code>bool</code>): Whether or not to update the <code>sigma^2</code> global error variance parameter based on <code>IG(a_global, b_global)</code>. Defaults to <code>True</code>.</li>
+<li><code>sample_sigma_leaf</code> (<code>bool</code>): Whether or not to update the <code>tau</code> leaf scale variance parameter based on <code>IG(a_leaf, b_leaf)</code>. Cannot (currently) be set to true if <code>basis_train</code> has more than one column. Defaults to <code>False</code>.</li>
+<li><code>random_seed</code> (<code>int</code>): Integer parameterizing the C++ random number generator. If not specified, the C++ random number generator is seeded according to <code>std::random_device</code>.</li>
+<li><code>keep_burnin</code> (<code>bool</code>): Whether or not "burnin" samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
+<li><code>keep_gfr</code> (<code>bool</code>): Whether or not "warm-start" / grow-from-root samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
+<li><code>num_chains</code> (<code>int</code>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, then each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations, with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each MCMC chain will be initialized from a separate GFR ensemble, with the requirement that <code>num_gfr &gt;= num_chains</code>. Default: <code>1</code>.</li>
+<li><code>keep_every</code> (<code>int</code>): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to <code>1</code>. Setting <code>keep_every = k</code> for some <code>k &gt; 1</code> will "thin" the MCMC samples by retaining every <code>k</code>-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.</li>
+</ul>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>self</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="stochtree.bart.BARTModel" href="#stochtree.bart.BARTModel">BARTModel</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Sampled BART Model.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.predict" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">covariates</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.predict" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return predictions from every forest sampled (either / both of mean and variance)</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set covariates.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional test set basis vector, must be provided if the model was trained with a leaf regression basis.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>tuple of `np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Tuple of arrays of predictions corresponding to each forest (mean and variance, depending on whether either / both was included). Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.predict_mean" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">predict_mean</span><span class="p">(</span><span class="n">covariates</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.predict_mean" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Predict expected conditional outcome from a BART model.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set covariates.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis</code>
+            </td>
+            <td>
+                  <code>`np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional test set basis vector, must be provided if the model was trained with a leaf regression basis.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>tuple of `np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Tuple of arrays of predictions corresponding to each forest (mean and variance, depending on whether either / both was included). Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.predict_variance" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">predict_variance</span><span class="p">(</span><span class="n">covariates</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.predict_variance" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Predict expected conditional variance from a BART model.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set covariates.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>tuple of `np.array`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Tuple of arrays of predictions corresponding to the variance forest. Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.to_json" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">to_json</span><span class="p">()</span></code>
+
+<a href="#stochtree.bart.BARTModel.to_json" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Converts a sampled BART model to JSON string representation (which can then be saved to a file or 
+processed using the <code>json</code> library)</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>`str`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.from_json" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">from_json</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.from_json" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Converts a JSON string to an in-memory BART model.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>json_string</code>
+            </td>
+            <td>
+                  <code>`str`</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: StochTree Python API Reference">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                StochTree Python API Reference
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="bcf.html" class="md-footer__link md-footer__link--next" aria-label="Next: BCF">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                BCF
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 - 2024 Drew Herren, Carlos Carvalho, Richard Hahn, Jared Murray
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/StochasticTree/stochtree" target="_blank" rel="noopener" title="stochtree on Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.indexes", "navigation.footer", "navigation.path", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
