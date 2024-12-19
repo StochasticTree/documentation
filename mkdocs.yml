@@ -1,5 +1,5 @@
 site_name: StochTree
-site_url: "https://andrewherren.github.io/stochtree-documentation/"
+site_url: "stochtree.ai"
 site_description: "Stochastic tree ensembles (i.e. BART, XBART) for supervised learning and causal inference"
 repo_url: "https://github.com/StochasticTree/stochtree"
 repo_name: "StochasticTree/stochtree"
@@ -13,6 +13,9 @@ theme:
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
+    - search.share
     - toc.follow
     - toc.integrate
   palette:
@@ -77,6 +80,7 @@ markdown_extensions:
       generic: true
 plugins:
   - offline
+  - search
   - mkdocstrings:
       handlers:
         python:
