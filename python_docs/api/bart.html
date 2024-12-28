@@ -681,6 +681,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.is_sampled" class="md-nav__link">
+    <span class="md-ellipsis">
+      is_sampled
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1100,7 +1109,7 @@ Does not require a leaf regression basis. </p>
                 <code>X_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1116,7 +1125,7 @@ Does not require a leaf regression basis. </p>
                 <code>y_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1132,7 +1141,7 @@ Does not require a leaf regression basis. </p>
                 <code>basis_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1148,7 +1157,7 @@ Does not require a leaf regression basis. </p>
                 <code>X_test</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1164,7 +1173,7 @@ Does not require a leaf regression basis. </p>
                 <code>basis_test</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1181,7 +1190,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>num_gfr</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1197,7 +1206,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>num_burnin</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1213,7 +1222,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>num_mcmc</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1229,7 +1238,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>params</code>
             </td>
             <td>
-                  <code>`dict`</code>
+                  <code>dict</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1277,29 +1286,6 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
       </tbody>
     </table>
 
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-<th>Name</th>          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-<td><code>self</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="stochtree.bart.BARTModel" href="#stochtree.bart.BARTModel">BARTModel</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Sampled BART Model.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
     </div>
 
 </div>
@@ -1315,7 +1301,9 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
 
     <div class="doc doc-contents ">
 
-        <p>Return predictions from every forest sampled (either / both of mean and variance)</p>
+        <p>Return predictions from every forest sampled (either / both of mean and variance). 
+Return type is either a single array of predictions, if a BART model only includes a 
+mean or variance term, or a tuple of prediction arrays, if a BART model includes both.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1334,7 +1322,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>covariates</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1350,7 +1338,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>basis</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1369,18 +1357,28 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
     <table>
       <thead>
         <tr>
-          <th>Type</th>
+<th>Name</th>          <th>Type</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td>
-                  <code>tuple of `np.array`</code>
+<td><code>mu_x</code></td>            <td>
+                  <code>(<span title="numpy.array">array</span>, optional)</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple of arrays of predictions corresponding to each forest (mean and variance, depending on whether either / both was included). Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+                <p>Mean forest predictions.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>sigma2_x</code></td>            <td>
+                  <code>(<span title="numpy.array">array</span>, optional)</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variance forest predictions.</p>
               </div>
             </td>
           </tr>
@@ -1421,7 +1419,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>covariates</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1437,7 +1435,7 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
                 <code>basis</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1463,11 +1461,11 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>tuple of `np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple of arrays of predictions corresponding to each forest (mean and variance, depending on whether either / both was included). Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+                <p>Mean forest predictions.</p>
               </div>
             </td>
           </tr>
@@ -1534,11 +1532,11 @@ Must be included / omitted consistently (i.e. if basis_train is provided, then b
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>tuple of `np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple of arrays of predictions corresponding to the variance forest. Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+                <p>Variance forest predictions.</p>
               </div>
             </td>
           </tr>
@@ -1575,7 +1573,7 @@ processed using the <code>json</code> library)</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>`str`</code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1620,7 +1618,7 @@ processed using the <code>json</code> library)</p>
                 <code>json_string</code>
             </td>
             <td>
-                  <code>`str`</code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1629,6 +1627,46 @@ processed using the <code>json</code> library)</p>
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.is_sampled" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">is_sampled</span><span class="p">()</span></code>
+
+<a href="#stochtree.bart.BARTModel.is_sampled" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Whether or not a BART model has been sampled.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><code>True</code> if a BART model has been sampled, <code>False</code> otherwise</p>
+              </div>
             </td>
           </tr>
       </tbody>

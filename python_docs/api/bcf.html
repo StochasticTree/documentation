@@ -702,6 +702,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stochtree.bcf.BCFModel.is_sampled" class="md-nav__link">
+    <span class="md-ellipsis">
+      is_sampled
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1108,7 +1117,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>X_train</code>
             </td>
             <td>
-                  <code>`np.array` or `pd.DataFrame`</code>
+                  <code><span title="numpy.array">array</span> or <span title="pandas.DataFrame">DataFrame</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1124,7 +1133,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>Z_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1140,7 +1149,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>y_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1156,7 +1165,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>pi_train</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1172,7 +1181,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>X_test</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1188,7 +1197,7 @@ will be cached for the training set and (if provided) the test set.</p>
                 <code>Z_test</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1205,7 +1214,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>pi_test</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1221,7 +1230,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>num_gfr</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1237,7 +1246,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>num_burnin</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1253,7 +1262,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>num_mcmc</code>
             </td>
             <td>
-                  <code>`int`</code>
+                  <code>int</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1269,7 +1278,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>params</code>
             </td>
             <td>
-                  <code>`dict`</code>
+                  <code>dict</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1309,7 +1318,7 @@ Must be provided if <code>X_test</code> is provided.</p>
 <li><code>variance_forest_leaf_init</code> (<code>float</code>): Starting value of root forest prediction in conditional (heteroskedastic) error variance model. Calibrated internally as <code>np.log(pct_var_variance_forest_init*np.var((y-np.mean(y))/np.std(y)))/num_trees_variance</code> if not set.</li>
 <li><code>pct_var_sigma2_init</code> (<code>float</code>): Percentage of standardized outcome variance used to initialize global error variance parameter. Superseded by <code>sigma2</code>. Defaults to <code>0.25</code>.</li>
 <li><code>pct_var_variance_forest_init</code> (<code>float</code>): Percentage of standardized outcome variance used to initialize global error variance parameter. Default: <code>1</code>. Superseded by <code>variance_forest_init</code>.</li>
-<li><code>variable_weights_mean</code> (<code>np.</code>array<code>): Numeric weights reflecting the relative probability of splitting on each variable in the prognostic and treatment effect forests. Does not need to sum to 1 but cannot be negative. Defaults to</code>np.repeat(1/X_train.shape[1], X_train.shape[1])<code>if not set here. Note that if the propensity score is included as a covariate in either forest, its weight will default to</code>1/X_train.shape[1]<code>. A workaround if you wish to provide a custom weight for the propensity score is to include it as a column in</code>X_train<code>and then set</code>propensity_covariate<code>to</code>'none'<code>and adjust</code>keep_vars_mu<code>and</code>keep_vars_tau`` accordingly.</li>
+<li><code>variable_weights_mean</code> (<code>np.</code>array<code>): Numeric weights reflecting the relative probability of splitting on each variable in the prognostic and treatment effect forests. Does not need to sum to 1 but cannot be negative. Defaults to</code>np.repeat(1/X_train.shape[1], X_train.shape[1])<code>if not set here. Note that if the propensity score is included as a covariate in either forest, its weight will default to</code>1/X_train.shape[1]<code>. A workaround if you wish to provide a custom weight for the propensity score is to include it as a column in</code>X_train<code>and then set</code>propensity_covariate<code>to</code>'none'<code>and adjust</code>keep_vars_mu<code>and</code>keep_vars_tau` accordingly.</li>
 <li><code>variable_weights_variance</code> (<code>np.array</code>): Numeric weights reflecting the relative probability of splitting on each variable in the variance forest. Does not need to sum to 1 but cannot be negative. Defaults to uniform over the columns of <code>X_train</code> if not provided.</li>
 <li><code>keep_vars_mu</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be included in the prognostic (<code>mu(X)</code>) forest. Defaults to <code>None</code>.</li>
 <li><code>drop_vars_mu</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be excluded from the prognostic (<code>mu(X)</code>) forest. Defaults to <code>None</code>. If both <code>drop_vars_mu</code> and <code>keep_vars_mu</code> are set, <code>drop_vars_mu</code> will be ignored.</li>
@@ -1341,29 +1350,6 @@ Must be provided if <code>X_test</code> is provided.</p>
             </td>
             <td>
                   <code>None</code>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-<th>Name</th>          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-<td><code>self</code></td>            <td>
-                  <code><a class="autorefs autorefs-internal" title="stochtree.bcf.BCFModel" href="#stochtree.bcf.BCFModel">BCFModel</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Sampled BCF Model.</p>
-              </div>
             </td>
           </tr>
       </tbody>
@@ -1435,7 +1421,7 @@ Must be provided if <code>X_test</code> is provided.</p>
                 <code>propensity</code>
             </td>
             <td>
-                  <code>`np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1519,7 +1505,7 @@ Must be provided if <code>X_test</code> is provided.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>covariates</code>
+                <code>propensity</code>
             </td>
             <td>
                   <code><span title="numpy.array">array</span></code>
@@ -1530,7 +1516,7 @@ Must be provided if <code>X_test</code> is provided.</p>
               </div>
             </td>
             <td>
-                <em>required</em>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -1548,11 +1534,11 @@ Must be provided if <code>X_test</code> is provided.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>tuple of `np.array`</code>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple of arrays of predictions corresponding to the variance forest. Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
+                <p>Array of predictions corresponding to the variance forest. Each array will contain as many rows as in <code>covariates</code> and as many columns as retained samples of the algorithm.</p>
               </div>
             </td>
           </tr>
@@ -1645,21 +1631,49 @@ Predicted outcomes are computed as <code>yhat = mu_x + Z*tau_x</code> where mu_x
     <table>
       <thead>
         <tr>
-          <th>Type</th>
+<th>Name</th>          <th>Type</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td>
-                  <code>tuple of np.array</code>
+<td><code>tau_x</code></td>            <td>
+                  <code><span title="numpy.array">array</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple of arrays with as many rows as in <code>X</code> and as many columns as retained samples of the algorithm. 
-The first entry of the tuple contains conditional average treatment effect (CATE) samples, 
-the second entry contains prognostic effect samples, and the third entry contains outcome prediction samples. 
-The optional fourth array contains variance forest samples.</p>
+                <p>Conditional average treatment effect (CATE) samples for every observation provided.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>mu_x</code></td>            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Prognostic effect samples for every observation provided.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>yhat_x</code></td>            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Outcome prediction samples for every observation provided.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>sigma2_x</code></td>            <td>
+                  <code>(<span title="numpy.array">array</span>, optional)</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variance forest samples for every observation provided. Only returned if the 
+model includes a heteroskedasticity forest.</p>
               </div>
             </td>
           </tr>
@@ -1696,7 +1710,7 @@ processed using the <code>json</code> library)</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>`str`</code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1741,7 +1755,7 @@ processed using the <code>json</code> library)</p>
                 <code>json_string</code>
             </td>
             <td>
-                  <code>`str`</code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1750,6 +1764,46 @@ processed using the <code>json</code> library)</p>
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bcf.BCFModel.is_sampled" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">is_sampled</span><span class="p">()</span></code>
+
+<a href="#stochtree.bcf.BCFModel.is_sampled" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Whether or not a BCF model has been sampled.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><code>True</code> if a BCF model has been sampled, <code>False</code> otherwise</p>
+              </div>
             </td>
           </tr>
       </tbody>
