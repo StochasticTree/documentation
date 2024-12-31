@@ -24,29 +24,23 @@ git clone --recursive git@github.com:StochasticTree/stochtree.git stochtree_repo
 The docs are largely built using [`mkdocs`](https://www.mkdocs.org), [`pkgdown`](https://pkgdown.r-lib.org) and [`doxygen`](https://www.doxygen.nl/index.html), 
 with everything tied together using the ["Material for MkDocs"](https://squidfunk.github.io/mkdocs-material/) theme. 
 
-##### stochtree
-
-Some of the docs and vignettes require having the current version of `stochtree` installed. 
-We first create a virtual environment and install this library.
+We first create a virtual environment and install the dependencies for `stochtree` as well as the doc site (several python packages: `mkdocs-material`, `mkdocstrings-python`, and `mkdocs-jupyter`).
 
 ```{bash}
 python -m venv venv
 source venv/bin/activate
-cd stochtree_repo
 pip install --upgrade pip
-pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
-pip install .
-cd ..
+pip install -r requirements.txt
 ```
 
-##### mkdocs-material
+##### stochtree
 
-Install the `mkdocs-material` and `mkdocstrings-python` packages in the same virtual environment
+Now, we build the `stochtree` python library locally in the virtual environment activated above
 
 ```{bash}
-pip install mkdocs-material
-pip install mkdocstrings-python
-pip install mkdocs-jupyter
+cd stochtree_repo
+pip install .
+cd ..
 ```
 
 ##### pkgdown
@@ -75,6 +69,7 @@ Then run the `pkgdown` build workflow to put the R docs in the correct folder
 ```{bash}
 mkdir -p docs/R_docs
 Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
+rm -rf stochtree_repo/stochtree_cran
 ```
 
 ### Building the doxygen site for the C++ API
