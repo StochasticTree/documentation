@@ -16,7 +16,7 @@
         <link rel="prev" href="bart.html">
       
       
-        <link rel="next" href="../demo/index.html">
+        <link rel="next" href="low-level/index.html">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -519,6 +519,8 @@
       
         
       
+        
+      
     
     
       
@@ -719,6 +721,164 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="low-level/index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Low level interface
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Low level interface
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/dataset.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/forest.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forest API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/sampler.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sampler API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/utilities.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utilies API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1050,17 +1210,17 @@ This is typically referred to as "warm start BART".</li>
 <p>In addition to enabling multiple samplers, we support a broad set of models. First, note that the original BCF model of Hahn, Murray, Carvalho (2020) is</p>
 <div class="arithmatex">\[\begin{equation*}
 \begin{aligned}
-y &amp;= \mu(X) + b_z(X) + \epsilon\\
-b_z(X) &amp;= (b_1 Z + b_0 (1-Z)) \tau(X)\\
+y &amp;= a(X) + b_z(X) + \epsilon\\
+b_z(X) &amp;= (b_1 Z + b_0 (1-Z)) t(X)\\
 b_0, b_1 &amp;\sim N(0, \frac{1}{2})\\\\
-\mu(X) &amp;\sim \text{BART}(\cdot)\\
-\tau(X) &amp;\sim \text{BART}(\cdot)\\
+a(X) &amp;\sim \text{BART}()\\
+t(X) &amp;\sim \text{BART}()\\
 \epsilon &amp;\sim N(0, \sigma^2)\\
-\sigma^2 &amp;\sim IG(\nu, \nu\lambda)
+\sigma^2 &amp;\sim IG(a, b)
 \end{aligned}
 \end{equation*}\]</div>
 <p>for continuous outcome <span class="arithmatex">\(y\)</span>, binary treatment <span class="arithmatex">\(Z\)</span>, and covariates <span class="arithmatex">\(X\)</span>.</p>
-<p>In words, there are two nonparametric mean functions -- a "prognostic" function and a treatment effect function -- governed by tree ensembles with BART priors and an additive (mean-zero) Gaussian error 
+<p>In words, there are two nonparametric mean functions -- a "prognostic" function and a "treatment effect" function -- governed by tree ensembles with BART priors and an additive (mean-zero) Gaussian error 
 term, whose variance is parameterized with an inverse gamma prior.</p>
 <p>The <code>BCFModel</code> class supports the following extensions of this model:</p>
 <ul>
@@ -1866,13 +2026,13 @@ processed using the <code>json</code> library)</p>
         
         
           
-          <a href="../demo/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: StochTree Python API Demo">
+          <a href="low-level/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Low-Level API">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                StochTree Python API Demo
+                Low-Level API
               </div>
             </div>
             <div class="md-footer__button md-icon">

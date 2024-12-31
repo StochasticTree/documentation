@@ -519,6 +519,8 @@
       
         
       
+        
+      
     
     
       
@@ -602,6 +604,164 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="low-level/index.html" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Low level interface
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Low level interface
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/dataset.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/forest.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forest API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/sampler.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sampler API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="low-level/utilities.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utilies API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -892,7 +1052,22 @@
 
 
 <h1 id="stochtree-python-api-reference">StochTree Python API Reference<a class="headerlink" href="#stochtree-python-api-reference" title="Permanent link">#</a></h1>
-<p>Overview of the <code>stochtree</code> python library's key classes and functions</p>
+<p>Overview of the <code>stochtree</code> python library's key classes and functions.</p>
+<p>The <code>stochtree</code> interface is divided into two "levels":</p>
+<ol>
+<li>"High level": end-to-end implementations of stochastic tree ensembles for supervised learning (BART / XBART) and causal inference (BCF / XBCF). Both interfaces are designed to mirror the <a href="https://scikit-learn.org/dev/developers/develop.html">scikit-learn estimator style</a>, with the <code>.fit()</code> method replaced by a <code>.sample()</code> method.<ol>
+<li>The BART (supervised learning) interface is documented <a href="bart.html">here</a>.</li>
+<li>The BCF (causal inference) interface is documented <a href="bcf.html">here</a>.</li>
+</ol>
+</li>
+<li>"Low level": we provide access to most of the C++ sampling objects and functionality via Python, which allow for custom sampling algorithms and integration of other model terms. This interface is documented <a href="low-level/index.html">here</a> and consists broadly of the following components:<ol>
+<li><a href="low-level/dataset.html">Data API</a>: loading and storing in-memory data needed to train <code>stochtree</code> models.</li>
+<li><a href="low-level/forest.html">Forest API</a>: creating, storing, and modifying ensembles of decision trees that underlie all <code>stochtree</code> models.</li>
+<li><a href="low-level/sampler.html">Sampler API</a>: sampling from stochastic tree ensemble models as well as several supported parametric models.</li>
+<li><a href="low-level/utilities.html">Utilities API</a>: seeding a C++ random number generator, preprocessing data, and serializing models to JSON (files or in-memory strings).</li>
+</ol>
+</li>
+</ol>
 
 
 
