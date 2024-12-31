@@ -51,19 +51,16 @@ jobs:
           python-version: "3.10"
           cache: "pip"
 
-      - name: Install stochtree python package
+      - name: Install python dependencies for the doc site and stochtree python package
         run: |
           pip install --upgrade pip
-          pip install numpy scipy pytest pandas scikit-learn pybind11 matplotlib seaborn
+          pip install -r requirements.txt
+      
+      - name: Install stochtree python package
+        run: |
           cd stochtree_repo
           pip install .
           cd ..
-
-      - name: Install python dependencies for the doc site
-        run: |
-          pip install mkdocs-material
-          pip install mkdocstrings-python
-          pip install mkdocs-jupyter
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
