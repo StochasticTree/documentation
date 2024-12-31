@@ -1,6 +1,6 @@
 # StochTree R API Reference
 
-Overview of the `stochtree` R library's key classes and functions, built as a [self-contained doc site](pkgdown/reference/index.html) using the [pkgdown](https://pkgdown.r-lib.org) format. The `stochtree` interface is divided into two "levels":
+Overview of the `stochtree` R library's key classes and functions, built as a [self-contained doc site](pkgdown/index.html) using the [pkgdown](https://pkgdown.r-lib.org) format. The `stochtree` interface is divided into two "levels":
 
 1. "High level": end-to-end implementations of stochastic tree ensembles for supervised learning (BART / XBART) and causal inference (BCF / XBCF). 
     1. The BART (supervised learning) interface is documented [here](pkgdown/reference/index.html#supervised-learning).
