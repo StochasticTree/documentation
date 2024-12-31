@@ -84,8 +84,8 @@ jobs:
           cp _pkgdown.yml stochtree_cran/_pkgdown.yml
           cp R_README.md stochtree_cran/README.md
           cd ..
-          mkdir -p docs/R_docs
-          Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
+          mkdir -p docs/R_docs/pkgdown
+          Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
 
       - name: Clean up the temporary stochtree_cran directory created
         run: |

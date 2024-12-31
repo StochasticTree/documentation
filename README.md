@@ -67,8 +67,8 @@ cd ..
 Then run the `pkgdown` build workflow to put the R docs in the correct folder
 
 ```{bash}
-mkdir -p docs/R_docs
-Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs", install = TRUE)'
+mkdir -p docs/R_docs/pkgdown
+Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
 rm -rf stochtree_repo/stochtree_cran
 ```
 
