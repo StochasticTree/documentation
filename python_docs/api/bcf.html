@@ -1297,7 +1297,7 @@ t(X) &amp;\sim \text{BART}()\\
 term, whose variance is parameterized with an inverse gamma prior.</p>
 <p>The <code>BCFModel</code> class supports the following extensions of this model:</p>
 <ul>
-<li>Continuous Treatment: If <span class="arithmatex">\(Z\)</span> is continuous rather than binary, we define <span class="arithmatex">\(b_z(X) &amp; = \tau(X, Z) = Z \tau(X)\)</span>, where the "leaf model" for the <span class="arithmatex">\(\tau\)</span> forest is essentially a regression on continuous <span class="arithmatex">\(Z\)</span>.</li>
+<li>Continuous Treatment: If <span class="arithmatex">\(Z\)</span> is continuous rather than binary, we define <span class="arithmatex">\(b_z(X) = \tau(X, Z) = Z \tau(X)\)</span>, where the "leaf model" for the <span class="arithmatex">\(\tau\)</span> forest is essentially a regression on continuous <span class="arithmatex">\(Z\)</span>.</li>
 <li>Heteroskedasticity: Rather than define <span class="arithmatex">\(\epsilon\)</span> parameterically, we can let a forest <span class="arithmatex">\(\sigma^2(X)\)</span> model a conditional error variance function. This can be done by setting <code>num_trees_variance &gt; 0</code> in the <code>params</code> dictionary passed to the <code>sample</code> method.</li>
 </ul>
 
