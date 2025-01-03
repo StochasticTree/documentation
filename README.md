@@ -80,12 +80,12 @@ On MacOS, this can be [done via homebrew](https://formulae.brew.sh/formula/doxyg
 Then, modify the `Doxyfile` to build the C++ documentation as desired and build the doxygen site
 
 ```{bash}
-sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/cpp_docs/Doxyfile
-sed -i '' 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/cpp_docs/Doxyfile
-sed -i '' 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/cpp_docs/Doxyfile
+sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/Doxyfile
+sed -i '' 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/Doxyfile
+sed -i '' 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/Doxyfile
 mkdir -p docs/cpp_docs/
 cd stochtree_repo
-doxygen cpp_docs/Doxyfile
+doxygen Doxyfile
 cd ..
 ```
 
