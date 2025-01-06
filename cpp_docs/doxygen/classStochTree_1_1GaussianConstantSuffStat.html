@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,10 +81,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classStochTree_1_1GaussianConstantSuffStat-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::GaussianConstantSuffStat Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::GaussianConstantSuffStat Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,43 +90,6 @@ $(function() {
  <a href="classStochTree_1_1GaussianConstantSuffStat.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:aaae23e912753384bac536fcc6b92ddc3" id="r_aaae23e912753384bac536fcc6b92ddc3"><td class="memItemLeft" align="right" valign="top"><a id="aaae23e912753384bac536fcc6b92ddc3" name="aaae23e912753384bac536fcc6b92ddc3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>IncrementSuffStat</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, Eigen::VectorXd &amp;outcome, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, data_size_t row_idx, int tree_idx)</td></tr>
-<tr class="separator:aaae23e912753384bac536fcc6b92ddc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae015846c3e6ac5a44ddf078f1a01a5fe" id="r_ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="memItemLeft" align="right" valign="top"><a id="ae015846c3e6ac5a44ddf078f1a01a5fe" name="ae015846c3e6ac5a44ddf078f1a01a5fe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
-<tr class="separator:ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8693648d0cb2b666503d8f3e8568f6ce" id="r_a8693648d0cb2b666503d8f3e8568f6ce"><td class="memItemLeft" align="right" valign="top"><a id="a8693648d0cb2b666503d8f3e8568f6ce" name="a8693648d0cb2b666503d8f3e8568f6ce"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSuffStat</b> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;rhs)</td></tr>
-<tr class="separator:a8693648d0cb2b666503d8f3e8568f6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30d32cda9e6cfdf72d8a47f8a84f068e" id="r_a30d32cda9e6cfdf72d8a47f8a84f068e"><td class="memItemLeft" align="right" valign="top"><a id="a30d32cda9e6cfdf72d8a47f8a84f068e" name="a30d32cda9e6cfdf72d8a47f8a84f068e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SubtractSuffStat</b> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;rhs)</td></tr>
-<tr class="separator:a30d32cda9e6cfdf72d8a47f8a84f068e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa77e3136646e48d0166b3a91fced3ba2" id="r_aa77e3136646e48d0166b3a91fced3ba2"><td class="memItemLeft" align="right" valign="top"><a id="aa77e3136646e48d0166b3a91fced3ba2" name="aa77e3136646e48d0166b3a91fced3ba2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SampleGreaterThan</b> (data_size_t threshold)</td></tr>
-<tr class="separator:aa77e3136646e48d0166b3a91fced3ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa467aa8d5b48545d64d2e2a09fefd683" id="r_aa467aa8d5b48545d64d2e2a09fefd683"><td class="memItemLeft" align="right" valign="top"><a id="aa467aa8d5b48545d64d2e2a09fefd683" name="aa467aa8d5b48545d64d2e2a09fefd683"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SampleGreaterThanEqual</b> (data_size_t threshold)</td></tr>
-<tr class="separator:aa467aa8d5b48545d64d2e2a09fefd683"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16a6e2c03208fe496ab25fa3ac09b285" id="r_a16a6e2c03208fe496ab25fa3ac09b285"><td class="memItemLeft" align="right" valign="top"><a id="a16a6e2c03208fe496ab25fa3ac09b285" name="a16a6e2c03208fe496ab25fa3ac09b285"></a>
-data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b> ()</td></tr>
-<tr class="separator:a16a6e2c03208fe496ab25fa3ac09b285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:aca262b4f9b9e92ec995139cd2c70c1bb" id="r_aca262b4f9b9e92ec995139cd2c70c1bb"><td class="memItemLeft" align="right" valign="top"><a id="aca262b4f9b9e92ec995139cd2c70c1bb" name="aca262b4f9b9e92ec995139cd2c70c1bb"></a>
-data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>n</b></td></tr>
-<tr class="separator:aca262b4f9b9e92ec995139cd2c70c1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf61c86b4f44dd8eb9b39bd43d010434" id="r_adf61c86b4f44dd8eb9b39bd43d010434"><td class="memItemLeft" align="right" valign="top"><a id="adf61c86b4f44dd8eb9b39bd43d010434" name="adf61c86b4f44dd8eb9b39bd43d010434"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>sum_w</b></td></tr>
-<tr class="separator:adf61c86b4f44dd8eb9b39bd43d010434"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe5e9241f911c58ba9044f32ae70b2b1" id="r_abe5e9241f911c58ba9044f32ae70b2b1"><td class="memItemLeft" align="right" valign="top"><a id="abe5e9241f911c58ba9044f32ae70b2b1" name="abe5e9241f911c58ba9044f32ae70b2b1"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>sum_yw</b></td></tr>
-<tr class="separator:abe5e9241f911c58ba9044f32ae70b2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>

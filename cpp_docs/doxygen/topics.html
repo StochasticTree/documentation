@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,7 +81,11 @@ $(function() {
 <div class="contents">
 <div class="textblock">Here is a list of all topics with brief descriptions:</div><div class="directory">
 <table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__tree__group.html" target="_self">Tree Data Structures and Functions</a></td><td class="desc"></td></tr>
+<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__data__group.html" target="_self">Dataset API</a></td><td class="desc">Functions for loading, using, and modifying training / test data for forest samplers </td></tr>
+<tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__forest__group.html" target="_self">Forest (i.e. ensemble of trees) API</a></td><td class="desc">Classes / functions for creating and modifying forests </td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__leaf__model__group.html" target="_self">Leaf Model API</a></td><td class="desc">Classes / functions for implementing leaf models </td></tr>
+<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__tree__group.html" target="_self">Tree API</a></td><td class="desc">Classes / functions for creating and modifying decision trees </td></tr>
+<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="group__sampling__group.html" target="_self">Forest Sampler API</a></td><td class="desc">Functions for sampling from a forest. The core interfce of these functions, as used by the R, Python, and standalone C++ program, is defined by <a class="el" href="group__sampling__group.html#ga08eabd64880e15e5ee94e8ad48110208">MCMCSampleOneIter</a>, which runs one iteration of the MCMC sampler for a given forest, and <a class="el" href="group__sampling__group.html#ga68c34c1d30d2ad0503b30e396ec97c09">GFRSampleOneIter</a>, which runs one iteration of the grow-from-root (GFR) algorithm for a given forest. All other functions are essentially helpers used in a sampling function, which are documented here to make extending the C++ codebase more straightforward </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

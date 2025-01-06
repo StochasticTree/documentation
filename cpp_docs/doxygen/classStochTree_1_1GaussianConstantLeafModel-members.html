@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -78,18 +85,7 @@ $(function() {
 <div class="contents">
 
 <p>This is the complete list of members for <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>GaussianConstantLeafModel</b>(double tau) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>NoSplitLogMarginalLikelihood</b>(GaussianConstantSuffStat &amp;suff_stat, double global_variance) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>PosteriorParameterMean</b>(GaussianConstantSuffStat &amp;suff_stat, double global_variance) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>PosteriorParameterVariance</b>(GaussianConstantSuffStat &amp;suff_stat, double global_variance) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>RequiresBasis</b>() (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>SampleLeafParameters</b>(ForestDataset &amp;dataset, ForestTracker &amp;tracker, ColumnVector &amp;residual, Tree *tree, int tree_num, double global_variance, std::mt19937 &amp;gen) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>SetEnsembleRootPredictedValue</b>(ForestDataset &amp;dataset, TreeEnsemble *ensemble, double root_pred_value) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>SetScale</b>(double tau) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>SplitLogMarginalLikelihood</b>(GaussianConstantSuffStat &amp;left_stat, GaussianConstantSuffStat &amp;right_stat, double global_variance) (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~GaussianConstantLeafModel</b>() (defined in <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a>)</td><td class="entry"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">StochTree::GaussianConstantLeafModel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

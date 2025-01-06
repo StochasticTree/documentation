@@ -5,13 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>StochTree: Tree Data Structures and Functions</title>
+<title>StochTree: Tree API</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -72,14 +79,17 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Tree Data Structures and Functions</div></div>
+  <div class="headertitle"><div class="title">Tree API</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classes / functions for creating and modifying decision trees.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1Tree.html">StochTree::Tree</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for constructing decision trees (splitting, pruning, setting parameter values)  <a href="classStochTree_1_1Tree.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decision tree data structure.  <a href="classStochTree_1_1Tree.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeSplit.html">StochTree::TreeSplit</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of arbitrary tree split rules, including numeric split rules (<code>X[,i] &lt;= c</code>) and categorical split rules (<code>X[,i] in {2,4,6,7}</code>)  <a href="classStochTree_1_1TreeSplit.html#details">More...</a><br /></td></tr>
@@ -115,9 +125,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
 <tr class="separator:ga1a2c57c7ad60ae863ae85f26e7f78e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Classes / functions for creating and modifying decision trees. </p>
+<h1><a class="anchor" id="tree_design"></a>
+Design</h1>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga168d1533c42902e725f5495b892cc88c" name="ga168d1533c42902e725f5495b892cc88c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga168d1533c42902e725f5495b892cc88c">&#9670;&#160;</a></span>EvaluateTree() <span class="overload">[1/2]</span></h2>
+<a id="ga2d27a2084998eb174869d0b14b5cf84a" name="ga2d27a2084998eb174869d0b14b5cf84a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2d27a2084998eb174869d0b14b5cf84a">&#9670;&#160;</a></span>SplitTrueNumeric()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,22 +139,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int StochTree::EvaluateTree </td>
+          <td class="memname">bool StochTree::SplitTrueNumeric </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> const &amp;&#160;</td>
-          <td class="paramname"><em>tree</em>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>fvalue</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>row</em>&#160;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>threshold</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -155,20 +162,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Determine the node at which a tree places a given observation</p>
+
+<p>Determine whether an observation produces a "true" value in a numeric split node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tree</td><td><a class="el" href="classStochTree_1_1Tree.html" title="API for constructing decision trees (splitting, pruning, setting parameter values)">Tree</a> object used for prediction </td></tr>
-    <tr><td class="paramname">data</td><td>Dataset used for prediction </td></tr>
-    <tr><td class="paramname">row</td><td>Row indexing the prediction observation </td></tr>
+    <tr><td class="paramname">fvalue</td><td>Value of the split feature for the observation </td></tr>
+    <tr><td class="paramname">threshold</td><td>Value of the numeric split threshold at the node </td></tr>
+    <tr><td class="paramname">left_child</td><td>Node id of the left child </td></tr>
+    <tr><td class="paramname">right_child</td><td>Node id of the right child </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ga9eb9e98f206c385f5ca2933995be4ce9" name="ga9eb9e98f206c385f5ca2933995be4ce9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9eb9e98f206c385f5ca2933995be4ce9">&#9670;&#160;</a></span>EvaluateTree() <span class="overload">[2/2]</span></h2>
+<a id="ga73cc13bbda66dea3cc2d5dd2153aeddf" name="ga73cc13bbda66dea3cc2d5dd2153aeddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga73cc13bbda66dea3cc2d5dd2153aeddf">&#9670;&#160;</a></span>SplitTrueCategorical()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,58 +186,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int StochTree::EvaluateTree </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> const &amp;&#160;</td>
-          <td class="paramname"><em>tree</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>row</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Determine the node at which a tree places a given observation</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tree</td><td><a class="el" href="classStochTree_1_1Tree.html" title="API for constructing decision trees (splitting, pruning, setting parameter values)">Tree</a> object used for prediction </td></tr>
-    <tr><td class="paramname">data</td><td>Dataset used for prediction </td></tr>
-    <tr><td class="paramname">row</td><td>Row indexing the prediction observation </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga354bb1ada338c8c5880be2547a03c11b" name="ga354bb1ada338c8c5880be2547a03c11b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga354bb1ada338c8c5880be2547a03c11b">&#9670;&#160;</a></span>NextNodeCategorical()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int StochTree::NextNodeCategorical </td>
+          <td class="memname">bool StochTree::SplitTrueCategorical </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>fvalue</em>, </td>
@@ -237,19 +195,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; std::uint32_t &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>category_list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>left_child</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>right_child</em>&#160;</td>
+          <td class="paramname"><em>category_list</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -264,7 +210,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
 </table>
 </div><div class="memdoc">
 
-<p>Return left or right node id based on a categorical split. </p>
+<p>Determine whether an observation produces a "true" value in a categorical split node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fvalue</td><td>Value of the split feature for the observation </td></tr>
@@ -330,6 +276,167 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
     <tr><td class="paramname">threshold</td><td>Value of the numeric split threshold at the node </td></tr>
     <tr><td class="paramname">left_child</td><td>Node id of the left child </td></tr>
     <tr><td class="paramname">right_child</td><td>Node id of the right child </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga354bb1ada338c8c5880be2547a03c11b" name="ga354bb1ada338c8c5880be2547a03c11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga354bb1ada338c8c5880be2547a03c11b">&#9670;&#160;</a></span>NextNodeCategorical()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int StochTree::NextNodeCategorical </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>fvalue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::uint32_t &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>category_list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>left_child</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>right_child</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return left or right node id based on a categorical split. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fvalue</td><td>Value of the split feature for the observation </td></tr>
+    <tr><td class="paramname">category_list</td><td>Category indices that route an observation to the left child </td></tr>
+    <tr><td class="paramname">left_child</td><td>Node id of the left child </td></tr>
+    <tr><td class="paramname">right_child</td><td>Node id of the right child </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga9eb9e98f206c385f5ca2933995be4ce9" name="ga9eb9e98f206c385f5ca2933995be4ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9eb9e98f206c385f5ca2933995be4ce9">&#9670;&#160;</a></span>EvaluateTree() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int StochTree::EvaluateTree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> const &amp;&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determine the node at which a tree places a given observation</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td><a class="el" href="classStochTree_1_1Tree.html" title="Decision tree data structure.">Tree</a> object used for prediction </td></tr>
+    <tr><td class="paramname">data</td><td>Dataset used for prediction </td></tr>
+    <tr><td class="paramname">row</td><td>Row indexing the prediction observation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga168d1533c42902e725f5495b892cc88c" name="ga168d1533c42902e725f5495b892cc88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga168d1533c42902e725f5495b892cc88c">&#9670;&#160;</a></span>EvaluateTree() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int StochTree::EvaluateTree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> const &amp;&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determine the node at which a tree places a given observation</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td><a class="el" href="classStochTree_1_1Tree.html" title="Decision tree data structure.">Tree</a> object used for prediction </td></tr>
+    <tr><td class="paramname">data</td><td>Dataset used for prediction </td></tr>
+    <tr><td class="paramname">row</td><td>Row indexing the prediction observation </td></tr>
   </table>
   </dd>
 </dl>
@@ -448,100 +555,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>StochTree::operator==
     <tr><td class="paramname">row</td><td>Row indexing the prediction observation </td></tr>
     <tr><td class="paramname">split_index</td><td>Column of new split </td></tr>
     <tr><td class="paramname">category_list</td><td>Categories defining the split </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga73cc13bbda66dea3cc2d5dd2153aeddf" name="ga73cc13bbda66dea3cc2d5dd2153aeddf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga73cc13bbda66dea3cc2d5dd2153aeddf">&#9670;&#160;</a></span>SplitTrueCategorical()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool StochTree::SplitTrueCategorical </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>fvalue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::uint32_t &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>category_list</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Determine whether an observation produces a "true" value in a categorical split node. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fvalue</td><td>Value of the split feature for the observation </td></tr>
-    <tr><td class="paramname">category_list</td><td>Category indices that route an observation to the left child </td></tr>
-    <tr><td class="paramname">left_child</td><td>Node id of the left child </td></tr>
-    <tr><td class="paramname">right_child</td><td>Node id of the right child </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga2d27a2084998eb174869d0b14b5cf84a" name="ga2d27a2084998eb174869d0b14b5cf84a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2d27a2084998eb174869d0b14b5cf84a">&#9670;&#160;</a></span>SplitTrueNumeric()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool StochTree::SplitTrueNumeric </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>fvalue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>threshold</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Determine whether an observation produces a "true" value in a numeric split node. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fvalue</td><td>Value of the split feature for the observation </td></tr>
-    <tr><td class="paramname">threshold</td><td>Value of the numeric split threshold at the node </td></tr>
-    <tr><td class="paramname">left_child</td><td>Node id of the left child </td></tr>
-    <tr><td class="paramname">right_child</td><td>Node id of the right child </td></tr>
   </table>
   </dd>
 </dl>

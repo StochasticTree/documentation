@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,7 +83,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1TreeEnsemble-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::TreeEnsemble Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::TreeEnsemble Class Reference<div class="ingroups"><a class="el" href="group__forest__group.html">Forest (i.e. ensemble of trees) API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,84 +119,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetRoot</b> ()</td>
 <tr class="memitem:a6c4a1b92b61d6248eb3311e0ea520995" id="r_a6c4a1b92b61d6248eb3311e0ea520995"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a6c4a1b92b61d6248eb3311e0ea520995">ReconstituteFromForest</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;ensemble)</td></tr>
 <tr class="memdesc:a6c4a1b92b61d6248eb3311e0ea520995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset an ensemble to clone another ensemble.  <br /></td></tr>
 <tr class="separator:a6c4a1b92b61d6248eb3311e0ea520995"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affbbb3dd4e2e77fea55b358d3e0101de" id="r_affbbb3dd4e2e77fea55b358d3e0101de"><td class="memItemLeft" align="right" valign="top"><a id="affbbb3dd4e2e77fea55b358d3e0101de" name="affbbb3dd4e2e77fea55b358d3e0101de"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Predict</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
-<tr class="separator:affbbb3dd4e2e77fea55b358d3e0101de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43717f9c27ff6cc2a5253e13d10415b1" id="r_a43717f9c27ff6cc2a5253e13d10415b1"><td class="memItemLeft" align="right" valign="top"><a id="a43717f9c27ff6cc2a5253e13d10415b1" name="a43717f9c27ff6cc2a5253e13d10415b1"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRaw</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
-<tr class="separator:a43717f9c27ff6cc2a5253e13d10415b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2116751423024c7b9b206a78116b3f40" id="r_a2116751423024c7b9b206a78116b3f40"><td class="memItemLeft" align="right" valign="top"><a id="a2116751423024c7b9b206a78116b3f40" name="a2116751423024c7b9b206a78116b3f40"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output, data_size_t offset=0)</td></tr>
-<tr class="separator:a2116751423024c7b9b206a78116b3f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4789d4571ec12fefa50f4c35baf3d079" id="r_a4789d4571ec12fefa50f4c35baf3d079"><td class="memItemLeft" align="right" valign="top"><a id="a4789d4571ec12fefa50f4c35baf3d079" name="a4789d4571ec12fefa50f4c35baf3d079"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output, int tree_begin, int tree_end, data_size_t offset=0)</td></tr>
-<tr class="separator:a4789d4571ec12fefa50f4c35baf3d079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e007979a196d53e5b936c752f515456" id="r_a4e007979a196d53e5b936c752f515456"><td class="memItemLeft" align="right" valign="top"><a id="a4e007979a196d53e5b936c752f515456" name="a4e007979a196d53e5b936c752f515456"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (Eigen::MatrixXd &amp;covariates, Eigen::MatrixXd &amp;basis, std::vector&lt; double &gt; &amp;output, data_size_t offset=0)</td></tr>
-<tr class="separator:a4e007979a196d53e5b936c752f515456"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8780877f27b2a41da31610255f176d02" id="r_a8780877f27b2a41da31610255f176d02"><td class="memItemLeft" align="right" valign="top"><a id="a8780877f27b2a41da31610255f176d02" name="a8780877f27b2a41da31610255f176d02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (Eigen::MatrixXd &amp;covariates, Eigen::MatrixXd &amp;basis, std::vector&lt; double &gt; &amp;output, int tree_begin, int tree_end, data_size_t offset=0)</td></tr>
-<tr class="separator:a8780877f27b2a41da31610255f176d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afacdd1868bd9fda5b6c8072e7cb62507" id="r_afacdd1868bd9fda5b6c8072e7cb62507"><td class="memItemLeft" align="right" valign="top"><a id="afacdd1868bd9fda5b6c8072e7cb62507" name="afacdd1868bd9fda5b6c8072e7cb62507"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (Eigen::MatrixXd &amp;covariates, std::vector&lt; double &gt; &amp;output, data_size_t offset=0)</td></tr>
-<tr class="separator:afacdd1868bd9fda5b6c8072e7cb62507"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34627496ec20bb7248d28bd73120c324" id="r_a34627496ec20bb7248d28bd73120c324"><td class="memItemLeft" align="right" valign="top"><a id="a34627496ec20bb7248d28bd73120c324" name="a34627496ec20bb7248d28bd73120c324"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInplace</b> (Eigen::MatrixXd &amp;covariates, std::vector&lt; double &gt; &amp;output, int tree_begin, int tree_end, data_size_t offset=0)</td></tr>
-<tr class="separator:a34627496ec20bb7248d28bd73120c324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0b48606b5b700502e3140c3dce6821" id="r_a7a0b48606b5b700502e3140c3dce6821"><td class="memItemLeft" align="right" valign="top"><a id="a7a0b48606b5b700502e3140c3dce6821" name="a7a0b48606b5b700502e3140c3dce6821"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawInplace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output, data_size_t offset=0)</td></tr>
-<tr class="separator:a7a0b48606b5b700502e3140c3dce6821"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a016bb7a309f511e87278c19addf4cf9a" id="r_a016bb7a309f511e87278c19addf4cf9a"><td class="memItemLeft" align="right" valign="top"><a id="a016bb7a309f511e87278c19addf4cf9a" name="a016bb7a309f511e87278c19addf4cf9a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawInplace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output, int tree_begin, int tree_end, data_size_t offset=0)</td></tr>
-<tr class="separator:a016bb7a309f511e87278c19addf4cf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a753f9d1487495bf8a8a727cd25e32487" id="r_a753f9d1487495bf8a8a727cd25e32487"><td class="memItemLeft" align="right" valign="top"><a id="a753f9d1487495bf8a8a727cd25e32487" name="a753f9d1487495bf8a8a727cd25e32487"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> ()</td></tr>
-<tr class="separator:a753f9d1487495bf8a8a727cd25e32487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85e8a202ca192c13bac10f8e44d31264" id="r_a85e8a202ca192c13bac10f8e44d31264"><td class="memItemLeft" align="right" valign="top"><a id="a85e8a202ca192c13bac10f8e44d31264" name="a85e8a202ca192c13bac10f8e44d31264"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumLeaves</b> ()</td></tr>
-<tr class="separator:a85e8a202ca192c13bac10f8e44d31264"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adebb2140842c689ef5bceded31923a3d" id="r_adebb2140842c689ef5bceded31923a3d"><td class="memItemLeft" align="right" valign="top"><a id="adebb2140842c689ef5bceded31923a3d" name="adebb2140842c689ef5bceded31923a3d"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>SumLeafSquared</b> ()</td></tr>
-<tr class="separator:adebb2140842c689ef5bceded31923a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae20d95a828d00e22029524be1d77972d" id="r_ae20d95a828d00e22029524be1d77972d"><td class="memItemLeft" align="right" valign="top"><a id="ae20d95a828d00e22029524be1d77972d" name="ae20d95a828d00e22029524be1d77972d"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDimension</b> ()</td></tr>
-<tr class="separator:ae20d95a828d00e22029524be1d77972d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adecb2083cd0c65640c8eb75a13bd74b3" id="r_adecb2083cd0c65640c8eb75a13bd74b3"><td class="memItemLeft" align="right" valign="top"><a id="adecb2083cd0c65640c8eb75a13bd74b3" name="adecb2083cd0c65640c8eb75a13bd74b3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsLeafConstant</b> ()</td></tr>
-<tr class="separator:adecb2083cd0c65640c8eb75a13bd74b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac81f0eec41423e8167fce1ca4b770542" id="r_ac81f0eec41423e8167fce1ca4b770542"><td class="memItemLeft" align="right" valign="top"><a id="ac81f0eec41423e8167fce1ca4b770542" name="ac81f0eec41423e8167fce1ca4b770542"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsExponentiated</b> ()</td></tr>
-<tr class="separator:ac81f0eec41423e8167fce1ca4b770542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a989d871ea49b907cd085bd4322ea99c7" id="r_a989d871ea49b907cd085bd4322ea99c7"><td class="memItemLeft" align="right" valign="top"><a id="a989d871ea49b907cd085bd4322ea99c7" name="a989d871ea49b907cd085bd4322ea99c7"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>TreeMaxDepth</b> (int tree_num)</td></tr>
-<tr class="separator:a989d871ea49b907cd085bd4322ea99c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad62272109c04ffecf34ad51af5027a34" id="r_ad62272109c04ffecf34ad51af5027a34"><td class="memItemLeft" align="right" valign="top"><a id="ad62272109c04ffecf34ad51af5027a34" name="ad62272109c04ffecf34ad51af5027a34"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>AverageMaxDepth</b> ()</td></tr>
-<tr class="separator:ad62272109c04ffecf34ad51af5027a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa12b15a3be8199286142fff2458d14ed" id="r_aa12b15a3be8199286142fff2458d14ed"><td class="memItemLeft" align="right" valign="top"><a id="aa12b15a3be8199286142fff2458d14ed" name="aa12b15a3be8199286142fff2458d14ed"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>AllRoots</b> ()</td></tr>
-<tr class="separator:aa12b15a3be8199286142fff2458d14ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d35cde179e6608f9966d34e57debfa4" id="r_a4d35cde179e6608f9966d34e57debfa4"><td class="memItemLeft" align="right" valign="top"><a id="a4d35cde179e6608f9966d34e57debfa4" name="a4d35cde179e6608f9966d34e57debfa4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLeafValue</b> (double leaf_value)</td></tr>
-<tr class="separator:a4d35cde179e6608f9966d34e57debfa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad509fa8787f1df5e17077648f5c21c91" id="r_ad509fa8787f1df5e17077648f5c21c91"><td class="memItemLeft" align="right" valign="top"><a id="ad509fa8787f1df5e17077648f5c21c91" name="ad509fa8787f1df5e17077648f5c21c91"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLeafVector</b> (std::vector&lt; double &gt; &amp;leaf_vector)</td></tr>
-<tr class="separator:ad509fa8787f1df5e17077648f5c21c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f7a21874a19a5854d74709b22fff4e5" id="r_a2f7a21874a19a5854d74709b22fff4e5"><td class="memItemLeft" align="right" valign="top"><a id="a2f7a21874a19a5854d74709b22fff4e5" name="a2f7a21874a19a5854d74709b22fff4e5"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaxLeafIndex</b> ()</td></tr>
 <tr class="memdesc:a2f7a21874a19a5854d74709b22fff4e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based "maximum" leaf index for an ensemble, which is equivalent to the sum of the number of leaves in each tree. This is used in conjunction with <code>PredictLeafIndicesInplace</code>, which returns an observation-specific leaf index for every observation-tree pair. <br /></td></tr>
 <tr class="separator:a2f7a21874a19a5854d74709b22fff4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f4a6507154e1d094d227652ee5b1b99" id="r_a9f4a6507154e1d094d227652ee5b1b99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a9f4a6507154e1d094d227652ee5b1b99">PredictLeafIndicesInplace</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> *dataset, std::vector&lt; int32_t &gt; &amp;output, int num_trees, data_size_t n)</td></tr>
-<tr class="memdesc:a9f4a6507154e1d094d227652ee5b1b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
+<tr class="memdesc:a9f4a6507154e1d094d227652ee5b1b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
 <tr class="separator:a9f4a6507154e1d094d227652ee5b1b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adefb16e6eae80fbad22bc9f60809c968" id="r_adefb16e6eae80fbad22bc9f60809c968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#adefb16e6eae80fbad22bc9f60809c968">PredictLeafIndicesInplace</a> (Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;covariates, std::vector&lt; int32_t &gt; &amp;output, int num_trees, data_size_t n)</td></tr>
-<tr class="memdesc:adefb16e6eae80fbad22bc9f60809c968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
+<tr class="memdesc:adefb16e6eae80fbad22bc9f60809c968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
 <tr class="separator:adefb16e6eae80fbad22bc9f60809c968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb040d736c6db0508fa599f02583f955" id="r_afb040d736c6db0508fa599f02583f955"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#afb040d736c6db0508fa599f02583f955">PredictLeafIndicesInplace</a> (Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;covariates, Eigen::Map&lt; Eigen::Matrix&lt; int, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;output, int column_ind, int num_trees, data_size_t n)</td></tr>
-<tr class="memdesc:afb040d736c6db0508fa599f02583f955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
+<tr class="memdesc:afb040d736c6db0508fa599f02583f955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
 <tr class="separator:afb040d736c6db0508fa599f02583f955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe529df21c790398ebb807305a05a8b4" id="r_abe529df21c790398ebb807305a05a8b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#abe529df21c790398ebb807305a05a8b4">PredictLeafIndicesInplace</a> (Eigen::MatrixXd &amp;covariates, std::vector&lt; int32_t &gt; &amp;output, int num_trees, data_size_t n)</td></tr>
-<tr class="memdesc:abe529df21c790398ebb807305a05a8b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
+<tr class="memdesc:abe529df21c790398ebb807305a05a8b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level.  <br /></td></tr>
 <tr class="separator:abe529df21c790398ebb807305a05a8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3525bf34725ed15fb64864e047f3a45" id="r_ad3525bf34725ed15fb64864e047f3a45"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#ad3525bf34725ed15fb64864e047f3a45">PredictLeafIndices</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> *dataset)</td></tr>
 <tr class="memdesc:ad3525bf34725ed15fb64864e047f3a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <code>PredictLeafIndicesInplace</code> but assumes responsibility for allocating and returning output vector.  <br /></td></tr>
@@ -300,6 +244,109 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a07d24b9893b4b47c442584614daead17" name="a07d24b9893b4b47c442584614daead17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07d24b9893b4b47c442584614daead17">&#9670;&#160;</a></span>GetTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> * StochTree::TreeEnsemble::GetTree </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a pointer to a tree in the forest. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index (0-based) of a tree to be queried </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Tree* </dd></dl>
+
+</div>
+</div>
+<a id="a47fc7a0d3cf6f953ec4d5eb126496b0d" name="a47fc7a0d3cf6f953ec4d5eb126496b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47fc7a0d3cf6f953ec4d5eb126496b0d">&#9670;&#160;</a></span>ResetTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::ResetTree </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset a single tree in an ensemble. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index (0-based) of the tree to be reset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0a1e70a39772ce232622c2adb1b3284c" name="a0a1e70a39772ce232622c2adb1b3284c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1e70a39772ce232622c2adb1b3284c">&#9670;&#160;</a></span>ResetInitTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::ResetInitTree </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reset a single tree in an ensemble. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index (0-based) of the tree to be reset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af9abbdbf233ede36844345db3f5f6dec" name="af9abbdbf233ede36844345db3f5f6dec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9abbdbf233ede36844345db3f5f6dec">&#9670;&#160;</a></span>CloneFromExistingTree()</h2>
 
@@ -345,8 +392,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 
 </div>
 </div>
-<a id="a07d24b9893b4b47c442584614daead17" name="a07d24b9893b4b47c442584614daead17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07d24b9893b4b47c442584614daead17">&#9670;&#160;</a></span>GetTree()</h2>
+<a id="a6c4a1b92b61d6248eb3311e0ea520995" name="a6c4a1b92b61d6248eb3311e0ea520995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c4a1b92b61d6248eb3311e0ea520995">&#9670;&#160;</a></span>ReconstituteFromForest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -355,10 +402,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> * StochTree::TreeEnsemble::GetTree </td>
+          <td class="memname">void StochTree::TreeEnsemble::ReconstituteFromForest </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;&#160;</td>
+          <td class="paramname"><em>ensemble</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -369,53 +416,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </table>
 </div><div class="memdoc">
 
-<p>Return a pointer to a tree in the forest. </p>
+<p>Reset an ensemble to clone another ensemble. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>Index (0-based) of a tree to be queried </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Tree* </dd></dl>
-
-</div>
-</div>
-<a id="ad3525bf34725ed15fb64864e047f3a45" name="ad3525bf34725ed15fb64864e047f3a45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3525bf34725ed15fb64864e047f3a45">&#9670;&#160;</a></span>PredictLeafIndices()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; int32_t &gt; StochTree::TreeEnsemble::PredictLeafIndices </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> *&#160;</td>
-          <td class="paramname"><em>dataset</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Same as <code>PredictLeafIndicesInplace</code> but assumes responsibility for allocating and returning output vector. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
+    <tr><td class="paramname">ensemble</td><td>Reference to an existing <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="afb040d736c6db0508fa599f02583f955" name="afb040d736c6db0508fa599f02583f955"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb040d736c6db0508fa599f02583f955">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[1/4]</span></h2>
+<a id="a9f4a6507154e1d094d227652ee5b1b99" name="a9f4a6507154e1d094d227652ee5b1b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4a6507154e1d094d227652ee5b1b99">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,20 +438,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
         <tr>
           <td class="memname">void StochTree::TreeEnsemble::PredictLeafIndicesInplace </td>
           <td>(</td>
-          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>covariates</em>, </td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> *&#160;</td>
+          <td class="paramname"><em>dataset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; int, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; int32_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>column_ind</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -466,12 +472,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </table>
 </div><div class="memdoc">
 
-<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
-<p>Note: this assumes the creation of a matrix of column indices with <code>num_trees*n</code> rows and as many columns as forests that were requested from R / Python </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
+<p>Note: this assumes the creation of a vector of column indices of size <code>dataset.NumObservations()</code> x <code>ensemble.NumTrees()</code> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">covariates</td><td>Matrix of covariates </td></tr>
-    <tr><td class="paramname">output</td><td>Matrix with num_trees*n rows and as many columns as forests that were requested from R / Python </td></tr>
-    <tr><td class="paramname">column_ind</td><td>Index of column in <code>output</code> into which the result should be unpacked </td></tr>
+    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
+    <tr><td class="paramname">output</td><td>Vector of length num_trees*n which stores the leaf node prediction </td></tr>
     <tr><td class="paramname">num_trees</td><td>Number of trees in an ensemble </td></tr>
     <tr><td class="paramname">n</td><td>Size of dataset </td></tr>
   </table>
@@ -526,7 +531,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </table>
 </div><div class="memdoc">
 
-<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
+<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
 <p>Note: this assumes the creation of a vector of column indices of size <code>dataset.NumObservations()</code> x <code>ensemble.NumTrees()</code> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">covariates</td><td>Matrix of covariates </td></tr>
@@ -539,8 +544,74 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 
 </div>
 </div>
+<a id="afb040d736c6db0508fa599f02583f955" name="afb040d736c6db0508fa599f02583f955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb040d736c6db0508fa599f02583f955">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::PredictLeafIndicesInplace </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>covariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Map&lt; Eigen::Matrix&lt; int, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>column_ind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_trees</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
+<p>Note: this assumes the creation of a matrix of column indices with <code>num_trees*n</code> rows and as many columns as forests that were requested from R / Python </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">covariates</td><td>Matrix of covariates </td></tr>
+    <tr><td class="paramname">output</td><td>Matrix with num_trees*n rows and as many columns as forests that were requested from R / Python </td></tr>
+    <tr><td class="paramname">column_ind</td><td>Index of column in <code>output</code> into which the result should be unpacked </td></tr>
+    <tr><td class="paramname">num_trees</td><td>Number of trees in an ensemble </td></tr>
+    <tr><td class="paramname">n</td><td>Size of dataset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abe529df21c790398ebb807305a05a8b4" name="abe529df21c790398ebb807305a05a8b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe529df21c790398ebb807305a05a8b4">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abe529df21c790398ebb807305a05a8b4">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,10 +656,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </table>
 </div><div class="memdoc">
 
-<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
+<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
 <p>Note: this assumes the creation of a vector of column indices of size <code>dataset.NumObservations()</code> x <code>ensemble.NumTrees()</code> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
+    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
     <tr><td class="paramname">output</td><td>Vector of length num_trees*n which stores the leaf node prediction </td></tr>
     <tr><td class="paramname">num_trees</td><td>Number of trees in an ensemble </td></tr>
     <tr><td class="paramname">n</td><td>Size of dataset </td></tr>
@@ -598,8 +669,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 
 </div>
 </div>
-<a id="a9f4a6507154e1d094d227652ee5b1b99" name="a9f4a6507154e1d094d227652ee5b1b99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f4a6507154e1d094d227652ee5b1b99">&#9670;&#160;</a></span>PredictLeafIndicesInplace() <span class="overload">[4/4]</span></h2>
+<a id="ad3525bf34725ed15fb64864e047f3a45" name="ad3525bf34725ed15fb64864e047f3a45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3525bf34725ed15fb64864e047f3a45">&#9670;&#160;</a></span>PredictLeafIndices()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -608,69 +679,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void StochTree::TreeEnsemble::PredictLeafIndicesInplace </td>
+          <td class="memname">std::vector&lt; int32_t &gt; StochTree::TreeEnsemble::PredictLeafIndices </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> *&#160;</td>
-          <td class="paramname"><em>dataset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; int32_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_trees</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Obtain a 0-based leaf index for every tree in an ensemble and for each observation in a <a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a>. Internally, trees are stored as essentially vectors of node information, and the leaves_ vector gives us node IDs for every leaf in the tree. Here, we would like to know, for every observation in a dataset, which leaf number it is mapped to. Since the leaf numbers themselves do not carry any information, we renumber them from 0 to <code>leaves_.size()-1</code>. We compute this at the tree-level and coordinate this computation at the ensemble level. </p>
-<p>Note: this assumes the creation of a vector of column indices of size <code>dataset.NumObservations()</code> x <code>ensemble.NumTrees()</code> </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
-    <tr><td class="paramname">output</td><td>Vector of length num_trees*n which stores the leaf node prediction </td></tr>
-    <tr><td class="paramname">num_trees</td><td>Number of trees in an ensemble </td></tr>
-    <tr><td class="paramname">n</td><td>Size of dataset </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6c4a1b92b61d6248eb3311e0ea520995" name="a6c4a1b92b61d6248eb3311e0ea520995"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c4a1b92b61d6248eb3311e0ea520995">&#9670;&#160;</a></span>ReconstituteFromForest()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::TreeEnsemble::ReconstituteFromForest </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;&#160;</td>
-          <td class="paramname"><em>ensemble</em></td><td>)</td>
+          <td class="paramname"><em>dataset</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -681,80 +693,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </table>
 </div><div class="memdoc">
 
-<p>Reset an ensemble to clone another ensemble. </p>
+<p>Same as <code>PredictLeafIndicesInplace</code> but assumes responsibility for allocating and returning output vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ensemble</td><td>Reference to an existing <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a0a1e70a39772ce232622c2adb1b3284c" name="a0a1e70a39772ce232622c2adb1b3284c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a1e70a39772ce232622c2adb1b3284c">&#9670;&#160;</a></span>ResetInitTree()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::TreeEnsemble::ResetInitTree </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reset a single tree in an ensemble. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Consider refactoring this and <code>ResetTree</code></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>Index (0-based) of the tree to be reset </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a47fc7a0d3cf6f953ec4d5eb126496b0d" name="a47fc7a0d3cf6f953ec4d5eb126496b0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47fc7a0d3cf6f953ec4d5eb126496b0d">&#9670;&#160;</a></span>ResetTree()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::TreeEnsemble::ResetTree </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reset a single tree in an ensemble. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Consider refactoring this and <code>ResetInitTree</code></dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>Index (0-based) of the tree to be reset </td></tr>
+    <tr><td class="paramname"><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></td><td>Dataset with which to predict leaf indices from the tree </td></tr>
   </table>
   </dd>
 </dl>

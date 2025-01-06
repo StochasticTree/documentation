@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,7 +81,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1GlobalHomoskedasticVarianceModel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::GlobalHomoskedasticVarianceModel Class Reference</div></div>
 </div><!--header-->
@@ -84,28 +90,6 @@ $(function() {
  <a href="classStochTree_1_1GlobalHomoskedasticVarianceModel.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="variance__model_8h_source.html">variance_model.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a6e77e939c2bbfb4d45cff7aca06d8f00" id="r_a6e77e939c2bbfb4d45cff7aca06d8f00"><td class="memItemLeft" align="right" valign="top"><a id="a6e77e939c2bbfb4d45cff7aca06d8f00" name="a6e77e939c2bbfb4d45cff7aca06d8f00"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>PosteriorShape</b> (Eigen::VectorXd &amp;residuals, double a, double b)</td></tr>
-<tr class="separator:a6e77e939c2bbfb4d45cff7aca06d8f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e64101f3a6fbda264ac96633511e3e" id="r_ac8e64101f3a6fbda264ac96633511e3e"><td class="memItemLeft" align="right" valign="top"><a id="ac8e64101f3a6fbda264ac96633511e3e" name="ac8e64101f3a6fbda264ac96633511e3e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>PosteriorScale</b> (Eigen::VectorXd &amp;residuals, double a, double b)</td></tr>
-<tr class="separator:ac8e64101f3a6fbda264ac96633511e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab134969e5f16c6763ffe9e1168b7b6db" id="r_ab134969e5f16c6763ffe9e1168b7b6db"><td class="memItemLeft" align="right" valign="top"><a id="ab134969e5f16c6763ffe9e1168b7b6db" name="ab134969e5f16c6763ffe9e1168b7b6db"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>PosteriorShape</b> (Eigen::VectorXd &amp;residuals, Eigen::VectorXd &amp;weights, double a, double b)</td></tr>
-<tr class="separator:ab134969e5f16c6763ffe9e1168b7b6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aebfc95473aed2138d0927814ebd884" id="r_a5aebfc95473aed2138d0927814ebd884"><td class="memItemLeft" align="right" valign="top"><a id="a5aebfc95473aed2138d0927814ebd884" name="a5aebfc95473aed2138d0927814ebd884"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>PosteriorScale</b> (Eigen::VectorXd &amp;residuals, Eigen::VectorXd &amp;weights, double a, double b)</td></tr>
-<tr class="separator:a5aebfc95473aed2138d0927814ebd884"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa60486afe9ff3d7fc0bbc8db0148c884" id="r_aa60486afe9ff3d7fc0bbc8db0148c884"><td class="memItemLeft" align="right" valign="top"><a id="aa60486afe9ff3d7fc0bbc8db0148c884" name="aa60486afe9ff3d7fc0bbc8db0148c884"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>SampleVarianceParameter</b> (Eigen::VectorXd &amp;residuals, double a, double b, std::mt19937 &amp;gen)</td></tr>
-<tr class="separator:aa60486afe9ff3d7fc0bbc8db0148c884"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b273dc4b5ef8a6c07f3978b325db6a6" id="r_a2b273dc4b5ef8a6c07f3978b325db6a6"><td class="memItemLeft" align="right" valign="top"><a id="a2b273dc4b5ef8a6c07f3978b325db6a6" name="a2b273dc4b5ef8a6c07f3978b325db6a6"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>SampleVarianceParameter</b> (Eigen::VectorXd &amp;residuals, Eigen::VectorXd &amp;weights, double a, double b, std::mt19937 &amp;gen)</td></tr>
-<tr class="separator:a2b273dc4b5ef8a6c07f3978b325db6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>

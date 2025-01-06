@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,176 +83,402 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1ForestContainer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::ForestContainer Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::ForestContainer Class Reference<div class="ingroups"><a class="el" href="group__forest__group.html">Forest (i.e. ensemble of trees) API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Container of <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> forest objects.  
+<p>Container of <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> forest objects. This is the primary (in-memory) storage interface for multiple "samples" of a decision tree ensemble in <code>stochtree</code>.  
  <a href="classStochTree_1_1ForestContainer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="container_8h_source.html">container.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af98585138de585a2173270862568bc37" id="r_af98585138de585a2173270862568bc37"><td class="memItemLeft" align="right" valign="top"><a id="af98585138de585a2173270862568bc37" name="af98585138de585a2173270862568bc37"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ForestContainer</b> (int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)</td></tr>
+<tr class="memitem:af98585138de585a2173270862568bc37" id="r_af98585138de585a2173270862568bc37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#af98585138de585a2173270862568bc37">ForestContainer</a> (int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)</td></tr>
+<tr class="memdesc:af98585138de585a2173270862568bc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1ForestContainer.html" title="Container of TreeEnsemble forest objects. This is the primary (in-memory) storage interface for multi...">ForestContainer</a> object.  <br /></td></tr>
 <tr class="separator:af98585138de585a2173270862568bc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1333fe7be47aa75bdc775642027b3432" id="r_a1333fe7be47aa75bdc775642027b3432"><td class="memItemLeft" align="right" valign="top"><a id="a1333fe7be47aa75bdc775642027b3432" name="a1333fe7be47aa75bdc775642027b3432"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ForestContainer</b> (int num_samples, int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)</td></tr>
+<tr class="memitem:a1333fe7be47aa75bdc775642027b3432" id="r_a1333fe7be47aa75bdc775642027b3432"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a1333fe7be47aa75bdc775642027b3432">ForestContainer</a> (int num_samples, int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)</td></tr>
+<tr class="memdesc:a1333fe7be47aa75bdc775642027b3432"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1ForestContainer.html" title="Container of TreeEnsemble forest objects. This is the primary (in-memory) storage interface for multi...">ForestContainer</a> object.  <br /></td></tr>
 <tr class="separator:a1333fe7be47aa75bdc775642027b3432"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f7ff47a118d657677643c26da01fb47" id="r_a4f7ff47a118d657677643c26da01fb47"><td class="memItemLeft" align="right" valign="top"><a id="a4f7ff47a118d657677643c26da01fb47" name="a4f7ff47a118d657677643c26da01fb47"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteSample</b> (int sample_num)</td></tr>
+<tr class="memitem:a4f7ff47a118d657677643c26da01fb47" id="r_a4f7ff47a118d657677643c26da01fb47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a4f7ff47a118d657677643c26da01fb47">DeleteSample</a> (int sample_num)</td></tr>
+<tr class="memdesc:a4f7ff47a118d657677643c26da01fb47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a forest from a container of forest samples and delete the corresponding object, freeing its memory.  <br /></td></tr>
 <tr class="separator:a4f7ff47a118d657677643c26da01fb47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff5c3b2d76e621175d3cdb0d7c1f79a0" id="r_aff5c3b2d76e621175d3cdb0d7c1f79a0"><td class="memItemLeft" align="right" valign="top"><a id="aff5c3b2d76e621175d3cdb0d7c1f79a0" name="aff5c3b2d76e621175d3cdb0d7c1f79a0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSample</b> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;forest)</td></tr>
+<tr class="memitem:aff5c3b2d76e621175d3cdb0d7c1f79a0" id="r_aff5c3b2d76e621175d3cdb0d7c1f79a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#aff5c3b2d76e621175d3cdb0d7c1f79a0">AddSample</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;forest)</td></tr>
+<tr class="memdesc:aff5c3b2d76e621175d3cdb0d7c1f79a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new forest to the container by copying <code>forest</code>.  <br /></td></tr>
 <tr class="separator:aff5c3b2d76e621175d3cdb0d7c1f79a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9b4ef41e79c621f1139991bab66a90e" id="r_ac9b4ef41e79c621f1139991bab66a90e"><td class="memItemLeft" align="right" valign="top"><a id="ac9b4ef41e79c621f1139991bab66a90e" name="ac9b4ef41e79c621f1139991bab66a90e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeRoot</b> (double leaf_value)</td></tr>
+<tr class="memitem:ac9b4ef41e79c621f1139991bab66a90e" id="r_ac9b4ef41e79c621f1139991bab66a90e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#ac9b4ef41e79c621f1139991bab66a90e">InitializeRoot</a> (double leaf_value)</td></tr>
+<tr class="memdesc:ac9b4ef41e79c621f1139991bab66a90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a "root" forest of univariate trees as the first element of the container, setting all root node values in every tree to <code>leaf_value</code>.  <br /></td></tr>
 <tr class="separator:ac9b4ef41e79c621f1139991bab66a90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e2a822f16c2850f12373afc327fbcc3" id="r_a3e2a822f16c2850f12373afc327fbcc3"><td class="memItemLeft" align="right" valign="top"><a id="a3e2a822f16c2850f12373afc327fbcc3" name="a3e2a822f16c2850f12373afc327fbcc3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>InitializeRoot</b> (std::vector&lt; double &gt; &amp;leaf_vector)</td></tr>
+<tr class="memitem:a3e2a822f16c2850f12373afc327fbcc3" id="r_a3e2a822f16c2850f12373afc327fbcc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a3e2a822f16c2850f12373afc327fbcc3">InitializeRoot</a> (std::vector&lt; double &gt; &amp;leaf_vector)</td></tr>
+<tr class="memdesc:a3e2a822f16c2850f12373afc327fbcc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a "root" forest of multivariate trees as the first element of the container, setting all root node values in every tree to <code>leaf_vector</code>.  <br /></td></tr>
 <tr class="separator:a3e2a822f16c2850f12373afc327fbcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af32a8984219be2086ecb1088f515c098" id="r_af32a8984219be2086ecb1088f515c098"><td class="memItemLeft" align="right" valign="top"><a id="af32a8984219be2086ecb1088f515c098" name="af32a8984219be2086ecb1088f515c098"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSamples</b> (int num_samples)</td></tr>
+<tr class="memitem:af32a8984219be2086ecb1088f515c098" id="r_af32a8984219be2086ecb1088f515c098"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#af32a8984219be2086ecb1088f515c098">AddSamples</a> (int num_samples)</td></tr>
+<tr class="memdesc:af32a8984219be2086ecb1088f515c098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-allocate space for <code>num_samples</code> additional forests in the container.  <br /></td></tr>
 <tr class="separator:af32a8984219be2086ecb1088f515c098"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac177b49773901ff68eb3a8385a8a8b7a" id="r_ac177b49773901ff68eb3a8385a8a8b7a"><td class="memItemLeft" align="right" valign="top"><a id="ac177b49773901ff68eb3a8385a8a8b7a" name="ac177b49773901ff68eb3a8385a8a8b7a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CopyFromPreviousSample</b> (int new_sample_id, int previous_sample_id)</td></tr>
+<tr class="memitem:ac177b49773901ff68eb3a8385a8a8b7a" id="r_ac177b49773901ff68eb3a8385a8a8b7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#ac177b49773901ff68eb3a8385a8a8b7a">CopyFromPreviousSample</a> (int new_sample_id, int previous_sample_id)</td></tr>
+<tr class="memdesc:ac177b49773901ff68eb3a8385a8a8b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the forest stored at <code>previous_sample_id</code> to the forest stored at <code>new_sample_id</code>.  <br /></td></tr>
 <tr class="separator:ac177b49773901ff68eb3a8385a8a8b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f27ca9076db7fa7c7c27c076b81b2db" id="r_a2f27ca9076db7fa7c7c27c076b81b2db"><td class="memItemLeft" align="right" valign="top"><a id="a2f27ca9076db7fa7c7c27c076b81b2db" name="a2f27ca9076db7fa7c7c27c076b81b2db"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Predict</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
+<tr class="memitem:a2f27ca9076db7fa7c7c27c076b81b2db" id="r_a2f27ca9076db7fa7c7c27c076b81b2db"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a2f27ca9076db7fa7c7c27c076b81b2db">Predict</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
+<tr class="memdesc:a2f27ca9076db7fa7c7c27c076b81b2db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predict from every forest in the container on every observation in the provided dataset. The resulting vector is "column-major", where every forest in a container defines the columns of a prediction matrix and every observation in the provided dataset defines the rows. The (<code>i</code>,<code>j</code>) element of this prediction matrix can be read from the <code>j * num_rows + i</code> element of the returned <code>std::vector&lt;double&gt;</code>, where <code>num_rows</code> is equal to the number of observations in <code>dataset</code> (i.e. <code>dataset.NumObservations()</code>).  <br /></td></tr>
 <tr class="separator:a2f27ca9076db7fa7c7c27c076b81b2db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79440f3a4af33eea377478d1833a9456" id="r_a79440f3a4af33eea377478d1833a9456"><td class="memItemLeft" align="right" valign="top"><a id="a79440f3a4af33eea377478d1833a9456" name="a79440f3a4af33eea377478d1833a9456"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRaw</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
+<tr class="memitem:a79440f3a4af33eea377478d1833a9456" id="r_a79440f3a4af33eea377478d1833a9456"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a79440f3a4af33eea377478d1833a9456">PredictRaw</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
+<tr class="memdesc:a79440f3a4af33eea377478d1833a9456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Predict from every forest in the container on every observation in the provided dataset. The resulting vector stores a possibly three-dimensional array, where the dimensions are arranged as follows.  <br /></td></tr>
 <tr class="separator:a79440f3a4af33eea377478d1833a9456"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4063bb32810423e02c5494948f7bb04" id="r_af4063bb32810423e02c5494948f7bb04"><td class="memItemLeft" align="right" valign="top"><a id="af4063bb32810423e02c5494948f7bb04" name="af4063bb32810423e02c5494948f7bb04"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRaw</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, int forest_num)</td></tr>
-<tr class="separator:af4063bb32810423e02c5494948f7bb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af45bde6c62a16890126f738360fc76ee" id="r_af45bde6c62a16890126f738360fc76ee"><td class="memItemLeft" align="right" valign="top"><a id="af45bde6c62a16890126f738360fc76ee" name="af45bde6c62a16890126f738360fc76ee"></a>
-std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawSingleTree</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, int forest_num, int tree_num)</td></tr>
-<tr class="separator:af45bde6c62a16890126f738360fc76ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6130f84f74e2ff1b6c31977f532721ae" id="r_a6130f84f74e2ff1b6c31977f532721ae"><td class="memItemLeft" align="right" valign="top"><a id="a6130f84f74e2ff1b6c31977f532721ae" name="a6130f84f74e2ff1b6c31977f532721ae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictInPlace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output)</td></tr>
-<tr class="separator:a6130f84f74e2ff1b6c31977f532721ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32c548559bfb8302fc7e8c2baa2571f1" id="r_a32c548559bfb8302fc7e8c2baa2571f1"><td class="memItemLeft" align="right" valign="top"><a id="a32c548559bfb8302fc7e8c2baa2571f1" name="a32c548559bfb8302fc7e8c2baa2571f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawInPlace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, std::vector&lt; double &gt; &amp;output)</td></tr>
-<tr class="separator:a32c548559bfb8302fc7e8c2baa2571f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4104a5acb6caf7571224d264f931b97" id="r_ac4104a5acb6caf7571224d264f931b97"><td class="memItemLeft" align="right" valign="top"><a id="ac4104a5acb6caf7571224d264f931b97" name="ac4104a5acb6caf7571224d264f931b97"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawInPlace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, int forest_num, std::vector&lt; double &gt; &amp;output)</td></tr>
-<tr class="separator:ac4104a5acb6caf7571224d264f931b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2184413c53b1798a8a057c417b6d3254" id="r_a2184413c53b1798a8a057c417b6d3254"><td class="memItemLeft" align="right" valign="top"><a id="a2184413c53b1798a8a057c417b6d3254" name="a2184413c53b1798a8a057c417b6d3254"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictRawSingleTreeInPlace</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, int forest_num, int tree_num, std::vector&lt; double &gt; &amp;output)</td></tr>
-<tr class="separator:a2184413c53b1798a8a057c417b6d3254"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9a9131bd2ab3ab683832876b54afc4e" id="r_aa9a9131bd2ab3ab683832876b54afc4e"><td class="memItemLeft" align="right" valign="top"><a id="aa9a9131bd2ab3ab683832876b54afc4e" name="aa9a9131bd2ab3ab683832876b54afc4e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PredictLeafIndicesInplace</b> (Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;covariates, Eigen::Map&lt; Eigen::Matrix&lt; int, Eigen::Dynamic, Eigen::Dynamic, Eigen::ColMajor &gt; &gt; &amp;output, std::vector&lt; int &gt; &amp;forest_indices, int num_trees, data_size_t n)</td></tr>
-<tr class="separator:aa9a9131bd2ab3ab683832876b54afc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22b821fae0841a37e04712bb3da6e3b9" id="r_a22b821fae0841a37e04712bb3da6e3b9"><td class="memItemLeft" align="right" valign="top"><a id="a22b821fae0841a37e04712bb3da6e3b9" name="a22b821fae0841a37e04712bb3da6e3b9"></a>
-<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetEnsemble</b> (int i)</td></tr>
-<tr class="separator:a22b821fae0841a37e04712bb3da6e3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af62c8f5895bc440707c9ae6189fe963f" id="r_af62c8f5895bc440707c9ae6189fe963f"><td class="memItemLeft" align="right" valign="top"><a id="af62c8f5895bc440707c9ae6189fe963f" name="af62c8f5895bc440707c9ae6189fe963f"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumSamples</b> ()</td></tr>
-<tr class="separator:af62c8f5895bc440707c9ae6189fe963f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81d7eff4420a77a1532bef227a3fb6ce" id="r_a81d7eff4420a77a1532bef227a3fb6ce"><td class="memItemLeft" align="right" valign="top"><a id="a81d7eff4420a77a1532bef227a3fb6ce" name="a81d7eff4420a77a1532bef227a3fb6ce"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> ()</td></tr>
-<tr class="separator:a81d7eff4420a77a1532bef227a3fb6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9abb672ce0788e7b45e3d699e1117ab" id="r_ad9abb672ce0788e7b45e3d699e1117ab"><td class="memItemLeft" align="right" valign="top"><a id="ad9abb672ce0788e7b45e3d699e1117ab" name="ad9abb672ce0788e7b45e3d699e1117ab"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> (int ensemble_num)</td></tr>
-<tr class="separator:ad9abb672ce0788e7b45e3d699e1117ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef909f23205cecf3a94f37e931585216" id="r_aef909f23205cecf3a94f37e931585216"><td class="memItemLeft" align="right" valign="top"><a id="aef909f23205cecf3a94f37e931585216" name="aef909f23205cecf3a94f37e931585216"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumLeaves</b> (int ensemble_num)</td></tr>
-<tr class="separator:aef909f23205cecf3a94f37e931585216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03daeccada495219894a877427e06a32" id="r_a03daeccada495219894a877427e06a32"><td class="memItemLeft" align="right" valign="top"><a id="a03daeccada495219894a877427e06a32" name="a03daeccada495219894a877427e06a32"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>EnsembleTreeMaxDepth</b> (int ensemble_num, int tree_num)</td></tr>
-<tr class="separator:a03daeccada495219894a877427e06a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fb53367c519a9b84ee7366325973527" id="r_a1fb53367c519a9b84ee7366325973527"><td class="memItemLeft" align="right" valign="top"><a id="a1fb53367c519a9b84ee7366325973527" name="a1fb53367c519a9b84ee7366325973527"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>EnsembleAverageMaxDepth</b> (int ensemble_num)</td></tr>
-<tr class="separator:a1fb53367c519a9b84ee7366325973527"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e5c88c76034e126552da72e6701bf4" id="r_ae8e5c88c76034e126552da72e6701bf4"><td class="memItemLeft" align="right" valign="top"><a id="ae8e5c88c76034e126552da72e6701bf4" name="ae8e5c88c76034e126552da72e6701bf4"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>AverageMaxDepth</b> ()</td></tr>
-<tr class="separator:ae8e5c88c76034e126552da72e6701bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8961aec77518b7e54a4d365bdd6312e7" id="r_a8961aec77518b7e54a4d365bdd6312e7"><td class="memItemLeft" align="right" valign="top"><a id="a8961aec77518b7e54a4d365bdd6312e7" name="a8961aec77518b7e54a4d365bdd6312e7"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDimension</b> ()</td></tr>
-<tr class="separator:a8961aec77518b7e54a4d365bdd6312e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb775c1b05778fd3ed051650be16172b" id="r_adb775c1b05778fd3ed051650be16172b"><td class="memItemLeft" align="right" valign="top"><a id="adb775c1b05778fd3ed051650be16172b" name="adb775c1b05778fd3ed051650be16172b"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDimension</b> (int ensemble_num)</td></tr>
-<tr class="separator:adb775c1b05778fd3ed051650be16172b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80cd3bd4aeae9b13bced28fcb18c1f65" id="r_a80cd3bd4aeae9b13bced28fcb18c1f65"><td class="memItemLeft" align="right" valign="top"><a id="a80cd3bd4aeae9b13bced28fcb18c1f65" name="a80cd3bd4aeae9b13bced28fcb18c1f65"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsLeafConstant</b> ()</td></tr>
-<tr class="separator:a80cd3bd4aeae9b13bced28fcb18c1f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05dd0b59a3d0b4052c6a00a580fcbf7d" id="r_a05dd0b59a3d0b4052c6a00a580fcbf7d"><td class="memItemLeft" align="right" valign="top"><a id="a05dd0b59a3d0b4052c6a00a580fcbf7d" name="a05dd0b59a3d0b4052c6a00a580fcbf7d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsLeafConstant</b> (int ensemble_num)</td></tr>
-<tr class="separator:a05dd0b59a3d0b4052c6a00a580fcbf7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adea4fa57399cb9c8d171187cbbfeaf41" id="r_adea4fa57399cb9c8d171187cbbfeaf41"><td class="memItemLeft" align="right" valign="top"><a id="adea4fa57399cb9c8d171187cbbfeaf41" name="adea4fa57399cb9c8d171187cbbfeaf41"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsExponentiated</b> ()</td></tr>
-<tr class="separator:adea4fa57399cb9c8d171187cbbfeaf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a074cdd00ee5deaa74b9f91d7ca05657c" id="r_a074cdd00ee5deaa74b9f91d7ca05657c"><td class="memItemLeft" align="right" valign="top"><a id="a074cdd00ee5deaa74b9f91d7ca05657c" name="a074cdd00ee5deaa74b9f91d7ca05657c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsExponentiated</b> (int ensemble_num)</td></tr>
-<tr class="separator:a074cdd00ee5deaa74b9f91d7ca05657c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0142be3df0f378b5b3b7d78d45c81876" id="r_a0142be3df0f378b5b3b7d78d45c81876"><td class="memItemLeft" align="right" valign="top"><a id="a0142be3df0f378b5b3b7d78d45c81876" name="a0142be3df0f378b5b3b7d78d45c81876"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>AllRoots</b> (int ensemble_num)</td></tr>
-<tr class="separator:a0142be3df0f378b5b3b7d78d45c81876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1998ad3e8e6641ead79df66f6a8e3e7c" id="r_a1998ad3e8e6641ead79df66f6a8e3e7c"><td class="memItemLeft" align="right" valign="top"><a id="a1998ad3e8e6641ead79df66f6a8e3e7c" name="a1998ad3e8e6641ead79df66f6a8e3e7c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLeafValue</b> (int ensemble_num, double leaf_value)</td></tr>
-<tr class="separator:a1998ad3e8e6641ead79df66f6a8e3e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dd61b245b7c875b4cf724870adbfa0b" id="r_a7dd61b245b7c875b4cf724870adbfa0b"><td class="memItemLeft" align="right" valign="top"><a id="a7dd61b245b7c875b4cf724870adbfa0b" name="a7dd61b245b7c875b4cf724870adbfa0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetLeafVector</b> (int ensemble_num, std::vector&lt; double &gt; &amp;leaf_vector)</td></tr>
-<tr class="separator:a7dd61b245b7c875b4cf724870adbfa0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa82e379953aa9b1fae9b775c5647927" id="r_aaa82e379953aa9b1fae9b775c5647927"><td class="memItemLeft" align="right" valign="top"><a id="aaa82e379953aa9b1fae9b775c5647927" name="aaa82e379953aa9b1fae9b775c5647927"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>IncrementSampleCount</b> ()</td></tr>
-<tr class="separator:aaa82e379953aa9b1fae9b775c5647927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a109fc7dbac31fbafffaa621bd819c334" id="r_a109fc7dbac31fbafffaa621bd819c334"><td class="memItemLeft" align="right" valign="top"><a id="a109fc7dbac31fbafffaa621bd819c334" name="a109fc7dbac31fbafffaa621bd819c334"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveToJsonFile</b> (std::string filename)</td></tr>
-<tr class="separator:a109fc7dbac31fbafffaa621bd819c334"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abab70d5bb095ddd7e5f07315d6fd0e4c" id="r_abab70d5bb095ddd7e5f07315d6fd0e4c"><td class="memItemLeft" align="right" valign="top"><a id="abab70d5bb095ddd7e5f07315d6fd0e4c" name="abab70d5bb095ddd7e5f07315d6fd0e4c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadFromJsonFile</b> (std::string filename)</td></tr>
-<tr class="separator:abab70d5bb095ddd7e5f07315d6fd0e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3780e176344ea3a25674fb17628cf2a" id="r_ab3780e176344ea3a25674fb17628cf2a"><td class="memItemLeft" align="right" valign="top"><a id="ab3780e176344ea3a25674fb17628cf2a" name="ab3780e176344ea3a25674fb17628cf2a"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DumpJsonString</b> ()</td></tr>
-<tr class="separator:ab3780e176344ea3a25674fb17628cf2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28bc07760d1f0b3cb57e2d5daf62dee3" id="r_a28bc07760d1f0b3cb57e2d5daf62dee3"><td class="memItemLeft" align="right" valign="top"><a id="a28bc07760d1f0b3cb57e2d5daf62dee3" name="a28bc07760d1f0b3cb57e2d5daf62dee3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadFromJsonString</b> (std::string &amp;json_string)</td></tr>
-<tr class="separator:a28bc07760d1f0b3cb57e2d5daf62dee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26ea54f8570dd2fdecb012104bbc1e35" id="r_a26ea54f8570dd2fdecb012104bbc1e35"><td class="memItemLeft" align="right" valign="top"><a id="a26ea54f8570dd2fdecb012104bbc1e35" name="a26ea54f8570dd2fdecb012104bbc1e35"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Reset</b> ()</td></tr>
-<tr class="separator:a26ea54f8570dd2fdecb012104bbc1e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0151f040e3803fcfdf26d9d3411d9b0e" id="r_a0151f040e3803fcfdf26d9d3411d9b0e"><td class="memItemLeft" align="right" valign="top"><a id="a0151f040e3803fcfdf26d9d3411d9b0e" name="a0151f040e3803fcfdf26d9d3411d9b0e"></a>
+<tr class="memitem:add4f098d363254a92f6bdeb66192f605" id="r_add4f098d363254a92f6bdeb66192f605"><td class="memItemLeft" align="right" valign="top"><a id="add4f098d363254a92f6bdeb66192f605" name="add4f098d363254a92f6bdeb66192f605"></a>
 nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><b>to_json</b> ()</td></tr>
-<tr class="memdesc:a0151f040e3803fcfdf26d9d3411d9b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save to JSON. <br /></td></tr>
-<tr class="separator:a0151f040e3803fcfdf26d9d3411d9b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:add4f098d363254a92f6bdeb66192f605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save to JSON. <br /></td></tr>
+<tr class="separator:add4f098d363254a92f6bdeb66192f605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d8f4ea6a3eb63fa2922b44255fa934" id="r_ac8d8f4ea6a3eb63fa2922b44255fa934"><td class="memItemLeft" align="right" valign="top"><a id="ac8d8f4ea6a3eb63fa2922b44255fa934" name="ac8d8f4ea6a3eb63fa2922b44255fa934"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const nlohmann::json &amp;forest_container_json)</td></tr>
 <tr class="memdesc:ac8d8f4ea6a3eb63fa2922b44255fa934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load from JSON. <br /></td></tr>
 <tr class="separator:ac8d8f4ea6a3eb63fa2922b44255fa934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa4ee75bcf2c6d64ed0506d868fbf19" id="r_aafa4ee75bcf2c6d64ed0506d868fbf19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#aafa4ee75bcf2c6d64ed0506d868fbf19">append_from_json</a> (const nlohmann::json &amp;forest_container_json)</td></tr>
-<tr class="memdesc:aafa4ee75bcf2c6d64ed0506d868fbf19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append to a forest container from JSON, requires that the ensemble already contains a nonzero number of forests.  <br /></td></tr>
+<tr class="memitem:aafa4ee75bcf2c6d64ed0506d868fbf19" id="r_aafa4ee75bcf2c6d64ed0506d868fbf19"><td class="memItemLeft" align="right" valign="top"><a id="aafa4ee75bcf2c6d64ed0506d868fbf19" name="aafa4ee75bcf2c6d64ed0506d868fbf19"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>append_from_json</b> (const nlohmann::json &amp;forest_container_json)</td></tr>
+<tr class="memdesc:aafa4ee75bcf2c6d64ed0506d868fbf19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append to a forest container from JSON, requires that the ensemble already contains a nonzero number of forests. <br /></td></tr>
 <tr class="separator:aafa4ee75bcf2c6d64ed0506d868fbf19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Container of <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> forest objects. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aafa4ee75bcf2c6d64ed0506d868fbf19" name="aafa4ee75bcf2c6d64ed0506d868fbf19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafa4ee75bcf2c6d64ed0506d868fbf19">&#9670;&#160;</a></span>append_from_json()</h2>
+<div class="textblock"><p>Container of <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> forest objects. This is the primary (in-memory) storage interface for multiple "samples" of a decision tree ensemble in <code>stochtree</code>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af98585138de585a2173270862568bc37" name="af98585138de585a2173270862568bc37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af98585138de585a2173270862568bc37">&#9670;&#160;</a></span>ForestContainer() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void StochTree::ForestContainer::append_from_json </td>
+          <td class="memname">StochTree::ForestContainer::ForestContainer </td>
           <td>(</td>
-          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
-          <td class="paramname"><em>forest_container_json</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_trees</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>output_dimension</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_leaf_constant</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_exponentiated</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1ForestContainer.html" title="Container of TreeEnsemble forest objects. This is the primary (in-memory) storage interface for multi...">ForestContainer</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_trees</td><td>Number of trees in each forest. </td></tr>
+    <tr><td class="paramname">output_dimension</td><td>Dimension of the leaf node parameter in each tree of each forest. </td></tr>
+    <tr><td class="paramname">is_leaf_constant</td><td>Whether or not the leaves of each tree are treated as "constant." If true, then predicting from an ensemble is simply a matter or determining which leaf node an observation falls into. If false, prediction will multiply a leaf node's parameter(s) for a given observation by a basis vector. </td></tr>
+    <tr><td class="paramname">is_exponentiated</td><td>Whether or not the leaves of each tree are stored in log scale. If true, leaf predictions are exponentiated before their prediction is returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1333fe7be47aa75bdc775642027b3432" name="a1333fe7be47aa75bdc775642027b3432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1333fe7be47aa75bdc775642027b3432">&#9670;&#160;</a></span>ForestContainer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::ForestContainer::ForestContainer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_samples</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_trees</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>output_dimension</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_leaf_constant</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_exponentiated</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1ForestContainer.html" title="Container of TreeEnsemble forest objects. This is the primary (in-memory) storage interface for multi...">ForestContainer</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_samples</td><td>Initial size of a container of forest samples. </td></tr>
+    <tr><td class="paramname">num_trees</td><td>Number of trees in each forest. </td></tr>
+    <tr><td class="paramname">output_dimension</td><td>Dimension of the leaf node parameter in each tree of each forest. </td></tr>
+    <tr><td class="paramname">is_leaf_constant</td><td>Whether or not the leaves of each tree are treated as "constant." If true, then predicting from an ensemble is simply a matter or determining which leaf node an observation falls into. If false, prediction will multiply a leaf node's parameter(s) for a given observation by a basis vector. </td></tr>
+    <tr><td class="paramname">is_exponentiated</td><td>Whether or not the leaves of each tree are stored in log scale. If true, leaf predictions are exponentiated before their prediction is returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4f7ff47a118d657677643c26da01fb47" name="a4f7ff47a118d657677643c26da01fb47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f7ff47a118d657677643c26da01fb47">&#9670;&#160;</a></span>DeleteSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::DeleteSample </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sample_num</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Append to a forest container from JSON, requires that the ensemble already contains a nonzero number of forests. </p>
-<p>Append forests to a container from a JSON forest specification. </p>
+<p>Remove a forest from a container of forest samples and delete the corresponding object, freeing its memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sample_num</td><td>Index of forest to be deleted. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a id="aff5c3b2d76e621175d3cdb0d7c1f79a0" name="aff5c3b2d76e621175d3cdb0d7c1f79a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff5c3b2d76e621175d3cdb0d7c1f79a0">&#9670;&#160;</a></span>AddSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::AddSample </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;&#160;</td>
+          <td class="paramname"><em>forest</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a new forest to the container by copying <code>forest</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">forest</td><td>Forest to be copied and added to the container of retained forest samples. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9b4ef41e79c621f1139991bab66a90e" name="ac9b4ef41e79c621f1139991bab66a90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b4ef41e79c621f1139991bab66a90e">&#9670;&#160;</a></span>InitializeRoot() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::InitializeRoot </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>leaf_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize a "root" forest of univariate trees as the first element of the container, setting all root node values in every tree to <code>leaf_value</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">leaf_value</td><td>Value to assign to the root node of every tree. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3e2a822f16c2850f12373afc327fbcc3" name="a3e2a822f16c2850f12373afc327fbcc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2a822f16c2850f12373afc327fbcc3">&#9670;&#160;</a></span>InitializeRoot() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::InitializeRoot </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>leaf_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize a "root" forest of multivariate trees as the first element of the container, setting all root node values in every tree to <code>leaf_vector</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">leaf_value</td><td>Vector of values to assign to the root node of every tree. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af32a8984219be2086ecb1088f515c098" name="af32a8984219be2086ecb1088f515c098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af32a8984219be2086ecb1088f515c098">&#9670;&#160;</a></span>AddSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::AddSamples </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_samples</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pre-allocate space for <code>num_samples</code> additional forests in the container. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num_samples</td><td>Number of (default-constructed) forests to allocated space for in the container. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac177b49773901ff68eb3a8385a8a8b7a" name="ac177b49773901ff68eb3a8385a8a8b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac177b49773901ff68eb3a8385a8a8b7a">&#9670;&#160;</a></span>CopyFromPreviousSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::CopyFromPreviousSample </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_sample_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>previous_sample_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy the forest stored at <code>previous_sample_id</code> to the forest stored at <code>new_sample_id</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_sample_id</td><td>Index of the new forest to be copied from an earlier sample. </td></tr>
+    <tr><td class="paramname">previous_sample_id</td><td>Index of the previous forest to copy to <code>new_sample_id</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f27ca9076db7fa7c7c27c076b81b2db" name="a2f27ca9076db7fa7c7c27c076b81b2db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f27ca9076db7fa7c7c27c076b81b2db">&#9670;&#160;</a></span>Predict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; StochTree::ForestContainer::Predict </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Predict from every forest in the container on every observation in the provided dataset. The resulting vector is "column-major", where every forest in a container defines the columns of a prediction matrix and every observation in the provided dataset defines the rows. The (<code>i</code>,<code>j</code>) element of this prediction matrix can be read from the <code>j * num_rows + i</code> element of the returned <code>std::vector&lt;double&gt;</code>, where <code>num_rows</code> is equal to the number of observations in <code>dataset</code> (i.e. <code>dataset.NumObservations()</code>). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataset</td><td>Data object containining training data, including covariates, leaf regression bases, and case weights. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;double&gt; Vector of predictions for every forest in the container and every observation in <code>dataset</code>. </dd></dl>
+
+</div>
+</div>
+<a id="a79440f3a4af33eea377478d1833a9456" name="a79440f3a4af33eea377478d1833a9456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79440f3a4af33eea377478d1833a9456">&#9670;&#160;</a></span>PredictRaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; double &gt; StochTree::ForestContainer::PredictRaw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Predict from every forest in the container on every observation in the provided dataset. The resulting vector stores a possibly three-dimensional array, where the dimensions are arranged as follows. </p>
+<ol type="1">
+<li>Dimension of the leaf node's raw values (1 for <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianConstantLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianUnivariateRegressionLeafModel</a>, and <a class="el" href="classStochTree_1_1LogLinearVarianceLeafModel.html" title="Marginal likelihood and posterior computation for heteroskedastic log-linear variance model.">LogLinearVarianceLeafModel</a>, &gt;1 for <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianMultivariateRegressionLeafModel</a>)</li>
+<li>Observations in the provided dataset.</li>
+<li>Forest samples in the container.</li>
+</ol>
+<p>If the leaf nodes have univariate values, then the "first dimension" is 1 and the resulting array has the exact same layout as in <a class="el" href="classStochTree_1_1ForestContainer.html#a2f27ca9076db7fa7c7c27c076b81b2db">Predict</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataset</td><td>Data object containining training data, including covariates, leaf regression bases, and case weights. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;double&gt; Vector of predictions for every forest in the container and every observation in <code>dataset</code>. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="container_8h_source.html">container.h</a></li>
-<li>src/<b>container.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

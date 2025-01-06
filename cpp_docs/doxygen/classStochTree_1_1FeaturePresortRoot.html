@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,7 +81,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1FeaturePresortRoot-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::FeaturePresortRoot Class Reference</div></div>
 </div><!--header-->
@@ -84,16 +90,6 @@ $(function() {
  <a href="classStochTree_1_1FeaturePresortRoot.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="partition__tracker_8h_source.html">partition_tracker.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a5f5fac20c52751fa86ccfa6edc072a42" id="r_a5f5fac20c52751fa86ccfa6edc072a42"><td class="memItemLeft" align="right" valign="top"><a id="a5f5fac20c52751fa86ccfa6edc072a42" name="a5f5fac20c52751fa86ccfa6edc072a42"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FeaturePresortRoot</b> (Eigen::MatrixXd &amp;covariates, int32_t feature_index, FeatureType feature_type)</td></tr>
-<tr class="separator:a5f5fac20c52751fa86ccfa6edc072a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa279b920232276d93dc08e14a9bed50" id="r_aaa279b920232276d93dc08e14a9bed50"><td class="memItemLeft" align="right" valign="top"><a id="aaa279b920232276d93dc08e14a9bed50" name="aaa279b920232276d93dc08e14a9bed50"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ArgsortRoot</b> (Eigen::MatrixXd &amp;covariates)</td></tr>
-<tr class="separator:aaa279b920232276d93dc08e14a9bed50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data structure for presorting a feature by its values. </p>
 <p>This class is intended to be run <em>once</em> on a dataset as it pre-sorts each feature across the entire dataset.</p>

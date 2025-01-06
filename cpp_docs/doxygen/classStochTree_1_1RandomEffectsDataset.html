@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,7 +83,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1RandomEffectsDataset-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::RandomEffectsDataset Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::RandomEffectsDataset Class Reference<div class="ingroups"><a class="el" href="group__data__group.html">Dataset API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -197,40 +204,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
 
 </div>
 </div>
-<a id="a3f55645a9a76194e7ddfb0f09a33d416" name="a3f55645a9a76194e7ddfb0f09a33d416"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f55645a9a76194e7ddfb0f09a33d416">&#9670;&#160;</a></span>AddGroupLabels()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::RandomEffectsDataset::AddGroupLabels </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; int32_t &gt; &amp;&#160;</td>
-          <td class="paramname"><em>group_labels</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy / load group indices for random effects. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">group_labels</td><td>Vector of integers with as many elements as <code>num_row</code> in the basis matrix, where each element corresponds to the group label for a given observation. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a28ab010b86d093d5aa7359373c31eeab" name="a28ab010b86d093d5aa7359373c31eeab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28ab010b86d093d5aa7359373c31eeab">&#9670;&#160;</a></span>AddVarianceWeights()</h2>
 
@@ -270,6 +243,40 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
   <table class="params">
     <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing weights </td></tr>
     <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f55645a9a76194e7ddfb0f09a33d416" name="a3f55645a9a76194e7ddfb0f09a33d416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f55645a9a76194e7ddfb0f09a33d416">&#9670;&#160;</a></span>AddGroupLabels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::RandomEffectsDataset::AddGroupLabels </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>group_labels</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy / load group indices for random effects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">group_labels</td><td>Vector of integers with as many elements as <code>num_row</code> in the basis matrix, where each element corresponds to the group label for a given observation. </td></tr>
   </table>
   </dd>
 </dl>
@@ -321,8 +328,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
 
 </div>
 </div>
-<a id="a9ed6acfc31336f1044e338476801144f" name="a9ed6acfc31336f1044e338476801144f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ed6acfc31336f1044e338476801144f">&#9670;&#160;</a></span>GetBasis()</h2>
+<a id="a88fc8112b6ec7617ad4f11ecf973dafc" name="a88fc8112b6ec7617ad4f11ecf973dafc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88fc8112b6ec7617ad4f11ecf973dafc">&#9670;&#160;</a></span>VarWeightValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -331,9 +338,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Eigen::MatrixXd &amp; StochTree::RandomEffectsDataset::GetBasis </td>
+          <td class="memname">double StochTree::RandomEffectsDataset::VarWeightValue </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -344,64 +352,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
 </table>
 </div><div class="memdoc">
 
-<p>Return a reference to the raw <code>Eigen::MatrixXd</code> storing the basis data. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::MatrixXd </dd></dl>
-
-</div>
-</div>
-<a id="a583ecd9a63af29ad5c4a57ca82153cbb" name="a583ecd9a63af29ad5c4a57ca82153cbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a583ecd9a63af29ad5c4a57ca82153cbb">&#9670;&#160;</a></span>GetGroupLabels()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; int32_t &gt; &amp; StochTree::RandomEffectsDataset::GetGroupLabels </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return a reference to the raw <code>std::vector</code> storing the group labels. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to internal std::vector </dd></dl>
-
-</div>
-</div>
-<a id="aace6cedd13ecdaf112f7c8cd150ca5e1" name="aace6cedd13ecdaf112f7c8cd150ca5e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aace6cedd13ecdaf112f7c8cd150ca5e1">&#9670;&#160;</a></span>GetVarWeights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::VectorXd &amp; StochTree::RandomEffectsDataset::GetVarWeights </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return a reference to the raw <code>Eigen::VectorXd</code> storing the variance weights. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::VectorXd </dd></dl>
+<p>Returns a dataset's variance weight stored at element <code>row</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Index to query in the weight vector </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -439,8 +396,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
 
 </div>
 </div>
-<a id="a88fc8112b6ec7617ad4f11ecf973dafc" name="a88fc8112b6ec7617ad4f11ecf973dafc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88fc8112b6ec7617ad4f11ecf973dafc">&#9670;&#160;</a></span>VarWeightValue()</h2>
+<a id="a9ed6acfc31336f1044e338476801144f" name="a9ed6acfc31336f1044e338476801144f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed6acfc31336f1044e338476801144f">&#9670;&#160;</a></span>GetBasis()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,10 +406,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double StochTree::RandomEffectsDataset::VarWeightValue </td>
+          <td class="memname">Eigen::MatrixXd &amp; StochTree::RandomEffectsDataset::GetBasis </td>
           <td>(</td>
-          <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>row</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -463,13 +419,64 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
 </table>
 </div><div class="memdoc">
 
-<p>Returns a dataset's variance weight stored at element <code>row</code> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">row</td><td>Index to query in the weight vector </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Return a reference to the raw <code>Eigen::MatrixXd</code> storing the basis data. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::MatrixXd </dd></dl>
+
+</div>
+</div>
+<a id="aace6cedd13ecdaf112f7c8cd150ca5e1" name="aace6cedd13ecdaf112f7c8cd150ca5e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace6cedd13ecdaf112f7c8cd150ca5e1">&#9670;&#160;</a></span>GetVarWeights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::VectorXd &amp; StochTree::RandomEffectsDataset::GetVarWeights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a reference to the raw <code>Eigen::VectorXd</code> storing the variance weights. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::VectorXd </dd></dl>
+
+</div>
+</div>
+<a id="a583ecd9a63af29ad5c4a57ca82153cbb" name="a583ecd9a63af29ad5c4a57ca82153cbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a583ecd9a63af29ad5c4a57ca82153cbb">&#9670;&#160;</a></span>GetGroupLabels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int32_t &gt; &amp; StochTree::RandomEffectsDataset::GetGroupLabels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a reference to the raw <code>std::vector</code> storing the group labels. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to internal std::vector </dd></dl>
 
 </div>
 </div>

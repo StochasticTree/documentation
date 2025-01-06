@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,10 +81,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classStochTree_1_1GaussianUnivariateRegressionSuffStat-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::GaussianUnivariateRegressionSuffStat Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::GaussianUnivariateRegressionSuffStat Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,43 +90,6 @@ $(function() {
  <a href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:af02078eb4e473fcb267831cd3c15906b" id="r_af02078eb4e473fcb267831cd3c15906b"><td class="memItemLeft" align="right" valign="top"><a id="af02078eb4e473fcb267831cd3c15906b" name="af02078eb4e473fcb267831cd3c15906b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>IncrementSuffStat</b> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, Eigen::VectorXd &amp;outcome, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, data_size_t row_idx, int tree_idx)</td></tr>
-<tr class="separator:af02078eb4e473fcb267831cd3c15906b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94c282b864f0db82536ee50f2e22e9fc" id="r_a94c282b864f0db82536ee50f2e22e9fc"><td class="memItemLeft" align="right" valign="top"><a id="a94c282b864f0db82536ee50f2e22e9fc" name="a94c282b864f0db82536ee50f2e22e9fc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
-<tr class="separator:a94c282b864f0db82536ee50f2e22e9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d16787392896a466e90fa730f5333c" id="r_ad1d16787392896a466e90fa730f5333c"><td class="memItemLeft" align="right" valign="top"><a id="ad1d16787392896a466e90fa730f5333c" name="ad1d16787392896a466e90fa730f5333c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSuffStat</b> (<a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;rhs)</td></tr>
-<tr class="separator:ad1d16787392896a466e90fa730f5333c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fdeaff81849bd19f42207a0678bdfe6" id="r_a1fdeaff81849bd19f42207a0678bdfe6"><td class="memItemLeft" align="right" valign="top"><a id="a1fdeaff81849bd19f42207a0678bdfe6" name="a1fdeaff81849bd19f42207a0678bdfe6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SubtractSuffStat</b> (<a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;rhs)</td></tr>
-<tr class="separator:a1fdeaff81849bd19f42207a0678bdfe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50c7ee784ece857c275fb7a289034a01" id="r_a50c7ee784ece857c275fb7a289034a01"><td class="memItemLeft" align="right" valign="top"><a id="a50c7ee784ece857c275fb7a289034a01" name="a50c7ee784ece857c275fb7a289034a01"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SampleGreaterThan</b> (data_size_t threshold)</td></tr>
-<tr class="separator:a50c7ee784ece857c275fb7a289034a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ae869da038ecdbd084f1351d8f0e8b0" id="r_a8ae869da038ecdbd084f1351d8f0e8b0"><td class="memItemLeft" align="right" valign="top"><a id="a8ae869da038ecdbd084f1351d8f0e8b0" name="a8ae869da038ecdbd084f1351d8f0e8b0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SampleGreaterThanEqual</b> (data_size_t threshold)</td></tr>
-<tr class="separator:a8ae869da038ecdbd084f1351d8f0e8b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9071d540c738fcda8dcb6af5aa667f43" id="r_a9071d540c738fcda8dcb6af5aa667f43"><td class="memItemLeft" align="right" valign="top"><a id="a9071d540c738fcda8dcb6af5aa667f43" name="a9071d540c738fcda8dcb6af5aa667f43"></a>
-data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b> ()</td></tr>
-<tr class="separator:a9071d540c738fcda8dcb6af5aa667f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a65600209629a5e3493212f86cbed50b1" id="r_a65600209629a5e3493212f86cbed50b1"><td class="memItemLeft" align="right" valign="top"><a id="a65600209629a5e3493212f86cbed50b1" name="a65600209629a5e3493212f86cbed50b1"></a>
-data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>n</b></td></tr>
-<tr class="separator:a65600209629a5e3493212f86cbed50b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a489aff38b16b0551b15d91656d678e79" id="r_a489aff38b16b0551b15d91656d678e79"><td class="memItemLeft" align="right" valign="top"><a id="a489aff38b16b0551b15d91656d678e79" name="a489aff38b16b0551b15d91656d678e79"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>sum_xxw</b></td></tr>
-<tr class="separator:a489aff38b16b0551b15d91656d678e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3bff0e70e091757b8fe1e657b61085e" id="r_ab3bff0e70e091757b8fe1e657b61085e"><td class="memItemLeft" align="right" valign="top"><a id="ab3bff0e70e091757b8fe1e657b61085e" name="ab3bff0e70e091757b8fe1e657b61085e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>sum_yxw</b></td></tr>
-<tr class="separator:ab3bff0e70e091757b8fe1e657b61085e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>

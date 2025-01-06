@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['treenodetype_0',['TreeNodeType',['../namespaceStochTree.html#aeca4e0fa068ffcf3a5275cbf0939fc5c',1,'StochTree']]]
+  ['modeltype_0',['ModelType',['../group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07',1,'StochTree']]]
 ];

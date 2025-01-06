@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,9 +94,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9836c766169344abd223f35bd9c1b5b9" id="r_a9836c766169344abd223f35bd9c1b5b9"><td class="memItemLeft" align="right" valign="top"><a id="a9836c766169344abd223f35bd9c1b5b9" name="a9836c766169344abd223f35bd9c1b5b9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UnsortedNodeSampleTracker</b> (data_size_t n, int num_trees)</td></tr>
-<tr class="separator:a9836c766169344abd223f35bd9c1b5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7d744f7496ac0f2a2b21fc06167e90b" id="r_ac7d744f7496ac0f2a2b21fc06167e90b"><td class="memItemLeft" align="right" valign="top"><a id="ac7d744f7496ac0f2a2b21fc06167e90b" name="ac7d744f7496ac0f2a2b21fc06167e90b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ReconstituteFromForest</b> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;forest, <a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset)</td></tr>
 <tr class="memdesc:ac7d744f7496ac0f2a2b21fc06167e90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reconstruct the node sample tracker based on the splits in a forest. <br /></td></tr>
@@ -138,12 +142,6 @@ data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NodeBegin</b> 
 data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NodeEnd</b> (int tree_id, int node_id)</td></tr>
 <tr class="memdesc:aca4b340a5106beaabbf427b4adf60192"><td class="mdescLeft">&#160;</td><td class="mdescRight">One past the last index of data points contained in node_id. <br /></td></tr>
 <tr class="separator:aca4b340a5106beaabbf427b4adf60192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12bf9e7177dc4f1b7bc344fc1c6614bf" id="r_a12bf9e7177dc4f1b7bc344fc1c6614bf"><td class="memItemLeft" align="right" valign="top"><a id="a12bf9e7177dc4f1b7bc344fc1c6614bf" name="a12bf9e7177dc4f1b7bc344fc1c6614bf"></a>
-std::vector&lt; data_size_t &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>NodeBeginIterator</b> (int tree_id, int node_id)</td></tr>
-<tr class="separator:a12bf9e7177dc4f1b7bc344fc1c6614bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1bb3fa82271d0e59094d265286bc174" id="r_ae1bb3fa82271d0e59094d265286bc174"><td class="memItemLeft" align="right" valign="top"><a id="ae1bb3fa82271d0e59094d265286bc174" name="ae1bb3fa82271d0e59094d265286bc174"></a>
-std::vector&lt; data_size_t &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>NodeEndIterator</b> (int tree_id, int node_id)</td></tr>
-<tr class="separator:ae1bb3fa82271d0e59094d265286bc174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab75eb8ee484dadf55a190ccb92f6d7eb" id="r_ab75eb8ee484dadf55a190ccb92f6d7eb"><td class="memItemLeft" align="right" valign="top"><a id="ab75eb8ee484dadf55a190ccb92f6d7eb" name="ab75eb8ee484dadf55a190ccb92f6d7eb"></a>
 data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NodeSize</b> (int tree_id, int node_id)</td></tr>
 <tr class="memdesc:ab75eb8ee484dadf55a190ccb92f6d7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">One past the last index of data points contained in node_id. <br /></td></tr>
@@ -183,9 +181,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> ()</td></
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Mapping nodes to the indices they contain. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="partition__tracker_8h_source.html">partition_tracker.h</a></li>
-<li>src/<b>partition_tracker.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

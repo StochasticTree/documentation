@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['walktree_0',['WalkTree',['../classStochTree_1_1Tree.html#a2044523457ee1b4a6803013b8541727c',1,'StochTree::Tree']]],
-  ['workingparametermean_1',['WorkingParameterMean',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#ab57cef6b67a0d96dee1a68794be9cf4b',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
-  ['workingparametervariance_2',['WorkingParameterVariance',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#ac7a43b5169651733ed8982942589b3dc',1,'StochTree::MultivariateRegressionRandomEffectsModel']]]
+  ['variancecomponentscale_0',['VarianceComponentScale',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a953b4819399d46b9902970c9de6c001c',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
+  ['variancecomponentshape_1',['VarianceComponentShape',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#ace637c5470f22e40dfdd95dc0939f036',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
+  ['varsplitrange_2',['VarSplitRange',['../group__sampling__group.html#ga1a6133404b4f375fe32036846dd24751',1,'StochTree']]],
+  ['varweightvalue_3',['varweightvalue',['../classStochTree_1_1ForestDataset.html#ac5721160088d181d5a0b1dbae9b89eda',1,'StochTree::ForestDataset::VarWeightValue()'],['../classStochTree_1_1RandomEffectsDataset.html#a88fc8112b6ec7617ad4f11ecf973dafc',1,'StochTree::RandomEffectsDataset::VarWeightValue()']]]
 ];

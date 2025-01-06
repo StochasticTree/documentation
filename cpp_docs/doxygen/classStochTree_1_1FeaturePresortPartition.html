@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -88,9 +95,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab7086188d5885f416944d7c3afb34d16" id="r_ab7086188d5885f416944d7c3afb34d16"><td class="memItemLeft" align="right" valign="top"><a id="ab7086188d5885f416944d7c3afb34d16" name="ab7086188d5885f416944d7c3afb34d16"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FeaturePresortPartition</b> (<a class="el" href="classStochTree_1_1FeaturePresortRoot.html">FeaturePresortRoot</a> *feature_presort_root, Eigen::MatrixXd &amp;covariates, int32_t feature_index, FeatureType feature_type)</td></tr>
-<tr class="separator:ab7086188d5885f416944d7c3afb34d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a067251368e76b0bf24d1c956d4a26b6d" id="r_a067251368e76b0bf24d1c956d4a26b6d"><td class="memItemLeft" align="right" valign="top"><a id="a067251368e76b0bf24d1c956d4a26b6d" name="a067251368e76b0bf24d1c956d4a26b6d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SplitFeature</b> (Eigen::MatrixXd &amp;covariates, int32_t node_id, int32_t feature_index, <a class="el" href="classStochTree_1_1TreeSplit.html">TreeSplit</a> &amp;split)</td></tr>
 <tr class="memdesc:a067251368e76b0bf24d1c956d4a26b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split numeric / ordered categorical feature and update sort indices. <br /></td></tr>
@@ -143,9 +147,8 @@ std::vector&lt; data_size_t &gt;&#160;</td><td class="memItemRight" valign="bott
 <div class="textblock"><p>Data structure that tracks pre-sorted feature values through a tree's split lifecycle. </p>
 <p>This class is initialized from a <a class="el" href="classStochTree_1_1FeaturePresortRoot.html" title="Data structure for presorting a feature by its values.">FeaturePresortRoot</a> which has computed the sort indices for a given feature over the entire dataset, so that sorting is not necessary for each new tree.</p>
 <p>When a split is made, this class handles sifting for each feature, so that the presorted feature values available at each node are easily queried. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="partition__tracker_8h_source.html">partition_tracker.h</a></li>
-<li>src/<b>partition_tracker.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

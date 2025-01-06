@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,40 +83,301 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1ColumnMatrix-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::ColumnMatrix Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::ColumnMatrix Class Reference<div class="ingroups"><a class="el" href="group__data__group.html">Dataset API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Internal wrapper around <code>Eigen::MatrixXd</code> interface for multidimensional floating point data.  
+ <a href="classStochTree_1_1ColumnMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="data_8h_source.html">data.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab507e7abfaa8ecf26c0aba46155be856" id="r_ab507e7abfaa8ecf26c0aba46155be856"><td class="memItemLeft" align="right" valign="top"><a id="ab507e7abfaa8ecf26c0aba46155be856" name="ab507e7abfaa8ecf26c0aba46155be856"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ColumnMatrix</b> (double *data_ptr, data_size_t num_row, int num_col, bool is_row_major)</td></tr>
+<tr class="memitem:ab507e7abfaa8ecf26c0aba46155be856" id="r_ab507e7abfaa8ecf26c0aba46155be856"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ColumnMatrix.html#ab507e7abfaa8ecf26c0aba46155be856">ColumnMatrix</a> (double *data_ptr, data_size_t num_row, int num_col, bool is_row_major)</td></tr>
+<tr class="memdesc:ab507e7abfaa8ecf26c0aba46155be856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <code><a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a></code> object from in-memory data buffer.  <br /></td></tr>
 <tr class="separator:ab507e7abfaa8ecf26c0aba46155be856"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55e10196a2819f78d9c63d648e5b889b" id="r_a55e10196a2819f78d9c63d648e5b889b"><td class="memItemLeft" align="right" valign="top"><a id="a55e10196a2819f78d9c63d648e5b889b" name="a55e10196a2819f78d9c63d648e5b889b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ColumnMatrix</b> (std::string filename, std::string column_index_string, bool header=true, bool precise_float_parser=false)</td></tr>
+<tr class="memitem:a55e10196a2819f78d9c63d648e5b889b" id="r_a55e10196a2819f78d9c63d648e5b889b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ColumnMatrix.html#a55e10196a2819f78d9c63d648e5b889b">ColumnMatrix</a> (std::string filename, std::string column_index_string, bool header=true, bool precise_float_parser=false)</td></tr>
+<tr class="memdesc:a55e10196a2819f78d9c63d648e5b889b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a> object from CSV file.  <br /></td></tr>
 <tr class="separator:a55e10196a2819f78d9c63d648e5b889b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a736f676bd33dca4ff875e421396a588e" id="r_a736f676bd33dca4ff875e421396a588e"><td class="memItemLeft" align="right" valign="top"><a id="a736f676bd33dca4ff875e421396a588e" name="a736f676bd33dca4ff875e421396a588e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetElement</b> (data_size_t row_num, int32_t col_num)</td></tr>
+<tr class="memitem:a736f676bd33dca4ff875e421396a588e" id="r_a736f676bd33dca4ff875e421396a588e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ColumnMatrix.html#a736f676bd33dca4ff875e421396a588e">GetElement</a> (data_size_t row_num, int32_t col_num)</td></tr>
+<tr class="memdesc:a736f676bd33dca4ff875e421396a588e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value stored at (<code>row</code>, <code>col</code>) in the object's internal <code>Eigen::MatrixXd</code>.  <br /></td></tr>
 <tr class="separator:a736f676bd33dca4ff875e421396a588e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0b9f9b4599af47771fb299f52035c69" id="r_af0b9f9b4599af47771fb299f52035c69"><td class="memItemLeft" align="right" valign="top"><a id="af0b9f9b4599af47771fb299f52035c69" name="af0b9f9b4599af47771fb299f52035c69"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetElement</b> (data_size_t row_num, int32_t col_num, double value)</td></tr>
+<tr class="memitem:af0b9f9b4599af47771fb299f52035c69" id="r_af0b9f9b4599af47771fb299f52035c69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ColumnMatrix.html#af0b9f9b4599af47771fb299f52035c69">SetElement</a> (data_size_t row_num, int32_t col_num, double value)</td></tr>
+<tr class="memdesc:af0b9f9b4599af47771fb299f52035c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an observation in the object's internal <code>Eigen::MatrixXd</code> to a new value.  <br /></td></tr>
 <tr class="separator:af0b9f9b4599af47771fb299f52035c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9575ef0cb165dc820877944b8a8da117" id="r_a9575ef0cb165dc820877944b8a8da117"><td class="memItemLeft" align="right" valign="top"><a id="a9575ef0cb165dc820877944b8a8da117" name="a9575ef0cb165dc820877944b8a8da117"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadData</b> (double *data_ptr, data_size_t num_row, int num_col, bool is_row_major)</td></tr>
+<tr class="memitem:a9575ef0cb165dc820877944b8a8da117" id="r_a9575ef0cb165dc820877944b8a8da117"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ColumnMatrix.html#a9575ef0cb165dc820877944b8a8da117">LoadData</a> (double *data_ptr, data_size_t num_row, int num_col, bool is_row_major)</td></tr>
+<tr class="memdesc:a9575ef0cb165dc820877944b8a8da117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the data in a <code><a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a></code> object from an in-memory data buffer. This will erase the existing matrix.  <br /></td></tr>
 <tr class="separator:a9575ef0cb165dc820877944b8a8da117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a005b157bebd5e196502ba26111b46f75" id="r_a005b157bebd5e196502ba26111b46f75"><td class="memItemLeft" align="right" valign="top"><a id="a005b157bebd5e196502ba26111b46f75" name="a005b157bebd5e196502ba26111b46f75"></a>
 data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumRows</b> ()</td></tr>
+<tr class="memdesc:a005b157bebd5e196502ba26111b46f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows in the object's internal <code>Eigen::MatrixXd</code>. <br /></td></tr>
 <tr class="separator:a005b157bebd5e196502ba26111b46f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a466acfe487e2490dfdc5f562ed5f6b1c" id="r_a466acfe487e2490dfdc5f562ed5f6b1c"><td class="memItemLeft" align="right" valign="top"><a id="a466acfe487e2490dfdc5f562ed5f6b1c" name="a466acfe487e2490dfdc5f562ed5f6b1c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>NumCols</b> ()</td></tr>
+<tr class="memdesc:a466acfe487e2490dfdc5f562ed5f6b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns in the object's internal <code>Eigen::MatrixXd</code>. <br /></td></tr>
 <tr class="separator:a466acfe487e2490dfdc5f562ed5f6b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72e66461b39243b0072e56f9394a9e1c" id="r_a72e66461b39243b0072e56f9394a9e1c"><td class="memItemLeft" align="right" valign="top"><a id="a72e66461b39243b0072e56f9394a9e1c" name="a72e66461b39243b0072e56f9394a9e1c"></a>
 Eigen::MatrixXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetData</b> ()</td></tr>
+<tr class="memdesc:a72e66461b39243b0072e56f9394a9e1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a reference to the object's internal <code>Eigen::MatrixXd</code>, for interfaces that require a raw matrix. <br /></td></tr>
 <tr class="separator:a72e66461b39243b0072e56f9394a9e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Internal wrapper around <code>Eigen::MatrixXd</code> interface for multidimensional floating point data. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab507e7abfaa8ecf26c0aba46155be856" name="ab507e7abfaa8ecf26c0aba46155be856"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab507e7abfaa8ecf26c0aba46155be856">&#9670;&#160;</a></span>ColumnMatrix() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::ColumnMatrix::ColumnMatrix </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_row_major</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <code><a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a></code> object from in-memory data buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a matrix. </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the matrix. </td></tr>
+    <tr><td class="paramname">num_col</td><td>Number of columns / covariates in the matrix. </td></tr>
+    <tr><td class="paramname">is_row_major</td><td>Whether or not the data in <code>data_ptr</code> are organized in a row-major or column-major fashion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a55e10196a2819f78d9c63d648e5b889b" name="a55e10196a2819f78d9c63d648e5b889b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e10196a2819f78d9c63d648e5b889b">&#9670;&#160;</a></span>ColumnMatrix() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::ColumnMatrix::ColumnMatrix </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>column_index_string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>header</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>precise_float_parser</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a> object from CSV file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Name of the file (including any necessary path prefixes). </td></tr>
+    <tr><td class="paramname">column_index_string</td><td>Comma-delimited string listing columns to extract into covariates matrix. </td></tr>
+    <tr><td class="paramname">header</td><td>Whether or not the file contains a header of column names / non-data. </td></tr>
+    <tr><td class="paramname">precise_float_parser</td><td>Whether floating point numbers in the CSV should be parsed precisely. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a736f676bd33dca4ff875e421396a588e" name="a736f676bd33dca4ff875e421396a588e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736f676bd33dca4ff875e421396a588e">&#9670;&#160;</a></span>GetElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::ColumnMatrix::GetElement </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>col_num</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the value stored at (<code>row</code>, <code>col</code>) in the object's internal <code>Eigen::MatrixXd</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Row number to query in the matrix </td></tr>
+    <tr><td class="paramname">col</td><td>Column number to query in the matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af0b9f9b4599af47771fb299f52035c69" name="af0b9f9b4599af47771fb299f52035c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0b9f9b4599af47771fb299f52035c69">&#9670;&#160;</a></span>SetElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ColumnMatrix::SetElement </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>col_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update an observation in the object's internal <code>Eigen::MatrixXd</code> to a new value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Row number to be overwritten. </td></tr>
+    <tr><td class="paramname">col</td><td>Column number to be overwritten. </td></tr>
+    <tr><td class="paramname">value</td><td>New value to write in (<code>row</code>, <code>col</code>) in the object's internal <code>Eigen::MatrixXd</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9575ef0cb165dc820877944b8a8da117" name="a9575ef0cb165dc820877944b8a8da117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9575ef0cb165dc820877944b8a8da117">&#9670;&#160;</a></span>LoadData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ColumnMatrix::LoadData </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_row_major</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the data in a <code><a class="el" href="classStochTree_1_1ColumnMatrix.html" title="Internal wrapper around Eigen::MatrixXd interface for multidimensional floating point data.">ColumnMatrix</a></code> object from an in-memory data buffer. This will erase the existing matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a matrix. </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the matrix. </td></tr>
+    <tr><td class="paramname">num_col</td><td>Number of columns / covariates in the matrix. </td></tr>
+    <tr><td class="paramname">is_row_major</td><td>Whether or not the data in <code>data_ptr</code> are organized in a row-major or column-major fashion. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="data_8h_source.html">data.h</a></li>
-<li>src/<b>data.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

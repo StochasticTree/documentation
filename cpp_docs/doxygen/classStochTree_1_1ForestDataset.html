@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,11 +83,11 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1ForestDataset-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">StochTree::ForestDataset Class Reference</div></div>
+  <div class="headertitle"><div class="title">StochTree::ForestDataset Class Reference<div class="ingroups"><a class="el" href="group__data__group.html">Dataset API</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>API for loading and accessing data used to sample tree ensembles.  
+<p>API for loading and accessing data used to sample tree ensembles The covariates / bases / weights used in sampling forests are stored internally as a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></code> by the sampling functions (see <a class="el" href="group__sampling__group.html">Forest Sampler API</a>).  
  <a href="classStochTree_1_1ForestDataset.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="data_8h_source.html">data.h</a>&gt;</code></p>
@@ -111,15 +118,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a39f5e0f48128c7674a582e2076a64d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33d4794ee73b7269668e17bcc4c89b2f" id="r_a33d4794ee73b7269668e17bcc4c89b2f"><td class="memItemLeft" align="right" valign="top"><a id="a33d4794ee73b7269668e17bcc4c89b2f" name="a33d4794ee73b7269668e17bcc4c89b2f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasCovariates</b> ()</td></tr>
-<tr class="memdesc:a33d4794ee73b7269668e17bcc4c89b2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></code> has (yet) loaded covariate data. <br /></td></tr>
+<tr class="memdesc:a33d4794ee73b7269668e17bcc4c89b2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></code> has (yet) loaded covariate data. <br /></td></tr>
 <tr class="separator:a33d4794ee73b7269668e17bcc4c89b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf7d395614802935500bebd234766ea1" id="r_aaf7d395614802935500bebd234766ea1"><td class="memItemLeft" align="right" valign="top"><a id="aaf7d395614802935500bebd234766ea1" name="aaf7d395614802935500bebd234766ea1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasBasis</b> ()</td></tr>
-<tr class="memdesc:aaf7d395614802935500bebd234766ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></code> has (yet) loaded basis data. <br /></td></tr>
+<tr class="memdesc:aaf7d395614802935500bebd234766ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></code> has (yet) loaded basis data. <br /></td></tr>
 <tr class="separator:aaf7d395614802935500bebd234766ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acccd0ac22829d432e91bc83285ed61dc" id="r_acccd0ac22829d432e91bc83285ed61dc"><td class="memItemLeft" align="right" valign="top"><a id="acccd0ac22829d432e91bc83285ed61dc" name="acccd0ac22829d432e91bc83285ed61dc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasVarWeights</b> ()</td></tr>
-<tr class="memdesc:acccd0ac22829d432e91bc83285ed61dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles.">ForestDataset</a></code> has (yet) loaded variance weights. <br /></td></tr>
+<tr class="memdesc:acccd0ac22829d432e91bc83285ed61dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></code> has (yet) loaded variance weights. <br /></td></tr>
 <tr class="separator:acccd0ac22829d432e91bc83285ed61dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a248bfd0c05cae580ba561de935ed9f5c" id="r_a248bfd0c05cae580ba561de935ed9f5c"><td class="memItemLeft" align="right" valign="top"><a id="a248bfd0c05cae580ba561de935ed9f5c" name="a248bfd0c05cae580ba561de935ed9f5c"></a>
 data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumObservations</b> ()</td></tr>
@@ -157,13 +164,78 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 <tr class="memitem:aeddde23c17d898bab66781846642b6d2" id="r_aeddde23c17d898bab66781846642b6d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestDataset.html#aeddde23c17d898bab66781846642b6d2">UpdateVarWeights</a> (double *data_ptr, data_size_t num_row, bool exponentiate=true)</td></tr>
 <tr class="memdesc:aeddde23c17d898bab66781846642b6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the data in the internal variance weight vector to new values stored in a raw double array.  <br /></td></tr>
 <tr class="separator:aeddde23c17d898bab66781846642b6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d7c45f92fd7790127e8e740aaefd511" id="r_a2d7c45f92fd7790127e8e740aaefd511"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestDataset.html#a2d7c45f92fd7790127e8e740aaefd511">SetCovariateValue</a> (data_size_t row_id, int col, double new_value)</td></tr>
+<tr class="memdesc:a2d7c45f92fd7790127e8e740aaefd511"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an observation in the internal covariate matrix to a new value.  <br /></td></tr>
+<tr class="separator:a2d7c45f92fd7790127e8e740aaefd511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28fab5b917fcf3976913e78a428781e" id="r_af28fab5b917fcf3976913e78a428781e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestDataset.html#af28fab5b917fcf3976913e78a428781e">SetBasisValue</a> (data_size_t row_id, int col, double new_value)</td></tr>
+<tr class="memdesc:af28fab5b917fcf3976913e78a428781e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an observation in the internal basis matrix to a new value.  <br /></td></tr>
+<tr class="separator:af28fab5b917fcf3976913e78a428781e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3622d50a706a2e6a02c563640fa1e7bc" id="r_a3622d50a706a2e6a02c563640fa1e7bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestDataset.html#a3622d50a706a2e6a02c563640fa1e7bc">SetVarWeightValue</a> (data_size_t row_id, double new_value, bool exponentiate=true)</td></tr>
 <tr class="memdesc:a3622d50a706a2e6a02c563640fa1e7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update an observation in the internal variance weight vector to a new value.  <br /></td></tr>
 <tr class="separator:a3622d50a706a2e6a02c563640fa1e7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>API for loading and accessing data used to sample tree ensembles. </p>
+<div class="textblock"><p>API for loading and accessing data used to sample tree ensembles The covariates / bases / weights used in sampling forests are stored internally as a <code><a class="el" href="classStochTree_1_1ForestDataset.html" title="API for loading and accessing data used to sample tree ensembles The covariates / bases / weights use...">ForestDataset</a></code> by the sampling functions (see <a class="el" href="group__sampling__group.html">Forest Sampler API</a>). </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3e5ce66ca3564d06609c78a7b88bb99e" name="a3e5ce66ca3564d06609c78a7b88bb99e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5ce66ca3564d06609c78a7b88bb99e">&#9670;&#160;</a></span>AddCovariates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestDataset::AddCovariates </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_row_major</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy / load covariates from raw memory buffer (often pointer to data in a R matrix or numpy array) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a covariate matrix </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the covariate matrix </td></tr>
+    <tr><td class="paramname">num_col</td><td>Number of columns / covariates in the covariate matrix </td></tr>
+    <tr><td class="paramname">is_row_major</td><td>Whether or not the data in <code>data_ptr</code> are organized in a row-major or column-major fashion </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="adc27d3e570706ecade1be92db9611053" name="adc27d3e570706ecade1be92db9611053"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc27d3e570706ecade1be92db9611053">&#9670;&#160;</a></span>AddBasis()</h2>
 
@@ -223,8 +295,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
-<a id="a678e315bd0580b6d76d50d6428069fac" name="a678e315bd0580b6d76d50d6428069fac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a678e315bd0580b6d76d50d6428069fac">&#9670;&#160;</a></span>AddBasisFromCSV()</h2>
+<a id="a23ada50f67a513ba692e2c23b4933199" name="a23ada50f67a513ba692e2c23b4933199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23ada50f67a513ba692e2c23b4933199">&#9670;&#160;</a></span>AddVarianceWeights()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,64 +305,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void StochTree::ForestDataset::AddBasisFromCSV </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>column_index_string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>header</em> = <code>true</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>precise_float_parser</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy / load basis matrix from CSV file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Name of the file (including any necessary path prefixes) </td></tr>
-    <tr><td class="paramname">column_index_string</td><td>Comma-delimited string listing columns to extract into covariates matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a3e5ce66ca3564d06609c78a7b88bb99e" name="a3e5ce66ca3564d06609c78a7b88bb99e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e5ce66ca3564d06609c78a7b88bb99e">&#9670;&#160;</a></span>AddCovariates()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::ForestDataset::AddCovariates </td>
+          <td class="memname">void StochTree::ForestDataset::AddVarianceWeights </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>data_ptr</em>, </td>
@@ -299,19 +314,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>num_row</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_col</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>is_row_major</em>&#160;</td>
+          <td class="paramname"><em>num_row</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -326,13 +329,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 </table>
 </div><div class="memdoc">
 
-<p>Copy / load covariates from raw memory buffer (often pointer to data in a R matrix or numpy array) </p>
+<p>Copy / load variance weights from raw memory buffer (often pointer to data in a R vector or numpy array) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a covariate matrix </td></tr>
-    <tr><td class="paramname">num_row</td><td>Number of rows in the covariate matrix </td></tr>
-    <tr><td class="paramname">num_col</td><td>Number of columns / covariates in the covariate matrix </td></tr>
-    <tr><td class="paramname">is_row_major</td><td>Whether or not the data in <code>data_ptr</code> are organized in a row-major or column-major fashion </td></tr>
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing weights </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
   </table>
   </dd>
 </dl>
@@ -396,8 +397,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
-<a id="a23ada50f67a513ba692e2c23b4933199" name="a23ada50f67a513ba692e2c23b4933199"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23ada50f67a513ba692e2c23b4933199">&#9670;&#160;</a></span>AddVarianceWeights()</h2>
+<a id="a678e315bd0580b6d76d50d6428069fac" name="a678e315bd0580b6d76d50d6428069fac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a678e315bd0580b6d76d50d6428069fac">&#9670;&#160;</a></span>AddBasisFromCSV()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -406,16 +407,28 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void StochTree::ForestDataset::AddVarianceWeights </td>
+          <td class="memname">void StochTree::ForestDataset::AddBasisFromCSV </td>
           <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>data_ptr</em>, </td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>num_row</em>&#160;</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>column_index_string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>header</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>precise_float_parser</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -430,11 +443,11 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 </table>
 </div><div class="memdoc">
 
-<p>Copy / load variance weights from raw memory buffer (often pointer to data in a R vector or numpy array) </p>
+<p>Copy / load basis matrix from CSV file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing weights </td></tr>
-    <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
+    <tr><td class="paramname">filename</td><td>Name of the file (including any necessary path prefixes) </td></tr>
+    <tr><td class="paramname">column_index_string</td><td>Comma-delimited string listing columns to extract into covariates matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -498,51 +511,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
-<a id="a0cac77110b0e22ac64b38480941346d5" name="a0cac77110b0e22ac64b38480941346d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cac77110b0e22ac64b38480941346d5">&#9670;&#160;</a></span>BasisValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double StochTree::ForestDataset::BasisValue </td>
-          <td>(</td>
-          <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>row</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>col</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a dataset's basis value stored at (<code>row</code>, <code>col</code>) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">row</td><td>Row number to query in the basis matrix </td></tr>
-    <tr><td class="paramname">col</td><td>Column number to query in the basis matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="aebec3a1371e22cfbaa753c5cf44453f4" name="aebec3a1371e22cfbaa753c5cf44453f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebec3a1371e22cfbaa753c5cf44453f4">&#9670;&#160;</a></span>CovariateValue()</h2>
 
@@ -588,8 +556,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
-<a id="a5ec6a3faf0cb4bc1dcba7d50bc100452" name="a5ec6a3faf0cb4bc1dcba7d50bc100452"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ec6a3faf0cb4bc1dcba7d50bc100452">&#9670;&#160;</a></span>GetBasis()</h2>
+<a id="a0cac77110b0e22ac64b38480941346d5" name="a0cac77110b0e22ac64b38480941346d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cac77110b0e22ac64b38480941346d5">&#9670;&#160;</a></span>BasisValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,9 +566,55 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Eigen::MatrixXd &amp; StochTree::ForestDataset::GetBasis </td>
+          <td class="memname">double StochTree::ForestDataset::BasisValue </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a dataset's basis value stored at (<code>row</code>, <code>col</code>) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Row number to query in the basis matrix </td></tr>
+    <tr><td class="paramname">col</td><td>Column number to query in the basis matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac5721160088d181d5a0b1dbae9b89eda" name="ac5721160088d181d5a0b1dbae9b89eda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5721160088d181d5a0b1dbae9b89eda">&#9670;&#160;</a></span>VarWeightValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::ForestDataset::VarWeightValue </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -611,8 +625,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 </table>
 </div><div class="memdoc">
 
-<p>Return a reference to the raw <code>Eigen::MatrixXd</code> storing the basis data. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::MatrixXd </dd></dl>
+<p>Returns a dataset's variance weight stored at element <code>row</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Index to query in the weight vector </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -644,6 +663,34 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
+<a id="a5ec6a3faf0cb4bc1dcba7d50bc100452" name="a5ec6a3faf0cb4bc1dcba7d50bc100452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec6a3faf0cb4bc1dcba7d50bc100452">&#9670;&#160;</a></span>GetBasis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::MatrixXd &amp; StochTree::ForestDataset::GetBasis </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a reference to the raw <code>Eigen::MatrixXd</code> storing the basis data. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::MatrixXd </dd></dl>
+
+</div>
+</div>
 <a id="a634dcd4bb7f2a86a9f5e4d680405e383" name="a634dcd4bb7f2a86a9f5e4d680405e383"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a634dcd4bb7f2a86a9f5e4d680405e383">&#9670;&#160;</a></span>GetVarWeights()</h2>
 
@@ -669,58 +716,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 <p>Return a reference to the raw <code>Eigen::VectorXd</code> storing the variance weights. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reference to internal Eigen::VectorXd </dd></dl>
-
-</div>
-</div>
-<a id="a3622d50a706a2e6a02c563640fa1e7bc" name="a3622d50a706a2e6a02c563640fa1e7bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3622d50a706a2e6a02c563640fa1e7bc">&#9670;&#160;</a></span>SetVarWeightValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void StochTree::ForestDataset::SetVarWeightValue </td>
-          <td>(</td>
-          <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>row_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>new_value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>exponentiate</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Update an observation in the internal variance weight vector to a new value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">row_id</td><td>Row ID in the variance weight vector to be overwritten </td></tr>
-    <tr><td class="paramname">new_value</td><td>New variance weight value </td></tr>
-    <tr><td class="paramname">exponentiate</td><td>Whether or not input should be exponentiated before being saved to var weight vector </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -835,8 +830,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 
 </div>
 </div>
-<a id="ac5721160088d181d5a0b1dbae9b89eda" name="ac5721160088d181d5a0b1dbae9b89eda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5721160088d181d5a0b1dbae9b89eda">&#9670;&#160;</a></span>VarWeightValue()</h2>
+<a id="a2d7c45f92fd7790127e8e740aaefd511" name="a2d7c45f92fd7790127e8e740aaefd511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d7c45f92fd7790127e8e740aaefd511">&#9670;&#160;</a></span>SetCovariateValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -845,11 +840,27 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double StochTree::ForestDataset::VarWeightValue </td>
+          <td class="memname">void StochTree::ForestDataset::SetCovariateValue </td>
           <td>(</td>
           <td class="paramtype">data_size_t&#160;</td>
-          <td class="paramname"><em>row</em></td><td>)</td>
+          <td class="paramname"><em>row_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>new_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -859,10 +870,116 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NumBasis</b> ()</td></
 </table>
 </div><div class="memdoc">
 
-<p>Returns a dataset's variance weight stored at element <code>row</code> </p>
+<p>Update an observation in the internal covariate matrix to a new value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">row</td><td>Index to query in the weight vector </td></tr>
+    <tr><td class="paramname">row</td><td>Row number to be overwritten in the covariate matrix </td></tr>
+    <tr><td class="paramname">col</td><td>Column number to be overwritten in the covariate matrix </td></tr>
+    <tr><td class="paramname">new_value</td><td>New covariate value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af28fab5b917fcf3976913e78a428781e" name="af28fab5b917fcf3976913e78a428781e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af28fab5b917fcf3976913e78a428781e">&#9670;&#160;</a></span>SetBasisValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestDataset::SetBasisValue </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>new_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update an observation in the internal basis matrix to a new value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>Row number to be overwritten in the basis matrix </td></tr>
+    <tr><td class="paramname">col</td><td>Column number to be overwritten in the basis matrix </td></tr>
+    <tr><td class="paramname">new_value</td><td>New basis value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3622d50a706a2e6a02c563640fa1e7bc" name="a3622d50a706a2e6a02c563640fa1e7bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3622d50a706a2e6a02c563640fa1e7bc">&#9670;&#160;</a></span>SetVarWeightValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestDataset::SetVarWeightValue </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>new_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exponentiate</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update an observation in the internal variance weight vector to a new value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row_id</td><td>Row ID in the variance weight vector to be overwritten </td></tr>
+    <tr><td class="paramname">new_value</td><td>New variance weight value </td></tr>
+    <tr><td class="paramname">exponentiate</td><td>Whether or not input should be exponentiated before being saved to var weight vector </td></tr>
   </table>
   </dd>
 </dl>

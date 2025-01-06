@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,63 +81,12 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1RandomEffectsContainer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::RandomEffectsContainer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a8317533cd6e0b56ae2af956a1ef9101d" id="r_a8317533cd6e0b56ae2af956a1ef9101d"><td class="memItemLeft" align="right" valign="top"><a id="a8317533cd6e0b56ae2af956a1ef9101d" name="a8317533cd6e0b56ae2af956a1ef9101d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RandomEffectsContainer</b> (int num_components, int num_groups)</td></tr>
-<tr class="separator:a8317533cd6e0b56ae2af956a1ef9101d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f370cd5181c9716916caabf8bab783d" id="r_a5f370cd5181c9716916caabf8bab783d"><td class="memItemLeft" align="right" valign="top"><a id="a5f370cd5181c9716916caabf8bab783d" name="a5f370cd5181c9716916caabf8bab783d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSample</b> (<a class="el" href="classStochTree_1_1MultivariateRegressionRandomEffectsModel.html">MultivariateRegressionRandomEffectsModel</a> &amp;model)</td></tr>
-<tr class="separator:a5f370cd5181c9716916caabf8bab783d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa06d099f29ba41dca6c3192327595e99" id="r_aa06d099f29ba41dca6c3192327595e99"><td class="memItemLeft" align="right" valign="top"><a id="aa06d099f29ba41dca6c3192327595e99" name="aa06d099f29ba41dca6c3192327595e99"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteSample</b> (int sample_num)</td></tr>
-<tr class="separator:aa06d099f29ba41dca6c3192327595e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d0de2224675775fe3f751b95e845a80" id="r_a2d0de2224675775fe3f751b95e845a80"><td class="memItemLeft" align="right" valign="top"><a id="a2d0de2224675775fe3f751b95e845a80" name="a2d0de2224675775fe3f751b95e845a80"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Predict</b> (<a class="el" href="classStochTree_1_1RandomEffectsDataset.html">RandomEffectsDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1LabelMapper.html">LabelMapper</a> &amp;label_mapper, std::vector&lt; double &gt; &amp;output)</td></tr>
-<tr class="separator:a2d0de2224675775fe3f751b95e845a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab5feceb8cc2bc84af38aada4dc228be" id="r_aab5feceb8cc2bc84af38aada4dc228be"><td class="memItemLeft" align="right" valign="top"><a id="aab5feceb8cc2bc84af38aada4dc228be" name="aab5feceb8cc2bc84af38aada4dc228be"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumSamples</b> ()</td></tr>
-<tr class="separator:aab5feceb8cc2bc84af38aada4dc228be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d7c9c1df818886fdbb5055a41d63c66" id="r_a5d7c9c1df818886fdbb5055a41d63c66"><td class="memItemLeft" align="right" valign="top"><a id="a5d7c9c1df818886fdbb5055a41d63c66" name="a5d7c9c1df818886fdbb5055a41d63c66"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumComponents</b> ()</td></tr>
-<tr class="separator:a5d7c9c1df818886fdbb5055a41d63c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a211d925e7dc88ececfa9e849aaa72964" id="r_a211d925e7dc88ececfa9e849aaa72964"><td class="memItemLeft" align="right" valign="top"><a id="a211d925e7dc88ececfa9e849aaa72964" name="a211d925e7dc88ececfa9e849aaa72964"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumGroups</b> ()</td></tr>
-<tr class="separator:a211d925e7dc88ececfa9e849aaa72964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace626ae679e9655fdbc7f19dda4021a6" id="r_ace626ae679e9655fdbc7f19dda4021a6"><td class="memItemLeft" align="right" valign="top"><a id="ace626ae679e9655fdbc7f19dda4021a6" name="ace626ae679e9655fdbc7f19dda4021a6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Reset</b> ()</td></tr>
-<tr class="separator:ace626ae679e9655fdbc7f19dda4021a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afecfeb93f408c9ca7d28eeaebd96ecbd" id="r_afecfeb93f408c9ca7d28eeaebd96ecbd"><td class="memItemLeft" align="right" valign="top"><a id="afecfeb93f408c9ca7d28eeaebd96ecbd" name="afecfeb93f408c9ca7d28eeaebd96ecbd"></a>
-std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetBeta</b> ()</td></tr>
-<tr class="separator:afecfeb93f408c9ca7d28eeaebd96ecbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26d3697d4bd97cfbe488a4faa95f2016" id="r_a26d3697d4bd97cfbe488a4faa95f2016"><td class="memItemLeft" align="right" valign="top"><a id="a26d3697d4bd97cfbe488a4faa95f2016" name="a26d3697d4bd97cfbe488a4faa95f2016"></a>
-std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAlpha</b> ()</td></tr>
-<tr class="separator:a26d3697d4bd97cfbe488a4faa95f2016"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91239b2a7a1689339ba3244b6eb9a372" id="r_a91239b2a7a1689339ba3244b6eb9a372"><td class="memItemLeft" align="right" valign="top"><a id="a91239b2a7a1689339ba3244b6eb9a372" name="a91239b2a7a1689339ba3244b6eb9a372"></a>
-std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetXi</b> ()</td></tr>
-<tr class="separator:a91239b2a7a1689339ba3244b6eb9a372"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a906b84c64f7bac3dc51c1b080fdc200c" id="r_a906b84c64f7bac3dc51c1b080fdc200c"><td class="memItemLeft" align="right" valign="top"><a id="a906b84c64f7bac3dc51c1b080fdc200c" name="a906b84c64f7bac3dc51c1b080fdc200c"></a>
-std::vector&lt; double &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetSigma</b> ()</td></tr>
-<tr class="separator:a906b84c64f7bac3dc51c1b080fdc200c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa66686d5d07d148420a401613081f06" id="r_aaa66686d5d07d148420a401613081f06"><td class="memItemLeft" align="right" valign="top"><a id="aaa66686d5d07d148420a401613081f06" name="aaa66686d5d07d148420a401613081f06"></a>
-nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><b>to_json</b> ()</td></tr>
-<tr class="separator:aaa66686d5d07d148420a401613081f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae44962c171cae004f455459ac211b973" id="r_ae44962c171cae004f455459ac211b973"><td class="memItemLeft" align="right" valign="top"><a id="ae44962c171cae004f455459ac211b973" name="ae44962c171cae004f455459ac211b973"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const nlohmann::json &amp;rfx_container_json)</td></tr>
-<tr class="separator:ae44962c171cae004f455459ac211b973"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99070ed74fe9fedb983ef92aecc31212" id="r_a99070ed74fe9fedb983ef92aecc31212"><td class="memItemLeft" align="right" valign="top"><a id="a99070ed74fe9fedb983ef92aecc31212" name="a99070ed74fe9fedb983ef92aecc31212"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>append_from_json</b> (const nlohmann::json &amp;rfx_container_json)</td></tr>
-<tr class="separator:a99070ed74fe9fedb983ef92aecc31212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="random__effects_8h_source.html">random_effects.h</a></li>
-<li>src/<b>random_effects.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

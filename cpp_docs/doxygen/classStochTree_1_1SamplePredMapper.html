@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,7 +81,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1SamplePredMapper-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::SamplePredMapper Class Reference</div></div>
 </div><!--header-->
@@ -84,28 +90,6 @@ $(function() {
  <a href="classStochTree_1_1SamplePredMapper.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="partition__tracker_8h_source.html">partition_tracker.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a06576d55779b30b5ba39fef715fffbf0" id="r_a06576d55779b30b5ba39fef715fffbf0"><td class="memItemLeft" align="right" valign="top"><a id="a06576d55779b30b5ba39fef715fffbf0" name="a06576d55779b30b5ba39fef715fffbf0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SamplePredMapper</b> (int num_trees, data_size_t num_observations)</td></tr>
-<tr class="separator:a06576d55779b30b5ba39fef715fffbf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add728ec4e48ef5aab6bc28ea1f5c51bb" id="r_add728ec4e48ef5aab6bc28ea1f5c51bb"><td class="memItemLeft" align="right" valign="top"><a id="add728ec4e48ef5aab6bc28ea1f5c51bb" name="add728ec4e48ef5aab6bc28ea1f5c51bb"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetPred</b> (data_size_t sample_id, int tree_id)</td></tr>
-<tr class="separator:add728ec4e48ef5aab6bc28ea1f5c51bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae86971cde5073bcb4dd874c8ac551d1d" id="r_ae86971cde5073bcb4dd874c8ac551d1d"><td class="memItemLeft" align="right" valign="top"><a id="ae86971cde5073bcb4dd874c8ac551d1d" name="ae86971cde5073bcb4dd874c8ac551d1d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPred</b> (data_size_t sample_id, int tree_id, double value)</td></tr>
-<tr class="separator:ae86971cde5073bcb4dd874c8ac551d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83695682584657b5006d72e81f050ef2" id="r_a83695682584657b5006d72e81f050ef2"><td class="memItemLeft" align="right" valign="top"><a id="a83695682584657b5006d72e81f050ef2" name="a83695682584657b5006d72e81f050ef2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> ()</td></tr>
-<tr class="separator:a83695682584657b5006d72e81f050ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1e9fc2c02c43e929a27d66099f5e59b" id="r_af1e9fc2c02c43e929a27d66099f5e59b"><td class="memItemLeft" align="right" valign="top"><a id="af1e9fc2c02c43e929a27d66099f5e59b" name="af1e9fc2c02c43e929a27d66099f5e59b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumObservations</b> ()</td></tr>
-<tr class="separator:af1e9fc2c02c43e929a27d66099f5e59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7b4901900de5f20227cddfc00d83ffd" id="r_ac7b4901900de5f20227cddfc00d83ffd"><td class="memItemLeft" align="right" valign="top"><a id="ac7b4901900de5f20227cddfc00d83ffd" name="ac7b4901900de5f20227cddfc00d83ffd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AssignAllSamplesToConstantPrediction</b> (int tree_id, double value)</td></tr>
-<tr class="separator:ac7b4901900de5f20227cddfc00d83ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class storing sample-prediction map for each tree in an ensemble. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>

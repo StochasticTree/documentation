@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,12 +94,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b0a1e34c2f1474d825f5ac72b516276" id="r_a9b0a1e34c2f1474d825f5ac72b516276"><td class="memItemLeft" align="right" valign="top"><a id="a9b0a1e34c2f1474d825f5ac72b516276" name="a9b0a1e34c2f1474d825f5ac72b516276"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CutpointGridContainer</b> (Eigen::MatrixXd &amp;covariates, Eigen::VectorXd &amp;residuals, int cutpoint_grid_size)</td></tr>
-<tr class="separator:a9b0a1e34c2f1474d825f5ac72b516276"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fc71b43e05ccaf05c7d43db460a99f1" id="r_a3fc71b43e05ccaf05c7d43db460a99f1"><td class="memItemLeft" align="right" valign="top"><a id="a3fc71b43e05ccaf05c7d43db460a99f1" name="a3fc71b43e05ccaf05c7d43db460a99f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Reset</b> (Eigen::MatrixXd &amp;covariates, Eigen::VectorXd &amp;residuals, int cutpoint_grid_size)</td></tr>
-<tr class="separator:a3fc71b43e05ccaf05c7d43db460a99f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaff9da9212b33b5bac7e941da6bf2f64" id="r_aaff9da9212b33b5bac7e941da6bf2f64"><td class="memItemLeft" align="right" valign="top"><a id="aaff9da9212b33b5bac7e941da6bf2f64" name="aaff9da9212b33b5bac7e941da6bf2f64"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateStrides</b> (Eigen::MatrixXd &amp;covariates, Eigen::VectorXd &amp;residuals, <a class="el" href="classStochTree_1_1SortedNodeSampleTracker.html">SortedNodeSampleTracker</a> *feature_node_sort_tracker, int32_t node_id, data_size_t node_begin, data_size_t node_end, int32_t feature_index, std::vector&lt; FeatureType &gt; &amp;feature_types)</td></tr>
 <tr class="memdesc:aaff9da9212b33b5bac7e941da6bf2f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate strides. <br /></td></tr>
@@ -125,9 +126,6 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>CutpointValue</b> (
 std::vector&lt; std::uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CutpointVector</b> (int i, int feature_index)</td></tr>
 <tr class="memdesc:a7a08c125505f032375364d56575f313f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of cutpoint values up to and including bin i Helper function for converting categorical split "value" (as outlined in Fisher 1958) to a set of categories. <br /></td></tr>
 <tr class="separator:a7a08c125505f032375364d56575f313f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaec8291eb25773bafa52375587ac8539" id="r_aaec8291eb25773bafa52375587ac8539"><td class="memItemLeft" align="right" valign="top"><a id="aaec8291eb25773bafa52375587ac8539" name="aaec8291eb25773bafa52375587ac8539"></a>
-<a class="el" href="classStochTree_1_1FeatureCutpointGrid.html">FeatureCutpointGrid</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetFeatureCutpointGrid</b> (int feature_num)</td></tr>
-<tr class="separator:aaec8291eb25773bafa52375587ac8539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Container class for <a class="el" href="classStochTree_1_1FeatureCutpointGrid.html" title="Computing and tracking cutpoints available for a given feature at a given node Store cutpoint bins in...">FeatureCutpointGrid</a> objects stored for every feature in a dataset. </p>

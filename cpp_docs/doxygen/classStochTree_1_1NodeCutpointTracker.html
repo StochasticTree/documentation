@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -88,9 +95,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab54bd46313ed0928f878fb6e8ed223c2" id="r_ab54bd46313ed0928f878fb6e8ed223c2"><td class="memItemLeft" align="right" valign="top"><a id="ab54bd46313ed0928f878fb6e8ed223c2" name="ab54bd46313ed0928f878fb6e8ed223c2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NodeCutpointTracker</b> (int cutpoint_grid_size)</td></tr>
-<tr class="separator:ab54bd46313ed0928f878fb6e8ed223c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4c2240976a0ecb6cd244de942033d5b" id="r_ab4c2240976a0ecb6cd244de942033d5b"><td class="memItemLeft" align="right" valign="top"><a id="ab4c2240976a0ecb6cd244de942033d5b" name="ab4c2240976a0ecb6cd244de942033d5b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CalculateStrides</b> (Eigen::MatrixXd &amp;covariates, Eigen::VectorXd &amp;residuals, <a class="el" href="classStochTree_1_1SortedNodeSampleTracker.html">SortedNodeSampleTracker</a> *feature_node_sort_tracker, int32_t node_id, data_size_t node_begin, data_size_t node_end, int32_t feature_index)</td></tr>
 <tr class="memdesc:ab4c2240976a0ecb6cd244de942033d5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate strides. <br /></td></tr>
@@ -122,9 +126,6 @@ Public Attributes</h2></td></tr>
 std::vector&lt; data_size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>node_stride_begin_</b></td></tr>
 <tr class="memdesc:a77f1f5f5081294df12fc10cf32df0a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vectors of node stride starting points and stride lengths. <br /></td></tr>
 <tr class="separator:a77f1f5f5081294df12fc10cf32df0a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a649928a6dd742e557e8a868e8a4d75ba" id="r_a649928a6dd742e557e8a868e8a4d75ba"><td class="memItemLeft" align="right" valign="top"><a id="a649928a6dd742e557e8a868e8a4d75ba" name="a649928a6dd742e557e8a868e8a4d75ba"></a>
-std::vector&lt; data_size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>node_stride_length_</b></td></tr>
-<tr class="separator:a649928a6dd742e557e8a868e8a4d75ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Computing and tracking cutpoints available for a given feature at a given node. </p>

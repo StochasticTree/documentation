@@ -5,13 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>StochTree: Main Page</title>
+<title>StochTree: stochtree C++ Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -68,10 +75,30 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">StochTree Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">stochtree C++ Documentation </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><h1><a class="anchor" id="getting-started"></a>
+Getting Started</h1>
+<p><code>stochtree</code> can be built and run as a standalone C++ program directly from source using <code>cmake</code>:</p>
+<h2><a class="anchor" id="cloning-repo"></a>
+Cloning the Repository</h2>
+<p>To clone the repository, you must have git installed, which you can do following <a href="https://learn.microsoft.com/en-us/devops/develop/git/install-and-set-up-git">these instructions</a>.</p>
+<p>Once git is available at the command line, navigate to the folder that will store this project (in bash / zsh, this is done by running <code>cd</code> followed by the path to the directory). Then, clone the <code>stochtree</code> repo as a subfolder by running </p><div class="fragment"><div class="line">git clone --recursive https://github.com/StochasticTree/stochtree.git</div>
+</div><!-- fragment --><p><b>NOTE</b>: this project incorporates several dependencies as <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a>, which is why the <code>--recursive</code> flag is necessary (some systems may perform a recursive clone without this flag, but <code>--recursive</code> ensures this behavior on all platforms). If you have already cloned the repo without the <code>--recursive</code> flag, you can retrieve the submodules recursively by running <code>git submodule update --init --recursive</code> in the main repo directory.</p>
+<h1><a class="anchor" id="key-components"></a>
+Key Components</h1>
+<p>The stochtree C++ core consists of thousands of lines of C++ code, but it can organized and understood through several components (see <a href="topics.html">topics</a> for more detail):</p>
+<ul>
+<li><b>Trees</b>: the most important "primitive" of decision tree algorithms is the <a class="el" href="group__tree__group.html">decision tree itself</a>, which in stochtree is defined by a <a class="el" href="classStochTree_1_1Tree.html">Tree</a> class as well as a series of static helper functions for prediction.</li>
+<li><b>Forest</b>: individual trees are combined into a <a class="el" href="group__forest__group.html">forest</a>, or ensemble, which in stochtree is defined by the <a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> class and a container of forests is defined by the <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> class.</li>
+<li><b>Dataset</b>: data can be loaded from a variety of sources into a <code>stochtree</code> <a class="el" href="group__data__group.html">data layer</a>.</li>
+<li><b>Sampler</b>: helper functions that sample forests from training data comprise the <a class="el" href="group__sampling__group.html">sampling layer</a> of <code>stochtree</code>.</li>
+</ul>
+<h1><a class="anchor" id="extending-stochtree"></a>
+Extending &lt;tt&gt;stochtree&lt;/tt&gt;</h1>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

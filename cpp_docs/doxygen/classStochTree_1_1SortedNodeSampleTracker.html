@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -87,9 +94,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2dd95b612d7f9f1ccd7daea2a71732ec" id="r_a2dd95b612d7f9f1ccd7daea2a71732ec"><td class="memItemLeft" align="right" valign="top"><a id="a2dd95b612d7f9f1ccd7daea2a71732ec" name="a2dd95b612d7f9f1ccd7daea2a71732ec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SortedNodeSampleTracker</b> (<a class="el" href="classStochTree_1_1FeaturePresortRootContainer.html">FeaturePresortRootContainer</a> *feature_presort_root_container, Eigen::MatrixXd &amp;covariates, std::vector&lt; FeatureType &gt; &amp;feature_types)</td></tr>
-<tr class="separator:a2dd95b612d7f9f1ccd7daea2a71732ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa95d335c1e777bc888009b8bb71bb583" id="r_aa95d335c1e777bc888009b8bb71bb583"><td class="memItemLeft" align="right" valign="top"><a id="aa95d335c1e777bc888009b8bb71bb583" name="aa95d335c1e777bc888009b8bb71bb583"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>PartitionNode</b> (Eigen::MatrixXd &amp;covariates, int node_id, int feature_split, <a class="el" href="classStochTree_1_1TreeSplit.html">TreeSplit</a> &amp;split)</td></tr>
 <tr class="memdesc:aa95d335c1e777bc888009b8bb71bb583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partition a node based on a new split rule. <br /></td></tr>
@@ -114,12 +118,6 @@ data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NodeEnd</b> (i
 data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NodeSize</b> (int node_id, int feature_index)</td></tr>
 <tr class="memdesc:a103cac2fc862d47ece9e9400d242cc70"><td class="mdescLeft">&#160;</td><td class="mdescRight">One past the last index of data points contained in node_id. <br /></td></tr>
 <tr class="separator:a103cac2fc862d47ece9e9400d242cc70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a959b6da5906c7e7249dd6ca0dd9cccbd" id="r_a959b6da5906c7e7249dd6ca0dd9cccbd"><td class="memItemLeft" align="right" valign="top"><a id="a959b6da5906c7e7249dd6ca0dd9cccbd" name="a959b6da5906c7e7249dd6ca0dd9cccbd"></a>
-std::vector&lt; data_size_t &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>NodeBeginIterator</b> (int node_id, int feature_index)</td></tr>
-<tr class="separator:a959b6da5906c7e7249dd6ca0dd9cccbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d3457e56c0f682f9c21ceea4cb7bdaf" id="r_a8d3457e56c0f682f9c21ceea4cb7bdaf"><td class="memItemLeft" align="right" valign="top"><a id="a8d3457e56c0f682f9c21ceea4cb7bdaf" name="a8d3457e56c0f682f9c21ceea4cb7bdaf"></a>
-std::vector&lt; data_size_t &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>NodeEndIterator</b> (int node_id, int feature_index)</td></tr>
-<tr class="separator:a8d3457e56c0f682f9c21ceea4cb7bdaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f2606c036f7d012c070cd88dbddcc59" id="r_a9f2606c036f7d012c070cd88dbddcc59"><td class="memItemLeft" align="right" valign="top"><a id="a9f2606c036f7d012c070cd88dbddcc59" name="a9f2606c036f7d012c070cd88dbddcc59"></a>
 std::vector&lt; data_size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>NodeIndices</b> (int node_id, int feature_index)</td></tr>
 <tr class="memdesc:a9f2606c036f7d012c070cd88dbddcc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data indices for a given node. <br /></td></tr>

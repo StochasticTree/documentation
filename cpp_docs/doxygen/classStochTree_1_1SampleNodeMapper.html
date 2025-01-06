@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -74,7 +81,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1SampleNodeMapper-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::SampleNodeMapper Class Reference</div></div>
 </div><!--header-->
@@ -84,34 +90,6 @@ $(function() {
  <a href="classStochTree_1_1SampleNodeMapper.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="partition__tracker_8h_source.html">partition_tracker.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:abcaaf68459344e916e4ad9ef56a2ac20" id="r_abcaaf68459344e916e4ad9ef56a2ac20"><td class="memItemLeft" align="right" valign="top"><a id="abcaaf68459344e916e4ad9ef56a2ac20" name="abcaaf68459344e916e4ad9ef56a2ac20"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SampleNodeMapper</b> (int num_trees, data_size_t num_observations)</td></tr>
-<tr class="separator:abcaaf68459344e916e4ad9ef56a2ac20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad55a0cf6b39d21038f228defb9b25530" id="r_ad55a0cf6b39d21038f228defb9b25530"><td class="memItemLeft" align="right" valign="top"><a id="ad55a0cf6b39d21038f228defb9b25530" name="ad55a0cf6b39d21038f228defb9b25530"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SampleNodeMapper</b> (<a class="el" href="classStochTree_1_1SampleNodeMapper.html">SampleNodeMapper</a> &amp;other)</td></tr>
-<tr class="separator:ad55a0cf6b39d21038f228defb9b25530"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ad802ecc3ea3475a2c0c69c9a90f9ed" id="r_a1ad802ecc3ea3475a2c0c69c9a90f9ed"><td class="memItemLeft" align="right" valign="top"><a id="a1ad802ecc3ea3475a2c0c69c9a90f9ed" name="a1ad802ecc3ea3475a2c0c69c9a90f9ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddSplit</b> (Eigen::MatrixXd &amp;covariates, <a class="el" href="classStochTree_1_1TreeSplit.html">TreeSplit</a> &amp;split, int32_t split_feature, int32_t tree_id, int32_t split_node_id, int32_t left_node_id, int32_t right_node_id)</td></tr>
-<tr class="separator:a1ad802ecc3ea3475a2c0c69c9a90f9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a203ac5f6520b1fddbd1ad0f8d2ca0e6a" id="r_a203ac5f6520b1fddbd1ad0f8d2ca0e6a"><td class="memItemLeft" align="right" valign="top"><a id="a203ac5f6520b1fddbd1ad0f8d2ca0e6a" name="a203ac5f6520b1fddbd1ad0f8d2ca0e6a"></a>
-data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeId</b> (data_size_t sample_id, int tree_id)</td></tr>
-<tr class="separator:a203ac5f6520b1fddbd1ad0f8d2ca0e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f6e71cbcb9af442511b1c32e0f3603e" id="r_a3f6e71cbcb9af442511b1c32e0f3603e"><td class="memItemLeft" align="right" valign="top"><a id="a3f6e71cbcb9af442511b1c32e0f3603e" name="a3f6e71cbcb9af442511b1c32e0f3603e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeId</b> (data_size_t sample_id, int tree_id, int node_id)</td></tr>
-<tr class="separator:a3f6e71cbcb9af442511b1c32e0f3603e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61d81ada78797852f8c371d491896dc1" id="r_a61d81ada78797852f8c371d491896dc1"><td class="memItemLeft" align="right" valign="top"><a id="a61d81ada78797852f8c371d491896dc1" name="a61d81ada78797852f8c371d491896dc1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumTrees</b> ()</td></tr>
-<tr class="separator:a61d81ada78797852f8c371d491896dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6eb4639bc2a7fdc26b7d289a59f85ac" id="r_af6eb4639bc2a7fdc26b7d289a59f85ac"><td class="memItemLeft" align="right" valign="top"><a id="af6eb4639bc2a7fdc26b7d289a59f85ac" name="af6eb4639bc2a7fdc26b7d289a59f85ac"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NumObservations</b> ()</td></tr>
-<tr class="separator:af6eb4639bc2a7fdc26b7d289a59f85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abad464b12b90b6cad2a9e319c83a41b7" id="r_abad464b12b90b6cad2a9e319c83a41b7"><td class="memItemLeft" align="right" valign="top"><a id="abad464b12b90b6cad2a9e319c83a41b7" name="abad464b12b90b6cad2a9e319c83a41b7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AssignAllSamplesToRoot</b> (int tree_id)</td></tr>
-<tr class="separator:abad464b12b90b6cad2a9e319c83a41b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class storing sample-node map for each tree in an ensemble. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
