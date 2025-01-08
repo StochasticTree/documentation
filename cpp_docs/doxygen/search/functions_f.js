@@ -21,11 +21,12 @@ var searchData=
   ['splitfeaturecategorical_18',['SplitFeatureCategorical',['../classStochTree_1_1FeaturePresortPartition.html#aed93dd598e7c38d88e258e74a9236166',1,'StochTree::FeaturePresortPartition']]],
   ['splitfeaturenumeric_19',['SplitFeatureNumeric',['../classStochTree_1_1FeaturePresortPartition.html#aded9491ad22a510f2f822559b53f52f7',1,'StochTree::FeaturePresortPartition']]],
   ['splitindex_20',['SplitIndex',['../classStochTree_1_1Tree.html#a17586ad05219ad6796f24f0e22741960',1,'StochTree::Tree']]],
-  ['splittrue_21',['SplitTrue',['../classStochTree_1_1TreeSplit.html#a28e6719139e2d29fe48a3c498ba16674',1,'StochTree::TreeSplit']]],
-  ['splittruecategorical_22',['SplitTrueCategorical',['../group__tree__group.html#ga73cc13bbda66dea3cc2d5dd2153aeddf',1,'StochTree']]],
-  ['splittruenumeric_23',['SplitTrueNumeric',['../group__tree__group.html#ga2d27a2084998eb174869d0b14b5cf84a',1,'StochTree']]],
-  ['splitvalue_24',['SplitValue',['../classStochTree_1_1TreeSplit.html#ade3b483cb19e192ddf114b4585f1b1b5',1,'StochTree::TreeSplit']]],
-  ['subtractfromdata_25',['SubtractFromData',['../classStochTree_1_1ColumnVector.html#a57b64930a29160c90a56a7bfd75a8fe1',1,'StochTree::ColumnVector']]],
-  ['sumsquaredleafvalues_26',['SumSquaredLeafValues',['../classStochTree_1_1Tree.html#a208e84bcaae414903db46b83b541a99c',1,'StochTree::Tree']]],
-  ['sumsquarednodevalues_27',['SumSquaredNodeValues',['../classStochTree_1_1Tree.html#a6774e670589e6de6259113b3372f40e6',1,'StochTree::Tree']]]
+  ['splitlogmarginallikelihood_21',['SplitLogMarginalLikelihood',['../classStochTree_1_1GaussianConstantLeafModel.html#a17606e57c26fbf44471659dba67d1b0a',1,'StochTree::GaussianConstantLeafModel']]],
+  ['splittrue_22',['SplitTrue',['../classStochTree_1_1TreeSplit.html#a28e6719139e2d29fe48a3c498ba16674',1,'StochTree::TreeSplit']]],
+  ['splittruecategorical_23',['SplitTrueCategorical',['../group__tree__group.html#ga73cc13bbda66dea3cc2d5dd2153aeddf',1,'StochTree']]],
+  ['splittruenumeric_24',['SplitTrueNumeric',['../group__tree__group.html#ga2d27a2084998eb174869d0b14b5cf84a',1,'StochTree']]],
+  ['splitvalue_25',['SplitValue',['../classStochTree_1_1TreeSplit.html#ade3b483cb19e192ddf114b4585f1b1b5',1,'StochTree::TreeSplit']]],
+  ['subtractfromdata_26',['SubtractFromData',['../classStochTree_1_1ColumnVector.html#a57b64930a29160c90a56a7bfd75a8fe1',1,'StochTree::ColumnVector']]],
+  ['sumsquaredleafvalues_27',['SumSquaredLeafValues',['../classStochTree_1_1Tree.html#a208e84bcaae414903db46b83b541a99c',1,'StochTree::Tree']]],
+  ['sumsquarednodevalues_28',['SumSquaredNodeValues',['../classStochTree_1_1Tree.html#a6774e670589e6de6259113b3372f40e6',1,'StochTree::Tree']]]
 ];

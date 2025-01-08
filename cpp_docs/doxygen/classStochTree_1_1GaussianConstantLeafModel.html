@@ -81,6 +81,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1GaussianConstantLeafModel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::GaussianConstantLeafModel Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
@@ -90,9 +91,181 @@ $(function() {
  <a href="classStochTree_1_1GaussianConstantLeafModel.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a17606e57c26fbf44471659dba67d1b0a" id="r_a17606e57c26fbf44471659dba67d1b0a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a17606e57c26fbf44471659dba67d1b0a">SplitLogMarginalLikelihood</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;left_stat, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;right_stat, double global_variance)</td></tr>
+<tr class="memdesc:a17606e57c26fbf44471659dba67d1b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log marginal likelihood for a proposed split, evaluated only for observations that fall into the node being split.  <br /></td></tr>
+<tr class="separator:a17606e57c26fbf44471659dba67d1b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35ff415dc96dfbb1423c116b15bcbec8" id="r_a35ff415dc96dfbb1423c116b15bcbec8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a35ff415dc96dfbb1423c116b15bcbec8">NoSplitLogMarginalLikelihood</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:a35ff415dc96dfbb1423c116b15bcbec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log marginal likelihood of a node, evaluated only for observations that fall into the node being split.  <br /></td></tr>
+<tr class="separator:a35ff415dc96dfbb1423c116b15bcbec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa93543fbf51aecc1c054d27d2fb4df1b" id="r_aa93543fbf51aecc1c054d27d2fb4df1b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#aa93543fbf51aecc1c054d27d2fb4df1b">PosteriorParameterMean</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:aa93543fbf51aecc1c054d27d2fb4df1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leaf node posterior mean.  <br /></td></tr>
+<tr class="separator:aa93543fbf51aecc1c054d27d2fb4df1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1decfd8e8d40157da1d6d5b1b8bef7d2" id="r_a1decfd8e8d40157da1d6d5b1b8bef7d2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a1decfd8e8d40157da1d6d5b1b8bef7d2">PosteriorParameterVariance</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:a1decfd8e8d40157da1d6d5b1b8bef7d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leaf node posterior mean.  <br /></td></tr>
+<tr class="separator:a1decfd8e8d40157da1d6d5b1b8bef7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a17606e57c26fbf44471659dba67d1b0a" name="a17606e57c26fbf44471659dba67d1b0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17606e57c26fbf44471659dba67d1b0a">&#9670;&#160;</a></span>SplitLogMarginalLikelihood()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianConstantLeafModel::SplitLogMarginalLikelihood </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>left_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>right_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Log marginal likelihood for a proposed split, evaluated only for observations that fall into the node being split. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">left_stat</td><td>Sufficient statistics of the left node formed by the proposed split </td></tr>
+    <tr><td class="paramname">right_stat</td><td>Sufficient statistics of the right node formed by the proposed split </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a35ff415dc96dfbb1423c116b15bcbec8" name="a35ff415dc96dfbb1423c116b15bcbec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35ff415dc96dfbb1423c116b15bcbec8">&#9670;&#160;</a></span>NoSplitLogMarginalLikelihood()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianConstantLeafModel::NoSplitLogMarginalLikelihood </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Log marginal likelihood of a node, evaluated only for observations that fall into the node being split. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa93543fbf51aecc1c054d27d2fb4df1b" name="aa93543fbf51aecc1c054d27d2fb4df1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93543fbf51aecc1c054d27d2fb4df1b">&#9670;&#160;</a></span>PosteriorParameterMean()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianConstantLeafModel::PosteriorParameterMean </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Leaf node posterior mean. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1decfd8e8d40157da1d6d5b1b8bef7d2" name="a1decfd8e8d40157da1d6d5b1b8bef7d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1decfd8e8d40157da1d6d5b1b8bef7d2">&#9670;&#160;</a></span>PosteriorParameterVariance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianConstantLeafModel::PosteriorParameterVariance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Leaf node posterior mean. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a></li>
 </ul>
 </div><!-- contents -->

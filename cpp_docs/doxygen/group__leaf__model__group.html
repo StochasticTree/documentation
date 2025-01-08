@@ -126,10 +126,115 @@ Enumerations</h2></td></tr>
 <li>A <code>LeafModel</code> class, defining the integrated likelihood and posterior, conditional on a particular tree structure</li>
 <li>A <code>SuffStat</code> class that tracks and accumulates sufficient statistics necessary for a <code>LeafModel</code></li>
 </ul>
+<p>To provide a thorough overview of this interface (and, importantly, how to extend it), we must introduce some mathematical notation. Any forest-based regression model involves an outcome, which we'll call \(y\), and features (or "covariates"), which we'll call \(X\). Our goal is to predict \(y\) as a function of \(X\), which we'll call \(f(X)\).</p>
+<p><em>NOTE:</em> if we have a more complicated, but still additive, model, such as \(y = X\beta + f(X)\), then we can just model \(y - X\beta = f(X)\), treating the residual \(y - X\beta\) as the outcome data, and we are back to the general setting above.</p>
+<p>Now, since \(f(X)\) is an additive tree ensemble, we can think of it as the sum of \(b\) separate decision tree functions, where \(b\) is the number of trees in an ensemble, so that</p>
+<p class="formulaDsp">
+\[
+   f(X) = f_1(X) + \dots + f_b(X)
+ \]
+</p>
+<p>and each decision tree function \(f_j\) has the property that features \(X\) are used to determine which leaf node an observation falls into, and then the parameters attached to that leaf node are used to compute \(f_j(X)\). The exact mechanics of this process are model-dependent, so now we introduce the "leaf node" models that <code>stochtree</code> supports.</p>
 <h1><a class="anchor" id="gaussian_constant_leaf_model"></a>
 Gaussian Constant Leaf Model</h1>
-<p>This leaf model corresponds to the "classic" BART model of <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">Chipman et al (2010)</a> as well as its "XBART" extension (<a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">He and Hahn (2023)</a>).</p>
-<h1><a class="anchor" id="gaussian_multivariate_regression_leaf_model"></a>
+<p>The most standard and common tree ensemble is a sum of "constant leaf" trees, in which a leaf node's parameter uniquely determines the prediction for all observations that fall into that leaf. For example, if leaf 2 for a tree is reached by the conditions that \(X_1 &lt; 0.4 \&amp; X_2 &gt; 0.6\), then every observation whose first feature is less than 0.4 and whose second feature is greater than 0.6 will receive the same prediction. Mathematically, for an observation \(i\) this looks like</p>
+<p class="formulaDsp">
+\[
+   f_j(X_i) = \sum_{\ell in L} \mathbb{1}(X_i \in \ell) \mu_{\ell}
+ \]
+</p>
+<p>where \(L\) denotes the indices of every leaf node, \(\mu_{\ell}\) is the parameter attached to leaf node \(\ell\), and \(\mathbb{1}(X \in \ell)\) checks whether \(X_i\) falls into leaf node \(\ell\).</p>
+<p>The way that we make such a model "stochastic" is by attaching to the leaf node parameters \(\mu_{\ell}\) a "prior" distribution. This leaf model corresponds to the "classic" BART model of <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">Chipman et al (2010)</a> as well as its "XBART" extension (<a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">He and Hahn (2023)</a>). We assign each leaf node parameter a prior</p>
+<p class="formulaDsp">
+\[
+   \mu \sim \mathcal{N}\left(0, \tau\right)
+ \]
+</p>
+<p>Assuming a homoskedastic Gaussian outcome likelihood, the log marginal likelihood in this model, for node \(\ell\) of tree \(j\) is given by</p>
+<p class="formulaDsp">
+\[
+   f(y \mid -) = -\frac{n_{\ell}}{2}\log(2\pi) - n_{\ell}\log(\sigma) + \frac{1}{2} \log\left(\frac{\sigma^2}{n_{\ell} \tau + \sigma^2}\right) - \frac{s_{yy,\ell}}{2\sigma^2} + \frac{\tau s_{y,\ell}^2}{2\sigma^2(n_{\ell} \tau + \sigma^2)}
+ \]
+</p>
+<p>where</p>
+<p class="formulaDsp">
+\[
+   n_{\ell} = \sum_{i : X_i \in \ell} 1
+ \]
+</p>
+<p class="formulaDsp">
+\[
+   s_{y,\ell} = \sum_{i : X_i \in \ell} r_i
+ \]
+</p>
+<p class="formulaDsp">
+\[
+   s_{yy,\ell} = \sum_{i : X_i \in \ell} r_i^2
+ \]
+</p>
+<p class="formulaDsp">
+\[
+   r_i = y_i - \sum_{k \neq j} \mu_k(X_i)
+ \]
+</p>
+<p>In words, this model depends on the data only through three sufficient statistics, \(n_{\ell}\), \(s_{y,\ell}\), and \(s_{yy,\ell}\), and it only depends on the other trees in the ensemble through the "partial residual" \(r_i\). The posterior distribution for node \(\ell\)'s leaf parameter is similarly defined as:</p>
+<p class="formulaDsp">
+\[
+   \mu_{\ell} \mid - \sim \mathcal{N}\left(\frac{\tau s_{y,\ell}}{n_{\ell} \tau + \sigma^2}, \frac{\tau \sigma^2}{n_{\ell} \tau + \sigma^2}\right)
+ \]
+</p>
+<p>Now, consider the possibility that each observation carries a unique weight \(w_i\). These could be "case weights" in a survey context or individual-level variances ("heteroskedasticity"). These case weights transform the outcome distribution (and associated likelihood) to</p>
+<p class="formulaDsp">
+\[
+   y_i \mid - \sim \mathcal{N}\left(\mu(X_i), \frac{\sigma^2}{w_i}\right) 
+ \]
+</p>
+<p>This gives a modified log marginal likelihood of</p>
+<p class="formulaDsp">
+\[
+   f(y \mid -) = -\frac{n_{\ell}}{2}\log(2\pi) - \sum_{i : X_i \in \ell} \log\left(\frac{\sigma^2}{w_i}\right) + \frac{1}{2} \log\left(\frac{\sigma^2}{s_{w,\ell} \tau + \sigma^2}\right) - \frac{s_{wyy,\ell}}{2\sigma^2} + \frac{\tau s_{wy,\ell}^2}{2\sigma^2(n_{\ell} \tau + \sigma^2)}
+ \]
+</p>
+<p>where</p>
+<p class="formulaDsp">
+\[
+   s_{w,\ell} = \sum_{i : X_i \in \ell} w_i
+ \]
+</p>
+<p class="formulaDsp">
+\[
+   s_{wy,\ell} = \sum_{i : X_i \in \ell} w_i r_i
+ \]
+</p>
+<p class="formulaDsp">
+\[
+   s_{wyy,\ell} = \sum_{i : X_i \in \ell} w_i r_i^2
+ \]
+</p>
+<p>Finally, note that when we consider splitting leaf \(\ell\) into new left and right leaves, we compute the original log marginal likelihood and the new log marginal likelihoods of the leaf and right leaves and compare these three values.</p>
+<p>The terms \(\frac{n_{\ell}}{2}\log(2\pi)\), \(\sum_{i : X_i \in \ell} \log\left(\frac{\sigma^2}{w_i}\right)\), and \(\frac{s_{wyy,\ell}}{2\sigma^2}\) are such that their left and right node values will always sum to the respective value in the original log marginal likelihood, so they can be ignored when evaluating splits or prunes and thus the reduced log marginal likelihood is</p>
+<p class="formulaDsp">
+\[
+   f(y \mid -) \propto \frac{1}{2} \log\left(\frac{\sigma^2}{s_{w,\ell} \tau + \sigma^2}\right) + \frac{\tau s_{wy,\ell}^2}{2\sigma^2(n_{\ell} \tau + \sigma^2)}
+ \]
+</p>
+<p>So the <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> class tracks a generalized version of these three statistics (which allows for each observation to have a weight \(w_i \neq 1\)):</p>
+<ul>
+<li>\(n_{\ell}\): <code>data_size_t n</code></li>
+<li>\(s_{w,\ell}\): <code>double sum_w</code></li>
+<li>\(s_{wy,\ell}\): <code>double sum_yw</code></li>
+</ul>
+<p>And these values are used by the <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">GaussianConstantLeafModel</a> class in the <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a17606e57c26fbf44471659dba67d1b0a">SplitLogMarginalLikelihood</a>, <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a35ff415dc96dfbb1423c116b15bcbec8">NoSplitLogMarginalLikelihood</a>, <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#aa93543fbf51aecc1c054d27d2fb4df1b">PosteriorParameterMean</a>, and <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a1decfd8e8d40157da1d6d5b1b8bef7d2">PosteriorParameterVariance</a> methods. To give one example, below is the implementation of <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a17606e57c26fbf44471659dba67d1b0a">SplitLogMarginalLikelihood</a>:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">double</span> left_log_ml = (</div>
+<div class="line">   -0.5*std::log(1 + tau_*(left_stat.sum_w/global_variance)) + ((tau_*left_stat.sum_yw*left_stat.sum_yw)/(2.0*global_variance*(tau_*left_stat.sum_w + global_variance)))</div>
+<div class="line">);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">double</span> right_log_ml = (</div>
+<div class="line">   -0.5*std::log(1 + tau_*(right_stat.sum_w/global_variance)) + ((tau_*right_stat.sum_yw*right_stat.sum_yw)/(2.0*global_variance*(tau_*right_stat.sum_w + global_variance)))</div>
+<div class="line">);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">return</span> left_log_ml + right_log_ml;</div>
+</div><!-- fragment --><h1><a class="anchor" id="gaussian_multivariate_regression_leaf_model"></a>
 Gaussian Multivariate Regression Leaf Model</h1>
 <p>This is an extension of the single-tree model of <a href="https://link.springer.com/article/10.1023/A:1013916107446">Chipman et al (2002)</a>, with:</p>
 <ul>
