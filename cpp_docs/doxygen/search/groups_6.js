@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['model_20api_0',['Leaf Model API',['../group__leaf__model__group.html',1,'']]]
+  ['tree_20api_0',['Tree API',['../group__tree__group.html',1,'']]]
 ];

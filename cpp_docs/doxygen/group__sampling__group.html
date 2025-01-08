@@ -377,9 +377,9 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Runs one iteration of the MCMC sampler for a tree ensemble model, which consists of two steps for every tree in a forest:</p><ol type="1">
-<li>Sampling "birth-death" tree modifications via the Metropolis-Hastings algorithm</li>
-<li>Sampling leaf node parameters, conditional on a (possibly-updated) tree, via a Gibbs sampler</li>
+<p>Runs one iteration of the "grow-from-root" (GFR) sampler for a tree ensemble model, which consists of two steps for every tree in a forest:</p><ol type="1">
+<li>Grow a tree by recursively sampling cutpoint via the GFR algorithm</li>
+<li>Sampling leaf node parameters, conditional on an updated tree, via a Gibbs sampler</li>
 </ol>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

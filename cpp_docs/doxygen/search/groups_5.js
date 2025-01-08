@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['leaf_20model_20api_0',['Leaf Model API',['../group__leaf__model__group.html',1,'']]]
+  ['sampler_20api_0',['Forest Sampler API',['../group__sampling__group.html',1,'']]]
 ];

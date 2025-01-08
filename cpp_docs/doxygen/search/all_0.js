@@ -11,6 +11,6 @@ var searchData=
   ['addvarianceweights_8',['addvarianceweights',['../classStochTree_1_1ForestDataset.html#a23ada50f67a513ba692e2c23b4933199',1,'StochTree::ForestDataset::AddVarianceWeights()'],['../classStochTree_1_1RandomEffectsDataset.html#a28ab010b86d093d5aa7359373c31eeab',1,'StochTree::RandomEffectsDataset::AddVarianceWeights()']]],
   ['addvarianceweightsfromcsv_9',['AddVarianceWeightsFromCSV',['../classStochTree_1_1ForestDataset.html#a39f5e0f48128c7674a582e2076a64d08',1,'StochTree::ForestDataset']]],
   ['allocnode_10',['AllocNode',['../classStochTree_1_1Tree.html#a2aaad319d1f0b2d59ddfcea3f5f243f1',1,'StochTree::Tree']]],
-  ['api_11',['api',['../group__data__group.html',1,'Dataset API'],['../group__forest__group.html',1,'Forest (i.e. ensemble of trees) API'],['../group__sampling__group.html',1,'Forest Sampler API'],['../group__leaf__model__group.html',1,'Leaf Model API'],['../group__tree__group.html',1,'Tree API']]],
+  ['api_11',['api',['../group__data__group.html',1,'Dataset API'],['../group__forest__group.html',1,'Forest API'],['../group__sampling__group.html',1,'Forest Sampler API'],['../group__leaf__model__group.html',1,'Leaf Model API'],['../group__tree__group.html',1,'Tree API']]],
   ['append_5ffrom_5fjson_12',['append_from_json',['../classStochTree_1_1ForestContainer.html#aafa4ee75bcf2c6d64ed0506d868fbf19',1,'StochTree::ForestContainer']]]
 ];

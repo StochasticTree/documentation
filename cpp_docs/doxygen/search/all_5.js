@@ -7,7 +7,7 @@ var searchData=
   ['featurepresortrootcontainer_4',['FeaturePresortRootContainer',['../classStochTree_1_1FeaturePresortRootContainer.html',1,'StochTree']]],
   ['features_5',['features',['../namespaceStochTree.html#autotoc_md0',1,'Numeric Features'],['../namespaceStochTree.html#autotoc_md1',1,'Ordered Categorical Features'],['../namespaceStochTree.html#autotoc_md2',1,'Unordered Categorical Features']]],
   ['featureunsortedpartition_6',['FeatureUnsortedPartition',['../classStochTree_1_1FeatureUnsortedPartition.html',1,'StochTree']]],
-  ['forest_20i_20e_20ensemble_20of_20trees_20api_7',['Forest (i.e. ensemble of trees) API',['../group__forest__group.html',1,'']]],
+  ['forest_20api_7',['Forest API',['../group__forest__group.html',1,'']]],
   ['forest_20sampler_20api_8',['Forest Sampler API',['../group__sampling__group.html',1,'']]],
   ['forestcontainer_9',['forestcontainer',['../classStochTree_1_1ForestContainer.html#af98585138de585a2173270862568bc37',1,'StochTree::ForestContainer::ForestContainer(int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)'],['../classStochTree_1_1ForestContainer.html#a1333fe7be47aa75bdc775642027b3432',1,'StochTree::ForestContainer::ForestContainer(int num_samples, int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)'],['../classStochTree_1_1ForestContainer.html',1,'StochTree::ForestContainer']]],
   ['forestdataset_10',['forestdataset',['../classStochTree_1_1ForestDataset.html#a647333e0df5760d566cd59aa2529acc9',1,'StochTree::ForestDataset::ForestDataset()'],['../classStochTree_1_1ForestDataset.html',1,'StochTree::ForestDataset']]],

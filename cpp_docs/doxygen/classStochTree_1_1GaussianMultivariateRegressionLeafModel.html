@@ -81,6 +81,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1GaussianMultivariateRegressionLeafModel-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::GaussianMultivariateRegressionLeafModel Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
@@ -90,9 +91,294 @@ $(function() {
  <a href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aafc03a0a630f68e23b8a098b06c8e024" id="r_aafc03a0a630f68e23b8a098b06c8e024"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#aafc03a0a630f68e23b8a098b06c8e024">GaussianMultivariateRegressionLeafModel</a> (Eigen::MatrixXd &amp;Sigma_0)</td></tr>
+<tr class="memdesc:aafc03a0a630f68e23b8a098b06c8e024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianMultivariateRegressionLeafModel</a> object.  <br /></td></tr>
+<tr class="separator:aafc03a0a630f68e23b8a098b06c8e024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600056e9c0086cf57bcb8b0a86f5dd2a" id="r_a600056e9c0086cf57bcb8b0a86f5dd2a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#a600056e9c0086cf57bcb8b0a86f5dd2a">SplitLogMarginalLikelihood</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;left_stat, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;right_stat, double global_variance)</td></tr>
+<tr class="memdesc:a600056e9c0086cf57bcb8b0a86f5dd2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log marginal likelihood for a proposed split, evaluated only for observations that fall into the node being split.  <br /></td></tr>
+<tr class="separator:a600056e9c0086cf57bcb8b0a86f5dd2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9334fc80b42996561e5f4fbd536d200" id="r_ac9334fc80b42996561e5f4fbd536d200"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#ac9334fc80b42996561e5f4fbd536d200">NoSplitLogMarginalLikelihood</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:ac9334fc80b42996561e5f4fbd536d200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log marginal likelihood of a node, evaluated only for observations that fall into the node being split.  <br /></td></tr>
+<tr class="separator:ac9334fc80b42996561e5f4fbd536d200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb3db74203b538a561d0db20424c266" id="r_abfb3db74203b538a561d0db20424c266"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#abfb3db74203b538a561d0db20424c266">PosteriorParameterMean</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:abfb3db74203b538a561d0db20424c266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leaf node posterior mean.  <br /></td></tr>
+<tr class="separator:abfb3db74203b538a561d0db20424c266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3561f383f9dcec98b684b34d72f9ae08" id="r_a3561f383f9dcec98b684b34d72f9ae08"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#a3561f383f9dcec98b684b34d72f9ae08">PosteriorParameterVariance</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;suff_stat, double global_variance)</td></tr>
+<tr class="memdesc:a3561f383f9dcec98b684b34d72f9ae08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leaf node posterior variance.  <br /></td></tr>
+<tr class="separator:a3561f383f9dcec98b684b34d72f9ae08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03ae7a40fd423bdaf10fd49dc1c6906e" id="r_a03ae7a40fd423bdaf10fd49dc1c6906e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html#a03ae7a40fd423bdaf10fd49dc1c6906e">SampleLeafParameters</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1Tree.html">Tree</a> *tree, int tree_num, double global_variance, std::mt19937 &amp;gen)</td></tr>
+<tr class="memdesc:a03ae7a40fd423bdaf10fd49dc1c6906e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw new parameters for every leaf node in <code>tree</code>, using a Gibbs update that conditions on the data, every other tree in the forest, and all model parameters.  <br /></td></tr>
+<tr class="separator:a03ae7a40fd423bdaf10fd49dc1c6906e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aafc03a0a630f68e23b8a098b06c8e024" name="aafc03a0a630f68e23b8a098b06c8e024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafc03a0a630f68e23b8a098b06c8e024">&#9670;&#160;</a></span>GaussianMultivariateRegressionLeafModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::GaussianMultivariateRegressionLeafModel::GaussianMultivariateRegressionLeafModel </td>
+          <td>(</td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Sigma_0</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianMultivariateRegressionLeafModel</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Sigma_0</td><td>Prior covariance, must have the same number of rows and columns as dimensions of the basis vector for the multivariate regression problem </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a600056e9c0086cf57bcb8b0a86f5dd2a" name="a600056e9c0086cf57bcb8b0a86f5dd2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600056e9c0086cf57bcb8b0a86f5dd2a">&#9670;&#160;</a></span>SplitLogMarginalLikelihood()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianMultivariateRegressionLeafModel::SplitLogMarginalLikelihood </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>left_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>right_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Log marginal likelihood for a proposed split, evaluated only for observations that fall into the node being split. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">left_stat</td><td>Sufficient statistics of the left node formed by the proposed split </td></tr>
+    <tr><td class="paramname">right_stat</td><td>Sufficient statistics of the right node formed by the proposed split </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9334fc80b42996561e5f4fbd536d200" name="ac9334fc80b42996561e5f4fbd536d200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9334fc80b42996561e5f4fbd536d200">&#9670;&#160;</a></span>NoSplitLogMarginalLikelihood()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::GaussianMultivariateRegressionLeafModel::NoSplitLogMarginalLikelihood </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Log marginal likelihood of a node, evaluated only for observations that fall into the node being split. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abfb3db74203b538a561d0db20424c266" name="abfb3db74203b538a561d0db20424c266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfb3db74203b538a561d0db20424c266">&#9670;&#160;</a></span>PosteriorParameterMean()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::VectorXd StochTree::GaussianMultivariateRegressionLeafModel::PosteriorParameterMean </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Leaf node posterior mean. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3561f383f9dcec98b684b34d72f9ae08" name="a3561f383f9dcec98b684b34d72f9ae08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3561f383f9dcec98b684b34d72f9ae08">&#9670;&#160;</a></span>PosteriorParameterVariance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::MatrixXd StochTree::GaussianMultivariateRegressionLeafModel::PosteriorParameterVariance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Leaf node posterior variance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistics of the node being evaluated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Global error variance parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a03ae7a40fd423bdaf10fd49dc1c6906e" name="a03ae7a40fd423bdaf10fd49dc1c6906e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03ae7a40fd423bdaf10fd49dc1c6906e">&#9670;&#160;</a></span>SampleLeafParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianMultivariateRegressionLeafModel::SampleLeafParameters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;&#160;</td>
+          <td class="paramname"><em>tracker</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;&#160;</td>
+          <td class="paramname"><em>residual</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> *&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tree_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>global_variance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>gen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw new parameters for every leaf node in <code>tree</code>, using a Gibbs update that conditions on the data, every other tree in the forest, and all model parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataset</td><td>Data object containining training data, including covariates, leaf regression bases, and case weights </td></tr>
+    <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
+    <tr><td class="paramname">residual</td><td>Data object containing the "partial" residual net of all the model's other mean terms, aside from <code>tree</code> </td></tr>
+    <tr><td class="paramname">tree</td><td><a class="el" href="classStochTree_1_1Tree.html" title="Decision tree data structure.">Tree</a> to be updated </td></tr>
+    <tr><td class="paramname">tree_num</td><td>Integer index of tree to be updated </td></tr>
+    <tr><td class="paramname">global_variance</td><td>Value of the global error variance parameter </td></tr>
+    <tr><td class="paramname">gen</td><td>C++ random number generator </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a></li>
 </ul>
 </div><!-- contents -->
