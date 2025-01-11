@@ -78,6 +78,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">StochTree Namespace Reference</div></div>
@@ -213,6 +214,15 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping nodes to the indices they contain.  <a href="classStochTree_1_1UnsortedNodeSampleTracker.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga3b4c0c2aa15bf379c20fb3a751b9f0f0" id="r_ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">SuffStatVariant</a> = std::variant&lt; <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &gt;</td></tr>
+<tr class="memdesc:ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unifying layer for disparate sufficient statistic class types.  <br /></td></tr>
+<tr class="separator:ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6e8634775db3810ef7a1dc42efd7059" id="r_gaf6e8634775db3810ef7a1dc42efd7059"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">LeafModelVariant</a> = std::variant&lt; <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">GaussianConstantLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionLeafModel.html">GaussianUnivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html">GaussianMultivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceLeafModel.html">LogLinearVarianceLeafModel</a> &gt;</td></tr>
+<tr class="memdesc:gaf6e8634775db3810ef7a1dc42efd7059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unifying layer for disparate leaf model class types.  <br /></td></tr>
+<tr class="separator:gaf6e8634775db3810ef7a1dc42efd7059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga8cbfe035085adfd1a05335cf6f543a07" id="r_ga8cbfe035085adfd1a05335cf6f543a07"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> </td></tr>
@@ -232,6 +242,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>ExtractMultipl
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>ExtractSingleFeatureFromMemory</b> (std::vector&lt; std::string &gt; *text_data, const Parser *parser, int32_t column_index, Eigen::VectorXd &amp;data, data_size_t num_rows)</td></tr>
 <tr class="memdesc:ga9db43f9f4db18314353907c59b6258de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract a single feature from the raw data loaded from a file into an <code>Eigen::VectorXd</code>. Lightly modified from LightGBM's datasetloader interface to support <code>stochtree</code>'s use cases. <br /></td></tr>
 <tr class="separator:ga9db43f9f4db18314353907c59b6258de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f479f37cb7892d7d9a4fe2c9fca9ed3" id="r_ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">SuffStatVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">suffStatFactory</a> (<a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> model_type, int basis_dim=0)</td></tr>
+<tr class="memdesc:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function that creates a new <code>SuffStat</code> object for the specified model type.  <br /></td></tr>
+<tr class="separator:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaba5f1e9af5724f79d1387fc97f7fc09" id="r_gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">LeafModelVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#gaaba5f1e9af5724f79d1387fc97f7fc09">leafModelFactory</a> (<a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> model_type, double tau, Eigen::MatrixXd &amp;Sigma0, double a, double b)</td></tr>
+<tr class="memdesc:gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function that creates a new <code>LeafModel</code> object for the specified model type.  <br /></td></tr>
+<tr class="separator:gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adeaa408c7836c4ce5a8e0e5df3dc323b" id="r_adeaa408c7836c4ce5a8e0e5df3dc323b"><td class="memItemLeft" align="right" valign="top"><a id="adeaa408c7836c4ce5a8e0e5df3dc323b" name="adeaa408c7836c4ce5a8e0e5df3dc323b"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TreeNodeTypeToString</b> (<a class="el" href="namespaceStochTree.html#aeca4e0fa068ffcf3a5275cbf0939fc5c">TreeNodeType</a> type)</td></tr>
 <tr class="memdesc:adeaa408c7836c4ce5a8e0e5df3dc323b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get string representation of TreeNodeType. <br /></td></tr>

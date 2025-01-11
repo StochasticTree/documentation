@@ -94,11 +94,67 @@ Key Components</h1>
 <li><b>Trees</b>: the most important "primitive" of decision tree algorithms is the <a class="el" href="group__tree__group.html">decision tree itself</a>, which in stochtree is defined by a <a class="el" href="classStochTree_1_1Tree.html">Tree</a> class as well as a series of static helper functions for prediction.</li>
 <li><b>Forest</b>: individual trees are combined into a <a class="el" href="group__forest__group.html">forest</a>, or ensemble, which in stochtree is defined by the <a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> class and a container of forests is defined by the <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> class.</li>
 <li><b>Dataset</b>: data can be loaded from a variety of sources into a <code>stochtree</code> <a class="el" href="group__data__group.html">data layer</a>.</li>
+<li><b>Leaf Model</b>: <code>stochtree</code>'s data structures are generalized to support a wide range of models, which are defined via specialized classes in the <a class="el" href="group__leaf__model__group.html">leaf model layer</a>.</li>
 <li><b>Sampler</b>: helper functions that sample forests from training data comprise the <a class="el" href="group__sampling__group.html">sampling layer</a> of <code>stochtree</code>.</li>
 </ul>
 <h1><a class="anchor" id="extending-stochtree"></a>
 Extending &lt;tt&gt;stochtree&lt;/tt&gt;</h1>
-</div></div><!-- PageDoc -->
+<h2><a class="anchor" id="custom-leaf-models"></a>
+Custom Leaf Models</h2>
+<p>The <a class="el" href="group__leaf__model__group.html">leaf model documentation</a> details the key components of new decision tree models: custom <code>LeafModel</code> and <code>SuffStat</code> classes that implement a model's log marginal likelihood and posterior computations.</p>
+<p>Adding a new leaf model will consist largely of implementing new versions of each of these classes which track the API of the existing classes. Once these classes exist, they need to be reflected in several places.</p>
+<p>Suppose, for the sake of illustration, that the newest custom leaf model is a multinomial logit model.</p>
+<p>First, add an entry to the <a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> enumeration for this new model type</p>
+<div class="fragment"><div class="line"><span class="keyword">enum</span> ModelType {</div>
+<div class="line">   kConstantLeafGaussian, </div>
+<div class="line">   kUnivariateRegressionLeafGaussian, </div>
+<div class="line">   kMultivariateRegressionLeafGaussian, </div>
+<div class="line">   kLogLinearVariance, </div>
+<div class="line">   kMultinomialLogit, </div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Next, add entries to the <code>std::variants</code> that bundle related <code>SuffStat</code> and <code>LeafModel</code> classes</p>
+<div class="fragment"><div class="line"><span class="keyword">using </span>SuffStatVariant = std::variant&lt;GaussianConstantSuffStat, </div>
+<div class="line">                                     GaussianUnivariateRegressionSuffStat, </div>
+<div class="line">                                     GaussianMultivariateRegressionSuffStat, </div>
+<div class="line">                                     LogLinearVarianceSuffStat, </div>
+<div class="line">                                     MultinomialLogitSuffStat&gt;;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">using </span>LeafModelVariant = std::variant&lt;GaussianConstantLeafModel, </div>
+<div class="line">                                      GaussianUnivariateRegressionLeafModel, </div>
+<div class="line">                                      GaussianMultivariateRegressionLeafModel, </div>
+<div class="line">                                      LogLinearVarianceLeafModel, </div>
+<div class="line">                                      MultinomialLogitLeafModel&gt;;</div>
+</div><!-- fragment --><p>Finally, update the <a class="el" href="group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">suffStatFactory</a> and <a class="el" href="group__leaf__model__group.html#gaaba5f1e9af5724f79d1387fc97f7fc09">leafModelFactory</a> functions to add a logic branch registering these new objects</p>
+<div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> SuffStatVariant suffStatFactory(ModelType model_type, <span class="keywordtype">int</span> basis_dim = 0) {</div>
+<div class="line">  <span class="keywordflow">if</span> (model_type == kConstantLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createSuffStat&lt;GaussianConstantSuffStat&gt;();</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kUnivariateRegressionLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createSuffStat&lt;GaussianUnivariateRegressionSuffStat&gt;();</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kMultivariateRegressionLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createSuffStat&lt;GaussianMultivariateRegressionSuffStat, int&gt;(basis_dim);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kLogLinearVariance) {</div>
+<div class="line">    <span class="keywordflow">return</span> createSuffStat&lt;LogLinearVarianceSuffStat&gt;();</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kMultinomialLogit) {</div>
+<div class="line">    <span class="keywordflow">return</span> createSuffStat&lt;MultinomialLogitSuffStat&gt;();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    Log::Fatal(<span class="stringliteral">&quot;Incompatible model type provided to suff stat factory&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> LeafModelVariant leafModelFactory(ModelType model_type, <span class="keywordtype">double</span> tau, Eigen::MatrixXd&amp; Sigma0, <span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b) {</div>
+<div class="line">  <span class="keywordflow">if</span> (model_type == kConstantLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createLeafModel&lt;GaussianConstantLeafModel, double&gt;(tau);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kUnivariateRegressionLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createLeafModel&lt;GaussianUnivariateRegressionLeafModel, double&gt;(tau);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kMultivariateRegressionLeafGaussian) {</div>
+<div class="line">    <span class="keywordflow">return</span> createLeafModel&lt;GaussianMultivariateRegressionLeafModel, Eigen::MatrixXd&gt;(Sigma0);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kLogLinearVariance) {</div>
+<div class="line">    <span class="keywordflow">return</span> createLeafModel&lt;LogLinearVarianceLeafModel, double, double&gt;(a, b);</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (model_type == kMultinomialLogit) {</div>
+<div class="line">    <span class="keywordflow">return</span> createLeafModel&lt;MultinomialLogitLeafModel&gt;();</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    Log::Fatal(<span class="stringliteral">&quot;Incompatible model type provided to leaf model factory&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

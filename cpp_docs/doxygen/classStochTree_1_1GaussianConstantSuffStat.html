@@ -81,6 +81,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1GaussianConstantSuffStat-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::GaussianConstantSuffStat Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
@@ -90,9 +91,265 @@ $(function() {
  <a href="classStochTree_1_1GaussianConstantSuffStat.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2b2b837f07a461d0baa59ee7e95a108d" id="r_a2b2b837f07a461d0baa59ee7e95a108d"><td class="memItemLeft" align="right" valign="top"><a id="a2b2b837f07a461d0baa59ee7e95a108d" name="a2b2b837f07a461d0baa59ee7e95a108d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>GaussianConstantSuffStat</b> ()</td></tr>
+<tr class="memdesc:a2b2b837f07a461d0baa59ee7e95a108d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianConstantSuffStat</a> object, setting all sufficient statistics to zero. <br /></td></tr>
+<tr class="separator:a2b2b837f07a461d0baa59ee7e95a108d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae23e912753384bac536fcc6b92ddc3" id="r_aaae23e912753384bac536fcc6b92ddc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#aaae23e912753384bac536fcc6b92ddc3">IncrementSuffStat</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, Eigen::VectorXd &amp;outcome, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, data_size_t row_idx, int tree_idx)</td></tr>
+<tr class="memdesc:aaae23e912753384bac536fcc6b92ddc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate data from observation <code>row_idx</code> into the sufficient statistics.  <br /></td></tr>
+<tr class="separator:aaae23e912753384bac536fcc6b92ddc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae015846c3e6ac5a44ddf078f1a01a5fe" id="r_ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="memItemLeft" align="right" valign="top"><a id="ae015846c3e6ac5a44ddf078f1a01a5fe" name="ae015846c3e6ac5a44ddf078f1a01a5fe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
+<tr class="memdesc:ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all of the sufficient statistics to zero. <br /></td></tr>
+<tr class="separator:ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8693648d0cb2b666503d8f3e8568f6ce" id="r_a8693648d0cb2b666503d8f3e8568f6ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#a8693648d0cb2b666503d8f3e8568f6ce">AddSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a8693648d0cb2b666503d8f3e8568f6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code>  <br /></td></tr>
+<tr class="separator:a8693648d0cb2b666503d8f3e8568f6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30d32cda9e6cfdf72d8a47f8a84f068e" id="r_a30d32cda9e6cfdf72d8a47f8a84f068e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#a30d32cda9e6cfdf72d8a47f8a84f068e">SubtractSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;rhs)</td></tr>
+<tr class="memdesc:a30d32cda9e6cfdf72d8a47f8a84f068e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the difference between the values provided by <code>lhs</code> and those provided by <code>rhs</code>  <br /></td></tr>
+<tr class="separator:a30d32cda9e6cfdf72d8a47f8a84f068e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa77e3136646e48d0166b3a91fced3ba2" id="r_aa77e3136646e48d0166b3a91fced3ba2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#aa77e3136646e48d0166b3a91fced3ba2">SampleGreaterThan</a> (data_size_t threshold)</td></tr>
+<tr class="memdesc:aa77e3136646e48d0166b3a91fced3ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether accumulated sample size, <code>n</code>, is greater than some threshold.  <br /></td></tr>
+<tr class="separator:aa77e3136646e48d0166b3a91fced3ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa467aa8d5b48545d64d2e2a09fefd683" id="r_aa467aa8d5b48545d64d2e2a09fefd683"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#aa467aa8d5b48545d64d2e2a09fefd683">SampleGreaterThanEqual</a> (data_size_t threshold)</td></tr>
+<tr class="memdesc:aa467aa8d5b48545d64d2e2a09fefd683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether accumulated sample size, <code>n</code>, is greater than or equal to some threshold.  <br /></td></tr>
+<tr class="separator:aa467aa8d5b48545d64d2e2a09fefd683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a6e2c03208fe496ab25fa3ac09b285" id="r_a16a6e2c03208fe496ab25fa3ac09b285"><td class="memItemLeft" align="right" valign="top"><a id="a16a6e2c03208fe496ab25fa3ac09b285" name="a16a6e2c03208fe496ab25fa3ac09b285"></a>
+data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b> ()</td></tr>
+<tr class="memdesc:a16a6e2c03208fe496ab25fa3ac09b285"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sample size accumulated by a sufficient stat object. <br /></td></tr>
+<tr class="separator:a16a6e2c03208fe496ab25fa3ac09b285"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaae23e912753384bac536fcc6b92ddc3" name="aaae23e912753384bac536fcc6b92ddc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae23e912753384bac536fcc6b92ddc3">&#9670;&#160;</a></span>IncrementSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianConstantSuffStat::IncrementSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>outcome</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;&#160;</td>
+          <td class="paramname"><em>tracker</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tree_idx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Accumulate data from observation <code>row_idx</code> into the sufficient statistics. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataset</td><td>Data object containining training data, including covariates, leaf regression bases, and case weights </td></tr>
+    <tr><td class="paramname">outcome</td><td>Data object containing the "partial" residual net of all the model's other mean terms, aside from <code>tree</code> </td></tr>
+    <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
+    <tr><td class="paramname">row_idx</td><td>Index of the training data observation from which the sufficient statistics should be updated </td></tr>
+    <tr><td class="paramname">tree_idx</td><td>Index of the tree being updated in the course of this sufficient statistic update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8693648d0cb2b666503d8f3e8568f6ce" name="a8693648d0cb2b666503d8f3e8568f6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8693648d0cb2b666503d8f3e8568f6ce">&#9670;&#160;</a></span>AddSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianConstantSuffStat::AddSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>First sufficient statistic ("left hand side") </td></tr>
+    <tr><td class="paramname">rhs</td><td>Second sufficient statistic ("right hand side") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a30d32cda9e6cfdf72d8a47f8a84f068e" name="a30d32cda9e6cfdf72d8a47f8a84f068e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30d32cda9e6cfdf72d8a47f8a84f068e">&#9670;&#160;</a></span>SubtractSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianConstantSuffStat::SubtractSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of each sufficient statistic to the difference between the values provided by <code>lhs</code> and those provided by <code>rhs</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>First sufficient statistic ("left hand side") </td></tr>
+    <tr><td class="paramname">rhs</td><td>Second sufficient statistic ("right hand side") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa77e3136646e48d0166b3a91fced3ba2" name="aa77e3136646e48d0166b3a91fced3ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa77e3136646e48d0166b3a91fced3ba2">&#9670;&#160;</a></span>SampleGreaterThan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StochTree::GaussianConstantSuffStat::SampleGreaterThan </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check whether accumulated sample size, <code>n</code>, is greater than some threshold. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshold</td><td>Value used to compute <code>n &gt; threshold</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa467aa8d5b48545d64d2e2a09fefd683" name="aa467aa8d5b48545d64d2e2a09fefd683"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa467aa8d5b48545d64d2e2a09fefd683">&#9670;&#160;</a></span>SampleGreaterThanEqual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StochTree::GaussianConstantSuffStat::SampleGreaterThanEqual </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check whether accumulated sample size, <code>n</code>, is greater than or equal to some threshold. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshold</td><td>Value used to compute <code>n &gt;= threshold</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a></li>
 </ul>
 </div><!-- contents -->

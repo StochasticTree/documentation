@@ -81,6 +81,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classStochTree_1_1GaussianMultivariateRegressionSuffStat-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StochTree::GaussianMultivariateRegressionSuffStat Class Reference<div class="ingroups"><a class="el" href="group__leaf__model__group.html">Leaf Model API</a></div></div></div>
 </div><!--header-->
@@ -90,9 +91,299 @@ $(function() {
  <a href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af2bea4548b86910b411b354e39d515a7" id="r_af2bea4548b86910b411b354e39d515a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#af2bea4548b86910b411b354e39d515a7">GaussianMultivariateRegressionSuffStat</a> (int basis_dim)</td></tr>
+<tr class="memdesc:af2bea4548b86910b411b354e39d515a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianMultivariateRegressionSuffStat</a> object.  <br /></td></tr>
+<tr class="separator:af2bea4548b86910b411b354e39d515a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdf01b604f1222a62c40728965fffc5a" id="r_afdf01b604f1222a62c40728965fffc5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#afdf01b604f1222a62c40728965fffc5a">IncrementSuffStat</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, Eigen::VectorXd &amp;outcome, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, data_size_t row_idx, int tree_idx)</td></tr>
+<tr class="memdesc:afdf01b604f1222a62c40728965fffc5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accumulate data from observation <code>row_idx</code> into the sufficient statistics.  <br /></td></tr>
+<tr class="separator:afdf01b604f1222a62c40728965fffc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10e3a30d3456b07d50e0fb7b317d31e" id="r_af10e3a30d3456b07d50e0fb7b317d31e"><td class="memItemLeft" align="right" valign="top"><a id="af10e3a30d3456b07d50e0fb7b317d31e" name="af10e3a30d3456b07d50e0fb7b317d31e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
+<tr class="memdesc:af10e3a30d3456b07d50e0fb7b317d31e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all of the sufficient statistics to zero. <br /></td></tr>
+<tr class="separator:af10e3a30d3456b07d50e0fb7b317d31e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac4b45baf39f24e18e36ff7bc879a7ce" id="r_aac4b45baf39f24e18e36ff7bc879a7ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#aac4b45baf39f24e18e36ff7bc879a7ce">AddSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;rhs)</td></tr>
+<tr class="memdesc:aac4b45baf39f24e18e36ff7bc879a7ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code>  <br /></td></tr>
+<tr class="separator:aac4b45baf39f24e18e36ff7bc879a7ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3123660c0ea50d920b26bdb9396de0c" id="r_ab3123660c0ea50d920b26bdb9396de0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#ab3123660c0ea50d920b26bdb9396de0c">SubtractSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;rhs)</td></tr>
+<tr class="memdesc:ab3123660c0ea50d920b26bdb9396de0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the difference between the values provided by <code>lhs</code> and those provided by <code>rhs</code>  <br /></td></tr>
+<tr class="separator:ab3123660c0ea50d920b26bdb9396de0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f2d2b23b7221cc5ebef1fec6d04ff1" id="r_a94f2d2b23b7221cc5ebef1fec6d04ff1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#a94f2d2b23b7221cc5ebef1fec6d04ff1">SampleGreaterThan</a> (data_size_t threshold)</td></tr>
+<tr class="memdesc:a94f2d2b23b7221cc5ebef1fec6d04ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether accumulated sample size, <code>n</code>, is greater than some threshold.  <br /></td></tr>
+<tr class="separator:a94f2d2b23b7221cc5ebef1fec6d04ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef85b73ba2afff488723c641367b10b2" id="r_aef85b73ba2afff488723c641367b10b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#aef85b73ba2afff488723c641367b10b2">SampleGreaterThanEqual</a> (data_size_t threshold)</td></tr>
+<tr class="memdesc:aef85b73ba2afff488723c641367b10b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether accumulated sample size, <code>n</code>, is greater than or equal to some threshold.  <br /></td></tr>
+<tr class="separator:aef85b73ba2afff488723c641367b10b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c459e069b57be04228115fce41ee1d6" id="r_a9c459e069b57be04228115fce41ee1d6"><td class="memItemLeft" align="right" valign="top"><a id="a9c459e069b57be04228115fce41ee1d6" name="a9c459e069b57be04228115fce41ee1d6"></a>
+data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b> ()</td></tr>
+<tr class="memdesc:a9c459e069b57be04228115fce41ee1d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the sample size accumulated by a sufficient stat object. <br /></td></tr>
+<tr class="separator:a9c459e069b57be04228115fce41ee1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="af2bea4548b86910b411b354e39d515a7" name="af2bea4548b86910b411b354e39d515a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2bea4548b86910b411b354e39d515a7">&#9670;&#160;</a></span>GaussianMultivariateRegressionSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::GaussianMultivariateRegressionSuffStat::GaussianMultivariateRegressionSuffStat </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>basis_dim</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianMultivariateRegressionSuffStat</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">basis_dim</td><td>Size of the basis vector that defines the leaf regression </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afdf01b604f1222a62c40728965fffc5a" name="afdf01b604f1222a62c40728965fffc5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdf01b604f1222a62c40728965fffc5a">&#9670;&#160;</a></span>IncrementSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianMultivariateRegressionSuffStat::IncrementSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>outcome</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;&#160;</td>
+          <td class="paramname"><em>tracker</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>row_idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tree_idx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Accumulate data from observation <code>row_idx</code> into the sufficient statistics. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataset</td><td>Data object containining training data, including covariates, leaf regression bases, and case weights </td></tr>
+    <tr><td class="paramname">outcome</td><td>Data object containing the "partial" residual net of all the model's other mean terms, aside from <code>tree</code> </td></tr>
+    <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
+    <tr><td class="paramname">row_idx</td><td>Index of the training data observation from which the sufficient statistics should be updated </td></tr>
+    <tr><td class="paramname">tree_idx</td><td>Index of the tree being updated in the course of this sufficient statistic update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aac4b45baf39f24e18e36ff7bc879a7ce" name="aac4b45baf39f24e18e36ff7bc879a7ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac4b45baf39f24e18e36ff7bc879a7ce">&#9670;&#160;</a></span>AddSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianMultivariateRegressionSuffStat::AddSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>First sufficient statistic ("left hand side") </td></tr>
+    <tr><td class="paramname">rhs</td><td>Second sufficient statistic ("right hand side") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab3123660c0ea50d920b26bdb9396de0c" name="ab3123660c0ea50d920b26bdb9396de0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3123660c0ea50d920b26bdb9396de0c">&#9670;&#160;</a></span>SubtractSuffStat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianMultivariateRegressionSuffStat::SubtractSuffStat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the value of each sufficient statistic to the difference between the values provided by <code>lhs</code> and those provided by <code>rhs</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>First sufficient statistic ("left hand side") </td></tr>
+    <tr><td class="paramname">rhs</td><td>Second sufficient statistic ("right hand side") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a94f2d2b23b7221cc5ebef1fec6d04ff1" name="a94f2d2b23b7221cc5ebef1fec6d04ff1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f2d2b23b7221cc5ebef1fec6d04ff1">&#9670;&#160;</a></span>SampleGreaterThan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StochTree::GaussianMultivariateRegressionSuffStat::SampleGreaterThan </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check whether accumulated sample size, <code>n</code>, is greater than some threshold. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshold</td><td>Value used to compute <code>n &gt; threshold</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aef85b73ba2afff488723c641367b10b2" name="aef85b73ba2afff488723c641367b10b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef85b73ba2afff488723c641367b10b2">&#9670;&#160;</a></span>SampleGreaterThanEqual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StochTree::GaussianMultivariateRegressionSuffStat::SampleGreaterThanEqual </td>
+          <td>(</td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check whether accumulated sample size, <code>n</code>, is greater than or equal to some threshold. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshold</td><td>Value used to compute <code>n &gt;= threshold</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/stochtree/<a class="el" href="leaf__model_8h_source.html">leaf_model.h</a></li>
 </ul>
 </div><!-- contents -->

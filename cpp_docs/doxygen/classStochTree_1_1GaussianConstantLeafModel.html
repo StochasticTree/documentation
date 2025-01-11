@@ -94,6 +94,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a4bce428493c2b2f5c7742dafb3f12202" id="r_a4bce428493c2b2f5c7742dafb3f12202"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a4bce428493c2b2f5c7742dafb3f12202">GaussianConstantLeafModel</a> (double tau)</td></tr>
+<tr class="memdesc:a4bce428493c2b2f5c7742dafb3f12202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianConstantLeafModel</a> object.  <br /></td></tr>
+<tr class="separator:a4bce428493c2b2f5c7742dafb3f12202"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17606e57c26fbf44471659dba67d1b0a" id="r_a17606e57c26fbf44471659dba67d1b0a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a17606e57c26fbf44471659dba67d1b0a">SplitLogMarginalLikelihood</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;left_stat, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;right_stat, double global_variance)</td></tr>
 <tr class="memdesc:a17606e57c26fbf44471659dba67d1b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log marginal likelihood for a proposed split, evaluated only for observations that fall into the node being split.  <br /></td></tr>
 <tr class="separator:a17606e57c26fbf44471659dba67d1b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,10 +112,52 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2921ab747f2e94846c0c0c75175e3b61" id="r_a2921ab747f2e94846c0c0c75175e3b61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#a2921ab747f2e94846c0c0c75175e3b61">SampleLeafParameters</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1Tree.html">Tree</a> *tree, int tree_num, double global_variance, std::mt19937 &amp;gen)</td></tr>
 <tr class="memdesc:a2921ab747f2e94846c0c0c75175e3b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw new parameters for every leaf node in <code>tree</code>, using a Gibbs update that conditions on the data, every other tree in the forest, and all model parameters.  <br /></td></tr>
 <tr class="separator:a2921ab747f2e94846c0c0c75175e3b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9f4e3336f5416bc88d23fec5072949c" id="r_af9f4e3336f5416bc88d23fec5072949c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html#af9f4e3336f5416bc88d23fec5072949c">SetScale</a> (double tau)</td></tr>
+<tr class="memdesc:af9f4e3336f5416bc88d23fec5072949c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a new value for the leaf node scale parameter.  <br /></td></tr>
+<tr class="separator:af9f4e3336f5416bc88d23fec5072949c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3973521ded4bb4ce8caf7aa1db09d183" id="r_a3973521ded4bb4ce8caf7aa1db09d183"><td class="memItemLeft" align="right" valign="top"><a id="a3973521ded4bb4ce8caf7aa1db09d183" name="a3973521ded4bb4ce8caf7aa1db09d183"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>RequiresBasis</b> ()</td></tr>
+<tr class="memdesc:a3973521ded4bb4ce8caf7aa1db09d183"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether this model requires a basis vector for posterior inference and prediction. <br /></td></tr>
+<tr class="separator:a3973521ded4bb4ce8caf7aa1db09d183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4bce428493c2b2f5c7742dafb3f12202" name="a4bce428493c2b2f5c7742dafb3f12202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bce428493c2b2f5c7742dafb3f12202">&#9670;&#160;</a></span>GaussianConstantLeafModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StochTree::GaussianConstantLeafModel::GaussianConstantLeafModel </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tau</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianConstantLeafModel</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tau</td><td>Leaf node prior scale parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a17606e57c26fbf44471659dba67d1b0a" name="a17606e57c26fbf44471659dba67d1b0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17606e57c26fbf44471659dba67d1b0a">&#9670;&#160;</a></span>SplitLogMarginalLikelihood()</h2>
 
@@ -334,6 +379,40 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">tree_num</td><td>Integer index of tree to be updated </td></tr>
     <tr><td class="paramname">global_variance</td><td>Value of the global error variance parameter </td></tr>
     <tr><td class="paramname">gen</td><td>C++ random number generator </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af9f4e3336f5416bc88d23fec5072949c" name="af9f4e3336f5416bc88d23fec5072949c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9f4e3336f5416bc88d23fec5072949c">&#9670;&#160;</a></span>SetScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianConstantLeafModel::SetScale </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tau</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a new value for the leaf node scale parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tau</td><td>Leaf node prior scale parameter </td></tr>
   </table>
   </dd>
 </dl>

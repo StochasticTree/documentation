@@ -78,7 +78,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Leaf Model API</div></div>
 </div><!--header-->
 <div class="contents">
@@ -113,11 +115,29 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marginal likelihood and posterior computation for heteroskedastic log-linear variance model.  <a href="classStochTree_1_1LogLinearVarianceLeafModel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga3b4c0c2aa15bf379c20fb3a751b9f0f0" id="r_ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">StochTree::SuffStatVariant</a> = std::variant&lt; <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &gt;</td></tr>
+<tr class="memdesc:ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unifying layer for disparate sufficient statistic class types.  <br /></td></tr>
+<tr class="separator:ga3b4c0c2aa15bf379c20fb3a751b9f0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6e8634775db3810ef7a1dc42efd7059" id="r_gaf6e8634775db3810ef7a1dc42efd7059"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">StochTree::LeafModelVariant</a> = std::variant&lt; <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">GaussianConstantLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionLeafModel.html">GaussianUnivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html">GaussianMultivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceLeafModel.html">LogLinearVarianceLeafModel</a> &gt;</td></tr>
+<tr class="memdesc:gaf6e8634775db3810ef7a1dc42efd7059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unifying layer for disparate leaf model class types.  <br /></td></tr>
+<tr class="separator:gaf6e8634775db3810ef7a1dc42efd7059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga8cbfe035085adfd1a05335cf6f543a07" id="r_ga8cbfe035085adfd1a05335cf6f543a07"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">StochTree::ModelType</a> </td></tr>
 <tr class="memdesc:ga8cbfe035085adfd1a05335cf6f543a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leaf models for the forest sampler:  <a href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">More...</a><br /></td></tr>
 <tr class="separator:ga8cbfe035085adfd1a05335cf6f543a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga1f479f37cb7892d7d9a4fe2c9fca9ed3" id="r_ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">SuffStatVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">StochTree::suffStatFactory</a> (<a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> model_type, int basis_dim=0)</td></tr>
+<tr class="memdesc:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function that creates a new <code>SuffStat</code> object for the specified model type.  <br /></td></tr>
+<tr class="separator:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaba5f1e9af5724f79d1387fc97f7fc09" id="r_gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">LeafModelVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#gaaba5f1e9af5724f79d1387fc97f7fc09">StochTree::leafModelFactory</a> (<a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> model_type, double tau, Eigen::MatrixXd &amp;Sigma0, double a, double b)</td></tr>
+<tr class="memdesc:gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function that creates a new <code>LeafModel</code> object for the specified model type.  <br /></td></tr>
+<tr class="separator:gaaba5f1e9af5724f79d1387fc97f7fc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Classes / functions for implementing leaf models. </p>
@@ -174,7 +194,7 @@ Gaussian Constant Leaf Model</h1>
 </p>
 <p class="formulaDsp">
 \[
-   r_i = y_i - \sum_{k \neq j} \mu_k(X_i)
+   r_i = y_i - \sum_{k \neq j} f_k(X_i)
  \]
 </p>
 <p>In words, this model depends on the data for a given leaf node only through three sufficient statistics, \(n_{\ell}\), \(s_{y,\ell}\), and \(s_{yy,\ell}\), and it only depends on the other trees in the ensemble through the "partial residual" \(r_i\). The posterior distribution for node \(\ell\)'s leaf parameter is similarly defined as:</p>
@@ -384,7 +404,42 @@ Inverse Gamma Leaf Model</h1>
 <div class="line"><span class="keywordtype">double</span> resid_term = a_term * log_b_term;</div>
 <div class="line"><span class="keywordtype">double</span> log_ml = prior_terms + lgamma_a_term - resid_term;</div>
 <div class="line"><span class="keywordflow">return</span> log_ml;</div>
-</div><!-- fragment --> <h2 class="groupheader">Enumeration Type Documentation</h2>
+</div><!-- fragment --> <h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga3b4c0c2aa15bf379c20fb3a751b9f0f0" name="ga3b4c0c2aa15bf379c20fb3a751b9f0f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">&#9670;&#160;</a></span>SuffStatVariant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">StochTree::SuffStatVariant</a> = typedef std::variant&lt;<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html">GaussianMultivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unifying layer for disparate sufficient statistic class types. </p>
+<p>Joins together <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianConstantSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianUnivariateRegressionSuffStat</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionSuffStat.html" title="Sufficient statistic and associated operations for gaussian homoskedastic constant leaf outcome model...">GaussianMultivariateRegressionSuffStat</a>, and <a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html" title="Sufficient statistic and associated operations for heteroskedastic log-linear variance model.">LogLinearVarianceSuffStat</a> as a combined "variant" type. See <a href="https://en.cppreference.com/w/cpp/utility/variant">the std::variant documentation</a> for more detail. </p>
+
+</div>
+</div>
+<a id="gaf6e8634775db3810ef7a1dc42efd7059" name="gaf6e8634775db3810ef7a1dc42efd7059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6e8634775db3810ef7a1dc42efd7059">&#9670;&#160;</a></span>LeafModelVariant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">StochTree::LeafModelVariant</a> = typedef std::variant&lt;<a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html">GaussianConstantLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionLeafModel.html">GaussianUnivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html">GaussianMultivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1LogLinearVarianceLeafModel.html">LogLinearVarianceLeafModel</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unifying layer for disparate leaf model class types. </p>
+<p>Joins together <a class="el" href="classStochTree_1_1GaussianConstantLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianConstantLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianUnivariateRegressionLeafModel</a>, <a class="el" href="classStochTree_1_1GaussianMultivariateRegressionLeafModel.html" title="Marginal likelihood and posterior computation for gaussian homoskedastic constant leaf outcome model.">GaussianMultivariateRegressionLeafModel</a>, and <a class="el" href="classStochTree_1_1LogLinearVarianceLeafModel.html" title="Marginal likelihood and posterior computation for heteroskedastic log-linear variance model.">LogLinearVarianceLeafModel</a> as a combined "variant" type. See <a href="https://en.cppreference.com/w/cpp/utility/variant">the std::variant documentation</a> for more detail. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="ga8cbfe035085adfd1a05335cf6f543a07" name="ga8cbfe035085adfd1a05335cf6f543a07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8cbfe035085adfd1a05335cf6f543a07">&#9670;&#160;</a></span>ModelType</h2>
 
@@ -404,6 +459,118 @@ Inverse Gamma Leaf Model</h1>
 <li><code>kMultivariateRegressionLeafGaussian</code>: Every leaf node has a multivariate normal prior, centered around the zero vector, and every leaf is a linear model, matrix-multiplying the leaf parameters by a (fixed) basis vector.</li>
 <li><code>kLogLinearVariance</code>: Every leaf node has a inverse gamma prior and every leaf is constant. </li>
 </ol>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga1f479f37cb7892d7d9a4fe2c9fca9ed3" name="ga1f479f37cb7892d7d9a4fe2c9fca9ed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">&#9670;&#160;</a></span>suffStatFactory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">SuffStatVariant</a> StochTree::suffStatFactory </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a>&#160;</td>
+          <td class="paramname"><em>model_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>basis_dim</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Factory function that creates a new <code>SuffStat</code> object for the specified model type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model_type</td><td>Enumeration storing the model type </td></tr>
+    <tr><td class="paramname">basis_dim</td><td>[Optional] dimension of the basis vector, only used if <code>model_type = kMultivariateRegressionLeafGaussian</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaaba5f1e9af5724f79d1387fc97f7fc09" name="gaaba5f1e9af5724f79d1387fc97f7fc09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaba5f1e9af5724f79d1387fc97f7fc09">&#9670;&#160;</a></span>leafModelFactory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059">LeafModelVariant</a> StochTree::leafModelFactory </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a>&#160;</td>
+          <td class="paramname"><em>model_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tau</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>Sigma0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Factory function that creates a new <code>LeafModel</code> object for the specified model type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model_type</td><td>Enumeration storing the model type </td></tr>
+    <tr><td class="paramname">tau</td><td>Value of the leaf node prior scale parameter, only used if <code>model_type = kConstantLeafGaussian</code> or <code>model_type = kUnivariateRegressionLeafGaussian</code> </td></tr>
+    <tr><td class="paramname">Sigma0</td><td>Value of the leaf node prior covariance matrix, only used if <code>model_type = kMultivariateRegressionLeafGaussian</code> </td></tr>
+    <tr><td class="paramname">a</td><td>Value of the leaf node inverse gamma prior shape parameter, only used if <code>model_type = kLogLinearVariance</code> </td></tr>
+    <tr><td class="paramname">b</td><td>Value of the leaf node inverse gamma prior scale parameter, only used if <code>model_type = kLogLinearVariance</code> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

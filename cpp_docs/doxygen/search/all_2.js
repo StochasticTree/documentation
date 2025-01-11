@@ -19,8 +19,9 @@ var searchData=
   ['copyfromprevioussample_16',['CopyFromPreviousSample',['../classStochTree_1_1ForestContainer.html#ac177b49773901ff68eb3a8385a8a8b7a',1,'StochTree::ForestContainer']]],
   ['covariatevalue_17',['CovariateValue',['../classStochTree_1_1ForestDataset.html#aebec3a1371e22cfbaa753c5cf44453f4',1,'StochTree::ForestDataset']]],
   ['currentnodeevaluated_18',['CurrentNodeEvaluated',['../classStochTree_1_1NodeCutpointTracker.html#a63231e0946827fa7b9aae7c942760ac3',1,'StochTree::NodeCutpointTracker']]],
-  ['cutpointgridcontainer_19',['CutpointGridContainer',['../classStochTree_1_1CutpointGridContainer.html',1,'StochTree']]],
-  ['cutpointgridsize_20',['CutpointGridSize',['../classStochTree_1_1CutpointGridContainer.html#ab8932b2186c94495869b885edaed279a',1,'StochTree::CutpointGridContainer']]],
-  ['cutpointvalue_21',['cutpointvalue',['../classStochTree_1_1FeatureCutpointGrid.html#afc4ca3bae4de60261d0f738f998c4dae',1,'StochTree::FeatureCutpointGrid::CutpointValue()'],['../classStochTree_1_1CutpointGridContainer.html#a0647cba2bfd0d502a071b81804a71d37',1,'StochTree::CutpointGridContainer::CutpointValue()']]],
-  ['cutpointvector_22',['cutpointvector',['../classStochTree_1_1FeatureCutpointGrid.html#a53e69ae9042eaa2cd471b70960c17816',1,'StochTree::FeatureCutpointGrid::CutpointVector()'],['../classStochTree_1_1CutpointGridContainer.html#a7a08c125505f032375364d56575f313f',1,'StochTree::CutpointGridContainer::CutpointVector()']]]
+  ['custom_20leaf_20models_19',['Custom Leaf Models',['../index.html#custom-leaf-models',1,'']]],
+  ['cutpointgridcontainer_20',['CutpointGridContainer',['../classStochTree_1_1CutpointGridContainer.html',1,'StochTree']]],
+  ['cutpointgridsize_21',['CutpointGridSize',['../classStochTree_1_1CutpointGridContainer.html#ab8932b2186c94495869b885edaed279a',1,'StochTree::CutpointGridContainer']]],
+  ['cutpointvalue_22',['cutpointvalue',['../classStochTree_1_1FeatureCutpointGrid.html#afc4ca3bae4de60261d0f738f998c4dae',1,'StochTree::FeatureCutpointGrid::CutpointValue()'],['../classStochTree_1_1CutpointGridContainer.html#a0647cba2bfd0d502a071b81804a71d37',1,'StochTree::CutpointGridContainer::CutpointValue()']]],
+  ['cutpointvector_23',['cutpointvector',['../classStochTree_1_1FeatureCutpointGrid.html#a53e69ae9042eaa2cd471b70960c17816',1,'StochTree::FeatureCutpointGrid::CutpointVector()'],['../classStochTree_1_1CutpointGridContainer.html#a7a08c125505f032375364d56575f313f',1,'StochTree::CutpointGridContainer::CutpointVector()']]]
 ];
