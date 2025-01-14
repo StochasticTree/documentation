@@ -127,11 +127,11 @@ feature.</p>
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_gfr <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_gfr <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -146,29 +146,29 @@ feature.</p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="fl">10</span>, <span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 33 29 24 36 24 26 17 35 25 39</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 20 27 34 25 23 27 22 30 41 28</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_aggregate_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2889 2624 2545 2292 2235 2621 2411 2842 2635 3812</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 2126 2231 2425 2496 2687 2770 2504 3247 3197 3755</span></span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s
 dig deeper and look at individual trees, starting with the first tree in
 the last “grow-from-root” sample.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span> <span class="op">=</span> <span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_granular_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
 <span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">1</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 2</span></span></code></pre></div>
 <p>This tree has a single split on the only “important” feature. Now,
 let’s look at the second tree.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">2</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 2</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</span></span></code></pre></div>
 <p>This tree also only splits on the important feature.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">20</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 1 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">30</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 1 0 0 0 0 0 0 1 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 1 0 1 0 0 0 0 0 1 0</span></span></code></pre></div>
 <p>We see that “later” trees are splitting on other features, but we
 also note that these trees are fitting an outcome that is already
 residualized many “relevant splits” made by trees 1 and 2.</p>
@@ -198,9 +198,11 @@ scikit-learn vignette</a></p>
 <span>            <span class="st">" else to node "</span>, <span class="va">right</span>, <span class="st">"\n"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.496 else to node 2</span></span>
-<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.39</span></span>
-<span><span class="co">#&gt;  node=2 is a leaf node with value=0.274</span></span></code></pre></div>
+<span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.74 else to node 2</span></span>
+<span><span class="co">#&gt;  node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.501 else to node 4</span></span>
+<span><span class="co">#&gt;  node=2 is a leaf node with value=0.244</span></span>
+<span><span class="co">#&gt;      node=3 is a leaf node with value=-0.232</span></span>
+<span><span class="co">#&gt;      node=4 is a leaf node with value=-0.00538</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

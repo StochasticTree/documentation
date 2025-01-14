@@ -154,12 +154,14 @@ and Hahn (2023)</span>). This is the default in
 <span><span class="va">num_trees</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
 <span><span class="va">a_0</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">0</span>, num_trees_variance <span class="op">=</span> <span class="va">num_trees</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="va">num_trees</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -179,12 +181,14 @@ ensemble using MCMC with root initialization (as in <span class="citation">Chipm
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">0</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="va">num_trees</span><span class="op">)</span></span>
 <span><span class="va">bart_model_mcmc</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -259,18 +263,21 @@ ensemble using “warm-start” initialization (<span class="citation">He
 and Hahn (2023)</span>). This is the default in
 <code>stochtree</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<code class="sourceCode R"><span><span class="va">num_trees</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">0</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="va">num_trees</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -290,14 +297,16 @@ ensemble using MCMC with root initialization (as in <span class="citation">Chipm
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">0</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="va">num_trees</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">bart_model_mcmc</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -387,14 +396,16 @@ and Hahn (2023)</span>). This is the default in
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">50</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="fl">50</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -419,14 +430,16 @@ ensemble using MCMC with root initialization (as in <span class="citation">Chipm
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">50</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="fl">50</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">bart_model_mcmc</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -522,14 +535,16 @@ and Hahn (2023)</span>). This is the default in
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">50</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="fl">50</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -554,14 +569,16 @@ ensemble using MCMC with root initialization (as in <span class="citation">Chipm
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees_mean <span class="op">=</span> <span class="fl">50</span>, num_trees_variance <span class="op">=</span> <span class="fl">50</span>, </span>
-<span>                    alpha_mean <span class="op">=</span> <span class="fl">0.95</span>, beta_mean <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf_mean <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    alpha_variance <span class="op">=</span> <span class="fl">0.95</span>, beta_variance <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf_variance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                    sample_sigma_global <span class="op">=</span> <span class="cn">F</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>                           alpha <span class="op">=</span> <span class="fl">0.95</span>, beta <span class="op">=</span> <span class="fl">2</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">variance_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="fl">50</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>                               beta <span class="op">=</span> <span class="fl">1.25</span>, min_samples_leaf <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">bart_model_mcmc</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span>, </span>
+<span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">

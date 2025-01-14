@@ -132,11 +132,12 @@ Hahn (2023)</span>). This is the default in <code>stochtree</code>.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -159,11 +160,12 @@ initialization.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_root</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>,</span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -230,11 +232,12 @@ Hahn (2023)</span>). This is the default in <code>stochtree</code>.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, W_train <span class="op">=</span> <span class="va">W_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, W_test <span class="op">=</span> <span class="va">W_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -257,11 +260,12 @@ initialization.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_root</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, W_train <span class="op">=</span> <span class="va">W_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, W_test <span class="op">=</span> <span class="va">W_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the BART samples after burnin.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -337,12 +341,13 @@ Hahn (2023)</span>). This is the default in <code>stochtree</code>.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, W_train <span class="op">=</span> <span class="va">W_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, group_ids_train <span class="op">=</span> <span class="va">group_ids_train</span>, </span>
 <span>    rfx_basis_train <span class="op">=</span> <span class="va">rfx_basis_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, W_test <span class="op">=</span> <span class="va">W_test</span>, group_ids_test <span class="op">=</span> <span class="va">group_ids_test</span>,</span>
 <span>    rfx_basis_test <span class="op">=</span> <span class="va">rfx_basis_test</span>, num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -365,12 +370,13 @@ initialization.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">bart_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma_global <span class="op">=</span> <span class="cn">T</span>, sample_sigma_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees_mean <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">T</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="va">bart_model_root</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, W_train <span class="op">=</span> <span class="va">W_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, group_ids_train <span class="op">=</span> <span class="va">group_ids_train</span>, </span>
 <span>    rfx_basis_train <span class="op">=</span> <span class="va">rfx_basis_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, W_test <span class="op">=</span> <span class="va">W_test</span>, group_ids_test <span class="op">=</span> <span class="va">group_ids_test</span>,</span>
 <span>    rfx_basis_test <span class="op">=</span> <span class="va">rfx_basis_test</span>, num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    params <span class="op">=</span> <span class="va">bart_params</span></span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Inspect the MCMC samples</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
