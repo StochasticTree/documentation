@@ -82,6 +82,10 @@ trees, and exposes functionality to run a forest sampler
 <li><p><a href="#method-ForestModel-sample_one_iteration"><code>ForestModel$sample_one_iteration()</code></a></p></li>
 <li><p><a href="#method-ForestModel-propagate_basis_update"><code>ForestModel$propagate_basis_update()</code></a></p></li>
 <li><p><a href="#method-ForestModel-propagate_residual_update"><code>ForestModel$propagate_residual_update()</code></a></p></li>
+<li><p><a href="#method-ForestModel-update_alpha"><code>ForestModel$update_alpha()</code></a></p></li>
+<li><p><a href="#method-ForestModel-update_beta"><code>ForestModel$update_beta()</code></a></p></li>
+<li><p><a href="#method-ForestModel-update_min_samples_leaf"><code>ForestModel$update_min_samples_leaf()</code></a></p></li>
+<li><p><a href="#method-ForestModel-update_max_depth"><code>ForestModel$update_max_depth()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-ForestModel-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new ForestModel object.</p><div class="section">
@@ -280,6 +284,86 @@ This function is run after the <code>Outcome</code> class's <code>update_data</c
 </div>
 <div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
+<p>NULL</p>
+</div>
+
+</div><p></p><hr><a id="method-ForestModel-update_alpha"></a><div class="section">
+<h3 id="method-update-alpha-">Method <code>update_alpha()</code><a class="anchor" aria-label="anchor" href="#method-update-alpha-"></a></h3>
+<p>Update alpha in the tree prior</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModel</span><span class="op">$</span><span class="fu">update_alpha</span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>alpha</code></dt>
+<dd><p>New value of alpha to be used</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>NULL</p>
+</div>
+
+</div><p></p><hr><a id="method-ForestModel-update_beta"></a><div class="section">
+<h3 id="method-update-beta-">Method <code>update_beta()</code><a class="anchor" aria-label="anchor" href="#method-update-beta-"></a></h3>
+<p>Update beta in the tree prior</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModel</span><span class="op">$</span><span class="fu">update_beta</span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>beta</code></dt>
+<dd><p>New value of beta to be used</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<p>NULL</p>
+</div>
+
+</div><p></p><hr><a id="method-ForestModel-update_min_samples_leaf"></a><div class="section">
+<h3 id="method-update-min-samples-leaf-">Method <code>update_min_samples_leaf()</code><a class="anchor" aria-label="anchor" href="#method-update-min-samples-leaf-"></a></h3>
+<p>Update min_samples_leaf in the tree prior</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModel</span><span class="op">$</span><span class="fu">update_min_samples_leaf</span><span class="op">(</span><span class="va">min_samples_leaf</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>min_samples_leaf</code></dt>
+<dd><p>New value of min_samples_leaf to be used</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<p>NULL</p>
+</div>
+
+</div><p></p><hr><a id="method-ForestModel-update_max_depth"></a><div class="section">
+<h3 id="method-update-max-depth-">Method <code>update_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-update-max-depth-"></a></h3>
+<p>Update max_depth in the tree prior</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModel</span><span class="op">$</span><span class="fu">update_max_depth</span><span class="op">(</span><span class="va">max_depth</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>max_depth</code></dt>
+<dd><p>New value of max_depth to be used</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>NULL</p>
 </div>
 
