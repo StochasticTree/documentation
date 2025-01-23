@@ -893,17 +893,17 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stochtree.preprocessing.CovariateTransformer" class="md-nav__link">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor" class="md-nav__link">
     <span class="md-ellipsis">
-      CovariateTransformer
+      CovariatePreprocessor
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="CovariateTransformer">
+    <nav class="md-nav" aria-label="CovariatePreprocessor">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stochtree.preprocessing.CovariateTransformer.fit" class="md-nav__link">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.fit" class="md-nav__link">
     <span class="md-ellipsis">
       fit
     </span>
@@ -912,7 +912,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stochtree.preprocessing.CovariateTransformer.transform" class="md-nav__link">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.transform" class="md-nav__link">
     <span class="md-ellipsis">
       transform
     </span>
@@ -921,7 +921,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stochtree.preprocessing.CovariateTransformer.fit_transform" class="md-nav__link">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.fit_transform" class="md-nav__link">
     <span class="md-ellipsis">
       fit_transform
     </span>
@@ -930,9 +930,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stochtree.preprocessing.CovariateTransformer.fetch_original_feature_indices" class="md-nav__link">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.fetch_original_feature_indices" class="md-nav__link">
     <span class="md-ellipsis">
       fetch_original_feature_indices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.to_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.preprocessing.CovariatePreprocessor.from_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_json
     </span>
   </a>
   
@@ -990,6 +1008,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.serialization.JSONSerializer.add_integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_integer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.serialization.JSONSerializer.add_boolean" class="md-nav__link">
     <span class="md-ellipsis">
       add_boolean
@@ -1017,6 +1044,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.serialization.JSONSerializer.add_integer_vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_integer_vector
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.serialization.JSONSerializer.add_string_vector" class="md-nav__link">
     <span class="md-ellipsis">
       add_string_vector
@@ -1029,6 +1065,15 @@
   <a href="#stochtree.serialization.JSONSerializer.get_scalar" class="md-nav__link">
     <span class="md-ellipsis">
       get_scalar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.serialization.JSONSerializer.get_integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_integer
     </span>
   </a>
   
@@ -1056,6 +1101,15 @@
   <a href="#stochtree.serialization.JSONSerializer.get_numeric_vector" class="md-nav__link">
     <span class="md-ellipsis">
       get_numeric_vector
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.serialization.JSONSerializer.get_integer_vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_integer_vector
     </span>
   </a>
   
@@ -1556,18 +1610,21 @@ triggers an initialization of the RNG based on
 
 
 
-<h2 id="stochtree.preprocessing.CovariateTransformer" class="doc doc-heading">
-            <code>stochtree.preprocessing.CovariateTransformer</code>
+<h2 id="stochtree.preprocessing.CovariatePreprocessor" class="doc doc-heading">
+            <code>stochtree.preprocessing.CovariatePreprocessor</code>
 
 
-<a href="#stochtree.preprocessing.CovariateTransformer" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#stochtree.preprocessing.CovariatePreprocessor" class="headerlink" title="Permanent link">#</a></h2>
 
 
     <div class="doc doc-contents first">
 
 
-        <p>Class that transforms covariates to a format that can be used to define tree splits. 
-Modeled after the <a href="https://scikit-learn.org/1.5/modules/preprocessing.html">scikit-learn preprocessing classes</a>.</p>
+        <p>Preprocessing engine for covariates provided as either <code>np.array</code> or <code>pd.DataFrame</code>, which standardizes inputs as a <code>np.array</code>.</p>
+<p><code>CovariatePreprocessor</code> uses <a href="https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes">column dtypes</a> in provided 
+dataframes to convert string / categorical variables to numeric variables, either by mapping ordinal variables to integers 
+or by one-hot encoding unordered categorical variables.</p>
+<p>This class is modeled after the <a href="https://scikit-learn.org/1.5/modules/preprocessing.html">scikit-learn preprocessing classes</a>.</p>
 
 
 
@@ -1590,15 +1647,15 @@ Modeled after the <a href="https://scikit-learn.org/1.5/modules/preprocessing.ht
 <div class="doc doc-object doc-function">
 
 
-<h3 id="stochtree.preprocessing.CovariateTransformer.fit" class="doc doc-heading">
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.fit" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">fit</span><span class="p">(</span><span class="n">covariates</span><span class="p">)</span></code>
 
-<a href="#stochtree.preprocessing.CovariateTransformer.fit" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#stochtree.preprocessing.CovariatePreprocessor.fit" class="headerlink" title="Permanent link">#</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Fits a <code>CovariateTransformer</code> by unpacking (and storing) data type information on the input (raw) covariates
+        <p>Fits a <code>CovariatePreprocessor</code> by unpacking (and storing) data type information on the input (raw) covariates
 and then converting to a numpy array which can be passed to a tree ensemble sampler.</p>
 <p>If <code>covariates</code> is a <code>pd.DataFrame</code>, <a href="https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes">column dtypes</a> 
 will be handled as follows:</p>
@@ -1659,10 +1716,10 @@ and <code>sklearn.preprocessing.OrdinalEncoder</code>.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="stochtree.preprocessing.CovariateTransformer.transform" class="doc doc-heading">
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.transform" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">transform</span><span class="p">(</span><span class="n">covariates</span><span class="p">)</span></code>
 
-<a href="#stochtree.preprocessing.CovariateTransformer.transform" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#stochtree.preprocessing.CovariatePreprocessor.transform" class="headerlink" title="Permanent link">#</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -1734,10 +1791,10 @@ categorical features).</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="stochtree.preprocessing.CovariateTransformer.fit_transform" class="doc doc-heading">
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.fit_transform" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">fit_transform</span><span class="p">(</span><span class="n">covariates</span><span class="p">)</span></code>
 
-<a href="#stochtree.preprocessing.CovariateTransformer.fit_transform" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#stochtree.preprocessing.CovariatePreprocessor.fit_transform" class="headerlink" title="Permanent link">#</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -1807,10 +1864,10 @@ categorical features).</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="stochtree.preprocessing.CovariateTransformer.fetch_original_feature_indices" class="doc doc-heading">
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.fetch_original_feature_indices" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">fetch_original_feature_indices</span><span class="p">()</span></code>
 
-<a href="#stochtree.preprocessing.CovariateTransformer.fetch_original_feature_indices" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#stochtree.preprocessing.CovariatePreprocessor.fetch_original_feature_indices" class="headerlink" title="Permanent link">#</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -1841,6 +1898,95 @@ If a single categorical feature were one-hot encoded into 5 binary features,
 this method would return a list <code>[0,0,0,0,0]</code>. If the transformer merely passes
 through <code>k</code> numeric features, this method would return a list <code>[0,...,k-1]</code>.</p>
               </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.to_json" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">to_json</span><span class="p">()</span></code>
+
+<a href="#stochtree.preprocessing.CovariatePreprocessor.to_json" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Converts a covariate preprocessor to JSON string representation (which can then be saved to a file or 
+processed using the <code>json</code> library)</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.preprocessing.CovariatePreprocessor.from_json" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">from_json</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span></code>
+
+<a href="#stochtree.preprocessing.CovariatePreprocessor.from_json" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Converts a JSON string to an in-memory BART model.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>json_string</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
       </tbody>
@@ -2079,6 +2225,86 @@ through <code>k</code> numeric features, this method would return a list <code>[
             <td>
               <div class="doc-md-description">
                 <p>Numeric value to be stored</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>subfolder_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of "subfolder" under which <code>field_name</code> to be stored in the json hierarchy</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.serialization.JSONSerializer.add_integer" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_integer</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_value</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.serialization.JSONSerializer.add_integer" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds an integer value to a json object</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the json field / label under which the numeric value will be stored</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_value</code>
+            </td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Integer value to be stored</p>
               </div>
             </td>
             <td>
@@ -2351,6 +2577,86 @@ through <code>k</code> numeric features, this method would return a list <code>[
 <div class="doc doc-object doc-function">
 
 
+<h3 id="stochtree.serialization.JSONSerializer.add_integer_vector" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_integer_vector</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_vector</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.serialization.JSONSerializer.add_integer_vector" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Adds a integer vector (stored as a numpy array) to a json object</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the json field / label under which the integer vector will be stored</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_vector</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Numpy array containing the vector to be stored in json. Should be one-dimensional.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>subfolder_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of "subfolder" under which <code>field_name</code> to be stored in the json hierarchy</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="stochtree.serialization.JSONSerializer.add_string_vector" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">add_string_vector</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_vector</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -2495,6 +2801,70 @@ through <code>k</code> numeric features, this method would return a list <code>[
 <div class="doc doc-object doc-function">
 
 
+<h3 id="stochtree.serialization.JSONSerializer.get_integer" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_integer</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.serialization.JSONSerializer.get_integer" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieves an integer value from a json object</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the json field / label under which the numeric value is stored</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>subfolder_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of "subfolder" under which <code>field_name</code> is stored in the json hierarchy</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="stochtree.serialization.JSONSerializer.get_boolean" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">get_boolean</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
@@ -2567,7 +2937,7 @@ through <code>k</code> numeric features, this method would return a list <code>[
 
     <div class="doc doc-contents ">
 
-        <p>Retrieve a string to a json object</p>
+        <p>Retrieve a string from a json object</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2590,7 +2960,7 @@ through <code>k</code> numeric features, this method would return a list <code>[
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Name of the json field / label under which the numeric value is stored</p>
+                <p>Name of the json field / label under which the string is stored</p>
               </div>
             </td>
             <td>
@@ -2631,7 +3001,7 @@ through <code>k</code> numeric features, this method would return a list <code>[
 
     <div class="doc doc-contents ">
 
-        <p>Adds a string to a json object</p>
+        <p>Retrieve numeric vector from a json object</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2655,6 +3025,70 @@ through <code>k</code> numeric features, this method would return a list <code>[
             <td>
               <div class="doc-md-description">
                 <p>Name of the json field / label under which the numeric vector is stored</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>subfolder_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of "subfolder" under which <code>field_name</code> to be stored in the json hierarchy</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.serialization.JSONSerializer.get_integer_vector" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_integer_vector</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">subfolder_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.serialization.JSONSerializer.get_integer_vector" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Retrieve integer vector from a json object</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>field_name</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the json field / label under which the integer vector is stored</p>
               </div>
             </td>
             <td>
