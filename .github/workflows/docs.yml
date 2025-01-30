@@ -79,9 +79,7 @@ jobs:
       - name: Build R doc site
         run: |
           cd stochtree_repo
-          Rscript cran-bootstrap.R 1
-          cp _pkgdown.yml stochtree_cran/_pkgdown.yml
-          cp R_README.md stochtree_cran/README.md
+          Rscript cran-bootstrap.R 1 1
           cd ..
           mkdir -p docs/R_docs/pkgdown
           Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
