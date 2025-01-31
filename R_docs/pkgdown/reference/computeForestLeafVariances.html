@@ -11,7 +11,7 @@ leaf model does not have a stochastic scale parameter."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,7 @@ leaf model does not have a stochastic scale parameter."></head><body>
     <li><h6 class="dropdown-header" data-toc-skip>Prototype Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/CustomSamplingRoutine.html">Custom Sampling Routines in StochTree</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -69,7 +70,7 @@ leaf model does not have a stochastic scale parameter.</p>
 
 
 <dl><dt id="arg-model-object">model_object<a class="anchor" aria-label="anchor" href="#arg-model-object"></a></dt>
-<dd><p>Object of type <code>bartmodel</code> or <code>bcf</code> corresponding to a BART / BCF model with at least one forest sample</p></dd>
+<dd><p>Object of type <code>bartmodel</code> or <code>bcfmodel</code> corresponding to a BART / BCF model with at least one forest sample</p></dd>
 
 
 <dt id="arg-forest-type">forest_type<a class="anchor" aria-label="anchor" href="#arg-forest-type"></a></dt>
@@ -86,7 +87,7 @@ Valid inputs depend on the model type, and whether or not a given forest was sam
 <dt id="arg-forest-inds">forest_inds<a class="anchor" aria-label="anchor" href="#arg-forest-inds"></a></dt>
 <dd><p>(Optional) Indices of the forest sample(s) for which to compute leaf indices. If not provided,
 this function will return leaf indices for every sample of a forest.
-This function uses 1-indexing, so the first forest sample corresponds to <code>forest_num = 1</code>, and so on.</p></dd>
+This function uses 0-indexing, so the first forest sample corresponds to <code>forest_num = 0</code>, and so on.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -94,6 +95,20 @@ This function uses 1-indexing, so the first forest sample corresponds to <code>f
     <p>Vector of size <code>length(forest_inds)</code> with the leaf scale parameter for each requested forest.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">5</span> <span class="op">+</span> <span class="fl">10</span><span class="op">*</span><span class="op">(</span><span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, num_gfr<span class="op">=</span><span class="fl">0</span>, num_mcmc<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.004616606 0.004563677 0.004172289 0.004077372 0.003744737 0.003575163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.003482369 0.003322222 0.003723427 0.003525577</span>
+<span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.004616606</span>
+<span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.004563677 0.004077372 0.003575163</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

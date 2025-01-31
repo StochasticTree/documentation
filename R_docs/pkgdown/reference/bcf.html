@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,7 @@
     <li><h6 class="dropdown-header" data-toc-skip>Prototype Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/CustomSamplingRoutine.html">Custom Sampling Routines in StochTree</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -59,19 +60,19 @@
 <span>  <span class="va">X_train</span>,</span>
 <span>  <span class="va">Z_train</span>,</span>
 <span>  <span class="va">y_train</span>,</span>
-<span>  pi_train <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_ids_train <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  propensity_train <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rfx_group_ids_train <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis_train <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  X_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  Z_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pi_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_ids_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  propensity_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rfx_group_ids_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_gfr <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  num_burnin <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  num_mcmc <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  previous_model_json <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  warmstart_sample_num <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  previous_model_warmstart_sample_num <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  general_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mu_forest_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  tau_forest_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -99,17 +100,17 @@ that the column is ordered categorical).</p></dd>
 <dd><p>Outcome to be modeled by the ensemble.</p></dd>
 
 
-<dt id="arg-pi-train">pi_train<a class="anchor" aria-label="anchor" href="#arg-pi-train"></a></dt>
+<dt id="arg-propensity-train">propensity_train<a class="anchor" aria-label="anchor" href="#arg-propensity-train"></a></dt>
 <dd><p>(Optional) Vector of propensity scores. If not provided, this will be estimated from the data.</p></dd>
 
 
-<dt id="arg-group-ids-train">group_ids_train<a class="anchor" aria-label="anchor" href="#arg-group-ids-train"></a></dt>
+<dt id="arg-rfx-group-ids-train">rfx_group_ids_train<a class="anchor" aria-label="anchor" href="#arg-rfx-group-ids-train"></a></dt>
 <dd><p>(Optional) Group labels used for an additive random effects model.</p></dd>
 
 
 <dt id="arg-rfx-basis-train">rfx_basis_train<a class="anchor" aria-label="anchor" href="#arg-rfx-basis-train"></a></dt>
 <dd><p>(Optional) Basis for "random-slope" regression in an additive random effects model.
-If <code>group_ids_train</code> is provided with a regression basis, an intercept-only random effects model
+If <code>rfx_group_ids_train</code> is provided with a regression basis, an intercept-only random effects model
 will be estimated.</p></dd>
 
 
@@ -123,11 +124,11 @@ that of <code>X_train</code>.</p></dd>
 <dd><p>(Optional) Test set of (continuous or binary) treatment assignments.</p></dd>
 
 
-<dt id="arg-pi-test">pi_test<a class="anchor" aria-label="anchor" href="#arg-pi-test"></a></dt>
+<dt id="arg-propensity-test">propensity_test<a class="anchor" aria-label="anchor" href="#arg-propensity-test"></a></dt>
 <dd><p>(Optional) Vector of propensity scores. If not provided, this will be estimated from the data.</p></dd>
 
 
-<dt id="arg-group-ids-test">group_ids_test<a class="anchor" aria-label="anchor" href="#arg-group-ids-test"></a></dt>
+<dt id="arg-rfx-group-ids-test">rfx_group_ids_test<a class="anchor" aria-label="anchor" href="#arg-rfx-group-ids-test"></a></dt>
 <dd><p>(Optional) Test set group labels used for an additive random effects model.
 We do not currently support (but plan to in the near future), test set evaluation for group labels
 that were not in the training set.</p></dd>
@@ -153,8 +154,8 @@ that were not in the training set.</p></dd>
 <dd><p>(Optional) JSON string containing a previous BCF model. This can be used to "continue" a sampler interactively after inspecting the samples or to run parallel chains "warm-started" from existing forest samples. Default: <code>NULL</code>.</p></dd>
 
 
-<dt id="arg-warmstart-sample-num">warmstart_sample_num<a class="anchor" aria-label="anchor" href="#arg-warmstart-sample-num"></a></dt>
-<dd><p>(Optional) Sample number from <code>previous_model_json</code> that will be used to warmstart this BCF sampler. One-indexed (so that the first sample is used for warm-start by setting <code>warmstart_sample_num = 1</code>). Default: <code>NULL</code>.</p></dd>
+<dt id="arg-previous-model-warmstart-sample-num">previous_model_warmstart_sample_num<a class="anchor" aria-label="anchor" href="#arg-previous-model-warmstart-sample-num"></a></dt>
+<dd><p>(Optional) Sample number from <code>previous_model_json</code> that will be used to warmstart this BCF sampler. One-indexed (so that the first sample is used for warm-start by setting <code>previous_model_warmstart_sample_num = 1</code>). Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-general-params">general_params<a class="anchor" aria-label="anchor" href="#arg-general-params"></a></dt>
@@ -186,7 +187,7 @@ that were not in the training set.</p></dd>
 <li><p><code>min_samples_leaf</code> Minimum allowable size of a leaf, in terms of training samples, in the prognostic forest. Default: <code>5</code>.</p></li>
 <li><p><code>max_depth</code> Maximum depth of any tree in the ensemble in the prognostic forest. Default: <code>10</code>. Can be overridden with <code>-1</code> which does not enforce any depth limits on trees.</p></li>
 <li><p><code>variable_weights</code> Numeric weights reflecting the relative probability of splitting on each variable in the prognostic forest. Does not need to sum to 1 but cannot be negative. Defaults to <code>rep(1/ncol(X_train), ncol(X_train))</code> if not set here.</p></li>
-<li><p><code>sample_sigma2_leaf</code> Whether or not to update the leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>. Cannot (currently) be set to true if <code>ncol(W_train)&gt;1</code>. Default: <code>FALSE</code>.</p></li>
+<li><p><code>sample_sigma2_leaf</code> Whether or not to update the leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>.</p></li>
 <li><p><code>sigma2_leaf_init</code> Starting value of leaf node scale parameter. Calibrated internally as <code>1/num_trees</code> if not set here.</p></li>
 <li><p><code>sigma2_leaf_shape</code> Shape parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Default: <code>3</code>.</p></li>
 <li><p><code>sigma2_leaf_scale</code> Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</p></li>
@@ -202,7 +203,7 @@ that were not in the training set.</p></dd>
 <li><p><code>min_samples_leaf</code> Minimum allowable size of a leaf, in terms of training samples, in the treatment effect forest. Default: <code>5</code>.</p></li>
 <li><p><code>max_depth</code> Maximum depth of any tree in the ensemble in the treatment effect forest. Default: <code>5</code>. Can be overridden with <code>-1</code> which does not enforce any depth limits on trees.</p></li>
 <li><p><code>variable_weights</code> Numeric weights reflecting the relative probability of splitting on each variable in the treatment effect forest. Does not need to sum to 1 but cannot be negative. Defaults to <code>rep(1/ncol(X_train), ncol(X_train))</code> if not set here.</p></li>
-<li><p><code>sample_sigma2_leaf</code> Whether or not to update the leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>. Cannot (currently) be set to true if <code>ncol(W_train)&gt;1</code>. Default: <code>FALSE</code>.</p></li>
+<li><p><code>sample_sigma2_leaf</code> Whether or not to update the leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>. Cannot (currently) be set to true if <code>ncol(Z_train)&gt;1</code>. Default: <code>FALSE</code>.</p></li>
 <li><p><code>sigma2_leaf_init</code> Starting value of leaf node scale parameter. Calibrated internally as <code>1/num_trees</code> if not set here.</p></li>
 <li><p><code>sigma2_leaf_shape</code> Shape parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Default: <code>3</code>.</p></li>
 <li><p><code>sigma2_leaf_scale</code> Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</p></li>
@@ -273,14 +274,17 @@ that were not in the training set.</p></dd>
 <span class="r-in"><span><span class="va">mu_train</span> <span class="op">&lt;-</span> <span class="va">mu_x</span><span class="op">[</span><span class="va">train_inds</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">tau_test</span> <span class="op">&lt;-</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">tau_train</span> <span class="op">&lt;-</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">train_inds</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">bcf_model</span> <span class="op">&lt;-</span> <span class="fu">bcf</span><span class="op">(</span>X_train <span class="op">=</span> <span class="va">X_train</span>, Z_train <span class="op">=</span> <span class="va">Z_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, pi_train <span class="op">=</span> <span class="va">pi_train</span>, </span></span>
-<span class="r-in"><span>                 X_test <span class="op">=</span> <span class="va">X_test</span>, Z_test <span class="op">=</span> <span class="va">Z_test</span>, pi_test <span class="op">=</span> <span class="va">pi_test</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># plot(rowMeans(bcf_model$mu_hat_test), mu_test, xlab = "predicted", </span></span></span>
-<span class="r-in"><span><span class="co">#      ylab = "actual", main = "Prognostic function")</span></span></span>
-<span class="r-in"><span><span class="co"># abline(0,1,col="red",lty=3,lwd=3)</span></span></span>
-<span class="r-in"><span><span class="co"># plot(rowMeans(bcf_model$tau_hat_test), tau_test, xlab = "predicted", </span></span></span>
-<span class="r-in"><span><span class="co">#      ylab = "actual", main = "Treatment effect")</span></span></span>
-<span class="r-in"><span><span class="co"># abline(0,1,col="red",lty=3,lwd=3)</span></span></span>
+<span class="r-in"><span><span class="va">bcf_model</span> <span class="op">&lt;-</span> <span class="fu">bcf</span><span class="op">(</span>X_train <span class="op">=</span> <span class="va">X_train</span>, Z_train <span class="op">=</span> <span class="va">Z_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, </span></span>
+<span class="r-in"><span>                 propensity_train <span class="op">=</span> <span class="va">pi_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, Z_test <span class="op">=</span> <span class="va">Z_test</span>, </span></span>
+<span class="r-in"><span>                 propensity_test <span class="op">=</span> <span class="va">pi_test</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model</span><span class="op">$</span><span class="va">mu_hat_test</span><span class="op">)</span>, <span class="va">mu_test</span>, xlab <span class="op">=</span> <span class="st">"predicted"</span>, </span></span>
+<span class="r-in"><span>     ylab <span class="op">=</span> <span class="st">"actual"</span>, main <span class="op">=</span> <span class="st">"Prognostic function"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="fl">3</span>,lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bcf-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span>, <span class="va">tau_test</span>, xlab <span class="op">=</span> <span class="st">"predicted"</span>, </span></span>
+<span class="r-in"><span>     ylab <span class="op">=</span> <span class="st">"actual"</span>, main <span class="op">=</span> <span class="st">"Treatment effect"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="fl">3</span>,lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="bcf-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
