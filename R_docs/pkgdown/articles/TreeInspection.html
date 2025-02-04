@@ -145,17 +145,17 @@ feature.</p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="fl">10</span>, <span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 14 33 25 26 28 23 29 17 26 37</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 17 30 31 25 24 32 31 32 23 27</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_aggregate_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2175 2599 2824 2952 2682 2566 2700 2285 2503 3880</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 2212 2437 2739 3330 2586 2812 2351 3141 2449 2966</span></span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s
 dig deeper and look at individual trees, starting with the first tree in
 the last “grow-from-root” sample.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span> <span class="op">=</span> <span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_granular_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
 <span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">1</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 2</span></span></code></pre></div>
 <p>This tree has a single split on the only “important” feature. Now,
 let’s look at the second tree.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -164,10 +164,10 @@ let’s look at the second tree.</p>
 <p>This tree also only splits on the important feature.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 1 0 0 0 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 1 0 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">30</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 1 0 0 0 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 1 1 0 0 0 0 0 0</span></span></code></pre></div>
 <p>We see that “later” trees are splitting on other features, but we
 also note that these trees are fitting an outcome that is already
 residualized many “relevant splits” made by trees 1 and 2.</p>
@@ -198,8 +198,10 @@ scikit-learn vignette</a></p>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.496 else to node 2</span></span>
-<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.341</span></span>
-<span><span class="co">#&gt;  node=2 is a leaf node with value=0.369</span></span></code></pre></div>
+<span><span class="co">#&gt;  node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.249 else to node 4</span></span>
+<span><span class="co">#&gt;  node=2 is a leaf node with value=0.395</span></span>
+<span><span class="co">#&gt;      node=3 is a leaf node with value=-0.452</span></span>
+<span><span class="co">#&gt;      node=4 is a leaf node with value=-0.119</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
