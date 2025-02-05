@@ -51,7 +51,23 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="stochtree-010">stochtree 0.1.0<a class="anchor" aria-label="anchor" href="#stochtree-010"></a></h2>
-<ul><li>Initial CRAN submission.</li>
+<ul><li>Initial release on CRAN.</li>
+<li>Support for sampling stochastic tree ensembles using two algorithms: MCMC and Grow-From-Root (GFR)</li>
+<li>High-level model types supported:
+<ul><li>Supervised learning with constant leaves or user-specified leaf regression models</li>
+<li>Causal effect estimation with binary, continuous, or multivariate treatments</li>
+</ul></li>
+<li>Additional high-level modeling features:
+<ul><li>Forest-based variance function estimation (heteroskedasticity)</li>
+<li>Additive (univariate or multivariate) group random effects</li>
+<li>Multi-chain sampling and support for parallelism</li>
+<li>“Warm-start” initialization of MCMC forest samplers via the Grow-From-Root (GFR) algorithm</li>
+<li>Automated preprocessing / handling of categorical variables</li>
+</ul></li>
+<li>Low-level interface:
+<ul><li>Ability to combine a forest sampler with other (additive) model terms, without using C++</li>
+<li>Combine and sample an arbitrary number of forests or random effects terms</li>
+</ul></li>
 </ul></div>
   </main></div>
 

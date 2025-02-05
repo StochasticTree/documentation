@@ -169,7 +169,7 @@ default in <code>stochtree</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -210,7 +210,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.97</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart"></a>
@@ -219,8 +219,8 @@ warm-start</p>
 initialization.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -260,7 +260,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.99</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.88</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -381,7 +381,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.84</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.95</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-1">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-1"></a>
@@ -390,7 +390,7 @@ warm-start</p>
 initialization.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -431,7 +431,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.67</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.94</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -552,7 +552,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-2">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-2"></a>
@@ -561,7 +561,7 @@ warm-start</p>
 initialization.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -602,7 +602,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.88</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -630,7 +630,7 @@ X_4 &amp;\sim N\left(X_2,1\right)\\
 </h4>
 <p>We draw from the DGP defined above</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
@@ -721,7 +721,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.99</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-3">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-3"></a>
@@ -730,7 +730,7 @@ warm-start</p>
 initialization.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -771,7 +771,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.93</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.99</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -847,9 +847,9 @@ BART with random effects is simply a matter of modifying the below code
 snippet by setting <code>num_gfr &lt;- 0</code> and
 <code>num_mcmc</code> &gt; 0).</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -901,7 +901,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.96</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.95</span></span></code></pre></div>
 <p>It is clear that causal inference is much more difficult in the
 presence of <strong>both</strong> strong covariate-dependent prognostic
 effects and strong group-level random effects. In this sense, proper
@@ -989,8 +989,8 @@ and treatment effect
 forests.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1035,15 +1035,15 @@ forests.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.948</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.828</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_tau_mean</span> <span class="op">-</span> <span class="va">tau_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.577776</span></span>
+<span><span class="co">#&gt; [1] 1.665139</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_outcome_mean</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2.010262</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.015857</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="mcmc-covariate-subset-in-taux">MCMC, covariate subset in
@@ -1055,8 +1055,8 @@ only covariate
 in the treatment effect forest.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1101,15 +1101,15 @@ in the treatment effect forest.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.96</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.82</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_mean</span> <span class="op">-</span> <span class="va">tau_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.282745</span></span>
+<span><span class="co">#&gt; [1] 1.472791</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_outcome_mean</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.915804</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.871234</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="warmstart-full-covariate-set-in-taux">Warmstart, full covariate set in
@@ -1124,7 +1124,7 @@ forests.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1170,15 +1170,15 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.952</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.872</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">tau_test</span> <span class="op">-</span> <span class="va">test_tau_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.646956</span></span>
+<span><span class="co">#&gt; [1] 1.569408</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">test_outcome_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2.055564</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.901226</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="warmstart-covariate-subset-in-taux">Warmstart, covariate subset in
@@ -1191,7 +1191,7 @@ in the treatment effect forest.</p>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1237,15 +1237,15 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.968</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.904</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">tau_test</span> <span class="op">-</span> <span class="va">test_tau_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.309086</span></span>
+<span><span class="co">#&gt; [1] 1.397716</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">test_outcome_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.915243</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.921583</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1324,7 +1324,7 @@ default in <code>stochtree</code>.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1365,7 +1365,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.94</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.96</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-4">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-4"></a>
@@ -1374,8 +1374,8 @@ warm-start</p>
 initialization.</p>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
 <span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>keep_every <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
@@ -1415,7 +1415,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.91</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.96</span></span></code></pre></div>
 </div>
 </div>
 </div>

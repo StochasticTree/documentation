@@ -154,17 +154,10 @@ trees, and exposes functionality to run a forest sampler
 <span>  <span class="va">forest_samples</span>,</span>
 <span>  <span class="va">active_forest</span>,</span>
 <span>  <span class="va">rng</span>,</span>
-<span>  <span class="va">feature_types</span>,</span>
-<span>  <span class="va">leaf_model_int</span>,</span>
-<span>  <span class="va">leaf_model_scale</span>,</span>
-<span>  <span class="va">variable_weights</span>,</span>
-<span>  <span class="va">a_forest</span>,</span>
-<span>  <span class="va">b_forest</span>,</span>
-<span>  <span class="va">global_scale</span>,</span>
-<span>  cutpoint_grid_size <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  <span class="va">forest_model_config</span>,</span>
+<span>  <span class="va">global_model_config</span>,</span>
 <span>  keep_forest <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>  gfr <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>  pre_initialized <span class="op">=</span> <span class="cn">F</span></span>
+<span>  gfr <span class="op">=</span> <span class="cn">T</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -190,48 +183,20 @@ trees, and exposes functionality to run a forest sampler
 <dd><p>Wrapper around C++ random number generator</p></dd>
 
 
-<dt><code>feature_types</code></dt>
-<dd><p>Vector specifying the type of all p covariates in <code>forest_dataset</code> (0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p></dd>
+<dt><code>forest_model_config</code></dt>
+<dd><p>ForestModelConfig object containing forest model parameters and settings</p></dd>
 
 
-<dt><code>leaf_model_int</code></dt>
-<dd><p>Integer specifying the leaf model type (0 = constant leaf, 1 = univariate leaf regression, 2 = multivariate leaf regression)</p></dd>
-
-
-<dt><code>leaf_model_scale</code></dt>
-<dd><p>Scale parameter used in the leaf node model (should be a q x q matrix where q is the dimensionality of the basis and is only &gt;1 when <code>leaf_model_int = 2</code>)</p></dd>
-
-
-<dt><code>variable_weights</code></dt>
-<dd><p>Vector specifying sampling probability for all p covariates in <code>forest_dataset</code></p></dd>
-
-
-<dt><code>a_forest</code></dt>
-<dd><p>Shape parameter on variance forest model (if applicable)</p></dd>
-
-
-<dt><code>b_forest</code></dt>
-<dd><p>Scale parameter on variance forest model (if applicable)</p></dd>
-
-
-<dt><code>global_scale</code></dt>
-<dd><p>Global variance parameter</p></dd>
-
-
-<dt><code>cutpoint_grid_size</code></dt>
-<dd><p>(Optional) Number of unique cutpoints to consider (default: <code>500</code>, currently only used when <code>GFR = TRUE</code>)</p></dd>
+<dt><code>global_model_config</code></dt>
+<dd><p>GlobalModelConfig object containing global model parameters and settings</p></dd>
 
 
 <dt><code>keep_forest</code></dt>
-<dd><p>(Optional) Whether the updated forest sample should be saved to <code>forest_samples</code>. Default: <code>T</code>.</p></dd>
+<dd><p>(Optional) Whether the updated forest sample should be saved to <code>forest_samples</code>. Default: <code>TRUE</code>.</p></dd>
 
 
 <dt><code>gfr</code></dt>
-<dd><p>(Optional) Whether or not the forest should be sampled using the "grow-from-root" (GFR) algorithm. Default: <code>T</code>.</p></dd>
-
-
-<dt><code>pre_initialized</code></dt>
-<dd><p>(Optional) Whether or not the leaves are pre-initialized outside of the sampling loop (before any samples are drawn). In multi-forest implementations like BCF, this is true, though in the single-forest supervised learning implementation, we can let C++ do the initialization. Default: <code>F</code>.</p></dd>
+<dd><p>(Optional) Whether or not the forest should be sampled using the "grow-from-root" (GFR) algorithm. Default: <code>TRUE</code>.</p></dd>
 
 
 </dl><p></p></div>

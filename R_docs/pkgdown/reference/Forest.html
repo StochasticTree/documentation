@@ -61,6 +61,10 @@
 <dd><p>External pointer to a C++ TreeEnsemble class</p></dd>
 
 
+<dt><code>internal_forest_is_empty</code></dt>
+<dd><p>Whether the forest has not yet been "initialized" such that its <code>predict</code> function can be called.</p></dd>
+
+
 </dl><p></p></div>
     </div>
     <div class="section level2">
@@ -85,6 +89,7 @@
 <li><p><a href="#method-Forest-get_forest_split_counts"><code>Forest$get_forest_split_counts()</code></a></p></li>
 <li><p><a href="#method-Forest-tree_max_depth"><code>Forest$tree_max_depth()</code></a></p></li>
 <li><p><a href="#method-Forest-average_max_depth"><code>Forest$average_max_depth()</code></a></p></li>
+<li><p><a href="#method-Forest-is_empty"><code>Forest$is_empty()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-Forest-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new Forest object.</p><div class="section">
@@ -431,6 +436,28 @@ After trees are initialized with constant root node predictions, their root pred
 <div class="section">
 <h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
 <p>Average maximum depth</p>
+</div>
+
+</div><p></p><hr><a id="method-Forest-is_empty"></a><div class="section">
+<h3 id="method-is-empty-">Method <code>is_empty()</code><a class="anchor" aria-label="anchor" href="#method-is-empty-"></a></h3>
+<p>When a forest object is created, it is "empty" in the sense that none
+of its component trees have leaves with values. There are two ways to
+"initialize" a Forest object. First, the <code>set_root_leaves()</code> method
+simply initializes every tree in the forest to a single node carrying
+the same (user-specified) leaf value. Second, the <code>prepare_for_sampler()</code>
+method initializes every tree in the forest to a single node with the
+same value and also propagates this information through to a ForestModel
+object, which must be synchronized with a Forest during a forest
+sampler loop.</p><div class="section">
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">is_empty</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
+<p><code>TRUE</code> if a Forest has not yet been initialized with a constant
+root value, <code>FALSE</code> otherwise if the forest has already been
+initialized / grown.</p>
 </div>
 
 </div>
