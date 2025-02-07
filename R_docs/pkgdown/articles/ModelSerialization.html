@@ -157,15 +157,15 @@ in <span class="citation">Hahn, Murray, and Carvalho (2020)</span>.</p>
 <span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
-<span><span class="va">mu_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
-<span><span class="va">tau_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">prognostic_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">treatment_effect_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">bcf_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bcf.html">bcf</a></span><span class="op">(</span></span>
 <span>    X_train <span class="op">=</span> <span class="va">X_train</span>, Z_train <span class="op">=</span> <span class="va">Z_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, propensity_train <span class="op">=</span> <span class="va">pi_train</span>, </span>
 <span>    rfx_group_ids_train <span class="op">=</span> <span class="va">rfx_group_ids_train</span>, rfx_basis_train <span class="op">=</span> <span class="va">rfx_basis_train</span>, </span>
 <span>    X_test <span class="op">=</span> <span class="va">X_test</span>, Z_test <span class="op">=</span> <span class="va">Z_test</span>, propensity_test <span class="op">=</span> <span class="va">pi_test</span>, </span>
 <span>    rfx_group_ids_test <span class="op">=</span> <span class="va">rfx_group_ids_test</span>, rfx_basis_test <span class="op">=</span> <span class="va">rfx_basis_test</span>, </span>
 <span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
-<span>    mu_forest_params <span class="op">=</span> <span class="va">mu_forest_params</span>, tau_forest_params <span class="op">=</span> <span class="va">tau_forest_params</span></span>
+<span>    prognostic_forest_params <span class="op">=</span> <span class="va">prognostic_forest_params</span>, treatment_effect_forest_params <span class="op">=</span> <span class="va">treatment_effect_forest_params</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
