@@ -1,7 +1,21 @@
 # Getting Started
 
 `stochtree` is composed of a C++ "core" and R / Python interfaces to that core.
-Details on installation and use are available below:
+Below, we detail how to install the R / Python packages, or work directly with the C++ codebase.
+
+## R Package
+
+The R package can be installed from CRAN via
+
+```
+install.packages("stochtree")
+```
+
+The development version of `stochtree` can be installed from Github via
+
+```
+remotes::install_github("StochasticTree/stochtree", ref="r-dev")
+```
 
 ## Python Package
 
@@ -39,7 +53,7 @@ Then install the package from github via pip
 pip install git+https://github.com/StochasticTree/stochtree.git
 ```
 
-(*Note*: if you'd also like to run `stochtree`'s notebook examples, you will also need jupyterlab, seaborn, and matplotlib)
+(*Note*: if you'd like to run `stochtree`'s notebook examples, you will also need `jupyterlab`, `seaborn`, and `matplotlib`)
 
 ```{bash}
 conda install matplotlib seaborn
@@ -70,18 +84,10 @@ Then install stochtree via
 pip install git+https://github.com/StochasticTree/stochtree.git
 ```
 
-As above, if you'd like to run the notebook examples in the `demo/` subfolder, you will also need jupyterlab, seaborn, and matplotlib and you will have to [clone the repo](#cloning-the-repository)
+As above, if you'd like to run the notebook examples in the `demo/` subfolder, you will also need `jupyterlab`, `seaborn`, and `matplotlib` and you will have to [clone the repo](#cloning-the-repository)
 
 ```{bash}
 pip install matplotlib seaborn jupyterlab
-```
-
-## R Package
-
-The package can be installed in R via
-
-```
-remotes::install_github("StochasticTree/stochtree", ref="r-dev")
 ```
 
 ## C++ Core

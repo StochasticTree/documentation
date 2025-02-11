@@ -40,6 +40,7 @@ theme:
 nav:
   - Home: index.md
   - 'Getting Started': getting-started.md
+  - 'About StochTree': about.md
   - 'R Package': 
     - 'Overview': R_docs/index.md
     - 'Pkgdown Site': 'R_docs/pkgdown/index.html'
@@ -61,11 +62,11 @@ nav:
       - 'BCF': python_docs/demo/causal_inference.ipynb
   - 'C++ Core API and Architecture':
     - cpp_docs/index.md
-    - 'Tree Data Structure': cpp_docs/tree.md
-    - 'Tracking Data Structure': cpp_docs/tracking.md
+    - 'Tracking Data Structures': cpp_docs/tracking.md
     - 'C++ Doxygen Site': 'cpp_docs/doxygen/index.html'
   - 'Development': 
     - 'Overview': development/index.md
+    - 'Contributing': development/contributing.md
     - 'Roadmap': development/roadmap.md
 extra:
   social:
@@ -89,6 +90,11 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 plugins:
   - offline
   - search
