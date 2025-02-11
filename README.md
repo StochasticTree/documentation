@@ -58,9 +58,7 @@ To build the R docs, first run a script that lays out the package as needed
 
 ```{bash}
 cd stochtree_repo
-Rscript cran-bootstrap.R 1
-cp _pkgdown.yml stochtree_cran/_pkgdown.yml
-cp R_README.md stochtree_cran/README.md
+Rscript cran-bootstrap.R 1 1 1
 cd ..
 ```
 

@@ -1,4 +1,4 @@
-# Forest Sampling Tracker API
+# Forest Sampling Tracker
 
 A truly minimalist tree ensemble library only needs 
 
@@ -21,8 +21,3 @@ These operations both perform unnecessary computation which can be avoided with 
 
 1. A mapping from dataset row index to leaf node id for every tree in an ensemble (so that we can skip the tree traversal during prediction)
 2. A mapping from leaf node id to dataset row indices every tree in an ensemble (so that we can skip the full pass through the training data at split evaluation)
-
-## Forest Tracker
-
-The `ForestTracker` class is a wrapper around several implementations of the mappings discussed above. 
-
