@@ -167,10 +167,10 @@ Gaussian Constant Leaf Model</h1>
 <p>The way that we make such a model "stochastic" is by attaching to the leaf node parameters \(\mu_{\ell}\) a "prior" distribution. This leaf model corresponds to the "classic" BART model of <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">Chipman et al (2010)</a> as well as its "XBART" extension (<a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">He and Hahn (2023)</a>). We assign each leaf node parameter a prior</p>
 <p class="formulaDsp">
 \[
-   \mu \sim \mathcal{N}\left(0, \tau\right)
+   \mu \sim N\left(0, \tau\right)
  \]
 </p>
-<p>Assuming a homoskedastic Gaussian outcome likelihood (i.e. \(y_i \sim \mathcal{N}\left(f(X_i),\sigma^2\right)\)), the log marginal likelihood in this model, for the outcome data in node \(\ell\) of tree \(j\) is given by</p>
+<p>Assuming a homoskedastic Gaussian outcome likelihood (i.e. \(y_i \sim N\left(f(X_i),\sigma^2\right)\)), the log marginal likelihood in this model, for the outcome data in node \(\ell\) of tree \(j\) is given by</p>
 <p class="formulaDsp">
 \[
    L(y) = -\frac{n_{\ell}}{2}\log(2\pi) - n_{\ell}\log(\sigma) + \frac{1}{2} \log\left(\frac{\sigma^2}{n_{\ell} \tau + \sigma^2}\right) - \frac{s_{yy,\ell}}{2\sigma^2} + \frac{\tau s_{y,\ell}^2}{2\sigma^2(n_{\ell} \tau + \sigma^2)}
@@ -200,13 +200,13 @@ Gaussian Constant Leaf Model</h1>
 <p>In words, this model depends on the data for a given leaf node only through three sufficient statistics, \(n_{\ell}\), \(s_{y,\ell}\), and \(s_{yy,\ell}\), and it only depends on the other trees in the ensemble through the "partial residual" \(r_i\). The posterior distribution for node \(\ell\)'s leaf parameter is similarly defined as:</p>
 <p class="formulaDsp">
 \[
-   \mu_{\ell} \mid - \sim \mathcal{N}\left(\frac{\tau s_{y,\ell}}{n_{\ell} \tau + \sigma^2}, \frac{\tau \sigma^2}{n_{\ell} \tau + \sigma^2}\right)
+   \mu_{\ell} \mid - \sim N\left(\frac{\tau s_{y,\ell}}{n_{\ell} \tau + \sigma^2}, \frac{\tau \sigma^2}{n_{\ell} \tau + \sigma^2}\right)
  \]
 </p>
 <p>Now, consider the possibility that each observation carries a unique weight \(w_i\). These could be "case weights" in a survey context or individual-level variances ("heteroskedasticity"). These case weights transform the outcome distribution (and associated likelihood) to</p>
 <p class="formulaDsp">
 \[
-   y_i \mid - \sim \mathcal{N}\left(\mu(X_i), \frac{\sigma^2}{w_i}\right) 
+   y_i \mid - \sim N\left(\mu(X_i), \frac{\sigma^2}{w_i}\right) 
  \]
 </p>
 <p>This gives a modified log marginal likelihood of</p>
@@ -265,13 +265,13 @@ Gaussian Multivariate Regression Leaf Model</h1>
 <p>and we assign \(\beta_{\ell}\) a prior of</p>
 <p class="formulaDsp">
 \[
-   \vec{\beta_{\ell}} \sim \mathcal{N}\left(\vec{\beta_0}, \Sigma_0\right)
+   \vec{\beta_{\ell}} \sim N\left(\vec{\beta_0}, \Sigma_0\right)
  \]
 </p>
 <p>where \(\vec{\beta_0}\) is typically a vector of zeros. The outcome likelihood is still</p>
 <p class="formulaDsp">
 \[
-   y_i \sim \mathcal{N}\left(f(X_i), \sigma^2\right)
+   y_i \sim N\left(f(X_i), \sigma^2\right)
  \]
 </p>
 <p>This gives a reduced log integrated likelihood of</p>
@@ -283,7 +283,7 @@ Gaussian Multivariate Regression Leaf Model</h1>
 <p>where \(\Omega\) is a matrix of bases for every observation in leaf \(\ell\) and \(p\) is the dimension of \(\Omega\). The posterior for \(\vec{\beta_{\ell}}\) is</p>
 <p class="formulaDsp">
 \[
-   \vec{\beta_{\ell}} \sim \mathcal{N}\left(\left(\Sigma_0^{-1} + \frac{\Omega&#39;\Omega}{\sigma^2}\right)^{-1}\left(\frac{\Omega&#39;y}{\sigma^2}\right),\left(\Sigma_0^{-1} + \frac{\Omega&#39;\Omega}{\sigma^2}\right)^{-1}\right)
+   \vec{\beta_{\ell}} \sim N\left(\left(\Sigma_0^{-1} + \frac{\Omega&#39;\Omega}{\sigma^2}\right)^{-1}\left(\frac{\Omega&#39;y}{\sigma^2}\right),\left(\Sigma_0^{-1} + \frac{\Omega&#39;\Omega}{\sigma^2}\right)^{-1}\right)
  \]
 </p>
 <p>This is an extension of the single-tree model of <a href="https://link.springer.com/article/10.1023/A:1013916107446">Chipman et al (2002)</a>, with:</p>
@@ -306,7 +306,7 @@ Gaussian Multivariate Regression Leaf Model</h1>
 <p>and a posterior for \(\vec{\beta_{\ell}}\) of</p>
 <p class="formulaDsp">
 \[
-   \vec{\beta_{\ell}} \sim \mathcal{N}\left(\left(\Sigma_{0}^{-1} + \Omega&#39;\Sigma_{y}^{-1}\Omega\right)^{-1}\left(\Omega&#39;\Sigma_{y}^{-1}y\right),\left(\Sigma_{0}^{-1} + \Omega&#39;\Sigma_{y}^{-1}\Omega\right)^{-1}\right)
+   \vec{\beta_{\ell}} \sim N\left(\left(\Sigma_{0}^{-1} + \Omega&#39;\Sigma_{y}^{-1}\Omega\right)^{-1}\left(\Omega&#39;\Sigma_{y}^{-1}y\right),\left(\Sigma_{0}^{-1} + \Omega&#39;\Sigma_{y}^{-1}\Omega\right)^{-1}\right)
  \]
 </p>
 <h1><a class="anchor" id="gaussian_univariate_regression_leaf_model"></a>
@@ -314,7 +314,7 @@ Gaussian Univariate Regression Leaf Model</h1>
 <p>This specializes the Gaussian Multivariate Regression Leaf Model for a univariate leaf basis, which allows for several computational speedups (replacing generalized matrix operations with simple summation or sum-product operations). We simplify \(\Omega\) to \(\omega\), a univariate basis for every observation, so that \(\Omega&#39;\Omega = \sum_{i:i \in \ell}\omega_i^2\) and \(\Omega&#39;y = \sum_{i:i \in \ell}\omega_ir_i\). Similarly, the prior for the leaf parameter becomes univariate normal as in gaussian_constant_leaf_model:</p>
 <p class="formulaDsp">
 \[
-   \beta \sim \mathcal{N}\left(0, \tau\right)
+   \beta \sim N\left(0, \tau\right)
  \]
 </p>
 <p>Allowing for case / variance weights $w_i$ as above, we derive a reduced log marginal likelihood of</p>
@@ -337,7 +337,7 @@ Gaussian Univariate Regression Leaf Model</h1>
 <p>and a posterior of</p>
 <p class="formulaDsp">
 \[
-   \beta_{\ell} \mid - \sim \mathcal{N}\left(\frac{\tau s_{wyx,\ell}}{s_{wxx,\ell} \tau + \sigma^2}, \frac{\tau \sigma^2}{s_{wxx,\ell} \tau + \sigma^2}\right)
+   \beta_{\ell} \mid - \sim N\left(\frac{\tau s_{wyx,\ell}}{s_{wxx,\ell} \tau + \sigma^2}, \frac{\tau \sigma^2}{s_{wxx,\ell} \tau + \sigma^2}\right)
  \]
 </p>
 <h1><a class="anchor" id="inverse_gamma_leaf_model"></a>
@@ -364,7 +364,7 @@ Inverse Gamma Leaf Model</h1>
 <p>Under an outcome model</p>
 <p class="formulaDsp">
 \[
-   y \sim \mathcal{N}\left(f(X), \sigma_0^2 \sigma^2(X)\right)
+   y \sim N\left(f(X), \sigma_0^2 \sigma^2(X)\right)
  \]
 </p>
 <p>updates to \(\mu_{\ell}\) for a given tree \(j\) are based on a reduced log marginal likelihood of</p>
