@@ -31,10 +31,10 @@ Once you've cloned the stochtree repository, follow these steps to build stochtr
 2. [Build the package in RStudio](https://docs.posit.co/ide/user/ide/guide/pkg-devel/writing-packages.html#building-a-package)
 
 Note that due to the complicated folder structure of the stochtree repo, step 2 might not work out of the box on all platforms. 
-If stochtree fails to build, you can use the script that is used to create a CRAN-friendly stochtree R package directory, which 
-creates a `stochtree_cran` subdirectory of the stochtree folder and copies the relevant R package files.
-You can run this script by entering `Rscript cran-bootstrap.R 1 1 1` in the terminal in RStudio. Once you have a `stochtree_cran` subfolder, 
-you can build stochtree using
+If stochtree fails to build, you can use the script that we use to create a CRAN-friendly stochtree R package directory, which 
+creates a `stochtree_cran` subdirectory of the stochtree folder and copies the relevant R package files into this subfolder.
+You can run this script by entering `Rscript cran-bootstrap.R 1 1 1` in the terminal in RStudio. 
+Once you have a `stochtree_cran` subfolder, you can build stochtree using
 
 ```{r}
 devtools::install_local("stochtree_cran")
@@ -66,11 +66,13 @@ pip install .
 ```
 
 Note that if you are making changes and finding that they aren't reflected after a reinstall of stochtree, you can 
-clear all of the python package development artifacts with 
+clear all of the python package build artifacts with 
 
 ```{bash}
 rm -rf stochtree.egg-info; rm -rf .pytest_cache; rm -rf build
 ```
+
+and then rerun `pip install .`
 
 #### Venv
 
@@ -100,6 +102,8 @@ clear all of the python package development artifacts with
 ```{bash}
 rm -rf stochtree.egg-info; rm -rf .pytest_cache; rm -rf build
 ```
+
+and then rerun `pip install .`
 
 ### C++
 
@@ -201,24 +205,70 @@ Suppose for the sake of illustration that the code you want to debug is saved in
 At the command line (either the terminal in RStudio or your local terminal program), 
 run `R -d lldb` if you are using MacOS (or `R -d gdb` if you are using Linux).
 
-After running this, interrupt execution with ctrl + C, which brings you to an lldb (or gdb) prompt which should look like below with a blinking cursor after it
+Now, you'll see an lldb prompt which should look like below with a blinking cursor after it
 
 ```
 (lldb) 
 ```
 
 From there, you can set breakpoints, either to specific lines of specific files like `b src/tree.cpp:2117` or to break whenever there is an error using `breakpoint set -E c++`.
-(**Note**: in gdb, the breakpoint and control flow commands are slightly different.)
-Now, start the R program by typing
+(**Note**: in gdb, the breakpoint and control flow commands are slightly different, see [here](https://www.maths.ed.ac.uk/~swood34/RCdebug/RCdebug.html) for more detail on debugging R through `gdb`.)
+Now, you can run R through the debugger by typing
 
 ```
 r
 ```
 
-Once you're there, you can execute a script you've set up to run your code using 
+This should load an R console, from which you can execute a script you've set up to run your code using 
 
 ```{r}
 source("path/to/debug_script.R")
 ```
 
-And step through the program as you wish using `lldb` / `gdb`
+The code will either stop when it hits your first line-based breakpoint or when it runs into an error if you set the error-based breakpoint.
+From there, you can navigate using `lldb` (or `gdb`) commands.
+
+**Note**: once you've loaded the R console, you can also simply interactively run commands that call stochtree's C++ code (i.e. running the `bart()` or `bcf()` functions). If you're debugging at this level, you probably have a specific problem in mind, and using a repeatable script will be worth your while, but it is not strictly necessary.
+
+### Python Package
+
+First, you need to build stochtree's C++ extension with debug symbols. 
+As always, start by navigating to the stochtree directory (i.e. `cd /path/to/stochtree/`) 
+and activating your development virtual environment (i.e. `conda activate [env_name]` or `source venv/bin/activate`).
+
+Since stochtree builds its C++ extension via cmake [following this example](https://github.com/pybind/cmake_example), 
+you'll need to ensure that the `self.debug` field in the `CMakeBuild` class is set to `True`. 
+You can do this by setting an environment variable of `DEBUG` equal to 1.
+In bash, you can do this with `export DEBUG=1` at the command line. 
+
+Once this is done, build the python library using 
+
+```{bash}
+pip install .
+```
+
+Suppose you'd like to debug stochtree through a script called `/path/to/script.py`.
+
+First, target a python process with `lldb` (or, alternatively, replace with `gdb` below if you use `gcc` as your compiler) via
+
+```
+lldb python
+```
+
+Now, you'll see an lldb (or gdb) prompt which should look like below with a blinking cursor after it
+
+```
+(lldb) 
+```
+
+From there, you can set breakpoints, either to specific lines of specific files like `b src/tree.cpp:2117` or to break whenever there is an error using `breakpoint set -E c++`.
+(If you're using `gdb`, see [here](https://lldb.llvm.org/use/map.html) for a comparison between lldb commands and gdb commands for setting breakpoints and navigating your program.)
+Now you can run your python script through the debugger by typing
+
+```
+r /path/to/script.py
+```
+
+The program will run until the first breakpoint is hit, and at this point you can navigate using lldb (or gdb) commands.
+
+**Note**: rather than running a script like `/path/to/script.py` above, you can also simply load the python console by typing `r` at the `(lldb)` terminal and then interactively run commands that call stochtree's C++ code (i.e. sampling `BARTModel` or `BCFModel` objects). If you're debugging at this level, you probably have a specific problem in mind, and using a repeatable script will be worth your while, but it is not strictly necessary.
