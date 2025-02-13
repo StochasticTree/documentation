@@ -1,7 +1,5 @@
 # StochTree Python API Reference
 
-Overview of the `stochtree` python library's key classes and functions.
-
 The `stochtree` interface is divided into two "levels":
 
 1. "High level": end-to-end implementations of stochastic tree ensembles for supervised learning (BART / XBART) and causal inference (BCF / XBCF). Both interfaces are designed to mirror the [scikit-learn estimator style](https://scikit-learn.org/dev/developers/develop.html), with the `.fit()` method replaced by a `.sample()` method.
