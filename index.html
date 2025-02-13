@@ -476,6 +476,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#what-does-the-software-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What does the software do?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-stochastic-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why "stochastic" trees?
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1453,8 +1471,18 @@
 
 
 <h1 id="stochtree">StochTree<a class="headerlink" href="#stochtree" title="Permanent link">#</a></h1>
-<p><code>stochtree</code> (short for "stochastic tree") unlocks flexible decision tree modeling in R or Python. 
-Boosted decision tree models (like <a href="https://xgboost.readthedocs.io/en/stable/">xgboost</a>, 
+<p><code>stochtree</code> (short for "stochastic trees") unlocks flexible decision tree modeling in R or Python. </p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="getting-started.html">Getting Started</a>: Details on how to install and use <code>stochtree</code></li>
+<li><a href="about.html">About</a>: Overview of the models supported by stochtree and pointers to further reading</li>
+<li><a href="R_docs/index.html">R Package</a>: Complete documentation of the R package</li>
+<li><a href="python_docs/index.html">Python Package</a>: Complete documentation of the Python package</li>
+<li><a href="cpp_docs/index.html">C++ Core API and Architecture</a>: Overview and documentation of the C++ codebase that supports stochtree</li>
+<li><a href="development/index.html">Development</a>: Roadmap and how to contribute</li>
+</ul>
+<h2 id="what-does-the-software-do">What does the software do?<a class="headerlink" href="#what-does-the-software-do" title="Permanent link">#</a></h2>
+<p>Boosted decision tree models (like <a href="https://xgboost.readthedocs.io/en/stable/">xgboost</a>, 
 <a href="https://lightgbm.readthedocs.io/en/latest/">LightGBM</a>, or 
 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html">scikit-learn's HistGradientBoostingRegressor</a>) 
 are great, but often require time-consuming hyperparameter tuning. 
@@ -1466,15 +1494,20 @@ are great, but often require time-consuming hyperparameter tuning.
 </ol>
 <p>The "core" of the software is written in C++, but it provides R and Python APIs. 
 The R package is <a href="https://cran.r-project.org/web/packages/stochtree/index.html">available on CRAN</a> and the python package will soon be on PyPI.</p>
-<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">#</a></h2>
-<ul>
-<li><a href="getting-started.html">Getting Started</a>: Details on how to install and use <code>stochtree</code></li>
-<li><a href="about.html">About</a>: Overview of the models supported by stochtree and pointers to further reading</li>
-<li><a href="R_docs/index.html">R Package</a>: Complete documentation of the R package</li>
-<li><a href="python_docs/index.html">Python Package</a>: Complete documentation of the Python package</li>
-<li><a href="cpp_docs/index.html">C++ Core API and Architecture</a>: Overview and documentation of the C++ codebase that supports stochtree</li>
-<li><a href="development/index.html">Development</a>: Roadmap and how to contribute</li>
-</ul>
+<h2 id="why-stochastic-trees">Why "stochastic" trees?<a class="headerlink" href="#why-stochastic-trees" title="Permanent link">#</a></h2>
+<p>"Stochastic" loosely means the same thing as "random." This naturally raises the question: how is <code>stochtree</code> different from a random forest library?
+At a superficial level, both are decision tree ensembles that use randomness in training.</p>
+<p>The difference lies in how that "randomness" is deployed. 
+Random forests take random subsets of a training dataset, and then run a deterministic decision tree fitting algorithm (<a href="https://en.wikipedia.org/wiki/Recursive_partitioning">recursive partitioning</a>).
+Stochastic tree algorithms use randomness to construct decision tree ensembles from a fixed training dataset.</p>
+<p>The original stochastic tree model, <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">Bayesian Additive Regression Trees (BART)</a>, used <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo (MCMC)</a> to sample forests from their posterior distribution. </p>
+<p>So why not call our project <code>bayesiantree</code>?</p>
+<p>Some algorithms implemented in <code>stochtree</code> are "quasi-Bayesian" in that they are inspired by a Bayesian model, but are sampled with fast algorithms that do not provide a valid Bayesian posterior distribution.</p>
+<p>Moreover, we think of stochastic forests as general-purpose modeling tools. 
+What makes them useful is that their strong empirical performance -- especially on small or noisy datasets -- not their adherence to any statistical framework.</p>
+<p>So why not just call our project <code>decisiontree</code>?</p>
+<p>Put simply, the sampling approach is part of what makes BART and other <code>stochtree</code> algorithms work so well -- we know because we have tested out versions that did not do stochastic sampling of the tree fits. </p>
+<p>So we settled on the term "stochastic trees", or "stochtree" for short (pronounced "stoke-tree").</p>
 
 
 
