@@ -37,13 +37,12 @@ var searchData=
   ['splittruenumeric_34',['SplitTrueNumeric',['../group__tree__group.html#ga2d27a2084998eb174869d0b14b5cf84a',1,'StochTree']]],
   ['splitvalue_35',['SplitValue',['../classStochTree_1_1TreeSplit.html#ade3b483cb19e192ddf114b4585f1b1b5',1,'StochTree::TreeSplit']]],
   ['started_36',['Getting Started',['../index.html#getting-started',1,'']]],
-  ['stochtree_37',['StochTree',['../namespaceStochTree.html',1,'']]],
+  ['stochtree_37',['stochtree',['../index.html#extending-stochtree',1,'Extending stochtree'],['../namespaceStochTree.html',1,'StochTree']]],
   ['stochtree_20c_20documentation_38',['stochtree C++ Documentation',['../index.html',1,'']]],
-  ['stochtree_20tt_39',['Extending &lt;tt&gt;stochtree&lt;/tt&gt;',['../index.html#extending-stochtree',1,'']]],
-  ['subtractfromdata_40',['SubtractFromData',['../classStochTree_1_1ColumnVector.html#a57b64930a29160c90a56a7bfd75a8fe1',1,'StochTree::ColumnVector']]],
-  ['subtractsuffstat_41',['subtractsuffstat',['../classStochTree_1_1GaussianConstantSuffStat.html#a30d32cda9e6cfdf72d8a47f8a84f068e',1,'StochTree::GaussianConstantSuffStat::SubtractSuffStat()'],['../classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#a1fdeaff81849bd19f42207a0678bdfe6',1,'StochTree::GaussianUnivariateRegressionSuffStat::SubtractSuffStat()'],['../classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#ab3123660c0ea50d920b26bdb9396de0c',1,'StochTree::GaussianMultivariateRegressionSuffStat::SubtractSuffStat()'],['../classStochTree_1_1LogLinearVarianceSuffStat.html#a8b88801c403adf8b8586818009a7050c',1,'StochTree::LogLinearVarianceSuffStat::SubtractSuffStat()']]],
-  ['suffstatfactory_42',['suffStatFactory',['../group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3',1,'StochTree']]],
-  ['suffstatvariant_43',['SuffStatVariant',['../group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0',1,'StochTree']]],
-  ['sumsquaredleafvalues_44',['SumSquaredLeafValues',['../classStochTree_1_1Tree.html#a208e84bcaae414903db46b83b541a99c',1,'StochTree::Tree']]],
-  ['sumsquarednodevalues_45',['SumSquaredNodeValues',['../classStochTree_1_1Tree.html#a6774e670589e6de6259113b3372f40e6',1,'StochTree::Tree']]]
+  ['subtractfromdata_39',['SubtractFromData',['../classStochTree_1_1ColumnVector.html#a57b64930a29160c90a56a7bfd75a8fe1',1,'StochTree::ColumnVector']]],
+  ['subtractsuffstat_40',['subtractsuffstat',['../classStochTree_1_1GaussianConstantSuffStat.html#a30d32cda9e6cfdf72d8a47f8a84f068e',1,'StochTree::GaussianConstantSuffStat::SubtractSuffStat()'],['../classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#a1fdeaff81849bd19f42207a0678bdfe6',1,'StochTree::GaussianUnivariateRegressionSuffStat::SubtractSuffStat()'],['../classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#ab3123660c0ea50d920b26bdb9396de0c',1,'StochTree::GaussianMultivariateRegressionSuffStat::SubtractSuffStat()'],['../classStochTree_1_1LogLinearVarianceSuffStat.html#a8b88801c403adf8b8586818009a7050c',1,'StochTree::LogLinearVarianceSuffStat::SubtractSuffStat()']]],
+  ['suffstatfactory_41',['suffStatFactory',['../group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3',1,'StochTree']]],
+  ['suffstatvariant_42',['SuffStatVariant',['../group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0',1,'StochTree']]],
+  ['sumsquaredleafvalues_43',['SumSquaredLeafValues',['../classStochTree_1_1Tree.html#a208e84bcaae414903db46b83b541a99c',1,'StochTree::Tree']]],
+  ['sumsquarednodevalues_44',['SumSquaredNodeValues',['../classStochTree_1_1Tree.html#a6774e670589e6de6259113b3372f40e6',1,'StochTree::Tree']]]
 ];
