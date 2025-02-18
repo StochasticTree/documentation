@@ -211,7 +211,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.96</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart"></a>
@@ -261,7 +261,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.89</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.88</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -382,7 +382,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.97</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-1">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-1"></a>
@@ -432,7 +432,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.92</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -772,7 +772,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.92</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.97</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1036,15 +1036,15 @@ forests.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.852</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.864</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_tau_mean</span> <span class="op">-</span> <span class="va">tau_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.683717</span></span>
+<span><span class="co">#&gt; [1] 1.669912</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_outcome_mean</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2.203899</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.144516</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="mcmc-covariate-subset-in-taux">MCMC, covariate subset in
@@ -1102,15 +1102,15 @@ in the treatment effect forest.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.836</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.876</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_mean</span> <span class="op">-</span> <span class="va">tau_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.43742</span></span>
+<span><span class="co">#&gt; [1] 1.385511</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_mcmc</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">test_outcome_mean</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.935893</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.982123</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="warmstart-full-covariate-set-in-taux">Warmstart, full covariate set in
@@ -1176,10 +1176,10 @@ warm-start</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">tau_test</span> <span class="op">-</span> <span class="va">test_tau_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.648462</span></span>
+<span><span class="co">#&gt; [1] 1.55738</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">test_outcome_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2.00278</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2.033253</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="warmstart-covariate-subset-in-taux">Warmstart, covariate subset in
@@ -1238,15 +1238,15 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.864</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.82</span></span></code></pre></div>
 <p>And test set RMSE</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_tau_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">tau_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">tau_test</span> <span class="op">-</span> <span class="va">test_tau_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.366122</span></span>
+<span><span class="co">#&gt; [1] 1.444941</span></span>
 <span><span class="va">test_outcome_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">test_outcome_mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1.930017</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.905903</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1366,7 +1366,7 @@ warm-start</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.97</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.98</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="bart-mcmc-without-warmstart-4">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-4"></a>
@@ -1416,7 +1416,7 @@ initialization.</p>
 <span>    <span class="op">(</span><span class="va">test_ub</span> <span class="op">&gt;=</span> <span class="va">tau_x</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cover</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.91</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.88</span></span></code></pre></div>
 </div>
 </div>
 </div>
