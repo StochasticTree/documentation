@@ -102,12 +102,12 @@ This function uses 0-indexing, so the first forest sample corresponds to <code>f
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">5</span> <span class="op">+</span> <span class="fl">10</span><span class="op">*</span><span class="op">(</span><span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, num_gfr<span class="op">=</span><span class="fl">0</span>, num_mcmc<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.005159427 0.005559471 0.005093134 0.005457064 0.006303875 0.006364499</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.006759435 0.006611709 0.006002504 0.006601129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.004471401 0.004770204 0.004632108 0.004393313 0.004462644 0.004913359</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.004859619 0.004982678 0.005216887 0.005093001</span>
 <span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.005159427</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.004471401</span>
 <span class="r-in"><span><span class="fu">computeForestLeafVariances</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.005559471 0.005457064 0.006364499</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.004770204 0.004393313 0.004913359</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
