@@ -146,10 +146,10 @@ feature.</p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="fl">10</span>, <span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 17 25 21 28 28 22 24 33 26 33</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 25 23 25 31 30 20 22 22 25 41</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_aggregate_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2447 2368 2197 2571 2607 2323 2322 2993 3068 4174</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 2542 2568 2238 3561 3072 2279 2420 2071 2545 3852</span></span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s
 dig deeper and look at individual trees, starting with the first tree in
 the last “grow-from-root” sample.</p>
@@ -165,10 +165,10 @@ let’s look at the second tree.</p>
 <p>This tree also only splits on the important feature.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 1 0 0 0 0 0 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 2</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">30</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 1 0 0 0 0 0 0 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 1 0 0 0</span></span></code></pre></div>
 <p>We see that “later” trees are splitting on other features, but we
 also note that these trees are fitting an outcome that is already
 residualized many “relevant splits” made by trees 1 and 2.</p>
@@ -199,8 +199,8 @@ scikit-learn vignette</a></p>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.505 else to node 2</span></span>
-<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.147</span></span>
-<span><span class="co">#&gt;  node=2 is a leaf node with value=0.242</span></span></code></pre></div>
+<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.266</span></span>
+<span><span class="co">#&gt;  node=2 is a leaf node with value=0.203</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -75,10 +75,14 @@ forest model they wish to run.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Vector of integer-coded feature types (integers where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p>
 <p>Vector specifying sampling probability for all p covariates in ForestDataset</p>
+<p>Number of trees in a forest</p>
+<p>Number of features in a forest model training set</p>
+<p>Number of observations in a forest model training set</p>
 <p>Root node split probability in tree prior</p>
 <p>Depth prior penalty in tree prior</p>
 <p>Minimum number of samples in a tree leaf</p>
 <p>Maximum depth of any tree in the ensemble in the model</p>
+<p>Integer coded leaf model type</p>
 <p>Scale parameter used in Gaussian leaf models</p>
 <p>Shape parameter for IG leaf models</p>
 <p>Scale parameter for IG leaf models</p>
@@ -168,10 +172,14 @@ Create a new ForestModelConfig object.</p></dd>
 <li><p><a href="#method-ForestModelConfig-update_cutpoint_grid_size"><code>ForestModelConfig$update_cutpoint_grid_size()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_feature_types"><code>ForestModelConfig$get_feature_types()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_variable_weights"><code>ForestModelConfig$get_variable_weights()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-get_num_trees"><code>ForestModelConfig$get_num_trees()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-get_num_features"><code>ForestModelConfig$get_num_features()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-get_num_observations"><code>ForestModelConfig$get_num_observations()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_alpha"><code>ForestModelConfig$get_alpha()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_beta"><code>ForestModelConfig$get_beta()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_min_samples_leaf"><code>ForestModelConfig$get_min_samples_leaf()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_max_depth"><code>ForestModelConfig$get_max_depth()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-get_leaf_model_type"><code>ForestModelConfig$get_leaf_model_type()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_leaf_model_scale"><code>ForestModelConfig$get_leaf_model_scale()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_variance_forest_shape"><code>ForestModelConfig$get_variance_forest_shape()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_variance_forest_scale"><code>ForestModelConfig$get_variance_forest_scale()</code></a></p></li>
@@ -203,7 +211,7 @@ Create a new ForestModelConfig object.</p></dd>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>feature_types</code></dt>
-<dd><p>Vector of integer-coded feature types (integers where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p></dd>
+<dd><p>Vector of integer-coded feature types (where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p></dd>
 
 
 <dt><code>num_trees</code></dt>
@@ -335,7 +343,7 @@ Create a new ForestModelConfig object.</p></dd>
 
 </div><p></p><hr><a id="method-ForestModelConfig-update_min_samples_leaf"></a><div class="section">
 <h3 id="method-update-min-samples-leaf-">Method <code>update_min_samples_leaf()</code><a class="anchor" aria-label="anchor" href="#method-update-min-samples-leaf-"></a></h3>
-<p>Update root node split probability in tree prior</p><div class="section">
+<p>Update minimum number of samples per leaf node in the tree prior</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_min_samples_leaf</span><span class="op">(</span><span class="va">min_samples_leaf</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -351,7 +359,7 @@ Create a new ForestModelConfig object.</p></dd>
 
 </div><p></p><hr><a id="method-ForestModelConfig-update_max_depth"></a><div class="section">
 <h3 id="method-update-max-depth-">Method <code>update_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-update-max-depth-"></a></h3>
-<p>Update root node split probability in tree prior</p><div class="section">
+<p>Update max depth in the tree prior</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_max_depth</span><span class="op">(</span><span class="va">max_depth</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -445,10 +453,34 @@ Create a new ForestModelConfig object.</p></dd>
 </div>
 
 
+</div><p></p><hr><a id="method-ForestModelConfig-get_num_trees"></a><div class="section">
+<h3 id="method-get-num-trees-">Method <code>get_num_trees()</code><a class="anchor" aria-label="anchor" href="#method-get-num-trees-"></a></h3>
+<p>Query number of trees</p><div class="section">
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_trees</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-ForestModelConfig-get_num_features"></a><div class="section">
+<h3 id="method-get-num-features-">Method <code>get_num_features()</code><a class="anchor" aria-label="anchor" href="#method-get-num-features-"></a></h3>
+<p>Query number of features</p><div class="section">
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-ForestModelConfig-get_num_observations"></a><div class="section">
+<h3 id="method-get-num-observations-">Method <code>get_num_observations()</code><a class="anchor" aria-label="anchor" href="#method-get-num-observations-"></a></h3>
+<p>Query number of observations</p><div class="section">
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_observations</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
 </div><p></p><hr><a id="method-ForestModelConfig-get_alpha"></a><div class="section">
 <h3 id="method-get-alpha-">Method <code>get_alpha()</code><a class="anchor" aria-label="anchor" href="#method-get-alpha-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_alpha</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -456,7 +488,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_beta"></a><div class="section">
 <h3 id="method-get-beta-">Method <code>get_beta()</code><a class="anchor" aria-label="anchor" href="#method-get-beta-"></a></h3>
 <p>Query depth prior penalty in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_beta</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -464,7 +496,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_min_samples_leaf"></a><div class="section">
 <h3 id="method-get-min-samples-leaf-">Method <code>get_min_samples_leaf()</code><a class="anchor" aria-label="anchor" href="#method-get-min-samples-leaf-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_min_samples_leaf</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -472,15 +504,23 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_max_depth"></a><div class="section">
 <h3 id="method-get-max-depth-">Method <code>get_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-get-max-depth-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_max_depth</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-ForestModelConfig-get_leaf_model_type"></a><div class="section">
+<h3 id="method-get-leaf-model-type-">Method <code>get_leaf_model_type()</code><a class="anchor" aria-label="anchor" href="#method-get-leaf-model-type-"></a></h3>
+<p>Query (integer-coded) type of leaf model</p><div class="section">
+<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_leaf_model_type</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
 </div><p></p><hr><a id="method-ForestModelConfig-get_leaf_model_scale"></a><div class="section">
 <h3 id="method-get-leaf-model-scale-">Method <code>get_leaf_model_scale()</code><a class="anchor" aria-label="anchor" href="#method-get-leaf-model-scale-"></a></h3>
 <p>Query scale parameter used in Gaussian leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_leaf_model_scale</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -488,7 +528,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_variance_forest_shape"></a><div class="section">
 <h3 id="method-get-variance-forest-shape-">Method <code>get_variance_forest_shape()</code><a class="anchor" aria-label="anchor" href="#method-get-variance-forest-shape-"></a></h3>
 <p>Query shape parameter for IG leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_variance_forest_shape</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -496,7 +536,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_variance_forest_scale"></a><div class="section">
 <h3 id="method-get-variance-forest-scale-">Method <code>get_variance_forest_scale()</code><a class="anchor" aria-label="anchor" href="#method-get-variance-forest-scale-"></a></h3>
 <p>Query scale parameter for IG leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
+<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_variance_forest_scale</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -504,7 +544,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_cutpoint_grid_size"></a><div class="section">
 <h3 id="method-get-cutpoint-grid-size-">Method <code>get_cutpoint_grid_size()</code><a class="anchor" aria-label="anchor" href="#method-get-cutpoint-grid-size-"></a></h3>
 <p>Query number of unique cutpoints to consider for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_cutpoint_grid_size</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
