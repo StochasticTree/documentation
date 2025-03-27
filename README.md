@@ -99,6 +99,17 @@ cp stochtree_repo/demo/notebooks/tree_inspection.ipynb docs/python_docs/demo/tre
 cp stochtree_repo/demo/notebooks/prototype_interface.ipynb docs/python_docs/demo/prototype_interface.ipynb
 ```
 
+### Copy static vignettes over to docs directory
+
+```{bash}
+cp vignettes/Python/rdd.html docs/vignettes/Python/rdd.html
+cp vignettes/Python/RDD_DAG.png docs/vignettes/Python/RDD_DAG.png
+cp vignettes/Python/trees1.png docs/vignettes/Python/trees1.png
+cp vignettes/Python/trees2.png docs/vignettes/Python/trees2.png
+cp vignettes/Python/trees3.png docs/vignettes/Python/trees3.png
+cp vignettes/R/rdd.html docs/vignettes/R/rdd.html
+```
+
 ### Building the overall website
 
 To build and preview the site locally, run 

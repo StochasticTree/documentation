@@ -9,6 +9,7 @@
 * [R Package](R_docs/index.md): Complete documentation of the R package
 * [Python Package](python_docs/index.md): Complete documentation of the Python package
 * [C++ Core API and Architecture](cpp_docs/index.md): Overview and documentation of the C++ codebase that supports stochtree
+* [Advanced Vignettes](vignettes/index.md): In-depth tutorials on new methods implemented using stochtree
 * [Development](development/index.md): Roadmap and how to contribute
 
 ## What does the software do?
@@ -43,7 +44,7 @@ So why not call our project `bayesiantree`?
 Some algorithms implemented in `stochtree` are "quasi-Bayesian" in that they are inspired by a Bayesian model, but are sampled with fast algorithms that do not provide a valid Bayesian posterior distribution.
 
 Moreover, we think of stochastic forests as general-purpose modeling tools. 
-What makes them useful is that their strong empirical performance -- especially on small or noisy datasets -- not their adherence to any statistical framework.
+What makes them useful is their strong empirical performance -- especially on small or noisy datasets -- not their adherence to any statistical framework.
 
 So why not just call our project `decisiontree`?
 
