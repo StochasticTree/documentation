@@ -155,7 +155,7 @@ While using `gdb` or `lldb` on `debugstochtree` at the command line is very help
 option(USE_SANITIZER "Use santizer flags" OFF)
 ```
 
-To generate an XCode project based on the build targets and specifications defined in a `CMakeLists.txt`, navigate to the main project folder (i.e. `cd /path/to/project`) and run the following commands:
+or via command-line argument to `cmake -G Xcode` as shown below. To generate an XCode project based on the build targets and specifications defined in a `CMakeLists.txt` file (and ensure that debug and santizer flags are switched off), navigate to the main project folder (i.e. `cd /path/to/project`) and run the following commands:
 
 ```{bash}
 rm -rf xcode/
