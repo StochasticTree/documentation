@@ -869,6 +869,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.from_json_string_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_json_string_list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.bart.BARTModel.is_sampled" class="md-nav__link">
     <span class="md-ellipsis">
       is_sampled
@@ -1901,7 +1910,7 @@ term, whose variance is parameterized with an inverse gamma prior.</p>
 
 
 <h3 id="stochtree.bart.BARTModel.sample" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">leaf_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">leaf_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_warmstart_sample_num</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#stochtree.bart.BARTModel.sample" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -2045,7 +2054,7 @@ Must be included / omitted consistently (i.e. if leaf_basis_train is provided, t
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional test set group labels used for an additive random effects model. We do not currently support (but plan to in the near future), 
+                <p>Optional test set group labels used for an additive random effects model. We do not currently support (but plan to in the near future),
 test set evaluation for group labels that were not in the training set.</p>
               </div>
             </td>
@@ -2199,6 +2208,38 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>keep_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be included in the variance forest. Defaults to <code>None</code>.</li>
 <li><code>drop_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be excluded from the variance forest. Defaults to <code>None</code>. If both <code>drop_vars</code> and <code>keep_vars</code> are set, <code>drop_vars</code> will be ignored.</li>
 </ul>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>previous_model_json</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string containing a previous BART model. This can be used to "continue" a sampler interactively after inspecting the samples or to run parallel chains "warm-started" from existing forest samples. Defaults to <code>None</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>previous_model_warmstart_sample_num</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Sample number from <code>previous_model_json</code> that will be used to warmstart this BART sampler. Zero-indexed (so that the first sample is used for warm-start by setting <code>previous_model_warmstart_sample_num = 0</code>). Defaults to <code>None</code>.</p>
               </div>
             </td>
             <td>
@@ -2605,6 +2646,56 @@ processed using the <code>json</code> library)</p>
             <td>
               <div class="doc-md-description">
                 <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.from_json_string_list" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">from_json_string_list</span><span class="p">(</span><span class="n">json_string_list</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.from_json_string_list" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Convert a list of (in-memory) JSON strings that represent BART models to a single combined BART model object
+which can be used for prediction, etc...</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>json_string_list</code>
+            </td>
+            <td>
+                  <code>list of str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of JSON strings which can be parsed to objects of type <code>JSONSerializer</code> containing Json representation of a BART model</p>
               </div>
             </td>
             <td>

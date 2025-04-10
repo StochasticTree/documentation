@@ -892,6 +892,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.bcf.BCFModel.from_json_string_list" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_json_string_list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.bcf.BCFModel.is_sampled" class="md-nav__link">
     <span class="md-ellipsis">
       is_sampled
@@ -2085,7 +2094,7 @@ Must be provided if <code>X_test</code> is provided.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional test set group labels used for an additive random effects model. We do not currently support (but plan to in the near future), 
+                <p>Optional test set group labels used for an additive random effects model. We do not currently support (but plan to in the near future),
 test set evaluation for group labels that were not in the training set.</p>
               </div>
             </td>
@@ -2759,6 +2768,56 @@ processed using the <code>json</code> library)</p>
             <td>
               <div class="doc-md-description">
                 <p>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bcf.BCFModel.from_json_string_list" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">from_json_string_list</span><span class="p">(</span><span class="n">json_string_list</span><span class="p">)</span></code>
+
+<a href="#stochtree.bcf.BCFModel.from_json_string_list" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Convert a list of (in-memory) JSON strings that represent BCF models to a single combined BCF model object
+which can be used for prediction, etc...</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>json_string_list</code>
+            </td>
+            <td>
+                  <code>list of str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of JSON strings which can be parsed to objects of type <code>JSONSerializer</code> containing Json representation of a BCF model</p>
               </div>
             </td>
             <td>

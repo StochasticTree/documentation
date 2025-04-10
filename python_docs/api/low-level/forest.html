@@ -1318,6 +1318,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.forest.ForestContainer.load_from_json_object" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_from_json_object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.forest.ForestContainer.add_sample" class="md-nav__link">
     <span class="md-ellipsis">
       add_sample
@@ -4679,13 +4688,13 @@ Values are stale if the node is a split node.</p>
     <div class="doc doc-contents ">
 
         <p>When a Forest object is created, it is "empty" in the sense that none
-of its component trees have leaves with values. There are two ways to 
+of its component trees have leaves with values. There are two ways to
 "initialize" a Forest object. First, the <code>set_root_leaves()</code> method of the
-Forest class simply initializes every tree in the forest to a single node 
-carrying the same (user-specified) leaf value. Second, the <code>prepare_for_sampler()</code> 
-method of the ForestSampler class initializes every tree in the forest to a 
-single node with the same value and also propagates this information through 
-to the temporary tracking data structrues in a ForestSampler object, which 
+Forest class simply initializes every tree in the forest to a single node
+carrying the same (user-specified) leaf value. Second, the <code>prepare_for_sampler()</code>
+method of the ForestSampler class initializes every tree in the forest to a
+single node with the same value and also propagates this information through
+to the temporary tracking data structrues in a ForestSampler object, which
 must be synchronized with a Forest during a forest sampler loop.</p>
 
 
@@ -5430,6 +5439,55 @@ combined with other JSON strings before serialization).</p>
             <td>
               <div class="doc-md-description">
                 <p>In-memory string containing state of a forest container.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.ForestContainer.load_from_json_object" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">load_from_json_object</span><span class="p">(</span><span class="n">json_object</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.ForestContainer.load_from_json_object" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Reload a forest container from an in-memory JSONSerializer object.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>json_object</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="stochtree.serialization.JSONSerializer" href="utilities.html#stochtree.serialization.JSONSerializer">JSONSerializer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>In-memory JSONSerializer object.</p>
               </div>
             </td>
             <td>
