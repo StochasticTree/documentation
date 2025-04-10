@@ -57,7 +57,7 @@ Conda provides a straightforward experience in managing python dependencies, avo
 To build stochtree using a `conda` based workflow, first create and activate a conda environment with the requisite dependencies
 
 ```{bash}
-conda create -n stochtree-dev -c conda-forge python=3.10 numpy scipy pytest pandas pybind11 scikit-learn matplotlib seaborn
+conda create -n stochtree-dev -c conda-forge python=3.10 numpy scipy pytest pandas pybind11 scikit-learn
 conda activate stochtree-dev
 ```
 
