@@ -539,6 +539,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="R Package">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cran" class="md-nav__link">
+    <span class="md-ellipsis">
+      CRAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-version-local-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Version (Local Build)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -552,18 +576,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#pypi" class="md-nav__link">
     <span class="md-ellipsis">
-      Quick start
+      PyPI
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#virtual-environment-installation" class="md-nav__link">
+  <a href="#development-version-local-build_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Virtual environment installation
+      Development Version (Local Build)
     </span>
   </a>
   
@@ -1819,51 +1843,58 @@
 <p><code>stochtree</code> is composed of a C++ "core" and R / Python interfaces to that core.
 Below, we detail how to install the R / Python packages, or work directly with the C++ codebase.</p>
 <h2 id="r-package">R Package<a class="headerlink" href="#r-package" title="Permanent link">#</a></h2>
+<h3 id="cran">CRAN<a class="headerlink" href="#cran" title="Permanent link">#</a></h3>
 <p>The R package can be installed from CRAN via</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>install.packages(&quot;stochtree&quot;)
 </span></code></pre></div>
+<h3 id="development-version-local-build">Development Version (Local Build)<a class="headerlink" href="#development-version-local-build" title="Permanent link">#</a></h3>
 <p>The development version of <code>stochtree</code> can be installed from Github via</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>remotes::install_github(&quot;StochasticTree/stochtree&quot;, ref=&quot;r-dev&quot;)
 </span></code></pre></div>
 <h2 id="python-package">Python Package<a class="headerlink" href="#python-package" title="Permanent link">#</a></h2>
-<p>The python package is not yet on PyPI but can be installed from source using pip's <a href="https://pip.pypa.io/en/stable/topics/vcs-support/">git interface</a>. 
+<h3 id="pypi">PyPI<a class="headerlink" href="#pypi" title="Permanent link">#</a></h3>
+<p><code>stochtree</code>'s Python package can be installed from PyPI via</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip install stochtree
+</span></code></pre></div>
+<h3 id="development-version-local-build_1">Development Version (Local Build)<a class="headerlink" href="#development-version-local-build_1" title="Permanent link">#</a></h3>
+<p>The development version of <code>stochtree</code> can be installed from source using pip's <a href="https://pip.pypa.io/en/stable/topics/vcs-support/">git interface</a>. 
 To proceed, you will need a working version of <a href="https://git-scm.com">git</a> and python 3.8 or greater (available from several sources, one of the most 
 straightforward being the <a href="https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html">anaconda</a> suite).</p>
-<h3 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">#</a></h3>
+<h4 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">#</a></h4>
 <p>Without worrying about virtual environments (detailed further below), <code>stochtree</code> can be installed from the command line</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip install numpy scipy pytest pandas scikit-learn pybind11
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>pip install git+https://github.com/StochasticTree/stochtree.git
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip install numpy scipy pytest pandas scikit-learn pybind11
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>pip install git+https://github.com/StochasticTree/stochtree.git
 </span></code></pre></div>
-<h3 id="virtual-environment-installation">Virtual environment installation<a class="headerlink" href="#virtual-environment-installation" title="Permanent link">#</a></h3>
+<h4 id="virtual-environment-installation">Virtual environment installation<a class="headerlink" href="#virtual-environment-installation" title="Permanent link">#</a></h4>
 <p>Often, users prefer to manage different projects (with different package / python version requirements) in virtual environments. </p>
-<h4 id="conda">Conda<a class="headerlink" href="#conda" title="Permanent link">#</a></h4>
+<h5 id="conda">Conda<a class="headerlink" href="#conda" title="Permanent link">#</a></h5>
 <p>Conda provides a straightforward experience in managing python dependencies, avoiding version conflicts / ABI issues / etc.</p>
 <p>To build stochtree using a <code>conda</code> based workflow, first create and activate a conda environment with the requisite dependencies</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>conda create -n stochtree-dev -c conda-forge python=3.10 numpy scipy pytest pandas pybind11 scikit-learn matplotlib seaborn
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>conda activate stochtree-dev
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>conda create -n stochtree-dev -c conda-forge python=3.10 numpy scipy pytest pandas pybind11 scikit-learn
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>conda activate stochtree-dev
 </span></code></pre></div>
 <p>Then install the package from github via pip</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip install git+https://github.com/StochasticTree/stochtree.git
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pip install git+https://github.com/StochasticTree/stochtree.git
 </span></code></pre></div>
 <p>(<em>Note</em>: if you'd like to run <code>stochtree</code>'s notebook examples, you will also need <code>jupyterlab</code>, <code>seaborn</code>, and <code>matplotlib</code>)</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>conda install matplotlib seaborn
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>pip install jupyterlab
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>conda install matplotlib seaborn
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>pip install jupyterlab
 </span></code></pre></div>
 <p>With these dependencies installed, you can <a href="#cloning-the-repository">clone the repo</a> and run the <code>demo/</code> examples.</p>
-<h4 id="venv">Venv<a class="headerlink" href="#venv" title="Permanent link">#</a></h4>
+<h5 id="venv">Venv<a class="headerlink" href="#venv" title="Permanent link">#</a></h5>
 <p>You could also use venv for environment management. First, navigate to the folder in which you usually store virtual environments 
 (i.e. <code>cd /path/to/envs</code>) and create and activate a virtual environment:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python -m venv venv
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>source venv/bin/activate
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python -m venv venv
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>source venv/bin/activate
 </span></code></pre></div>
 <p>Install all of the package (and demo notebook) dependencies</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pip install numpy scipy pytest pandas scikit-learn pybind11
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pip install numpy scipy pytest pandas scikit-learn pybind11
 </span></code></pre></div>
 <p>Then install stochtree via</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pip install git+https://github.com/StochasticTree/stochtree.git
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip install git+https://github.com/StochasticTree/stochtree.git
 </span></code></pre></div>
 <p>As above, if you'd like to run the notebook examples in the <code>demo/</code> subfolder, you will also need <code>jupyterlab</code>, <code>seaborn</code>, and <code>matplotlib</code> and you will have to <a href="#cloning-the-repository">clone the repo</a></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip install matplotlib seaborn jupyterlab
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pip install matplotlib seaborn jupyterlab
 </span></code></pre></div>
 <h2 id="c-core">C++ Core<a class="headerlink" href="#c-core" title="Permanent link">#</a></h2>
 <p>While the C++ core links to both R and Python for a performant, high-level interface, 
@@ -1874,7 +1905,7 @@ the C++ code can be compiled and unit-tested and compiled into a standalone
 <p>To clone the repository, you must have git installed, which you can do following <a href="https://learn.microsoft.com/en-us/devops/develop/git/install-and-set-up-git">these instructions</a>. </p>
 <p>Once git is available at the command line, navigate to the folder that will store this project (in bash / zsh, this is done by running <code>cd</code> followed by the path to the directory). 
 Then, clone the <code>stochtree</code> repo as a subfolder by running
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git clone --recursive https://github.com/StochasticTree/stochtree.git
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git clone --recursive https://github.com/StochasticTree/stochtree.git
 </span></code></pre></div></p>
 <p><em>NOTE</em>: this project incorporates several dependencies as <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git submodules</a>, 
 which is why the <code>--recursive</code> flag is necessary (some systems may perform a recursive clone without this flag, but 
@@ -1887,10 +1918,10 @@ on MacOS, <code>cmake</code> can be installed using <a href="https://formulae.br
 Once <code>cmake</code> is installed, you can build the CLI by navigating to the main 
 project directory at your command line (i.e. <code>cd /path/to/stochtree</code>) and 
 running the following code </p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rm -rf build
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>mkdir build
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>cmake -S . -B build
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>cmake --build build
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>rm -rf build
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>mkdir build
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>cmake -S . -B build
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>cmake --build build
 </span></code></pre></div>
 <p>The CMake build has two primary targets, which are detailed below</p>
 <h5 id="debug-program">Debug Program<a class="headerlink" href="#debug-program" title="Permanent link">#</a></h5>
@@ -1906,14 +1937,14 @@ and the test suite can be run after compilation via <code>./build/teststochtree<
 <h3 id="xcode">Xcode<a class="headerlink" href="#xcode" title="Permanent link">#</a></h3>
 <p>While using <code>gdb</code> or <code>lldb</code> on <code>debugstochtree</code> at the command line is very helpful, users may prefer debugging in a full-fledged IDE like xcode. This project's C++ core can be converted to an xcode project from <code>CMakeLists.txt</code>, but first you must turn off sanitizers (xcode seems to have its own way of setting this at build time for different configurations, and having injected 
 <code>-fsanitize=address</code> statically into compiler arguments will cause xcode errors). To do this, modify the <code>USE_SANITIZER</code> line in <code>CMakeLists.txt</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>option(USE_SANITIZER &quot;Use santizer flags&quot; OFF)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>option(USE_SANITIZER &quot;Use santizer flags&quot; OFF)
 </span></code></pre></div>
-<p>To generate an XCode project based on the build targets and specifications defined in a <code>CMakeLists.txt</code>, navigate to the main project folder (i.e. <code>cd /path/to/project</code>) and run the following commands:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>rm -rf xcode/
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>mkdir xcode
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>cd xcode
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>cmake -G Xcode .. -DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=c++ -DUSE_SANITIZER=OFF -DUSE_DEBUG=OFF
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>cd ..
+<p>or via command-line argument to <code>cmake -G Xcode</code> as shown below. To generate an XCode project based on the build targets and specifications defined in a <code>CMakeLists.txt</code> file (and ensure that debug and santizer flags are switched off), navigate to the main project folder (i.e. <code>cd /path/to/project</code>) and run the following commands:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>rm -rf xcode/
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mkdir xcode
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>cd xcode
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>cmake -G Xcode .. -DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=c++ -DUSE_SANITIZER=OFF -DUSE_DEBUG=OFF
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>cd ..
 </span></code></pre></div>
 <p>Now, if you navigate to the xcode subfolder (in Finder), you should be able to click on a <code>.xcodeproj</code> file and the project will open in XCode.</p>
 
