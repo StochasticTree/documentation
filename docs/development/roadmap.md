@@ -15,7 +15,7 @@ Our development goals are prioritized along three broad timelines
 
 | Category | Now | Next | Later |
 | --- | --- | --- | --- | 
-| User Interface | Feature parity between R and Python | |  |
+| User Interface |  | |  |
 | Performance |  |  | Hardware acceleration (Apple Silicon GPU)<br>Hardware acceleration (NVIDIA GPU)<br>Out-of-memory sampler |
-| Modeling Features | Quantile cutpoint sampling | Monotonicity constraints<br>Multiclass classification | |
+| Modeling Features | Quantile cutpoint sampling<br>Probit BART and BCF | Monotonicity constraints<br>Multiclass classification | |
 | Interoperability | | | PyMC (Python)<br>Stan (R / Python)<br>Apache Arrow (R / Python)<br>Polars (Python) |
