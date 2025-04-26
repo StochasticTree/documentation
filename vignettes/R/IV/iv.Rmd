@@ -41,7 +41,7 @@ Lastly, we could have *defiers* (d): contrarians who who were planning on gettin
 
 ## The causal diagram
 
-The causal diagram for this model can be expressed as follows. Here we are considering one confounder and moderator variable ($X$), which is the patient's age. In our data generating process (which we know because this is a simulation demonstration) higher age will make it more likely that a person is an always taker or complier and less likely that they are a nevertaker, which in turn has an effect on flu risk. We stipulate here that always takers are at lower risk and never takers at higher risk. Simultaneously, age has an increasing and then decreasing direct effect on flu risk; very young and very old are at higher risk, while young and middle age adults are at lower risk. In this DGP the flu efficacy has a multiplicative effect, reducing flu risk as a fixed proportion of baseline risk -- accordingly, the treatment effect (as a difference) is nonlinear in Age (for each principal stratum).
+The causal diagram for this model can be expressed as follows. Here we are considering one confounder and moderator variable ($X$), which is the patient's age. In our data generating process (which we know because this is a simulation demonstration) higher age will make it more likely that a person is an always taker or complier and less likely that they are a never taker, which in turn has an effect on flu risk. We stipulate here that always takers are at lower risk and never takers at higher risk. Simultaneously, age has an increasing and then decreasing direct effect on flu risk; very young and very old are at higher risk, while young and middle age adults are at lower risk. In this DGP the flu efficacy has a multiplicative effect, reducing flu risk as a fixed proportion of baseline risk -- accordingly, the treatment effect (as a difference) is nonlinear in Age (for each principal stratum).
 
 ```{r pressure, echo=FALSE, fig.cap="The causal directed acyclic graph (CDAG) for the instrumental variables flu example.", fig.align="center", out.width = '50%'}
 knitr::include_graphics("IV_CDAG.png")
@@ -268,7 +268,7 @@ The outcome model is fit with a single (S-learner) BART model. This part of the 
 
 These models could (and probably should) be wrapped as functions. Here they are implemented as scripts, with the full loops shown. The output -- at the end of the loops -- are stochtree forest objects from which we can extract posterior samples and generate predictions. In particular, the $ITT_c$ will be constructed using posterior counterfactual predictions derived from these forest objects. 
 
-We begin by setting a bunch of hyperparmeters and instantiating the forest objects to be operated upon in the main sampling loop. We also initialize the latent variables.
+We begin by setting a bunch of hyperparameters and instantiating the forest objects to be operated upon in the main sampling loop. We also initialize the latent variables.
 
 ```{r outcomefit1}
 # Fit the BART model for Pr(Y = 1 | Z = 1, V = 1, X = x)
@@ -334,7 +334,7 @@ active_forest$prepare_for_sampler(forest_dataset, outcome, forest_model, outcome
 active_forest$adjust_residual(forest_dataset, outcome, forest_model, FALSE, FALSE)
 ```
 
-Now we enter the main loop, which involves only two steps: sample the forest, given the latent utilies, then sample the latent utilities given the estimated conditional means defined by the forest and its parameters. 
+Now we enter the main loop, which involves only two steps: sample the forest, given the latent utilities, then sample the latent utilities given the estimated conditional means defined by the forest and its parameters. 
 
 ```{r outcomefit2}
 # Initialize the Markov chain with num_warmstart grow-from-root iterations
@@ -370,7 +370,7 @@ for (i in 1:num_samples) {
 
 ### Fit the monotone probit model(s)
 
-The monotonicty constraint relies on a data augmentation as described in Papakostas et al (2023). The implementation of this sampler is inherently cumbersome, as one of the "data" vectors is constructed from some observed data and some latent data and there are two forest objects, one of which applies to all of the observations and one of which applies to only those observations with $Z = 0$. We go into more details about this sampler in a dedicated vignette. Here we include the code, but without producing the equations derived in Papakostas (2023). What is most important is simply that  
+The monotonicty constraint relies on a data augmentation as described in @papakostas2023forecasts. The implementation of this sampler is inherently cumbersome, as one of the "data" vectors is constructed from some observed data and some latent data and there are two forest objects, one of which applies to all of the observations and one of which applies to only those observations with $Z = 0$. We go into more details about this sampler in a dedicated vignette. Here we include the code, but without producing the equations derived in @papakostas2023forecasts. What is most important is simply that  
 
 \begin{equation}
 \begin{aligned}
@@ -610,7 +610,7 @@ LATE_true0 <- gamfun(xgrid,1,0,"c") - gamfun(xgrid,0,0,"c")
 LATE_true1 <- gamfun(xgrid,1,1,"c") - gamfun(xgrid,0,1,"c")
 ```
 
-Next we populate the data structures for stochtree to operate on, call the predict functions to extract the predictions, convert them to the probability scale using the built in pnorm function. 
+Next we populate the data structures for stochtree to operate on, call the predict functions to extract the predictions, convert them to probability scale using the built in `pnorm` function. 
 
 ```{r plot3}
 # Datasets for counterfactual predictions
@@ -703,7 +703,7 @@ for (j in 1:ncol(phat_c)){
   a1 <- ss*m11
   b1 <- ss*(1-m11)
   
-  # When the corresponding mean is out-of-range, sample from a beta with mass piled near the violeted boundary
+  # When the corresponding mean is out-of-range, sample from a beta with mass piled near the violated boundary
   a1[m11<0] <- 1
   b1[m11<0] <- 5
   
@@ -769,6 +769,6 @@ With a valid exclusion restriction the three black curves would all be the same.
 
 We see also that the posterior mean of the $ITT_c$ estimate (gold) is very similar to the posterior mean under the assumption of an exclusion restriction (gray). This is by design...they will only deviate due to Monte Carlo variation or due to the rare situations where the exclusion restriction is incompatible with the identification interval. 
 
-By changing the sample size and various aspects of the DGP this script allows us to build some intuituion for how aspects of the DGP affect posterior inferences, particularly how violates of assumptions affect accuracy and posterior uncertainty. 
+By changing the sample size and various aspects of the DGP this script allows us to build some intuition for how aspects of the DGP affect posterior inferences, particularly how violates of assumptions affect accuracy and posterior uncertainty. 
 
 # References

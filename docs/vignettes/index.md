@@ -9,3 +9,4 @@ with an R and Python version for each vignette.
 Current advanced vignettes include:
 
 1. Using `stochtree` for Regression Discontinuity Design ([R](R/rdd.html), [Python](Python/rdd.html))
+2. Using `stochtree` for Instrumental Variables Analysis ([R](R/iv.html), [Python](Python/iv.html))
