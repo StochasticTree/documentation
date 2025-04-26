@@ -52,7 +52,7 @@ cp vignettes/Python/RDD/trees3.png docs/vignettes/Python/trees3.png
 cp vignettes/R/RDD/rdd.html docs/vignettes/R/rdd.html
 cp vignettes/Python/IV/iv.html docs/vignettes/Python/iv.html
 cp vignettes/Python/IV/IV_CDAG.png docs/vignettes/Python/IV_CDAG.png
-cp vignettes/R/IV/iv.html docs/vignettes/R/IV/iv.html
+cp vignettes/R/IV/iv.html docs/vignettes/R/iv.html
 
 # Build the doc site
 mkdocs build
