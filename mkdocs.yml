@@ -72,11 +72,11 @@ nav:
   - 'Vignettes':
     - 'Vignettes': vignettes/index.md
     - 'R':
-      - 'Instrumental Variables': 'vignettes/R/IV/iv.html'
-      - 'RDD': 'vignettes/R/RDD/rdd.html'
+      - 'Instrumental Variables': 'vignettes/R/iv.html'
+      - 'RDD': 'vignettes/R/rdd.html'
     - 'Python': 
-      - 'Instrumental Variables': 'vignettes/Python/IV/iv.html'
-      - 'RDD': 'vignettes/Python/RDD/rdd.html'
+      - 'Instrumental Variables': 'vignettes/Python/iv.html'
+      - 'RDD': 'vignettes/Python/rdd.html'
   - 'Development': 
     - 'Development': development/index.md
     - 'Contributing': development/contributing.md
@@ -126,6 +126,8 @@ plugins:
   - mkdocs-jupyter:
       execute: true
       include_source: True
+      include_requirejs: true
+      custom_mathjax_url: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
