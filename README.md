@@ -102,12 +102,15 @@ cp stochtree_repo/demo/notebooks/prototype_interface.ipynb docs/python_docs/demo
 ### Copy static vignettes over to docs directory
 
 ```{bash}
-cp vignettes/Python/rdd.html docs/vignettes/Python/rdd.html
-cp vignettes/Python/RDD_DAG.png docs/vignettes/Python/RDD_DAG.png
-cp vignettes/Python/trees1.png docs/vignettes/Python/trees1.png
-cp vignettes/Python/trees2.png docs/vignettes/Python/trees2.png
-cp vignettes/Python/trees3.png docs/vignettes/Python/trees3.png
-cp vignettes/R/rdd.html docs/vignettes/R/rdd.html
+cp vignettes/Python/RDD/rdd.html docs/vignettes/Python/rdd.html
+cp vignettes/Python/RDD/RDD_DAG.png docs/vignettes/Python/RDD_DAG.png
+cp vignettes/Python/RDD/trees1.png docs/vignettes/Python/trees1.png
+cp vignettes/Python/RDD/trees2.png docs/vignettes/Python/trees2.png
+cp vignettes/Python/RDD/trees3.png docs/vignettes/Python/trees3.png
+cp vignettes/R/RDD/rdd.html docs/vignettes/R/rdd.html
+cp vignettes/Python/IV/iv.html docs/vignettes/Python/iv.html
+cp vignettes/Python/IV/IV_CDAG.png docs/vignettes/Python/IV_CDAG.png
+cp vignettes/R/IV/iv.html docs/vignettes/R/iv.html
 ```
 
 ### Building the overall website
