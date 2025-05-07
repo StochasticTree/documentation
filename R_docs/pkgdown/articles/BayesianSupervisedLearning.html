@@ -396,6 +396,195 @@ initialization.</p>
 </div>
 </div>
 <div class="section level2">
+<h2 id="demo-4-partitioned-linear-model-with-probit-outcome-model">Demo 4: Partitioned Linear Model with Probit Outcome Model<a class="anchor" aria-label="anchor" href="#demo-4-partitioned-linear-model-with-probit-outcome-model"></a>
+</h2>
+<div class="section level3">
+<h3 id="simulation-3">Simulation<a class="anchor" aria-label="anchor" href="#simulation-3"></a>
+</h3>
+<p>Here, we generate data from a simple partitioned linear model.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Generate the data</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">p_x</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">p_x</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p_x</span><span class="op">)</span></span>
+<span><span class="va">f_X</span> <span class="op">&lt;-</span> <span class="op">(</span></span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="fl">0</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.25</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">7.5</span><span class="op">*</span><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.25</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.5</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">2.5</span><span class="op">*</span><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.5</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.75</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">2.5</span><span class="op">*</span><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.75</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">7.5</span><span class="op">*</span><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">f_X</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">z</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1.0</span></span>
+<span></span>
+<span><span class="co"># Split data into test and train sets</span></span>
+<span><span class="va">test_set_pct</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
+<span><span class="va">n_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">test_set_pct</span><span class="op">*</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">n_train</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">-</span> <span class="va">n_test</span></span>
+<span><span class="va">test_inds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, <span class="va">n_test</span>, replace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">train_inds</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">test_inds</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">X_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">X</span><span class="op">[</span><span class="va">test_inds</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">X_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">X</span><span class="op">[</span><span class="va">train_inds</span>,<span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">z_test</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span></span>
+<span><span class="va">z_train</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="va">train_inds</span><span class="op">]</span></span>
+<span><span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span></span>
+<span><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">train_inds</span><span class="op">]</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="sampling-and-analysis-3">Sampling and Analysis<a class="anchor" aria-label="anchor" href="#sampling-and-analysis-3"></a>
+</h3>
+<div class="section level4">
+<h4 id="warmstart-3">Warmstart<a class="anchor" aria-label="anchor" href="#warmstart-3"></a>
+</h4>
+<p>We first sample from an ensemble model of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∣</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">y \mid X</annotation></semantics></math>
+using “warm-start” initialization samples (<span class="citation">He and
+Hahn (2023)</span>). This is the default in <code>stochtree</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                           probit_outcome_model <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">bart_model_warmstart</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
+<span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
+<span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Since we’ve simulated this data, we can compare the true latent
+continuous outcome variable to the probit-scale predictions for a test
+set.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span>, <span class="va">z_test</span>, </span>
+<span>     pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">0.75</span>, xlab <span class="op">=</span> <span class="st">"pred"</span>, ylab <span class="op">=</span> <span class="st">"actual"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="BayesianSupervisedLearning_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>On non-simulated datasets, the first thing we would evaluate is the
+prediction accuracy.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">preds_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">preds_test</span> <span class="op">==</span> <span class="va">y_test</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.878</span></span></code></pre></div>
+<p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="external-link">ROC
+curve</a> for every posterior sample, as well as the ROC of the
+posterior mean.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num_thresholds</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">thresholds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.001</span>,<span class="fl">0.999</span>,length.out<span class="op">=</span><span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">tpr_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">fpr_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">tpr_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span>, <span class="va">num_mcmc</span><span class="op">)</span></span>
+<span><span class="va">fpr_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span>, <span class="va">num_mcmc</span><span class="op">)</span></span>
+<span><span class="va">yhat_samples</span> <span class="op">&lt;-</span> <span class="va">bart_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span></span>
+<span><span class="va">yhat_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">yhat_samples</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_thresholds</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">is_above_threshold_samples</span> <span class="op">&lt;-</span> <span class="va">yhat_samples</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">thresholds</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">is_above_threshold_mean</span> <span class="op">&lt;-</span> <span class="va">yhat_mean</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">thresholds</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">n_positive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">)</span></span>
+<span>    <span class="va">n_negative</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span></span>
+<span>    <span class="va">y_above_threshold_mean</span> <span class="op">&lt;-</span> <span class="va">y_test</span><span class="op">[</span><span class="va">is_above_threshold_mean</span><span class="op">]</span></span>
+<span>    <span class="va">tpr_mean</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold_mean</span><span class="op">)</span><span class="op">/</span><span class="va">n_positive</span></span>
+<span>    <span class="va">fpr_mean</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold_mean</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="va">n_negative</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_mcmc</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="va">y_above_threshold</span> <span class="op">&lt;-</span> <span class="va">y_test</span><span class="op">[</span><span class="va">is_above_threshold_samples</span><span class="op">[</span>,<span class="va">j</span><span class="op">]</span><span class="op">]</span></span>
+<span>        <span class="va">tpr_samples</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold</span><span class="op">)</span><span class="op">/</span><span class="va">n_positive</span></span>
+<span>        <span class="va">fpr_samples</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="va">n_negative</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_mcmc</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, <span class="va">tpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"line"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         xlab <span class="op">=</span> <span class="st">"False positive rate"</span>, ylab <span class="op">=</span> <span class="st">"True positive rate"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, <span class="va">tpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning in plot.xy(xy, type, ...): plot type 'line' will be truncated to first</span></span>
+<span><span class="co">#&gt; character</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fpr_mean</span>, <span class="va">tpr_mean</span>, col <span class="op">=</span> <span class="st">"black"</span>, lwd <span class="op">=</span> <span class="fl">3</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="BayesianSupervisedLearning_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p>Note that the nonlinearity of the ROC function means that the ROC
+curve of the posterior mean could sit above most of the individual
+posterior sample ROC curves (which would not be the case if we had
+simply taken the mean of the ROC curves).</p>
+</div>
+<div class="section level4">
+<h4 id="bart-mcmc-without-warmstart-3">BART MCMC without Warmstart<a class="anchor" aria-label="anchor" href="#bart-mcmc-without-warmstart-3"></a>
+</h4>
+<p>Next, we sample from this ensemble model without any warm-start
+initialization.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num_gfr</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">num_burnin</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_mcmc</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">num_samples</span> <span class="op">&lt;-</span> <span class="va">num_gfr</span> <span class="op">+</span> <span class="va">num_burnin</span> <span class="op">+</span> <span class="va">num_mcmc</span></span>
+<span><span class="va">general_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_global <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">mean_forest_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sample_sigma2_leaf <span class="op">=</span> <span class="cn">F</span>, num_trees <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                           probit_outcome_model <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">bart_model_root</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/bart.html">bart</a></span><span class="op">(</span></span>
+<span>    X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, X_test <span class="op">=</span> <span class="va">X_test</span>, </span>
+<span>    num_gfr <span class="op">=</span> <span class="va">num_gfr</span>, num_burnin <span class="op">=</span> <span class="va">num_burnin</span>, num_mcmc <span class="op">=</span> <span class="va">num_mcmc</span>, </span>
+<span>    general_params <span class="op">=</span> <span class="va">general_params</span>, mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Since we’ve simulated this data, we can compare the true latent
+continuous outcome variable to the probit-scale predictions for a test
+set.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_root</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span>, <span class="va">z_test</span>, </span>
+<span>     pch<span class="op">=</span><span class="fl">16</span>, cex<span class="op">=</span><span class="fl">0.75</span>, xlab <span class="op">=</span> <span class="st">"pred"</span>, ylab <span class="op">=</span> <span class="st">"actual"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="BayesianSupervisedLearning_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p>On non-simulated datasets, the first thing we would evaluate is the
+prediction accuracy.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">preds_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_root</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">preds_test</span> <span class="op">==</span> <span class="va">y_test</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.876</span></span></code></pre></div>
+<p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="external-link">ROC
+curve</a> for every posterior sample, as well as the ROC of the
+posterior mean.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">num_thresholds</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">thresholds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.001</span>,<span class="fl">0.999</span>,length.out<span class="op">=</span><span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">tpr_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">fpr_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span><span class="op">)</span></span>
+<span><span class="va">tpr_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span>, <span class="va">num_mcmc</span><span class="op">)</span></span>
+<span><span class="va">fpr_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">num_thresholds</span>, <span class="va">num_mcmc</span><span class="op">)</span></span>
+<span><span class="va">yhat_samples</span> <span class="op">&lt;-</span> <span class="va">bart_model_root</span><span class="op">$</span><span class="va">y_hat_test</span></span>
+<span><span class="va">yhat_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">yhat_samples</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_thresholds</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">is_above_threshold_samples</span> <span class="op">&lt;-</span> <span class="va">yhat_samples</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">thresholds</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">is_above_threshold_mean</span> <span class="op">&lt;-</span> <span class="va">yhat_mean</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">thresholds</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">n_positive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">)</span></span>
+<span>    <span class="va">n_negative</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_test</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span></span>
+<span>    <span class="va">y_above_threshold_mean</span> <span class="op">&lt;-</span> <span class="va">y_test</span><span class="op">[</span><span class="va">is_above_threshold_mean</span><span class="op">]</span></span>
+<span>    <span class="va">tpr_mean</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold_mean</span><span class="op">)</span><span class="op">/</span><span class="va">n_positive</span></span>
+<span>    <span class="va">fpr_mean</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold_mean</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="va">n_negative</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_mcmc</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="va">y_above_threshold</span> <span class="op">&lt;-</span> <span class="va">y_test</span><span class="op">[</span><span class="va">is_above_threshold_samples</span><span class="op">[</span>,<span class="va">j</span><span class="op">]</span><span class="op">]</span></span>
+<span>        <span class="va">tpr_samples</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold</span><span class="op">)</span><span class="op">/</span><span class="va">n_positive</span></span>
+<span>        <span class="va">fpr_samples</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y_above_threshold</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="va">n_negative</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_mcmc</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, <span class="va">tpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"line"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         xlab <span class="op">=</span> <span class="st">"False positive rate"</span>, ylab <span class="op">=</span> <span class="st">"True positive rate"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, <span class="va">tpr_samples</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; Warning in plot.xy(xy, type, ...): plot type 'line' will be truncated to first</span></span>
+<span><span class="co">#&gt; character</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fpr_mean</span>, <span class="va">tpr_mean</span>, col <span class="op">=</span> <span class="st">"black"</span>, lwd <span class="op">=</span> <span class="fl">3</span>, lty <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="BayesianSupervisedLearning_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+</div>
+</div>
+</div>
+<div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
