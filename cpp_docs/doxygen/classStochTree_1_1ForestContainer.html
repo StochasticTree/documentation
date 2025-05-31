@@ -100,6 +100,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1333fe7be47aa75bdc775642027b3432" id="r_a1333fe7be47aa75bdc775642027b3432"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a1333fe7be47aa75bdc775642027b3432">ForestContainer</a> (int num_samples, int num_trees, int output_dimension=1, bool is_leaf_constant=true, bool is_exponentiated=false)</td></tr>
 <tr class="memdesc:a1333fe7be47aa75bdc775642027b3432"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classStochTree_1_1ForestContainer.html" title="Container of TreeEnsemble forest objects. This is the primary (in-memory) storage interface for multi...">ForestContainer</a> object.  <br /></td></tr>
 <tr class="separator:a1333fe7be47aa75bdc775642027b3432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec1ac6e8569002589e6822e36ddfdf8" id="r_a8ec1ac6e8569002589e6822e36ddfdf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a8ec1ac6e8569002589e6822e36ddfdf8">MergeForests</a> (int inbound_forest_index, int outbound_forest_index)</td></tr>
+<tr class="memdesc:a8ec1ac6e8569002589e6822e36ddfdf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine two forests into a single forest by merging their trees.  <br /></td></tr>
+<tr class="separator:a8ec1ac6e8569002589e6822e36ddfdf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb79480c8741aebeee5a66fd378770ac" id="r_afb79480c8741aebeee5a66fd378770ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#afb79480c8741aebeee5a66fd378770ac">AddToForest</a> (int forest_index, double constant_value)</td></tr>
+<tr class="memdesc:afb79480c8741aebeee5a66fd378770ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a constant value to every leaf of every tree of a specified forest.  <br /></td></tr>
+<tr class="separator:afb79480c8741aebeee5a66fd378770ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d8f33aa0d7072d27d4e81b604c80ac" id="r_a31d8f33aa0d7072d27d4e81b604c80ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a31d8f33aa0d7072d27d4e81b604c80ac">MultiplyForest</a> (int forest_index, double constant_multiple)</td></tr>
+<tr class="memdesc:a31d8f33aa0d7072d27d4e81b604c80ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply every leaf of every tree of a specified forest by a constant value.  <br /></td></tr>
+<tr class="separator:a31d8f33aa0d7072d27d4e81b604c80ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f7ff47a118d657677643c26da01fb47" id="r_a4f7ff47a118d657677643c26da01fb47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestContainer.html#a4f7ff47a118d657677643c26da01fb47">DeleteSample</a> (int sample_num)</td></tr>
 <tr class="memdesc:a4f7ff47a118d657677643c26da01fb47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a forest from a container of forest samples and delete the corresponding object, freeing its memory.  <br /></td></tr>
 <tr class="separator:a4f7ff47a118d657677643c26da01fb47"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,6 +259,141 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>append_from_json</b> 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8ec1ac6e8569002589e6822e36ddfdf8" name="a8ec1ac6e8569002589e6822e36ddfdf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ec1ac6e8569002589e6822e36ddfdf8">&#9670;&#160;</a></span>MergeForests()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::MergeForests </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inbound_forest_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>outbound_forest_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combine two forests into a single forest by merging their trees. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inbound_forest_index</td><td>Index of the forest that will be appended to </td></tr>
+    <tr><td class="paramname">outbound_forest_index</td><td>Index of the forest that will be appended </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afb79480c8741aebeee5a66fd378770ac" name="afb79480c8741aebeee5a66fd378770ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb79480c8741aebeee5a66fd378770ac">&#9670;&#160;</a></span>AddToForest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::AddToForest </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>forest_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>constant_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a constant value to every leaf of every tree of a specified forest. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">forest_index</td><td>Index of forest whose leaves will be modified </td></tr>
+    <tr><td class="paramname">constant_value</td><td>Value to add to every leaf of every tree of the forest at <code>forest_index</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a31d8f33aa0d7072d27d4e81b604c80ac" name="a31d8f33aa0d7072d27d4e81b604c80ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d8f33aa0d7072d27d4e81b604c80ac">&#9670;&#160;</a></span>MultiplyForest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::ForestContainer::MultiplyForest </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>forest_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>constant_multiple</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply every leaf of every tree of a specified forest by a constant value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">forest_index</td><td>Index of forest whose leaves will be modified </td></tr>
+    <tr><td class="paramname">constant_multiple</td><td>Value to multiply through by every leaf of every tree of the forest at <code>forest_index</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a4f7ff47a118d657677643c26da01fb47" name="a4f7ff47a118d657677643c26da01fb47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f7ff47a118d657677643c26da01fb47">&#9670;&#160;</a></span>DeleteSample()</h2>
 

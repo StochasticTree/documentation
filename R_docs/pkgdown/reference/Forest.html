@@ -75,6 +75,9 @@
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-Forest-new"><code>Forest$new()</code></a></p></li>
+<li><p><a href="#method-Forest-merge_forest"><code>Forest$merge_forest()</code></a></p></li>
+<li><p><a href="#method-Forest-add_constant"><code>Forest$add_constant()</code></a></p></li>
+<li><p><a href="#method-Forest-multiply_constant"><code>Forest$multiply_constant()</code></a></p></li>
 <li><p><a href="#method-Forest-predict"><code>Forest$predict()</code></a></p></li>
 <li><p><a href="#method-Forest-predict_raw"><code>Forest$predict_raw()</code></a></p></li>
 <li><p><a href="#method-Forest-set_root_leaves"><code>Forest$set_root_leaves()</code></a></p></li>
@@ -128,15 +131,63 @@
 <p>A new <code>Forest</code> object.</p>
 </div>
 
-</div><p></p><hr><a id="method-Forest-predict"></a><div class="section">
-<h3 id="method-predict-">Method <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code><a class="anchor" aria-label="anchor" href="#method-predict-"></a></h3>
-<p>Predict forest on every sample in <code>forest_dataset</code></p><div class="section">
+</div><p></p><hr><a id="method-Forest-merge_forest"></a><div class="section">
+<h3 id="method-merge-forest-">Method <code>merge_forest()</code><a class="anchor" aria-label="anchor" href="#method-merge-forest-"></a></h3>
+<p>Create a larger forest by merging the trees of this forest with those of another forest</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">forest_dataset</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">merge_forest</span><span class="op">(</span><span class="va">forest</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>forest</code></dt>
+<dd><p>Forest to be merged into this forest</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Forest-add_constant"></a><div class="section">
+<h3 id="method-add-constant-">Method <code>add_constant()</code><a class="anchor" aria-label="anchor" href="#method-add-constant-"></a></h3>
+<p>Add a constant value to every leaf of every tree in an ensemble. If leaves are multi-dimensional, <code>constant_value</code> will be added to every dimension of the leaves.</p><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">add_constant</span><span class="op">(</span><span class="va">constant_value</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>constant_value</code></dt>
+<dd><p>Value that will be added to every leaf of every tree</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Forest-multiply_constant"></a><div class="section">
+<h3 id="method-multiply-constant-">Method <code>multiply_constant()</code><a class="anchor" aria-label="anchor" href="#method-multiply-constant-"></a></h3>
+<p>Multiply every leaf of every tree by a constant value. If leaves are multi-dimensional, <code>constant_multiple</code> will be multiplied through every dimension of the leaves.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">multiply_constant</span><span class="op">(</span><span class="va">constant_multiple</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>constant_multiple</code></dt>
+<dd><p>Value that will be multiplied by every leaf of every tree</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Forest-predict"></a><div class="section">
+<h3 id="method-predict-">Method <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code><a class="anchor" aria-label="anchor" href="#method-predict-"></a></h3>
+<p>Predict forest on every sample in <code>forest_dataset</code></p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">predict</span><span class="op">(</span><span class="va">forest_dataset</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>forest_dataset</code></dt>
 <dd><p><code>ForestDataset</code> R class</p></dd>
 
@@ -151,12 +202,12 @@
 </div><p></p><hr><a id="method-Forest-predict_raw"></a><div class="section">
 <h3 id="method-predict-raw-">Method <code>predict_raw()</code><a class="anchor" aria-label="anchor" href="#method-predict-raw-"></a></h3>
 <p>Predict "raw" leaf values (without being multiplied by basis) for every sample in <code>forest_dataset</code></p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">predict_raw</span><span class="op">(</span><span class="va">forest_dataset</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>forest_dataset</code></dt>
 <dd><p><code>ForestDataset</code> R class</p></dd>
 
@@ -178,12 +229,12 @@ number of samples).</p>
 <h3 id="method-set-root-leaves-">Method <code>set_root_leaves()</code><a class="anchor" aria-label="anchor" href="#method-set-root-leaves-"></a></h3>
 <p>Set a constant predicted value for every tree in the ensemble.
 Stops program if any tree is more than a root node.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">set_root_leaves</span><span class="op">(</span><span class="va">leaf_value</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>leaf_value</code></dt>
 <dd><p>Constant leaf value(s) to be fixed for each tree in the ensemble indexed by <code>forest_num</code>. Can be either a single number or a vector, depending on the forest's leaf dimension.</p></dd>
 
@@ -195,7 +246,7 @@ Stops program if any tree is more than a root node.</p><div class="section">
 <h3 id="method-prepare-for-sampler-">Method <code>prepare_for_sampler()</code><a class="anchor" aria-label="anchor" href="#method-prepare-for-sampler-"></a></h3>
 <p>Set a constant predicted value for every tree in the ensemble.
 Stops program if any tree is more than a root node.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">prepare_for_sampler</span><span class="op">(</span></span>
 <span>  <span class="va">dataset</span>,</span>
 <span>  <span class="va">outcome</span>,</span>
@@ -206,7 +257,7 @@ Stops program if any tree is more than a root node.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>dataset</code></dt>
 <dd><p><code>ForestDataset</code> Dataset class (covariates, basis, etc...)</p></dd>
 
@@ -235,12 +286,12 @@ Stops program if any tree is more than a root node.</p><div class="section">
 <p>Adjusts residual based on the predictions of a forest</p>
 <p>This is typically run just once at the beginning of a forest sampling algorithm.
 After trees are initialized with constant root node predictions, their root predictions are subtracted out of the residual.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">adjust_residual</span><span class="op">(</span><span class="va">dataset</span>, <span class="va">outcome</span>, <span class="va">forest_model</span>, <span class="va">requires_basis</span>, <span class="va">add</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>dataset</code></dt>
 <dd><p><code>ForestDataset</code> object storing the covariates and bases for a given forest</p></dd>
 
@@ -267,7 +318,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-num_trees"></a><div class="section">
 <h3 id="method-num-trees-">Method <code>num_trees()</code><a class="anchor" aria-label="anchor" href="#method-num-trees-"></a></h3>
 <p>Return number of trees in each ensemble of a <code>Forest</code> object</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">num_trees</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -279,7 +330,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-leaf_dimension"></a><div class="section">
 <h3 id="method-leaf-dimension-">Method <code>leaf_dimension()</code><a class="anchor" aria-label="anchor" href="#method-leaf-dimension-"></a></h3>
 <p>Return output dimension of trees in a <code>Forest</code> object</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">leaf_dimension</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -291,7 +342,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-is_constant_leaf"></a><div class="section">
 <h3 id="method-is-constant-leaf-">Method <code>is_constant_leaf()</code><a class="anchor" aria-label="anchor" href="#method-is-constant-leaf-"></a></h3>
 <p>Return constant leaf status of trees in a <code>Forest</code> object</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">is_constant_leaf</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -303,7 +354,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-is_exponentiated"></a><div class="section">
 <h3 id="method-is-exponentiated-">Method <code>is_exponentiated()</code><a class="anchor" aria-label="anchor" href="#method-is-exponentiated-"></a></h3>
 <p>Return exponentiation status of trees in a <code>Forest</code> object</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">is_exponentiated</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -315,7 +366,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-add_numeric_split_tree"></a><div class="section">
 <h3 id="method-add-numeric-split-tree-">Method <code>add_numeric_split_tree()</code><a class="anchor" aria-label="anchor" href="#method-add-numeric-split-tree-"></a></h3>
 <p>Add a numeric (i.e. <code>X[,i] &lt;= c</code>) split to a given tree in the ensemble</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">add_numeric_split_tree</span><span class="op">(</span></span>
 <span>  <span class="va">tree_num</span>,</span>
 <span>  <span class="va">leaf_num</span>,</span>
@@ -327,7 +378,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tree_num</code></dt>
 <dd><p>Index of the tree to be split</p></dd>
 
@@ -358,12 +409,12 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-get_tree_leaves"></a><div class="section">
 <h3 id="method-get-tree-leaves-">Method <code>get_tree_leaves()</code><a class="anchor" aria-label="anchor" href="#method-get-tree-leaves-"></a></h3>
 <p>Retrieve a vector of indices of leaf nodes for a given tree in a given forest</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">get_tree_leaves</span><span class="op">(</span><span class="va">tree_num</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tree_num</code></dt>
 <dd><p>Index of the tree for which leaf indices will be retrieved</p></dd>
 
@@ -374,12 +425,12 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-get_tree_split_counts"></a><div class="section">
 <h3 id="method-get-tree-split-counts-">Method <code>get_tree_split_counts()</code><a class="anchor" aria-label="anchor" href="#method-get-tree-split-counts-"></a></h3>
 <p>Retrieve a vector of split counts for every training set variable in a given tree in the forest</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">get_tree_split_counts</span><span class="op">(</span><span class="va">tree_num</span>, <span class="va">num_features</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tree_num</code></dt>
 <dd><p>Index of the tree for which split counts will be retrieved</p></dd>
 
@@ -394,12 +445,12 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-get_forest_split_counts"></a><div class="section">
 <h3 id="method-get-forest-split-counts-">Method <code>get_forest_split_counts()</code><a class="anchor" aria-label="anchor" href="#method-get-forest-split-counts-"></a></h3>
 <p>Retrieve a vector of split counts for every training set variable in the forest</p><div class="section">
-<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="va">num_features</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>num_features</code></dt>
 <dd><p>Total number of features in the training set</p></dd>
 
@@ -410,12 +461,12 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-tree_max_depth"></a><div class="section">
 <h3 id="method-tree-max-depth-">Method <code>tree_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-tree-max-depth-"></a></h3>
 <p>Maximum depth of a specific tree in the forest</p><div class="section">
-<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">tree_max_depth</span><span class="op">(</span><span class="va">tree_num</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tree_num</code></dt>
 <dd><p>Tree index within forest</p></dd>
 
@@ -430,7 +481,7 @@ After trees are initialized with constant root node predictions, their root pred
 </div><p></p><hr><a id="method-Forest-average_max_depth"></a><div class="section">
 <h3 id="method-average-max-depth-">Method <code>average_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-average-max-depth-"></a></h3>
 <p>Average the maximum depth of each tree in the forest</p><div class="section">
-<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">average_max_depth</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -450,7 +501,7 @@ method initializes every tree in the forest to a single node with the
 same value and also propagates this information through to a ForestModel
 object, which must be synchronized with a Forest during a forest
 sampler loop.</p><div class="section">
-<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Forest</span><span class="op">$</span><span class="fu">is_empty</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 

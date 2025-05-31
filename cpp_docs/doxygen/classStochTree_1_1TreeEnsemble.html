@@ -100,6 +100,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a43686c7c4f2b8f2eaad484a050f5d92c" id="r_a43686c7c4f2b8f2eaad484a050f5d92c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a43686c7c4f2b8f2eaad484a050f5d92c">TreeEnsemble</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;ensemble)</td></tr>
 <tr class="memdesc:a43686c7c4f2b8f2eaad484a050f5d92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize an ensemble based on the state of an existing ensemble.  <br /></td></tr>
 <tr class="separator:a43686c7c4f2b8f2eaad484a050f5d92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc289625eee2ff06b8a44958f109c02" id="r_a7dc289625eee2ff06b8a44958f109c02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a7dc289625eee2ff06b8a44958f109c02">MergeForest</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;ensemble)</td></tr>
+<tr class="memdesc:a7dc289625eee2ff06b8a44958f109c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combine two forests into a single forest by merging their trees.  <br /></td></tr>
+<tr class="separator:a7dc289625eee2ff06b8a44958f109c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b43adc55dc926ffde7e1e75161a335" id="r_a73b43adc55dc926ffde7e1e75161a335"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a73b43adc55dc926ffde7e1e75161a335">AddValueToLeaves</a> (double constant_value)</td></tr>
+<tr class="memdesc:a73b43adc55dc926ffde7e1e75161a335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a constant value to every leaf of every tree in an ensemble. If leaves are multi-dimensional, <code>constant_value</code> will be added to every dimension of the leaves.  <br /></td></tr>
+<tr class="separator:a73b43adc55dc926ffde7e1e75161a335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae50768937738ff9e35190f2360a2e997" id="r_ae50768937738ff9e35190f2360a2e997"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#ae50768937738ff9e35190f2360a2e997">MultiplyLeavesByValue</a> (double constant_multiple)</td></tr>
+<tr class="memdesc:ae50768937738ff9e35190f2360a2e997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply every leaf of every tree by a constant value. If leaves are multi-dimensional, <code>constant_multiple</code> will be multiplied through every dimension of the leaves.  <br /></td></tr>
+<tr class="separator:ae50768937738ff9e35190f2360a2e997"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07d24b9893b4b47c442584614daead17" id="r_a07d24b9893b4b47c442584614daead17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classStochTree_1_1Tree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1TreeEnsemble.html#a07d24b9893b4b47c442584614daead17">GetTree</a> (int i)</td></tr>
 <tr class="memdesc:a07d24b9893b4b47c442584614daead17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to a tree in the forest.  <br /></td></tr>
 <tr class="separator:a07d24b9893b4b47c442584614daead17"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,6 +253,108 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>from_json</b> (const 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7dc289625eee2ff06b8a44958f109c02" name="a7dc289625eee2ff06b8a44958f109c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc289625eee2ff06b8a44958f109c02">&#9670;&#160;</a></span>MergeForest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::MergeForest </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;&#160;</td>
+          <td class="paramname"><em>ensemble</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combine two forests into a single forest by merging their trees. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ensemble</td><td>Reference to another <code><a class="el" href="classStochTree_1_1TreeEnsemble.html" title="Class storing a &quot;forest,&quot; or an ensemble of decision trees.">TreeEnsemble</a></code> that will be merged into the current ensemble </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a73b43adc55dc926ffde7e1e75161a335" name="a73b43adc55dc926ffde7e1e75161a335"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73b43adc55dc926ffde7e1e75161a335">&#9670;&#160;</a></span>AddValueToLeaves()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::AddValueToLeaves </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>constant_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a constant value to every leaf of every tree in an ensemble. If leaves are multi-dimensional, <code>constant_value</code> will be added to every dimension of the leaves. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constant_value</td><td>Value that will be added to every leaf of every tree </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae50768937738ff9e35190f2360a2e997" name="ae50768937738ff9e35190f2360a2e997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae50768937738ff9e35190f2360a2e997">&#9670;&#160;</a></span>MultiplyLeavesByValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::TreeEnsemble::MultiplyLeavesByValue </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>constant_multiple</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiply every leaf of every tree by a constant value. If leaves are multi-dimensional, <code>constant_multiple</code> will be multiplied through every dimension of the leaves. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">constant_multiple</td><td>Value that will be multiplied by every leaf of every tree </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a07d24b9893b4b47c442584614daead17" name="a07d24b9893b4b47c442584614daead17"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07d24b9893b4b47c442584614daead17">&#9670;&#160;</a></span>GetTree()</h2>
 

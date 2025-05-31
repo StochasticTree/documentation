@@ -182,6 +182,7 @@ that were not in the training set.</p></dd>
 <li><p><code>sigma2_leaf_scale</code> Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</p></li>
 <li><p><code>keep_vars</code> Vector of variable names or column indices denoting variables that should be included in the forest. Default: <code>NULL</code>.</p></li>
 <li><p><code>drop_vars</code> Vector of variable names or column indices denoting variables that should be excluded from the forest. Default: <code>NULL</code>. If both <code>drop_vars</code> and <code>keep_vars</code> are set, <code>drop_vars</code> will be ignored.</p></li>
+<li><p><code>probit_outcome_model</code> Whether or not the outcome should be modeled as explicitly binary via a probit link. If <code>TRUE</code>, <code>y</code> must only contain the values <code>0</code> and <code>1</code>. Default: <code>FALSE</code>.</p></li>
 </ul></dd>
 
 
