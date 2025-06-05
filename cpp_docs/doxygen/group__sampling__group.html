@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Functions for sampling from a forest. The core interfce of these functions, as used by the R, Python, and standalone C++ program, is defined by <a class="el" href="group__sampling__group.html#ga08eabd64880e15e5ee94e8ad48110208">MCMCSampleOneIter</a>, which runs one iteration of the MCMC sampler for a given forest, and <a class="el" href="group__sampling__group.html#ga68c34c1d30d2ad0503b30e396ec97c09">GFRSampleOneIter</a>, which runs one iteration of the grow-from-root (GFR) algorithm for a given forest. All other functions are essentially helpers used in a sampling function, which are documented here to make extending the C++ codebase more straightforward.  
+<p>Functions for sampling from a forest. The core interfce of these functions, as used by the R, Python, and standalone C++ program, is defined by <a class="el" href="group__sampling__group.html#ga1e053000d844abd73252220aa1ad1ed7">MCMCSampleOneIter</a>, which runs one iteration of the MCMC sampler for a given forest, and <a class="el" href="group__sampling__group.html#ga0f4f96f99556850538f6309b25e4cac0">GFRSampleOneIter</a>, which runs one iteration of the grow-from-root (GFR) algorithm for a given forest. All other functions are essentially helpers used in a sampling function, which are documented here to make extending the C++ codebase more straightforward.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -93,16 +93,16 @@ Functions</h2></td></tr>
 <tr class="memitem:ga40394b4b31bc161a33b2f169e7ecbc55" id="r_ga40394b4b31bc161a33b2f169e7ecbc55"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sampling__group.html#ga40394b4b31bc161a33b2f169e7ecbc55">StochTree::NodesNonConstantAfterSplit</a> (<a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1TreeSplit.html">TreeSplit</a> &amp;split, int tree_num, int leaf_split, int feature_split)</td></tr>
 <tr class="memdesc:ga40394b4b31bc161a33b2f169e7ecbc55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines whether a proposed split creates two leaf nodes with constant values for every feature (thus ensuring that the tree cannot split further).  <br /></td></tr>
 <tr class="separator:ga40394b4b31bc161a33b2f169e7ecbc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga68c34c1d30d2ad0503b30e396ec97c09" id="r_ga68c34c1d30d2ad0503b30e396ec97c09"><td class="memTemplParams" colspan="2">template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffStatConstructorArgs&gt; </td></tr>
-<tr class="memitem:ga68c34c1d30d2ad0503b30e396ec97c09"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__sampling__group.html#ga68c34c1d30d2ad0503b30e396ec97c09">StochTree::GFRSampleOneIter</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;active_forest, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> &amp;forests, LeafModel &amp;leaf_model, <a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1TreePrior.html">TreePrior</a> &amp;tree_prior, std::mt19937 &amp;gen, std::vector&lt; double &gt; &amp;variable_weights, double global_variance, std::vector&lt; FeatureType &gt; &amp;feature_types, int cutpoint_grid_size, bool keep_forest, bool pre_initialized, bool backfitting, LeafSuffStatConstructorArgs &amp;... leaf_suff_stat_args)</td></tr>
-<tr class="separator:ga68c34c1d30d2ad0503b30e396ec97c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga08eabd64880e15e5ee94e8ad48110208" id="r_ga08eabd64880e15e5ee94e8ad48110208"><td class="memTemplParams" colspan="2">template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffStatConstructorArgs&gt; </td></tr>
-<tr class="memitem:ga08eabd64880e15e5ee94e8ad48110208"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__sampling__group.html#ga08eabd64880e15e5ee94e8ad48110208">StochTree::MCMCSampleOneIter</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;active_forest, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> &amp;forests, LeafModel &amp;leaf_model, <a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1TreePrior.html">TreePrior</a> &amp;tree_prior, std::mt19937 &amp;gen, std::vector&lt; double &gt; &amp;variable_weights, double global_variance, bool keep_forest, bool pre_initialized, bool backfitting, LeafSuffStatConstructorArgs &amp;... leaf_suff_stat_args)</td></tr>
-<tr class="memdesc:ga08eabd64880e15e5ee94e8ad48110208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one iteration of the MCMC sampler for a tree ensemble model, which consists of two steps for every tree in a forest:  <br /></td></tr>
-<tr class="separator:ga08eabd64880e15e5ee94e8ad48110208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0f4f96f99556850538f6309b25e4cac0" id="r_ga0f4f96f99556850538f6309b25e4cac0"><td class="memTemplParams" colspan="2">template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffStatConstructorArgs&gt; </td></tr>
+<tr class="memitem:ga0f4f96f99556850538f6309b25e4cac0"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__sampling__group.html#ga0f4f96f99556850538f6309b25e4cac0">StochTree::GFRSampleOneIter</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;active_forest, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> &amp;forests, LeafModel &amp;leaf_model, <a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1TreePrior.html">TreePrior</a> &amp;tree_prior, std::mt19937 &amp;gen, std::vector&lt; double &gt; &amp;variable_weights, std::vector&lt; int &gt; &amp;sweep_update_indices, double global_variance, std::vector&lt; FeatureType &gt; &amp;feature_types, int cutpoint_grid_size, bool keep_forest, bool pre_initialized, bool backfitting, LeafSuffStatConstructorArgs &amp;... leaf_suff_stat_args)</td></tr>
+<tr class="separator:ga0f4f96f99556850538f6309b25e4cac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e053000d844abd73252220aa1ad1ed7" id="r_ga1e053000d844abd73252220aa1ad1ed7"><td class="memTemplParams" colspan="2">template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffStatConstructorArgs&gt; </td></tr>
+<tr class="memitem:ga1e053000d844abd73252220aa1ad1ed7"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__sampling__group.html#ga1e053000d844abd73252220aa1ad1ed7">StochTree::MCMCSampleOneIter</a> (<a class="el" href="classStochTree_1_1TreeEnsemble.html">TreeEnsemble</a> &amp;active_forest, <a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a> &amp;tracker, <a class="el" href="classStochTree_1_1ForestContainer.html">ForestContainer</a> &amp;forests, LeafModel &amp;leaf_model, <a class="el" href="classStochTree_1_1ForestDataset.html">ForestDataset</a> &amp;dataset, <a class="el" href="classStochTree_1_1ColumnVector.html">ColumnVector</a> &amp;residual, <a class="el" href="classStochTree_1_1TreePrior.html">TreePrior</a> &amp;tree_prior, std::mt19937 &amp;gen, std::vector&lt; double &gt; &amp;variable_weights, std::vector&lt; int &gt; &amp;sweep_update_indices, double global_variance, bool keep_forest, bool pre_initialized, bool backfitting, LeafSuffStatConstructorArgs &amp;... leaf_suff_stat_args)</td></tr>
+<tr class="memdesc:ga1e053000d844abd73252220aa1ad1ed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one iteration of the MCMC sampler for a tree ensemble model, which consists of two steps for every tree in a forest:  <br /></td></tr>
+<tr class="separator:ga1e053000d844abd73252220aa1ad1ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Functions for sampling from a forest. The core interfce of these functions, as used by the R, Python, and standalone C++ program, is defined by <a class="el" href="group__sampling__group.html#ga08eabd64880e15e5ee94e8ad48110208">MCMCSampleOneIter</a>, which runs one iteration of the MCMC sampler for a given forest, and <a class="el" href="group__sampling__group.html#ga68c34c1d30d2ad0503b30e396ec97c09">GFRSampleOneIter</a>, which runs one iteration of the grow-from-root (GFR) algorithm for a given forest. All other functions are essentially helpers used in a sampling function, which are documented here to make extending the C++ codebase more straightforward. </p>
+<p>Functions for sampling from a forest. The core interfce of these functions, as used by the R, Python, and standalone C++ program, is defined by <a class="el" href="group__sampling__group.html#ga1e053000d844abd73252220aa1ad1ed7">MCMCSampleOneIter</a>, which runs one iteration of the MCMC sampler for a given forest, and <a class="el" href="group__sampling__group.html#ga0f4f96f99556850538f6309b25e4cac0">GFRSampleOneIter</a>, which runs one iteration of the grow-from-root (GFR) algorithm for a given forest. All other functions are essentially helpers used in a sampling function, which are documented here to make extending the C++ codebase more straightforward. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga1a6133404b4f375fe32036846dd24751" name="ga1a6133404b4f375fe32036846dd24751"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga1a6133404b4f375fe32036846dd24751">&#9670;&#160;</a></span>VarSplitRange()</h2>
@@ -258,8 +258,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga68c34c1d30d2ad0503b30e396ec97c09" name="ga68c34c1d30d2ad0503b30e396ec97c09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga68c34c1d30d2ad0503b30e396ec97c09">&#9670;&#160;</a></span>GFRSampleOneIter()</h2>
+<a id="ga0f4f96f99556850538f6309b25e4cac0" name="ga0f4f96f99556850538f6309b25e4cac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0f4f96f99556850538f6309b25e4cac0">&#9670;&#160;</a></span>GFRSampleOneIter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,6 +322,12 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>variable_weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sweep_update_indices</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -400,6 +406,7 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
     <tr><td class="paramname">tree_prior</td><td>Configuration for tree prior (i.e. max depth, min samples in a leaf, depth-defined split probability). </td></tr>
     <tr><td class="paramname">gen</td><td>Random number generator for sampler. </td></tr>
     <tr><td class="paramname">variable_weights</td><td>Vector of selection weights for each variable in <code>dataset</code>. </td></tr>
+    <tr><td class="paramname">sweep_update_indices</td><td>Vector of (0-indexed) indices of trees to update in a sweep. </td></tr>
     <tr><td class="paramname">global_variance</td><td>Current value of (possibly stochastic) global error variance parameter. </td></tr>
     <tr><td class="paramname">feature_types</td><td>Enum-coded vector of feature types (see FeatureType) for each feature in <code>dataset</code>. </td></tr>
     <tr><td class="paramname">cutpoint_grid_size</td><td>Maximum size of a grid of potential cutpoints (the grow-from-root algorithm evaluates a series of potential cutpoints for each feature and this parameter "thins" the cutpoint candidates for numeric variables). </td></tr>
@@ -413,8 +420,8 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
 
 </div>
 </div>
-<a id="ga08eabd64880e15e5ee94e8ad48110208" name="ga08eabd64880e15e5ee94e8ad48110208"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga08eabd64880e15e5ee94e8ad48110208">&#9670;&#160;</a></span>MCMCSampleOneIter()</h2>
+<a id="ga1e053000d844abd73252220aa1ad1ed7" name="ga1e053000d844abd73252220aa1ad1ed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e053000d844abd73252220aa1ad1ed7">&#9670;&#160;</a></span>MCMCSampleOneIter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,6 +484,12 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>variable_weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>sweep_update_indices</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -545,6 +558,7 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
     <tr><td class="paramname">tree_prior</td><td>Configuration for tree prior (i.e. max depth, min samples in a leaf, depth-defined split probability). </td></tr>
     <tr><td class="paramname">gen</td><td>Random number generator for sampler. </td></tr>
     <tr><td class="paramname">variable_weights</td><td>Vector of selection weights for each variable in <code>dataset</code>. </td></tr>
+    <tr><td class="paramname">sweep_update_indices</td><td>Vector of (0-indexed) indices of trees to update in a sweep. </td></tr>
     <tr><td class="paramname">global_variance</td><td>Current value of (possibly stochastic) global error variance parameter. </td></tr>
     <tr><td class="paramname">keep_forest</td><td>Whether or not <code>active_forest</code> should be retained in <code>forests</code>. </td></tr>
     <tr><td class="paramname">pre_initialized</td><td>Whether or not <code>active_forest</code> has already been initialized (note: this parameter will be refactored out soon). </td></tr>

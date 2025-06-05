@@ -74,6 +74,7 @@ forest model they wish to run.</p>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Vector of integer-coded feature types (integers where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p>
+<p>Vector of (0-indexed) indices of trees to update in a sweep</p>
 <p>Vector specifying sampling probability for all p covariates in ForestDataset</p>
 <p>Number of trees in a forest</p>
 <p>Number of features in a forest model training set</p>
@@ -92,6 +93,10 @@ forest model they wish to run.</p>
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
     <p></p><div class="r6-fields"><dl><dt><code>feature_types</code></dt>
 <dd><p>Vector of integer-coded feature types (integers where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p></dd>
+
+
+<dt><code>sweep_update_indices</code></dt>
+<dd><p>Vector of trees to update in a sweep</p></dd>
 
 
 <dt><code>num_trees</code></dt>
@@ -161,6 +166,7 @@ Create a new ForestModelConfig object.</p></dd>
 
 <ul><li><p><a href="#method-ForestModelConfig-new"><code>ForestModelConfig$new()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-update_feature_types"><code>ForestModelConfig$update_feature_types()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-update_sweep_indices"><code>ForestModelConfig$update_sweep_indices()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-update_variable_weights"><code>ForestModelConfig$update_variable_weights()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-update_alpha"><code>ForestModelConfig$update_alpha()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-update_beta"><code>ForestModelConfig$update_beta()</code></a></p></li>
@@ -171,6 +177,7 @@ Create a new ForestModelConfig object.</p></dd>
 <li><p><a href="#method-ForestModelConfig-update_variance_forest_scale"><code>ForestModelConfig$update_variance_forest_scale()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-update_cutpoint_grid_size"><code>ForestModelConfig$update_cutpoint_grid_size()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_feature_types"><code>ForestModelConfig$get_feature_types()</code></a></p></li>
+<li><p><a href="#method-ForestModelConfig-get_sweep_indices"><code>ForestModelConfig$get_sweep_indices()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_variable_weights"><code>ForestModelConfig$get_variable_weights()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_num_trees"><code>ForestModelConfig$get_num_trees()</code></a></p></li>
 <li><p><a href="#method-ForestModelConfig-get_num_features"><code>ForestModelConfig$get_num_features()</code></a></p></li>
@@ -191,6 +198,7 @@ Create a new ForestModelConfig object.</p></dd>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ForestModelConfig.html">ForestModelConfig</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  feature_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sweep_update_indices <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_trees <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_features <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_observations <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -212,6 +220,10 @@ Create a new ForestModelConfig object.</p></dd>
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>feature_types</code></dt>
 <dd><p>Vector of integer-coded feature types (where 0 = numeric, 1 = ordered categorical, 2 = unordered categorical)</p></dd>
+
+
+<dt><code>sweep_update_indices</code></dt>
+<dd><p>Vector of (0-indexed) indices of trees to update in a sweep</p></dd>
 
 
 <dt><code>num_trees</code></dt>
@@ -293,15 +305,31 @@ Create a new ForestModelConfig object.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ForestModelConfig-update_variable_weights"></a><div class="section">
-<h3 id="method-update-variable-weights-">Method <code>update_variable_weights()</code><a class="anchor" aria-label="anchor" href="#method-update-variable-weights-"></a></h3>
-<p>Update variable weights</p><div class="section">
+</div><p></p><hr><a id="method-ForestModelConfig-update_sweep_indices"></a><div class="section">
+<h3 id="method-update-sweep-indices-">Method <code>update_sweep_indices()</code><a class="anchor" aria-label="anchor" href="#method-update-sweep-indices-"></a></h3>
+<p>Update sweep update indices</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_variable_weights</span><span class="op">(</span><span class="va">variable_weights</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_sweep_indices</span><span class="op">(</span><span class="va">sweep_update_indices</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>sweep_update_indices</code></dt>
+<dd><p>Vector of (0-indexed) indices of trees to update in a sweep</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ForestModelConfig-update_variable_weights"></a><div class="section">
+<h3 id="method-update-variable-weights-">Method <code>update_variable_weights()</code><a class="anchor" aria-label="anchor" href="#method-update-variable-weights-"></a></h3>
+<p>Update variable weights</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_variable_weights</span><span class="op">(</span><span class="va">variable_weights</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>variable_weights</code></dt>
 <dd><p>Vector specifying sampling probability for all p covariates in ForestDataset</p></dd>
 
@@ -312,12 +340,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_alpha"></a><div class="section">
 <h3 id="method-update-alpha-">Method <code>update_alpha()</code><a class="anchor" aria-label="anchor" href="#method-update-alpha-"></a></h3>
 <p>Update root node split probability in tree prior</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_alpha</span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>alpha</code></dt>
 <dd><p>Root node split probability in tree prior</p></dd>
 
@@ -328,12 +356,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_beta"></a><div class="section">
 <h3 id="method-update-beta-">Method <code>update_beta()</code><a class="anchor" aria-label="anchor" href="#method-update-beta-"></a></h3>
 <p>Update depth prior penalty in tree prior</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_beta</span><span class="op">(</span><span class="va">beta</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>beta</code></dt>
 <dd><p>Depth prior penalty in tree prior</p></dd>
 
@@ -344,12 +372,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_min_samples_leaf"></a><div class="section">
 <h3 id="method-update-min-samples-leaf-">Method <code>update_min_samples_leaf()</code><a class="anchor" aria-label="anchor" href="#method-update-min-samples-leaf-"></a></h3>
 <p>Update minimum number of samples per leaf node in the tree prior</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_min_samples_leaf</span><span class="op">(</span><span class="va">min_samples_leaf</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>min_samples_leaf</code></dt>
 <dd><p>Minimum number of samples in a tree leaf</p></dd>
 
@@ -360,12 +388,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_max_depth"></a><div class="section">
 <h3 id="method-update-max-depth-">Method <code>update_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-update-max-depth-"></a></h3>
 <p>Update max depth in the tree prior</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_max_depth</span><span class="op">(</span><span class="va">max_depth</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>max_depth</code></dt>
 <dd><p>Maximum depth of any tree in the ensemble in the model</p></dd>
 
@@ -376,12 +404,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_leaf_model_scale"></a><div class="section">
 <h3 id="method-update-leaf-model-scale-">Method <code>update_leaf_model_scale()</code><a class="anchor" aria-label="anchor" href="#method-update-leaf-model-scale-"></a></h3>
 <p>Update scale parameter used in Gaussian leaf models</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_leaf_model_scale</span><span class="op">(</span><span class="va">leaf_model_scale</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>leaf_model_scale</code></dt>
 <dd><p>Scale parameter used in Gaussian leaf models</p></dd>
 
@@ -392,12 +420,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_variance_forest_shape"></a><div class="section">
 <h3 id="method-update-variance-forest-shape-">Method <code>update_variance_forest_shape()</code><a class="anchor" aria-label="anchor" href="#method-update-variance-forest-shape-"></a></h3>
 <p>Update shape parameter for IG leaf models</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_variance_forest_shape</span><span class="op">(</span><span class="va">variance_forest_shape</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>variance_forest_shape</code></dt>
 <dd><p>Shape parameter for IG leaf models</p></dd>
 
@@ -408,12 +436,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_variance_forest_scale"></a><div class="section">
 <h3 id="method-update-variance-forest-scale-">Method <code>update_variance_forest_scale()</code><a class="anchor" aria-label="anchor" href="#method-update-variance-forest-scale-"></a></h3>
 <p>Update scale parameter for IG leaf models</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_variance_forest_scale</span><span class="op">(</span><span class="va">variance_forest_scale</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>variance_forest_scale</code></dt>
 <dd><p>Scale parameter for IG leaf models</p></dd>
 
@@ -424,12 +452,12 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-update_cutpoint_grid_size"></a><div class="section">
 <h3 id="method-update-cutpoint-grid-size-">Method <code>update_cutpoint_grid_size()</code><a class="anchor" aria-label="anchor" href="#method-update-cutpoint-grid-size-"></a></h3>
 <p>Update number of unique cutpoints to consider</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">update_cutpoint_grid_size</span><span class="op">(</span><span class="va">cutpoint_grid_size</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>cutpoint_grid_size</code></dt>
 <dd><p>Number of unique cutpoints to consider</p></dd>
 
@@ -440,15 +468,23 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_feature_types"></a><div class="section">
 <h3 id="method-get-feature-types-">Method <code>get_feature_types()</code><a class="anchor" aria-label="anchor" href="#method-get-feature-types-"></a></h3>
 <p>Query feature types for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_feature_types</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-ForestModelConfig-get_sweep_indices"></a><div class="section">
+<h3 id="method-get-sweep-indices-">Method <code>get_sweep_indices()</code><a class="anchor" aria-label="anchor" href="#method-get-sweep-indices-"></a></h3>
+<p>Query sweep update indices for this ForestModelConfig object</p><div class="section">
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_sweep_indices</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
 </div><p></p><hr><a id="method-ForestModelConfig-get_variable_weights"></a><div class="section">
 <h3 id="method-get-variable-weights-">Method <code>get_variable_weights()</code><a class="anchor" aria-label="anchor" href="#method-get-variable-weights-"></a></h3>
 <p>Query variable weights for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_variable_weights</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -456,7 +492,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_num_trees"></a><div class="section">
 <h3 id="method-get-num-trees-">Method <code>get_num_trees()</code><a class="anchor" aria-label="anchor" href="#method-get-num-trees-"></a></h3>
 <p>Query number of trees</p><div class="section">
-<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_trees</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -464,7 +500,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_num_features"></a><div class="section">
 <h3 id="method-get-num-features-">Method <code>get_num_features()</code><a class="anchor" aria-label="anchor" href="#method-get-num-features-"></a></h3>
 <p>Query number of features</p><div class="section">
-<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_features</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -472,7 +508,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_num_observations"></a><div class="section">
 <h3 id="method-get-num-observations-">Method <code>get_num_observations()</code><a class="anchor" aria-label="anchor" href="#method-get-num-observations-"></a></h3>
 <p>Query number of observations</p><div class="section">
-<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_num_observations</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -480,7 +516,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_alpha"></a><div class="section">
 <h3 id="method-get-alpha-">Method <code>get_alpha()</code><a class="anchor" aria-label="anchor" href="#method-get-alpha-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_alpha</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -488,7 +524,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_beta"></a><div class="section">
 <h3 id="method-get-beta-">Method <code>get_beta()</code><a class="anchor" aria-label="anchor" href="#method-get-beta-"></a></h3>
 <p>Query depth prior penalty in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_beta</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -496,7 +532,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_min_samples_leaf"></a><div class="section">
 <h3 id="method-get-min-samples-leaf-">Method <code>get_min_samples_leaf()</code><a class="anchor" aria-label="anchor" href="#method-get-min-samples-leaf-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_min_samples_leaf</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -504,7 +540,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_max_depth"></a><div class="section">
 <h3 id="method-get-max-depth-">Method <code>get_max_depth()</code><a class="anchor" aria-label="anchor" href="#method-get-max-depth-"></a></h3>
 <p>Query root node split probability in tree prior for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
+<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_max_depth</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -512,7 +548,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_leaf_model_type"></a><div class="section">
 <h3 id="method-get-leaf-model-type-">Method <code>get_leaf_model_type()</code><a class="anchor" aria-label="anchor" href="#method-get-leaf-model-type-"></a></h3>
 <p>Query (integer-coded) type of leaf model</p><div class="section">
-<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_leaf_model_type</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -520,7 +556,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_leaf_model_scale"></a><div class="section">
 <h3 id="method-get-leaf-model-scale-">Method <code>get_leaf_model_scale()</code><a class="anchor" aria-label="anchor" href="#method-get-leaf-model-scale-"></a></h3>
 <p>Query scale parameter used in Gaussian leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
+<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_leaf_model_scale</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -528,7 +564,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_variance_forest_shape"></a><div class="section">
 <h3 id="method-get-variance-forest-shape-">Method <code>get_variance_forest_shape()</code><a class="anchor" aria-label="anchor" href="#method-get-variance-forest-shape-"></a></h3>
 <p>Query shape parameter for IG leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
+<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_variance_forest_shape</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -536,7 +572,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_variance_forest_scale"></a><div class="section">
 <h3 id="method-get-variance-forest-scale-">Method <code>get_variance_forest_scale()</code><a class="anchor" aria-label="anchor" href="#method-get-variance-forest-scale-"></a></h3>
 <p>Query scale parameter for IG leaf models for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
+<h4 id="usage-25">Usage<a class="anchor" aria-label="anchor" href="#usage-25"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_variance_forest_scale</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -544,7 +580,7 @@ Create a new ForestModelConfig object.</p></dd>
 </div><p></p><hr><a id="method-ForestModelConfig-get_cutpoint_grid_size"></a><div class="section">
 <h3 id="method-get-cutpoint-grid-size-">Method <code>get_cutpoint_grid_size()</code><a class="anchor" aria-label="anchor" href="#method-get-cutpoint-grid-size-"></a></h3>
 <p>Query number of unique cutpoints to consider for this ForestModelConfig object</p><div class="section">
-<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
+<h4 id="usage-26">Usage<a class="anchor" aria-label="anchor" href="#usage-26"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ForestModelConfig</span><span class="op">$</span><span class="fu">get_cutpoint_grid_size</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
