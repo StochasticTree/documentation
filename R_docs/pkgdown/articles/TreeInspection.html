@@ -146,10 +146,10 @@ feature.</p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="fl">10</span>, <span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 35 23 28 29 16 30 23 27 23 26</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 22 25 22 20 22 28 37 32 23 23</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_aggregate_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2706 2465 2576 2474 2339 2296 2530 3123 3081 3298</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 2381 2048 2335 2164 1800 2984 3035 3348 3054 3112</span></span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s
 dig deeper and look at individual trees, starting with the first tree in
 the last “grow-from-root” sample.</p>
@@ -165,7 +165,7 @@ let’s look at the second tree.</p>
 <p>This tree also only splits on the important feature.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 1 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 1 0 0 0 0 1 0 0 0 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">30</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;  [1] 0 0 0 0 0 0 1 0 0 0</span></span></code></pre></div>
@@ -199,8 +199,8 @@ scikit-learn vignette</a></p>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.496 else to node 2</span></span>
-<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.502</span></span>
-<span><span class="co">#&gt;  node=2 is a leaf node with value=0.34</span></span></code></pre></div>
+<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.405</span></span>
+<span><span class="co">#&gt;  node=2 is a leaf node with value=0.396</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
