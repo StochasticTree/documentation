@@ -584,6 +584,41 @@
         </dt>
         <dd>Reset a <code>RandomEffectsTracker</code> object to its "default" state</dd>
       </dl></div><div class="section level2">
+
+      <h3 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a></h3>
+      <div class="section-desc"><p>Miscellaneous “utility” classes and functions</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="sample_without_replacement.html">sample_without_replacement()</a></code>
+
+        </dt>
+        <dd>Draw <code>sample_size</code> samples from <code>population_vector</code> without replacement, weighted by <code>sampling_probabilities</code></dd>
+      </dl><dl><dt>
+
+          <code><a href="expand_dims_1d.html">expand_dims_1d()</a></code>
+
+        </dt>
+        <dd>Convert scalar input to vector of dimension <code>output_size</code>, or check that input array is equivalent to a vector of dimension <code>output_size</code>.</dd>
+      </dl><dl><dt>
+
+          <code><a href="expand_dims_2d.html">expand_dims_2d()</a></code>
+
+        </dt>
+        <dd>Ensures that input is propagated appropriately to a matrix of dimension <code>output_rows</code> x <code>output_cols</code>. Handles the following cases: <ol><li><p><code>input</code> is a scalar: output is simply a (<code>output_rows</code>, <code>output_cols</code>) matrix with <code>input</code> repeated for each element</p></li> <li><p><code>input</code> is a vector of length <code>output_rows</code>: output is a (<code>output_rows</code>, <code>output_cols</code>) array with <code>input</code> broadcast across each of <code>output_cols</code> columns</p></li> <li><p><code>input</code> is a vector of length <code>output_cols</code>: output is a (<code>output_rows</code>, <code>output_cols</code>) array with <code>input</code> broadcast across each of <code>output_rows</code> rows</p></li> <li><p><code>input</code> is a matrix of dimension (<code>output_rows</code>, <code>output_cols</code>): input is passed through as-is All other cases throw an error.</p></li> </ol></dd>
+      </dl><dl><dt>
+
+          <code><a href="expand_dims_2d_diag.html">expand_dims_2d_diag()</a></code>
+
+        </dt>
+        <dd>Convert scalar input to square matrix of dimension <code>output_size</code> x <code>output_size</code> with <code>input</code> along the diagonal, or check that input array is equivalent to a square matrix of dimension <code>output_size</code> x <code>output_size</code>.</dd>
+      </dl></div><div class="section level2">
       <h2 id="package-info">Package info<a class="anchor" aria-label="anchor" href="#package-info"></a></h2>
 
       <div class="section-desc"><p>High-level package details</p></div>

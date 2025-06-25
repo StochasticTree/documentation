@@ -89,7 +89,7 @@ model). This vignette walks through some of the features
 trees in a model.</p>
 <p>To begin, we load the <code>stochtree</code> package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stochtree.ai/" class="external-link">stochtree</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stochtree.ai/">stochtree</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="demo-1-supervised-learning">Demo 1: Supervised Learning<a class="anchor" aria-label="anchor" href="#demo-1-supervised-learning"></a>
 </h2>
@@ -146,10 +146,10 @@ feature.</p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_forest_split_counts</span><span class="op">(</span><span class="fl">10</span>, <span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 23 31 26 31 32 20 21 36 21 32</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 30 30 36 26 23 21 30 33 28 26</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bart_model</span><span class="op">$</span><span class="va">mean_forests</span><span class="op">$</span><span class="fu">get_aggregate_split_counts</span><span class="op">(</span><span class="va">p_x</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 3082 2262 2319 2547 2811 2313 2412 3274 2264 3745</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 3067 2867 2813 2378 2282 2529 2537 3147 2701 3966</span></span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s
 dig deeper and look at individual trees, starting with the first tree in
 the last “grow-from-root” sample.</p>
@@ -161,14 +161,14 @@ the last “grow-from-root” sample.</p>
 let’s look at the second tree.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">2</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 0 0 0 0 0 0 3</span></span></code></pre></div>
 <p>This tree also only splits on the important feature.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">20</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 0 0 1 1 0 0 0 0 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 1 0 0 0 1 0 0 0</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">splits</span><span class="op">[</span><span class="fl">10</span>,<span class="fl">30</span>,<span class="op">]</span></span>
-<span><span class="co">#&gt;  [1] 1 0 0 1 0 0 0 1 0 0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] 0 0 0 1 0 0 0 0 0 1</span></span></code></pre></div>
 <p>We see that “later” trees are splitting on other features, but we
 also note that these trees are fitting an outcome that is already
 residualized many “relevant splits” made by trees 1 and 2.</p>
@@ -199,8 +199,8 @@ scikit-learn vignette</a></p>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.496 else to node 2</span></span>
-<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.403</span></span>
-<span><span class="co">#&gt;  node=2 is a leaf node with value=0.441</span></span></code></pre></div>
+<span><span class="co">#&gt;  node=1 is a leaf node with value=-0.348</span></span>
+<span><span class="co">#&gt;  node=2 is a leaf node with value=0.457</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

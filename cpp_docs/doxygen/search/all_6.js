@@ -28,7 +28,7 @@ var searchData=
   ['gettree_25',['GetTree',['../classStochTree_1_1TreeEnsemble.html#a07d24b9893b4b47c442584614daead17',1,'StochTree::TreeEnsemble']]],
   ['getvarweights_26',['getvarweights',['../classStochTree_1_1RandomEffectsDataset.html#aace6cedd13ecdaf112f7c8cd150ca5e1',1,'StochTree::RandomEffectsDataset::GetVarWeights()'],['../classStochTree_1_1ForestDataset.html#a634dcd4bb7f2a86a9f5e4d680405e383',1,'StochTree::ForestDataset::GetVarWeights()']]],
   ['getworkingparameter_27',['GetWorkingParameter',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a6f03df0122da3d636d6804c8a06f786f',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
-  ['gfrsampleoneiter_28',['GFRSampleOneIter',['../group__sampling__group.html#ga0f4f96f99556850538f6309b25e4cac0',1,'StochTree']]],
+  ['gfrsampleoneiter_28',['GFRSampleOneIter',['../group__sampling__group.html#gafdd524382f6d26fc7a4bab5fa4496705',1,'StochTree']]],
   ['globalhomoskedasticvariancemodel_29',['GlobalHomoskedasticVarianceModel',['../classStochTree_1_1GlobalHomoskedasticVarianceModel.html',1,'StochTree']]],
   ['groupid_30',['GroupId',['../classStochTree_1_1RandomEffectsDataset.html#a7b9060b9dc0de42f3d79978e43da6450',1,'StochTree::RandomEffectsDataset']]],
   ['groupparametermean_31',['GroupParameterMean',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a4acc081f531015866b775ca7cc2c5378',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
