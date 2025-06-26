@@ -59,7 +59,7 @@ f(X_i) = g_1(X_i) + \dots + g_k(X_i)
 
 There are several ways to train an ensemble of decision trees (sometimes called "forests"), the most popular of which are [random forests](https://en.wikipedia.org/wiki/Random_forest) and 
 [gradient boosting](https://en.wikipedia.org/wiki/Gradient_boosting). Their main difference is that random forests train 
-all $m$ trees independently of one another, while boosting trains tree sequentially, so that tree $j$ depends on the result of training trees 1 through $j-1$.
+all $m$ trees independently of one another, while boosting trains trees sequentially, so that tree $j$ depends on the result of training trees 1 through $j-1$.
 Libraries like [xgboost](https://xgboost.readthedocs.io/en/stable/) and [LightGBM](https://lightgbm.readthedocs.io/en/latest/) are popular examples of boosted tree ensembles.
 
 Tree ensembles often [outperform neural networks and other machine learning methods on tabular datasets](https://arxiv.org/abs/2207.08815), 
