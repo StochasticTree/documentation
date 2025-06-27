@@ -1929,7 +1929,7 @@ f(X_i) = g_1(X_i) + \dots + g_k(X_i)
 \end{equation*}\]</div>
 <p>There are several ways to train an ensemble of decision trees (sometimes called "forests"), the most popular of which are <a href="https://en.wikipedia.org/wiki/Random_forest">random forests</a> and 
 <a href="https://en.wikipedia.org/wiki/Gradient_boosting">gradient boosting</a>. Their main difference is that random forests train 
-all <span class="arithmatex">\(m\)</span> trees independently of one another, while boosting trains tree sequentially, so that tree <span class="arithmatex">\(j\)</span> depends on the result of training trees 1 through <span class="arithmatex">\(j-1\)</span>.
+all <span class="arithmatex">\(m\)</span> trees independently of one another, while boosting trains trees sequentially, so that tree <span class="arithmatex">\(j\)</span> depends on the result of training trees 1 through <span class="arithmatex">\(j-1\)</span>.
 Libraries like <a href="https://xgboost.readthedocs.io/en/stable/">xgboost</a> and <a href="https://lightgbm.readthedocs.io/en/latest/">LightGBM</a> are popular examples of boosted tree ensembles.</p>
 <p>Tree ensembles often <a href="https://arxiv.org/abs/2207.08815">outperform neural networks and other machine learning methods on tabular datasets</a>, 
 but classic tree ensemble methods return a single estimated function <span class="arithmatex">\(f\)</span>, without expressing uncertainty around its estimates.</p>
