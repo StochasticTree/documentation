@@ -105,6 +105,9 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
 <tr class="memdesc:ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all of the sufficient statistics to zero. <br /></td></tr>
 <tr class="separator:ae015846c3e6ac5a44ddf078f1a01a5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883f5707454c280debf277835f0e548f" id="r_a883f5707454c280debf277835f0e548f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#a883f5707454c280debf277835f0e548f">AddSuffStatInplace</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;suff_stat)</td></tr>
+<tr class="memdesc:a883f5707454c280debf277835f0e548f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code>  <br /></td></tr>
+<tr class="separator:a883f5707454c280debf277835f0e548f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8693648d0cb2b666503d8f3e8568f6ce" id="r_a8693648d0cb2b666503d8f3e8568f6ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html#a8693648d0cb2b666503d8f3e8568f6ce">AddSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;rhs)</td></tr>
 <tr class="memdesc:a8693648d0cb2b666503d8f3e8568f6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code>  <br /></td></tr>
 <tr class="separator:a8693648d0cb2b666503d8f3e8568f6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,6 +188,40 @@ data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b>
     <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
     <tr><td class="paramname">row_idx</td><td>Index of the training data observation from which the sufficient statistics should be updated </td></tr>
     <tr><td class="paramname">tree_idx</td><td>Index of the tree being updated in the course of this sufficient statistic update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a883f5707454c280debf277835f0e548f" name="a883f5707454c280debf277835f0e548f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a883f5707454c280debf277835f0e548f">&#9670;&#160;</a></span>AddSuffStatInplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianConstantSuffStat::AddSuffStatInplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianConstantSuffStat.html">GaussianConstantSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistic to be added to the current sufficient statistics </td></tr>
   </table>
   </dd>
 </dl>

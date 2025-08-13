@@ -101,6 +101,9 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
 <tr class="memdesc:a9b3f4625f8913df1b919b105882f11cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all of the sufficient statistics to zero. <br /></td></tr>
 <tr class="separator:a9b3f4625f8913df1b919b105882f11cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab413022c171c93fcb583bee1b0b285e7" id="r_ab413022c171c93fcb583bee1b0b285e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html#ab413022c171c93fcb583bee1b0b285e7">AddSuffStatInplace</a> (<a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &amp;suff_stat)</td></tr>
+<tr class="memdesc:ab413022c171c93fcb583bee1b0b285e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code>  <br /></td></tr>
+<tr class="separator:ab413022c171c93fcb583bee1b0b285e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affb6e240934598c320715a5f1f0fb585" id="r_affb6e240934598c320715a5f1f0fb585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html#affb6e240934598c320715a5f1f0fb585">AddSuffStat</a> (<a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &amp;rhs)</td></tr>
 <tr class="memdesc:affb6e240934598c320715a5f1f0fb585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code>  <br /></td></tr>
 <tr class="separator:affb6e240934598c320715a5f1f0fb585"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +184,40 @@ data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b>
     <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
     <tr><td class="paramname">row_idx</td><td>Index of the training data observation from which the sufficient statistics should be updated </td></tr>
     <tr><td class="paramname">tree_idx</td><td>Index of the tree being updated in the course of this sufficient statistic update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab413022c171c93fcb583bee1b0b285e7" name="ab413022c171c93fcb583bee1b0b285e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab413022c171c93fcb583bee1b0b285e7">&#9670;&#160;</a></span>AddSuffStatInplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::LogLinearVarianceSuffStat::AddSuffStatInplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1LogLinearVarianceSuffStat.html">LogLinearVarianceSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistic to be added to the current sufficient statistics </td></tr>
   </table>
   </dd>
 </dl>

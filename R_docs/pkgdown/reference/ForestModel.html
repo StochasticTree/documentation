@@ -162,6 +162,7 @@ trees, and exposes functionality to run a forest sampler
 <span>  <span class="va">rng</span>,</span>
 <span>  <span class="va">forest_model_config</span>,</span>
 <span>  <span class="va">global_model_config</span>,</span>
+<span>  num_threads <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
 <span>  keep_forest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  gfr <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -195,6 +196,10 @@ trees, and exposes functionality to run a forest sampler
 
 <dt><code>global_model_config</code></dt>
 <dd><p>GlobalModelConfig object containing global model parameters and settings</p></dd>
+
+
+<dt><code>num_threads</code></dt>
+<dd><p>Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's setup, this will default to <code>1</code>, otherwise to the maximum number of available threads.</p></dd>
 
 
 <dt><code>keep_forest</code></dt>

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['maxleafdepth_0',['MaxLeafDepth',['../classStochTree_1_1Tree.html#a6abc048b6f39956d15fef71bc5a2efa3',1,'StochTree::Tree']]],
-  ['mcmcsampleoneiter_1',['MCMCSampleOneIter',['../group__sampling__group.html#ga1e053000d844abd73252220aa1ad1ed7',1,'StochTree']]],
+  ['mcmcsampleoneiter_1',['MCMCSampleOneIter',['../group__sampling__group.html#ga051aa0efa91162528480c2a1a7d90279',1,'StochTree']]],
   ['mergeforest_2',['MergeForest',['../classStochTree_1_1TreeEnsemble.html#a7dc289625eee2ff06b8a44958f109c02',1,'StochTree::TreeEnsemble']]],
   ['mergeforests_3',['MergeForests',['../classStochTree_1_1ForestContainer.html#a8ec1ac6e8569002589e6822e36ddfdf8',1,'StochTree::ForestContainer']]],
   ['model_4',['model',['../group__leaf__model__group.html#gaussian_constant_leaf_model',1,'Gaussian Constant Leaf Model'],['../group__leaf__model__group.html#gaussian_multivariate_regression_leaf_model',1,'Gaussian Multivariate Regression Leaf Model'],['../group__leaf__model__group.html#gaussian_univariate_regression_leaf_model',1,'Gaussian Univariate Regression Leaf Model'],['../group__leaf__model__group.html#inverse_gamma_leaf_model',1,'Inverse Gamma Leaf Model']]],

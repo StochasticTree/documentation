@@ -105,6 +105,9 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetSuffStat</b> ()</td></tr>
 <tr class="memdesc:a94c282b864f0db82536ee50f2e22e9fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all of the sufficient statistics to zero. <br /></td></tr>
 <tr class="separator:a94c282b864f0db82536ee50f2e22e9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebaa5c2cf2e525ad33ad1ca0000cbe60" id="r_aebaa5c2cf2e525ad33ad1ca0000cbe60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#aebaa5c2cf2e525ad33ad1ca0000cbe60">AddSuffStatInplace</a> (<a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;suff_stat)</td></tr>
+<tr class="memdesc:aebaa5c2cf2e525ad33ad1ca0000cbe60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code>  <br /></td></tr>
+<tr class="separator:aebaa5c2cf2e525ad33ad1ca0000cbe60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1d16787392896a466e90fa730f5333c" id="r_ad1d16787392896a466e90fa730f5333c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#ad1d16787392896a466e90fa730f5333c">AddSuffStat</a> (<a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;lhs, <a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;rhs)</td></tr>
 <tr class="memdesc:ad1d16787392896a466e90fa730f5333c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of each sufficient statistic to the sum of the values provided by <code>lhs</code> and <code>rhs</code>  <br /></td></tr>
 <tr class="separator:ad1d16787392896a466e90fa730f5333c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,6 +188,40 @@ data_size_t&#160;</td><td class="memItemRight" valign="bottom"><b>SampleSize</b>
     <tr><td class="paramname">tracker</td><td>Tracking data structures that speed up sampler operations, synchronized with <code>active_forest</code> tracking a forest's state </td></tr>
     <tr><td class="paramname">row_idx</td><td>Index of the training data observation from which the sufficient statistics should be updated </td></tr>
     <tr><td class="paramname">tree_idx</td><td>Index of the tree being updated in the course of this sufficient statistic update </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aebaa5c2cf2e525ad33ad1ca0000cbe60" name="aebaa5c2cf2e525ad33ad1ca0000cbe60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebaa5c2cf2e525ad33ad1ca0000cbe60">&#9670;&#160;</a></span>AddSuffStatInplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::GaussianUnivariateRegressionSuffStat::AddSuffStatInplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classStochTree_1_1GaussianUnivariateRegressionSuffStat.html">GaussianUnivariateRegressionSuffStat</a> &amp;&#160;</td>
+          <td class="paramname"><em>suff_stat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Increment the value of each sufficient statistic by the values provided by <code>suff_stat</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">suff_stat</td><td>Sufficient statistic to be added to the current sufficient statistics </td></tr>
   </table>
   </dd>
 </dl>
