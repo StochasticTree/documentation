@@ -185,6 +185,7 @@ that were not in the training set.</p></dd>
 <li><p><code>rfx_group_parameter_prior_cov</code> Prior covariance matrix for the random effects "group parameters." Default: <code>NULL</code>. Must be a square matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</p></li>
 <li><p><code>rfx_variance_prior_shape</code> Shape parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</p></li>
 <li><p><code>rfx_variance_prior_scale</code> Scale parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</p></li>
+<li><p><code>num_threads</code> Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's setup, this will default to <code>1</code>, otherwise to the maximum number of available threads.</p></li>
 </ul></dd>
 
 

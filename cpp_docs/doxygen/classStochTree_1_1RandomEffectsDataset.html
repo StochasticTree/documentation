@@ -104,6 +104,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28ab010b86d093d5aa7359373c31eeab" id="r_a28ab010b86d093d5aa7359373c31eeab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1RandomEffectsDataset.html#a28ab010b86d093d5aa7359373c31eeab">AddVarianceWeights</a> (double *data_ptr, data_size_t num_row)</td></tr>
 <tr class="memdesc:a28ab010b86d093d5aa7359373c31eeab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy / load variance weights from raw memory buffer (often pointer to data in a R vector or numpy array)  <br /></td></tr>
 <tr class="separator:a28ab010b86d093d5aa7359373c31eeab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fcdb1c04e59920bb93c920502816bd1" id="r_a7fcdb1c04e59920bb93c920502816bd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1RandomEffectsDataset.html#a7fcdb1c04e59920bb93c920502816bd1">UpdateBasis</a> (double *data_ptr, data_size_t num_row, int num_col, bool is_row_major)</td></tr>
+<tr class="memdesc:a7fcdb1c04e59920bb93c920502816bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the data in the internal basis matrix to new values stored in a raw double array.  <br /></td></tr>
+<tr class="separator:a7fcdb1c04e59920bb93c920502816bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213b8a801685bd994b046d83a0d0f8ec" id="r_a213b8a801685bd994b046d83a0d0f8ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1RandomEffectsDataset.html#a213b8a801685bd994b046d83a0d0f8ec">UpdateVarWeights</a> (double *data_ptr, data_size_t num_row, bool exponentiate=true)</td></tr>
+<tr class="memdesc:a213b8a801685bd994b046d83a0d0f8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the data in the internal variance weight vector to new values stored in a raw double array.  <br /></td></tr>
+<tr class="separator:a213b8a801685bd994b046d83a0d0f8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94a2519db016fc3b6ab87b3eaaec73a6" id="r_a94a2519db016fc3b6ab87b3eaaec73a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1RandomEffectsDataset.html#a94a2519db016fc3b6ab87b3eaaec73a6">UpdateGroupLabels</a> (std::vector&lt; int32_t &gt; &amp;group_labels, data_size_t num_row)</td></tr>
+<tr class="memdesc:a94a2519db016fc3b6ab87b3eaaec73a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a <a class="el" href="classStochTree_1_1RandomEffectsDataset.html" title="API for loading and accessing data used to sample (additive) random effects.">RandomEffectsDataset</a>'s group indices.  <br /></td></tr>
+<tr class="separator:a94a2519db016fc3b6ab87b3eaaec73a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f55645a9a76194e7ddfb0f09a33d416" id="r_a3f55645a9a76194e7ddfb0f09a33d416"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1RandomEffectsDataset.html#a3f55645a9a76194e7ddfb0f09a33d416">AddGroupLabels</a> (std::vector&lt; int32_t &gt; &amp;group_labels)</td></tr>
 <tr class="memdesc:a3f55645a9a76194e7ddfb0f09a33d416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy / load group indices for random effects.  <br /></td></tr>
 <tr class="separator:a3f55645a9a76194e7ddfb0f09a33d416"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,6 +256,163 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>HasGroupLabels</b> ()
   <table class="params">
     <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing weights </td></tr>
     <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7fcdb1c04e59920bb93c920502816bd1" name="a7fcdb1c04e59920bb93c920502816bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fcdb1c04e59920bb93c920502816bd1">&#9670;&#160;</a></span>UpdateBasis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::RandomEffectsDataset::UpdateBasis </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_row_major</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the data in the internal basis matrix to new values stored in a raw double array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a basis matrix </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the basis matrix </td></tr>
+    <tr><td class="paramname">num_col</td><td>Number of columns in the basis matrix </td></tr>
+    <tr><td class="paramname">is_row_major</td><td>Whether or not the data in <code>data_ptr</code> are organized in a row-major or column-major fashion </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a213b8a801685bd994b046d83a0d0f8ec" name="a213b8a801685bd994b046d83a0d0f8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a213b8a801685bd994b046d83a0d0f8ec">&#9670;&#160;</a></span>UpdateVarWeights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::RandomEffectsDataset::UpdateVarWeights </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exponentiate</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the data in the internal variance weight vector to new values stored in a raw double array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a weight vector </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
+    <tr><td class="paramname">exponentiate</td><td>Whether or not inputs should be exponentiated before being saved to var weight vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a94a2519db016fc3b6ab87b3eaaec73a6" name="a94a2519db016fc3b6ab87b3eaaec73a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94a2519db016fc3b6ab87b3eaaec73a6">&#9670;&#160;</a></span>UpdateGroupLabels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StochTree::RandomEffectsDataset::UpdateGroupLabels </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; int32_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>group_labels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data_size_t&#160;</td>
+          <td class="paramname"><em>num_row</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update a <a class="el" href="classStochTree_1_1RandomEffectsDataset.html" title="API for loading and accessing data used to sample (additive) random effects.">RandomEffectsDataset</a>'s group indices. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data_ptr</td><td>Pointer to first element of a contiguous array of data storing a weight vector </td></tr>
+    <tr><td class="paramname">num_row</td><td>Number of rows in the weight vector </td></tr>
+    <tr><td class="paramname">exponentiate</td><td>Whether or not inputs should be exponentiated before being saved to var weight vector </td></tr>
   </table>
   </dd>
 </dl>
