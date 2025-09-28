@@ -464,7 +464,7 @@ prediction accuracy.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preds_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_warmstart</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">preds_test</span> <span class="op">==</span> <span class="va">y_test</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.876</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.88</span></span></code></pre></div>
 <p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="external-link">ROC
 curve</a> for every posterior sample, as well as the ROC of the
 posterior mean.</p>
@@ -539,7 +539,7 @@ prediction accuracy.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">preds_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_root</span><span class="op">$</span><span class="va">y_hat_test</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">preds_test</span> <span class="op">==</span> <span class="va">y_test</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.884</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.874</span></span></code></pre></div>
 <p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic" class="external-link">ROC
 curve</a> for every posterior sample, as well as the ROC of the
 posterior mean.</p>
