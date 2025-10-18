@@ -3010,12 +3010,12 @@ sigma2_samples_mcmc = sigma2_samples[num_warmstart:num_samples]</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">IndexError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[9], line 3</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Forest predictions</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> bart_preds <span style="color: rgb(98,98,98)">=</span> forest_container<span style="color: rgb(98,98,98)">.</span>predict(dataset)
-<span class="ansi-green-fg">----&gt; 3</span> forest_preds <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">bart_preds</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">y_hat</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">]</span> <span style="color: rgb(98,98,98)">*</span> y_std <span style="color: rgb(98,98,98)">+</span> y_bar
-<span class="ansi-green-intense-fg ansi-bold">      4</span> forest_preds_gfr <span style="color: rgb(98,98,98)">=</span> forest_preds[:, :num_warmstart]
-<span class="ansi-green-intense-fg ansi-bold">      5</span> forest_preds_mcmc <span style="color: rgb(98,98,98)">=</span> forest_preds[:, num_warmstart:num_samples]
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[9]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="color: rgb(95,135,135)"># Forest predictions</span>
+<span class="ansi-green-fg">      2</span> bart_preds = forest_container.predict(dataset)
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span> forest_preds = <span class="ansi-yellow-bg">bart_preds</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">y_hat</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span> * y_std + y_bar
+<span class="ansi-green-fg">      4</span> forest_preds_gfr = forest_preds[:, :num_warmstart]
+<span class="ansi-green-fg">      5</span> forest_preds_mcmc = forest_preds[:, num_warmstart:num_samples]
 
 <span class="ansi-red-fg">IndexError</span>: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices</pre>
 </div>
@@ -3084,13 +3084,13 @@ plt.show()</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> forest_pred_avg_gfr <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">forest_preds_gfr</span><span style="color: rgb(98,98,98)">.</span>mean(axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>, keepdims<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> forest_pred_df_gfr <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame(
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     np<span style="color: rgb(98,98,98)">.</span>concatenate((np<span style="color: rgb(98,98,98)">.</span>expand_dims(y, axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>), forest_pred_avg_gfr), axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     columns<span style="color: rgb(98,98,98)">=</span>[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">True y</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Average predicted y</span><span style="color: rgb(175,0,0)">"</span>],
-<span class="ansi-green-intense-fg ansi-bold">      5</span> )
-<span class="ansi-green-intense-fg ansi-bold">      6</span> sns<span style="color: rgb(98,98,98)">.</span>scatterplot(data<span style="color: rgb(98,98,98)">=</span>forest_pred_df_gfr, x<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">True y</span><span style="color: rgb(175,0,0)">"</span>, y<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Average predicted y</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> forest_pred_avg_gfr = <span class="ansi-yellow-bg">forest_preds_gfr</span>.mean(axis=<span class="ansi-green-fg">1</span>, keepdims=<span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+<span class="ansi-green-fg">      2</span> forest_pred_df_gfr = pd.DataFrame(
+<span class="ansi-green-fg">      3</span>     np.concatenate((np.expand_dims(y, axis=<span class="ansi-green-fg">1</span>), forest_pred_avg_gfr), axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">      4</span>     columns=[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">True y</span><span class="ansi-yellow-fg">"</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Average predicted y</span><span class="ansi-yellow-fg">"</span>],
+<span class="ansi-green-fg">      5</span> )
+<span class="ansi-green-fg">      6</span> sns.scatterplot(data=forest_pred_df_gfr, x=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">True y</span><span class="ansi-yellow-fg">"</span>, y=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Average predicted y</span><span class="ansi-yellow-fg">"</span>)
 
 <span class="ansi-red-fg">NameError</span>: name 'forest_preds_gfr' is not defined</pre>
 </div>
@@ -3156,19 +3156,19 @@ plt.show()</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 5</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> sigma_df_gfr <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame(
-<span class="ansi-green-intense-fg ansi-bold">      2</span>     np<span style="color: rgb(98,98,98)">.</span>concatenate(
-<span class="ansi-green-intense-fg ansi-bold">      3</span>         (
-<span class="ansi-green-intense-fg ansi-bold">      4</span>             np<span style="color: rgb(98,98,98)">.</span>expand_dims(np<span style="color: rgb(98,98,98)">.</span>arange(num_warmstart), axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-fg">----&gt; 5</span>             np<span style="color: rgb(98,98,98)">.</span>expand_dims(<span class="ansi-yellow-bg">sigma2_samples_gfr</span>, axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-intense-fg ansi-bold">      6</span>         ),
-<span class="ansi-green-intense-fg ansi-bold">      7</span>         axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>,
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     ),
-<span class="ansi-green-intense-fg ansi-bold">      9</span>     columns<span style="color: rgb(98,98,98)">=</span>[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sample</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sigma^2</span><span style="color: rgb(175,0,0)">"</span>],
-<span class="ansi-green-intense-fg ansi-bold">     10</span> )
-<span class="ansi-green-intense-fg ansi-bold">     11</span> sns<span style="color: rgb(98,98,98)">.</span>scatterplot(data<span style="color: rgb(98,98,98)">=</span>sigma_df_gfr, x<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sample</span><span style="color: rgb(175,0,0)">"</span>, y<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sigma^2</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-intense-fg ansi-bold">     12</span> plt<span style="color: rgb(98,98,98)">.</span>show()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 5</span>
+<span class="ansi-green-fg">      1</span> sigma_df_gfr = pd.DataFrame(
+<span class="ansi-green-fg">      2</span>     np.concatenate(
+<span class="ansi-green-fg">      3</span>         (
+<span class="ansi-green-fg">      4</span>             np.expand_dims(np.arange(num_warmstart), axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">5</span>             np.expand_dims(<span class="ansi-yellow-bg">sigma2_samples_gfr</span>, axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">      6</span>         ),
+<span class="ansi-green-fg">      7</span>         axis=<span class="ansi-green-fg">1</span>,
+<span class="ansi-green-fg">      8</span>     ),
+<span class="ansi-green-fg">      9</span>     columns=[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sample</span><span class="ansi-yellow-fg">"</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sigma^2</span><span class="ansi-yellow-fg">"</span>],
+<span class="ansi-green-fg">     10</span> )
+<span class="ansi-green-fg">     11</span> sns.scatterplot(data=sigma_df_gfr, x=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sample</span><span class="ansi-yellow-fg">"</span>, y=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sigma^2</span><span class="ansi-yellow-fg">"</span>)
+<span class="ansi-green-fg">     12</span> plt.show()
 
 <span class="ansi-red-fg">NameError</span>: name 'sigma2_samples_gfr' is not defined</pre>
 </div>
@@ -3237,13 +3237,13 @@ plt.show()</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[12], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> forest_pred_avg_mcmc <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">forest_preds_mcmc</span><span style="color: rgb(98,98,98)">.</span>mean(axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>, keepdims<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> forest_pred_df_mcmc <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame(
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     np<span style="color: rgb(98,98,98)">.</span>concatenate((np<span style="color: rgb(98,98,98)">.</span>expand_dims(y, axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>), forest_pred_avg_mcmc), axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     columns<span style="color: rgb(98,98,98)">=</span>[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">True y</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Average predicted y</span><span style="color: rgb(175,0,0)">"</span>],
-<span class="ansi-green-intense-fg ansi-bold">      5</span> )
-<span class="ansi-green-intense-fg ansi-bold">      6</span> sns<span style="color: rgb(98,98,98)">.</span>scatterplot(data<span style="color: rgb(98,98,98)">=</span>forest_pred_df_mcmc, x<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">True y</span><span style="color: rgb(175,0,0)">"</span>, y<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Average predicted y</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> forest_pred_avg_mcmc = <span class="ansi-yellow-bg">forest_preds_mcmc</span>.mean(axis=<span class="ansi-green-fg">1</span>, keepdims=<span class="ansi-bold" style="color: rgb(0,135,0)">True</span>)
+<span class="ansi-green-fg">      2</span> forest_pred_df_mcmc = pd.DataFrame(
+<span class="ansi-green-fg">      3</span>     np.concatenate((np.expand_dims(y, axis=<span class="ansi-green-fg">1</span>), forest_pred_avg_mcmc), axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">      4</span>     columns=[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">True y</span><span class="ansi-yellow-fg">"</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Average predicted y</span><span class="ansi-yellow-fg">"</span>],
+<span class="ansi-green-fg">      5</span> )
+<span class="ansi-green-fg">      6</span> sns.scatterplot(data=forest_pred_df_mcmc, x=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">True y</span><span class="ansi-yellow-fg">"</span>, y=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Average predicted y</span><span class="ansi-yellow-fg">"</span>)
 
 <span class="ansi-red-fg">NameError</span>: name 'forest_preds_mcmc' is not defined</pre>
 </div>
@@ -3309,19 +3309,19 @@ plt.show()</div>
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 5</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> sigma_df_mcmc <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame(
-<span class="ansi-green-intense-fg ansi-bold">      2</span>     np<span style="color: rgb(98,98,98)">.</span>concatenate(
-<span class="ansi-green-intense-fg ansi-bold">      3</span>         (
-<span class="ansi-green-intense-fg ansi-bold">      4</span>             np<span style="color: rgb(98,98,98)">.</span>expand_dims(np<span style="color: rgb(98,98,98)">.</span>arange(num_samples <span style="color: rgb(98,98,98)">-</span> num_warmstart), axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-fg">----&gt; 5</span>             np<span style="color: rgb(98,98,98)">.</span>expand_dims(<span class="ansi-yellow-bg">sigma2_samples_mcmc</span>, axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>),
-<span class="ansi-green-intense-fg ansi-bold">      6</span>         ),
-<span class="ansi-green-intense-fg ansi-bold">      7</span>         axis<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>,
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     ),
-<span class="ansi-green-intense-fg ansi-bold">      9</span>     columns<span style="color: rgb(98,98,98)">=</span>[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sample</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sigma^2</span><span style="color: rgb(175,0,0)">"</span>],
-<span class="ansi-green-intense-fg ansi-bold">     10</span> )
-<span class="ansi-green-intense-fg ansi-bold">     11</span> sns<span style="color: rgb(98,98,98)">.</span>scatterplot(data<span style="color: rgb(98,98,98)">=</span>sigma_df_mcmc, x<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sample</span><span style="color: rgb(175,0,0)">"</span>, y<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Sigma^2</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-intense-fg ansi-bold">     12</span> plt<span style="color: rgb(98,98,98)">.</span>show()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[13]</span><span class="ansi-green-fg">, line 5</span>
+<span class="ansi-green-fg">      1</span> sigma_df_mcmc = pd.DataFrame(
+<span class="ansi-green-fg">      2</span>     np.concatenate(
+<span class="ansi-green-fg">      3</span>         (
+<span class="ansi-green-fg">      4</span>             np.expand_dims(np.arange(num_samples - num_warmstart), axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">5</span>             np.expand_dims(<span class="ansi-yellow-bg">sigma2_samples_mcmc</span>, axis=<span class="ansi-green-fg">1</span>),
+<span class="ansi-green-fg">      6</span>         ),
+<span class="ansi-green-fg">      7</span>         axis=<span class="ansi-green-fg">1</span>,
+<span class="ansi-green-fg">      8</span>     ),
+<span class="ansi-green-fg">      9</span>     columns=[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sample</span><span class="ansi-yellow-fg">"</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sigma^2</span><span class="ansi-yellow-fg">"</span>],
+<span class="ansi-green-fg">     10</span> )
+<span class="ansi-green-fg">     11</span> sns.scatterplot(data=sigma_df_mcmc, x=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sample</span><span class="ansi-yellow-fg">"</span>, y=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Sigma^2</span><span class="ansi-yellow-fg">"</span>)
+<span class="ansi-green-fg">     12</span> plt.show()
 
 <span class="ansi-red-fg">NameError</span>: name 'sigma2_samples_mcmc' is not defined</pre>
 </div>
