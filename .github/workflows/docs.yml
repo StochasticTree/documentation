@@ -55,9 +55,11 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Install stochtree python package
+      - name: Install local copy of the stochtree python package
         run: |
-          pip install stochtree
+          cd stochtree_repo
+          pip install .
+          cd ..
 
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
