@@ -1020,6 +1020,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.sampler.ForestSampler.get_cached_forest_predictions" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_cached_forest_predictions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.sampler.ForestSampler.update_alpha" class="md-nav__link">
     <span class="md-ellipsis">
       update_alpha
@@ -2254,7 +2263,7 @@ Integer codes map <code>0</code> to "numeric" (continuous), <code>1</code> to "o
 
 
 <h3 id="stochtree.sampler.ForestSampler.sample_one_iteration" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">sample_one_iteration</span><span class="p">(</span><span class="n">forest_container</span><span class="p">,</span> <span class="n">forest</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">residual</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">global_config</span><span class="p">,</span> <span class="n">forest_config</span><span class="p">,</span> <span class="n">keep_forest</span><span class="p">,</span> <span class="n">gfr</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">sample_one_iteration</span><span class="p">(</span><span class="n">forest_container</span><span class="p">,</span> <span class="n">forest</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">residual</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">global_config</span><span class="p">,</span> <span class="n">forest_config</span><span class="p">,</span> <span class="n">keep_forest</span><span class="p">,</span> <span class="n">gfr</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
 
 <a href="#stochtree.sampler.ForestSampler.sample_one_iteration" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -2417,6 +2426,22 @@ Integer codes map <code>0</code> to "numeric" (continuous), <code>1</code> to "o
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>num_threads</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's system, this will default to <code>1</code>, otherwise to the maximum number of available threads.</p>
+              </div>
+            </td>
+            <td>
+                  <code>-1</code>
             </td>
           </tr>
       </tbody>
@@ -2730,6 +2755,47 @@ next sampling loop is run.</p>
             </td>
             <td>
                 <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.sampler.ForestSampler.get_cached_forest_predictions" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_cached_forest_predictions</span><span class="p">()</span></code>
+
+<a href="#stochtree.sampler.ForestSampler.get_cached_forest_predictions" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Extract an internally-cached prediction of a forest on the training dataset in a sampler.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Numpy 1D array with as many elements as observations in the training dataset</p>
+              </div>
             </td>
           </tr>
       </tbody>

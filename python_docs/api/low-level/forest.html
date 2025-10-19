@@ -997,6 +997,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.forest.Forest.merge_forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      merge_forest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.Forest.add_constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_constant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.Forest.multiply_constant" class="md-nav__link">
+    <span class="md-ellipsis">
+      multiply_constant
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.forest.Forest.add_numeric_split" class="md-nav__link">
     <span class="md-ellipsis">
       add_numeric_split
@@ -1276,6 +1303,42 @@
   <a href="#stochtree.forest.ForestContainer.set_root_leaves" class="md-nav__link">
     <span class="md-ellipsis">
       set_root_leaves
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.ForestContainer.collapse" class="md-nav__link">
+    <span class="md-ellipsis">
+      collapse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.ForestContainer.combine_forests" class="md-nav__link">
+    <span class="md-ellipsis">
+      combine_forests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.ForestContainer.add_to_forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_to_forest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.forest.ForestContainer.multiply_forest" class="md-nav__link">
+    <span class="md-ellipsis">
+      multiply_forest
     </span>
   </a>
   
@@ -2856,6 +2919,153 @@ Assumes the forest consists of all root (single-node) trees.</p>
                 <p>Constant values to which root nodes are to be set. If the trees in forest <code>forest_num</code>
 are univariate, then <code>leaf_value</code> must be a <code>float</code>, while if the trees in forest <code>forest_num</code>
 are multivariate, then <code>leaf_value</code> must be a <code>np.array</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.Forest.merge_forest" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">merge_forest</span><span class="p">(</span><span class="n">other_forest</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.Forest.merge_forest" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Create a larger forest by merging the trees of this forest with those of another forest</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>other_forest</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="stochtree.forest.Forest" href="#stochtree.forest.Forest">Forest</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Forest to be merged into this forest</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.Forest.add_constant" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_constant</span><span class="p">(</span><span class="n">constant_value</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.Forest.add_constant" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Add a constant value to every leaf of every tree in an ensemble. If leaves are multi-dimensional, <code>constant_value</code> will be added to every dimension of the leaves.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>constant_value</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Value that will be added to every leaf of every tree</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.Forest.multiply_constant" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">multiply_constant</span><span class="p">(</span><span class="n">constant_multiple</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.Forest.multiply_constant" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Multiply every leaf of every tree by a constant value. If leaves are multi-dimensional, <code>constant_multiple</code> will be multiplied through every dimension of the leaves.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>constant_multiple</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Value that will be multiplied by every leaf of every tree</p>
               </div>
             </td>
             <td>
@@ -5327,6 +5537,241 @@ Assumes the forest consists of all root (single-node) trees.</p>
                 <p>Constant values to which root nodes are to be set. If the trees in forest <code>forest_num</code>
 are univariate, then <code>leaf_value</code> must be a <code>float</code>, while if the trees in forest <code>forest_num</code>
 are multivariate, then <code>leaf_value</code> must be a <code>np.array</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.ForestContainer.collapse" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">collapse</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.ForestContainer.collapse" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Collapse forests in this container by a pre-specified batch size. 
+For example, if we have a container of twenty 10-tree forests, and we 
+specify a <code>batch_size</code> of 5, then this method will yield four 50-tree 
+forests. "Excess" forests remaining after the size of a forest container 
+is divided by <code>batch_size</code> will be pruned from the beginning of the 
+container (i.e. earlier sampled forests will be deleted). This method 
+has no effect if <code>batch_size</code> is larger than the number of forests 
+in a container.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>batch_size</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of forests to be collapsed into a single forest</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.ForestContainer.combine_forests" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">combine_forests</span><span class="p">(</span><span class="n">forest_inds</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.ForestContainer.combine_forests" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Collapse specified forests into a single forest</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>forest_inds</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Indices of forests to be combined (0-indexed).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.ForestContainer.add_to_forest" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_to_forest</span><span class="p">(</span><span class="n">forest_index</span><span class="p">,</span> <span class="n">constant_value</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.ForestContainer.add_to_forest" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Add a constant value to every leaf of every tree of a given forest</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>forest_index</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of forest whose leaves will be modified (0-indexed)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>constant_value</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Value to add to every leaf of every tree of the forest at <code>forest_index</code></p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.forest.ForestContainer.multiply_forest" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">multiply_forest</span><span class="p">(</span><span class="n">forest_index</span><span class="p">,</span> <span class="n">constant_multiple</span><span class="p">)</span></code>
+
+<a href="#stochtree.forest.ForestContainer.multiply_forest" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Multiply every leaf of every tree of a given forest by constant value</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>forest_index</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of forest whose leaves will be modified (0-indexed)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>constant_multiple</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Value to multiply through by every leaf of every tree of the forest at <code>forest_index</code></p>
               </div>
             </td>
             <td>

@@ -2226,6 +2226,14 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>keep_gfr</code> (<code>bool</code>): Whether or not "warm-start" / grow-from-root samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
 <li><code>keep_every</code> (<code>int</code>): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to <code>1</code>. Setting <code>keep_every = k</code> for some <code>k &gt; 1</code> will "thin" the MCMC samples by retaining every <code>k</code>-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.</li>
 <li><code>num_chains</code> (<code>int</code>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, then each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations, with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each MCMC chain will be initialized from a separate GFR ensemble, with the requirement that <code>num_gfr &gt;= num_chains</code>. Defaults to <code>1</code>.</li>
+<li><code>probit_outcome_model</code> (<code>bool</code>): Whether or not the outcome should be modeled as explicitly binary via a probit link. If <code>True</code>, <code>y</code> must only contain the values <code>0</code> and <code>1</code>. Default: <code>False</code>.</li>
+<li><code>rfx_working_parameter_prior_mean</code>: Prior mean for the random effects "working parameter". Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
+<li><code>rfx_group_parameter_prior_mean</code>: Prior mean for the random effects "group parameters." Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
+<li><code>rfx_working_parameter_prior_cov</code>: Prior covariance matrix for the random effects "working parameter." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
+<li><code>rfx_group_parameter_prior_cov</code>: Prior covariance matrix for the random effects "group parameters." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
+<li><code>rfx_variance_prior_shape</code>: Shape parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
+<li><code>rfx_variance_prior_scale</code>: Scale parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
+<li><code>num_threads</code>: Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's setup, this will default to <code>1</code>, otherwise to the maximum number of available threads.</li>
 </ul>
               </div>
             </td>
@@ -2255,6 +2263,7 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>sigma2_leaf_scale</code> (<code>float</code>): Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</li>
 <li><code>keep_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be included in the mean forest. Defaults to <code>None</code>.</li>
 <li><code>drop_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be excluded from the mean forest. Defaults to <code>None</code>. If both <code>drop_vars</code> and <code>keep_vars</code> are set, <code>drop_vars</code> will be ignored.</li>
+<li><code>num_features_subsample</code> (<code>int</code>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
 </ul>
               </div>
             </td>
@@ -2284,6 +2293,7 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>var_forest_prior_scale</code> (<code>float</code>): Scale parameter in the [optional] <code>IG(var_forest_prior_shape, var_forest_prior_scale)</code> conditional error variance forest (which is only sampled if <code>num_trees &gt; 0</code>). Calibrated internally as <code>num_trees / leaf_prior_calibration_param^2</code> if not set here.</li>
 <li><code>keep_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be included in the variance forest. Defaults to <code>None</code>.</li>
 <li><code>drop_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be excluded from the variance forest. Defaults to <code>None</code>. If both <code>drop_vars</code> and <code>keep_vars</code> are set, <code>drop_vars</code> will be ignored.</li>
+<li><code>num_features_subsample</code> (<code>int</code>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
 </ul>
               </div>
             </td>

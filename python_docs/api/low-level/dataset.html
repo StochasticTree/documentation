@@ -965,6 +965,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.update_variance_weights" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_variance_weights
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stochtree.data.Dataset.num_observations" class="md-nav__link">
     <span class="md-ellipsis">
       num_observations
@@ -986,6 +995,33 @@
   <a href="#stochtree.data.Dataset.num_basis" class="md-nav__link">
     <span class="md-ellipsis">
       num_basis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.get_covariates" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_covariates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.get_basis" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_basis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.get_variance_weights" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_variance_weights
     </span>
   </a>
   
@@ -2198,6 +2234,72 @@ regress on bases that are updated throughout the sampler.</p>
 <div class="doc doc-object doc-function">
 
 
+<h3 id="stochtree.data.Dataset.update_variance_weights" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">update_variance_weights</span><span class="p">(</span><span class="n">variance_weights</span><span class="p">,</span> <span class="n">exponentiate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Dataset.update_variance_weights" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update variance weights in a dataset. Allows users to build an ensemble that depends on 
+variance weights that are updated throughout the sampler.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>variance_weights</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Univariate numpy array of variance weights.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>exponentiate</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to exponentiate the variance weights before storing them in the dataset.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="stochtree.data.Dataset.num_observations" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">num_observations</span><span class="p">()</span></code>
 
@@ -2307,6 +2409,129 @@ regress on bases that are updated throughout the sampler.</p>
             <td>
               <div class="doc-md-description">
                 <p>Dimension of the basis vector in the dataset, returning 0 if the dataset does not have a basis</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.get_covariates" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_covariates</span><span class="p">()</span></code>
+
+<a href="#stochtree.data.Dataset.get_covariates" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the covariates in a Dataset as a numpy array</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Covariate data</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.get_basis" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_basis</span><span class="p">()</span></code>
+
+<a href="#stochtree.data.Dataset.get_basis" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the bases in a Dataset as a numpy array</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Basis data</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.get_variance_weights" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_variance_weights</span><span class="p">()</span></code>
+
+<a href="#stochtree.data.Dataset.get_variance_weights" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Return the variance weights in a Dataset as a numpy array</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variance weights data</p>
               </div>
             </td>
           </tr>
