@@ -128,7 +128,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    data_size_t n = residuals.rows();</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">double</span> sum_sq_resid = 0.;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">for</span> (data_size_t i = 0; i &lt; n; i++) {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      sum_sq_resid += (residuals(i) * residuals(i)) * weights(i);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      sum_sq_resid += (residuals(i) * residuals(i)) / weights(i);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> b + (0.5 * sum_sq_resid);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  }</div>
