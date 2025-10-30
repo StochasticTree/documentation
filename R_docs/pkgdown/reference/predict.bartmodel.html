@@ -60,10 +60,13 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'bartmodel'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
-<span>  <span class="va">X</span>,</span>
+<span>  <span class="va">covariates</span>,</span>
 <span>  leaf_basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"posterior"</span>,</span>
+<span>  terms <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  scale <span class="op">=</span> <span class="st">"linear"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -76,7 +79,7 @@
 <dd><p>Object of type <code>bart</code> containing draws of a regression forest and associated sampling outputs.</p></dd>
 
 
-<dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+<dt id="arg-covariates">covariates<a class="anchor" aria-label="anchor" href="#arg-covariates"></a></dt>
 <dd><p>Covariates used to determine tree leaf predictions for each observation. Must be passed as a matrix or dataframe.</p></dd>
 
 
@@ -94,14 +97,25 @@ that were not in the training set.</p></dd>
 <dd><p>(Optional) Test set basis for "random-slope" regression in additive random effects model.</p></dd>
 
 
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p>(Optional) Type of prediction to return. Options are "mean", which averages the predictions from every draw of a BART model, and "posterior", which returns the entire matrix of posterior predictions. Default: "posterior".</p></dd>
+
+
+<dt id="arg-terms">terms<a class="anchor" aria-label="anchor" href="#arg-terms"></a></dt>
+<dd><p>(Optional) Which model terms to include in the prediction. This can be a single term or a list of model terms. Options include "y_hat", "mean_forest", "rfx", "variance_forest", or "all". If a model doesn't have mean forest, random effects, or variance forest predictions, but one of those terms is request, the request will simply be ignored. If none of the requested terms are present in a model, this function will return <code>NULL</code> along with a warning. Default: "all".</p></dd>
+
+
+<dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
+<dd><p>(Optional) Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>(Optional) Other prediction parameters.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List of prediction matrices. If model does not have random effects, the list has one element – the predictions from the forest.
-If the model does have random effects, the list has three elements – forest predictions, random effects predictions, and their sum (<code>y_hat</code>).</p>
+    <p>List of prediction matrices or single prediction matrix / vector, depending on the terms requested.</p>
     </div>
 
     <div class="section level2">
@@ -110,9 +124,9 @@ If the model does have random effects, the list has three elements – forest pr
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">p</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">f_XW</span> <span class="op">&lt;-</span> <span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.25</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">7.5</span><span class="op">)</span> <span class="op">+</span> </span></span>
-<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.25</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.5</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span> </span></span>
-<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.5</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.75</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span> </span></span>
+<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.25</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">7.5</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.25</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.5</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="op">-</span><span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.5</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">0.75</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">2.5</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>    <span class="op">(</span><span class="op">(</span><span class="fl">0.75</span> <span class="op">&lt;=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="fl">1</span> <span class="op">&gt;</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">7.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">noise_sd</span> <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
@@ -126,7 +140,7 @@ If the model does have random effects, the list has three elements – forest pr
 <span class="r-in"><span><span class="va">X_train</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">train_inds</span>,<span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">y_test</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">test_inds</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">y_train</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">train_inds</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span>X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>, </span></span>
+<span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span>X_train <span class="op">=</span> <span class="va">X_train</span>, y_train <span class="op">=</span> <span class="va">y_train</span>,</span></span>
 <span class="r-in"><span>                   num_gfr <span class="op">=</span> <span class="fl">10</span>, num_burnin <span class="op">=</span> <span class="fl">0</span>, num_mcmc <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y_hat_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">bart_model</span>, <span class="va">X_test</span><span class="op">)</span><span class="op">$</span><span class="va">y_hat</span></span></span>
 </code></pre></div>

@@ -72,6 +72,24 @@
 
         </dt>
         <dd>Predict from a sampled BART model on new data</dd>
+      </dl><dl><dt>
+
+          <code><a href="compute_bart_posterior_interval.html">compute_bart_posterior_interval()</a></code>
+
+        </dt>
+        <dd>Compute posterior credible intervals for specified terms from a fitted BART model. It supports intervals for mean functions, variance functions, random effects, and overall predictions.</dd>
+      </dl><dl><dt>
+
+          <code><a href="compute_contrast_bart_model.html">compute_contrast_bart_model()</a></code>
+
+        </dt>
+        <dd>Compute a contrast using a BART model by making two sets of outcome predictions and taking their difference. This function provides the flexibility to compute any contrast of interest by specifying covariates, leaf basis, and random effects bases / IDs for both sides of a two term contrast. For simplicity, we refer to the subtrahend of the contrast as the "control" or <code>Y0</code> term and the minuend of the contrast as the <code>Y1</code> term, though the requested contrast need not match the "control vs treatment" terminology of a classic two-treatment causal inference problem. We mirror the function calls and terminology of the <code>predict.bartmodel</code> function, labeling each prediction data term with a <code>1</code> to denote its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</dd>
+      </dl><dl><dt>
+
+          <code><a href="sample_bart_posterior_predictive.html">sample_bart_posterior_predictive()</a></code>
+
+        </dt>
+        <dd>Sample from the posterior predictive distribution for outcomes modeled by BART</dd>
       </dl></div><div class="section level2">
       <h2 id="causal-inference">Causal inference<a class="anchor" aria-label="anchor" href="#causal-inference"></a></h2>
 
@@ -95,6 +113,24 @@
 
         </dt>
         <dd>Predict from a sampled BCF model on new data</dd>
+      </dl><dl><dt>
+
+          <code><a href="compute_bcf_posterior_interval.html">compute_bcf_posterior_interval()</a></code>
+
+        </dt>
+        <dd>Compute posterior credible intervals for BCF model terms</dd>
+      </dl><dl><dt>
+
+          <code><a href="compute_contrast_bcf_model.html">compute_contrast_bcf_model()</a></code>
+
+        </dt>
+        <dd>Compute a contrast using a BCF model by making two sets of outcome predictions and taking their difference. For simple BCF models with binary treatment, this will yield the same prediction as requesting <code>terms = "cate"</code> in the <code>predict.bcfmodel</code> function. For more general models, such as models with continuous / multivariate treatments or an additive random effects term with a coefficient on the treatment, this function provides the flexibility to compute a any contrast of interest by specifying covariates, treatment, and random effects bases and IDs for both sides of a two term contrast. For simplicity, we refer to the subtrahend of the contrast as the "control" or <code>Y0</code> term and the minuend of the contrast as the <code>Y1</code> term, though the requested contrast need not match the "control vs treatment" terminology of a classic two-arm experiment. We mirror the function calls and terminology of the <code>predict.bcfmodel</code> function, labeling each prediction data term with a <code>1</code> to denote its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</dd>
+      </dl><dl><dt>
+
+          <code><a href="sample_bcf_posterior_predictive.html">sample_bcf_posterior_predictive()</a></code>
+
+        </dt>
+        <dd>Sample from the posterior predictive distribution for outcomes modeled by BCF</dd>
       </dl></div><div class="section level2">
       <h2 id="low-level-functionality">Low-level functionality<a class="anchor" aria-label="anchor" href="#low-level-functionality"></a></h2>
 

@@ -833,18 +833,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stochtree.bart.BARTModel.predict_mean" class="md-nav__link">
+  <a href="#stochtree.bart.BARTModel.compute_contrast" class="md-nav__link">
     <span class="md-ellipsis">
-      predict_mean
+      compute_contrast
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#stochtree.bart.BARTModel.predict_variance" class="md-nav__link">
+  <a href="#stochtree.bart.BARTModel.compute_posterior_interval" class="md-nav__link">
     <span class="md-ellipsis">
-      predict_variance
+      compute_posterior_interval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.sample_posterior_predictive" class="md-nav__link">
+    <span class="md-ellipsis">
+      sample_posterior_predictive
     </span>
   </a>
   
@@ -881,6 +890,15 @@
   <a href="#stochtree.bart.BARTModel.is_sampled" class="md-nav__link">
     <span class="md-ellipsis">
       is_sampled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.bart.BARTModel.has_term" class="md-nav__link">
+    <span class="md-ellipsis">
+      has_term
     </span>
   </a>
   
@@ -1987,7 +2005,7 @@ term, whose variance is parameterized with an inverse gamma prior.</p>
 
 
 <h3 id="stochtree.bart.BARTModel.sample" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">leaf_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_warmstart_sample_num</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">leaf_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_effects_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_warmstart_sample_num</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#stochtree.bart.BARTModel.sample" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -2227,12 +2245,6 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>keep_every</code> (<code>int</code>): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to <code>1</code>. Setting <code>keep_every = k</code> for some <code>k &gt; 1</code> will "thin" the MCMC samples by retaining every <code>k</code>-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.</li>
 <li><code>num_chains</code> (<code>int</code>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, then each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations, with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each MCMC chain will be initialized from a separate GFR ensemble, with the requirement that <code>num_gfr &gt;= num_chains</code>. Defaults to <code>1</code>.</li>
 <li><code>probit_outcome_model</code> (<code>bool</code>): Whether or not the outcome should be modeled as explicitly binary via a probit link. If <code>True</code>, <code>y</code> must only contain the values <code>0</code> and <code>1</code>. Default: <code>False</code>.</li>
-<li><code>rfx_working_parameter_prior_mean</code>: Prior mean for the random effects "working parameter". Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
-<li><code>rfx_group_parameter_prior_mean</code>: Prior mean for the random effects "group parameters." Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
-<li><code>rfx_working_parameter_prior_cov</code>: Prior covariance matrix for the random effects "working parameter." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
-<li><code>rfx_group_parameter_prior_cov</code>: Prior covariance matrix for the random effects "group parameters." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
-<li><code>rfx_variance_prior_shape</code>: Shape parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
-<li><code>rfx_variance_prior_scale</code>: Scale parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
 <li><code>num_threads</code>: Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's setup, this will default to <code>1</code>, otherwise to the maximum number of available threads.</li>
 </ul>
               </div>
@@ -2280,7 +2292,7 @@ test set evaluation for group labels that were not in the training set.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Dictionary of variance forest model  parameters, each of which has a default value processed internally, so this argument is optional.</p>
+                <p>Dictionary of variance forest model parameters, each of which has a default value processed internally, so this argument is optional.</p>
 <ul>
 <li><code>num_trees</code> (<code>int</code>): Number of trees in the conditional variance model. Defaults to <code>0</code>. Variance is only modeled using a tree / forest if <code>num_trees &gt; 0</code>.</li>
 <li><code>alpha</code> (<code>float</code>): Prior probability of splitting for a tree of depth 0 in the conditional variance model. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>0.95</code>.</li>
@@ -2294,6 +2306,31 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>keep_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be included in the variance forest. Defaults to <code>None</code>.</li>
 <li><code>drop_vars</code> (<code>list</code> or <code>np.array</code>): Vector of variable names or column indices denoting variables that should be excluded from the variance forest. Defaults to <code>None</code>. If both <code>drop_vars</code> and <code>keep_vars</code> are set, <code>drop_vars</code> will be ignored.</li>
 <li><code>num_features_subsample</code> (<code>int</code>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
+</ul>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>random_effects_params</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary of random effects parameters, each of which has a default value processed internally, so this argument is optional.</p>
+<ul>
+<li><code>model_spec</code>: Specification of the random effects model. Options are "custom" and "intercept_only". If "custom" is specified, then a user-provided basis must be passed through <code>rfx_basis_train</code>. If "intercept_only" is specified, a random effects basis of all ones will be dispatched internally at sampling and prediction time. If "intercept_plus_treatment" is specified, a random effects basis that combines an "intercept" basis of all ones with the treatment variable (<code>Z_train</code>) will be dispatched internally at sampling and prediction time. Default: "custom". If "intercept_only" is specified, <code>rfx_basis_train</code> and <code>rfx_basis_test</code> (if provided) will be ignored.</li>
+<li><code>working_parameter_prior_mean</code>: Prior mean for the random effects "working parameter". Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
+<li><code>group_parameter_prior_mean</code>: Prior mean for the random effects "group parameters." Default: <code>None</code>. Must be a 1D numpy array whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a vector.</li>
+<li><code>working_parameter_prior_cov</code>: Prior covariance matrix for the random effects "working parameter." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
+<li><code>group_parameter_prior_cov</code>: Prior covariance matrix for the random effects "group parameters." Default: <code>None</code>. Must be a square numpy matrix whose dimension matches the number of random effects bases, or a scalar value that will be expanded to a diagonal matrix.</li>
+<li><code>variance_prior_shape</code>: Shape parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
+<li><code>variance_prior_scale</code>: Scale parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
 </ul>
               </div>
             </td>
@@ -2368,7 +2405,7 @@ test set evaluation for group labels that were not in the training set.</p>
 
 
 <h3 id="stochtree.bart.BARTModel.predict" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">covariates</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">covariates</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;posterior&#39;</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span></code>
 
 <a href="#stochtree.bart.BARTModel.predict" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -2455,6 +2492,54 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
                   <code>None</code>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>type</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Type of prediction to return. Options are "mean", which averages the predictions from every draw of a BART model, and "posterior", which returns the entire matrix of posterior predictions. Default: "posterior".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;posterior&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>terms</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Which model terms to include in the prediction. This can be a single term or a list of model terms. Options include "y_hat", "mean_forest", "rfx", "variance_forest", or "all". If a model doesn't have mean forest, random effects, or variance forest predictions, but one of those terms is request, the request will simply be ignored. If none of the requested terms are present in a model, this function will return <code>NULL</code> along with a warning. Default: "all".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;all&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scale</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;linear&#39;</code>
+            </td>
+          </tr>
       </tbody>
     </table>
 
@@ -2463,28 +2548,18 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
     <table>
       <thead>
         <tr>
-<th>Name</th>          <th>Type</th>
+          <th>Type</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-<td><code>mu_x</code></td>            <td>
-                  <code>(<span title="numpy.array">array</span>, <span title="optional">optional</span>)</code>
+            <td>
+                  <code>Dict of numpy arrays for each prediction term, or a simple numpy array if a single term is requested.</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Mean forest and / or random effects predictions.</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-<td><code>sigma2_x</code></td>            <td>
-                  <code>(<span title="numpy.array">array</span>, <span title="optional">optional</span>)</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Variance forest predictions.</p>
+                
               </div>
             </td>
           </tr>
@@ -2499,15 +2574,410 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
 <div class="doc doc-object doc-function">
 
 
-<h3 id="stochtree.bart.BARTModel.predict_mean" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">predict_mean</span><span class="p">(</span><span class="n">covariates</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h3 id="stochtree.bart.BARTModel.compute_contrast" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute_contrast</span><span class="p">(</span><span class="n">covariates_0</span><span class="p">,</span> <span class="n">covariates_1</span><span class="p">,</span> <span class="n">basis_0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;posterior&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span></code>
 
-<a href="#stochtree.bart.BARTModel.predict_mean" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#stochtree.bart.BARTModel.compute_contrast" class="headerlink" title="Permanent link">#</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Predict expected conditional outcome from a BART model.</p>
+        <p>Compute a contrast using a BART model by making two sets of outcome predictions and taking their
+difference. This function provides the flexibility to compute any contrast of interest by specifying
+covariates, leaf basis, and random effects bases / IDs for both sides of a two term contrast.
+For simplicity, we refer to the subtrahend of the contrast as the "control" or <code>Y0</code> term and the minuend
+of the contrast as the <code>Y1</code> term, though the requested contrast need not match the "control vs treatment"
+terminology of a classic two-treatment causal inference problem. We mirror the function calls and
+terminology of the <code>predict.bartmodel</code> function, labeling each prediction data term with a <code>1</code> to denote
+its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates_0</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span> or <span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Covariates used for prediction in the "control" case. Must be a numpy array or dataframe.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates_1</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span> or <span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Covariates used for prediction in the "treatment" case. Must be a numpy array or dataframe.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis_0</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bases used for prediction in the "control" case (by e.g. dot product with leaf values).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis_1</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bases used for prediction in the "treatment" case (by e.g. dot product with leaf values).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_group_ids_0</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set group labels used for prediction from an additive random effects model in the "control" case.
+We do not currently support (but plan to in the near future), test set evaluation for group labels that
+were not in the training set. Must be a numpy array.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_group_ids_1</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set group labels used for prediction from an additive random effects model in the "treatment" case.
+We do not currently support (but plan to in the near future), test set evaluation for group labels that
+were not in the training set. Must be a numpy array.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_basis_0</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set basis for used for prediction from an additive random effects model in the "control" case.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_basis_1</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Test set basis for used for prediction from an additive random effects model in the "treatment" case.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>type</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Aggregation level of the contrast. Options are "mean", which averages the contrast evaluations over every draw of a BART model, and "posterior", which returns the entire matrix of posterior contrast estimates. Default: "posterior".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;posterior&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scale</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale of the contrast. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;linear&#39;</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>Array, either 1d or 2d depending on whether type = &#34;mean&#34; or &#34;posterior&#34;.</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.compute_posterior_interval" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute_posterior_interval</span><span class="p">(</span><span class="n">terms</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">covariates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.compute_posterior_interval" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compute posterior credible intervals for specified terms from a fitted BART model. It supports intervals for mean functions, variance functions, random effects, and overall predictions.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>terms</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Character string specifying the model term(s) for which to compute intervals. Options for BART models are <code>"mean_forest"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, <code>"y_hat"</code>, or <code>"all"</code>. Defaults to <code>"all"</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;all&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scale</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Defaults to <code>"linear"</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;linear&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>level</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A numeric value between 0 and 1 specifying the credible interval level. Defaults to 0.95 for a 95% credible interval.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.95</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>covariates</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional array or data frame of covariates at which to compute the intervals. Required if the requested term depends on covariates (e.g., mean forest, variance forest, or overall predictions).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>basis</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional array of basis function evaluations for mean forest models with regression defined in the leaves. Required for "leaf regression" models.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_group_ids</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional vector of group IDs for random effects. Required if the requested term includes random effects.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_basis</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional matrix of basis function evaluations for random effects. Required if the requested term includes random effects.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A dict containing the lower and upper bounds of the credible interval for the specified term. If multiple terms are requested, a dict with intervals for each term is returned.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.sample_posterior_predictive" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">sample_posterior_predictive</span><span class="p">(</span><span class="n">covariates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_draws_per_sample</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.sample_posterior_predictive" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Sample from the posterior predictive distribution for outcomes modeled by BART</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2530,11 +3000,11 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Test set covariates.</p>
+                <p>An array or data frame of covariates at which to compute the intervals. Required if the BART model depends on covariates (e.g., contains a mean or variance forest).</p>
               </div>
             </td>
             <td>
-                <em>required</em>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -2546,7 +3016,55 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional test set basis vector, must be provided if the model was trained with a leaf regression basis.</p>
+                <p>An array of basis function evaluations for mean forest models with regression defined in the leaves. Required for "leaf regression" models.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_group_ids</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An array of group IDs for random effects. Required if the BART model includes random effects.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rfx_basis</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An array of basis function evaluations for random effects. Required if the BART model includes random effects.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>num_draws_per_sample</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The number of posterior predictive samples to draw for each posterior sample. Defaults to a heuristic based on the number of samples in a BART model (i.e. if the BART model has &gt;1000 draws, we use 1 draw from the likelihood per sample, otherwise we upsample to ensure intervals are based on at least 1000 posterior predictive draws).</p>
               </div>
             </td>
             <td>
@@ -2572,79 +3090,7 @@ mean or variance term, or a tuple of prediction arrays, if a BART model includes
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Mean forest predictions.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="stochtree.bart.BARTModel.predict_variance" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">predict_variance</span><span class="p">(</span><span class="n">covariates</span><span class="p">)</span></code>
-
-<a href="#stochtree.bart.BARTModel.predict_variance" class="headerlink" title="Permanent link">#</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Predict expected conditional variance from a BART model.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>covariates</code>
-            </td>
-            <td>
-                  <code><span title="numpy.array">array</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Test set covariates.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="numpy.array">array</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Variance forest predictions.</p>
+                <p>A matrix of posterior predictive samples. If <code>num_draws = 1</code>.</p>
               </div>
             </td>
           </tr>
@@ -2827,6 +3273,78 @@ which can be used for prediction, etc...</p>
             <td>
               <div class="doc-md-description">
                 <p><code>True</code> if a BART model has been sampled, <code>False</code> otherwise</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bart.BARTModel.has_term" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">has_term</span><span class="p">(</span><span class="n">term</span><span class="p">)</span></code>
+
+<a href="#stochtree.bart.BARTModel.has_term" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Whether or not a model includes a term.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>term</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Character string specifying the model term to check for. Options for BART models are <code>"mean_forest"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, <code>"y_hat"</code>, or <code>"all"</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><code>True</code> if the model includes the specified term, <code>False</code> otherwise</p>
               </div>
             </td>
           </tr>

@@ -695,7 +695,9 @@ default in <code>stochtree</code>.</p>
 <span>    general_params <span class="op">=</span> <span class="va">general_params</span>, prognostic_forest_params <span class="op">=</span> <span class="va">prognostic_forest_params</span>, </span>
 <span>    treatment_effect_forest_params <span class="op">=</span> <span class="va">treatment_effect_forest_params</span>, </span>
 <span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in bcf(X_train = X_train, Z_train = Z_train, y_train = y_train, :</span></span>
+<span><span class="co">#&gt; Global error variance will not be sampled with a heteroskedasticity</span></span></code></pre></div>
 <p>Inspect the BART samples that were initialized with an XBART
 warm-start</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
@@ -735,7 +737,9 @@ initialization.</p>
 <span>    general_params <span class="op">=</span> <span class="va">general_params</span>, prognostic_forest_params <span class="op">=</span> <span class="va">prognostic_forest_params</span>, </span>
 <span>    treatment_effect_forest_params <span class="op">=</span> <span class="va">treatment_effect_forest_params</span>, </span>
 <span>    variance_forest_params <span class="op">=</span> <span class="va">variance_forest_params</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in bcf(X_train = X_train, Z_train = Z_train, y_train = y_train, :</span></span>
+<span><span class="co">#&gt; Global error variance will not be sampled with a heteroskedasticity</span></span></code></pre></div>
 <p>Inspect the BART samples after burnin</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bcf_model_root</span><span class="op">$</span><span class="va">mu_hat_test</span><span class="op">)</span>, <span class="va">mu_test</span>, </span>
