@@ -2095,7 +2095,7 @@ set.</p>
 prediction accuracy.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">preds_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rowMeans</span><span class="p">(</span><span class="n">bart_model_warmstart</span><span class="o">$</span><span class="n">y_hat_test</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nf">mean</span><span class="p">(</span><span class="n">preds_test</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y_test</span><span class="p">)</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">#&gt; [1] 0.882</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">#&gt; [1] 0.888</span>
 </span></code></pre></div>
 <p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC
 curve</a>
@@ -2167,7 +2167,7 @@ set.</p>
 prediction accuracy.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">preds_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rowMeans</span><span class="p">(</span><span class="n">bart_model_root</span><span class="o">$</span><span class="n">y_hat_test</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="nf">mean</span><span class="p">(</span><span class="n">preds_test</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y_test</span><span class="p">)</span>
-</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="c1">#&gt; [1] 0.858</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="c1">#&gt; [1] 0.864</span>
 </span></code></pre></div>
 <p>We can also compute the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC
 curve</a>
