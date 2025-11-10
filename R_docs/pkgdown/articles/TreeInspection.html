@@ -1827,10 +1827,10 @@ trees in a model.</p>
 <p><img alt="" src="TreeInspection_files/figure-html/unnamed-chunk-5-2.png" /></p>
 <p>Check the variable split count in the last GFR sample</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">bart_model</span><span class="o">$</span><span class="n">mean_forests</span><span class="o">$</span><span class="nf">get_forest_split_counts</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">p_x</span><span class="p">)</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">#&gt;  [1] 21 18 26 22 26 30 25 32 26 39</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">#&gt;  [1] 28 28 31 25 23 26 35 19 29 18</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">bart_model</span><span class="o">$</span><span class="n">mean_forests</span><span class="o">$</span><span class="nf">get_aggregate_split_counts</span><span class="p">(</span><span class="n">p_x</span><span class="p">)</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">#&gt;  [1] 2044 2239 2410 2862 2749 2525 2613 3430 2451 4095</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">#&gt;  [1] 2961 2638 2824 2292 2431 2712 2996 2373 2800 2872</span>
 </span></code></pre></div>
 <p>The split counts appear relatively uniform across features, so let’s dig
 deeper and look at individual trees, starting with the first tree in the
@@ -1842,14 +1842,14 @@ last “grow-from-root” sample.</p>
 <p>This tree has a single split on the only “important” feature. Now, let’s
 look at the second tree.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">splits</span><span class="p">[</span><span class="m">10</span><span class="p">,</span><span class="m">2</span><span class="p">,]</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">#&gt;  [1] 0 0 0 0 0 0 0 0 0 2</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">#&gt;  [1] 0 0 0 0 0 0 0 0 0 1</span>
 </span></code></pre></div>
 <p>This tree also only splits on the important feature.</p>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">splits</span><span class="p">[</span><span class="m">10</span><span class="p">,</span><span class="m">20</span><span class="p">,]</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">#&gt;  [1] 0 0 0 0 0 0 0 0 1 0</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">#&gt;  [1] 0 0 1 0 2 0 1 0 0 0</span>
 </span></code></pre></div>
 <div class="language-r highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">splits</span><span class="p">[</span><span class="m">10</span><span class="p">,</span><span class="m">30</span><span class="p">,]</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">#&gt;  [1] 0 0 0 1 0 0 0 0 0 0</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">#&gt;  [1] 0 0 0 0 1 0 0 0 0 0</span>
 </span></code></pre></div>
 <p>We see that “later” trees are splitting on other features, but we also
 note that these trees are fitting an outcome that is already
@@ -1880,8 +1880,8 @@ vignette</a></p>
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="p">}</span>
 </span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="c1">#&gt; node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.496 else to node 2</span>
-</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="c1">#&gt;  node=1 is a leaf node with value=-0.465</span>
-</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="c1">#&gt;  node=2 is a leaf node with value=0.3</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="c1">#&gt;  node=1 is a leaf node with value=-0.355</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="c1">#&gt;  node=2 is a leaf node with value=0.492</span>
 </span></code></pre></div>
 
 
