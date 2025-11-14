@@ -97,6 +97,7 @@ cp stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb d
 cp stochtree_repo/demo/notebooks/serialization.ipynb docs/python_docs/demo/serialization.ipynb
 cp stochtree_repo/demo/notebooks/tree_inspection.ipynb docs/python_docs/demo/tree_inspection.ipynb
 cp stochtree_repo/demo/notebooks/prototype_interface.ipynb docs/python_docs/demo/prototype_interface.ipynb
+cp stochtree_repo/demo/notebooks/multi_chain.ipynb docs/python_docs/demo/multi_chain.ipynb
 ```
 
 ### Copy static vignettes over to docs directory
