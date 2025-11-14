@@ -2330,7 +2330,7 @@ term, whose variance is parameterized with an inverse gamma prior.</p>
 
 
 <h3 id="stochtree.bcf.BCFModel.sample" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">pi_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Z_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pi_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prognostic_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">treatment_effect_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_effects_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">pi_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Z_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pi_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis_test</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gfr</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_burnin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_mcmc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">general_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prognostic_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">treatment_effect_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variance_forest_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_effects_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previous_model_warmstart_sample_num</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 <a href="#stochtree.bcf.BCFModel.sample" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -2606,7 +2606,7 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>keep_burnin</code> (<code>bool</code>): Whether or not "burnin" samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
 <li><code>keep_gfr</code> (<code>bool</code>): Whether or not "warm-start" / grow-from-root samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
 <li><code>keep_every</code> (<code>int</code>): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to <code>1</code>. Setting <code>keep_every = k</code> for some <code>k &gt; 1</code> will "thin" the MCMC samples by retaining every <code>k</code>-th sample, rather than simply every sample. This can reduce the autocorrelation of the MCMC samples.</li>
-<li><code>num_chains</code> (<code>int</code>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, then each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations, with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each MCMC chain will be initialized from a separate GFR ensemble, with the requirement that <code>num_gfr &gt;= num_chains</code>. Defaults to <code>1</code>.</li>
+<li><code>num_chains</code> (<code>int</code>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, then each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations, with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each MCMC chain will be initialized from a separate GFR ensemble, with the requirement that <code>num_gfr &gt;= num_chains</code>. Defaults to <code>1</code>. Note that if <code>num_chains &gt; 1</code>, the returned model object will contain samples from all chains, stored consecutively. That is, if there are 4 chains with 100 samples each, the first 100 samples will be from chain 1, the next 100 samples will be from chain 2, etc... For more detail on working with multi-chain BCF models, see the multi chain vignettes.</li>
 <li><code>probit_outcome_model</code> (<code>bool</code>): Whether or not the outcome should be modeled as explicitly binary via a probit link. If <code>True</code>, <code>y</code> must only contain the values <code>0</code> and <code>1</code>. Default: <code>False</code>.</li>
 <li><code>num_threads</code>: Number of threads to use in the GFR and MCMC algorithms, as well as prediction. If OpenMP is not available on a user's setup, this will default to <code>1</code>, otherwise to the maximum number of available threads.</li>
 </ul>
@@ -2727,6 +2727,38 @@ test set evaluation for group labels that were not in the training set.</p>
 <li><code>variance_prior_shape</code>: Shape parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
 <li><code>variance_prior_scale</code>: Scale parameter for the inverse gamma prior on the variance of the random effects "group parameter." Default: <code>1</code>.</li>
 </ul>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>previous_model_json</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>JSON string containing a previous BCF model. This can be used to "continue" a sampler interactively after inspecting the samples or to run parallel chains "warm-started" from existing forest samples. Defaults to <code>None</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>previous_model_warmstart_sample_num</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Sample number from <code>previous_model_json</code> that will be used to warmstart this BART sampler. Zero-indexed (so that the first sample is used for warm-start by setting <code>previous_model_warmstart_sample_num = 0</code>). Defaults to <code>None</code>. If <code>num_chains</code> in the <code>general_params</code> list is &gt; 1, then each successive chain will be initialized from a different sample, counting backwards from <code>previous_model_warmstart_sample_num</code>. That is, if <code>previous_model_warmstart_sample_num = 10</code> and <code>num_chains = 4</code>, then chain 1 will be initialized from sample 10, chain 2 from sample 9, chain 3 from sample 8, and chain 4 from sample 7. If <code>previous_model_json</code> is provided but <code>previous_model_warmstart_sample_num</code> is NULL, the last sample in the previous model will be used to initialize the first chain, counting backwards as noted before. If more chains are requested than there are samples in <code>previous_model_json</code>, a warning will be raised and only the last sample will be used.</p>
               </div>
             </td>
             <td>
