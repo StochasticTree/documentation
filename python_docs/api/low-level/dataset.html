@@ -1190,6 +1190,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Residual.add_vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_vector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Residual.subtract_vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        subtract_vector
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3160,6 +3182,104 @@ by subtracting out the initial prediction value of every tree in every forest te
             <td>
               <div class="doc-md-description">
                 <p>Univariate numpy array of new residual values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Residual.add_vector" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_vector</span><span class="p">(</span><span class="n">update_vector</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Residual.add_vector" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update the current state of the outcome (i.e. partial residual) data by adding each element of <code>update_vector</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>update_vector</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Univariate numpy array of values to add to the current residual.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Residual.subtract_vector" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">subtract_vector</span><span class="p">(</span><span class="n">update_vector</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Residual.subtract_vector" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update the current state of the outcome (i.e. partial residual) data by subtracting each element of <code>update_vector</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>update_vector</code>
+            </td>
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Univariate numpy array of values to subtracted from the current residual.</p>
               </div>
             </td>
             <td>
