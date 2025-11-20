@@ -59,8 +59,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_bcf_posterior_predictive</span><span class="op">(</span></span>
 <span>  <span class="va">model_object</span>,</span>
-<span>  covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  treatment <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  X <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  Z <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  propensity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -76,11 +76,11 @@
 <dd><p>A fitted BCF model object of class <code>bcfmodel</code>.</p></dd>
 
 
-<dt id="arg-covariates">covariates<a class="anchor" aria-label="anchor" href="#arg-covariates"></a></dt>
+<dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>A matrix or data frame of covariates.</p></dd>
 
 
-<dt id="arg-treatment">treatment<a class="anchor" aria-label="anchor" href="#arg-treatment"></a></dt>
+<dt id="arg-z">Z<a class="anchor" aria-label="anchor" href="#arg-z"></a></dt>
 <dd><p>A vector or matrix of treatment assignments.</p></dd>
 
 
@@ -115,8 +115,8 @@
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="va">Z</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bcf_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bcf.html">bcf</a></span><span class="op">(</span>X_train <span class="op">=</span> <span class="va">X</span>, Z_train <span class="op">=</span> <span class="va">Z</span>, y_train <span class="op">=</span> <span class="va">y</span>, propensity_train <span class="op">=</span> <span class="va">pi_X</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ppd_samples</span> <span class="op">&lt;-</span> <span class="fu">sample_bcf_posterior_predictive</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  model_object <span class="op">=</span> <span class="va">bcf_model</span>, covariates <span class="op">=</span> <span class="va">X</span>,</span></span>
-<span class="r-in"><span>  treatment <span class="op">=</span> <span class="va">Z</span>, propensity <span class="op">=</span> <span class="va">pi_X</span></span></span>
+<span class="r-in"><span>  model_object <span class="op">=</span> <span class="va">bcf_model</span>, X <span class="op">=</span> <span class="va">X</span>,</span></span>
+<span class="r-in"><span>  Z <span class="op">=</span> <span class="va">Z</span>, propensity <span class="op">=</span> <span class="va">pi_X</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>

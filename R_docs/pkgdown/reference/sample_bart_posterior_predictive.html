@@ -59,8 +59,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_bart_posterior_predictive</span><span class="op">(</span></span>
 <span>  <span class="va">model_object</span>,</span>
-<span>  covariates <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  X <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  leaf_basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_draws_per_sample <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -75,11 +75,11 @@
 <dd><p>A fitted BART model object of class <code>bartmodel</code>.</p></dd>
 
 
-<dt id="arg-covariates">covariates<a class="anchor" aria-label="anchor" href="#arg-covariates"></a></dt>
+<dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>A matrix or data frame of covariates. Required if the BART model depends on covariates (e.g., contains a mean or variance forest).</p></dd>
 
 
-<dt id="arg-basis">basis<a class="anchor" aria-label="anchor" href="#arg-basis"></a></dt>
+<dt id="arg-leaf-basis">leaf_basis<a class="anchor" aria-label="anchor" href="#arg-leaf-basis"></a></dt>
 <dd><p>A matrix of bases for mean forest models with regression defined in the leaves. Required for "leaf regression" models.</p></dd>
 
 
@@ -108,7 +108,7 @@
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span>y_train <span class="op">=</span> <span class="va">y</span>, X_train <span class="op">=</span> <span class="va">X</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ppd_samples</span> <span class="op">&lt;-</span> <span class="fu">sample_bart_posterior_predictive</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  model_object <span class="op">=</span> <span class="va">bart_model</span>, covariates <span class="op">=</span> <span class="va">X</span></span></span>
+<span class="r-in"><span>  model_object <span class="op">=</span> <span class="va">bart_model</span>, X <span class="op">=</span> <span class="va">X</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>

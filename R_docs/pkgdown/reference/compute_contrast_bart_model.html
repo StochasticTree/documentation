@@ -77,8 +77,8 @@ function, labeling each prediction data term with a <code>1</code> to denote its
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compute_contrast_bart_model</span><span class="op">(</span></span>
 <span>  <span class="va">object</span>,</span>
-<span>  <span class="va">covariates_0</span>,</span>
-<span>  <span class="va">covariates_1</span>,</span>
+<span>  <span class="va">X_0</span>,</span>
+<span>  <span class="va">X_1</span>,</span>
 <span>  leaf_basis_0 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  leaf_basis_1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids_0 <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -98,11 +98,11 @@ function, labeling each prediction data term with a <code>1</code> to denote its
 <dd><p>Object of type <code>bart</code> containing draws of a regression forest and associated sampling outputs.</p></dd>
 
 
-<dt id="arg-covariates-">covariates_0<a class="anchor" aria-label="anchor" href="#arg-covariates-"></a></dt>
+<dt id="arg-x-">X_0<a class="anchor" aria-label="anchor" href="#arg-x-"></a></dt>
 <dd><p>Covariates used for prediction in the "control" case. Must be a matrix or dataframe.</p></dd>
 
 
-<dt id="arg-covariates-">covariates_1<a class="anchor" aria-label="anchor" href="#arg-covariates-"></a></dt>
+<dt id="arg-x-">X_1<a class="anchor" aria-label="anchor" href="#arg-x-"></a></dt>
 <dd><p>Covariates used for prediction in the "treatment" case. Must be a matrix or dataframe.</p></dd>
 
 
@@ -180,8 +180,8 @@ for group labels that were not in the training set. Must be a vector.</p></dd>
 <span class="r-in"><span>                   num_gfr <span class="op">=</span> <span class="fl">10</span>, num_burnin <span class="op">=</span> <span class="fl">0</span>, num_mcmc <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">contrast_test</span> <span class="op">&lt;-</span> <span class="fu">compute_contrast_bart_model</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">bart_model</span>,</span></span>
-<span class="r-in"><span>    covariates_0 <span class="op">=</span> <span class="va">X_test</span>,</span></span>
-<span class="r-in"><span>    covariates_1 <span class="op">=</span> <span class="va">X_test</span>,</span></span>
+<span class="r-in"><span>    X_0 <span class="op">=</span> <span class="va">X_test</span>,</span></span>
+<span class="r-in"><span>    X_1 <span class="op">=</span> <span class="va">X_test</span>,</span></span>
 <span class="r-in"><span>    leaf_basis_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0</span>, nrow <span class="op">=</span> <span class="va">n_test</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    leaf_basis_1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="va">n_test</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    type <span class="op">=</span> <span class="st">"posterior"</span>,</span></span>
