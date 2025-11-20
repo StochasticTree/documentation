@@ -78,14 +78,14 @@
           <code><a href="compute_bart_posterior_interval.html">compute_bart_posterior_interval()</a></code>
 
         </dt>
-        <dd>Compute posterior credible intervals for specified terms from a fitted BART model. It supports intervals for mean functions, variance functions, random effects, and overall predictions.</dd>
+        <dd>Compute posterior credible intervals for specified terms from a fitted BART model.</dd>
 
         <dt>
 
           <code><a href="compute_contrast_bart_model.html">compute_contrast_bart_model()</a></code>
 
         </dt>
-        <dd>Compute a contrast using a BART model by making two sets of outcome predictions and taking their difference. This function provides the flexibility to compute any contrast of interest by specifying covariates, leaf basis, and random effects bases / IDs for both sides of a two term contrast. For simplicity, we refer to the subtrahend of the contrast as the "control" or <code>Y0</code> term and the minuend of the contrast as the <code>Y1</code> term, though the requested contrast need not match the "control vs treatment" terminology of a classic two-treatment causal inference problem. We mirror the function calls and terminology of the <code>predict.bartmodel</code> function, labeling each prediction data term with a <code>1</code> to denote its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</dd>
+        <dd>Compute a contrast between two outcome prediction specifications for a BART model</dd>
 
         <dt>
 
@@ -129,7 +129,7 @@
           <code><a href="compute_contrast_bcf_model.html">compute_contrast_bcf_model()</a></code>
 
         </dt>
-        <dd>Compute a contrast using a BCF model by making two sets of outcome predictions and taking their difference. For simple BCF models with binary treatment, this will yield the same prediction as requesting <code>terms = "cate"</code> in the <code>predict.bcfmodel</code> function. For more general models, such as models with continuous / multivariate treatments or an additive random effects term with a coefficient on the treatment, this function provides the flexibility to compute a any contrast of interest by specifying covariates, treatment, and random effects bases and IDs for both sides of a two term contrast. For simplicity, we refer to the subtrahend of the contrast as the "control" or <code>Y0</code> term and the minuend of the contrast as the <code>Y1</code> term, though the requested contrast need not match the "control vs treatment" terminology of a classic two-arm experiment. We mirror the function calls and terminology of the <code>predict.bcfmodel</code> function, labeling each prediction data term with a <code>1</code> to denote its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</dd>
+        <dd>Compute a contrast between two outcome prediction specifications for a BCF model</dd>
 
         <dt>
 
@@ -404,14 +404,14 @@
           <code><a href="preprocessTrainData.html">preprocessTrainData()</a></code>
 
         </dt>
-        <dd>Preprocess covariates. DataFrames will be preprocessed based on their column types. Matrices will be passed through assuming all columns are numeric.</dd>
+        <dd>Preprocess covariates for use in a <code>ForestDataset</code> at train time.</dd>
 
         <dt>
 
           <code><a href="preprocessPredictionData.html">preprocessPredictionData()</a></code>
 
         </dt>
-        <dd>Preprocess covariates. DataFrames will be preprocessed based on their column types. Matrices will be passed through assuming all columns are numeric.</dd>
+        <dd>Preprocess covariates for use in a <code>ForestDataset</code> at prediction time.</dd>
 
         <dt>
 
@@ -590,7 +590,7 @@
           <code><a href="RandomEffectSamples.html">RandomEffectSamples</a></code>
 
         </dt>
-        <dd>Class that wraps the "persistent" aspects of a C++ random effects model (draws of the parameters and a map from the original label indices to the 0-indexed label numbers used to place group samples in memory (i.e. the first label is stored in column 0 of the sample matrix, the second label is store in column 1 of the sample matrix, etc...))</dd>
+        <dd>Class that wraps the "persistent" aspects of a C++ random effects model.</dd>
 
         <dt>
 
@@ -718,7 +718,7 @@
           <code><a href="expand_dims_2d.html">expand_dims_2d()</a></code>
 
         </dt>
-        <dd>Ensures that input is propagated appropriately to a matrix of dimension <code>output_rows</code> x <code>output_cols</code>. Handles the following cases: <ol><li><p><code>input</code> is a scalar: output is simply a (<code>output_rows</code>, <code>output_cols</code>) matrix with <code>input</code> repeated for each element</p></li> <li><p><code>input</code> is a vector of length <code>output_rows</code>: output is a (<code>output_rows</code>, <code>output_cols</code>) array with <code>input</code> broadcast across each of <code>output_cols</code> columns</p></li> <li><p><code>input</code> is a vector of length <code>output_cols</code>: output is a (<code>output_rows</code>, <code>output_cols</code>) array with <code>input</code> broadcast across each of <code>output_rows</code> rows</p></li> <li><p><code>input</code> is a matrix of dimension (<code>output_rows</code>, <code>output_cols</code>): input is passed through as-is All other cases throw an error.</p></li> </ol></dd>
+        <dd>Ensures that input is propagated appropriately to a matrix of dimension <code>output_rows</code> x <code>output_cols</code>.</dd>
 
         <dt>
 
