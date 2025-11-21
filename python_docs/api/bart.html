@@ -3149,7 +3149,7 @@ were not in the training set. Must be a numpy array.</p>
 
 
 <h3 id="stochtree.bart.BARTModel.compute_posterior_interval" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">compute_posterior_interval</span><span class="p">(</span><span class="n">terms</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">compute_posterior_interval</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">leaf_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_group_ids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rfx_basis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span></code>
 
 <a href="#stochtree.bart.BARTModel.compute_posterior_interval" class="headerlink" title="Permanent link">#</a></h3>
 
@@ -3170,54 +3170,6 @@ were not in the training set. Must be a numpy array.</p>
         </tr>
       </thead>
       <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>terms</code>
-            </td>
-            <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Character string specifying the model term(s) for which to compute intervals. Options for BART models are <code>"mean_forest"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, <code>"y_hat"</code>, or <code>"all"</code>. Defaults to <code>"all"</code>.</p>
-              </div>
-            </td>
-            <td>
-                  <code>&#39;all&#39;</code>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>scale</code>
-            </td>
-            <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Defaults to <code>"linear"</code>.</p>
-              </div>
-            </td>
-            <td>
-                  <code>&#39;linear&#39;</code>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>level</code>
-            </td>
-            <td>
-                  <code><span title="float">float</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>A numeric value between 0 and 1 specifying the credible interval level. Defaults to 0.95 for a 95% credible interval.</p>
-              </div>
-            </td>
-            <td>
-                  <code>0.95</code>
-            </td>
-          </tr>
           <tr class="doc-section-item">
             <td>
                 <code>X</code>
@@ -3280,6 +3232,54 @@ were not in the training set. Must be a numpy array.</p>
             </td>
             <td>
                   <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>terms</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Character string specifying the model term(s) for which to compute intervals. Options for BART models are <code>"mean_forest"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, <code>"y_hat"</code>, or <code>"all"</code>. Defaults to <code>"all"</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;all&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scale</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Defaults to <code>"linear"</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;linear&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>level</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A numeric value between 0 and 1 specifying the credible interval level. Defaults to 0.95 for a 95% credible interval.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.95</code>
             </td>
           </tr>
       </tbody>
