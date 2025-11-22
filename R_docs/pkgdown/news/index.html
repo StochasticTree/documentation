@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,9 +51,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.2" id="stochtree-012">stochtree 0.1.2<a class="anchor" aria-label="anchor" href="#stochtree-012"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="stochtree-020">stochtree 0.2.0<a class="anchor" aria-label="anchor" href="#stochtree-020"></a></h2>
 <div class="section level3">
-<h3 id="new-features-0-1-2">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-2"></a></h3>
+<h3 id="new-features-0-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
 <ul><li>Support for multithreading in various elements of the GFR and MCMC algorithms (<a href="https://github.com/StochasticTree/stochtree/pull/182" class="external-link">#182</a>)</li>
 <li>Support for binary outcomes in BART and BCF with a probit link (<a href="https://github.com/StochasticTree/stochtree/pull/164" class="external-link">#164</a>)</li>
 <li>Enable “restricted sweep” of tree algorithms over a handful of trees (<a href="https://github.com/StochasticTree/stochtree/pull/173" class="external-link">#173</a>)</li>
@@ -61,23 +61,34 @@
 <li>Enable modification of dataset variables (weights, etc…) via low-level interface (<a href="https://github.com/StochasticTree/stochtree/pull/194" class="external-link">#194</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="computational-improvements-0-1-2">Computational Improvements<a class="anchor" aria-label="anchor" href="#computational-improvements-0-1-2"></a></h3>
+<h3 id="computational-improvements-0-2-0">Computational Improvements<a class="anchor" aria-label="anchor" href="#computational-improvements-0-2-0"></a></h3>
 <ul><li>Modified default random effects initialization (<a href="https://github.com/StochasticTree/stochtree/pull/190" class="external-link">#190</a>)</li>
 <li>Avoid double prediction on training set (<a href="https://github.com/StochasticTree/stochtree/pull/178" class="external-link">#178</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-1-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-2"></a></h3>
+<h3 id="bug-fixes-0-2-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0"></a></h3>
 <ul><li>Fixed indexing bug in cleanup of grow-from-root (GFR) samples in BART and BCF models</li>
 <li>Avoid using covariate preprocessor in <code>computeForestLeafIndices</code> function when a <code>ForestSamples</code> object is provided (rather than a <code>bartmodel</code> or <code>bcfmodel</code> object)</li>
+<li>Correctly compute feature-specific split counts in R and Python (<a href="https://github.com/StochasticTree/stochtree/issues/220" class="external-link">#220</a>)</li>
+<li>Avoid override of user-specified <code>num_burnin</code> parameter in BCF models with an internal propensity score (<a href="https://github.com/StochasticTree/stochtree/issues/222" class="external-link">#222</a>)</li>
+<li>Outcome predictions correctly incorporate adaptive coding of untreated observations in BCF with binary treatment (<a href="https://github.com/StochasticTree/stochtree/issues/231" class="external-link">#231</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-changes-0-1-2">Other Changes<a class="anchor" aria-label="anchor" href="#other-changes-0-1-2"></a></h3>
-<ul><li>Standardized naming conventions for out of sample data in prediction and posterior computation routines (we raise warnings when data are passed through <code>y</code>, <code>X</code>, <code>Z</code>, etc… arguments)
-<ul><li>Covariates / features are always referred to as “covariates” rather than “X”</li>
-<li>Treatment is referred to as “treatment” rather than “Z”</li>
-<li>Propensity scores are referred to as “propensity” rather than “pi_X”</li>
-<li>Outcomes are referred to as “outcome” rather than “Y”</li>
+<h3 id="documentation-improvements-0-2-0">Documentation Improvements<a class="anchor" aria-label="anchor" href="#documentation-improvements-0-2-0"></a></h3>
+<ul><li>Clarify structure / layout of samples when users request multiple chains in BART and BCF models (<a href="https://github.com/StochasticTree/stochtree/issues/220" class="external-link">#220</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="other-changes-0-2-0">Other Changes<a class="anchor" aria-label="anchor" href="#other-changes-0-2-0"></a></h3>
+<ul><li>Standardized naming conventions for data elements of BART and BCF models across R and Python interfaces
+<ul><li>Covariates / features are always referred to as “<code>X</code>”</li>
+<li>Treatment is always referred to as “<code>Z</code>”</li>
+<li>Propensity scores are referred to as “<code>propensity</code>” (rather than “<code>pi</code>”)</li>
+<li>Outcomes are referred to as “<code>y</code>”</li>
+<li>Basis vectors for leaf-wise regression models in forest terms are referred to as “<code>leaf_basis</code>”</li>
+<li>Group labels for additive random effects models are referred to as “<code>rfx_group_ids</code>”</li>
+<li>Basis vectors for additive random effects models are referred to as “<code>rfx_basis</code>”</li>
 </ul></li>
+<li>Run-time checks for variables that are treated as continuous but have many “ties” (which presents issues with the current GFR algorithm) when only GFR samples are requested (<a href="https://github.com/StochasticTree/stochtree/pull/243" class="external-link">#243</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
