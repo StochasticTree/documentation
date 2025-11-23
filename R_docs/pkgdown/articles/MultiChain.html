@@ -228,9 +228,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.396, Lag 5: 0.182, Lag 10: 0.117, Lag 50: 0.053</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1303.8</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.009</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.357, Lag 5: 0.139, Lag 10: 0.097, Lag 50: 0.066</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1717.4</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.004</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -303,15 +303,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.587, Lag 5: 0.341, Lag 10: 0.243, Lag 50: 0.103</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.585, Lag 5: 0.345, Lag 10: 0.277, Lag 50: 0.15</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.508, Lag 5: 0.185, Lag 10: 0.126, Lag 50: -0.01</span></span>
-<span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.528, Lag 5: 0.251, Lag 10: 0.178, Lag 50: 0.06</span></span>
-<span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.477, Lag 5: 0.23, Lag 10: 0.136, Lag 50: 0.041</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.526, Lag 5: 0.222, Lag 10: 0.131, Lag 50: 0.018</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.588, Lag 5: 0.261, Lag 10: 0.158, Lag 50: 0.075</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.599, Lag 5: 0.296, Lag 10: 0.176, Lag 50: 0.068</span></span>
+<span><span class="co">#&gt; Observation 32:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.461, Lag 5: 0.199, Lag 10: 0.123, Lag 50: 0.015</span></span>
+<span><span class="co">#&gt; Observation 93:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.536, Lag 5: 0.256, Lag 10: 0.158, Lag 50: 0.101</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -330,11 +330,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 625.2</span></span>
-<span><span class="co">#&gt; Observation 82: 1350.8</span></span>
-<span><span class="co">#&gt; Observation 93: 933.6</span></span>
-<span><span class="co">#&gt; Observation 32: 1185.6</span></span>
-<span><span class="co">#&gt; Observation 63: 1067.6</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 523.1</span></span>
+<span><span class="co">#&gt; Observation 82: 1015.1</span></span>
+<span><span class="co">#&gt; Observation 63: 851.7</span></span>
+<span><span class="co">#&gt; Observation 32: 1176.4</span></span>
+<span><span class="co">#&gt; Observation 93: 938.3</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -352,11 +352,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.105</span></span>
-<span><span class="co">#&gt; Observation 82: 1.003</span></span>
-<span><span class="co">#&gt; Observation 93: 1.025</span></span>
-<span><span class="co">#&gt; Observation 32: 1.018</span></span>
-<span><span class="co">#&gt; Observation 63: 1.01</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.017</span></span>
+<span><span class="co">#&gt; Observation 82: 1.015</span></span>
+<span><span class="co">#&gt; Observation 63: 1.003</span></span>
+<span><span class="co">#&gt; Observation 32: 1.014</span></span>
+<span><span class="co">#&gt; Observation 93: 1.028</span></span></code></pre></div>
 <p>We can see that these “hard to predict” observations have a higher
 autocorrelation and lower effective sample size.</p>
 </div>
@@ -452,9 +452,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.378, Lag 5: 0.157, Lag 10: 0.117, Lag 50: 0.03</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1312</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.361, Lag 5: 0.142, Lag 10: 0.089, Lag 50: 0.024</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1550</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.008</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -527,15 +527,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.612, Lag 5: 0.37, Lag 10: 0.273, Lag 50: 0.122</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.62, Lag 5: 0.399, Lag 10: 0.321, Lag 50: 0.203</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.511, Lag 5: 0.197, Lag 10: 0.094, Lag 50: 0.014</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.493, Lag 5: 0.187, Lag 10: 0.073, Lag 50: 0.028</span></span>
 <span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.456, Lag 5: 0.222, Lag 10: 0.109, Lag 50: 0.04</span></span>
-<span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.522, Lag 5: 0.243, Lag 10: 0.16, Lag 50: 0.043</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.407, Lag 5: 0.135, Lag 10: 0.064, Lag 50: -0.01</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.577, Lag 5: 0.245, Lag 10: 0.158, Lag 50: 0.046</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.589, Lag 5: 0.259, Lag 10: 0.103, Lag 50: 0.025</span></span>
+<span><span class="co">#&gt; Observation 93:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.498, Lag 5: 0.23, Lag 10: 0.155, Lag 50: 0.022</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -554,11 +554,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 515.1</span></span>
-<span><span class="co">#&gt; Observation 82: 1448.9</span></span>
-<span><span class="co">#&gt; Observation 32: 1200.8</span></span>
-<span><span class="co">#&gt; Observation 93: 918.2</span></span>
-<span><span class="co">#&gt; Observation 63: 1058.2</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 279.9</span></span>
+<span><span class="co">#&gt; Observation 82: 1336.3</span></span>
+<span><span class="co">#&gt; Observation 32: 1830.3</span></span>
+<span><span class="co">#&gt; Observation 63: 1142.6</span></span>
+<span><span class="co">#&gt; Observation 93: 789.6</span></span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -576,11 +576,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.009</span></span>
-<span><span class="co">#&gt; Observation 82: 1.006</span></span>
-<span><span class="co">#&gt; Observation 32: 1.008</span></span>
-<span><span class="co">#&gt; Observation 93: 1.013</span></span>
-<span><span class="co">#&gt; Observation 63: 1.004</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.171</span></span>
+<span><span class="co">#&gt; Observation 82: 1.002</span></span>
+<span><span class="co">#&gt; Observation 32: 1.022</span></span>
+<span><span class="co">#&gt; Observation 63: 1.001</span></span>
+<span><span class="co">#&gt; Observation 93: 1.001</span></span></code></pre></div>
 <p>We can see that some of these “hard to predict” observations have a
 higher autocorrelation and lower effective sample size.</p>
 </div>
@@ -960,8 +960,8 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.095, Lag 5: 0.047, Lag 10: 0.028, Lag 50: -0.012</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 4946.2</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.09, Lag 5: 0.015, Lag 10: 0.001, Lag 50: 0.002</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 5842.5</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
@@ -1093,8 +1093,8 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.091, Lag 5: 0.006, Lag 10: 0.045, Lag 50: 0.021</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 5556.3</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.122, Lag 5: 0.017, Lag 10: 0.01, Lag 50: 0.006</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 5572</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
