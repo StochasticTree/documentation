@@ -192,7 +192,7 @@ out-of-sample predictions.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y_hat_test</span>, <span class="va">y_test</span>, xlab <span class="op">=</span> <span class="st">"Predicted"</span>, ylab <span class="op">=</span> <span class="st">"Actual"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="700"></p>
 <p>Now, suppose we want to analyze each of the chains separately to
 assess mixing / convergence.</p>
 <p>We can use our knowledge of the internal arrangement of the chain
@@ -211,7 +211,7 @@ diagnostics.</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/traceplot.html" class="external-link">traceplot</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="va">noise_sd</span><span class="op">^</span><span class="fl">2</span>, col <span class="op">=</span> <span class="st">"black"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/autocorr.diag.html" class="external-link">autocorr.diag</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
 <span><span class="va">ess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
@@ -228,9 +228,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.373, Lag 5: 0.129, Lag 10: 0.096, Lag 50: 0.017</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1587.3</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.355, Lag 5: 0.124, Lag 10: 0.104, Lag 50: 0.021</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1547.6</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.018</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -262,7 +262,7 @@ for each chain, comparing to the true simulated value.</p>
 <span>    linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can also analyze the pointwise forest predictions. Let’s consider
 5 observations with the largest test-set residual.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -303,15 +303,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.586, Lag 5: 0.324, Lag 10: 0.243, Lag 50: 0.139</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.656, Lag 5: 0.444, Lag 10: 0.362, Lag 50: 0.261</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.5, Lag 5: 0.176, Lag 10: 0.072, Lag 50: 0.007</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.48, Lag 5: 0.159, Lag 10: 0.061, Lag 50: 0.035</span></span>
 <span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.443, Lag 5: 0.197, Lag 10: 0.117, Lag 50: 0.015</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.435, Lag 5: 0.184, Lag 10: 0.108, Lag 50: 0.011</span></span>
 <span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.491, Lag 5: 0.245, Lag 10: 0.139, Lag 50: 0.021</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.531, Lag 5: 0.281, Lag 10: 0.177, Lag 50: 0.057</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.558, Lag 5: 0.224, Lag 10: 0.113, Lag 50: 0.037</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.565, Lag 5: 0.219, Lag 10: 0.126, Lag 50: 0.056</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -330,11 +330,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 461</span></span>
-<span><span class="co">#&gt; Observation 82: 1480.3</span></span>
-<span><span class="co">#&gt; Observation 32: 1204.7</span></span>
-<span><span class="co">#&gt; Observation 93: 939.7</span></span>
-<span><span class="co">#&gt; Observation 63: 985.1</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 204.7</span></span>
+<span><span class="co">#&gt; Observation 82: 1542.6</span></span>
+<span><span class="co">#&gt; Observation 32: 1312.5</span></span>
+<span><span class="co">#&gt; Observation 93: 736</span></span>
+<span><span class="co">#&gt; Observation 63: 974.6</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -352,11 +352,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.089</span></span>
-<span><span class="co">#&gt; Observation 82: 1.004</span></span>
-<span><span class="co">#&gt; Observation 32: 1.009</span></span>
-<span><span class="co">#&gt; Observation 93: 1.002</span></span>
-<span><span class="co">#&gt; Observation 63: 1.024</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.296</span></span>
+<span><span class="co">#&gt; Observation 82: 1.005</span></span>
+<span><span class="co">#&gt; Observation 32: 1.005</span></span>
+<span><span class="co">#&gt; Observation 93: 1.003</span></span>
+<span><span class="co">#&gt; Observation 63: 1.017</span></span></code></pre></div>
 <p>We can see that these “hard to predict” observations have a higher
 autocorrelation and lower effective sample size.</p>
 </div>
@@ -416,7 +416,7 @@ out-of-sample predictions.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y_hat_test</span>, <span class="va">y_test</span>, xlab <span class="op">=</span> <span class="st">"Predicted"</span>, ylab <span class="op">=</span> <span class="st">"Actual"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="700"></p>
 <p>Now, suppose we want to analyze each of the chains separately to
 assess mixing / convergence.</p>
 <p>We can use our knowledge of the internal arrangement of the chain
@@ -435,7 +435,7 @@ diagnostics.</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/traceplot.html" class="external-link">traceplot</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="va">noise_sd</span><span class="op">^</span><span class="fl">2</span>, col <span class="op">=</span> <span class="st">"black"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/autocorr.diag.html" class="external-link">autocorr.diag</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
 <span><span class="va">ess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
@@ -452,9 +452,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.348, Lag 5: 0.127, Lag 10: 0.116, Lag 50: 0.019</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1241.2</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.01</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.359, Lag 5: 0.156, Lag 10: 0.093, Lag 50: 0.026</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1634.8</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -486,7 +486,7 @@ for each chain, comparing to the true simulated value.</p>
 <span>    linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can also analyze the pointwise forest predictions. Let’s consider
 5 observations with the largest test-set residual.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -527,15 +527,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.573, Lag 5: 0.311, Lag 10: 0.228, Lag 50: 0.118</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.578, Lag 5: 0.326, Lag 10: 0.23, Lag 50: 0.123</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.524, Lag 5: 0.199, Lag 10: 0.108, Lag 50: 0.031</span></span>
-<span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.447, Lag 5: 0.171, Lag 10: 0.104, Lag 50: 0.011</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.508, Lag 5: 0.213, Lag 10: 0.125, Lag 50: -0.016</span></span>
 <span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.515, Lag 5: 0.234, Lag 10: 0.167, Lag 50: 0.058</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.498, Lag 5: 0.233, Lag 10: 0.15, Lag 50: 0.031</span></span>
+<span><span class="co">#&gt; Observation 32:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.439, Lag 5: 0.184, Lag 10: 0.127, Lag 50: 0.071</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.569, Lag 5: 0.248, Lag 10: 0.137, Lag 50: 0.047</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.561, Lag 5: 0.233, Lag 10: 0.117, Lag 50: 0.013</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -554,11 +554,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 705.1</span></span>
-<span><span class="co">#&gt; Observation 82: 1340.9</span></span>
-<span><span class="co">#&gt; Observation 32: 1402.7</span></span>
-<span><span class="co">#&gt; Observation 93: 981.1</span></span>
-<span><span class="co">#&gt; Observation 63: 1105.8</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 498.5</span></span>
+<span><span class="co">#&gt; Observation 82: 1052.2</span></span>
+<span><span class="co">#&gt; Observation 93: 1085.4</span></span>
+<span><span class="co">#&gt; Observation 32: 1215.7</span></span>
+<span><span class="co">#&gt; Observation 63: 1152.7</span></span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -576,11 +576,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.097</span></span>
-<span><span class="co">#&gt; Observation 82: 1.019</span></span>
-<span><span class="co">#&gt; Observation 32: 1.013</span></span>
-<span><span class="co">#&gt; Observation 93: 1.014</span></span>
-<span><span class="co">#&gt; Observation 63: 1.009</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.114</span></span>
+<span><span class="co">#&gt; Observation 82: 1.004</span></span>
+<span><span class="co">#&gt; Observation 93: 1.005</span></span>
+<span><span class="co">#&gt; Observation 32: 1.005</span></span>
+<span><span class="co">#&gt; Observation 63: 1.021</span></span></code></pre></div>
 <p>We can see that some of these “hard to predict” observations have a
 higher autocorrelation and lower effective sample size.</p>
 </div>
@@ -684,7 +684,7 @@ predictions.</p>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-30-1.png" class="r-plt" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-30-2.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-30-1.png" class="r-plt" alt="" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-30-2.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>And to the true
@@ -705,7 +705,7 @@ values.</p>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-31-1.png" class="r-plt" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-31-2.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-31-1.png" class="r-plt" alt="" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-31-2.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -819,7 +819,7 @@ predictions.</p>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-39-1.png" class="r-plt" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-39-2.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-39-1.png" class="r-plt" alt="" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-39-2.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>And to the true
@@ -840,7 +840,7 @@ values.</p>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-40-1.png" class="r-plt" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-40-2.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-40-1.png" class="r-plt" alt="" width="700"><img src="MultiChain_files/figure-html/unnamed-chunk-40-2.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -924,7 +924,7 @@ out-of-sample predictions.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y_hat_test</span>, <span class="va">y_test</span>, xlab <span class="op">=</span> <span class="st">"Predicted"</span>, ylab <span class="op">=</span> <span class="st">"Actual"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-44-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-44-1.png" class="r-plt" alt="" width="700"></p>
 <p>Now, suppose we want to analyze each of the chains separately to
 assess mixing / convergence.</p>
 <p>We can use our knowledge of the internal arrangement of the chain
@@ -943,7 +943,7 @@ diagnostics.</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/traceplot.html" class="external-link">traceplot</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"black"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-45-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-45-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/autocorr.diag.html" class="external-link">autocorr.diag</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
 <span><span class="va">ess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
@@ -960,9 +960,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.115, Lag 5: 0.05, Lag 10: 0.038, Lag 50: 0.016</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 3923.3</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.119, Lag 5: 0.038, Lag 10: 0.02, Lag 50: 0.007</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 5211.7</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
@@ -994,7 +994,7 @@ for each chain, comparing to the true simulated value.</p>
 <span>    linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-47-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-47-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="sampling-multiple-chains-sequentially-from-xbcf-forests">Sampling Multiple Chains Sequentially from XBCF Forests<a class="anchor" aria-label="anchor" href="#sampling-multiple-chains-sequentially-from-xbcf-forests"></a>
@@ -1057,7 +1057,7 @@ out-of-sample predictions.</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y_hat_test</span>, <span class="va">y_test</span>, xlab <span class="op">=</span> <span class="st">"Predicted"</span>, ylab <span class="op">=</span> <span class="st">"Actual"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-51-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-51-1.png" class="r-plt" alt="" width="700"></p>
 <p>Now, suppose we want to analyze each of the chains separately to
 assess mixing / convergence.</p>
 <p>We can use our knowledge of the internal arrangement of the chain
@@ -1076,7 +1076,7 @@ diagnostics.</p>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/traceplot.html" class="external-link">traceplot</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">1</span>, col <span class="op">=</span> <span class="st">"black"</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-52-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-52-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/autocorr.diag.html" class="external-link">autocorr.diag</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
 <span><span class="va">ess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">sigma2_coda_list</span><span class="op">)</span></span>
@@ -1093,9 +1093,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.114, Lag 5: 0.025, Lag 10: 0.022, Lag 50: 0.011</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 5145.9</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.113, Lag 5: 0.032, Lag 10: 0.03, Lag 50: 0.011</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 4202.4</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
@@ -1127,7 +1127,7 @@ for each chain, comparing to the true simulated value.</p>
 <span>    linetype <span class="op">=</span> <span class="st">"dashed"</span>,</span>
 <span>    size <span class="op">=</span> <span class="fl">1</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="MultiChain_files/figure-html/unnamed-chunk-54-1.png" class="r-plt" width="700"></p>
+<p><img src="MultiChain_files/figure-html/unnamed-chunk-54-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
 <div class="section level2">
