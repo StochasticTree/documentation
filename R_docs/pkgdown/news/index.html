@@ -53,9 +53,14 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.1" id="stochtree-031">stochtree 0.3.1<a class="anchor" aria-label="anchor" href="#stochtree-031"></a></h2>
 <div class="section level3">
+<h3 id="new-features-0-3-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-1"></a></h3>
+<ul><li>Added <code>print</code>, <code>summary</code>, <code>plot</code>, and <code>extract_parameter</code> generic functions in R for the <code>bartmodel</code> and <code>bcfmodel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/271" class="external-link">#271</a>)</li>
+</ul></div>
+<div class="section level3">
 <h3 id="bug-fixes-0-3-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-1"></a></h3>
 <ul><li>Fix R bug where our approach to temporarily modifying users’ RNG state failed if <code>.Random.seed</code> did not exist (i.e. if the R RNG hadn’t yet been accessed by an R session) (<a href="https://github.com/StochasticTree/stochtree/issues/258" class="external-link">#258</a>)</li>
 <li>Fix prediction bug for R BART models with random effects with labels that aren’t straightforward <code>1:num_groups</code> integers when only <code>y_hat</code> is requested (<a href="https://github.com/StochasticTree/stochtree/pull/256" class="external-link">#256</a>)</li>
+<li>Fix issue with C++ standard specification in Windows R package config (<a href="https://github.com/StochasticTree/stochtree/pull/276" class="external-link">#276</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
