@@ -2164,10 +2164,10 @@
 <h1 id="stochtree-python-api-reference">StochTree Python API Reference<a class="headerlink" href="#stochtree-python-api-reference" title="Permanent link">#</a></h1>
 <p>The <code>stochtree</code> interface is divided into two "levels":</p>
 <ol>
-<li>"High level": end-to-end implementations of stochastic tree ensembles for supervised learning (BART / XBART) and causal inference (BCF / XBCF). Both interfaces are designed to mirror the <a href="https://scikit-learn.org/dev/developers/develop.html">scikit-learn estimator style</a>, with the <code>.fit()</code> method replaced by a <code>.sample()</code> method.<ol>
+<li>"High level": end-to-end implementations of stochastic tree ensembles for supervised learning (BART / XBART) and causal inference (BCF / XBCF). Both interfaces are designed to mirror the <a href="https://scikit-learn.org/dev/developers/develop.html">scikit-learn estimator style</a>, with the <code>.fit()</code> method replaced by a <code>.sample()</code> method. We also provide a scikit-learn-compatible BART estimator which treats the posterior mean forest predictions as a single supervised learning model and enables cross-validation / model selection through <code>sklearn</code>.<ol>
 <li>The BART (supervised learning) interface is documented <a href="bart.html">here</a>.</li>
 <li>The BCF (causal inference) interface is documented <a href="bcf.html">here</a>.</li>
-<li>The scikit-learn estimator interface is documented <a href="sklearn.html">here</a>.</li>
+<li>The scikit-learn BART estimator is documented <a href="sklearn.html">here</a>.</li>
 </ol>
 </li>
 <li>"Low level": we provide access to most of the C++ sampling objects and functionality via Python, which allow for custom sampling algorithms and integration of other model terms. This interface is documented <a href="low-level/index.html">here</a> and consists broadly of the following components:<ol>
