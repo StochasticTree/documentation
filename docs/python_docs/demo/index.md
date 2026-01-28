@@ -8,4 +8,5 @@ The following demos showcase (some of) the functionality and output of the `stoc
 4. [Multivariate Treatment Causal Inference](multivariate_treatment_causal_inference.ipynb): using `BCFModel()` for causal effect estimation with a multivariate (continuous) treatment variable
 5. [Model Serialization](serialization.ipynb): saving and reloading `stochtree` models via JSON
 6. [Internal Tree Inspection](tree_inspection.ipynb): inspecting the trees in a sampled `stochtree` forest
-7. [Low-Level Interface](prototype_interface.ipynb): using the low-level `stochtree` interface to construct a custom sampling loop
+7. [Scikit-Learn Estimator Wrappers](sklearn_wrappers.ipynb): wrappers that enable `stochtree.BARTModel` to be used as a `sklearn` estimator (for e.g. cross-validation or model selection)
+8. [Low-Level Interface](prototype_interface.ipynb): using the low-level `stochtree` interface to construct a custom sampling loop
