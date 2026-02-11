@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">StochTree<span id="projectnumber">&#160;0.3.0.9000</span>
+   <div id="projectname">StochTree<span id="projectnumber">&#160;0.3.1</span>
    </div>
   </td>
  </tr>
@@ -84,6 +84,9 @@ $(function() {
   <div class="headertitle"><div class="title">StochTree Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A collection of random number generation utilities.  
+<a href="namespaceStochTree.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -122,6 +125,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1ForestTracker.html">ForestTracker</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">"Superclass" wrapper around tracking data structures for forest sampling algorithms  <a href="classStochTree_1_1ForestTracker.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1gamma__sampler.html">gamma_sampler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1GammaSampler.html">GammaSampler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +202,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1SortedNodeSampleTracker.html">SortedNodeSampleTracker</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure for tracking observations through a tree partition with each feature pre-sorted.  <a href="classStochTree_1_1SortedNodeSampleTracker.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1standard__normal.html">standard_normal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1Tree.html">Tree</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decision tree data structure.  <a href="classStochTree_1_1Tree.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,6 +219,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1UnsortedNodeSampleTracker.html">UnsortedNodeSampleTracker</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping nodes to the indices they contain.  <a href="classStochTree_1_1UnsortedNodeSampleTracker.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStochTree_1_1walker__vose.html">walker_vose</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -247,6 +256,14 @@ template&lt;typename container_type , typename prob_type &gt; </td></tr>
 <tr class="memitem:a2759edd24112c7618571b8299f55aee4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>sample_without_replacement</b> (container_type *output, prob_type *p, container_type *a, int population_size, int sample_size, std::mt19937 &amp;gen)</td></tr>
 <tr class="memdesc:a2759edd24112c7618571b8299f55aee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample without replacement according to a set of probability weights. This template function is a C++ variant of numpy's implementation: <a href="https://github.com/numpy/numpy/blob/031f44252d613f4524ad181e3eb2ae2791e22187/numpy/random/_generator.pyx#L925">https://github.com/numpy/numpy/blob/031f44252d613f4524ad181e3eb2ae2791e22187/numpy/random/_generator.pyx#L925</a>. <br /></td></tr>
 <tr class="separator:a2759edd24112c7618571b8299f55aee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1a24801e5a9fbac71bacb5e4107949" id="r_a8b1a24801e5a9fbac71bacb5e4107949"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceStochTree.html#a8b1a24801e5a9fbac71bacb5e4107949">standard_uniform_draw_53bit</a> (std::mt19937 &amp;gen)</td></tr>
+<tr class="separator:a8b1a24801e5a9fbac71bacb5e4107949"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2d81e3857bf8e82b5ca974c8ea78c35" id="r_aa2d81e3857bf8e82b5ca974c8ea78c35"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceStochTree.html#aa2d81e3857bf8e82b5ca974c8ea78c35">standard_uniform_draw_32bit</a> (std::mt19937 &amp;gen)</td></tr>
+<tr class="separator:aa2d81e3857bf8e82b5ca974c8ea78c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4688c8328628db98ffc8282fd02f4d53" id="r_a4688c8328628db98ffc8282fd02f4d53"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceStochTree.html#a4688c8328628db98ffc8282fd02f4d53">sample_standard_normal</a> (double mean, double sd, std::mt19937 &amp;gen)</td></tr>
+<tr class="separator:a4688c8328628db98ffc8282fd02f4d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8123ac5fd63373e32aa96a7ab3583d9b" id="r_a8123ac5fd63373e32aa96a7ab3583d9b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceStochTree.html#a8123ac5fd63373e32aa96a7ab3583d9b">sample_gamma</a> (std::mt19937 &amp;gen, double shape, double scale)</td></tr>
+<tr class="separator:a8123ac5fd63373e32aa96a7ab3583d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f479f37cb7892d7d9a4fe2c9fca9ed3" id="r_ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__leaf__model__group.html#ga3b4c0c2aa15bf379c20fb3a751b9f0f0">SuffStatVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">suffStatFactory</a> (<a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> model_type, int basis_dim=0)</td></tr>
 <tr class="memdesc:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory function that creates a new <code>SuffStat</code> object for the specified model type.  <br /></td></tr>
 <tr class="separator:ga1f479f37cb7892d7d9a4fe2c9fca9ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -302,7 +319,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const
 <tr class="separator:ga051aa0efa91162528480c2a1a7d90279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Copyright (c) 2024 stochtree authors.</p>
+<div class="textblock"><p>A collection of random number generation utilities. </p>
+<p>Copyright (c) 2024 stochtree authors.</p>
 <p>General-purpose data structures used for keeping track of categories in a training dataset.</p>
 <p><a class="el" href="classStochTree_1_1SampleCategoryMapper.html" title="Class storing sample-node map for each tree in an ensemble TODO: Add run-time checks for categories w...">SampleCategoryMapper</a> is a simplified version of <a class="el" href="classStochTree_1_1SampleNodeMapper.html" title="Class storing sample-node map for each tree in an ensemble.">SampleNodeMapper</a>, which is not tree-specific as it tracks categories loaded into a training dataset, and we do not expect to modify it during training.</p>
 <p><a class="el" href="classStochTree_1_1SampleCategoryMapper.html" title="Class storing sample-node map for each tree in an ensemble TODO: Add run-time checks for categories w...">SampleCategoryMapper</a> is used in two places:</p><ol type="1">
@@ -332,6 +350,7 @@ Ordered Categorical Features</h2>
 Unordered Categorical Features</h2>
 <p>In this case, the grid is every unique value of the unordered categorical feature, arranged in an outcome-dependent order, as described in Fisher (1958)</p>
 <p>Copyright (c) 2024 stochtree authors. All rights reserved. Licensed under the MIT License. See LICENSE file in the project root for license information.</p>
+<p>This file is vendored from a broader C++ / R distribution library, where the distributions are subject to rigorous testing. <a href="https://github.com/andrewherren/cpp11_r_rng">https://github.com/andrewherren/cpp11_r_rng</a></p>
 <p>Copyright (c) 2024 stochtree authors. All rights reserved.</p>
 <p>Copyright (c) 2024 stochtree authors.</p>
 <p>Data structures used for tracking dataset through the tree building process.</p>
@@ -342,7 +361,149 @@ Unordered Categorical Features</h2>
 <p><a class="el" href="classStochTree_1_1SortedNodeSampleTracker.html" title="Data structure for tracking observations through a tree partition with each feature pre-sorted.">SortedNodeSampleTracker</a> is inspired by the "approximate" split finding method in xgboost, released under the Apache license with the following copyright:</p>
 <p>Copyright 2015~2023 by XGBoost Contributors</p>
 <p>Copyright (c) 2023 stochtree authors. All rights reserved. Licensed under the MIT License. See LICENSE file in the project root for license information. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a8b1a24801e5a9fbac71bacb5e4107949" name="a8b1a24801e5a9fbac71bacb5e4107949"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b1a24801e5a9fbac71bacb5e4107949">&#9670;&#160;</a></span>standard_uniform_draw_53bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::standard_uniform_draw_53bit </td>
+          <td>(</td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Generate a standard uniform random variate to 53 bits of precision via two mersenne twisters, see: <a href="https://github.com/numpy/numpy/blob/0d7986494b39ace565afda3de68be528ddade602/numpy/random/src/mt19937/mt19937.h#L56">https://github.com/numpy/numpy/blob/0d7986494b39ace565afda3de68be528ddade602/numpy/random/src/mt19937/mt19937.h#L56</a> </p>
+
+</div>
+</div>
+<a id="aa2d81e3857bf8e82b5ca974c8ea78c35" name="aa2d81e3857bf8e82b5ca974c8ea78c35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2d81e3857bf8e82b5ca974c8ea78c35">&#9670;&#160;</a></span>standard_uniform_draw_32bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::standard_uniform_draw_32bit </td>
+          <td>(</td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Generate a standard uniform random variate to 32 bits of precision via a single mersenne twister. </p>
+
+</div>
+</div>
+<a id="a4688c8328628db98ffc8282fd02f4d53" name="a4688c8328628db98ffc8282fd02f4d53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4688c8328628db98ffc8282fd02f4d53">&#9670;&#160;</a></span>sample_standard_normal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::sample_standard_normal </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>mean</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>gen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Stateless standard normal sampler implementing Marsaglia's polar method. Without caching, this is half as fast as other methods for repeated normal sampling, but this might be acceptable in cases where a relatively small number of normal draws is desired.</p>
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Marsaglia_polar_method">https://en.wikipedia.org/wiki/Marsaglia_polar_method</a> </p>
+
+</div>
+</div>
+<a id="a8123ac5fd63373e32aa96a7ab3583d9b" name="a8123ac5fd63373e32aa96a7ab3583d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8123ac5fd63373e32aa96a7ab3583d9b">&#9670;&#160;</a></span>sample_gamma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double StochTree::sample_gamma </td>
+          <td>(</td>
+          <td class="paramtype">std::mt19937 &amp;&#160;</td>
+          <td class="paramname"><em>gen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Generate a single sample from a gamma distribution using a combination of algorithms When shape &lt; 1.0, use the Ahrens-Dieter method When shape &gt; 1.0, use the Marsaglia-Tsang method When shape == 1.0, sample an exponential via inverse transform method When shape == 0.0, return 0.0 <a href="https://en.wikipedia.org/wiki/Gamma_distribution#Random_variate_generation">https://en.wikipedia.org/wiki/Gamma_distribution#Random_variate_generation</a> </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
