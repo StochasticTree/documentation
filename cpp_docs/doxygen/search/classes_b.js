@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['walker_5fvose_0',['walker_vose',['../classStochTree_1_1walker__vose.html',1,'StochTree']]]
+  ['univariatenormalsampler_0',['UnivariateNormalSampler',['../classStochTree_1_1UnivariateNormalSampler.html',1,'StochTree']]],
+  ['unsortednodesampletracker_1',['UnsortedNodeSampleTracker',['../classStochTree_1_1UnsortedNodeSampleTracker.html',1,'StochTree']]]
 ];

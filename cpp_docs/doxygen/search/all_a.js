@@ -5,7 +5,7 @@ var searchData=
   ['leaf_20model_20api_2',['Leaf Model API',['../group__leaf__model__group.html',1,'']]],
   ['leaf_20models_3',['Custom Leaf Models',['../index.html#custom-leaf-models',1,'']]],
   ['leafmodelfactory_4',['leafModelFactory',['../group__leaf__model__group.html#gaaba5f1e9af5724f79d1387fc97f7fc09',1,'StochTree']]],
-  ['leafmodelvariant_5',['LeafModelVariant',['../group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059',1,'StochTree']]],
+  ['leafmodelvariant_5',['LeafModelVariant',['../group__leaf__model__group.html#gaebdff4958b10f680db14b448f30184fc',1,'StochTree']]],
   ['leafnodehomoskedasticvariancemodel_6',['LeafNodeHomoskedasticVarianceModel',['../classStochTree_1_1LeafNodeHomoskedasticVarianceModel.html',1,'StochTree']]],
   ['leafvalue_7',['leafvalue',['../classStochTree_1_1Tree.html#a577f57d27e49fb5bfc890971168bc99f',1,'StochTree::Tree::LeafValue(std::int32_t nid, std::int32_t dim_id) const'],['../classStochTree_1_1Tree.html#a9bcf52371b866aa5e36386c85e8a015b',1,'StochTree::Tree::LeafValue(std::int32_t nid) const']]],
   ['leafvector_8',['LeafVector',['../classStochTree_1_1Tree.html#a3415cc0674af76f7c948370410d863b6',1,'StochTree::Tree']]],

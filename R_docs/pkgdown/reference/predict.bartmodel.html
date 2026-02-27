@@ -23,6 +23,7 @@
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -107,7 +108,7 @@ that were not in the training set.</p></dd>
 
 
 <dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
-<dd><p>(Optional) Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p></dd>
+<dd><p>(Optional) Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, "probability", which transforms predictions into class probabilities for models with discrete outcomes, and "class", which returns predicted outcome categories for discrete outcome models. "probability" is only valid for outcome models with <code>outcome == 'binary'</code> or <code>outcome == 'ordinal'</code>. For binary outcomes, this will return the probability that <code>y == 1</code>, and for ordinal outcomes, this will return probabilities for each outcome label. Default: "linear".</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -29,6 +29,7 @@ For tutorials on the &quot;proper&quot; usage of the stochtree's advanced workfl
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -83,6 +84,8 @@ For tutorials on the "proper" usage of the stochtree's advanced workflow, we pro
 <span>  leaf_model_scale <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  variance_forest_shape <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  variance_forest_scale <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cloglog_forest_shape <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  cloglog_forest_rate <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  cutpoint_grid_size <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  num_features_subsample <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -150,6 +153,14 @@ For tutorials on the "proper" usage of the stochtree's advanced workflow, we pro
 
 <dt id="arg-variance-forest-scale">variance_forest_scale<a class="anchor" aria-label="anchor" href="#arg-variance-forest-scale"></a></dt>
 <dd><p>Scale parameter for IG leaf models (applicable when <code>leaf_model_type = 3</code>). Default: <code>1</code>.</p></dd>
+
+
+<dt id="arg-cloglog-forest-shape">cloglog_forest_shape<a class="anchor" aria-label="anchor" href="#arg-cloglog-forest-shape"></a></dt>
+<dd><p>Shape parameter for conditional gamma component of cloglog leaf models (applicable when <code>leaf_model_type = 4</code>). Default: <code>1</code>.</p></dd>
+
+
+<dt id="arg-cloglog-forest-rate">cloglog_forest_rate<a class="anchor" aria-label="anchor" href="#arg-cloglog-forest-rate"></a></dt>
+<dd><p>Rate parameter for conditional gamma component of cloglog leaf models (applicable when <code>leaf_model_type = 4</code>). Default: <code>1</code>.</p></dd>
 
 
 <dt id="arg-cutpoint-grid-size">cutpoint_grid_size<a class="anchor" aria-label="anchor" href="#arg-cutpoint-grid-size"></a></dt>

@@ -1181,6 +1181,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.add_auxiliary_dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_auxiliary_dimension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.set_auxiliary_data_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        set_auxiliary_data_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.get_auxiliary_data_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_auxiliary_data_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stochtree.data.Dataset.get_auxiliary_data_vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_auxiliary_data_vector
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1389,6 +1433,8 @@
       
         
       
+        
+      
     
     
     
@@ -1491,6 +1537,34 @@
     
   
     Causal Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demo/ordinal_outcome.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ordinal Regression in StochTree
   
 
     
@@ -3103,6 +3177,296 @@ variance weights that are updated throughout the sampler.</p>
             <td>
               <div class="doc-md-description">
                 <p><code>True</code> if the dataset has variance weights, <code>False</code> otherwise</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.add_auxiliary_dimension" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">add_auxiliary_dimension</span><span class="p">(</span><span class="n">dim_size</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Dataset.add_auxiliary_dimension" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Add an auxiliary data dimension to the dataset</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>dim_size</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of elements in the new auxiliary dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.set_auxiliary_data_value" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">set_auxiliary_data_value</span><span class="p">(</span><span class="n">dim_idx</span><span class="p">,</span> <span class="n">element_idx</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Dataset.set_auxiliary_data_value" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Set a value in the auxiliary data</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>dim_idx</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of the auxiliary dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>element_idx</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of the element within the dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>value</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Value to set</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.get_auxiliary_data_value" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_auxiliary_data_value</span><span class="p">(</span><span class="n">dim_idx</span><span class="p">,</span> <span class="n">element_idx</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Dataset.get_auxiliary_data_value" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get a value from the auxiliary data</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>dim_idx</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of the auxiliary dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>element_idx</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of the element within the dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The auxiliary data value</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.data.Dataset.get_auxiliary_data_vector" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_auxiliary_data_vector</span><span class="p">(</span><span class="n">dim_idx</span><span class="p">)</span></code>
+
+<a href="#stochtree.data.Dataset.get_auxiliary_data_vector" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get an auxiliary data vector as a numpy array</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>dim_idx</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Index of the auxiliary dimension</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The auxiliary data vector</p>
               </div>
             </td>
           </tr>

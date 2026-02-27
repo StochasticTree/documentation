@@ -23,6 +23,7 @@
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -87,7 +88,7 @@
 
 
 <dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
-<dd><p>(Optional) Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability", which transforms predictions into a probability of observing <code>y == 1</code>. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p></dd>
+<dd><p>(Optional) Scale of mean function predictions. Options are "linear", which returns predictions on the original scale of the mean forest / RFX terms, and "probability". <code>scale = "probability"</code> is only valid for models fit with a probit / cloglog links on binary or ordinal outcomes. For binary outcome models, <code>scale = "probability"</code> will return an interval over the probability that <code>y == 1</code>. For ordinal outcome models, <code>scale = "probability"</code> will return intervals over the "survival function" <code>P(y &gt; k)</code> for <code>k = 1, 2, ..., K-1</code> where <code>K</code> is the total number of categories. Default: "linear".</p></dd>
 
 
 <dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -124,6 +125,8 @@
 <span class="r-in"><span> X <span class="op">=</span> <span class="va">X</span>,</span></span>
 <span class="r-in"><span> level <span class="op">=</span> <span class="fl">0.90</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple posterior dimensions matching the number of posterior draws found in the array, using the last one as the MCMC index</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Multiple posterior dimensions matching the number of posterior draws found in the array, using the last one as the MCMC index</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

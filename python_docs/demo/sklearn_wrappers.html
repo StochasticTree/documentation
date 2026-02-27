@@ -1123,6 +1123,8 @@
       
         
       
+        
+      
     
     
     
@@ -1223,6 +1225,34 @@
     
   
     Causal Inference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ordinal_outcome.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ordinal Regression in StochTree
   
 
     
@@ -3041,7 +3071,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_wine</span><span class="p">,</span> <span class="n">load_breast_cancer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneVsRestClassifier</span>
@@ -3052,7 +3081,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-1">import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 from sklearn.datasets import load_wine, load_breast_cancer
 from sklearn.model_selection import GridSearchCV
 from sklearn.multiclass import OneVsRestClassifier
@@ -4811,9 +4839,9 @@ a.param-doc-link::before {
 </table>
 </details>
 </div>
-</div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-3"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(mean_forest_params={'alpha': 0.9, 'beta': 1.5,
-                                           'num_trees': 100},
-                       num_gfr=40, num_mcmc=0)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-4"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
+</div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-3"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(mean_forest_params={'alpha': 0.95, 'beta': 2.0,
+                                           'num_trees': 50},
+                       num_gfr=40, num_mcmc=1000)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-4"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
 <div class="estimator-table">
 <details>
 <summary>Parameters</summary>
@@ -4835,7 +4863,7 @@ a.param-doc-link::before {
 <td><i class="copy-paste-icon" onclick="copyToClipboard('num_mcmc',
                           this.parentElement.nextElementSibling)"></i></td>
 <td class="param">num_mcmc</td>
-<td class="value">0</td>
+<td class="value">1000</td>
 </tr>
 <tr class="default">
 <td><i class="copy-paste-icon" onclick="copyToClipboard('general_params',
@@ -4847,7 +4875,7 @@ a.param-doc-link::before {
 <td><i class="copy-paste-icon" onclick="copyToClipboard('mean_forest_params',
                           this.parentElement.nextElementSibling)"></i></td>
 <td class="param">mean_forest_params</td>
-<td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
+<td class="value">{'alpha': 0.95, 'beta': 2.0, 'num_trees': 50}</td>
 </tr>
 <tr class="default">
 <td><i class="copy-paste-icon" onclick="copyToClipboard('variance_forest_params',
@@ -5052,10 +5080,10 @@ print(print_message)</div>
 <pre>
 Hyperparameters chosen by grid search: 
   num_gfr: 40 
-  num_mcmc: 0 
-  num_trees: 100 
-  alpha: 0.9 
-  beta: 1.5
+  num_mcmc: 1000 
+  num_trees: 50 
+  alpha: 0.95 
+  beta: 2.0
 
 </pre>
 </div>

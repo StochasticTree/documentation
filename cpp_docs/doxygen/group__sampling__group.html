@@ -426,6 +426,7 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
     <tr><td class="paramname">pre_initialized</td><td>Whether or not <code>active_forest</code> has already been initialized (note: this parameter will be refactored out soon). </td></tr>
     <tr><td class="paramname">backfitting</td><td>Whether or not the sampler uses "backfitting" (wherein the sampler for a given tree only depends on the other trees via their effect on the residual) or the more general "blocked MCMC" (wherein the state of other trees must be more explicitly considered). </td></tr>
     <tr><td class="paramname">num_features_subsample</td><td>How many features to subsample when running the GFR algorithm. </td></tr>
+    <tr><td class="paramname">num_threads</td><td>Number of threads to use for split evaluations and other compute-intensive operations. </td></tr>
     <tr><td class="paramname">leaf_suff_stat_args</td><td>Any arguments which must be supplied to initialize a <code>LeafSuffStat</code> object. </td></tr>
   </table>
   </dd>
@@ -582,6 +583,7 @@ template&lt;typename LeafModel , typename LeafSuffStat , typename... LeafSuffSta
     <tr><td class="paramname">keep_forest</td><td>Whether or not <code>active_forest</code> should be retained in <code>forests</code>. </td></tr>
     <tr><td class="paramname">pre_initialized</td><td>Whether or not <code>active_forest</code> has already been initialized (note: this parameter will be refactored out soon). </td></tr>
     <tr><td class="paramname">backfitting</td><td>Whether or not the sampler uses "backfitting" (wherein the sampler for a given tree only depends on the other trees via their effect on the residual) or the more general "blocked MCMC" (wherein the state of other trees must be more explicitly considered). </td></tr>
+    <tr><td class="paramname">num_threads</td><td>Number of threads to use for split evaluations and other compute-intensive operations. </td></tr>
     <tr><td class="paramname">leaf_suff_stat_args</td><td>Any arguments which must be supplied to initialize a <code>LeafSuffStat</code> object. </td></tr>
   </table>
   </dd>

@@ -9,6 +9,7 @@ In-sample mean function predictions: "y_hat_train"
 Test set mean function predictions: "y_hat_test"
 In-sample variance forest predictions: "sigma2_x_train", "var_x_train"
 Test set variance forest predictions: "sigma2_x_test", "var_x_test"
+Ordinal model cutpoints (valid only for ordinal cloglog models): "cloglog_cutpoints", "cutpoints"
 
 '><meta property="og:description" content='Extract a vector, matrix or array of parameter samples from a BART model by name.
 Random effects are handled by a separate getRandomEffectSamples function due to the complexity of the random effects parameters.
@@ -20,6 +21,7 @@ In-sample mean function predictions: "y_hat_train"
 Test set mean function predictions: "y_hat_test"
 In-sample variance forest predictions: "sigma2_x_train", "var_x_train"
 Test set variance forest predictions: "sigma2_x_test", "var_x_test"
+Ordinal model cutpoints (valid only for ordinal cloglog models): "cloglog_cutpoints", "cutpoints"
 
 '></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -45,6 +47,7 @@ Test set variance forest predictions: "sigma2_x_test", "var_x_test"
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -84,6 +87,7 @@ The following conventions are used for parameter names:</p><ul><li><p>Global err
 <li><p>Test set mean function predictions: <code>"y_hat_test"</code></p></li>
 <li><p>In-sample variance forest predictions: <code>"sigma2_x_train"</code>, <code>"var_x_train"</code></p></li>
 <li><p>Test set variance forest predictions: <code>"sigma2_x_test"</code>, <code>"var_x_test"</code></p></li>
+<li><p>Ordinal model cutpoints (valid only for ordinal cloglog models): <code>"cloglog_cutpoints"</code>, <code>"cutpoints"</code></p></li>
 </ul></div>
 
     <div class="section level2">

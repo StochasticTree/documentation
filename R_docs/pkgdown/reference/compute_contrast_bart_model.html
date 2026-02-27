@@ -37,6 +37,7 @@ Only valid when there is either a mean forest or a random effects term in the BA
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -143,7 +144,7 @@ for group labels that were not in the training set. Must be a vector.</p></dd>
 
 
 <dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
-<dd><p>(Optional) Scale of the contrast. Options are "linear", which returns a contrast on the original scale of the mean forest / RFX terms, and "probability", which transforms each contrast term into a probability of observing <code>y == 1</code> before taking their difference. "probability" is only valid for models fit with a probit outcome model. Default: "linear".</p></dd>
+<dd><p>(Optional) Scale of the contrast. Options are "linear", which returns contrast of predictions on the original scale of the mean forest / RFX terms, and "probability". <code>scale = "probability"</code> is only valid for models fit with a probit / cloglog links on binary or ordinal outcomes. For binary outcome models, <code>scale = "probability"</code> will return contrasts of the probability that <code>y == 1</code>. For ordinal outcome models, <code>scale = "probability"</code> will return contrasts over the "survival function" <code>P(y &gt; k)</code> for <code>k = 1, 2, ..., K-1</code> where <code>K</code> is the total number of categories. Default: "linear".</p></dd>
 
 </dl></div>
     <div class="section level2">

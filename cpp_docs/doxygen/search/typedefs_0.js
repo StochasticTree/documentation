@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['leafmodelvariant_0',['LeafModelVariant',['../group__leaf__model__group.html#gaf6e8634775db3810ef7a1dc42efd7059',1,'StochTree']]]
+  ['leafmodelvariant_0',['LeafModelVariant',['../group__leaf__model__group.html#gaebdff4958b10f680db14b448f30184fc',1,'StochTree']]]
 ];

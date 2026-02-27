@@ -23,6 +23,7 @@
     <li><a class="dropdown-item" href="../articles/BayesianSupervisedLearning.html">Bayesian Supervised Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/CausalInference.html">Causal Machine Learning in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/Heteroskedasticity.html">Bayesian Supervised Learning with Heteroskedasticity in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/OrdinalOutcome.html">Ordinal Regression in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Advanced Model Interface</h6></li>
     <li><a class="dropdown-item" href="../articles/MultiChain.html">Running Multiple Chains (Sequentially or in Parallel) in StochTree</a></li>
@@ -98,11 +99,11 @@ This function uses 0-indexing, so the first forest sample corresponds to <code>f
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">5</span> <span class="op">+</span> <span class="fl">10</span><span class="op">*</span><span class="op">(</span><span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bart_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="bart.html">bart</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, num_gfr<span class="op">=</span><span class="fl">0</span>, num_mcmc<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">computeForestMaxLeafIndex</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 390 403 422 419 437 445 430 426 434 438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 386 403 419 427 431 426 419 424 436 437</span>
 <span class="r-in"><span><span class="fu">computeForestMaxLeafIndex</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 386</span>
 <span class="r-in"><span><span class="fu">computeForestMaxLeafIndex</span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"mean"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 403 419 438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 403 427 437</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
