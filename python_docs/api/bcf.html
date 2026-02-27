@@ -1015,6 +1015,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stochtree.bcf.BCFModel.extract_parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        extract_parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1293,6 +1304,8 @@
       
         
       
+        
+      
     
     
     
@@ -1507,6 +1520,34 @@
     
   
     Model Serialization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/summary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary and Plotting Utilities
   
 
     
@@ -3911,6 +3952,93 @@ which can be used for prediction, etc...</p>
             <td>
               <div class="doc-md-description">
                 <p><code>True</code> if the model includes the specified term, <code>False</code> otherwise</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="stochtree.bcf.BCFModel.extract_parameter" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">extract_parameter</span><span class="p">(</span><span class="n">term</span><span class="p">)</span></code>
+
+<a href="#stochtree.bcf.BCFModel.extract_parameter" class="headerlink" title="Permanent link">#</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Extract a vector, matrix or array of parameter samples from a BCF model by name.
+Random effects are handled by a separate <code>extract_parameter_samples</code> method attached to the underlying <code>RandomEffectsContainer</code> object due to the complexity of the random effects parameters.
+If the requested model term is not found, an error is thrown.
+The following conventions are used for parameter names:
+- Global error variance: <code>"sigma2"</code>, <code>"global_error_scale"</code>, <code>"sigma2_global"</code>
+- Prognostic forest leaf scale: <code>"sigma2_leaf_mu"</code>, <code>"leaf_scale_mu"</code>, <code>"mu_leaf_scale"</code>
+- Treatment effect forest leaf scale: <code>"sigma2_leaf_tau"</code>, <code>"leaf_scale_tau"</code>, <code>"tau_leaf_scale"</code>
+- Adaptive coding parameters: <code>"adaptive_coding"</code> (returns both the control and treated parameters jointly, with control in the first row and treated in the second row)
+- In-sample mean function predictions: <code>"y_hat_train"</code>
+- Test set mean function predictions: <code>"y_hat_test"</code>
+- In-sample treatment effect forest predictions: <code>"tau_hat_train"</code>
+- Test set treatment effect forest predictions: <code>"tau_hat_test"</code>
+- In-sample variance forest predictions: <code>"sigma2_x_train"</code>, <code>"var_x_train"</code>
+- Test set variance forest predictions: <code>"sigma2_x_test"</code>, <code>"var_x_test"</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>term</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the parameter to extract (e.g., <code>"sigma2"</code>, <code>"y_hat_train"</code>, etc.)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.array">array</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Array of parameter samples. If the underlying parameter is a scalar, this will be a vector of length <code>num_samples</code>.
+If the underlying parameter is vector-valued, this will be (<code>parameter_dimension</code> x <code>num_samples</code>) matrix, and if the underlying
+parameter is multidimensional, this will be an array of dimension (<code>parameter_dimension_1</code> x <code>parameter_dimension_2</code> x ... x <code>num_samples</code>).</p>
               </div>
             </td>
           </tr>

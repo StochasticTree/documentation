@@ -25,7 +25,7 @@ needed for prediction / serialization"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +47,7 @@ needed for prediction / serialization"></head><body>
     <li><a class="dropdown-item" href="../articles/ModelSerialization.html">Model Serialization in StochTree</a></li>
     <li><a class="dropdown-item" href="../articles/PriorCalibration.html">Prior Calibration Approaches for Parametric Components of Stochastic Tree Ensembles</a></li>
     <li><a class="dropdown-item" href="../articles/EnsembleKernel.html">Kernel Methods from Tree Ensembles in StochTree</a></li>
+    <li><a class="dropdown-item" href="../articles/Summary.html">Summary and Plotting Utilities</a></li>
     <li><a class="dropdown-item" href="../articles/TreeInspection.html">Deeper Dive on Sampled Forests in StochTree</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Prototype Interface</h6></li>
@@ -115,6 +116,9 @@ needed for prediction / serialization</p>
 <li><p><a href="#method-RandomEffectSamples-extract_parameter_samples"><code>RandomEffectSamples$extract_parameter_samples()</code></a></p></li>
 <li><p><a href="#method-RandomEffectSamples-delete_sample"><code>RandomEffectSamples$delete_sample()</code></a></p></li>
 <li><p><a href="#method-RandomEffectSamples-extract_label_mapping"><code>RandomEffectSamples$extract_label_mapping()</code></a></p></li>
+<li><p><a href="#method-RandomEffectSamples-num_samples"><code>RandomEffectSamples$num_samples()</code></a></p></li>
+<li><p><a href="#method-RandomEffectSamples-num_components"><code>RandomEffectSamples$num_components()</code></a></p></li>
+<li><p><a href="#method-RandomEffectSamples-num_groups"><code>RandomEffectSamples$num_groups()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-RandomEffectSamples-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new RandomEffectSamples object.</p><div class="section">
@@ -376,6 +380,42 @@ The sigma array has dimension (<code>num_components</code>, <code>num_samples</c
 <div class="section">
 <h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
 <p>List mapping group ID to random effect components.</p>
+</div>
+
+</div><p></p><hr><a id="method-RandomEffectSamples-num_samples"></a><div class="section">
+<h3 id="method-num-samples-">Method <code>num_samples()</code><a class="anchor" aria-label="anchor" href="#method-num-samples-"></a></h3>
+<p>Query the number of samples in the <code>RandomEffectsSamples</code> object.</p><div class="section">
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RandomEffectSamples</span><span class="op">$</span><span class="fu">num_samples</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
+<p>Integer number of samples</p>
+</div>
+
+</div><p></p><hr><a id="method-RandomEffectSamples-num_components"></a><div class="section">
+<h3 id="method-num-components-">Method <code>num_components()</code><a class="anchor" aria-label="anchor" href="#method-num-components-"></a></h3>
+<p>Query the number of components in the <code>RandomEffectsSamples</code> object.</p><div class="section">
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RandomEffectSamples</span><span class="op">$</span><span class="fu">num_components</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
+<p>Integer number of components</p>
+</div>
+
+</div><p></p><hr><a id="method-RandomEffectSamples-num_groups"></a><div class="section">
+<h3 id="method-num-groups-">Method <code>num_groups()</code><a class="anchor" aria-label="anchor" href="#method-num-groups-"></a></h3>
+<p>Query the number of groups in the <code>RandomEffectsSamples</code> object.</p><div class="section">
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RandomEffectSamples</span><span class="op">$</span><span class="fu">num_groups</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
+<p>Integer number of groups</p>
 </div>
 
 </div>
