@@ -141,19 +141,19 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; Outcome was standardized</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.883, standard deviation = 0.045, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.890, standard deviation = 0.048, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.7967336 0.8265223 0.8522763 0.8806234 0.9128363 0.9409974 0.9740796 </span></span>
+<span><span class="co">#&gt; 0.8022402 0.8291637 0.8565768 0.8890352 0.9209240 0.9527704 0.9871828 </span></span>
 <span><span class="co">#&gt; Summary of leaf scale posterior: </span></span>
 <span><span class="co">#&gt; 3000 samples, mean = 0.007, standard deviation = 0.001, quantiles:</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; 0.005032765 0.005732493 0.006417132 0.007392238 0.008385892 0.009372483 </span></span>
+<span><span class="co">#&gt; 0.005005461 0.005585954 0.006195786 0.006978670 0.007776599 0.008759668 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt; 0.010711164 </span></span>
+<span><span class="co">#&gt; 0.010198066 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = -0.065, standard deviation = 3.286, quantiles:</span></span>
-<span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
-<span><span class="co">#&gt; -6.8031082 -4.9756483 -1.8281978 -0.1214095  2.0175400  4.2893743  6.4917416</span></span></code></pre></div>
+<span><span class="co">#&gt; 1000 observations, mean = -0.064, standard deviation = 3.286, quantiles:</span></span>
+<span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
+<span><span class="co">#&gt; -6.815829 -4.951478 -1.825302 -0.124682  2.009870  4.250982  6.418150</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
@@ -242,35 +242,33 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; An internal propensity model was fit using stochtree::bart() in lieu of user-provided propensity scores</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.949, standard deviation = 0.045, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.942, standard deviation = 0.046, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.8677312 0.8933722 0.9165492 0.9477217 0.9778212 1.0074254 1.0383977 </span></span>
+<span><span class="co">#&gt; 0.8561114 0.8839362 0.9114115 0.9406030 0.9726403 1.0035803 1.0346695 </span></span>
 <span><span class="co">#&gt; Summary of prognostic forest leaf scale posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.002, standard deviation = 0.000, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.002, standard deviation = 0.001, quantiles:</span></span>
 <span><span class="co">#&gt;         2.5%          10%          25%          50%          75%          90% </span></span>
-<span><span class="co">#&gt; 0.0009750628 0.0011428664 0.0013345446 0.0016062013 0.0018850005 0.0021541563 </span></span>
+<span><span class="co">#&gt; 0.0009776928 0.0011536364 0.0014163874 0.0017392960 0.0021134520 0.0024926151 </span></span>
 <span><span class="co">#&gt;        97.5% </span></span>
-<span><span class="co">#&gt; 0.0026688928 </span></span>
+<span><span class="co">#&gt; 0.0029096142 </span></span>
 <span><span class="co">#&gt; Summary of adaptive coding parameters: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean (control) = -0.319, mean (treated) = 0.775, standard deviation (control) = 0.294, standard deviation (treated) = 0.275</span></span>
+<span><span class="co">#&gt; 3000 samples, mean (control) = -0.348, mean (treated) = 0.768, standard deviation (control) = 0.302, standard deviation (treated) = 0.285</span></span>
 <span><span class="co">#&gt; quantiles (control):</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -1.02940194 -0.69100141 -0.48169128 -0.28254224 -0.12045895  0.01268002 </span></span>
+<span><span class="co">#&gt; -1.01509586 -0.76595781 -0.54413929 -0.31176425 -0.13534346  0.01588605 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  0.16433077 </span></span>
+<span><span class="co">#&gt;  0.16948213 </span></span>
 <span><span class="co">#&gt; quantiles (treated):</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.3021300 0.4447522 0.5866599 0.7490300 0.9342952 1.1464447 1.3847670 </span></span>
+<span><span class="co">#&gt; 0.2425914 0.4330188 0.5799816 0.7355551 0.9453430 1.1530446 1.3857502 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 3.487, standard deviation = 0.947, quantiles:</span></span>
+<span><span class="co">#&gt; 1000 observations, mean = 3.488, standard deviation = 0.948, quantiles:</span></span>
 <span><span class="co">#&gt;     2.5%      10%      25%      50%      75%      90%    97.5% </span></span>
-<span><span class="co">#&gt; 1.694685 2.277270 2.810162 3.472536 4.132044 4.740673 5.425356 </span></span>
+<span><span class="co">#&gt; 1.670184 2.278706 2.813535 3.485558 4.136763 4.734325 5.444643 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean CATEs: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 0.067, standard deviation = 0.525, quantiles:</span></span>
-<span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -0.71578825 -0.56183790 -0.41118685 -0.01196482  0.60262842  0.76714895 </span></span>
-<span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  0.86486483</span></span></code></pre></div>
+<span><span class="co">#&gt; 1000 observations, mean = 0.072, standard deviation = 0.524, quantiles:</span></span>
+<span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
+<span><span class="co">#&gt; -0.7185236 -0.5567607 -0.4042917  0.0147850  0.5942532  0.7678618  0.8690871</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
