@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,16 +53,50 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.1.9000" id="stochtree-0319000">stochtree 0.3.1.9000<a class="anchor" aria-label="anchor" href="#stochtree-0319000"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.0" id="stochtree-040">stochtree 0.4.0<a class="anchor" aria-label="anchor" href="#stochtree-040"></a></h2>
 <div class="section level3">
-<h3 id="new-features-0-3-1-9000">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-1-9000"></a></h3>
-<ul><li>Added <code>__str__</code>, <code>__repr__</code>, <code>summary</code>, and <code>extract_parameter</code> methods in Python for the <code>BARTModel</code> and <code>BCFModel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
+<h3 id="new-features-0-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
+<ul><li>Added support for ordinal outcome modeling through complementary log-log link function in the BART models (<a href="https://github.com/StochasticTree/stochtree/pull/196" class="external-link">#196</a>)</li>
+<li>Added <code>__str__</code>, <code>__repr__</code>, <code>summary</code>, and <code>extract_parameter</code> methods in Python for the <code>BARTModel</code> and <code>BCFModel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
 <li>Added plotting utility function (<code>plot_parameter_trace</code>) in Python that operates on both the <code>BARTModel</code> and <code>BCFModel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
 <li>Added vignettes for summary / model inspection utilities in both R and Python (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
-<li>Added <code>print</code> methods for R and <code>__str__</code> methods for Python for the forest container and random effects container objects (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
+<li>Added <code>print</code> methods in R and <code>__str__</code> methods in Python for the forest container and random effects container objects (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
+<li>Updated R documentation to group related functions into topics (<a href="https://github.com/StochasticTree/stochtree/pull/302" class="external-link">#302</a>):
+<ul><li><code>BARTSerialization</code></li>
+<li><code>BCFSerialization</code></li>
+<li><code>ForestSamplesSerialization</code></li>
+<li><code>RandomEffectSamplesSerialization</code></li>
+<li><code>DataPreprocessing</code></li>
+<li><code>ForestKernelComputation</code></li>
+<li><code>ForestStateManagement</code></li>
+<li><code>RandomEffectStateManagement</code></li>
+</ul></li>
+<li>Converted the following R function names from snake case to camel case (<a href="https://github.com/StochasticTree/stochtree/pull/302" class="external-link">#302</a>):
+<ul><li>
+<code>compute_bart_posterior_interval</code> -&gt; <code>computeBARTPosteriorInterval</code>
+</li>
+<li>
+<code>compute_bcf_posterior_interval</code> -&gt; <code>computeBCFPosteriorInterval</code>
+</li>
+<li>
+<code>compute_contrast_bart_model</code> -&gt; <code>computeContrastBARTModel</code>
+</li>
+<li>
+<code>compute_contrast_bcf_model</code> -&gt; <code>computeContrastBCFModel</code>
+</li>
+<li>
+<code>extract_parameter</code> -&gt; <code>extractParameter</code>
+</li>
+<li>
+<code>sample_bart_posterior_predictive</code> -&gt; <code>sampleBARTPosteriorPredictive</code>
+</li>
+<li>
+<code>sample_bcf_posterior_predictive</code> -&gt; <code>sampleBCFPosteriorPredictive</code>
+</li>
+</ul></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-3-1-9000">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-1-9000"></a></h3>
+<h3 id="bug-fixes-0-4-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0"></a></h3>
 <ul><li>Fixed status logging bugs for multi-chain R MCMC loops (<a href="https://github.com/StochasticTree/stochtree/pull/298" class="external-link">#298</a>)</li>
 </ul></div>
 </div>

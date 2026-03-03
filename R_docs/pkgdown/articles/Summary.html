@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,19 +141,19 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; Outcome was standardized</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.888, standard deviation = 0.047, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.896, standard deviation = 0.048, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.8005121 0.8278741 0.8547766 0.8867185 0.9188729 0.9499080 0.9814877 </span></span>
+<span><span class="co">#&gt; 0.8053727 0.8344515 0.8628199 0.8946928 0.9270030 0.9570092 0.9925686 </span></span>
 <span><span class="co">#&gt; Summary of leaf scale posterior: </span></span>
 <span><span class="co">#&gt; 3000 samples, mean = 0.007, standard deviation = 0.001, quantiles:</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; 0.005066028 0.005522443 0.006119807 0.006790362 0.007601055 0.008540178 </span></span>
+<span><span class="co">#&gt; 0.005224991 0.005687260 0.006210048 0.006867710 0.007622169 0.009052484 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt; 0.009936252 </span></span>
+<span><span class="co">#&gt; 0.011175789 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = -0.064, standard deviation = 3.285, quantiles:</span></span>
-<span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; -6.852160 -4.925664 -1.818674 -0.114368  2.002915  4.300611  6.522902</span></span></code></pre></div>
+<span><span class="co">#&gt; 1000 observations, mean = -0.064, standard deviation = 3.286, quantiles:</span></span>
+<span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
+<span><span class="co">#&gt; -6.8433924 -4.9609745 -1.8256369 -0.1201517  1.9962190  4.2832434  6.5457268</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
@@ -165,7 +165,7 @@ predictions</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bart_model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Summary_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700"></p>
 <p>For finer-grained control over which parameters to plot, we can also
-use the <code><a href="../reference/extract_parameter.html">extract_parameter()</a></code> function to pull the posterior
+use the <code><a href="../reference/extractParameter.html">extractParameter()</a></code> function to pull the posterior
 distribution of any valid model term (e.g., global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>,
 leaf scale
@@ -173,7 +173,7 @@ leaf scale
 in-sample mean function predictions <code>y_hat_train</code>) and then
 plot any subset or transformation of these values.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">y_hat_train_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_parameter.html">extract_parameter</a></span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"y_hat_train"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">y_hat_train_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extractParameter.html">extractParameter</a></span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"y_hat_train"</span><span class="op">)</span></span>
 <span><span class="va">obs_index</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">y_hat_train_samples</span><span class="op">[</span><span class="va">obs_index</span>, <span class="op">]</span>,</span>
@@ -242,35 +242,35 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; An internal propensity model was fit using stochtree::bart() in lieu of user-provided propensity scores</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.953, standard deviation = 0.046, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.952, standard deviation = 0.045, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.8687535 0.8959173 0.9226951 0.9518836 0.9814306 1.0129240 1.0492748 </span></span>
+<span><span class="co">#&gt; 0.8690451 0.8946114 0.9205941 0.9507438 0.9817871 1.0105112 1.0454710 </span></span>
 <span><span class="co">#&gt; Summary of prognostic forest leaf scale posterior: </span></span>
 <span><span class="co">#&gt; 3000 samples, mean = 0.001, standard deviation = 0.000, quantiles:</span></span>
 <span><span class="co">#&gt;         2.5%          10%          25%          50%          75%          90% </span></span>
-<span><span class="co">#&gt; 0.0008736919 0.0010011085 0.0011354539 0.0013164351 0.0015554243 0.0017913780 </span></span>
+<span><span class="co">#&gt; 0.0008502639 0.0009794334 0.0011297169 0.0013256125 0.0015545809 0.0017879322 </span></span>
 <span><span class="co">#&gt;        97.5% </span></span>
-<span><span class="co">#&gt; 0.0021597952 </span></span>
+<span><span class="co">#&gt; 0.0021951149 </span></span>
 <span><span class="co">#&gt; Summary of adaptive coding parameters: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean (control) = -0.252, mean (treated) = 0.799, standard deviation (control) = 0.291, standard deviation (treated) = 0.280</span></span>
+<span><span class="co">#&gt; 3000 samples, mean (control) = -0.282, mean (treated) = 0.806, standard deviation (control) = 0.272, standard deviation (treated) = 0.270</span></span>
 <span><span class="co">#&gt; quantiles (control):</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -0.97717823 -0.64351472 -0.40129570 -0.22008660 -0.06046424  0.07960515 </span></span>
+<span><span class="co">#&gt; -0.90012639 -0.62757771 -0.42821939 -0.25465308 -0.11106955  0.04276908 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  0.23481890 </span></span>
+<span><span class="co">#&gt;  0.19609528 </span></span>
 <span><span class="co">#&gt; quantiles (treated):</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.3050494 0.4800757 0.6089559 0.7763713 0.9574100 1.1731817 1.4447201 </span></span>
+<span><span class="co">#&gt; 0.3655588 0.5082113 0.6180718 0.7664783 0.9551385 1.1629863 1.4215815 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 3.488, standard deviation = 0.941, quantiles:</span></span>
+<span><span class="co">#&gt; 1000 observations, mean = 3.487, standard deviation = 0.943, quantiles:</span></span>
 <span><span class="co">#&gt;     2.5%      10%      25%      50%      75%      90%    97.5% </span></span>
-<span><span class="co">#&gt; 1.691197 2.269548 2.814026 3.473908 4.116115 4.721470 5.427572 </span></span>
+<span><span class="co">#&gt; 1.664934 2.274807 2.826421 3.481556 4.119418 4.731922 5.441128 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean CATEs: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 0.077, standard deviation = 0.529, quantiles:</span></span>
+<span><span class="co">#&gt; 1000 observations, mean = 0.068, standard deviation = 0.520, quantiles:</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -0.70303416 -0.55178665 -0.39842320 -0.01740183  0.61660477  0.78620384 </span></span>
+<span><span class="co">#&gt; -0.71235510 -0.55230547 -0.39567894 -0.01914456  0.58776591  0.76146234 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  0.88377780</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.85886219</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
@@ -282,7 +282,7 @@ predictions</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bcf_model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Summary_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="700"></p>
 <p>For finer-grained control over which parameters to plot, we can also
-use the <code><a href="../reference/extract_parameter.html">extract_parameter()</a></code> function to pull the posterior
+use the <code><a href="../reference/extractParameter.html">extractParameter()</a></code> function to pull the posterior
 distribution of any valid model term (e.g., global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>,
 prognostic forest leaf scale
@@ -298,7 +298,7 @@ for binary treatment, in-sample mean function predictions
 <code>tau_hat_train</code>) and then plot any subset or transformation
 of these values.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">adaptive_coding_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_parameter.html">extract_parameter</a></span><span class="op">(</span><span class="va">bcf_model</span>, <span class="st">"adaptive_coding"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">adaptive_coding_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extractParameter.html">extractParameter</a></span><span class="op">(</span><span class="va">bcf_model</span>, <span class="st">"adaptive_coding"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">adaptive_coding_samples</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>

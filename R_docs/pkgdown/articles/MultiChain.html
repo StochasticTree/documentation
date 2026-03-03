@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -230,9 +230,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.363, Lag 5: 0.15, Lag 10: 0.09, Lag 50: 0.025</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1677.6</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.011</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.378, Lag 5: 0.163, Lag 10: 0.098, Lag 50: 0.045</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1387.1</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -305,15 +305,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.608, Lag 5: 0.367, Lag 10: 0.29, Lag 50: 0.155</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.617, Lag 5: 0.377, Lag 10: 0.268, Lag 50: 0.153</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.512, Lag 5: 0.215, Lag 10: 0.126, Lag 50: 0.023</span></span>
-<span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.516, Lag 5: 0.254, Lag 10: 0.161, Lag 50: 0.077</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.494, Lag 5: 0.172, Lag 10: 0.068, Lag 50: 0.017</span></span>
 <span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.442, Lag 5: 0.175, Lag 10: 0.077, Lag 50: 0.033</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.463, Lag 5: 0.203, Lag 10: 0.13, Lag 50: 0.048</span></span>
+<span><span class="co">#&gt; Observation 93:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.502, Lag 5: 0.221, Lag 10: 0.135, Lag 50: 0.04</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.58, Lag 5: 0.278, Lag 10: 0.171, Lag 50: 0.027</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.567, Lag 5: 0.245, Lag 10: 0.11, Lag 50: 0.019</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -332,11 +332,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 321.6</span></span>
-<span><span class="co">#&gt; Observation 82: 1027.4</span></span>
-<span><span class="co">#&gt; Observation 93: 878.9</span></span>
-<span><span class="co">#&gt; Observation 32: 1622.8</span></span>
-<span><span class="co">#&gt; Observation 63: 982</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 443.7</span></span>
+<span><span class="co">#&gt; Observation 82: 1553.8</span></span>
+<span><span class="co">#&gt; Observation 32: 1161.4</span></span>
+<span><span class="co">#&gt; Observation 93: 1076.2</span></span>
+<span><span class="co">#&gt; Observation 63: 1181.9</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -354,11 +354,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.501</span></span>
-<span><span class="co">#&gt; Observation 82: 1.011</span></span>
-<span><span class="co">#&gt; Observation 93: 1.004</span></span>
-<span><span class="co">#&gt; Observation 32: 1.005</span></span>
-<span><span class="co">#&gt; Observation 63: 1.011</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.053</span></span>
+<span><span class="co">#&gt; Observation 82: 1.001</span></span>
+<span><span class="co">#&gt; Observation 32: 1.013</span></span>
+<span><span class="co">#&gt; Observation 93: 1.016</span></span>
+<span><span class="co">#&gt; Observation 63: 1.001</span></span></code></pre></div>
 <p>We can see that these “hard to predict” observations have a higher
 autocorrelation and lower effective sample size.</p>
 </div>
@@ -385,7 +385,7 @@ initialize MCMC chains.</p>
 <span>  num_burnin <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  num_mcmc <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">xbart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/saveBARTModelToJsonString.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">xbart_model</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">xbart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/BARTSerialization.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">xbart_model</span><span class="op">)</span></span></code></pre></div>
 <p>Run the multi-chain BART sampler, with each chain initialized from a
 different GFR forest</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -454,9 +454,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.379, Lag 5: 0.145, Lag 10: 0.113, Lag 50: 0.05</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 1471.1</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.018</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.345, Lag 5: 0.127, Lag 10: 0.085, Lag 50: 0.006</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 1519.1</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -529,15 +529,15 @@ for each chain, comparing to the true simulated value.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains for each of five observations:</span></span>
 <span><span class="co">#&gt; Observation 41:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.612, Lag 5: 0.36, Lag 10: 0.272, Lag 50: 0.166</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.615, Lag 5: 0.373, Lag 10: 0.299, Lag 50: 0.202</span></span>
 <span><span class="co">#&gt; Observation 82:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.503, Lag 5: 0.186, Lag 10: 0.111, Lag 50: 0.024</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.497, Lag 5: 0.165, Lag 10: 0.048, Lag 50: 0.015</span></span>
 <span><span class="co">#&gt; Observation 32:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.48, Lag 5: 0.221, Lag 10: 0.132, Lag 50: 0.049</span></span>
-<span><span class="co">#&gt; Observation 93:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.49, Lag 5: 0.186, Lag 10: 0.117, Lag 50: 0.014</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.433, Lag 5: 0.179, Lag 10: 0.101, Lag 50: 0.037</span></span>
 <span><span class="co">#&gt; Observation 63:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.555, Lag 5: 0.212, Lag 10: 0.11, Lag 50: 0.017</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.552, Lag 5: 0.186, Lag 10: 0.086, Lag 50: -0.009</span></span>
+<span><span class="co">#&gt; Observation 93:</span></span>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.516, Lag 5: 0.248, Lag 10: 0.176, Lag 50: 0.042</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Total effective sample size across chains:\n"</span>,</span>
@@ -556,11 +556,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Total effective sample size across chains:</span></span>
-<span><span class="co">#&gt; Observation 41: 399.7</span></span>
-<span><span class="co">#&gt; Observation 82: 1391.9</span></span>
-<span><span class="co">#&gt; Observation 32: 1045.1</span></span>
-<span><span class="co">#&gt; Observation 93: 1227.1</span></span>
-<span><span class="co">#&gt; Observation 63: 1137</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 444.3</span></span>
+<span><span class="co">#&gt; Observation 82: 1480.1</span></span>
+<span><span class="co">#&gt; Observation 32: 1455.9</span></span>
+<span><span class="co">#&gt; Observation 63: 1404.6</span></span>
+<span><span class="co">#&gt; Observation 93: 785.7</span></span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
 <span>  <span class="st">"'R-hat' potential scale reduction factor of Gelman and Rubin (1992)\n"</span>,</span>
@@ -578,11 +578,11 @@ for each chain, comparing to the true simulated value.</p>
 <span>  sep <span class="op">=</span> <span class="st">""</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)</span></span>
-<span><span class="co">#&gt; Observation 41: 1.132</span></span>
-<span><span class="co">#&gt; Observation 82: 1.011</span></span>
-<span><span class="co">#&gt; Observation 32: 1.012</span></span>
-<span><span class="co">#&gt; Observation 93: 1.008</span></span>
-<span><span class="co">#&gt; Observation 63: 1.003</span></span></code></pre></div>
+<span><span class="co">#&gt; Observation 41: 1.079</span></span>
+<span><span class="co">#&gt; Observation 82: 1.004</span></span>
+<span><span class="co">#&gt; Observation 32: 1.002</span></span>
+<span><span class="co">#&gt; Observation 63: 1.007</span></span>
+<span><span class="co">#&gt; Observation 93: 1.006</span></span></code></pre></div>
 <p>We can see that some of these “hard to predict” observations have a
 higher autocorrelation and lower effective sample size.</p>
 </div>
@@ -602,8 +602,8 @@ for cross-process communication. After <code>num_chains</code> models
 have been run in parallel and their JSON representations have been
 collated in the primary R session, we can combine these into a single
 <code>bartmodel</code> or <code>bcfmodel</code> object via the
-<code><a href="../reference/createBARTModelFromCombinedJsonString.html">createBARTModelFromCombinedJsonString()</a></code> or
-<code><a href="../reference/createBCFModelFromCombinedJsonString.html">createBCFModelFromCombinedJsonString()</a></code> functions.</p>
+<code><a href="../reference/BARTSerialization.html">createBARTModelFromCombinedJsonString()</a></code> or
+<code><a href="../reference/BCFSerialization.html">createBCFModelFromCombinedJsonString()</a></code> functions.</p>
 <p>In order to run multiple parallel stochtree chains, a parallel
 backend must be registered in your R environment. The code below will
 register a parallel backend with access to as many cores are available
@@ -647,7 +647,7 @@ storing the resulting BART JSON strings in a list.</p>
 <span>      general_params <span class="op">=</span> <span class="va">general_params</span>,</span>
 <span>      mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span>    <span class="op">)</span></span>
-<span>    <span class="va">bart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/saveBARTModelToJsonString.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">bart_model</span><span class="op">)</span></span>
+<span>    <span class="va">bart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/BARTSerialization.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">bart_model</span><span class="op">)</span></span>
 <span>    <span class="va">y_hat_test</span> <span class="op">&lt;-</span> <span class="va">bart_model</span><span class="op">$</span><span class="va">y_hat_test</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">bart_model_string</span>, yhat <span class="op">=</span> <span class="va">y_hat_test</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
@@ -665,7 +665,7 @@ into a single forest, we can do so as follows</p>
 <span>  <span class="va">bart_model_strings</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">bart_model_outputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span></span>
 <span>  <span class="va">bart_model_yhats</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_outputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">yhat</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="va">combined_bart</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createBARTModelFromCombinedJsonString.html">createBARTModelFromCombinedJsonString</a></span><span class="op">(</span><span class="va">bart_model_strings</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">combined_bart</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/BARTSerialization.html">createBARTModelFromCombinedJsonString</a></span><span class="op">(</span><span class="va">bart_model_strings</span><span class="op">)</span></span></code></pre></div>
 <p>We can predict from this combined forest as follows</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yhat_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">combined_bart</span>, <span class="va">X_test</span>, <span class="va">leaf_basis_test</span><span class="op">)</span><span class="op">$</span><span class="va">y_hat</span></span></code></pre></div>
@@ -742,7 +742,7 @@ independent parallel chains in a moment).</p>
 <span>  general_params <span class="op">=</span> <span class="va">general_params</span>,</span>
 <span>  mean_forest_params <span class="op">=</span> <span class="va">mean_forest_params</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">xbart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/saveBARTModelToJsonString.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">xbart_model</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">xbart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/BARTSerialization.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">xbart_model</span><span class="op">)</span></span></code></pre></div>
 <p>In order to run this sampler in parallel, a parallel backend must be
 registered in your R environment. The code below will register a
 parallel backend with access to as many cores are available on your
@@ -783,7 +783,7 @@ storing the resulting BART JSON strings in a list.</p>
 <span>      previous_model_json <span class="op">=</span> <span class="va">xbart_model_string</span>,</span>
 <span>      previous_model_warmstart_sample_num <span class="op">=</span> <span class="va">num_gfr</span> <span class="op">-</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">1</span>,</span>
 <span>    <span class="op">)</span></span>
-<span>    <span class="va">bart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/saveBARTModelToJsonString.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">bart_model</span><span class="op">)</span></span>
+<span>    <span class="va">bart_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/BARTSerialization.html">saveBARTModelToJsonString</a></span><span class="op">(</span><span class="va">bart_model</span><span class="op">)</span></span>
 <span>    <span class="va">y_hat_test</span> <span class="op">&lt;-</span> <span class="va">bart_model</span><span class="op">$</span><span class="va">y_hat_test</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">bart_model_string</span>, yhat <span class="op">=</span> <span class="va">y_hat_test</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span></code></pre></div>
@@ -800,7 +800,7 @@ into a single forest, we can do so as follows</p>
 <span>  <span class="va">bart_model_strings</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">bart_model_outputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span></span>
 <span>  <span class="va">bart_model_yhats</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">bart_model_outputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">yhat</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="va">combined_bart</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/createBARTModelFromCombinedJsonString.html">createBARTModelFromCombinedJsonString</a></span><span class="op">(</span><span class="va">bart_model_strings</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">combined_bart</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/BARTSerialization.html">createBARTModelFromCombinedJsonString</a></span><span class="op">(</span><span class="va">bart_model_strings</span><span class="op">)</span></span></code></pre></div>
 <p>We can predict from this combined forest as follows</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yhat_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">combined_bart</span>, <span class="va">X_test</span>, <span class="va">leaf_basis_test</span><span class="op">)</span><span class="op">$</span><span class="va">y_hat</span></span></code></pre></div>
@@ -962,9 +962,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.116, Lag 5: 0.025, Lag 10: 0.014, Lag 50: 0.007</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 5411.7</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.114, Lag 5: 0.011, Lag 10: 0.025, Lag 50: 0.004</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 5288</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
@@ -1021,7 +1021,7 @@ forest.</p>
 <span>  num_burnin <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  num_mcmc <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">xbcf_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/saveBCFModelToJsonString.html">saveBCFModelToJsonString</a></span><span class="op">(</span><span class="va">xbcf_model</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">xbcf_model_string</span> <span class="op">&lt;-</span> <span class="fu">stochtree</span><span class="fu">::</span><span class="fu"><a href="../reference/BCFSerialization.html">saveBCFModelToJsonString</a></span><span class="op">(</span><span class="va">xbcf_model</span><span class="op">)</span></span></code></pre></div>
 <p>Run the multi-chain BCF sampler, with each chain initialized from a
 different GFR forest</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
@@ -1095,9 +1095,9 @@ diagnostics.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Average autocorrelation across chains:</span></span>
-<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.097, Lag 5: 0.031, Lag 10: 0.029, Lag 50: -0.01</span></span>
-<span><span class="co">#&gt; Total effective sample size across chains: 5422.2</span></span>
-<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</span></span></code></pre></div>
+<span><span class="co">#&gt; Lag 0: 1, Lag 1: 0.122, Lag 5: 0.011, Lag 10: 0.038, Lag 50: 0.011</span></span>
+<span><span class="co">#&gt; Total effective sample size across chains: 4379.7</span></span>
+<span><span class="co">#&gt; 'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.004</span></span></code></pre></div>
 <p>We can convert this to an array to be consumed by the
 <code>bayesplot</code> package</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">

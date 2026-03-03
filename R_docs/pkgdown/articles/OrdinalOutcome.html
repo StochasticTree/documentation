@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,7 @@ whose probabilities depend on covariates,
 </h3>
 <p>We specify the cloglog link function for modeling an ordinal outcome
 by setting
-<code>outcome_model=outcome_model(outcome="ordinal", link="cloglog")</code>
+<code>outcome_model=OutcomeModel(outcome="ordinal", link="cloglog")</code>
 in the <code>general_params</code> argument list. Since ordinal outcomes
 are incompatible with the Gaussian global error variance model, we also
 set <code>sample_sigma2_global=FALSE</code>.</p>
@@ -195,7 +195,7 @@ and set <code>sample_sigma2_leaf=FALSE</code>.</p>
 <span>    num_chains <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>    verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    random_seed <span class="op">=</span> <span class="va">random_seed</span>,</span>
-<span>    outcome_model <span class="op">=</span> <span class="fu"><a href="../reference/outcome_model.html">outcome_model</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="st">'ordinal'</span>, link <span class="op">=</span> <span class="st">'cloglog'</span><span class="op">)</span></span>
+<span>    outcome_model <span class="op">=</span> <span class="fu"><a href="../reference/OutcomeModel.html">OutcomeModel</a></span><span class="op">(</span>outcome <span class="op">=</span> <span class="st">'ordinal'</span>, link <span class="op">=</span> <span class="st">'cloglog'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  mean_forest_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>num_trees <span class="op">=</span> <span class="fl">50</span>, sample_sigma2_leaf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -243,7 +243,7 @@ test sets.</p>
 the posterior distributions of the other two cutpoints and compare them
 to their true simulated values (blue dotted lines).</p>
 <p>The cutpoint samples are accessed via
-<code>extract_parameter(bart_model, "cloglog_cutpoints")</code> (shape:
+<code>extractParameter(bart_model, "cloglog_cutpoints")</code> (shape:
 <code>(n_categories - 1, num_samples)</code>) and are shifted by the
 per-sample mean of the training predictions to account for the
 non-identifiable intercept.</p>
@@ -255,7 +255,7 @@ non-identifiable intercept.</p>
 <span>  terms <span class="op">=</span> <span class="st">"y_hat"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"posterior"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">cutpoint_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_parameter.html">extract_parameter</a></span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"cloglog_cutpoints"</span><span class="op">)</span></span>
+<span><span class="va">cutpoint_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extractParameter.html">extractParameter</a></span><span class="op">(</span><span class="va">bart_model</span>, <span class="st">"cloglog_cutpoints"</span><span class="op">)</span></span>
 <span><span class="va">gamma1</span> <span class="op">&lt;-</span> <span class="va">cutpoint_samples</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">y_hat_train_post</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span></span>
 <span>  <span class="va">gamma1</span>,</span>
