@@ -95,6 +95,7 @@ cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/ca
 cp stochtree_repo/demo/notebooks/heteroskedastic_supervised_learning.ipynb docs/python_docs/demo/heteroskedastic_supervised_learning.ipynb
 cp stochtree_repo/demo/notebooks/ordinal_outcome.ipynb docs/python_docs/demo/ordinal_outcome.ipynb
 cp stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb docs/python_docs/demo/multivariate_treatment_causal_inference.ipynb
+cp stochtree_repo/demo/notebooks/reparameterized_causal_inference.ipynb docs/python_docs/demo/reparameterized_causal_inference.ipynb
 cp stochtree_repo/demo/notebooks/serialization.ipynb docs/python_docs/demo/serialization.ipynb
 cp stochtree_repo/demo/notebooks/tree_inspection.ipynb docs/python_docs/demo/tree_inspection.ipynb
 cp stochtree_repo/demo/notebooks/summary.ipynb docs/python_docs/demo/summary.ipynb
