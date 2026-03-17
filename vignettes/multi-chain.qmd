@@ -1,0 +1,125 @@
+---
+title: "Multi-Chain Inference"
+---
+
+Running multiple independent MCMC chains with `stochtree` and combining
+their results for improved mixing diagnostics and more robust posterior summaries.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/multi_chain.ipynb`
+- **R**: pkgdown article `MultiChain`
+:::
+
+## Background
+
+Running a single MCMC chain can be fragile. Multiple independent chains allow:
+
+- **Convergence diagnostics**: $\hat{R}$ (potential scale reduction factor) detects
+  non-convergence across chains.
+- **Parallelism**: Chains can run concurrently on multiple cores.
+- **Ensemble pooling**: Posterior samples from all chains can be pooled for final inference.
+
+## Setup
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+library(stochtree)
+library(doParallel)
+```
+
+## Python
+
+```{python}
+#| eval: false
+import stochtree
+import numpy as np
+from multiprocessing import Pool
+```
+
+::::
+
+## Data Simulation
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Simulate data
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Simulate data
+```
+
+::::
+
+## Running Multiple Chains
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Run chains in parallel with doParallel
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Run chains sequentially or with multiprocessing
+```
+
+::::
+
+## Convergence Diagnostics
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Compute R-hat, trace plots
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Compute R-hat, trace plots
+```
+
+::::
+
+## Combining Chain Results
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Pool posterior samples across chains
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Pool posterior samples across chains
+```
+
+::::

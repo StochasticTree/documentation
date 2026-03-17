@@ -1,0 +1,107 @@
+---
+title: "Heteroskedastic BART"
+---
+
+BART with a forest-modeled error variance, where the residual variance
+$\sigma^2(X_i)$ is itself a function of covariates learned via a separate
+tree ensemble.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/heteroskedastic_supervised_learning.ipynb`
+- **R**: pkgdown article `Heteroskedasticity`
+:::
+
+## Background
+
+Standard BART assumes homoskedastic errors $\epsilon_i \sim \mathcal{N}(0, \sigma^2)$.
+When error variance varies with covariates, modeling $\sigma^2(X_i)$ jointly with
+the mean function improves inference. The model is:
+
+$$
+Y_i = \mu(X_i) + \epsilon_i, \quad \epsilon_i \sim \mathcal{N}(0, \sigma^2(X_i))
+$$
+
+where both $\mu(\cdot)$ and $\log \sigma^2(\cdot)$ are modeled with BART ensembles.
+
+## Setup
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+library(stochtree)
+```
+
+## Python
+
+```{python}
+#| eval: false
+import stochtree
+import numpy as np
+```
+
+::::
+
+## Data Simulation
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Simulate data with non-constant variance
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Simulate data with non-constant variance
+```
+
+::::
+
+## Model Fitting
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Fit heteroskedastic BART
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Fit heteroskedastic BART
+```
+
+::::
+
+## Posterior Summaries
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Mean and variance posterior summaries
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Mean and variance posterior summaries
+```
+
+::::

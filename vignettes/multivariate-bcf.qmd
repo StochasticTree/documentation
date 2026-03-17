@@ -1,0 +1,53 @@
+---
+title: "Multivariate Treatment BCF"
+---
+
+BCF extended to vector-valued (multivariate) treatments, estimating heterogeneous
+effects for multiple treatment arms simultaneously.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb`
+:::
+
+## Background
+
+When treatments are multivariate — such as continuous dose vectors or multiple
+binary arms — the standard BCF model extends to:
+
+$$
+Y_i = \mu(X_i) + \tau(X_i)^\top Z_i + \epsilon_i
+$$
+
+where $Z_i \in \mathbb{R}^p$ and $\tau(X_i) \in \mathbb{R}^p$ is a vector of
+covariate-varying treatment effects.
+
+## Setup
+
+```{python}
+#| eval: false
+import stochtree
+import numpy as np
+```
+
+## Data Simulation
+
+```{python}
+#| eval: false
+# Simulate multivariate treatment data
+```
+
+## Model Fitting
+
+```{python}
+#| eval: false
+# Fit multivariate BCF
+```
+
+## Posterior Summaries
+
+```{python}
+#| eval: false
+# Per-treatment CATE posteriors
+```

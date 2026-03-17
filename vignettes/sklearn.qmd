@@ -1,0 +1,64 @@
+---
+title: "Scikit-Learn Interface"
+---
+
+Using `stochtree` via scikit-learn compatible estimators —
+`StochTreeBARTRegressor`, `StochTreeBARTBinaryClassifier`, and
+`StochTreeBCFRegressor` — for seamless integration with the sklearn ecosystem
+(pipelines, cross-validation, grid search).
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/sklearn_wrappers.ipynb`
+:::
+
+## Setup
+
+```{python}
+#| eval: false
+from stochtree.sklearn import (
+    StochTreeBARTRegressor,
+    StochTreeBARTBinaryClassifier,
+    StochTreeBCFRegressor,
+)
+import numpy as np
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+```
+
+## Regression with `StochTreeBARTRegressor`
+
+```{python}
+#| eval: false
+# Fit and predict
+```
+
+## Classification with `StochTreeBARTBinaryClassifier`
+
+```{python}
+#| eval: false
+# Fit and predict_proba
+```
+
+## Causal Inference with `StochTreeBCFRegressor`
+
+```{python}
+#| eval: false
+# BCF via sklearn interface
+```
+
+## Using sklearn Pipelines
+
+```{python}
+#| eval: false
+# Example pipeline with preprocessing
+```
+
+## Cross-Validation
+
+```{python}
+#| eval: false
+# cross_val_score with a stochtree estimator
+```

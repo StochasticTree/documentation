@@ -1,0 +1,62 @@
+---
+title: "Prior Calibration"
+---
+
+Choosing and calibrating the BART tree priors — including the branching process
+prior on tree structure and the leaf parameter prior — to match prior beliefs
+about the scale of the outcome.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **R**: pkgdown article `PriorCalibration`
+:::
+
+## Background
+
+BART uses two types of priors:
+
+1. **Tree structure prior**: Controls tree depth via $P(\text{split at depth } d) = \alpha (1 + d)^{-\beta}$.
+   Defaults: $\alpha = 0.95$, $\beta = 2$.
+
+2. **Leaf prior**: $\mu_{ij} \sim \mathcal{N}(0, \sigma_\mu^2 / m)$ where $m$ is the number
+   of trees. The scale $\sigma_\mu$ is typically calibrated so that $m \cdot \sigma_\mu$
+   spans the observed outcome range.
+
+3. **Error variance prior**: $\sigma^2 \sim \text{Inv-}\chi^2(\nu, \lambda)$ with $\nu$ and
+   $\lambda$ calibrated from a preliminary linear model fit.
+
+## Setup
+
+```{r}
+#| eval: false
+library(stochtree)
+```
+
+## Default Priors
+
+```{r}
+#| eval: false
+# Examine default prior settings
+```
+
+## Calibrating the Leaf Scale
+
+```{r}
+#| eval: false
+# Automatic calibration of sigma_mu based on outcome range
+```
+
+## Calibrating the Error Variance Prior
+
+```{r}
+#| eval: false
+# Calibrate nu and lambda from a linear model
+```
+
+## Sensitivity Analysis
+
+```{r}
+#| eval: false
+# Compare posteriors under different prior choices
+```

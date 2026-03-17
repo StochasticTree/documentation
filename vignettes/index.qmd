@@ -1,0 +1,42 @@
+---
+title: "StochTree Vignettes"
+---
+
+Extended worked examples for the `stochtree` package, covering core models,
+practical topics, and advanced causal inference methods. Each vignette presents
+R and Python implementations side-by-side.
+
+## Core Models
+
+| Vignette | Description |
+|---|---|
+| [BART](bart.qmd) | Bayesian Additive Regression Trees for supervised learning |
+| [BCF](bcf.qmd) | Bayesian Causal Forests for heterogeneous treatment effects |
+| [Heteroskedastic BART](heteroskedastic.qmd) | BART with a forest-modeled error variance |
+| [Multi-Chain Inference](multi-chain.qmd) | Running and combining multiple MCMC chains |
+| [Ordinal Outcome Modeling](ordinal-outcome.qmd) | BART for ordinal responses |
+| [Multivariate Treatment BCF](multivariate-bcf.qmd) | BCF with vector-valued treatments |
+
+## Practical Topics
+
+| Vignette | Description |
+|---|---|
+| [Model Serialization](serialization.qmd) | Saving and loading fitted models |
+| [Tree Inspection](tree-inspection.qmd) | Examining individual trees in a fitted ensemble |
+| [Summary and Plotting](summary-plotting.qmd) | Posterior summary utilities |
+| [Prior Calibration](prior-calibration.qmd) | Choosing and calibrating tree priors |
+| [Scikit-Learn Interface](sklearn.qmd) | Using stochtree via sklearn-compatible estimators |
+
+## Low-Level Interface
+
+| Vignette | Description |
+|---|---|
+| [Custom Sampling Routine](custom-sampling.qmd) | Building a custom Gibbs sampler with stochtree primitives |
+| [Ensemble Kernel](ensemble-kernel.qmd) | Using the tree ensemble as a kernel |
+
+## Advanced Methods
+
+| Vignette | Description |
+|---|---|
+| [Regression Discontinuity Design](rdd.qmd) | BARDDT: leaf-regression BART for RDD |
+| [Instrumental Variables](iv.qmd) | IV analysis via a custom monotone probit Gibbs sampler |

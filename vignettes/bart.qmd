@@ -1,0 +1,210 @@
+---
+title: "Bayesian Supervised Learning in StochTree"
+bibliography: vignettes.bib
+---
+
+This vignette demonstrates how to sample variants of the BART model (@chipman2010bart), using the `bart()` function in `stochtree`. The original BART model is 
+
+$$
+\begin{aligned}
+y_i \mid X_i = x_i &\sim \mathcal{N}(f(x_i), \sigma^2)\\
+\sigma^2 &\sim \text{IG}\left(\frac{\nu}{2}, \frac{\nu \lambda}{2}\right)
+\end{aligned}
+$$
+
+where 
+
+$$
+f(X) = \sum_{s=1}^m g_s(X)
+$$
+
+and each $g_s$ refers to a decision tree function which partitions $X$ into $k_s$ mutually exclusive regions ($\mathcal{A}_s = \mathcal{A}_{s,1} \cup \dots \cup \mathcal{A}_{s,k_s}$) and assigns a scalar parameter $\mu_{s,j}$ to each region $\mathcal{A}_{s,j}$
+
+$$
+g_s(x) = \sum_{j = 1}^{k_s} \mu_{s,j} \mathbb{I}\left(x \in \mathcal{A}_{s,j}\right).
+$$
+
+The partitions $\mathcal{A}_s$ are defined by a series of logical split rules $X_i \leq c$ where $i$ is a variable index and $c$ is a numeric cutpoint and these partitions are guided by a uniform prior on variables and cutpoints. The prior on partitions is further specified by a probability of splitting a node
+
+$$
+P(\text{split node } \eta) = \alpha (1 + \text{depth}_{\eta})^{-\beta}
+$$
+
+The prior for each leaf node parameter is 
+
+$$
+\mu_{s,j} \sim \mathcal{N}\left(0, \sigma^2_{\mu}\right)
+$$
+
+Together, we refer to this conditional mean model as 
+
+$$
+f(X) &\sim \text{BART}(\alpha, \beta, m)
+$$
+
+This is the "core" of stochtree's supervised learning interface, though we support many expanded models including
+
+* linear leaf regression (i.e. each leaf node evaluates a linear regression on basis $W$ rather than return a constant),
+* additive random effects,
+* forest-based heteroskedasticity,
+* binary / ordinal outcome modeling using the probit and complementary log-log (cloglog) links,
+
+and we offer the ability to sample any of the above models using the MCMC or the Grow-From-Root sampler (@he2023stochastic).
+
+# Setup
+
+To begin, we load the `stochtree` and other necessary packages.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+library(stochtree)
+```
+
+## Python
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+from stochtree import BARTModel
+```
+
+::::
+
+We set a seed for reproducibility
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+random_seed <- 1234
+set.seed(random_seed)
+```
+
+## Python
+
+```{python}
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
+```
+
+::::
+
+# Demo 1: Step Function
+
+## Data Generation
+
+We generate data from a simple step function and split into test and train sets.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Generate the data
+n <- 500
+p_x <- 10
+snr <- 3
+X <- matrix(runif(n * p_x), ncol = p_x)
+f_XW <- (((0 <= X[, 1]) & (0.25 > X[, 1])) *
+  (-7.5) +
+  ((0.25 <= X[, 1]) & (0.5 > X[, 1])) * (-2.5) +
+  ((0.5 <= X[, 1]) & (0.75 > X[, 1])) * (2.5) +
+  ((0.75 <= X[, 1]) & (1 > X[, 1])) * (7.5))
+noise_sd <- sd(f_XW) / snr
+y <- f_XW + rnorm(n, 0, 1) * noise_sd
+
+# Split data into test and train sets
+test_set_pct <- 0.2
+n_test <- round(test_set_pct * n)
+n_train <- n - n_test
+test_inds <- sort(sample(1:n, n_test, replace = FALSE))
+train_inds <- (1:n)[!((1:n) %in% test_inds)]
+X_test <- as.data.frame(X[test_inds, ])
+X_train <- as.data.frame(X[train_inds, ])
+y_test <- y[test_inds]
+y_train <- y[train_inds]
+```
+
+## Python
+
+```{python}
+# Generate the data
+n = 500
+p_x = 10
+snr = 3
+X = rng.uniform(0, 1, (n, p_x))
+f_XW = (
+    ((X[:, 0] >= 0.0) & (X[:, 0] < 0.25)) * (-7.5)
+    + ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5)) * (-2.5)
+    + ((X[:, 0] >= 0.5) & (X[:, 0] < 0.75)) * (2.5)
+    + ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0)) * (7.5)
+)
+noise_sd = np.std(f_XW) / snr
+y = f_XW + rng.normal(0, noise_sd, n)
+
+# Split data into test and train sets
+test_set_pct = 0.2
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=test_set_pct, random_state=random_seed
+)
+```
+
+::::
+
+## Sampling and Analysis
+
+We sample from a BART model of $y \mid X$ with 10 grow-from-root samples (@he2023stochastic) followed by 100 MCMC samples (this is the default in `stochtree`). We also specify $m = 100$ and we let both $\sigma^2$ and $\sigma^2_{\mu}$ be updated by Gibbs samplers.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+num_gfr <- 10
+num_burnin <- 0
+num_mcmc <- 100
+general_params <- list(sample_sigma2_global = T)
+mean_forest_params <- list(sample_sigma2_leaf = T, num_trees = 100)
+bart_model <- stochtree::bart(
+  X_train = X_train,
+  y_train = y_train,
+  X_test = X_test,
+  num_gfr = num_gfr,
+  num_burnin = num_burnin,
+  num_mcmc = num_mcmc,
+  general_params = general_params,
+  mean_forest_params = mean_forest_params
+)
+```
+
+## Python
+
+```{python}
+num_gfr = 10
+num_burnin = 0
+num_mcmc = 100
+general_params = {'sample_sigma2_global': True}
+mean_forest_params = {'sample_sigma2_leaf': True, 'num_trees': 100}
+bart_model = BARTModel()
+bart_model.sample(
+  X_train = X_train,
+  y_train = y_train,
+  X_test = X_test,
+  num_gfr = num_gfr,
+  num_burnin = num_burnin,
+  num_mcmc = num_mcmc,
+  general_params = general_params,
+  mean_forest_params = mean_forest_params
+)
+```
+
+::::
+
+# References

@@ -1,0 +1,129 @@
+---
+title: "BCF: Bayesian Causal Forests"
+---
+
+Bayesian Causal Forests (BCF) for estimating heterogeneous treatment effects,
+with separate tree ensembles for the prognostic function and treatment effect.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/causal_inference.ipynb`
+- **R**: pkgdown article `CausalInference`
+:::
+
+## Background
+
+BCF [@hahn2020bayesian] models the conditional average treatment effect (CATE)
+by fitting two separate tree ensembles:
+
+$$
+Y_i = \mu(X_i) + \tau(X_i) Z_i + \epsilon_i, \quad \epsilon_i \sim \mathcal{N}(0, \sigma^2)
+$$
+
+where $\mu(\cdot)$ is a prognostic forest and $\tau(\cdot)$ is a treatment effect forest.
+The estimated propensity score $\hat{\pi}(X_i)$ is included as a covariate in $\mu(\cdot)$
+to reduce confounding bias.
+
+## Setup
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+library(stochtree)
+```
+
+## Python
+
+```{python}
+#| eval: false
+import stochtree
+import numpy as np
+```
+
+::::
+
+## Data Simulation
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Simulate observational data with heterogeneous treatment effects
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Simulate observational data with heterogeneous treatment effects
+```
+
+::::
+
+## Propensity Score Estimation
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Estimate propensity scores
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Estimate propensity scores
+```
+
+::::
+
+## Model Fitting
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Fit BCF model
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Fit BCF model
+```
+
+::::
+
+## Posterior Summaries
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Summarize CATE posterior
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Summarize CATE posterior
+```
+
+::::
+
+## References

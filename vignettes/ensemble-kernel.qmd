@@ -1,0 +1,62 @@
+---
+title: "Ensemble Kernel"
+---
+
+Using the `stochtree` tree ensemble as a kernel function — extracting the
+posterior similarity matrix induced by leaf co-membership across trees and
+MCMC samples.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **R**: pkgdown article `EnsembleKernel`
+:::
+
+## Background
+
+Each tree in a BART ensemble partitions the covariate space into leaf regions.
+Two observations $i$ and $j$ that fall in the same leaf of tree $t$ at sample $s$
+are "similar" according to that tree. Averaging over trees and posterior samples
+gives a data-driven kernel:
+
+$$
+K(x_i, x_j) = \frac{1}{Sm} \sum_{s=1}^S \sum_{t=1}^m \mathbf{1}[\ell_t^{(s)}(x_i) = \ell_t^{(s)}(x_j)]
+$$
+
+This kernel can be used for clustering, Gaussian process inference, or as a
+similarity measure for downstream tasks.
+
+## Setup
+
+```{r}
+#| eval: false
+library(stochtree)
+```
+
+## Fitting a Model
+
+```{r}
+#| eval: false
+# Fit a BART model
+```
+
+## Extracting the Kernel Matrix
+
+```{r}
+#| eval: false
+# Compute leaf co-membership kernel
+```
+
+## Visualizing the Kernel
+
+```{r}
+#| eval: false
+# Heatmap of kernel matrix
+```
+
+## Downstream Applications
+
+```{r}
+#| eval: false
+# Clustering or GP prediction with the ensemble kernel
+```

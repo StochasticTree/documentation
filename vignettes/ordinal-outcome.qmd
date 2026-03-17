@@ -1,0 +1,53 @@
+---
+title: "Ordinal Outcome Modeling"
+---
+
+BART for ordinal (ordered categorical) responses, using a latent variable
+formulation with learned cutpoints.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/ordinal_outcome.ipynb`
+:::
+
+## Background
+
+For an ordinal response $Y_i \in \{1, 2, \ldots, K\}$, the model introduces a
+latent continuous variable $Z_i$ and cutpoints $\gamma_1 < \gamma_2 < \cdots < \gamma_{K-1}$:
+
+$$
+Y_i = k \iff \gamma_{k-1} < Z_i \leq \gamma_k
+$$
+
+where $Z_i = \mu(X_i) + \epsilon_i$ with $\epsilon_i \sim \mathcal{N}(0,1)$ and
+$\mu(\cdot)$ is a BART ensemble.
+
+## Setup
+
+```{python}
+#| eval: false
+import stochtree
+import numpy as np
+```
+
+## Data Simulation
+
+```{python}
+#| eval: false
+# Simulate ordinal outcome data
+```
+
+## Model Fitting
+
+```{python}
+#| eval: false
+# Fit ordinal BART
+```
+
+## Posterior Summaries
+
+```{python}
+#| eval: false
+# Category probabilities, cumulative probabilities
+```

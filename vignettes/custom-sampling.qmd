@@ -1,0 +1,133 @@
+---
+title: "Custom Sampling Routine"
+---
+
+Building a custom Gibbs sampler using the low-level `stochtree` primitives —
+`Dataset`, `Residual`, `ForestSampler`, `GlobalVarianceModel`, and
+`LeafVarianceModel` — to implement non-standard models and sampling schemes.
+
+::: {.callout-note}
+This vignette is under construction. Content will be ported from:
+
+- **Python**: `stochtree_repo/demo/notebooks/prototype_interface.ipynb`
+- **R**: pkgdown article `CustomSamplingRoutine`
+:::
+
+## Background
+
+The high-level `BARTModel` and `BCFModel` classes handle data preparation,
+prior calibration, and sampling internally. The low-level interface exposes
+these building blocks so you can:
+
+- Customize which parameters are sampled and in what order
+- Insert additional Gibbs steps (e.g. for auxiliary variables)
+- Implement novel models that share `stochtree`'s tree ensemble samplers
+
+## Setup
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+library(stochtree)
+```
+
+## Python
+
+```{python}
+#| eval: false
+from stochtree import (
+    Dataset,
+    Residual,
+    ForestSampler,
+    GlobalVarianceModel,
+    LeafVarianceModel,
+    Forest,
+    ForestContainer,
+)
+import numpy as np
+```
+
+::::
+
+## Preparing Data Structures
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Construct Dataset and Residual objects
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Construct Dataset and Residual objects
+```
+
+::::
+
+## Initializing Forests
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Initialize Forest and ForestContainer
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Initialize Forest and ForestContainer
+```
+
+::::
+
+## Custom Gibbs Loop
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Implement a full Gibbs sampler loop
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Implement a full Gibbs sampler loop
+```
+
+::::
+
+## Extracting Results
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| eval: false
+# Extract posterior samples from ForestContainer
+```
+
+## Python
+
+```{python}
+#| eval: false
+# Extract posterior samples from ForestContainer
+```
+
+::::
