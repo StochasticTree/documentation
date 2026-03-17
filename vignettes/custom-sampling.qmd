@@ -1,133 +1,351 @@
 ---
 title: "Custom Sampling Routine"
+bibliography: vignettes.bib
 ---
 
-Building a custom Gibbs sampler using the low-level `stochtree` primitives —
-`Dataset`, `Residual`, `ForestSampler`, `GlobalVarianceModel`, and
-`LeafVarianceModel` — to implement non-standard models and sampling schemes.
+While the functions `bart()` and `bcf()` provide simple and performant interfaces for
+supervised learning / causal inference, `stochtree` also offers access to many of the
+"low-level" data structures that are typically implemented in C++. This low-level
+interface is not designed for performance or even simplicity — rather the intent is
+to provide a "prototype" interface to the C++ code that doesn't require modifying any
+C++.
 
-::: {.callout-note}
-This vignette is under construction. Content will be ported from:
+# Motivation
 
-- **Python**: `stochtree_repo/demo/notebooks/prototype_interface.ipynb`
-- **R**: pkgdown article `CustomSamplingRoutine`
-:::
+To illustrate when such a prototype interface might be useful, consider the classic
+BART algorithm:
 
-## Background
+|    **INPUT**: $y$, $X$, $\tau$, $\nu$, $\lambda$, $\alpha$, $\beta$
+|    **OUTPUT**: $m$ samples of a decision forest with $k$ trees and global variance parameter $\sigma^2$
+|    Initialize $\sigma^2$ via a default or a data-dependent calibration exercise
+|    Initialize "forest 0" with $k$ trees with a single root node, referring to tree $j$'s prediction vector as $f_{0,j}$
+|    Compute residual as $r = y - \sum_{j=1}^k f_{0,j}$
+|    **FOR** $i$ **IN** $\left\{1,\dots,m\right\}$:
+|       Initialize forest $i$ from forest $i-1$
+|       **FOR** $j$ **IN** $\left\{1,\dots,k\right\}$:
+|          Add predictions for tree $j$ to residual: $r = r + f_{i,j}$
+|          Sample tree $j$ of forest $i$ from $p\left(\mathcal{T}_{i,j} \mid r, \sigma^2\right)$
+|          Update residual by removing tree $j$'s predictions: $r = r - f_{i,j}$
+|       Sample $\sigma^2$ from $p\left(\sigma^2 \mid r\right)$
+|    **RETURN** forests $\left\{1,\dots,m\right\}$ and $\sigma^2$ samples
 
-The high-level `BARTModel` and `BCFModel` classes handle data preparation,
-prior calibration, and sampling internally. The low-level interface exposes
-these building blocks so you can:
+This algorithm is implemented in the `bart()` function, but the low-level interface
+allows you to customize this loop — for example, to add random effects, modify the
+variance model, or implement a novel sampling scheme.
 
-- Customize which parameters are sampled and in what order
-- Insert additional Gibbs steps (e.g. for auxiliary variables)
-- Implement novel models that share `stochtree`'s tree ensemble samplers
-
-## Setup
+# Setup
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
 library(stochtree)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-from stochtree import (
-    Dataset,
-    Residual,
-    ForestSampler,
-    GlobalVarianceModel,
-    LeafVarianceModel,
-    Forest,
-    ForestContainer,
+# Python implementation coming soon
+```
+
+::::
+
+# Demo 1: Supervised Learning
+
+## Simulation
+
+Simulate a simple partitioned linear model.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Generate the data
+n <- 500
+p_X <- 10
+p_W <- 1
+X <- matrix(runif(n*p_X), ncol = p_X)
+W <- matrix(runif(n*p_W), ncol = p_W)
+f_XW <- (
+    ((0 <= X[,1]) & (0.25 > X[,1])) * (-3*W[,1]) +
+    ((0.25 <= X[,1]) & (0.5 > X[,1])) * (-1*W[,1]) +
+    ((0.5 <= X[,1]) & (0.75 > X[,1])) * (1*W[,1]) +
+    ((0.75 <= X[,1]) & (1 > X[,1])) * (3*W[,1])
 )
-import numpy as np
+y <- f_XW + rnorm(n, 0, 1)
+
+# Standardize outcome
+y_bar <- mean(y)
+y_std <- sd(y)
+resid <- (y-y_bar)/y_std
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
 ```
 
 ::::
 
-## Preparing Data Structures
+## Sampling
+
+Set some parameters that inform the forest and variance parameter samplers.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Construct Dataset and Residual objects
+alpha <- 0.9
+beta <- 1.25
+min_samples_leaf <- 1
+max_depth <- 10
+num_trees <- 100
+cutpoint_grid_size <- 100
+global_variance_init <- 1.
+current_sigma2 <- global_variance_init
+tau_init <- 1/num_trees
+leaf_prior_scale <- as.matrix(ifelse(p_W >= 1, diag(tau_init, p_W), diag(tau_init, 1)))
+nu <- 4
+lambda <- 0.5
+a_leaf <- 2.
+b_leaf <- 0.5
+leaf_regression <- T
+feature_types <- as.integer(rep(0, p_X)) # 0 = numeric
+var_weights <- rep(1/p_X, p_X)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Construct Dataset and Residual objects
+# Python implementation coming soon
 ```
 
 ::::
 
-## Initializing Forests
+Initialize R-level access to the C++ classes needed to sample our model.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Initialize Forest and ForestContainer
+# Data
+if (leaf_regression) {
+    forest_dataset <- createForestDataset(X, W)
+    outcome_model_type <- 1
+    leaf_dimension <- p_W
+} else {
+    forest_dataset <- createForestDataset(X)
+    outcome_model_type <- 0
+    leaf_dimension <- 1
+}
+outcome <- createOutcome(resid)
+
+# Random number generator (std::mt19937)
+rng <- createCppRNG()
+
+# Sampling data structures
+forest_model_config <- createForestModelConfig(
+    feature_types = feature_types, num_trees = num_trees, num_features = p_X,
+    num_observations = n, variable_weights = var_weights, leaf_dimension = leaf_dimension,
+    alpha = alpha, beta = beta, min_samples_leaf = min_samples_leaf, max_depth = max_depth,
+    leaf_model_type = outcome_model_type, leaf_model_scale = leaf_prior_scale,
+    cutpoint_grid_size = cutpoint_grid_size
+)
+global_model_config <- createGlobalModelConfig(global_error_variance = global_variance_init)
+forest_model <- createForestModel(forest_dataset, forest_model_config, global_model_config)
+
+# "Active forest" (which gets updated by the sample) and
+# container of forest samples (which is written to when
+# a sample is not discarded due to burn-in / thinning)
+if (leaf_regression) {
+    forest_samples <- createForestSamples(num_trees, 1, F)
+    active_forest <- createForest(num_trees, 1, F)
+} else {
+    forest_samples <- createForestSamples(num_trees, 1, T)
+    active_forest <- createForest(num_trees, 1, T)
+}
+
+# Initialize the leaves of each tree in the forest
+active_forest$prepare_for_sampler(forest_dataset, outcome, forest_model, outcome_model_type, mean(resid))
+active_forest$adjust_residual(forest_dataset, outcome, forest_model, ifelse(outcome_model_type==1, T, F), F)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Initialize Forest and ForestContainer
+# Python implementation coming soon
 ```
 
 ::::
 
-## Custom Gibbs Loop
+Prepare to run the sampler.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Implement a full Gibbs sampler loop
+num_warmstart <- 10
+num_mcmc <- 100
+num_samples <- num_warmstart + num_mcmc
+global_var_samples <- c(global_variance_init, rep(0, num_samples))
+leaf_scale_samples <- c(tau_init, rep(0, num_samples))
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Implement a full Gibbs sampler loop
+# Python implementation coming soon
 ```
 
 ::::
 
-## Extracting Results
+Run the grow-from-root sampler to "warm-start" BART (@he2023stochastic).
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Extract posterior samples from ForestContainer
+for (i in 1:num_warmstart) {
+    # Sample forest
+    forest_model$sample_one_iteration(
+        forest_dataset, outcome, forest_samples, active_forest, rng,
+        forest_model_config, global_model_config, keep_forest = T, gfr = T
+    )
+
+    # Sample global variance parameter
+    current_sigma2 <- sampleGlobalErrorVarianceOneIteration(
+        outcome, forest_dataset, rng, nu, lambda
+    )
+    global_var_samples[i+1] <- current_sigma2
+    global_model_config$update_global_error_variance(current_sigma2)
+
+    # Sample leaf node variance parameter and update `leaf_prior_scale`
+    leaf_scale_samples[i+1] <- sampleLeafVarianceOneIteration(
+        active_forest, rng, a_leaf, b_leaf
+    )
+    leaf_prior_scale[1,1] <- leaf_scale_samples[i+1]
+    forest_model_config$update_leaf_model_scale(leaf_prior_scale)
+}
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Extract posterior samples from ForestContainer
+# Python implementation coming soon
 ```
 
 ::::
+
+Pick up from the last GFR forest (and associated global variance / leaf scale
+parameters) with an MCMC sampler.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+for (i in (num_warmstart+1):num_samples) {
+    # Sample forest
+    forest_model$sample_one_iteration(
+        forest_dataset, outcome, forest_samples, active_forest, rng,
+        forest_model_config, global_model_config, keep_forest = T, gfr = F
+    )
+
+    # Sample global variance parameter
+    current_sigma2 <- sampleGlobalErrorVarianceOneIteration(
+        outcome, forest_dataset, rng, nu, lambda
+    )
+    global_var_samples[i+1] <- current_sigma2
+    global_model_config$update_global_error_variance(current_sigma2)
+
+    # Sample leaf node variance parameter and update `leaf_prior_scale`
+    leaf_scale_samples[i+1] <- sampleLeafVarianceOneIteration(
+        active_forest, rng, a_leaf, b_leaf
+    )
+    leaf_prior_scale[1,1] <- leaf_scale_samples[i+1]
+    forest_model_config$update_leaf_model_scale(leaf_prior_scale)
+}
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+Predict and rescale samples.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Forest predictions
+preds <- forest_samples$predict(forest_dataset)*y_std + y_bar
+
+# Global error variance
+sigma_samples <- sqrt(global_var_samples)*y_std
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+## Results
+
+Inspect the initial samples obtained via "grow-from-root" (@he2023stochastic).
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+plot(sigma_samples[1:num_warmstart], ylab="sigma")
+plot(rowMeans(preds[,1:num_warmstart]), y, pch=16,
+     cex=0.75, xlab = "pred", ylab = "actual")
+abline(0,1,col="red",lty=2,lwd=2.5)
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+Inspect the BART samples obtained after "warm-starting".
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+plot(sigma_samples[(num_warmstart+1):num_samples], ylab="sigma")
+plot(rowMeans(preds[,(num_warmstart+1):num_samples]), y, pch=16,
+     cex=0.75, xlab = "pred", ylab = "actual")
+abline(0,1,col="red",lty=2,lwd=2.5)
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+# References

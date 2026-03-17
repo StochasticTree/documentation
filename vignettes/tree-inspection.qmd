@@ -1,114 +1,273 @@
 ---
 title: "Tree Inspection"
+bibliography: vignettes.bib
 ---
 
-Examining the structure and parameters of individual trees within a fitted
-`stochtree` ensemble — useful for interpretability and debugging.
+While out of sample evaluation and MCMC diagnostics on parametric BART components
+(i.e. $\sigma^2$, the global error variance) are helpful, it's important to be able
+to inspect the trees in a BART / BCF model. This vignette walks through some of the
+features `stochtree` provides to query and understand the forests and trees in a model.
 
-::: {.callout-note}
-This vignette is under construction. Content will be ported from:
-
-- **Python**: `stochtree_repo/demo/notebooks/tree_inspection.ipynb`
-- **R**: pkgdown article `TreeInspection`
-:::
-
-## Setup
+# Setup
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
 library(stochtree)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-import stochtree
-import numpy as np
+# Python implementation coming soon
 ```
 
 ::::
 
-## Fitting a Model
+# Demo 1: Supervised Learning
+
+Generate sample data where feature 10 is the only "important" feature.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Fit a model to inspect
+# Generate the data
+n <- 500
+p_x <- 10
+X <- matrix(runif(n*p_x), ncol = p_x)
+f_XW <- (
+    ((0 <= X[,10]) & (0.25 > X[,10])) * (-7.5) +
+    ((0.25 <= X[,10]) & (0.5 > X[,10])) * (-2.5) +
+    ((0.5 <= X[,10]) & (0.75 > X[,10])) * (2.5) +
+    ((0.75 <= X[,10]) & (1 > X[,10])) * (7.5)
+)
+noise_sd <- 1
+y <- f_XW + rnorm(n, 0, 1)*noise_sd
+
+# Split data into test and train sets
+test_set_pct <- 0.2
+n_test <- round(test_set_pct*n)
+n_train <- n - n_test
+test_inds <- sort(sample(1:n, n_test, replace = FALSE))
+train_inds <- (1:n)[!((1:n) %in% test_inds)]
+X_test <- as.data.frame(X[test_inds,])
+X_train <- as.data.frame(X[train_inds,])
+y_test <- y[test_inds]
+y_train <- y[train_inds]
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Fit a model to inspect
+# Python implementation coming soon
 ```
 
 ::::
 
-## Accessing the Forest Container
+## Sampling and Analysis
+
+Run BART.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Extract forest container from fitted model
+num_gfr <- 10
+num_burnin <- 0
+num_mcmc <- 100
+general_params <- list(keep_gfr = T)
+bart_model <- stochtree::bart(
+    X_train = X_train, y_train = y_train, X_test = X_test,
+    num_gfr = num_gfr, num_burnin = num_burnin, num_mcmc = num_mcmc,
+    general_params = general_params
+)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Extract forest container from fitted model
+# Python implementation coming soon
 ```
 
 ::::
 
-## Inspecting Tree Structure
+Inspect the MCMC samples.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Navigate individual trees: split variables, thresholds, leaf values
+plot(bart_model$sigma2_global_samples, ylab="sigma^2")
+abline(h=noise_sd^2,col="red",lty=2,lwd=2.5)
+plot(rowMeans(bart_model$y_hat_test), y_test,
+     pch=16, cex=0.75, xlab = "pred", ylab = "actual")
+abline(0,1,col="red",lty=2,lwd=2.5)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Navigate individual trees: split variables, thresholds, leaf values
+# Python implementation coming soon
 ```
 
 ::::
 
-## Summarizing Split Frequencies
+## Variable Split Counts
+
+Check the variable split count in the last GFR sample.
 
 ::::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| eval: false
-# Variable importance via split counts
+bart_model$mean_forests$get_forest_split_counts(10, p_x)
 ```
 
 ## Python
 
 ```{python}
-#| eval: false
-# Variable importance via split counts
+# Python implementation coming soon
+```
+
+::::
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+bart_model$mean_forests$get_aggregate_split_counts(p_x)
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+The split counts appear relatively uniform across features, so let's dig deeper and
+look at individual trees, starting with the first tree in the last "grow-from-root"
+sample.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+splits = bart_model$mean_forests$get_granular_split_counts(p_x)
+splits[10,1,]
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+This tree has a single split on the only "important" feature. Now, let's look at
+the second tree.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+splits[10,2,]
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+splits[10,20,]
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+splits[10,30,]
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
+```
+
+::::
+
+We see that "later" trees are splitting on other features, but we also note that these
+trees are fitting an outcome that is already residualized by many "relevant splits"
+made by trees 1 and 2.
+
+## Tree Structure
+
+Now, let's inspect the first tree for the last GFR sample in more depth, following
+[this scikit-learn vignette](https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html).
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+forest_num <- 9
+tree_num <- 0
+nodes <- sort(bart_model$mean_forests$nodes(forest_num, tree_num))
+for (nid in nodes) {
+    if (bart_model$mean_forests$is_leaf_node(forest_num, tree_num, nid)) {
+        node_depth <- bart_model$mean_forests$node_depth(forest_num, tree_num, nid)
+        space_text <- rep("\t", node_depth)
+        leaf_values <- bart_model$mean_forests$node_leaf_values(forest_num, tree_num, nid)
+        cat(space_text, "node=", nid, " is a leaf node with value=",
+            format(leaf_values, digits = 3), "\n", sep = "")
+    } else {
+        node_depth <- bart_model$mean_forests$node_depth(forest_num, tree_num, nid)
+        space_text <- rep("\t", node_depth)
+        left <- bart_model$mean_forests$left_child_node(forest_num, tree_num, nid)
+        feature <- bart_model$mean_forests$node_split_index(forest_num, tree_num, nid)
+        threshold <- bart_model$mean_forests$node_split_threshold(forest_num, tree_num, nid)
+        right <- bart_model$mean_forests$right_child_node(forest_num, tree_num, nid)
+        cat(space_text, "node=", nid, " is a split node, which tells us to go to node ",
+            left, " if X[:, ", feature, "] <= ", format(threshold, digits = 3),
+            " else to node ", right, "\n", sep = "")
+    }
+}
+```
+
+## Python
+
+```{python}
+# Python implementation coming soon
 ```
 
 ::::
