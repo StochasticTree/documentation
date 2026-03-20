@@ -1,12 +1,27 @@
 ---
 title: "Summary and Plotting"
 bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
 
 This vignette demonstrates the summary and plotting utilities available for
 `stochtree` models.
 
 # Setup
+
+Load necessary packages
 
 ::::{.panel-tabset group="language"}
 
@@ -14,6 +29,25 @@ This vignette demonstrates the summary and plotting utilities available for
 
 ```{r}
 library(stochtree)
+```
+
+## Python
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from stochtree import BARTModel, BCFModel, plot_parameter_trace
+```
+
+::::
+
+Set a seed for reproducibility
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
 random_seed = 1234
 set.seed(random_seed)
 ```
@@ -21,7 +55,8 @@ set.seed(random_seed)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
 ```
 
 ::::
@@ -54,7 +89,20 @@ y <- f_XW + rnorm(n, 0, 1) * noise_sd
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n = 1000
+p_x = 10
+p_w = 1
+X = rng.uniform(size=(n, p_x))
+W = rng.uniform(size=(n, p_w))
+# R uses X[,10] (1-indexed) = Python X[:,9]
+f_XW = (
+    ((X[:, 9] >= 0)    & (X[:, 9] < 0.25)) * (-7.5 * W[:, 0]) +
+    ((X[:, 9] >= 0.25) & (X[:, 9] < 0.5))  * (-2.5 * W[:, 0]) +
+    ((X[:, 9] >= 0.5)  & (X[:, 9] < 0.75)) * ( 2.5 * W[:, 0]) +
+    ((X[:, 9] >= 0.75) & (X[:, 9] < 1.0))  * ( 7.5 * W[:, 0])
+)
+noise_sd = 1.0
+y = f_XW + rng.standard_normal(n) * noise_sd
 ```
 
 ::::
@@ -84,7 +132,16 @@ bart_model <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model = BARTModel()
+bart_model.sample(
+    X_train=X,
+    y_train=y,
+    leaf_basis_train=W,
+    num_gfr=10,
+    num_burnin=0,
+    num_mcmc=1000,
+    general_params={"num_threads": 1, "num_chains": 3},
+)
 ```
 
 ::::
@@ -102,7 +159,7 @@ print(bart_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+print(bart_model)
 ```
 
 ::::
@@ -121,7 +178,7 @@ summary(bart_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+print(bart_model.summary())
 ```
 
 ::::
@@ -141,7 +198,8 @@ plot(bart_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+ax = plot_parameter_trace(bart_model, term="global_error_scale")
+plt.show()
 ```
 
 ::::
@@ -171,18 +229,23 @@ plot(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+y_hat_train_samples = bart_model.extract_parameter("y_hat_train")
+obs_index = 0  # 0-indexed (R uses 1)
+fig, ax = plt.subplots()
+ax.plot(y_hat_train_samples[obs_index, :])
+ax.set_title(f"In-Sample Predictions Traceplot, Observation {obs_index}")
+ax.set_xlabel("Index")
+ax.set_ylabel("Parameter Values")
+plt.show()
 ```
 
 ::::
 
 # Causal Inference
 
-We now run the same demo for the causal inference use case served by the `bcf()`
-function.
+We now run the same demo for the causal inference use case served by the `bcf()` function in R and the `BCFModel` Python class.
 
-Below we simulate a simple dataset for a causal inference problem with binary
-treatment and continuous outcome.
+Below we simulate a simple dataset for a causal inference problem with binary treatment and continuous outcome.
 
 ::::{.panel-tabset group="language"}
 
@@ -208,12 +271,21 @@ y = mu_X + tau_X * Z + epsilon
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n = 1000
+p_X = 5
+X = rng.uniform(size=(n, p_X))
+# R uses X[,1], X[,3], X[,2] (1-indexed) = Python X[:,0], X[:,2], X[:,1]
+pi_X = 0.25 + 0.5 * X[:, 0]
+Z = rng.binomial(1, pi_X, n).astype(float)
+mu_X = pi_X * 5 + 2 * X[:, 2]
+tau_X = X[:, 1] * 2 - 1
+epsilon = rng.standard_normal(n)
+y = mu_X + tau_X * Z + epsilon
 ```
 
 ::::
 
-Now we fit a simple BCF model to the data.
+Now we fit a simple BCF model to the data
 
 ::::{.panel-tabset group="language"}
 
@@ -238,7 +310,17 @@ bcf_model <- stochtree::bcf(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bcf_model = BCFModel()
+bcf_model.sample(
+    X_train=X,
+    Z_train=Z,
+    y_train=y,
+    propensity_train=pi_X,
+    num_gfr=10,
+    num_burnin=0,
+    num_mcmc=1000,
+    general_params={"num_threads": 1, "num_chains": 3},
+)
 ```
 
 ::::
@@ -256,13 +338,12 @@ print(bcf_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+print(bcf_model)
 ```
 
 ::::
 
-For a more detailed summary (including the information above), we use the `summary()`
-function.
+For a more detailed summary (including the information above), we use the `summary()` function / method.
 
 ::::{.panel-tabset group="language"}
 
@@ -275,14 +356,14 @@ summary(bcf_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+print(bcf_model.summary())
 ```
 
 ::::
 
-We can use the `plot()` function to produce a traceplot of model terms like the global
-error scale $\sigma^2$ or (if $\sigma^2$ is not sampled) the first observation of
-cached train set predictions.
+In R, we have a `plot()` that produces a traceplot of model terms like the global error scale $\sigma^2$ or (if $\sigma^2$ is not sampled) the first observation of cached train set predictions.
+
+In Python, we provide a `plot_parameter_trace()` function for requesting a traceplot of a specific model parameter.
 
 ::::{.panel-tabset group="language"}
 
@@ -295,18 +376,13 @@ plot(bcf_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+ax = plot_parameter_trace(bcf_model, term="global_error_scale")
+plt.show()
 ```
 
 ::::
 
-For finer-grained control over which parameters to plot, we can also use the
-`extractParameter()` function to pull the posterior distribution of any valid model
-term (e.g., global error scale $\sigma^2$, prognostic forest leaf scale
-$\sigma^2_{\mu}$, CATE forest leaf scale $\sigma^2_{\tau}$, adaptive coding
-parameters $b_0$ and $b_1$ for binary treatment, in-sample mean function predictions
-`y_hat_train`, in-sample CATE function predictions `tau_hat_train`) and then plot any
-subset or transformation of these values.
+For finer-grained control over which parameters to plot, we can also use the `extractParameter()` function in R or the `extract_parameter()` method in Python to query the posterior distribution of any valid model term (e.g., global error scale $\sigma^2$, prognostic forest leaf scale $\sigma^2_{\mu}$, CATE forest leaf scale $\sigma^2_{\tau}$, adaptive coding parameters $b_0$ and $b_1$ for binary treatment, in-sample mean function predictions `y_hat_train`, in-sample CATE function predictions `tau_hat_train`) and then plot any subset or transformation of these values.
 
 ::::{.panel-tabset group="language"}
 
@@ -335,7 +411,15 @@ legend(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+adaptive_coding_samples = bcf_model.extract_parameter("adaptive_coding")
+fig, ax = plt.subplots()
+ax.plot(adaptive_coding_samples[0, :], color="blue", label="Control")
+ax.plot(adaptive_coding_samples[1, :], color="orange", label="Treated")
+ax.set_title("Adaptive Coding Parameter Traceplot")
+ax.set_xlabel("Index")
+ax.set_ylabel("Parameter Values")
+ax.legend(loc="upper right")
+plt.show()
 ```
 
 ::::

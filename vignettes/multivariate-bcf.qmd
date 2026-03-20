@@ -1,15 +1,22 @@
 ---
 title: "Multivariate Treatment BCF"
+execute:
+  freeze: auto  # re-render only when source changes
 ---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
 
 BCF extended to vector-valued (multivariate) treatments, estimating heterogeneous
 effects for multiple treatment arms simultaneously.
-
-::: {.callout-note}
-This vignette is under construction. Content will be ported from:
-
-- **Python**: `stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb`
-:::
 
 ## Background
 
@@ -25,29 +32,361 @@ covariate-varying treatment effects.
 
 ## Setup
 
-```{python}
-#| eval: false
-import stochtree
-import numpy as np
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+library(stochtree)
 ```
+
+## Python
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+
+from stochtree import BCFModel
+```
+
+::::
 
 ## Data Simulation
 
-```{python}
-#| eval: false
-# Simulate multivariate treatment data
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Generate covariates and propensity scores
+n <- 500
+p_X <- 5
+X <- matrix(runif(n * p_X), nrow = n, ncol = p_X)
+pi_X <- cbind(0.25 + 0.5 * X[, 1], 0.75 - 0.5 * X[, 2])
+Z <- cbind(rbinom(n, 1, pi_X[, 1]), rbinom(n, 1, pi_X[, 2]))
+
+# Define outcome mean functions (prognostic and treatment effects)
+mu_X <- pi_X[, 1] * 5 + pi_X[, 2] * 2 + 2 * X[, 3]
+tau_X <- cbind(X[, 2], X[, 3])
+
+# Generate outcome
+treatment_term <- rowSums(tau_X * Z)
+y <- mu_X + treatment_term + rnorm(n)
 ```
+
+## Python
+
+```{python}
+# RNG
+rng = np.random.default_rng()
+
+# Generate covariates and basis
+n = 500
+p_X = 5
+X = rng.uniform(0, 1, (n, p_X))
+pi_X = np.c_[0.25 + 0.5 * X[:, 0], 0.75 - 0.5 * X[:, 1]]
+Z = rng.binomial(1, pi_X, (n, 2))
+
+# Define the outcome mean functions (prognostic and treatment effects)
+mu_X = pi_X[:, 0] * 5 + pi_X[:, 1] * 2 + 2 * X[:, 2]
+tau_X = np.stack((X[:, 1], X[:, 2]), axis=-1)
+
+# Generate outcome
+epsilon = rng.normal(0, 1, n)
+treatment_term = np.multiply(tau_X, Z).sum(axis=1)
+y = mu_X + treatment_term + epsilon
+```
+
+::::
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+n_test <- round(n * 0.5)
+test_inds <- sort(sample(seq_len(n), n_test, replace = FALSE))
+train_inds <- setdiff(seq_len(n), test_inds)
+X_train <- X[train_inds, ]
+X_test  <- X[test_inds, ]
+Z_train <- Z[train_inds, ]
+Z_test  <- Z[test_inds, ]
+y_train <- y[train_inds]
+y_test  <- y[test_inds]
+mu_train  <- mu_X[train_inds]
+mu_test   <- mu_X[test_inds]
+tau_train <- tau_X[train_inds, ]
+tau_test  <- tau_X[test_inds, ]
+```
+
+## Python
+
+```{python}
+sample_inds = np.arange(n)
+train_inds, test_inds = train_test_split(sample_inds, test_size=0.5)
+X_train = X[train_inds, :]
+X_test = X[test_inds, :]
+Z_train = Z[train_inds, :]
+Z_test = Z[test_inds, :]
+y_train = y[train_inds]
+y_test = y[test_inds]
+pi_train = pi_X[train_inds]
+pi_test = pi_X[test_inds]
+mu_train = mu_X[train_inds]
+mu_test = mu_X[test_inds]
+tau_train = tau_X[train_inds, :]
+tau_test = tau_X[test_inds, :]
+```
+
+::::
 
 ## Model Fitting
 
-```{python}
-#| eval: false
-# Fit multivariate BCF
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Note: propensity adjustment is not supported for multivariate treatment in bcf()
+bcf_model <- bcf(
+  X_train = X_train,
+  Z_train = Z_train,
+  y_train = y_train,
+  X_test = X_test,
+  Z_test = Z_test,
+  num_gfr = 10,
+  num_mcmc = 100
+)
 ```
+
+## Python
+
+```{python}
+bcf_model = BCFModel()
+bcf_model.sample(
+    X_train=X_train,
+    Z_train=Z_train,
+    y_train=y_train,
+    propensity_train=pi_train,
+    X_test=X_test,
+    Z_test=Z_test,
+    propensity_test=pi_test,
+    num_gfr=10,
+    num_mcmc=100,
+)
+```
+
+::::
 
 ## Posterior Summaries
 
-```{python}
-#| eval: false
-# Per-treatment CATE posteriors
+### Outcome
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# y_hat_test is (n_test x num_samples)
+plot(
+  rowMeans(bcf_model$y_hat_test), y_test,
+  xlab = "Average estimated outcome", ylab = "True outcome"
+)
+abline(0, 1, col = "black", lty = 3)
 ```
+
+```{r}
+sqrt(mean((rowMeans(bcf_model$y_hat_test) - y_test)^2))
+```
+
+## Python
+
+```{python}
+forest_preds_y_mcmc = bcf_model.y_hat_test
+y_avg_mcmc = np.squeeze(forest_preds_y_mcmc).mean(axis=1, keepdims=True)
+y_df_mcmc = pd.DataFrame(
+    np.concatenate((np.expand_dims(y_test, 1), y_avg_mcmc), axis=1),
+    columns=["True outcome", "Average estimated outcome"],
+)
+sns.scatterplot(data=y_df_mcmc, x="Average estimated outcome", y="True outcome")
+plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
+plt.show()
+```
+
+```{python}
+np.sqrt(np.mean(np.power(y_avg_mcmc - y_test, 2)))
+```
+
+::::
+
+### Treatment Effects
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# tau_hat_test is (n_test x p_Z x num_samples) for multivariate treatment
+tau_avg_1 <- rowMeans(bcf_model$tau_hat_test[, 1, ])
+plot(
+  tau_test[, 1], tau_avg_1,
+  xlab = "True tau", ylab = "Average estimated tau",
+  main = "Treatment 1"
+)
+abline(0, 1, col = "black", lty = 3)
+```
+
+```{r}
+tau_avg_2 <- rowMeans(bcf_model$tau_hat_test[, 2, ])
+plot(
+  tau_test[, 2], tau_avg_2,
+  xlab = "True tau", ylab = "Average estimated tau",
+  main = "Treatment 2"
+)
+abline(0, 1, col = "black", lty = 3)
+```
+
+## Python
+
+```{python}
+treatment_idx = 0
+forest_preds_tau_mcmc = np.squeeze(bcf_model.tau_hat_test[:, :, treatment_idx])
+tau_avg_mcmc = np.squeeze(forest_preds_tau_mcmc).mean(axis=1, keepdims=True)
+tau_df_mcmc = pd.DataFrame(
+    np.concatenate(
+        (np.expand_dims(tau_test[:, treatment_idx], 1), tau_avg_mcmc), axis=1
+    ),
+    columns=["True tau", "Average estimated tau"],
+)
+sns.scatterplot(data=tau_df_mcmc, x="True tau", y="Average estimated tau")
+plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
+plt.show()
+```
+
+```{python}
+treatment_idx = 1
+forest_preds_tau_mcmc = np.squeeze(bcf_model.tau_hat_test[:, :, treatment_idx])
+tau_avg_mcmc = np.squeeze(forest_preds_tau_mcmc).mean(axis=1, keepdims=True)
+tau_df_mcmc = pd.DataFrame(
+    np.concatenate(
+        (np.expand_dims(tau_test[:, treatment_idx], 1), tau_avg_mcmc), axis=1
+    ),
+    columns=["True tau", "Average estimated tau"],
+)
+sns.scatterplot(data=tau_df_mcmc, x="True tau", y="Average estimated tau")
+plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
+plt.show()
+```
+
+::::
+
+### Treatment Term
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Compute sum_j(tau_hat(X)_j * Z_j) per observation per sample
+treatment_term_mcmc <- apply(bcf_model$tau_hat_test, 3, function(tau_s) {
+  rowSums(tau_s * Z_test)
+})
+true_treatment_term <- rowSums(tau_test * Z_test)
+plot(
+  true_treatment_term, rowMeans(treatment_term_mcmc),
+  xlab = "True treatment term", ylab = "Average estimated treatment term"
+)
+abline(0, 1, col = "black", lty = 3)
+```
+
+## Python
+
+```{python}
+treatment_term_mcmc_test = np.multiply(
+    np.atleast_3d(Z_test).swapaxes(1, 2), bcf_model.tau_hat_test
+).sum(axis=2)
+treatment_term_test = np.multiply(tau_test, Z_test).sum(axis=1)
+treatment_term_mcmc_avg = np.squeeze(treatment_term_mcmc_test).mean(
+    axis=1, keepdims=True
+)
+mu_df_mcmc = pd.DataFrame(
+    np.concatenate(
+        (np.expand_dims(treatment_term_test, 1), treatment_term_mcmc_avg), axis=1
+    ),
+    columns=["True treatment term", "Average estimated treatment term"],
+)
+sns.scatterplot(
+    data=mu_df_mcmc, x="True treatment term", y="Average estimated treatment term"
+)
+plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
+plt.show()
+```
+
+::::
+
+### Prognostic Function
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+plot(
+  mu_test, rowMeans(bcf_model$mu_hat_test),
+  xlab = "True mu", ylab = "Average estimated mu"
+)
+abline(0, 1, col = "black", lty = 3)
+```
+
+## Python
+
+```{python}
+forest_preds_mu_mcmc = bcf_model.mu_hat_test
+mu_avg_mcmc = np.squeeze(forest_preds_mu_mcmc).mean(axis=1, keepdims=True)
+mu_df_mcmc = pd.DataFrame(
+    np.concatenate((np.expand_dims(mu_test, 1), mu_avg_mcmc), axis=1),
+    columns=["True mu", "Average estimated mu"],
+)
+sns.scatterplot(data=mu_df_mcmc, x="True mu", y="Average estimated mu")
+plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
+plt.show()
+```
+
+::::
+
+### Global Error Variance
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+plot(
+  bcf_model$sigma2_global_samples,
+  xlab = "Sample", ylab = expression(sigma^2)
+)
+```
+
+## Python
+
+```{python}
+sigma_df_mcmc = pd.DataFrame(
+    np.concatenate(
+        (
+            np.expand_dims(
+                np.arange(bcf_model.num_samples - bcf_model.num_gfr), axis=1
+            ),
+            np.expand_dims(bcf_model.global_var_samples[bcf_model.num_gfr:], axis=1),
+        ),
+        axis=1,
+    ),
+    columns=["Sample", "Sigma"],
+)
+sns.scatterplot(data=sigma_df_mcmc, x="Sample", y="Sigma")
+plt.show()
+```
+
+::::

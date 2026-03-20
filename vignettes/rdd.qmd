@@ -8,7 +8,9 @@ author:
   - name: Drew Herren
     affiliation: University of Texas at Austin
 date: today
-bibliography: R/RDD/rdd.bib
+bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
 
 ::: {.hidden}
@@ -30,12 +32,15 @@ $$
 ```{r}
 #| include: false
 reticulate::use_python(
-  Sys.getenv("RETICULATE_PYTHON", unset = Sys.which("python3")),
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
   required = TRUE
 )
 ```
 
-## Introduction
+# Introduction
 
 We study conditional average treatment effect (CATE) estimation for regression
 discontinuity designs (RDD), in which treatment assignment is based on whether a
@@ -50,7 +55,7 @@ provided the conditional expectation $E[Y \mid X,W]$ is continuous at that point
 _all_ $W=w$. We exploit this assumption with the leaf regression BART model implemented
 in stochtree, which allows us to define an explicit prior on the CATE.
 
-## Regression Discontinuity Design
+# Regression Discontinuity Design
 
 We conceptualize the treatment effect estimation problem via a quartet of random
 variables $(Y, X, Z, U)$. The variable $Y$ is the outcome variable; $X$ is the running
@@ -82,7 +87,7 @@ violated, so the overall ATE $\bar{\tau} = E(\tau(X))$ is unidentified. We inste
 estimate $\tau(0) = \mu_1(0) - \mu_0(0)$, which is identified for continuous $X$
 under the assumption that $\mu_1$ and $\mu_0$ are suitably smooth at $x = 0$.
 
-### Conditional Average Treatment Effects in RDD
+## Conditional Average Treatment Effects in RDD
 
 We are concerned with learning not only $\tau(0)$ but also RDD CATEs,
 $\tau(0, \w)$ for covariate vector $\w$. Defining potential outcome means
@@ -96,7 +101,7 @@ must assume $\mu_1(x,\w)$ and $\mu_0(x,\w)$ are suitably smooth in $x$ for every
 CATE estimation in RDDs then reduces to estimating $E[Y \mid X=x, W=\w, Z=z]$, for
 which we turn to BART.
 
-## The BARDDT Model
+# The BARDDT Model
 
 We propose a BART model where the trees split on $(x,\w)$ but each leaf node parameter
 is a vector of regression coefficients tailored to the RDD context. Let $\psi$ denote
@@ -139,12 +144,14 @@ variable, there is no need to separately define a bandwidth as in polynomial RDD
 regression trees automatically determine (in the course of posterior sampling) when to
 prune away regions far from the cutoff.
 
-## Demo
+# Demo
 
 In this section, we provide code for implementing BARDDT in `stochtree` on a
 popular RDD dataset.
 
-### Load Libraries
+## Setup
+
+Load the necessary packages
 
 :::{.panel-tabset group="language"}
 
@@ -172,7 +179,28 @@ from stochtree import BARTModel
 
 :::
 
-### Dataset
+Set a seed for reproducibility
+
+:::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| message: false
+random_seed <- 1234
+set.seed(random_seed)
+```
+
+## Python
+
+```{python}
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
+```
+
+:::
+
+## Dataset
 
 The data comes from @lindo2010ability, who analyze data on college students at a large
 Canadian university to evaluate an academic probation policy. Students whose GPA falls
@@ -190,21 +218,36 @@ quantile (`hsgrade_pct`).
 ## R
 
 ```{r}
+# Load and organize data
 data <- read.csv("https://raw.githubusercontent.com/rdpackages-replication/CIT_2024_CUP/refs/heads/main/CIT_2024_CUP_discrete.csv")
 y <- data$nextGPA
 x <- data$X
+n <- nrow(data)
+
+# Standardize x
 x <- x / sd(x)
+
+# Extract covariates
 w <- data[, 4:11]
+
+# Encode categorical features as ordered/unordered factors
 w$totcredits_year1 <- factor(w$totcredits_year1, ordered = TRUE)
 w$male <- factor(w$male, ordered = FALSE)
 w$bpl_north_america <- factor(w$bpl_north_america, ordered = FALSE)
 w$loc_campus1 <- factor(w$loc_campus1, ordered = FALSE)
 w$loc_campus2 <- factor(w$loc_campus2, ordered = FALSE)
 w$loc_campus3 <- factor(w$loc_campus3, ordered = FALSE)
+
+# x is normalized so the cutoff occurs at c = 0
 c <- 0
-n <- nrow(data)
+
+# Binarize the running variable into a "treatment" indicator
 z <- as.numeric(x > c)
+
+# Window for prediction sample
 h <- 0.1
+
+# Define the prediction subset
 test <- -h < x & x < h
 ntest <- sum(test)
 ```
@@ -212,31 +255,49 @@ ntest <- sum(test)
 ## Python
 
 ```{python}
+# Load and organize data
 data = pd.read_csv("https://raw.githubusercontent.com/rdpackages-replication/CIT_2024_CUP/refs/heads/main/CIT_2024_CUP_discrete.csv")
-y = data.loc[:, "nextGPA"].to_numpy()
-x = data.loc[:, "X"].to_numpy()
+y = data.loc[:, "nextGPA"].to_numpy().squeeze()
+x = data.loc[:, "X"].to_numpy().squeeze()
+n = data.shape[0]
+
+# Standardize x
 x = x / np.std(x)
+
+# Extract covariates
 w = data.iloc[:, 3:11]
 
-ordered_cat = pd.api.types.CategoricalDtype(ordered=True)
-unordered_cat = pd.api.types.CategoricalDtype(ordered=False)
-w.loc[:, "totcredits_year1"] = w.loc[:, "totcredits_year1"].astype(ordered_cat)
-w.loc[:, "male"] = w.loc[:, "male"].astype(unordered_cat)
-w.loc[:, "bpl_north_america"] = w.loc[:, "bpl_north_america"].astype(unordered_cat)
-w.loc[:, "loc_campus1"] = w.loc[:, "loc_campus1"].astype(unordered_cat)
-w.loc[:, "loc_campus2"] = w.loc[:, "loc_campus2"].astype(unordered_cat)
-w.loc[:, "loc_campus3"] = w.loc[:, "loc_campus3"].astype(unordered_cat)
+# Encode categorical features as ordered/unordered factors
+w["totcredits_year1"] = pd.Categorical(
+    w["totcredits_year1"], ordered=True
+)
+unordered_categorical_cols = [
+    "male",
+    "bpl_north_america",
+    "loc_campus1",
+    "loc_campus2",
+    "loc_campus3",
+]
+for col in unordered_categorical_cols:
+    w.loc[:, col] = pd.Categorical(w.loc[:, col], ordered=False)
+
+# x is normalized so the cutoff occurs at c = 0
 c = 0
-n = data.shape[0]
-z = np.where(x > c, 1.0, 0.0)
+
+# Binarize the running variable into a "treatment" indicator
+z = (x > c).astype(float)
+
+# Window for prediction sample
 h = 0.1
-test = (x > -h) & (x < h)
-ntest = int(np.sum(test))
+
+# Define the prediction subset
+test = (-h < x) & (x < h)
+ntest = np.sum(test)
 ```
 
 :::
 
-### Target Estimand
+## Target Estimand
 
 Our estimand is the CATE function at $x = 0$, i.e. $\tau(0, \w)$. To focus on
 feasible estimation points, we restrict to observed $\w_i$ such that $|x_i| \leq \delta$
@@ -246,7 +307,7 @@ $$
 \tau(0, \w_i) \quad \forall i \text{ such that } |x_i| \leq \delta.
 $$
 
-### Implementing BARDDT
+## Implementing BARDDT
 
 The $\psi$ basis vector for the leaf regression is
 $\psi = [1,\, zx,\, (1-z)x,\, z]$, and the training covariate matrix is
@@ -258,109 +319,144 @@ $$
 
 :::{.panel-tabset group="language"}
 
+Define basis functions for model sampling
+
 ## R
 
 ```{r}
-fit_barddt <- function(y, x, w, z, test, c,
-                       num_gfr = 2, num_mcmc = 500) {
-  n <- length(y)
-  barddt_global <- list(standardize = TRUE,
-                        sample_sigma_global = TRUE,
-                        sigma2_global_init = 0.1)
-  barddt_mean   <- list(num_trees = 50, min_samples_leaf = 20,
-                        alpha = 0.95, beta = 2, max_depth = 20,
-                        sample_sigma2_leaf = FALSE,
-                        sigma2_leaf_init = diag(rep(0.1 / 50, 4)))
-  B    <- cbind(rep(1, n), z * x, (1 - z) * x, z)
-  B1   <- cbind(rep(1, n), rep(c, n), rep(0, n), rep(1, n))[test, ]
-  B0   <- cbind(rep(1, n), rep(0, n), rep(c, n), rep(0, n))[test, ]
-  Xmat <- as.matrix(cbind(rep(0, n), w))[test, ]
-  fit  <- stochtree::bart(
-    X_train = as.matrix(cbind(x, w)), y_train = y,
-    leaf_basis_train = B,
-    mean_forest_params = barddt_mean,
-    general_params = barddt_global,
-    num_gfr = num_gfr, num_mcmc = num_mcmc
-  )
-  pred1 <- predict(fit, Xmat, B1)$y_hat
-  pred0 <- predict(fit, Xmat, B0)$y_hat
-  pred1 - pred0
-}
+Psi <- cbind(rep(1, n), z * x, (1 - z) * x, z)
 ```
 
 ## Python
 
 ```{python}
-def estimate_barddt(y, x, w, z, test, c,
-                    num_gfr=2, num_mcmc=100, seed=None):
-    n = y.shape[0]
-    global_params = {"standardize": True,
-                     "sample_sigma_global": True,
-                     "sigma2_global_init": 0.1}
-    if seed is not None:
-        global_params["random_seed"] = seed
-    mean_params = {"num_trees": 50, "min_samples_leaf": 20,
-                   "alpha": 0.95, "beta": 2, "max_depth": 20,
-                   "sample_sigma2_leaf": False,
-                   "sigma2_leaf_init": np.diag(np.repeat(0.1 / 150, 4))}
-    Psi  = np.column_stack([np.ones(n), z * x, (1 - z) * x, z])
-    Psi1 = np.column_stack([np.ones(n), np.repeat(c, n),
-                             np.zeros(n), np.ones(n)])[test, :]
-    Psi0 = np.column_stack([np.ones(n), np.zeros(n),
-                             np.repeat(c, n), np.zeros(n)])[test, :]
-    Xmat = np.column_stack([np.zeros(n), w])[test, :]
-    model = BARTModel()
-    model.sample(X_train=np.column_stack([x, w]), y_train=y,
-                 leaf_basis_train=Psi, num_gfr=num_gfr, num_mcmc=num_mcmc,
-                 general_params=global_params, mean_forest_params=mean_params)
-    return model.predict(Xmat, Psi1) - model.predict(Xmat, Psi0)
+Psi = np.c_[np.ones(n), z * x, (1 - z) * x, z]
 ```
 
 :::
 
-### Fitting the Model
+## Fitting the Model
 
-We run multiple chains and combine their posterior draws.
+We run multiple chains and combine their posterior draws. To compute the CATE posterior, we obtain $Y(z)$ predictions by predicting from the model with $Z = z$ set in the basis. `stochtree` provides a function / method (`computeContrastBARTModel` in R, `compute_contrast` in Python) for directly computing this contrast from a sampled BART model.
 
 :::{.panel-tabset group="language"}
 
 ## R
 
 ```{r}
-#| cache: true
-num_chains <- 20
-num_gfr    <- 2
-num_mcmc   <- 500
+# Define sampling parameters
+num_chains <- 4
+num_gfr <- 4
+num_burnin <- 0
+num_mcmc <- 500
 
-ncores <- min(5, parallel::detectCores() - 1)
-cl <- makeCluster(ncores)
-registerDoParallel(cl)
+# Parameter lists for BART model fit
+global_params <- list(
+  standardize = T,
+  sample_sigma_global = TRUE,
+  sigma2_global_init = 0.1, 
+  random_seed = random_seed, 
+  num_threads = 1, 
+  num_chains = num_chains
+)
+forest_params <- list(
+  num_trees = 50,
+  min_samples_leaf = 20,
+  alpha = 0.95,
+  beta = 2,
+  max_depth = 20,
+  sample_sigma2_leaf = FALSE,
+  sigma2_leaf_init = 0.1 / 50
+)
 
-chain_outputs <- foreach(i = seq_len(num_chains)) %dopar% {
-  fit_barddt(y, x, w, z, test, c,
-             num_gfr = num_gfr, num_mcmc = num_mcmc)
-}
-stopCluster(cl)
+# Fit the BART model
+bart_model <- bart(
+  X_train = cbind(x, w),
+  leaf_basis_train = Psi,
+  y_train = y,
+  num_gfr = num_gfr,
+  num_burnin = num_burnin,
+  num_mcmc = num_mcmc,
+  general_params = global_params,
+  mean_forest_params = forest_params
+)
 
-pred <- do.call("cbind", chain_outputs)
+# Compute the CATE posterior
+Psi0 <- cbind(rep(1, n), rep(0, n), rep(0, n), rep(0, n))[test, ]
+Psi1 <- cbind(rep(1, n), rep(0, n), rep(0, n), rep(1, n))[test, ]
+covariates_test <- cbind(x = rep(0, n), w)[test, ]
+cate_posterior <- computeContrastBARTModel(
+  bart_model,
+  X_0 = covariates_test,
+  X_1 = covariates_test,
+  leaf_basis_0 = Psi0,
+  leaf_basis_1 = Psi1,
+  type = "posterior",
+  scale = "linear"
+)
 ```
 
 ## Python
 
 ```{python}
-#| cache: true
-num_chains <- 4
-num_mcmc   <- 100
-cate_result = np.empty((ntest, num_chains * num_mcmc))
-for i in range(num_chains):
-    draws = estimate_barddt(y, x, w, z, test, c,
-                            num_gfr=2, num_mcmc=num_mcmc, seed=i)
-    cate_result[:, (i * num_mcmc):((i + 1) * num_mcmc)] = draws
+# Define sampling parameters
+num_chains = 4
+num_gfr = 4
+num_burnin = 0
+num_mcmc = 500
+
+# Parameter lists for BART model fit
+global_params = {
+    "standardize": True,
+    "sample_sigma_global": True,
+    "sigma2_global_init": 0.1,
+    "random_seed": random_seed,
+    "num_threads": 1, 
+    "num_chains": num_chains
+}
+forest_params = {
+    "num_trees": 50,
+    "min_samples_leaf": 20,
+    "alpha": 0.95,
+    "beta": 2,
+    "max_depth": 20,
+    "sample_sigma2_leaf": False,
+    "sigma2_leaf_init": 0.1 / 50,
+}
+
+# Fit the BART model
+covariates_train = w
+covariates_train.loc[:, "x"] = x
+bart_model = BARTModel()
+bart_model.sample(
+    X_train=covariates_train,
+    leaf_basis_train=Psi,
+    y_train=y,
+    num_gfr=num_gfr,
+    num_burnin=num_burnin,
+    num_mcmc=num_mcmc,
+    general_params=global_params,
+    mean_forest_params=forest_params,
+)
+
+# Compute the CATE posterior
+Psi0 = np.c_[np.ones(n), np.zeros(n), np.zeros(n), np.zeros(n)][test, :]
+Psi1 = np.c_[np.ones(n), np.zeros(n), np.zeros(n), np.ones(n)][test, :]
+covariates_test = w.iloc[test, :]
+covariates_test.loc[:, "x"] = np.zeros(ntest)
+cate_posterior = bart_model.compute_contrast(
+    X_0=covariates_test,
+    X_1=covariates_test,
+    leaf_basis_0=Psi0,
+    leaf_basis_1=Psi1,
+    type="posterior",
+    scale="linear",
+)
 ```
 
 :::
 
-### Analyzing CATE Heterogeneity
+## Analyzing CATE Heterogeneity
 
 To summarize the CATE posterior we fit a regression tree to the posterior mean
 point estimates $\bar{\tau}_i = \frac{1}{M} \sum_{h=1}^M \tau^{(h)}(0, \w_i)$,
@@ -372,7 +468,7 @@ using $W$ as predictors. We restrict to observations with $|x_i| \leq \delta$.
 
 ```{r}
 #| fig-cap: "Regression tree fit to posterior point estimates of individual treatment effects. Top number in each box is the average subgroup treatment effect; lower number is the share of the sample."
-cate <- rpart(y ~ ., data.frame(y = rowMeans(pred), w[test, ]),
+cate <- rpart(y ~ ., data.frame(y = rowMeans(cate_posterior), w[test, ]),
               control = rpart.control(cp = 0.015))
 
 plot_cart <- function(rp) {
@@ -392,9 +488,11 @@ rpart.plot(cate, main = "", box.col = plot_cart(cate))
 
 ```{python}
 #| fig-cap: "Decision tree fit to posterior mean CATEs, used as an effect moderation summary."
-y_surrogate  = np.mean(cate_result, axis=1)
+y_surrogate  = np.mean(cate_posterior, axis=1)
 X_surrogate  = w.iloc[test, :]
-cate_tree = DecisionTreeRegressor(min_impurity_decrease=0.0001)
+cp = 0.015
+min_impurity_decrease = cp * np.var(y_surrogate)
+cate_tree = DecisionTreeRegressor(min_impurity_decrease=min_impurity_decrease)
 cate_tree.fit(X=X_surrogate, y=y_surrogate)
 plot_tree(cate_tree, impurity=False, filled=True,
           feature_names=w.columns, proportion=False,
@@ -408,7 +506,7 @@ The resulting tree indicates that course load (`totcredits_year1`) in the academ
 leading to probation is a strong moderator of the treatment effect. The tree also flags
 campus, age at entry, and gender as secondary moderators — all prima facie plausible.
 
-### Comparing Subgroup Posteriors
+## Comparing Subgroup Posteriors
 
 The effect moderation tree is a posterior summary tool; it does not alter the
 posterior itself. We can compare any two subgroups by averaging their individual
@@ -440,7 +538,7 @@ cate_kde <- function(rp, pred) {
   cate_b <- colMeans(pred[right, , drop = FALSE])
   MASS::kde2d(cate_a, cate_b, n = 200)
 }
-contour(cate_kde(cate, pred), bty = "n",
+contour(cate_kde(cate, cate_posterior), bty = "n",
         xlab = "Group A", ylab = "Group B")
 abline(a = 0, b = 1)
 ```
@@ -450,11 +548,13 @@ abline(a = 0, b = 1)
 ```{python}
 #| fig-cap: "Joint KDE of Group A and Group B CATE posteriors. Contours above the diagonal indicate Group B has persistently higher treatment effects."
 predicted_nodes  = cate_tree.apply(X=X_surrogate)
-posterior_group_a = np.mean(cate_result[predicted_nodes == 2, :], axis=0)
-posterior_group_b = np.mean(cate_result[predicted_nodes == 6, :], axis=0)
+max_value_node = np.argmax(cate_tree.tree_.value)
+min_value_node = np.argmin(cate_tree.tree_.value)
+posterior_group_a = np.mean(cate_posterior[predicted_nodes == min_value_node, :], axis=0)
+posterior_group_b = np.mean(cate_posterior[predicted_nodes == max_value_node, :], axis=0)
 posterior_df = pd.DataFrame({"group_a": posterior_group_a,
-                              "group_b": posterior_group_b})
-sns.kdeplot(data=posterior_df, x="group_b", y="group_a")
+                             "group_b": posterior_group_b})
+sns.kdeplot(data=posterior_df, x="group_a", y="group_b")
 plt.axline((0, 0), slope=1, color="black", linestyle=(0, (3, 3)))
 plt.show()
 ```
@@ -469,4 +569,4 @@ As always, CATEs that vary with observable factors do not necessarily represent 
 _causal_ moderating relationship; uncovering these patterns is crucial for suggesting
 causal mechanisms to investigate in future studies.
 
-## References
+# References

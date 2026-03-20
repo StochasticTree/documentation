@@ -4,71 +4,60 @@
 
 ### MacOS
 
-#### Cloning the repo 
+#### Software dependencies
 
-First, you will need the stochtree repo on your local machine. 
-Navigate to the `documentation` repo in your terminal (*replace `~/path/to/documentation` with the path to the documentation repo on your local system*).
+You'll need to have the following software installed
 
-```{bash}
-cd ~/path/to/documentation
-```
+- Python: can be installed via [homebrew](https://formulae.brew.sh/formula/python@3.14), [conda](https://www.anaconda.com/download), and [directly from the python site](https://www.python.org/downloads/)
+- R: can be installed via [CRAN](https://cran.r-project.org/) or [homebrew](https://formulae.brew.sh/formula/r)
+- Quarto: can be installed [directly from the Quarto site](https://quarto.org/docs/get-started/) or [homebrew](https://formulae.brew.sh/cask/quarto)
+- Doxygen: can be installed [directly from the Doxygen site](https://www.doxygen.nl/) or [homebrew](https://formulae.brew.sh/formula/doxygen)
 
-Now, recursively clone the main `stochtree` repo into a `stochtree_repo` subfolder of the `documentation` repo
+#### Setting up R and Python build dependencies
 
-```{bash}
-git clone --recursive git@github.com:StochasticTree/stochtree.git stochtree_repo
-```
-
-#### Setting up build dependencies
-
-The docs are largely built using [`mkdocs`](https://www.mkdocs.org), [`pkgdown`](https://pkgdown.r-lib.org) and [`doxygen`](https://www.doxygen.nl/index.html), 
-with everything tied together using the ["Material for MkDocs"](https://squidfunk.github.io/mkdocs-material/) theme. 
-
-We first create a virtual environment and install the dependencies for `stochtree` as well as the doc site (several python packages: `mkdocs-material`, `mkdocstrings-python`, and `mkdocs-jupyter`).
+Building multi-lingual (R and Python) vignettes requires installing the vignettes' package dependencies. In Python, this is done via a virtual environment (local `.venv`)
 
 ```{bash}
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install git+https://github.com/StochasticTree/stochtree.git
 ```
 
-##### stochtree
-
-Now, we build the `stochtree` python library locally in the virtual environment activated above
+And in R, this is typically done as a global system install, though you might also consider [`renv`](https://rstudio.github.io/renv/) for managing project-specific R dependencies
 
 ```{bash}
-cd stochtree_repo
-pip install .
-cd ..
+Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor", "pkgdown", "cpp11", "BH", "doParallel", "foreach", "knitr", "Matrix", "MASS", "mvtnorm", "rmarkdown", "testthat", "tgp", "here", "reticulate"), repos="https://cloud.r-project.org/")'
+Rscript -e 'remotes::install_github("StochasticTree/stochtree", ref = "r-dev")'
 ```
 
-##### pkgdown
+#### Building the vignettes with quarto
 
-To use `pkgdown`, you need to install [R](https://cran.r-project.org). 
-One R is installed, make sure the dependendencies of the pkgdown build are installed
+The vignettes live in the `vignettes/` directory and are configured as a standalone Quarto website via `vignettes/_quarto.yml`. Each `.qmd` file uses `{.panel-tabset group="language"}` tabsets to present R and Python code side-by-side. Python cells are executed via `reticulate`; set the `RETICULATE_PYTHON` environment variable to point at your `.venv` interpreter if it isn't picked up automatically.
 
-```{bash}
-Rscript -e 'install.packages(c("remotes", "devtools", "roxygen2", "ggplot2", "latex2exp", "decor", "pkgdown", "cpp11", "BH", "doParallel", "foreach", "knitr", "Matrix", "MASS", "mvtnorm", "rmarkdown", "testthat", "tgp"), repos="https://cloud.r-project.org/")'
+To render all vignettes at once:
+
+```bash
+cd vignettes
+quarto render
 ```
 
-### Building the R docs
+To render a single vignette:
 
-To build the R docs, first run a script that lays out the package as needed
-
-```{bash}
-cd stochtree_repo
-Rscript cran-bootstrap.R 1 1 1
-cd ..
+```bash
+cd vignettes
+quarto render bart.qmd
 ```
 
-Then run the `pkgdown` build workflow to put the R docs in the correct folder
+To preview the vignette site locally with live reload:
 
-```{bash}
-mkdir -p docs/R_docs/pkgdown
-Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
-rm -rf stochtree_repo/stochtree_cran
+```bash
+cd vignettes
+quarto preview
 ```
+
+The rendered site is written to `vignettes/_site/`. Individual vignettes use `freeze: auto` in their frontmatter, so re-renders only re-execute cells whose source has changed. To force a full re-execution, delete `vignettes/_freeze/` before rendering.
 
 ### Building the doxygen site for the C++ API
 
@@ -87,46 +76,8 @@ doxygen Doxyfile
 cd ..
 ```
 
-### Copying Jupyter notebook demos to the docs directory
-
-```{bash}
-cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
-cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
-cp stochtree_repo/demo/notebooks/heteroskedastic_supervised_learning.ipynb docs/python_docs/demo/heteroskedastic_supervised_learning.ipynb
-cp stochtree_repo/demo/notebooks/ordinal_outcome.ipynb docs/python_docs/demo/ordinal_outcome.ipynb
-cp stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb docs/python_docs/demo/multivariate_treatment_causal_inference.ipynb
-cp stochtree_repo/demo/notebooks/serialization.ipynb docs/python_docs/demo/serialization.ipynb
-cp stochtree_repo/demo/notebooks/tree_inspection.ipynb docs/python_docs/demo/tree_inspection.ipynb
-cp stochtree_repo/demo/notebooks/summary.ipynb docs/python_docs/demo/summary.ipynb
-cp stochtree_repo/demo/notebooks/prototype_interface.ipynb docs/python_docs/demo/prototype_interface.ipynb
-cp stochtree_repo/demo/notebooks/sklearn_wrappers.ipynb docs/python_docs/demo/sklearn_wrappers.ipynb
-cp stochtree_repo/demo/notebooks/multi_chain.ipynb docs/python_docs/demo/multi_chain.ipynb
-```
-
-### Copy static vignettes over to docs directory
-
-```{bash}
-cp vignettes/Python/RDD/rdd.html docs/vignettes/Python/rdd.html
-cp vignettes/Python/RDD/RDD_DAG.png docs/vignettes/Python/RDD_DAG.png
-cp vignettes/Python/RDD/trees1.png docs/vignettes/Python/trees1.png
-cp vignettes/Python/RDD/trees2.png docs/vignettes/Python/trees2.png
-cp vignettes/Python/RDD/trees3.png docs/vignettes/Python/trees3.png
-cp vignettes/R/RDD/rdd.html docs/vignettes/R/rdd.html
-cp vignettes/Python/IV/iv.html docs/vignettes/Python/iv.html
-cp vignettes/Python/IV/IV_CDAG.png docs/vignettes/Python/IV_CDAG.png
-cp vignettes/R/IV/iv.html docs/vignettes/R/iv.html
-```
-
 ### Building the overall website
 
-To build and preview the site locally, run 
+The overall site is built and deployed via the GitHub Actions workflow in `.github/workflows/docs.yml`, which renders the Quarto vignettes, builds Doxygen (C++ API) and pkgdown (R API) docs, and publishes the result to the `gh-pages` branch.
 
-```{bash}
-mkdocs serve
-```
-
-To build the files underlying the static site, run
-
-```{bash}
-mkdocs build
-```
+To build and preview the vignette site locally, use `quarto preview` as described above. Full-site local builds (including embedded Doxygen / pkgdown output) are best done through the CI workflow.

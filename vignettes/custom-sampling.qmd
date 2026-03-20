@@ -1,7 +1,20 @@
 ---
 title: "Custom Sampling Routine"
 bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
 
 While the functions `bart()` and `bcf()` provide simple and performant interfaces for
 supervised learning / causal inference, `stochtree` also offers access to many of the
@@ -46,12 +59,18 @@ library(stochtree)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+import numpy as np
+import matplotlib.pyplot as plt
+from stochtree import (
+    RNG, Dataset, Forest, ForestContainer, ForestSampler,
+    GlobalVarianceModel, LeafVarianceModel, Residual,
+    ForestModelConfig, GlobalModelConfig,
+)
 ```
 
 ::::
 
-# Demo 1: Supervised Learning
+# Supervised Learning Demo
 
 ## Simulation
 
@@ -85,7 +104,27 @@ resid <- (y-y_bar)/y_std
 ## Python
 
 ```{python}
-# Python implementation coming soon
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
+
+n = 500
+p_X = 10
+p_W = 1
+X = rng.uniform(size=(n, p_X))
+W = rng.uniform(size=(n, p_W))
+# R uses X[,1] (1-indexed) = Python X[:,0]
+f_XW = (
+    ((X[:, 0] >= 0)    & (X[:, 0] < 0.25)) * (-3 * W[:, 0]) +
+    ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5))  * (-1 * W[:, 0]) +
+    ((X[:, 0] >= 0.5)  & (X[:, 0] < 0.75)) * ( 1 * W[:, 0]) +
+    ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0))  * ( 3 * W[:, 0])
+)
+y = f_XW + rng.standard_normal(n)
+
+# Standardize outcome
+y_bar = np.mean(y)
+y_std = np.std(y)
+resid = (y - y_bar) / y_std
 ```
 
 ::::
@@ -121,7 +160,24 @@ var_weights <- rep(1/p_X, p_X)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+alpha = 0.9
+beta = 1.25
+min_samples_leaf = 1
+max_depth = 10
+num_trees = 100
+cutpoint_grid_size = 100
+global_variance_init = 1.0
+tau_init = 1.0 / num_trees
+leaf_prior_scale = np.array([[tau_init]], order="C")
+a_global = 4.0
+b_global = 2.0
+a_leaf = 2.0
+b_leaf = 0.5
+leaf_regression = True
+feature_types = np.zeros(p_X, dtype=int)  # 0 = numeric
+var_weights = np.full(p_X, 1.0 / p_X)
+leaf_model = 1 if leaf_regression else 0  # 1 = linear leaf (with basis)
+leaf_dimension = p_W if leaf_regression else 1
 ```
 
 ::::
@@ -178,7 +234,45 @@ active_forest$adjust_residual(forest_dataset, outcome, forest_model, ifelse(outc
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# Dataset: covariates + basis
+dataset = Dataset()
+dataset.add_covariates(X)
+dataset.add_basis(W)
+
+# Residual
+residual = Residual(resid)
+
+# Random number generator
+cpp_rng = RNG(random_seed)
+
+# Forest container (stores samples) and active forest (updated each iteration)
+forest_container = ForestContainer(num_trees, leaf_dimension, False, False)
+active_forest = Forest(num_trees, leaf_dimension, False, False)
+
+# Sampler config
+global_model_config = GlobalModelConfig(global_error_variance=global_variance_init)
+forest_model_config = ForestModelConfig(
+    num_trees=num_trees,
+    num_features=p_X,
+    num_observations=n,
+    feature_types=feature_types,
+    variable_weights=var_weights,
+    leaf_dimension=leaf_dimension,
+    alpha=alpha,
+    beta=beta,
+    min_samples_leaf=min_samples_leaf,
+    max_depth=max_depth,
+    leaf_model_type=leaf_model,
+    leaf_model_scale=leaf_prior_scale,
+    cutpoint_grid_size=cutpoint_grid_size,
+)
+forest_sampler = ForestSampler(dataset, global_model_config, forest_model_config)
+global_var_model = GlobalVarianceModel()
+leaf_var_model = LeafVarianceModel()
+
+# Initialize leaves of each tree
+forest_init_val = np.zeros(leaf_dimension)
+forest_sampler.prepare_for_sampler(dataset, residual, active_forest, leaf_model, forest_init_val)
 ```
 
 ::::
@@ -200,7 +294,11 @@ leaf_scale_samples <- c(tau_init, rep(0, num_samples))
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_warmstart = 10
+num_mcmc = 100
+num_samples = num_warmstart + num_mcmc
+global_var_samples = np.concatenate([[global_variance_init], np.zeros(num_samples)])
+leaf_scale_samples = np.concatenate([[tau_init], np.zeros(num_samples)])
 ```
 
 ::::
@@ -238,7 +336,16 @@ for (i in 1:num_warmstart) {
 ## Python
 
 ```{python}
-# Python implementation coming soon
+for i in range(num_warmstart):
+    forest_sampler.sample_one_iteration(
+        forest_container, active_forest, dataset, residual, cpp_rng,
+        global_model_config, forest_model_config, True, True, 1,  # keep_forest=True, gfr=True, num_threads=1
+    )
+    current_sigma2 = global_var_model.sample_one_iteration(residual, cpp_rng, a_global, b_global)
+    global_var_samples[i + 1] = current_sigma2
+    leaf_scale_samples[i + 1] = leaf_var_model.sample_one_iteration(active_forest, cpp_rng, a_leaf, b_leaf)
+    leaf_prior_scale[0, 0] = leaf_scale_samples[i + 1]
+    forest_model_config.update_leaf_model_scale(leaf_prior_scale)
 ```
 
 ::::
@@ -277,7 +384,16 @@ for (i in (num_warmstart+1):num_samples) {
 ## Python
 
 ```{python}
-# Python implementation coming soon
+for i in range(num_warmstart, num_samples):
+    forest_sampler.sample_one_iteration(
+        forest_container, active_forest, dataset, residual, cpp_rng,
+        global_model_config, forest_model_config, True, False, 1,  # keep_forest=True, gfr=False, num_threads=1
+    )
+    current_sigma2 = global_var_model.sample_one_iteration(residual, cpp_rng, a_global, b_global)
+    global_var_samples[i + 1] = current_sigma2
+    leaf_scale_samples[i + 1] = leaf_var_model.sample_one_iteration(active_forest, cpp_rng, a_leaf, b_leaf)
+    leaf_prior_scale[0, 0] = leaf_scale_samples[i + 1]
+    forest_model_config.update_leaf_model_scale(leaf_prior_scale)
 ```
 
 ::::
@@ -299,7 +415,11 @@ sigma_samples <- sqrt(global_var_samples)*y_std
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# Forest predictions: shape (n, num_samples); rescale to original y scale
+preds = forest_container.predict(dataset) * y_std + y_bar
+
+# Global error variance (sigma, not sigma^2)
+sigma_samples = np.sqrt(global_var_samples) * y_std
 ```
 
 ::::
@@ -322,7 +442,20 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+gfr_preds = preds[:, :num_warmstart]
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+ax1.plot(sigma_samples[1:num_warmstart + 1])
+ax1.set_ylabel("sigma")
+ax1.set_title("GFR: Global Error Scale")
+ax2.scatter(gfr_preds.mean(axis=1), y, s=10, alpha=0.5)
+lo = min(gfr_preds.mean(axis=1).min(), y.min())
+hi = max(gfr_preds.mean(axis=1).max(), y.max())
+ax2.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+ax2.set_xlabel("pred")
+ax2.set_ylabel("actual")
+ax2.set_title("GFR: Predicted vs Actual")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::
@@ -343,7 +476,20 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+mcmc_preds = preds[:, num_warmstart:num_samples]
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+ax1.plot(sigma_samples[num_warmstart + 1:num_samples + 1])
+ax1.set_ylabel("sigma")
+ax1.set_title("MCMC: Global Error Scale")
+ax2.scatter(mcmc_preds.mean(axis=1), y, s=10, alpha=0.5)
+lo = min(mcmc_preds.mean(axis=1).min(), y.min())
+hi = max(mcmc_preds.mean(axis=1).max(), y.max())
+ax2.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+ax2.set_xlabel("pred")
+ax2.set_ylabel("actual")
+ax2.set_title("MCMC: Predicted vs Actual")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::

@@ -1,7 +1,20 @@
 ---
 title: "Multi-Chain Inference"
 bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
 
 # Motivation
 
@@ -40,7 +53,12 @@ library(doParallel)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+import numpy as np
+import matplotlib.pyplot as plt
+import arviz as az
+from stochtree import BARTModel
+
+rng = np.random.default_rng(1111)
 ```
 
 ::::
@@ -89,7 +107,23 @@ y_train <- y[train_inds]
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n, p_x, p_w, snr = 500, 10, 1, 3
+X = rng.uniform(size=(n, p_x))
+leaf_basis = rng.uniform(size=(n, p_w))
+f_XW = (((0 <= X[:, 0]) & (0.25 > X[:, 0])) * (-7.5 * leaf_basis[:, 0]) +
+        ((0.25 <= X[:, 0]) & (0.5 > X[:, 0]))  * (-2.5 * leaf_basis[:, 0]) +
+        ((0.5 <= X[:, 0]) & (0.75 > X[:, 0]))  * (2.5  * leaf_basis[:, 0]) +
+        ((0.75 <= X[:, 0]) & (1 > X[:, 0]))     * (7.5  * leaf_basis[:, 0]))
+noise_sd = np.std(f_XW) / snr
+y = f_XW + rng.normal(0, noise_sd, size=n)
+
+test_set_pct = 0.2
+n_test = round(test_set_pct * n)
+test_inds  = rng.choice(n, n_test, replace=False)
+train_inds = np.setdiff1d(np.arange(n), test_inds)
+X_test,          X_train          = X[test_inds],          X[train_inds]
+leaf_basis_test, leaf_basis_train = leaf_basis[test_inds], leaf_basis[train_inds]
+y_test,          y_train          = y[test_inds],          y[train_inds]
 ```
 
 ::::
@@ -120,7 +154,10 @@ num_mcmc <- 2000
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_chains = 4
+num_gfr    = 0
+num_burnin = 1000
+num_mcmc   = 2000
 ```
 
 ::::
@@ -146,14 +183,19 @@ bart_model <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model = BARTModel()
+bart_model.sample(
+    X_train=X_train, leaf_basis_train=leaf_basis_train, y_train=y_train,
+    num_gfr=num_gfr, num_burnin=num_burnin, num_mcmc=num_mcmc,
+    general_params={"num_threads": 1, "num_chains": num_chains},
+)
 ```
 
 ::::
 
-Now we have a `bartmodel` object with `num_chains * num_mcmc` samples stored
-internally. These samples are arranged sequentially, with the first `num_mcmc`
-samples corresponding to chain 1, the next `num_mcmc` samples to chain 2, etc.
+Now we have a model with `num_chains * num_mcmc` samples stored internally. These
+samples are arranged sequentially, with the first `num_mcmc` samples corresponding
+to chain 1, the next `num_mcmc` samples to chain 2, etc.
 
 Since each chain is a set of samples of the same model, we can analyze the samples
 collectively, for example, by looking at out-of-sample predictions.
@@ -177,7 +219,14 @@ abline(0, 1, col = "red", lty = 3, lwd = 3)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+y_hat_test = bart_model.predict(
+    X=X_test, leaf_basis=leaf_basis_test, type="mean", terms="y_hat"
+)
+lo, hi = min(y_hat_test.min(), y_test.min()), max(y_hat_test.max(), y_test.max())
+plt.scatter(y_hat_test, y_test, alpha=0.5)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual")
+plt.show()
 ```
 
 ::::
@@ -218,7 +267,18 @@ cat(paste0(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# Reshape flat sigma2 samples into (num_chains, num_mcmc) for per-chain diagnostics
+# az.from_dict requires nested dict: {"posterior": {"var": array(chains, draws)}}
+idata = az.from_dict({"posterior": {"sigma2": bart_model.global_var_samples.reshape(num_chains, num_mcmc)}})
+
+az.plot_trace(idata)
+plt.axhline(noise_sd**2, color="black", linestyle="dashed", linewidth=1.5)
+plt.show()
+
+print("ESS:  ", az.ess(idata))
+print("R-hat:", az.rhat(idata))
+az.plot_autocorr(idata)
+plt.show()
 ```
 
 ::::
@@ -242,7 +302,8 @@ dimnames(coda_array) <- list(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# sigma2_by_chain already has shape (num_chains, num_mcmc) — ready for per-chain plots
+sigma2_chains = bart_model.global_var_samples.reshape(num_chains, num_mcmc)
 ```
 
 ::::
@@ -279,7 +340,15 @@ bayesplot::mcmc_hist_by_chain(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+fig, axes = plt.subplots(1, num_chains, figsize=(12, 3), sharey=True)
+for i, ax in enumerate(axes):
+    ax.hist(sigma2_chains[i], bins=30)
+    ax.axvline(noise_sd**2, color="black", linestyle="dashed", linewidth=1.5)
+    ax.set_title(f"Chain {i+1}")
+    ax.set_xlabel(r"$\sigma^2$")
+fig.suptitle("Global error scale posterior by chain")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::
@@ -304,7 +373,10 @@ num_mcmc <- 2000
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_chains = 4
+num_gfr    = 5
+num_burnin = 1000
+num_mcmc   = 2000
 ```
 
 ::::
@@ -330,7 +402,13 @@ xbart_model_string <- stochtree::saveBARTModelToJsonString(xbart_model)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+xbart_model = BARTModel()
+xbart_model.sample(
+    X_train=X_train, leaf_basis_train=leaf_basis_train, y_train=y_train,
+    num_gfr=num_gfr, num_burnin=0, num_mcmc=0,
+    general_params={"num_threads": 1},
+)
+xbart_model_json = xbart_model.to_json()
 ```
 
 ::::
@@ -359,7 +437,14 @@ bart_model <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model = BARTModel()
+bart_model.sample(
+    X_train=X_train, leaf_basis_train=leaf_basis_train, y_train=y_train,
+    num_gfr=0, num_burnin=num_burnin, num_mcmc=num_mcmc,
+    general_params={"num_threads": 1, "num_chains": num_chains},
+    previous_model_json=xbart_model_json,
+    previous_model_warmstart_sample_num=num_gfr - 1,  # 0-indexed
+)
 ```
 
 ::::
@@ -383,7 +468,14 @@ abline(0, 1, col = "red", lty = 3, lwd = 3)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+y_hat_test = bart_model.predict(
+    X=X_test, leaf_basis=leaf_basis_test, type="mean", terms="y_hat"
+)
+lo, hi = min(y_hat_test.min(), y_test.min()), max(y_hat_test.max(), y_test.max())
+plt.scatter(y_hat_test, y_test, alpha=0.5)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual")
+plt.show()
 ```
 
 ::::
@@ -420,7 +512,16 @@ cat(paste0(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+idata = az.from_dict({"posterior": {"sigma2": bart_model.global_var_samples.reshape(num_chains, num_mcmc)}})
+
+az.plot_trace(idata)
+plt.axhline(noise_sd**2, color="black", linestyle="dashed", linewidth=1.5)
+plt.show()
+
+print("ESS:  ", az.ess(idata))
+print("R-hat:", az.rhat(idata))
+az.plot_autocorr(idata)
+plt.show()
 ```
 
 ::::
@@ -442,7 +543,7 @@ dimnames(coda_array) <- list(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+sigma2_chains = bart_model.global_var_samples.reshape(num_chains, num_mcmc)
 ```
 
 ::::
@@ -476,25 +577,31 @@ bayesplot::mcmc_hist_by_chain(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+fig, axes = plt.subplots(1, num_chains, figsize=(12, 3), sharey=True)
+for i, ax in enumerate(axes):
+    ax.hist(sigma2_chains[i], bins=30)
+    ax.axvline(noise_sd**2, color="black", linestyle="dashed", linewidth=1.5)
+    ax.set_title(f"Chain {i+1}")
+    ax.set_xlabel(r"$\sigma^2$")
+fig.suptitle("Global error scale posterior by chain")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::
 
 ## Sampling Multiple Chains in Parallel
 
-While the above examples used sequential multi-chain sampling internally in `bart()`
-and `bcf()`, it is also possible to run chains in parallel via `doParallel`. While
-`bartmodel` or `bcfmodel` objects contain external pointers to C++ data structures
-which are not reachable by other processes, we can serialize `stochtree` models to
-JSON for cross-process communication. After `num_chains` models have been run in
-parallel and their JSON representations have been collated in the primary R session,
-we can combine these into a single `bartmodel` or `bcfmodel` object via
-`createBARTModelFromCombinedJsonString()` or `createBCFModelFromCombinedJsonString()`.
+While the above examples used sequential multi-chain sampling internally, it is also
+possible to run chains in parallel. In R, this is done via `doParallel` / `foreach`;
+in Python, via `concurrent.futures.ProcessPoolExecutor`. In both cases, each chain
+is serialized to JSON for cross-process communication, then combined into a single
+model via `createBARTModelFromCombinedJsonString()` (R) or
+`BARTModel.from_json_string_list()` (Python).
 
-In order to run multiple parallel stochtree chains, a parallel backend must be
-registered in your R environment. Note that we do not evaluate the cluster setup
-code below in order to interact nicely with CRAN / GitHub Actions environments.
+In order to run multiple parallel stochtree chains in R, a parallel backend must be
+registered. Note that we do not evaluate the cluster setup code below in order to
+interact nicely with GitHub Actions.
 
 ::::{.panel-tabset group="language"}
 
@@ -510,7 +617,22 @@ registerDoParallel(cl)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+#| eval: false
+# Worker function must be defined at module level for pickling
+from concurrent.futures import ProcessPoolExecutor
+
+def _run_bart_chain(args):
+    X_tr, lb_tr, y_tr, X_te, lb_te, num_burnin, num_mcmc, seed = args
+    from stochtree import BARTModel
+    m = BARTModel()
+    m.sample(
+        X_train=X_tr, leaf_basis_train=lb_tr, y_train=y_tr,
+        X_test=X_te, leaf_basis_test=lb_te,
+        num_gfr=0, num_burnin=num_burnin, num_mcmc=num_mcmc,
+        general_params={"num_threads": 1, "random_seed": seed},
+        mean_forest_params={"sample_sigma2_leaf": False},
+    )
+    return m.to_json(), m.y_hat_test
 ```
 
 ::::
@@ -529,7 +651,10 @@ num_mcmc <- 100
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_chains = 4
+num_gfr    = 0
+num_burnin = 100
+num_mcmc   = 100
 ```
 
 ::::
@@ -565,7 +690,18 @@ bart_model_outputs <- foreach(i = 1:num_chains) %dopar%
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# Sequential loop — replace the loop body with ProcessPoolExecutor for true parallelism
+bart_model_outputs = []
+for i in range(num_chains):
+    m = BARTModel()
+    m.sample(
+        X_train=X_train, leaf_basis_train=leaf_basis_train, y_train=y_train,
+        X_test=X_test, leaf_basis_test=leaf_basis_test,
+        num_gfr=0, num_burnin=num_burnin, num_mcmc=num_mcmc,
+        general_params={"num_threads": 1, "sample_sigma2_global": True, "random_seed": i + 1},
+        mean_forest_params={"sample_sigma2_leaf": False},
+    )
+    bart_model_outputs.append({"model": m.to_json(), "yhat": m.y_hat_test})
 ```
 
 ::::
@@ -584,7 +720,7 @@ stopCluster(cl)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# No explicit teardown required when using concurrent.futures context manager
 ```
 
 ::::
@@ -608,7 +744,12 @@ combined_bart <- createBARTModelFromCombinedJsonString(bart_model_strings)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_strings = [out["model"] for out in bart_model_outputs]
+bart_model_yhats = np.column_stack([
+    out["yhat"].mean(axis=1) for out in bart_model_outputs
+])  # shape: (n_test, num_chains)
+combined_bart = BARTModel()
+combined_bart.from_json_string_list(bart_model_strings)
 ```
 
 ::::
@@ -624,7 +765,8 @@ yhat_combined <- predict(combined_bart, X_test, leaf_basis_test)$y_hat
 ## Python
 
 ```{python}
-# Python implementation coming soon
+# type="posterior" (default) returns the full n_test × (num_chains * num_mcmc) matrix
+yhat_combined = combined_bart.predict(X=X_test, leaf_basis=leaf_basis_test, terms="y_hat")
 ```
 
 ::::
@@ -657,7 +799,18 @@ par(mfrow = c(1, 1))
 ## Python
 
 ```{python}
-# Python implementation coming soon
+fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+for i, ax in enumerate(axes.flat):
+    chain_combined = yhat_combined[:, i * num_mcmc:(i + 1) * num_mcmc].mean(axis=1)
+    chain_orig = bart_model_yhats[:, i]
+    lo = min(chain_combined.min(), chain_orig.min())
+    hi = max(chain_combined.max(), chain_orig.max())
+    ax.scatter(chain_combined, chain_orig, alpha=0.4, s=10)
+    ax.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=1.5)
+    ax.set_xlabel("Deserialized"); ax.set_ylabel("Original")
+    ax.set_title(f"Chain {i+1} Predictions")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::
@@ -687,7 +840,17 @@ par(mfrow = c(1, 1))
 ## Python
 
 ```{python}
-# Python implementation coming soon
+fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+for i, ax in enumerate(axes.flat):
+    chain_pred = yhat_combined[:, i * num_mcmc:(i + 1) * num_mcmc].mean(axis=1)
+    lo = min(chain_pred.min(), y_test.min())
+    hi = max(chain_pred.max(), y_test.max())
+    ax.scatter(chain_pred, y_test, alpha=0.4, s=10)
+    ax.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=1.5)
+    ax.set_xlabel("Predicted"); ax.set_ylabel("Actual")
+    ax.set_title(f"Chain {i+1} Predictions")
+plt.tight_layout()
+plt.show()
 ```
 
 ::::

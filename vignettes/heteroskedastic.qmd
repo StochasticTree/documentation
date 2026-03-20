@@ -1,7 +1,20 @@
 ---
 title: "Heteroskedastic BART"
 bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
 
 This vignette demonstrates how to use the `bart()` function for Bayesian supervised
 learning (@chipman2010bart) and causal inference (@hahn2020bayesian), with an
@@ -20,7 +33,11 @@ library(stochtree)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+import numpy as np
+import matplotlib.pyplot as plt
+from stochtree import BARTModel
+
+rng = np.random.default_rng(101)
 ```
 
 ::::
@@ -83,7 +100,24 @@ s_x_train <- s_XW[train_inds]
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n, p_x = 500, 10
+X = rng.uniform(size=(n, p_x))
+# Note: R's X[,1] = Python's X[:,0]
+s_XW = (
+    ((X[:, 0] >= 0)    & (X[:, 0] < 0.25)) * 0.5 +
+    ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5))  * 1.0 +
+    ((X[:, 0] >= 0.5)  & (X[:, 0] < 0.75)) * 2.0 +
+    ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0))  * 3.0
+)
+y = rng.normal(size=n) * s_XW
+
+test_set_pct = 0.2
+n_test = round(test_set_pct * n)
+test_inds  = rng.choice(n, n_test, replace=False)
+train_inds = np.setdiff1d(np.arange(n), test_inds)
+X_test,  X_train  = X[test_inds],  X[train_inds]
+y_test,  y_train  = y[test_inds],  y[train_inds]
+s_x_test, s_x_train = s_XW[test_inds], s_XW[train_inds]
 ```
 
 ::::
@@ -119,7 +153,15 @@ bart_model_warmstart <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_trees = 20
+bart_model_warmstart = BARTModel()
+bart_model_warmstart.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=10, num_burnin=0, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 0},
+    variance_forest_params={"num_trees": num_trees},
+)
 ```
 
 ::::
@@ -139,7 +181,12 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+var_pred = bart_model_warmstart.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -171,7 +218,14 @@ bart_model_mcmc <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_mcmc = BARTModel()
+bart_model_mcmc.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=0, num_burnin=1000, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 0},
+    variance_forest_params={"num_trees": num_trees},
+)
 ```
 
 ::::
@@ -191,7 +245,12 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+var_pred = bart_model_mcmc.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -252,7 +311,24 @@ s_x_train <- s_XW[train_inds]
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n, p_x = 500, 10
+X = rng.uniform(size=(n, p_x))
+# R's X[,3] = Python's X[:,2]
+s_XW = (
+    ((X[:, 0] >= 0)    & (X[:, 0] < 0.25)) * (0.5 * X[:, 2]) +
+    ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5))  * (1.0 * X[:, 2]) +
+    ((X[:, 0] >= 0.5)  & (X[:, 0] < 0.75)) * (2.0 * X[:, 2]) +
+    ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0))  * (3.0 * X[:, 2])
+)
+y = rng.normal(size=n) * s_XW
+
+test_set_pct = 0.2
+n_test = round(test_set_pct * n)
+test_inds  = rng.choice(n, n_test, replace=False)
+train_inds = np.setdiff1d(np.arange(n), test_inds)
+X_test,  X_train  = X[test_inds],  X[train_inds]
+y_test,  y_train  = y[test_inds],  y[train_inds]
+s_x_test, s_x_train = s_XW[test_inds], s_XW[train_inds]
 ```
 
 ::::
@@ -286,7 +362,17 @@ bart_model_warmstart <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+num_trees = 20
+bart_model_warmstart = BARTModel()
+bart_model_warmstart.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=10, num_burnin=0, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 0,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": num_trees, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 1},
+)
 ```
 
 ::::
@@ -304,7 +390,12 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+var_pred = bart_model_warmstart.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -335,7 +426,16 @@ bart_model_mcmc <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_mcmc = BARTModel()
+bart_model_mcmc.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=0, num_burnin=1000, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 0,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": num_trees, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 1},
+)
 ```
 
 ::::
@@ -353,7 +453,12 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+var_pred = bart_model_mcmc.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -425,7 +530,31 @@ s_x_test <- s_XW[test_inds]
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n, p_x = 500, 10
+X = rng.uniform(size=(n, p_x))
+# R's X[,2] = Python's X[:,1]; R's X[,1] = Python's X[:,0]
+f_XW = (
+    ((X[:, 1] >= 0)    & (X[:, 1] < 0.25)) * (-6) +
+    ((X[:, 1] >= 0.25) & (X[:, 1] < 0.5))  * (-2) +
+    ((X[:, 1] >= 0.5)  & (X[:, 1] < 0.75)) * (2)  +
+    ((X[:, 1] >= 0.75) & (X[:, 1] < 1.0))  * (6)
+)
+s_XW = (
+    ((X[:, 0] >= 0)    & (X[:, 0] < 0.25)) * 0.5 +
+    ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5))  * 1.0 +
+    ((X[:, 0] >= 0.5)  & (X[:, 0] < 0.75)) * 2.0 +
+    ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0))  * 3.0
+)
+y = f_XW + rng.normal(size=n) * s_XW
+
+test_set_pct = 0.2
+n_test = round(test_set_pct * n)
+test_inds  = rng.choice(n, n_test, replace=False)
+train_inds = np.setdiff1d(np.arange(n), test_inds)
+X_test,  X_train  = X[test_inds],  X[train_inds]
+y_test,  y_train  = y[test_inds],  y[train_inds]
+f_x_test = f_XW[test_inds]
+s_x_test = s_XW[test_inds]
 ```
 
 ::::
@@ -458,7 +587,16 @@ bart_model_warmstart <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_warmstart = BARTModel()
+bart_model_warmstart.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=10, num_burnin=0, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 50,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": 50, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 5},
+)
 ```
 
 ::::
@@ -479,7 +617,19 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+mean_pred = bart_model_warmstart.y_hat_test.mean(axis=1)
+lo, hi = min(mean_pred.min(), y_test.min()), max(mean_pred.max(), y_test.max())
+plt.scatter(mean_pred, y_test, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Mean function")
+plt.show()
+
+var_pred = bart_model_warmstart.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -510,7 +660,16 @@ bart_model_mcmc <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_mcmc = BARTModel()
+bart_model_mcmc.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=0, num_burnin=1000, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 50,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": 50, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 5},
+)
 ```
 
 ::::
@@ -531,7 +690,19 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+mean_pred = bart_model_mcmc.y_hat_test.mean(axis=1)
+lo, hi = min(mean_pred.min(), y_test.min()), max(mean_pred.max(), y_test.max())
+plt.scatter(mean_pred, y_test, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Mean function")
+plt.show()
+
+var_pred = bart_model_mcmc.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -603,7 +774,31 @@ s_x_test <- s_XW[test_inds]
 ## Python
 
 ```{python}
-# Python implementation coming soon
+n, p_x = 500, 10
+X = rng.uniform(size=(n, p_x))
+# R's X[,2]=X[:,1], X[,4]=X[:,3], X[,1]=X[:,0], X[,3]=X[:,2]
+f_XW = (
+    ((X[:, 1] >= 0)    & (X[:, 1] < 0.25)) * (-6 * X[:, 3]) +
+    ((X[:, 1] >= 0.25) & (X[:, 1] < 0.5))  * (-2 * X[:, 3]) +
+    ((X[:, 1] >= 0.5)  & (X[:, 1] < 0.75)) * (2  * X[:, 3]) +
+    ((X[:, 1] >= 0.75) & (X[:, 1] < 1.0))  * (6  * X[:, 3])
+)
+s_XW = (
+    ((X[:, 0] >= 0)    & (X[:, 0] < 0.25)) * (0.5 * X[:, 2]) +
+    ((X[:, 0] >= 0.25) & (X[:, 0] < 0.5))  * (1.0 * X[:, 2]) +
+    ((X[:, 0] >= 0.5)  & (X[:, 0] < 0.75)) * (2.0 * X[:, 2]) +
+    ((X[:, 0] >= 0.75) & (X[:, 0] < 1.0))  * (3.0 * X[:, 2])
+)
+y = f_XW + rng.normal(size=n) * s_XW
+
+test_set_pct = 0.2
+n_test = round(test_set_pct * n)
+test_inds  = rng.choice(n, n_test, replace=False)
+train_inds = np.setdiff1d(np.arange(n), test_inds)
+X_test,  X_train  = X[test_inds],  X[train_inds]
+y_test,  y_train  = y[test_inds],  y[train_inds]
+f_x_test = f_XW[test_inds]
+s_x_test = s_XW[test_inds]
 ```
 
 ::::
@@ -636,7 +831,16 @@ bart_model_warmstart <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_warmstart = BARTModel()
+bart_model_warmstart.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=10, num_burnin=0, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 50,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": 50, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 5},
+)
 ```
 
 ::::
@@ -657,7 +861,19 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+mean_pred = bart_model_warmstart.y_hat_test.mean(axis=1)
+lo, hi = min(mean_pred.min(), y_test.min()), max(mean_pred.max(), y_test.max())
+plt.scatter(mean_pred, y_test, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Mean function")
+plt.show()
+
+var_pred = bart_model_warmstart.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::
@@ -688,7 +904,16 @@ bart_model_mcmc <- stochtree::bart(
 ## Python
 
 ```{python}
-# Python implementation coming soon
+bart_model_mcmc = BARTModel()
+bart_model_mcmc.sample(
+    X_train=X_train, y_train=y_train, X_test=X_test,
+    num_gfr=0, num_burnin=1000, num_mcmc=100,
+    general_params={"num_threads": 1, "sample_sigma2_global": False},
+    mean_forest_params={"sample_sigma2_leaf": False, "num_trees": 50,
+                        "alpha": 0.95, "beta": 2, "min_samples_leaf": 5},
+    variance_forest_params={"num_trees": 50, "alpha": 0.95,
+                            "beta": 1.25, "min_samples_leaf": 5},
+)
 ```
 
 ::::
@@ -709,7 +934,19 @@ abline(0,1,col="red",lty=2,lwd=2.5)
 ## Python
 
 ```{python}
-# Python implementation coming soon
+mean_pred = bart_model_mcmc.y_hat_test.mean(axis=1)
+lo, hi = min(mean_pred.min(), y_test.min()), max(mean_pred.max(), y_test.max())
+plt.scatter(mean_pred, y_test, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Mean function")
+plt.show()
+
+var_pred = bart_model_mcmc.sigma2_x_test.mean(axis=1)
+lo, hi = min(var_pred.min(), (s_x_test**2).min()), max(var_pred.max(), (s_x_test**2).max())
+plt.scatter(var_pred, s_x_test**2, s=10, alpha=0.6)
+plt.plot([lo, hi], [lo, hi], color="red", linestyle="dashed", linewidth=2)
+plt.xlabel("Predicted"); plt.ylabel("Actual"); plt.title("Variance function")
+plt.show()
 ```
 
 ::::

@@ -6,10 +6,23 @@ author:
   - name: Drew Herren
     affiliation: University of Texas at Austin
 date: today
-bibliography: R/IV/iv.bib
+bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
 ---
 
-## Introduction
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(here::here(), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
+
+# Introduction
 
 Here we consider a causal inference problem with a binary treatment and a binary outcome
 where there is unobserved confounding, but an exogenous instrument is available (also
@@ -17,7 +30,7 @@ binary). This problem requires several extensions to the basic BART model, all o
 can be implemented as Gibbs samplers using `stochtree`. Our analysis follows the
 Bayesian nonparametric approach described in the supplement to @hahn2016bayesian.
 
-## Background
+# Background
 
 To be concrete, suppose we wish to measure the effect of receiving a flu vaccine on the
 probability of getting the flu. Individuals who opt to get a flu shot differ in many
@@ -35,10 +48,11 @@ Let $V$ denote the treatment variable (vaccine). Let $Y$ denote the response
 covariate (patient age).
 
 Let $S$ denote the *principal strata*, an exhaustive characterization of how individuals
-are affected by the encouragement. Some people will get a flu shot no matter what:
-*always takers* ($a$). Some will not get the shot no matter what: *never takers* ($n$).
-*Compliers* ($c$) would not have gotten the shot but for the encouragement. We assume
-no *defiers* ($d$).
+are affected by the encouragement. 
+Some people will get a flu shot no matter what: *always takers* ($a$). 
+Some will not get the shot no matter what: *never takers* ($n$).
+*Compliers* ($c$) would not have gotten the shot but for the encouragement. 
+We assume no *defiers* ($d$).
 
 ## The Causal Diagram
 
@@ -110,19 +124,13 @@ $$
 
 and analogously for $\gamma_c^{11}(x)$.
 
-## Load Libraries
+# Setup
+
+We load all necessary libraries
 
 :::{.panel-tabset group="language"}
 
 ## R
-
-```{r}
-#| include: false
-reticulate::use_python(
-  Sys.getenv("RETICULATE_PYTHON", unset = Sys.which("python3")),
-  required = TRUE
-)
-```
 
 ```{r}
 #| message: false
@@ -144,9 +152,29 @@ from stochtree import (
 
 :::
 
-## Simulate the Data
+And set a seed for reproducibility
 
-### Setup
+:::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+random_seed <- 1234
+set.seed(random_seed)
+```
+
+## Python
+
+```{python}
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
+```
+
+:::
+
+## Data Generation
+
+Data size
 
 :::{.panel-tabset group="language"}
 
@@ -154,23 +182,17 @@ from stochtree import (
 
 ```{r}
 n <- 20000
-random_seed <- NULL
 ```
 
 ## Python
 
 ```{python}
 n = 20000
-random_seed = None
-if random_seed is not None:
-    rng = np.random.default_rng(random_seed)
-else:
-    rng = np.random.default_rng()
 ```
 
 :::
 
-### Generate the Instrument
+Generate the Instrument
 
 :::{.panel-tabset group="language"}
 
@@ -188,10 +210,8 @@ z = rng.binomial(n=1, p=0.5, size=n)
 
 :::
 
-### Generate the Covariate
-
-We think of $X$ as patient age, drawn from a uniform distribution on $[0, 3]$
-(pre-standardized for illustration purposes).
+We conceptualize a covariate $X$ as patient age, drawn from a uniform distribution on $[0, 3]$
+(pre-standardized for illustration purposes) and generate the covariate
 
 :::{.panel-tabset group="language"}
 
@@ -213,10 +233,8 @@ x   = X[:, 0]
 
 :::
 
-### Generate the Principal Strata
-
-We generate $S$ from a logistic model in $X$, parameterized so that the probability
-of being a never taker decreases with age.
+We generate principal strata $S$ from a logistic model in $X$, parameterized so that the probability
+of being a never taker decreases with age
 
 :::{.panel-tabset group="language"}
 
@@ -262,10 +280,8 @@ for i in range(n):
 
 :::
 
-### Generate the Treatment
-
-The treatment $V$ is a deterministic function of $S$ and $Z$ — this is what gives the
-principal strata their meaning.
+The treatment $V$ is generated as a deterministic function of $S$ and $Z$ — this is what gives the
+principal strata their meaning
 
 :::{.panel-tabset group="language"}
 
@@ -283,11 +299,10 @@ v = 1*(s == 'a') + 0*(s == 'n') + z*(s == "c") + (1-z)*(s == "d")
 
 :::
 
-### Generate the Outcome
-
-The outcome structural model — by varying this function we can alter the
-identification conditions. Setting it to depend on `zval` violates the exclusion
-restriction, and we do so here to illustrate partial identification.
+The outcome is generated according to the structural model below. 
+By varying this function we can alter the identification conditions. 
+Setting it to depend on `zval` violates the exclusion restriction, 
+and we do so here to illustrate partial identification.
 
 :::{.panel-tabset group="language"}
 
@@ -315,10 +330,9 @@ y = rng.binomial(n=1, p=gamfun(X[:, 0], v, z, s), size=n)
 
 :::
 
-### Organize the Data
+## Model Fitting
 
-For the monotone probit model, the observations must be sorted so that $Z=1$ cases
-come first.
+In order to fit a monotone probit model, the observations must be sorted so that $Z=1$ cases come first.
 
 :::{.panel-tabset group="language"}
 
@@ -354,8 +368,6 @@ x          = x[sort_index]
 
 :::
 
-## Fit the Outcome Model
-
 We fit a probit BART model for $\Pr(Y=1 \mid V=1, Z=1, X=x)$ using the
 Albert–Chib [@albert1993bayesian] data augmentation Gibbs sampler. We initialize the
 forest, enter the main loop (alternating: sample forest | sample latent utilities),
@@ -366,7 +378,6 @@ and retain all post-warmstart draws.
 ## R
 
 ```{r}
-#| cache: true
 num_warmstart <- 10
 num_mcmc      <- 1000
 num_samples   <- num_warmstart + num_mcmc
@@ -415,7 +426,7 @@ for (i in seq_len(num_samples)) {
   forest_model$sample_one_iteration(
     forest_dataset, outcome, forest_samples, active_forest,
     rng_r, forest_model_config, global_model_config,
-    keep_forest = TRUE, gfr = gfr_flag
+    keep_forest = TRUE, gfr = gfr_flag, num_threads = 1
   )
   eta <- forest_samples$predict_raw_single_forest(forest_dataset, i - 1)
   U1  <- runif(n1, pnorm(0, eta[y == 1], 1), 1)
@@ -430,9 +441,8 @@ for (i in seq_len(num_samples)) {
 ## Python
 
 ```{python}
-#| cache: true
-num_warmstart <- 10
-num_mcmc      <- 1000
+num_warmstart = 10
+num_mcmc      = 1000
 num_samples   = num_warmstart + num_mcmc
 
 alpha = 0.95;  beta = 2;  min_samples_leaf = 1;  max_depth = 20
@@ -476,7 +486,7 @@ for i in range(num_samples):
     forest_sampler.sample_one_iteration(
         forest_samples, active_forest, forest_dataset, outcome, cpp_rng,
         global_model_config, forest_model_config,
-        keep_forest=True, gfr=gfr_flag,
+        keep_forest=True, gfr=gfr_flag, num_threads=1,
     )
     eta  = np.squeeze(forest_samples.predict_raw_single_forest(forest_dataset, i))
     mu0  = eta[y == 0];  mu1 = eta[y == 1]
@@ -489,11 +499,7 @@ for i in range(num_samples):
 
 :::
 
-## Fit the Monotone Probit Model
-
-The monotonicity constraint
-$\Pr(V=1 \mid Z=0, X=x) \leq \Pr(V=1 \mid Z=1, X=x)$ is enforced via the
-data augmentation of @papakostas2023forecasts. We parameterize:
+The monotonicity constraint $\Pr(V=1 \mid Z=0, X=x) \leq \Pr(V=1 \mid Z=1, X=x)$ is enforced via the data augmentation of @papakostas2023forecasts. We parameterize
 
 $$
 \Pr(V=1 \mid Z=0, X=x) = \Phi_f(x)\,\Phi_h(x), \qquad
@@ -507,7 +513,6 @@ where $\Phi_\mu(x)$ is the normal CDF with mean $\mu(x)$ and variance 1.
 ## R
 
 ```{r}
-#| cache: true
 X_h  <- as.matrix(X[z == 0, ])
 n0   <- sum(z == 0);  n1 <- sum(z == 1)
 num_trees_f <- 50;  num_trees_h <- 20
@@ -563,12 +568,12 @@ gfr_flag <- TRUE
 for (i in seq_len(num_samples)) {
   if (i > num_warmstart) gfr_flag <- FALSE
   fm_f$sample_one_iteration(forest_dataset_f, out_f, fs_f, af_f,
-    rng_r, fmc_f, gmc_mono, keep_forest = TRUE, gfr = gfr_flag)
+    rng_r, fmc_f, gmc_mono, keep_forest = TRUE, gfr = gfr_flag, num_threads = 1)
   fm_h$sample_one_iteration(forest_dataset_h, out_h, fs_h, af_h,
-    rng_r, fmc_h, gmc_mono, keep_forest = TRUE, gfr = gfr_flag)
+    rng_r, fmc_h, gmc_mono, keep_forest = TRUE, gfr = gfr_flag, num_threads = 1)
 
-  eta_f <- forest_samples_f$predict_raw_single_forest(forest_dataset_f, i - 1)
-  eta_h <- forest_samples_h$predict_raw_single_forest(forest_dataset_h, i - 1)
+  eta_f <- fs_f$predict_raw_single_forest(forest_dataset_f, i - 1)
+  eta_h <- fs_h$predict_raw_single_forest(forest_dataset_h, i - 1)
 
   idx0  <- which(v0 == 0)
   w1 <- (1 - pnorm(eta_h[idx0])) * (1 - pnorm(eta_f[n1 + idx0]))
@@ -598,7 +603,6 @@ for (i in seq_len(num_samples)) {
 ## Python
 
 ```{python}
-#| cache: true
 X_h  = X[z == 0, :]
 n0   = int(np.sum(z == 0));  n1 = int(np.sum(z == 1))
 num_trees_f = 50;  num_trees_h = 20
@@ -651,9 +655,9 @@ for i in range(num_samples):
     if i >= num_warmstart:
         gfr_flag = False
     fs_f.sample_one_iteration(forest_samples_f, af_f, forest_dataset_f, out_f,
-        cpp_rng, gmc_mono, fmc_f, keep_forest=True, gfr=gfr_flag)
+        cpp_rng, gmc_mono, fmc_f, keep_forest=True, gfr=gfr_flag, num_threads=1)
     fs_h.sample_one_iteration(forest_samples_h, af_h, forest_dataset_h, out_h,
-        cpp_rng, gmc_mono, fmc_h, keep_forest=True, gfr=gfr_flag)
+        cpp_rng, gmc_mono, fmc_h, keep_forest=True, gfr=gfr_flag, num_threads=1)
 
     eta_f = np.squeeze(forest_samples_f.predict_raw_single_forest(forest_dataset_f, i))
     eta_h = np.squeeze(forest_samples_h.predict_raw_single_forest(forest_dataset_h, i))
