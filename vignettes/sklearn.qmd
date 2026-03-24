@@ -1,5 +1,5 @@
 ---
-title: "Scikit-Learn Interface"
+title: "Using Stochtree via Sklearn-Compatible Estimators in Python"
 execute:
   freeze: auto  # re-render only when source changes
 ---
@@ -126,10 +126,12 @@ grid_search = GridSearchCV(
     param_grid=param_grid,
     cv=5,
     scoring="r2",
-    n_jobs=-1,
+    n_jobs=1,  # n_jobs=-1 deadlocks when stochtree's C++ thread pool is active
 )
 grid_search.fit(X, y)
 ```
+
+Note that we set `n_jobs=1` above to avoid deadlocks arising from interactions between `reticulate` (which renders these python vignettes), `joblib`, and stochtree's own C++ multithreading model. Users running this vignette interactively or as a script do not need to fix `n_jobs=1`.
 
 ```{python}
 cv_best_ind = np.argwhere(grid_search.cv_results_['rank_test_score'] == 1).item(0)
