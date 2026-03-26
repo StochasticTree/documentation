@@ -142,19 +142,19 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; Outcome was standardized</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.891, standard deviation = 0.048, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.890, standard deviation = 0.049, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.7987165 0.8305400 0.8581000 0.8889526 0.9225745 0.9524837 0.9866250 </span></span>
+<span><span class="co">#&gt; 0.8003149 0.8293188 0.8556636 0.8878185 0.9226812 0.9541112 0.9926500 </span></span>
 <span><span class="co">#&gt; Summary of leaf scale posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.007, standard deviation = 0.001, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.007, standard deviation = 0.002, quantiles:</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; 0.005123651 0.005609508 0.006129227 0.006794166 0.007611351 0.008624560 </span></span>
+<span><span class="co">#&gt; 0.005311876 0.005851766 0.006408429 0.007131616 0.008143749 0.009389664 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt; 0.010147458 </span></span>
+<span><span class="co">#&gt; 0.011290079 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = -0.064, standard deviation = 3.285, quantiles:</span></span>
+<span><span class="co">#&gt; 1000 observations, mean = -0.064, standard deviation = 3.286, quantiles:</span></span>
 <span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
-<span><span class="co">#&gt; -6.8176294 -4.9031323 -1.8322216 -0.1186542  2.0587442  4.2719329  6.5767967</span></span></code></pre></div>
+<span><span class="co">#&gt; -6.8376169 -4.9410309 -1.8286542 -0.1212699  2.0049226  4.3343843  6.5421589</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
@@ -243,39 +243,37 @@ the <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">su
 <span><span class="co">#&gt; An internal propensity model was fit using stochtree::bart() in lieu of user-provided propensity scores</span></span>
 <span><span class="co">#&gt; The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) </span></span>
 <span><span class="co">#&gt; Summary of sigma^2 posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 2.908, standard deviation = 2.861, quantiles:</span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.949, standard deviation = 0.045, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; 0.8709006 0.9007331 0.9312586 0.9750548 6.1750474 7.6062483 8.2533928 </span></span>
+<span><span class="co">#&gt; 0.8666404 0.8909755 0.9181982 0.9474310 0.9780992 1.0080411 1.0391263 </span></span>
 <span><span class="co">#&gt; Summary of prognostic forest leaf scale posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 0.367, standard deviation = 0.598, quantiles:</span></span>
-<span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; 0.001124219 0.001334023 0.001578939 0.002061884 0.816064021 1.256450008 </span></span>
-<span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt; 2.012117936 </span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.002, standard deviation = 0.000, quantiles:</span></span>
+<span><span class="co">#&gt;         2.5%          10%          25%          50%          75%          90% </span></span>
+<span><span class="co">#&gt; 0.0009116635 0.0010987064 0.0012542186 0.0014739285 0.0017229353 0.0019749827 </span></span>
+<span><span class="co">#&gt;        97.5% </span></span>
+<span><span class="co">#&gt; 0.0022666950 </span></span>
 <span><span class="co">#&gt; Summary of adaptive coding parameters: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean (control) = 7.367, mean (treated) = 7.991, standard deviation (control) = 17.057, standard deviation (treated) = 15.447</span></span>
+<span><span class="co">#&gt; 3000 samples, mean (control) = -0.478, mean (treated) = 1.024, standard deviation (control) = 0.351, standard deviation (treated) = 0.322</span></span>
 <span><span class="co">#&gt; quantiles (control):</span></span>
 <span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -14.4512865  -1.3371975  -0.8907895  -0.4951968   3.1868561  41.2201978 </span></span>
+<span><span class="co">#&gt; -1.20954103 -0.94533073 -0.70589290 -0.45372961 -0.23804618 -0.05053639 </span></span>
 <span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  46.7789566 </span></span>
+<span><span class="co">#&gt;  0.16412275 </span></span>
 <span><span class="co">#&gt; quantiles (treated):</span></span>
-<span><span class="co">#&gt;        2.5%         10%         25%         50%         75%         90% </span></span>
-<span><span class="co">#&gt; -10.0770744   0.2850534   0.6216322   0.9595755   2.1708540  39.1251787 </span></span>
-<span><span class="co">#&gt;       97.5% </span></span>
-<span><span class="co">#&gt;  45.1793345 </span></span>
-<span><span class="co">#&gt; Summary of treatment effect intercept (tau_0) posterior: </span></span>
-<span><span class="co">#&gt; 3000 samples, mean = 3.347, standard deviation = 10.122, quantiles:</span></span>
 <span><span class="co">#&gt;      2.5%       10%       25%       50%       75%       90%     97.5% </span></span>
-<span><span class="co">#&gt; -8.733087 -6.977256 -3.638997  0.395986  8.429882 19.814918 28.488112 </span></span>
+<span><span class="co">#&gt; 0.4426646 0.6310700 0.8015953 1.0027876 1.2307075 1.4410206 1.7117698 </span></span>
+<span><span class="co">#&gt; Summary of treatment effect intercept (tau_0) posterior: </span></span>
+<span><span class="co">#&gt; 3000 samples, mean = 0.117, standard deviation = 0.822, quantiles:</span></span>
+<span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
+<span><span class="co">#&gt; -1.8338976 -1.1897141 -0.3050375  0.2355905  0.6736681  1.0255668  1.5358699 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean predictions: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 3.074, standard deviation = 1.111, quantiles:</span></span>
+<span><span class="co">#&gt; 1000 observations, mean = 3.487, standard deviation = 0.945, quantiles:</span></span>
 <span><span class="co">#&gt;     2.5%      10%      25%      50%      75%      90%    97.5% </span></span>
-<span><span class="co">#&gt; 1.010582 1.627791 2.275165 3.100228 3.829148 4.501453 5.266819 </span></span>
+<span><span class="co">#&gt; 1.648826 2.259504 2.796575 3.474391 4.146071 4.702589 5.442007 </span></span>
 <span><span class="co">#&gt; Summary of in-sample posterior mean CATEs: </span></span>
-<span><span class="co">#&gt; 1000 observations, mean = 7.646, standard deviation = 0.394, quantiles:</span></span>
-<span><span class="co">#&gt;     2.5%      10%      25%      50%      75%      90%    97.5% </span></span>
-<span><span class="co">#&gt; 7.047858 7.160313 7.282692 7.625729 8.034039 8.162172 8.249342</span></span></code></pre></div>
+<span><span class="co">#&gt; 1000 observations, mean = -0.094, standard deviation = 0.528, quantiles:</span></span>
+<span><span class="co">#&gt;       2.5%        10%        25%        50%        75%        90%      97.5% </span></span>
+<span><span class="co">#&gt; -0.9095241 -0.7312615 -0.5618005 -0.1734408  0.4091968  0.6312514  0.7610138</span></span></code></pre></div>
 <p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function to produce a traceplot of
 model terms like the global error scale
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>
