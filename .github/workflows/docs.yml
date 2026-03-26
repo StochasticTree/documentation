@@ -87,10 +87,13 @@ jobs:
           mkdir -p docs/R_docs/pkgdown
           Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
 
+      - name: Install stochtree R package for vignettes
+        run: Rscript -e 'install.packages("stochtree_repo/stochtree_cran", repos = NULL, type = "source")'
+
       - name: Clean up the temporary stochtree_cran directory created
         run: |
           cd stochtree_repo
-          Rscript cran-cleanup.R 
+          Rscript cran-cleanup.R
           cd ..
 
       - name: Install Quarto
