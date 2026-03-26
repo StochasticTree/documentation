@@ -1,0 +1,37 @@
+/* ── Secondary nav bar (breadcrumb bar below main navbar) ────────────────
+   The bar uses var(--bs-breadcrumb-bg) for its background, so we override
+   the variable rather than the property.
+   ──────────────────────────────────────────────────────────────────────── */
+:root {
+  --bs-breadcrumb-bg: #ffffff;
+}
+
+/* ── Secondary nav bar: links (e.g. "Core Models") ──────────────────────────
+   Breadcrumb item links inherit the global link color (teal) which disappears
+   on the now-white breadcrumb bar. Override to the same dark slate as the text.
+   ──────────────────────────────────────────────────────────────────────────── */
+.quarto-secondary-nav a,
+.breadcrumb-item a {
+  color: #2d3748 !important;
+}
+
+/* ── Methods summary table ───────────────────────────────────────────────
+   The methods table lives in <section id="methods" class="level2">.
+   First column (method name): never wrap, pin a minimum width so long
+   names like `compute_posterior_interval` stay on one line.
+   ──────────────────────────────────────────────────────────────────────── */
+section#methods table.table td:first-child,
+section#methods table.table th:first-child {
+  min-width: 240px;
+  white-space: nowrap;
+}
+
+/* ── Parameter / Returns tables ──────────────────────────────────────────
+   These live in <section class="level4 doc-section doc-section-parameters">
+   Give the Name column a floor so it isn't crowded by Type/Description.
+   ──────────────────────────────────────────────────────────────────────── */
+.doc-section table.table td:first-child,
+.doc-section table.table th:first-child {
+  min-width: 140px;
+  white-space: nowrap;
+}
