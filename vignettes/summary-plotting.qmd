@@ -10,7 +10,7 @@ execute:
 reticulate::use_python(
   Sys.getenv(
     "RETICULATE_PYTHON",
-    unset = file.path(here::here(), ".venv", "bin", "python")
+    unset = file.path(rprojroot::find_root(rprojroot::has_file(".here")), ".venv", "bin", "python")
   ),
   required = TRUE
 )
@@ -117,7 +117,10 @@ Now we fit a simple BART model to the data.
 num_gfr <- 10
 num_burnin <- 0
 num_mcmc <- 1000
-general_params <- list(num_chains = 3)
+general_params <- list(
+  num_threads = 1, 
+  num_chains = 3
+)
 bart_model <- stochtree::bart(
   X_train = X,
   y_train = y,
@@ -140,7 +143,10 @@ bart_model.sample(
     num_gfr=10,
     num_burnin=0,
     num_mcmc=1000,
-    general_params={"num_threads": 1, "num_chains": 3},
+    general_params={
+      "num_threads": 1, 
+      "num_chains": 3
+    },
 )
 ```
 
@@ -230,7 +236,7 @@ plot(
 
 ```{python}
 y_hat_train_samples = bart_model.extract_parameter("y_hat_train")
-obs_index = 0  # 0-indexed (R uses 1)
+obs_index = 0
 fig, ax = plt.subplots()
 ax.plot(y_hat_train_samples[obs_index, :])
 ax.set_title(f"In-Sample Predictions Traceplot, Observation {obs_index}")
@@ -271,14 +277,18 @@ y = mu_X + tau_X * Z + epsilon
 ## Python
 
 ```{python}
+# Generate covariates and treatment
 n = 1000
 p_X = 5
 X = rng.uniform(size=(n, p_X))
-# R uses X[,1], X[,3], X[,2] (1-indexed) = Python X[:,0], X[:,2], X[:,1]
 pi_X = 0.25 + 0.5 * X[:, 0]
 Z = rng.binomial(1, pi_X, n).astype(float)
+
+# Define the outcome mean functions (prognostic and treatment effects)
 mu_X = pi_X * 5 + 2 * X[:, 2]
 tau_X = X[:, 1] * 2 - 1
+
+# Generate outcome
 epsilon = rng.standard_normal(n)
 y = mu_X + tau_X * Z + epsilon
 ```
@@ -295,7 +305,11 @@ Now we fit a simple BCF model to the data
 num_gfr <- 10
 num_burnin <- 0
 num_mcmc <- 1000
-general_params <- list(num_chains = 3)
+general_params <- list(
+  num_threads = 1, 
+  num_chains = 3, 
+  adaptive_coding = TRUE
+)
 bcf_model <- stochtree::bcf(
   X_train = X,
   y_train = y,
@@ -319,7 +333,11 @@ bcf_model.sample(
     num_gfr=10,
     num_burnin=0,
     num_mcmc=1000,
-    general_params={"num_threads": 1, "num_chains": 3},
+    general_params={
+      "num_threads": 1, 
+      "num_chains": 3, 
+      "adaptive_coding": True
+    },
 )
 ```
 

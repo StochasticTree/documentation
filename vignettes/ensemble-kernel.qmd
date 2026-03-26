@@ -10,7 +10,7 @@ execute:
 reticulate::use_python(
   Sys.getenv(
     "RETICULATE_PYTHON",
-    unset = file.path(here::here(), ".venv", "bin", "python")
+    unset = file.path(rprojroot::find_root(rprojroot::has_file(".here")), ".venv", "bin", "python")
   ),
   required = TRUE
 )
@@ -28,14 +28,31 @@ it reserves the numbers 1 - 3, and in turn if tree 2 has 5 leaves, it reserves t
 numbers 4 - 8 to label its leaves, and so on). For a dataset with $n$ observations,
 we construct the matrix $W$ as follows:
 
-|    Initialize $W$ as a matrix of all zeroes with $n$ rows and as many columns as leaves in the ensemble
-|    Let `s` = 0
-|    **FOR** $j$ **IN** $\left\{1,\dots,m\right\}$:
-|       Let `num_leaves` be the number of leaves in tree $j$
-|       **FOR** $i$ **IN** $\left\{1,\dots,n\right\}$:
-|          Let `k` be the leaf to which tree $j$ maps observation $i$
-|          Set element $W_{i,k+s} = 1$
-|       Let `s` = `s + num_leaves`
+<style>.algorithm p { margin: 0.1em 0; line-height: 1.7; }</style>
+
+::: {.algorithm style="border-top: 2px solid; border-bottom: 2px solid; padding: 0.6em 1em; margin: 1.5em 0;"}
+
+Initialize $W$ as a matrix of all zeroes with $n$ rows and as many columns as leaves in the ensemble
+
+Let `s` = 0
+
+For $j$ in $\left\{1,\dots,m\right\}$:
+
+:::: {style="margin-left: 2em"}
+Let `num_leaves` be the number of leaves in tree $j$
+
+For $i$ in $\left\{1,\dots,n\right\}$:
+
+::::: {style="margin-left: 2em"}
+Let `k` be the leaf to which tree $j$ maps observation $i$
+
+Set element $W_{i,k+s} = 1$
+:::::
+
+Let `s` = `s + num_leaves`
+::::
+
+:::
 
 This sparse matrix $W$ is a matrix representation of the basis predictions of an
 ensemble (i.e. integrating out the leaf parameters and just analyzing the leaf

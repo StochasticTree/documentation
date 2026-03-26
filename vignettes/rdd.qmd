@@ -26,7 +26,7 @@ $$
 reticulate::use_python(
   Sys.getenv(
     "RETICULATE_PYTHON",
-    unset = file.path(here::here(), ".venv", "bin", "python")
+    unset = file.path(rprojroot::find_root(rprojroot::has_file(".here")), ".venv", "bin", "python")
   ),
   required = TRUE
 )

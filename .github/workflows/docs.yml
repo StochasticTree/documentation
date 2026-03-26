@@ -61,6 +61,9 @@ jobs:
           pip install .
           cd ..
 
+      - name: Set RETICULATE_PYTHON for vignette rendering
+        run: echo "RETICULATE_PYTHON=$(which python)" >> $GITHUB_ENV
+
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
@@ -79,7 +82,7 @@ jobs:
       - name: Build R doc site
         run: |
           cd stochtree_repo
-          Rscript cran-bootstrap.R 1 1 1
+          Rscript cran-bootstrap.R 0 1 0
           cd ..
           mkdir -p docs/R_docs/pkgdown
           Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
@@ -90,39 +93,22 @@ jobs:
           Rscript cran-cleanup.R 
           cd ..
 
-      - name: Copy Jupyter notebook demos over to docs directory
-        run: |
-          cp stochtree_repo/demo/notebooks/supervised_learning.ipynb docs/python_docs/demo/supervised_learning.ipynb
-          cp stochtree_repo/demo/notebooks/causal_inference.ipynb docs/python_docs/demo/causal_inference.ipynb
-          cp stochtree_repo/demo/notebooks/heteroskedastic_supervised_learning.ipynb docs/python_docs/demo/heteroskedastic_supervised_learning.ipynb
-          cp stochtree_repo/demo/notebooks/multivariate_treatment_causal_inference.ipynb docs/python_docs/demo/multivariate_treatment_causal_inference.ipynb
-          cp stochtree_repo/demo/notebooks/serialization.ipynb docs/python_docs/demo/serialization.ipynb
-          cp stochtree_repo/demo/notebooks/tree_inspection.ipynb docs/python_docs/demo/tree_inspection.ipynb
-          cp stochtree_repo/demo/notebooks/summary.ipynb docs/python_docs/demo/summary.ipynb
-          cp stochtree_repo/demo/notebooks/ordinal_outcome.ipynb docs/python_docs/demo/ordinal_outcome.ipynb
-          cp stochtree_repo/demo/notebooks/prototype_interface.ipynb docs/python_docs/demo/prototype_interface.ipynb
-          cp stochtree_repo/demo/notebooks/sklearn_wrappers.ipynb docs/python_docs/demo/sklearn_wrappers.ipynb
-          cp stochtree_repo/demo/notebooks/multi_chain.ipynb docs/python_docs/demo/multi_chain.ipynb
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Copy static vignettes over to docs directory
-        run: |
-          cp vignettes/Python/RDD/rdd.html docs/vignettes/Python/rdd.html
-          cp vignettes/Python/RDD/RDD_DAG.png docs/vignettes/Python/RDD_DAG.png
-          cp vignettes/Python/RDD/trees1.png docs/vignettes/Python/trees1.png
-          cp vignettes/Python/RDD/trees2.png docs/vignettes/Python/trees2.png
-          cp vignettes/Python/RDD/trees3.png docs/vignettes/Python/trees3.png
-          cp vignettes/R/RDD/rdd.html docs/vignettes/R/rdd.html
-          cp vignettes/Python/IV/iv.html docs/vignettes/Python/iv.html
-          cp vignettes/Python/IV/IV_CDAG.png docs/vignettes/Python/IV_CDAG.png
-          cp vignettes/R/IV/iv.html docs/vignettes/R/iv.html
-      
+      - name: Install quartodoc
+        run: pip install quartodoc "griffe<1.0"
+
+      - name: Regenerate Python API reference pages
+        run: quartodoc build
+
       - name: Build the overall doc site
         run: |
-          mkdocs build
+          quarto render
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: site
+          folder: _site

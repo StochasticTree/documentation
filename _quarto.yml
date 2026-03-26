@@ -1,0 +1,155 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "vignettes/*.qmd"
+    - "python-api/reference/*.qmd"
+    - "development/*.qmd"
+  resources:
+    - docs/R_docs/pkgdown/
+    - docs/cpp_docs/doxygen/
+
+website:
+  title: "StochTree"
+  site-url: "https://stochtree.ai/"
+  repo-url: "https://github.com/StochasticTree/stochtree"
+  repo-actions: [issue]
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: getting-started.qmd
+        text: Getting Started
+      - href: about.qmd
+        text: About
+      - text: R Package
+        href: docs/R_docs/pkgdown/index.html
+      - text: Python API
+        href: python-api/reference/index.qmd
+      - text: C++ API
+        href: docs/cpp_docs/doxygen/index.html
+      - text: Vignettes
+        href: vignettes/index.qmd
+      - text: Development
+        menu:
+          - text: Overview
+            href: development/index.qmd
+          - text: Contributing
+            href: development/contributing.qmd
+          - text: Adding New Models
+            href: development/new-models.qmd
+          - text: Roadmap
+            href: development/roadmap.qmd
+
+  sidebar:
+    - id: python-api
+      title: "Python API"
+      style: docked
+      contents:
+        - python-api/reference/index.qmd
+        - section: "Core Models"
+          contents:
+            - python-api/reference/bart.BARTModel.qmd
+            - python-api/reference/bcf.BCFModel.qmd
+        - section: "Scikit-Learn Interface"
+          contents:
+            - python-api/reference/sklearn.StochTreeBARTRegressor.qmd
+            - python-api/reference/sklearn.StochTreeBARTBinaryClassifier.qmd
+        - section: "Low-Level API"
+          contents:
+            - python-api/reference/data.Dataset.qmd
+            - python-api/reference/data.Residual.qmd
+            - python-api/reference/forest.Forest.qmd
+            - python-api/reference/forest.ForestContainer.qmd
+            - python-api/reference/sampler.ForestSampler.qmd
+            - python-api/reference/sampler.GlobalVarianceModel.qmd
+            - python-api/reference/sampler.LeafVarianceModel.qmd
+
+    - id: vignettes
+      title: "Vignettes"
+      style: docked
+      contents:
+        - vignettes/index.qmd
+        - section: "Core Models"
+          contents:
+            - vignettes/bart.qmd
+            - vignettes/bcf.qmd
+            - vignettes/heteroskedastic.qmd
+            - vignettes/ordinal-outcome.qmd
+            - vignettes/multivariate-bcf.qmd
+        - section: "Practical Topics"
+          contents:
+            - vignettes/serialization.qmd
+            - vignettes/multi-chain.qmd
+            - vignettes/tree-inspection.qmd
+            - vignettes/summary-plotting.qmd
+            - vignettes/prior-calibration.qmd
+            - vignettes/sklearn.qmd
+        - section: "Low-Level Interface"
+          contents:
+            - vignettes/custom-sampling.qmd
+            - vignettes/ensemble-kernel.qmd
+        - section: "Advanced Methods"
+          contents:
+            - vignettes/rdd.qmd
+            - vignettes/iv.qmd
+
+format:
+  html:
+    theme: [minty, assets/custom.scss]
+    css: assets/api.css
+    toc: true
+    toc-depth: 3
+    grid:
+      body-width: 1000px
+      margin-width: 200px
+
+execute:
+  freeze: auto
+
+quartodoc:
+  package: stochtree
+  dir: python-api/reference
+  style: pkgdown
+  parser: numpy
+  render_interlinks: false
+  sections:
+    - title: Core Models
+      desc: High-level model interfaces for supervised learning and causal inference.
+      contents:
+        - name: bart.BARTModel
+          member_order: source
+        - name: bcf.BCFModel
+          member_order: source
+    - title: Scikit-Learn Interface
+      desc: stochtree models wrapped as sklearn-compatible estimators.
+      contents:
+        - name: sklearn.StochTreeBARTRegressor
+          member_order: source
+        - name: sklearn.StochTreeBARTBinaryClassifier
+          member_order: source
+    - title: Low-Level API — Data
+      desc: Data structures for custom sampling workflows.
+      contents:
+        - name: data.Dataset
+          member_order: source
+        - name: data.Residual
+          member_order: source
+    - title: Low-Level API — Forest
+      desc: Forest containers and inspection.
+      contents:
+        - name: forest.Forest
+          member_order: source
+        - name: forest.ForestContainer
+          member_order: source
+    - title: Low-Level API — Samplers
+      desc: Sampler classes for building custom models.
+      contents:
+        - name: sampler.ForestSampler
+          member_order: source
+        - name: sampler.GlobalVarianceModel
+          member_order: source
+        - name: sampler.LeafVarianceModel
+          member_order: source
