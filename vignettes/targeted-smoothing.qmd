@@ -74,6 +74,15 @@ library(stochtree)
 library(ggplot2)
 ```
 
+## Python
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import norm
+from stochtree import BARTModel
+```
+
 ::::
 
 Set a seed for reproducibility
@@ -87,9 +96,71 @@ random_seed <- 1234
 set.seed(random_seed)
 ```
 
+## Python
+
+```{python}
+random_seed = 1234
+rng = np.random.default_rng(random_seed)
+```
+
 ::::
 
-# Hilbert Space Basis Functions
+
+# Simulation
+
+We simulate a dataset in which the response depends on $u$ and $X$ through an interaction:
+
+$$
+f(u, X) = 3 X_1 u + \frac{(X_2 - 1)(1 - u)^2}{3} + \Phi(2 X_3 u)
+$$
+
+where $u \sim \text{Uniform}(-0.5, 0.5)$ is the GP target variable, $X \in \mathbb{R}^3$ are additional covariates, and $\Phi$ is the standard normal CDF.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+n <- 1000
+p <- 5
+
+u <- runif(n, -0.5, 0.5)
+X <- matrix(rnorm(n * p), nrow = n)
+
+f_true <- function(row) {
+  # row = c(u, x1, x2, x3)
+  3 * row[2] * row[1] + (row[3] - 1) * (1 - row[1])^2 / 3 + pnorm(2 * row[4] * row[1])
+}
+
+f0 <- apply(cbind(u, X), 1, f_true)
+y  <- f0 + rnorm(n, 0, 0.25 * sd(f0))
+
+cat("Signal SD:", round(sd(f0), 3), "\n")
+cat("Noise SD: ", round(0.25 * sd(f0), 3), "\n")
+```
+
+## Python
+
+```{python}
+n = 1000
+p = 5
+
+u = rng.uniform(-0.5, 0.5, n)
+X = rng.standard_normal((n, p))
+
+def f_true(u, x):
+    return 3 * x[0] * u + (x[1] - 1) * (1 - u)**2 / 3 + norm.cdf(2 * x[2] * u)
+
+f0 = np.array([f_true(u[i], X[i]) for i in range(n)])
+y  = f0 + rng.normal(0, 0.25 * f0.std(), n)
+
+print(f"Signal SD: {f0.std():.3f}")
+print(f"Noise SD:  {0.25 * f0.std():.3f}")
+```
+
+::::
+
+# Constructing the Basis Matrix
 
 Two helper functions below construct the basis:
 
@@ -117,44 +188,22 @@ SDiag <- function(sigma, l, J, L) {
 }
 ```
 
-::::
+## Python
 
-# Simulation
+```{python}
+def Omega(u, J, L):
+    j = np.arange(1, J + 1)
+    return np.sqrt(1 / L) * np.sin(np.pi * j[None, :] * (u[:, None] + L) / (2 * L))
 
-We simulate a dataset in which the response depends on $u$ and $X$ through an interaction:
 
-$$
-f(u, X) = 3 X_1 u + \frac{(X_2 - 1)(1 - u)^2}{3} + \Phi(2 X_3 u)
-$$
-
-where $u \sim \text{Uniform}(-0.5, 0.5)$ is the GP target variable, $X \in \mathbb{R}^3$ are additional covariates, and $\Phi$ is the standard normal CDF.
-
-::::{.panel-tabset group="language"}
-
-## R
-
-```{r}
-n <- 200
-p <- 3
-
-u <- runif(n, -0.5, 0.5)
-X <- matrix(rnorm(n * p), nrow = n)
-
-f_true <- function(row) {
-  # row = c(u, x1, x2, x3)
-  3 * row[2] * row[1] + (row[3] - 1) * (1 - row[1])^2 / 3 + pnorm(2 * row[4] * row[1])
-}
-
-f0 <- apply(cbind(u, X), 1, f_true)
-y  <- f0 + rnorm(n, 0, 0.25 * sd(f0))
-
-cat("Signal SD:", round(sd(f0), 3), "\n")
-cat("Noise SD: ", round(0.25 * sd(f0), 3), "\n")
+def SDiag(sigma, l, J, L):
+    j = np.arange(1, J + 1)
+    eigenvals = (np.pi * j / (2 * L)) ** 2
+    s = sigma**2 * np.sqrt(2 * np.pi) * l * np.exp(-0.5 * l**2 * eigenvals)
+    return np.diag(s)
 ```
 
 ::::
-
-# Constructing the Basis Expansion
 
 We set $L = 5/8$ (the half-width of the $u$ domain with a small buffer), $J = 12$ basis functions, and the GP lengthscale to $\ell = \text{range}(u) / (2\pi)$ following @solin2020hilbert.
 
@@ -179,7 +228,32 @@ omega_grid <- Omega(u_grid, J, L)
 omega_grid_scaled <- omega_grid %*% scales
 ```
 
+## Python
+
+```{python}
+L = 5 / 4 * np.abs(u).max()  # domain half-width with buffer
+J = 12  # number of basis functions
+l_gp = (u.max() - u.min()) / (2 * np.pi)  # GP lengthscale
+sigma_gp = 1.0  # marginal SD; handled by the leaf scale in the model
+
+# Basis at training points
+scales = np.sqrt(SDiag(sigma_gp, l_gp, J, L))
+omega = Omega(u, J, L)
+omega_scaled = omega @ scales  # scaled: N(0,I) prior on coefs induces GP prior
+
+# Basis on a fine grid for posterior curve plots
+u_grid = np.linspace(-0.5, 0.5, 500)
+omega_grid = Omega(u_grid, J, L)
+omega_grid_scaled = omega_grid @ scales
+```
+
+::::
+
 We can visualise the scaled basis functions to get a sense of the smoothness they encode:
+
+::::{.panel-tabset group="language"}
+
+## R
 
 ```{r}
 #| fig-width: 7
@@ -196,6 +270,21 @@ matplot(
 )
 ```
 
+## Python
+
+```{python}
+#| fig-cap: "First six scaled Hilbert-space basis functions."
+fig, ax = plt.subplots(figsize=(7, 3))
+for j in range(6):
+    ax.plot(u_grid, omega_grid_scaled[:, j], label=f"j={j + 1}")
+ax.set_xlabel("u")
+ax.set_ylabel(r"$\phi_j(u)$")
+ax.set_title("Scaled basis functions (j = 1–6)")
+ax.legend(ncol=3, fontsize=8)
+plt.tight_layout()
+plt.show()
+```
+
 ::::
 
 # Sampling and Analysis
@@ -207,7 +296,8 @@ We pass `omega_scaled` as the leaf basis.
 ## R
 
 ```{r}
-num_trees <- 50
+num_trees <- 100
+num_gfr <- 10
 num_burnin <- 500
 num_mcmc <- 500
 
@@ -215,10 +305,40 @@ bart_model <- bart(
   X_train = X,
   y_train = y,
   leaf_basis_train = omega_scaled,
+  num_gfr = num_gfr, 
   num_burnin = num_burnin,
   num_mcmc = num_mcmc,
-  general_params = list(sample_sigma2_global = TRUE),
+  general_params = list(
+    num_threads = 1,
+    sample_sigma2_global = TRUE,
+    random_seed = random_seed
+  ),
   mean_forest_params = list(num_trees = num_trees, sample_sigma2_leaf = FALSE)
+)
+```
+
+## Python
+
+```{python}
+num_trees = 100
+num_gfr = 10
+num_burnin = 500
+num_mcmc = 500
+
+bart_model = BARTModel()
+bart_model.sample(
+    X_train=X,
+    y_train=y,
+    leaf_basis_train=omega_scaled,
+    num_gfr=num_gfr,
+    num_burnin=num_burnin,
+    num_mcmc=num_mcmc,
+    general_params={
+        "num_threads": 1,
+        "sample_sigma2_global": True,
+        "random_seed": random_seed,
+    },
+    mean_forest_params={"num_trees": num_trees, "sample_sigma2_leaf": False},
 )
 ```
 
@@ -255,6 +375,29 @@ abline(0, 1, col = "firebrick", lwd = 1.5)
 cat("RMSE:", round(sqrt(mean((y_hat_mean - f0)^2)), 4), "\n")
 ```
 
+## Python
+
+```{python}
+#| fig-cap: "Posterior mean in-sample predictions versus the true function."
+y_hat_train = bart_model.extract_parameter("y_hat_train")
+y_hat_mean = y_hat_train.mean(axis=1)
+
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.scatter(f0, y_hat_mean, alpha=0.5, color="#1a7a9c", s=20)
+lims = [min(f0.min(), y_hat_mean.min()), max(f0.max(), y_hat_mean.max())]
+ax.plot(lims, lims, color="firebrick", linewidth=1.5)
+ax.set_xlabel("True f(u, X)")
+ax.set_ylabel("Posterior mean prediction")
+ax.set_title("In-sample fit")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+rmse = np.sqrt(np.mean((y_hat_mean - f0)**2))
+print(f"RMSE: {rmse:.4f}")
+```
+
 ::::
 
 ## Posterior GP Curves
@@ -270,7 +413,7 @@ This works by constructing a test set in which $X_{\text{test}}$ has $x^*$ repea
 ```{r}
 #| fig-width: 7
 #| fig-height: 5
-#| fig-cap: "Posterior GP curves at three randomly selected observations. The blue line is the true f(u, x*), the dark line is the posterior mean, and the shaded band is the 90% credible interval."
+#| fig-cap: "Posterior GP curves at three randomly selected observations. The dotted line is the true f(u, x*), the dark line is the posterior mean, and the shaded band is the 90% credible interval."
 plot_ids <- sample(n, 3)
 
 par(mfrow = c(1, 3), mar = c(4, 4, 2, 1))
@@ -283,7 +426,12 @@ for (ix in plot_ids) {
     nrow = nrow(omega_grid_scaled),
     byrow = TRUE
   )
-  pred_grid <- predict(bart_model, X = X_grid, leaf_basis = omega_grid_scaled, terms = "y_hat")
+  pred_grid <- predict(
+    bart_model,
+    X = X_grid,
+    leaf_basis = omega_grid_scaled,
+    terms = "y_hat"
+  )
   # pred_grid is (n_grid x num_mcmc)
 
   pred_mean <- rowMeans(pred_grid)
@@ -317,6 +465,49 @@ for (ix in plot_ids) {
   points(u[ix], y[ix], pch = 19, col = "black")
 }
 par(mfrow = c(1, 1))
+```
+
+## Python
+
+```{python}
+#| fig-cap: "Posterior GP curves at three randomly selected observations. The dotted line is the true f(u, x*), the dark line is the posterior mean, and the shaded band is the 90% credible interval."
+rng2 = np.random.default_rng(42)
+plot_ids = rng2.choice(n, 3, replace=False)
+
+fig, axes = plt.subplots(1, 3, figsize=(10, 4))
+for ax, ix in zip(axes, plot_ids):
+    xx = X[[ix], :]  # shape (1, p)
+
+    # Repeat x* for every grid point; vary only the leaf basis over the u grid
+    X_grid = np.repeat(xx, len(u_grid), axis=0)  # (n_grid, p)
+    pred_grid = bart_model.predict(
+        X=X_grid, leaf_basis=omega_grid_scaled, terms="y_hat"
+    )  # (n_grid, num_mcmc)
+
+    pred_mean = pred_grid.mean(axis=1)
+    pred_lo = np.quantile(pred_grid, 0.05, axis=1)
+    pred_hi = np.quantile(pred_grid, 0.95, axis=1)
+
+    f_true_curve = np.array([f_true(ug, xx[0]) for ug in u_grid])
+
+    ax.fill_between(u_grid, pred_lo, pred_hi, alpha=0.15, color="#1a7a9c")
+    ax.plot(u_grid, pred_mean, color="#1a7a9c", linewidth=2, label="Posterior mean")
+    ax.plot(
+        u_grid,
+        f_true_curve,
+        color="firebrick",
+        linewidth=1.5,
+        linestyle="--",
+        label="True f",
+    )
+    ax.scatter([u[ix]], [y[ix]], color="black", zorder=5, s=30)
+    ax.set_xlabel("u")
+    ax.set_ylabel("f(u, x*)")
+    ax.set_title(f"Obs. {ix}")
+
+axes[0].legend(fontsize=8)
+plt.tight_layout()
+plt.show()
 ```
 
 ::::
