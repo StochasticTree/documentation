@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0b3c71074a64c241c8f9889709c51dc5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3633b35b84bac462552e404edf991774.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -375,6 +375,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/targeted-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Targeted Smooth BART Approximation via Leaf Regression</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../vignettes/rdd.html" class="sidebar-item-text sidebar-link">
@@ -669,9 +675,9 @@ window.Quarto = {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.377, Lag 5: 0.171, Lag 10: 0.11, Lag 50: 0.05
-Total effective sample size across chains: 1226.7
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.006</code></pre>
+Lag 0: 1, Lag 1: 0.364, Lag 5: 0.146, Lag 10: 0.095, Lag 50: 0.044
+Total effective sample size across chains: 1533.6
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</code></pre>
 </div>
 </div>
 </div>
@@ -700,7 +706,7 @@ Total effective sample size across chains: 1226.7
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 652.0</code></pre>
+        sigma2   float64 8B 448.1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -708,7 +714,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.003</code></pre>
+        sigma2   float64 8B 1.009</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -971,9 +977,9 @@ Group: /posterior
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.375, Lag 5: 0.175, Lag 10: 0.12, Lag 50: 0.074
-Total effective sample size across chains: 1246.3
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</code></pre>
+Lag 0: 1, Lag 1: 0.337, Lag 5: 0.148, Lag 10: 0.089, Lag 50: 0.032
+Total effective sample size across chains: 1614.4
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.006</code></pre>
 </div>
 </div>
 </div>
@@ -1000,7 +1006,7 @@ Total effective sample size across chains: 1246.3
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 574.8</code></pre>
+        sigma2   float64 8B 231.0</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1008,7 +1014,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.008</code></pre>
+        sigma2   float64 8B 1.021</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0b3c71074a64c241c8f9889709c51dc5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3633b35b84bac462552e404edf991774.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -356,6 +356,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/targeted-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Targeted Smooth BART Approximation via Leaf Regression</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../vignettes/rdd.html" class="sidebar-item-text sidebar-link">
@@ -2703,8 +2709,8 @@ Default value was changed from ``True`` to ``False``</span></a></td>
             </details>
         </div>
     </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1},
-                       mean_forest_params={'alpha': 0.95, 'beta': 2.0,
-                                           'num_trees': 50},
+                       mean_forest_params={'alpha': 0.9, 'beta': 1.5,
+                                           'num_trees': 100},
                        num_gfr=40, num_mcmc=0)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
         <div class="estimator-table">
             <details>
@@ -2735,7 +2741,7 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 <tr class="user-set odd">
 <td><em></em></td>
 <td class="param">mean_forest_params</td>
-<td class="value">{'alpha': 0.95, 'beta': 2.0, 'num_trees': 50}</td>
+<td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
@@ -2893,9 +2899,9 @@ forceTheme('sk-container-id-3');</script>
 Hyperparameters chosen by grid search:
   num_gfr: 40
   num_mcmc: 0
-  num_trees: 50
-  alpha: 0.95
-  beta: 2.0</code></pre>
+  num_trees: 100
+  alpha: 0.9
+  beta: 1.5</code></pre>
 </div>
 </div>
 </section>
