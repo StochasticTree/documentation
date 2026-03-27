@@ -1,0 +1,326 @@
+---
+title: "Targeted Smooth BART Approximation via Leaf Regression"
+bibliography: vignettes.bib
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| include: false
+reticulate::use_python(
+  Sys.getenv(
+    "RETICULATE_PYTHON",
+    unset = file.path(rprojroot::find_root(rprojroot::has_file(".here")), ".venv", "bin", "python")
+  ),
+  required = TRUE
+)
+```
+
+This vignette demonstrates how to approximate **BART with Targeted Smoothing (tsBART)** (@starling2020bart) using `stochtree`'s leaf regression interface. tsBART extends BART by placing a Gaussian Process (GP) in the leaves of each tree, allowing smooth, nonlinear functions of a designated "target" variable $u$ within each leaf node defined by covariates $X$.
+
+The key idea is that a GP on a compact interval can be well approximated by a linear regression on a finite-dimensional basis expansion of $u$.
+
+# Hilbert Space GP Approximation
+
+We omit much of the formalism and derivation of the Hilbert space GP approximation in this vignette. A blog post by @orduz2024hsgp provides an excellent overview, citing both @solin2020hilbert and @riutort2023practical for further academic references.
+
+Let $u \in [-L, L]$ be the target variable, symmetric around zero. A GP with a squared exponential kernel $K$ on $u$ is defined as
+
+$$
+\begin{aligned}
+g(u) &\sim \mathcal{GP}(0, K)\\
+K(u, u') &= \sigma^2 \exp\left(-\frac{(u - u')^2}{2\ell^2}\right)
+\end{aligned}
+$$
+
+The Hilbert space approximation represents a GP $g(u)$ as
+
+$$
+g(u) \approx \sum_{j=1}^{J} \sqrt{S(\lambda_j)} \phi_j(u) \beta_j, \quad \beta_j \sim \mathcal{N}(0, I)
+$$
+
+where $J$ is the total number of basis functions in the finite-dimensional expansion, and $\phi_j$, $S(\cdot)$, and $\lambda_j$ are defined as follows:
+
+$$
+\begin{aligned}
+\phi_j(u) &= \frac{1}{\sqrt{L}} \sin\!\left(\frac{\pi j (u + L)}{2L}\right), \\
+S(\sigma, \ell, \omega) &= \sigma^2 \sqrt{2\pi}\, \ell \exp\!\left(-\frac{\ell^2 \omega^2}{2}\right)\\
+\lambda_j &= \left(\frac{\pi j}{2L}\right)^2
+\end{aligned}
+$$
+
+Evaluating $\phi_j$ at the data points and scaling by $\sqrt{S(\lambda_j)}$ gives a basis matrix $\Omega$ such that $\Omega \beta \sim \mathcal{N}(0, K)$ where $K$ is the kernel matrix — so a standard $\mathcal{N}(0, I)$ prior on $\beta$ induces the target GP prior on $g(u)$.
+
+In the tsBART approximation, $X$ partitions the data within each tree (as in standard BART) and $g_{\mathcal{L}}(u) = \Omega_{\mathcal{L}} \beta_{\mathcal{L}}$ is a GP on each leaf $\mathcal{L}$. The combined prediction at $(X_i, u_i)$ is
+
+$$
+\hat{y}_i = \sum_{t=1}^{T} g_{\mathcal{L}_t(X_i)}(u_i) = \sum_{t=1}^{T} \Omega(u_i)^\top \beta_{\mathcal{L}_t(X_i)}
+$$
+
+where $T$ is the total number of trees in the ensemble.
+
+This can be sampled straightforwardly as a `stochtree` BART model with `leaf_basis_train = Omega`.
+
+# Setup
+
+Load necessary packages
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+library(stochtree)
+library(ggplot2)
+```
+
+::::
+
+Set a seed for reproducibility
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+random_seed <- 1234
+set.seed(random_seed)
+```
+
+::::
+
+# Hilbert Space Basis Functions
+
+Two helper functions below construct the basis:
+
+- `Omega(u, J, L)` — evaluates the $J$ eigenfunctions at the points in `u`
+- `SDiag(sigma, l, J, L)` — diagonal matrix of spectral density values $S(\lambda_j)$
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+Omega <- function(u, J, L) {
+  phi <- function(u, j, L) sqrt(1 / L) * sin(pi * j * (u + L) / (2 * L))
+  omega <- matrix(0, nrow = length(u), ncol = J)
+  for (j in 1:J) {
+    omega[, j] <- phi(u, j, L)
+  }
+  return(omega)
+}
+
+SDiag <- function(sigma, l, J, L) {
+  eigenval <- function(j, L) (pi * j / (2 * L))^2
+  s <- function(sigma, l, w) sigma^2 * sqrt(2 * pi) * l * exp(-0.5 * l^2 * w^2)
+  return(diag(s(sigma, l, sqrt(eigenval(1:J, L)))))
+}
+```
+
+::::
+
+# Simulation
+
+We simulate a dataset in which the response depends on $u$ and $X$ through an interaction:
+
+$$
+f(u, X) = 3 X_1 u + \frac{(X_2 - 1)(1 - u)^2}{3} + \Phi(2 X_3 u)
+$$
+
+where $u \sim \text{Uniform}(-0.5, 0.5)$ is the GP target variable, $X \in \mathbb{R}^3$ are additional covariates, and $\Phi$ is the standard normal CDF.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+n <- 200
+p <- 3
+
+u <- runif(n, -0.5, 0.5)
+X <- matrix(rnorm(n * p), nrow = n)
+
+f_true <- function(row) {
+  # row = c(u, x1, x2, x3)
+  3 * row[2] * row[1] + (row[3] - 1) * (1 - row[1])^2 / 3 + pnorm(2 * row[4] * row[1])
+}
+
+f0 <- apply(cbind(u, X), 1, f_true)
+y  <- f0 + rnorm(n, 0, 0.25 * sd(f0))
+
+cat("Signal SD:", round(sd(f0), 3), "\n")
+cat("Noise SD: ", round(0.25 * sd(f0), 3), "\n")
+```
+
+::::
+
+# Constructing the Basis Expansion
+
+We set $L = 5/8$ (the half-width of the $u$ domain with a small buffer), $J = 12$ basis functions, and the GP lengthscale to $\ell = \text{range}(u) / (2\pi)$ following @solin2020hilbert.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+L <- 5 / 4 * max(abs(u)) # domain half-width with buffer
+J <- 12 # number of basis functions
+l_gp <- diff(range(u)) / (2 * pi) # GP lengthscale
+sigma_gp <- 1 # marginal SD; handled by the leaf scale in the model
+
+# Basis at training points
+scales <- sqrt(SDiag(sigma_gp, l_gp, J, L))
+omega <- Omega(u, J, L)
+omega_scaled <- omega %*% scales # scaled: N(0,I) prior on coefs induces GP prior
+
+# Basis on a fine grid for posterior curve plots
+u_grid <- seq(-0.5, 0.5, length.out = 500)
+omega_grid <- Omega(u_grid, J, L)
+omega_grid_scaled <- omega_grid %*% scales
+```
+
+We can visualise the scaled basis functions to get a sense of the smoothness they encode:
+
+```{r}
+#| fig-width: 7
+#| fig-height: 3
+#| fig-cap: "First six scaled Hilbert-space basis functions."
+matplot(
+  u_grid,
+  omega_grid_scaled[, 1:6],
+  type = "l",
+  lty = 1,
+  xlab = "u",
+  ylab = expression(phi[j](u)),
+  main = "Scaled basis functions (j = 1–6)"
+)
+```
+
+::::
+
+# Sampling and Analysis
+
+We pass `omega_scaled` as the leaf basis.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+num_trees <- 50
+num_burnin <- 500
+num_mcmc <- 500
+
+bart_model <- bart(
+  X_train = X,
+  y_train = y,
+  leaf_basis_train = omega_scaled,
+  num_burnin = num_burnin,
+  num_mcmc = num_mcmc,
+  general_params = list(sample_sigma2_global = TRUE),
+  mean_forest_params = list(num_trees = num_trees, sample_sigma2_leaf = FALSE)
+)
+```
+
+::::
+
+## In-Sample Fit
+
+We compare the true outcomes to this model's estimated conditional posterior mean
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| fig-cap: "Posterior mean in-sample predictions versus the true function."
+y_hat_train <- extractParameter(bart_model, "y_hat_train")
+y_hat_mean <- rowMeans(y_hat_train)
+
+plot(
+  f0,
+  y_hat_mean,
+  xlab = "True f(u, X)",
+  ylab = "Posterior mean prediction",
+  main = "In-sample fit",
+  pch = 20,
+  col = "#1a7a9c80"
+)
+abline(0, 1, col = "firebrick", lwd = 1.5)
+```
+
+```{r}
+cat("RMSE:", round(sqrt(mean((y_hat_mean - f0)^2)), 4), "\n")
+```
+
+::::
+
+## Posterior GP Curves
+
+A distinctive feature of tsBART is that we can draw posterior GP curves: for a fixed covariate vector $x^*$, we evaluate the model over a fine grid of $u$ values to visualise the smooth function $g(u \mid x^*)$.
+
+This works by constructing a test set in which $X_{\text{test}}$ has $x^*$ repeated for every grid point and `leaf_basis` sweeps over the grid basis `omega_grid_scaled`. Because every grid point shares the same $X$, they all fall into the same leaf in each tree — so the prediction traces the GP assigned to that partition cell.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-cap: "Posterior GP curves at three randomly selected observations. The blue line is the true f(u, x*), the dark line is the posterior mean, and the shaded band is the 90% credible interval."
+plot_ids <- sample(n, 3)
+
+par(mfrow = c(1, 3), mar = c(4, 4, 2, 1))
+for (ix in plot_ids) {
+  xx <- X[ix, , drop = FALSE]
+
+  # Repeat x* for every grid point; vary only the leaf basis over the u grid
+  X_grid <- matrix(
+    rep(xx, nrow(omega_grid_scaled)),
+    nrow = nrow(omega_grid_scaled),
+    byrow = TRUE
+  )
+  pred_grid <- predict(bart_model, X = X_grid, leaf_basis = omega_grid_scaled, terms = "y_hat")
+  # pred_grid is (n_grid x num_mcmc)
+
+  pred_mean <- rowMeans(pred_grid)
+  pred_lo <- apply(pred_grid, 1, quantile, 0.05)
+  pred_hi <- apply(pred_grid, 1, quantile, 0.95)
+
+  f_true_curve <- apply(
+    cbind(u_grid, matrix(rep(xx, length(u_grid)), ncol = p, byrow = TRUE)),
+    1,
+    f_true
+  )
+
+  plot(
+    u_grid,
+    pred_mean,
+    type = "l",
+    lwd = 2,
+    ylim = range(c(pred_lo, pred_hi, f_true_curve)),
+    xlab = "u",
+    ylab = "f(u, x*)",
+    main = paste0("Obs. ", ix)
+  )
+  polygon(
+    c(u_grid, rev(u_grid)),
+    c(pred_hi, rev(pred_lo)),
+    col = "#1a7a9c20",
+    border = NA
+  )
+  lines(u_grid, pred_mean, lwd = 2, col = "#1a7a9c")
+  lines(u_grid, f_true_curve, col = "firebrick", lwd = 1.5, lty = 2)
+  points(u[ix], y[ix], pch = 19, col = "black")
+}
+par(mfrow = c(1, 1))
+```
+
+::::
+
+The model recovers smooth curves in $u$ that adapt to the local covariate context defined by $x^*$.
+
+# References
