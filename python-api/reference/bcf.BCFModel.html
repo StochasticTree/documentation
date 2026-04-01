@@ -202,6 +202,10 @@ window.Quarto = {
  <span class="dropdown-text">Adding New Models</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../development/changelog.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../development/roadmap.html">
  <span class="dropdown-text">Roadmap</span></a>
   </li>  
@@ -535,7 +539,7 @@ t(X) &amp;\sim \text{BART}()\\
 <tr class="even">
 <td>propensity_train</td>
 <td>np.array</td>
-<td>Optional vector of propensity scores. If not provided, this will be estimated from the data.</td>
+<td>Optional vector of propensity scores. If not provided, this will be estimated from the data. If <code>None</code> and <code>previous_model_json</code> is provided with an internally estimated propensity model, that model’s propensity estimates are re-used rather than re-fitted.</td>
 <td><code>None</code></td>
 </tr>
 <tr class="odd">
@@ -637,7 +641,7 @@ t(X) &amp;\sim \text{BART}()\\
 <tr class="odd">
 <td>previous_model_json</td>
 <td>str</td>
-<td>JSON string containing a previous BCF model. This can be used to “continue” a sampler interactively after inspecting the samples or to run parallel chains “warm-started” from existing forest samples. Defaults to <code>None</code>.</td>
+<td>JSON string containing a previous BCF model. This can be used to “continue” a sampler interactively after inspecting the samples or to run parallel chains “warm-started” from existing forest samples. If the previous model used an internally estimated propensity score (i.e.&nbsp;<code>propensity_train</code> was not supplied to that run), the fitted propensity model is carried forward and re-used rather than being re-estimated. This ensures that multi-chain warm-starts remain consistent with the propensity scores used in the initial run. Defaults to <code>None</code>.</td>
 <td><code>None</code></td>
 </tr>
 <tr class="even">

@@ -86,7 +86,9 @@ that the column is ordered categorical).</p></dd>
 
 
 <dt id="arg-propensity-train">propensity_train<a class="anchor" aria-label="anchor" href="#arg-propensity-train"></a></dt>
-<dd><p>(Optional) Vector of propensity scores. If not provided, this will be estimated from the data.</p></dd>
+<dd><p>(Optional) Vector of propensity scores. If not provided, this will be estimated from the data.
+If <code>NULL</code> and <code>previous_model_json</code> is provided with an internally estimated propensity model, that model's
+propensity estimates are re-used rather than re-fitted.</p></dd>
 
 
 <dt id="arg-rfx-group-ids-train">rfx_group_ids_train<a class="anchor" aria-label="anchor" href="#arg-rfx-group-ids-train"></a></dt>
@@ -144,7 +146,12 @@ not compatible with cloglog link functions.</p></dd>
 
 
 <dt id="arg-previous-model-json">previous_model_json<a class="anchor" aria-label="anchor" href="#arg-previous-model-json"></a></dt>
-<dd><p>(Optional) JSON string containing a previous BCF model. This can be used to "continue" a sampler interactively after inspecting the samples or to run parallel chains "warm-started" from existing forest samples. Default: <code>NULL</code>.</p></dd>
+<dd><p>(Optional) JSON string containing a previous BCF model. This can be used to "continue" a
+sampler interactively after inspecting the samples or to run parallel chains "warm-started" from existing forest
+samples. If the previous model used an internally estimated propensity score (i.e. <code>propensity_train</code> was not
+supplied to that run), the fitted propensity model is carried forward and re-used rather than being re-estimated.
+This ensures that multi-chain warm-starts remain consistent with the propensity scores used in the initial run.
+Default: <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-previous-model-warmstart-sample-num">previous_model_warmstart_sample_num<a class="anchor" aria-label="anchor" href="#arg-previous-model-warmstart-sample-num"></a></dt>
