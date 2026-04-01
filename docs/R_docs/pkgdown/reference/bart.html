@@ -49,6 +49,7 @@
 <span>  leaf_basis_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  observation_weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_gfr <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  num_burnin <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  num_mcmc <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -114,6 +115,14 @@ that were not in the training set.</p></dd>
 
 <dt id="arg-rfx-basis-test">rfx_basis_test<a class="anchor" aria-label="anchor" href="#arg-rfx-basis-test"></a></dt>
 <dd><p>(Optional) Test set basis for "random-slope" regression in additive random effects model.</p></dd>
+
+
+<dt id="arg-observation-weights">observation_weights<a class="anchor" aria-label="anchor" href="#arg-observation-weights"></a></dt>
+<dd><p>(Optional) Numeric vector of observation weights of length <code>nrow(X_train)</code>. Weights are
+applied as <code>y_i | - ~ N(mu(X_i), sigma^2 / w_i)</code>, so larger weights increase an observation's influence on the fit.
+All weights must be non-negative. Default: <code>NULL</code> (all observations equally weighted). Compatible with Gaussian
+(continuous/identity) and probit outcome models; not compatible with cloglog link functions. Note: these are
+referred to internally in the C++ layer as "variance weights" (<code>var_weights</code>), since they scale the residual variance.</p></dd>
 
 
 <dt id="arg-num-gfr">num_gfr<a class="anchor" aria-label="anchor" href="#arg-num-gfr"></a></dt>

@@ -51,6 +51,7 @@
 <span>  propensity_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_group_ids_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rfx_basis_test <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  observation_weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  num_gfr <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  num_burnin <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  num_mcmc <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -122,6 +123,14 @@ that were not in the training set.</p></dd>
 <dd><p>(Optional) Test set basis for "random-slope" regression in additive random effects model.</p></dd>
 
 
+<dt id="arg-observation-weights">observation_weights<a class="anchor" aria-label="anchor" href="#arg-observation-weights"></a></dt>
+<dd><p>(Optional) Numeric vector of observation weights of length <code>nrow(X_train)</code>. Weights are
+applied as <code>y_i | - ~ N(mu(X_i), sigma^2 / w_i)</code>, so larger weights increase an observation's influence on the fit.
+All weights must be non-negative. Default: <code>NULL</code> (all observations equally weighted). Applied to both the
+prognostic and treatment effect forests. Compatible with Gaussian (continuous/identity) and probit outcome models;
+not compatible with cloglog link functions.</p></dd>
+
+
 <dt id="arg-num-gfr">num_gfr<a class="anchor" aria-label="anchor" href="#arg-num-gfr"></a></dt>
 <dd><p>Number of "warm-start" iterations run using the grow-from-root algorithm (He and Hahn, 2021). Default: 5.</p></dd>
 
@@ -151,7 +160,7 @@ that were not in the training set.</p></dd>
 <li><p><code>sigma2_global_scale</code> Scale parameter in the <code>IG(sigma2_global_shape, sigma2_global_scale)</code> global error variance model. Default: <code>0</code>.</p></li>
 <li><p><code>variable_weights</code> Numeric weights reflecting the relative probability of splitting on each variable. Does not need to sum to 1 but cannot be negative. Defaults to <code>rep(1/ncol(X_train), ncol(X_train))</code> if not set here. Note that if the propensity score is included as a covariate in either forest, its weight will default to <code>1/ncol(X_train)</code>. A workaround if you wish to provide a custom weight for the propensity score is to include it as a column in <code>X_train</code> and then set <code>propensity_covariate</code> to <code>'none'</code> adjust <code>keep_vars</code> accordingly for the <code>prognostic</code> or <code>treatment_effect</code> forests.</p></li>
 <li><p><code>propensity_covariate</code> Whether to include the propensity score as a covariate in either or both of the forests. Enter <code>"none"</code> for neither, <code>"prognostic"</code> for the prognostic forest, <code>"treatment_effect"</code> for the treatment forest, and <code>"both"</code> for both forests. If this is not <code>"none"</code> and a propensity score is not provided, it will be estimated from (<code>X_train</code>, <code>Z_train</code>) using <code><a href="bart.html">stochtree::bart()</a></code>. Default: <code>"mu"</code>.</p></li>
-<li><p><code>adaptive_coding</code> Whether or not to use an "adaptive coding" scheme in which a binary treatment variable is not coded manually as (0,1) or (-1,1) but learned via parameters <code>b_0</code> and <code>b_1</code> that attach to the outcome model <code>[b_0 (1-Z) + b_1 Z] tau(X)</code>. This is ignored when Z is not binary. Default: <code>TRUE</code>.</p></li>
+<li><p><code>adaptive_coding</code> Whether or not to use an "adaptive coding" scheme in which a binary treatment variable is not coded manually as (0,1) or (-1,1) but learned via parameters <code>b_0</code> and <code>b_1</code> that attach to the outcome model <code>[b_0 (1-Z) + b_1 Z] tau(X)</code>. This is ignored when Z is not binary. Default: <code>FALSE</code>.</p></li>
 <li><p><code>control_coding_init</code> Initial value of the "control" group coding parameter. This is ignored when Z is not binary. Default: <code>-0.5</code>.</p></li>
 <li><p><code>treated_coding_init</code> Initial value of the "treatment" group coding parameter. This is ignored when Z is not binary. Default: <code>0.5</code>.</p></li>
 <li><p><code>rfx_prior_var</code> Prior on the (diagonals of the) covariance of the additive group-level random regression coefficients. Must be a vector of length <code>ncol(rfx_basis_train)</code>. Default: <code>rep(1, ncol(rfx_basis_train))</code></p></li>
