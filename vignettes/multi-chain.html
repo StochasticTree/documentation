@@ -281,6 +281,9 @@ window.Quarto = {
   </div>
 </li>
           <li class="sidebar-item">
+ <span class="menu-text">probit.qmd</span>
+  </li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../vignettes/heteroskedastic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BART with a Forest-based Variance Model</span></a>
@@ -679,9 +682,9 @@ window.Quarto = {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.379, Lag 5: 0.183, Lag 10: 0.11, Lag 50: 0.013
-Total effective sample size across chains: 1271.9
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.006</code></pre>
+Lag 0: 1, Lag 1: 0.34, Lag 5: 0.114, Lag 10: 0.059, Lag 50: 0.007
+Total effective sample size across chains: 1921.5
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.004</code></pre>
 </div>
 </div>
 </div>
@@ -710,7 +713,7 @@ Total effective sample size across chains: 1271.9
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 446.8</code></pre>
+        sigma2   float64 8B 727.0</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -718,7 +721,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.019</code></pre>
+        sigma2   float64 8B 1.01</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -981,9 +984,9 @@ Group: /posterior
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.338, Lag 5: 0.123, Lag 10: 0.069, Lag 50: 0.034
-Total effective sample size across chains: 2018.2
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.006</code></pre>
+Lag 0: 1, Lag 1: 0.379, Lag 5: 0.165, Lag 10: 0.107, Lag 50: 0.058
+Total effective sample size across chains: 1062.7
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.001</code></pre>
 </div>
 </div>
 </div>
@@ -1010,7 +1013,7 @@ Total effective sample size across chains: 2018.2
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 352.9</code></pre>
+        sigma2   float64 8B 349.4</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1018,7 +1021,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.015</code></pre>
+        sigma2   float64 8B 1.014</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
