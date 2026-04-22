@@ -126,7 +126,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keyword">inline</span> <span class="keywordtype">void</span> SetCategoryId(data_size_t sample_id, <span class="keywordtype">int</span> category_id) {</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    CHECK_LT(sample_id, num_observations_);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    observation_indices_[sample_id] = sample_id;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    observation_indices_[sample_id] = category_id;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">inline</span> <span class="keywordtype">int</span> NumObservations() {<span class="keywordflow">return</span> num_observations_;}</div>
