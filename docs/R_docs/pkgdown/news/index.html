@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,17 +33,19 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.1.9000" id="stochtree-0419000">stochtree 0.4.1.9000<a class="anchor" aria-label="anchor" href="#stochtree-0419000"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.2" id="stochtree-042">stochtree 0.4.2<a class="anchor" aria-label="anchor" href="#stochtree-042"></a></h2>
 <div class="section level3">
-<h3 id="new-features-0-4-1-9000">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-1-9000"></a></h3>
+<h3 id="new-features-0-4-2">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-2"></a></h3>
 <ul><li>Added support for parametric treatment effect term in BCF <a href="https://github.com/StochasticTree/stochtree/pull/309/" class="external-link">#309</a>
 </li>
 <li>Added support for observation-level weights passed as data arguments to BART and BCF <a href="https://github.com/StochasticTree/stochtree/pull/333" class="external-link">#333</a>
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-4-1-9000">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1-9000"></a></h3>
-<ul><li>Fixed prediction bug for cloglog BART in R <a href="https://github.com/StochasticTree/stochtree/pull/361" class="external-link">#361</a>
+<h3 id="bug-fixes-0-4-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-2"></a></h3>
+<ul><li>Include boost headers in <code>sdist</code> for Python package <a href="https://github.com/StochasticTree/stochtree/pull/362" class="external-link">#362</a>
+</li>
+<li>Fixed prediction bug for cloglog BART in R <a href="https://github.com/StochasticTree/stochtree/pull/361" class="external-link">#361</a>
 </li>
 <li>Fixed assignment bug in RFX category tracker data structure <a href="https://github.com/StochasticTree/stochtree/pull/360" class="external-link">#360</a>
 </li>
@@ -65,20 +67,20 @@
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-and-other-maintenance-0-4-1-9000">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-1-9000"></a></h3>
-</div>
+<h3 id="documentation-and-other-maintenance-0-4-2">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-2"></a></h3>
+<ul><li>Add support for python 3.14 and drop 3.8 and 3.9 <a href="https://github.com/StochasticTree/stochtree/pull/363" class="external-link">#363</a>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="stochtree-041">stochtree 0.4.1<a class="anchor" aria-label="anchor" href="#stochtree-041"></a></h2>
 <div class="section level3">
-<h3 id="new-features-0-4-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-1"></a></h3>
-</div>
-<div class="section level3">
-<h3 id="bug-fixes-0-4-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-1"></a></h3>
-</div>
-<div class="section level3">
 <h3 id="documentation-and-other-maintenance-0-4-1">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-1"></a></h3>
 <ul><li>Converted all R man page titles to title case <a href="https://github.com/StochasticTree/stochtree/pull/310" class="external-link">#310</a>
+</li>
+<li>Updated Python <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> methods to print directly to console rather than return a summary string <a href="https://github.com/StochasticTree/stochtree/pull/310" class="external-link">#310</a>
+</li>
+<li>Updated vendored pybind11 dependency to version 3.0.2 <a href="https://github.com/StochasticTree/stochtree/pull/310" class="external-link">#310</a>
 </li>
 </ul></div>
 </div>
@@ -143,6 +145,7 @@
 <div class="section level3">
 <h3 id="new-features-0-3-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
 <ul><li>Added <code>print</code>, <code>summary</code>, <code>plot</code>, and <code>extract_parameter</code> generic functions in R for the <code>bartmodel</code> and <code>bcfmodel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/271" class="external-link">#271</a>)</li>
+<li>Added sklearn-compatible estimator wrapper for <code>BARTModel</code> in Python (<a href="https://github.com/StochasticTree/stochtree/pull/270" class="external-link">#270</a>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-3-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0"></a></h3>
