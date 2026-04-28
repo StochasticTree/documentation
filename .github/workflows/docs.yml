@@ -105,6 +105,9 @@ jobs:
       - name: Regenerate Python API reference pages
         run: quartodoc build
 
+      - name: Generate CHANGELOG.md from stochtree NEWS.md
+        run: bash generate_changelog.sh
+
       - name: Build the overall doc site
         run: |
           quarto render
