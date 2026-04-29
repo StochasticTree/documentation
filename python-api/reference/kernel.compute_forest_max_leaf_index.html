@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – StochTree</title>
+<title>kernel.compute_forest_max_leaf_index – StochTree</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -75,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../assets/api.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../python-api/reference/index.html" aria-current="page"> 
+    <a class="nav-link" href="../../python-api/reference/index.html"> 
 <span class="menu-text">Python API</span></a>
   </li>  
   <li class="nav-item">
@@ -153,145 +188,20 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../python-api/reference/index.html">Function reference</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Function reference</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Core Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/bart.BARTModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">bart.BARTModel</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/bcf.BCFModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">bcf.BCFModel</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Scikit-Learn Interface</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/sklearn.StochTreeBARTRegressor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">sklearn.StochTreeBARTRegressor</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/sklearn.StochTreeBARTBinaryClassifier.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">sklearn.StochTreeBARTBinaryClassifier</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Low-Level API</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/data.Dataset.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">data.Dataset</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/data.Residual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">data.Residual</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/forest.Forest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">forest.Forest</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/forest.ForestContainer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">forest.ForestContainer</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/sampler.ForestSampler.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">sampler.ForestSampler</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/sampler.GlobalVarianceModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">sampler.GlobalVarianceModel</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../python-api/reference/sampler.LeafVarianceModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">sampler.LeafVarianceModel</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#function-reference" id="toc-function-reference" class="nav-link active" data-scroll-target="#function-reference">Function reference</a>
+  <li><a href="#stochtree.kernel.compute_forest_max_leaf_index" id="toc-stochtree.kernel.compute_forest_max_leaf_index" class="nav-link active" data-scroll-target="#stochtree.kernel.compute_forest_max_leaf_index">kernel.compute_forest_max_leaf_index</a>
   <ul class="collapse">
-  <li><a href="#core-models" id="toc-core-models" class="nav-link" data-scroll-target="#core-models">Core Models</a></li>
-  <li><a href="#scikit-learn-interface" id="toc-scikit-learn-interface" class="nav-link" data-scroll-target="#scikit-learn-interface">Scikit-Learn Interface</a></li>
-  <li><a href="#low-level-api-data" id="toc-low-level-api-data" class="nav-link" data-scroll-target="#low-level-api-data">Low-Level API — Data</a></li>
-  <li><a href="#low-level-api-forest" id="toc-low-level-api-forest" class="nav-link" data-scroll-target="#low-level-api-forest">Low-Level API — Forest</a></li>
-  <li><a href="#low-level-api-samplers" id="toc-low-level-api-samplers" class="nav-link" data-scroll-target="#low-level-api-samplers">Low-Level API — Samplers</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
@@ -302,96 +212,73 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="function-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">Function reference</h1>
-<section id="core-models" class="level2">
-<h2 class="anchored" data-anchor-id="core-models">Core Models</h2>
-<p>High-level model interfaces for supervised learning and causal inference.</p>
+<section id="stochtree.kernel.compute_forest_max_leaf_index" class="level1">
+<h1>kernel.compute_forest_max_leaf_index</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>kernel.compute_forest_max_leaf_index(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    model_object,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    forest_type<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    forest_inds<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compute and return the largest possible leaf index computable by <code>compute_forest_leaf_indices</code> for the forests in a designated forest sample container.</p>
+<section id="parameters" class="level2 doc-section doc-section-parameters">
+<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 5%">
+<col style="width: 91%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="../../python-api/reference/bart.BARTModel.html#stochtree.bart.BARTModel">bart.BARTModel</a></td>
-<td>Class that handles sampling, storage, and serialization of stochastic forest models for supervised learning.</td>
+<td>model_object</td>
+<td>BARTModel, BCFModel, or ForestContainer</td>
+<td>Object corresponding to a BART / BCF model with at least one forest sample, or a low-level <code>ForestContainer</code> object.</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../../python-api/reference/bcf.BCFModel.html#stochtree.bcf.BCFModel">bcf.BCFModel</a></td>
-<td>Class that handles sampling, storage, and serialization of stochastic forest models for causal effect estimation.</td>
+<td>forest_type</td>
+<td>str</td>
+<td>Which forest to use from <code>model_object</code>. Valid inputs depend on the model type, and whether or not a given forest was sampled in that model. * <strong>BART</strong> * <code>'mean'</code>: <code>'mean'</code>: Extracts leaf indices for the mean forest * <code>'variance'</code>: Extracts leaf indices for the variance forest * <strong>BCF</strong> * <code>'prognostic'</code>: Extracts leaf indices for the prognostic forest * <code>'treatment'</code>: Extracts leaf indices for the treatment effect forest * <code>'variance'</code>: Extracts leaf indices for the variance forest * <strong>ForestContainer</strong> * <code>NULL</code>: It is not necessary to disambiguate when this function is called directly on a <code>ForestSamples</code> object. This is the default value of this</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>forest_inds</td>
+<td>int or np.ndarray</td>
+<td>Indices of the forest sample(s) for which to compute max leaf indices. If not provided, this function will return max leaf indices for every sample of a forest. This function uses 0-indexing, so the first forest sample corresponds to <code>forest_num = 0</code>, and so on.</td>
+<td><code>None</code></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="scikit-learn-interface" class="level2">
-<h2 class="anchored" data-anchor-id="scikit-learn-interface">Scikit-Learn Interface</h2>
-<p>stochtree models wrapped as sklearn-compatible estimators.</p>
+<section id="returns" class="level2 doc-section doc-section-returns">
+<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 87%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><a href="../../python-api/reference/sklearn.StochTreeBARTRegressor.html#stochtree.sklearn.StochTreeBARTRegressor">sklearn.StochTreeBARTRegressor</a></td>
-<td>A scikit-learn-compatible estimator that implements a BART regression model.</td>
-</tr>
-<tr class="even">
-<td><a href="../../python-api/reference/sklearn.StochTreeBARTBinaryClassifier.html#stochtree.sklearn.StochTreeBARTBinaryClassifier">sklearn.StochTreeBARTBinaryClassifier</a></td>
-<td>A scikit-learn-compatible estimator that implements a binary probit BART classifier.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="low-level-api-data" class="level2">
-<h2 class="anchored" data-anchor-id="low-level-api-data">Low-Level API — Data</h2>
-<p>Data structures for custom sampling workflows.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="../../python-api/reference/data.Dataset.html#stochtree.data.Dataset">data.Dataset</a></td>
-<td>Wrapper around a C++ class that stores all of the non-outcome data used in <code>stochtree</code>. This includes:</td>
-</tr>
-<tr class="even">
-<td><a href="../../python-api/reference/data.Residual.html#stochtree.data.Residual">data.Residual</a></td>
-<td>Wrapper around a C++ class that stores residual data used in <code>stochtree</code>.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="low-level-api-forest" class="level2">
-<h2 class="anchored" data-anchor-id="low-level-api-forest">Low-Level API — Forest</h2>
-<p>Forest containers and inspection.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="../../python-api/reference/forest.Forest.html#stochtree.forest.Forest">forest.Forest</a></td>
-<td>In-memory python wrapper around a C++ tree ensemble object</td>
-</tr>
-<tr class="even">
-<td><a href="../../python-api/reference/forest.ForestContainer.html#stochtree.forest.ForestContainer">forest.ForestContainer</a></td>
-<td>Container that stores sampled (and retained) tree ensembles from BART, BCF or a custom sampler.</td>
-</tr>
-<tr class="odd">
-<td><a href="../../python-api/reference/kernel.compute_forest_leaf_indices.html#stochtree.kernel.compute_forest_leaf_indices">kernel.compute_forest_leaf_indices</a></td>
-<td>Compute and return a vector representation of a forest’s leaf predictions for every observation in a dataset.</td>
-</tr>
-<tr class="even">
-<td><a href="../../python-api/reference/kernel.compute_forest_max_leaf_index.html#stochtree.kernel.compute_forest_max_leaf_index">kernel.compute_forest_max_leaf_index</a></td>
-<td>Compute and return the largest possible leaf index computable by <code>compute_forest_leaf_indices</code> for the forests in a designated forest sample container.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="low-level-api-samplers" class="level2">
-<h2 class="anchored" data-anchor-id="low-level-api-samplers">Low-Level API — Samplers</h2>
-<p>Sampler classes for building custom models.</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="../../python-api/reference/sampler.ForestSampler.html#stochtree.sampler.ForestSampler">sampler.ForestSampler</a></td>
-<td>Wrapper around many of the core C++ sampling data structures and algorithms.</td>
-</tr>
-<tr class="even">
-<td><a href="../../python-api/reference/sampler.GlobalVarianceModel.html#stochtree.sampler.GlobalVarianceModel">sampler.GlobalVarianceModel</a></td>
-<td>Wrapper around methods / functions for sampling a “global” error variance model</td>
-</tr>
-<tr class="odd">
-<td><a href="../../python-api/reference/sampler.LeafVarianceModel.html#stochtree.sampler.LeafVarianceModel">sampler.LeafVarianceModel</a></td>
-<td>Wrapper around methods / functions for sampling a “leaf scale” model for the variance term of a Gaussian</td>
+<td></td>
+<td>Numpy array containing the largest possible leaf index computable by <code>compute_forest_leaf_indices</code> for the forests in a designated forest sample container.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
