@@ -645,7 +645,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bart_model<span class="sc">$</span>mean_forests<span class="sc">$</span><span class="fu">get_forest_split_counts</span>(<span class="dv">10</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 26 22 24 34 23 18 23 28 31 29</code></pre>
+<pre><code> [1] 29 18 22 29 26 24 36 20 40 34</code></pre>
 </div>
 </div>
 </div>
@@ -653,7 +653,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bart_model.forest_container_mean.get_forest_split_counts(<span class="dv">9</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([23, 26, 33, 33, 22, 22, 29, 25, 26, 34], dtype=int32)</code></pre>
+<pre><code>array([19, 27, 24, 34, 27, 37, 22, 26, 23, 38], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -667,7 +667,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bart_model<span class="sc">$</span>mean_forests<span class="sc">$</span><span class="fu">get_aggregate_split_counts</span>(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2665 2426 2728 2839 2914 2290 2607 2696 2504 3116</code></pre>
+<pre><code> [1] 3079 1891 2492 2545 2625 2335 3287 2369 3010 3826</code></pre>
 </div>
 </div>
 </div>
@@ -675,7 +675,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bart_model.forest_container_mean.get_overall_split_counts(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([2236, 2505, 2743, 2951, 2235, 2411, 3061, 2799, 2912, 3407],
+<pre><code>array([2582, 2137, 1842, 2951, 2838, 2511, 2409, 2751, 2604, 3935],
       dtype=int32)</code></pre>
 </div>
 </div>
@@ -717,7 +717,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 0 0 0 0 2</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
 </div>
 </div>
 </div>
@@ -739,7 +739,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">20</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 1 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 1 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -747,7 +747,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">9</span>, <span class="dv">19</span>, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0], dtype=int32)</code></pre>
+<pre><code>array([0, 0, 0, 0, 0, 0, 0, 1, 0, 1], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -760,7 +760,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">30</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 1 0 0 0 0 0 0 1</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 1 0</code></pre>
 </div>
 </div>
 </div>
@@ -808,8 +808,8 @@ window.Quarto = {
 <span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.497 else to node 2
-    node=1 is a leaf node with value=-0.379
-    node=2 is a leaf node with value=0.457</code></pre>
+    node=1 is a leaf node with value=-0.466
+    node=2 is a leaf node with value=0.405</code></pre>
 </div>
 </div>
 </div>
@@ -835,8 +835,8 @@ window.Quarto = {
 <span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"</span><span class="sc">{</span>left<span class="sc">}</span><span class="ss"> if X[:, </span><span class="sc">{</span>feature<span class="sc">}</span><span class="ss">] &lt;= </span><span class="sc">{</span>threshold<span class="sc">}</span><span class="ss"> else to node </span><span class="sc">{</span>right<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.488 else to node 2
-    node=1 is a leaf node with value=[-0.292]
-    node=2 is a leaf node with value=[0.289]</code></pre>
+    node=1 is a leaf node with value=[-0.219]
+    node=2 is a leaf node with value=[0.373]</code></pre>
 </div>
 </div>
 </div>
