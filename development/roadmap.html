@@ -100,10 +100,29 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../getting-started.html"> 
 <span class="menu-text">Getting Started</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../about/index.html">
+ <span class="dropdown-text">Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../about/trees.html">
+ <span class="dropdown-text">Stochastic Tree Ensembles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bart.html">
+ <span class="dropdown-text">BART</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bcf.html">
+ <span class="dropdown-text">BCF</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../docs/R_docs/pkgdown/index.html"> 
 <span class="menu-text">R Package</span></a>
@@ -197,12 +216,6 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Later</strong>: long-term goal; exploratory</li>
 </ol>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Category</th>
@@ -215,20 +228,20 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>User Interface</td>
 <td></td>
-<td></td>
+<td>Prior predictive sampling (<a href="https://github.com/StochasticTree/rfcs/blob/main/0003-bart-prior-sampling.md">RFC 3</a>)</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>Performance</td>
-<td></td>
+<td>Refactor BART / BCF Samplers to Pure C++ (<a href="https://github.com/StochasticTree/rfcs/blob/main/0004-cpp-dispatch.md">RFC 4</a>)</td>
 <td></td>
 <td>Hardware acceleration (Apple Silicon GPU)<br>Hardware acceleration (NVIDIA GPU)<br>Out-of-memory sampler</td>
 </tr>
 <tr class="odd">
 <td>Modeling Features</td>
-<td>Quantile cutpoint sampling<br>Probit BART and BCF</td>
-<td>Monotonicity constraints<br>Multiclass classification</td>
 <td></td>
+<td>Multiclass classification</td>
+<td>Monotonicity constraints</td>
 </tr>
 <tr class="even">
 <td>Interoperability</td>

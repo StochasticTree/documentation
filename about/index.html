@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Overview of Stochastic Tree Models – StochTree</title>
+<title>Understanding StochTree – StochTree</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5668cc984099a76c6060f852be0f64ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5668cc984099a76c6060f852be0f64ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,41 +70,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="assets/api.css">
+<link rel="stylesheet" href="../assets/api.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -114,7 +82,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">StochTree</span>
     </a>
   </div>
@@ -125,31 +93,50 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./getting-started.html"> 
+    <a class="nav-link" href="../getting-started.html"> 
 <span class="menu-text">Getting Started</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../about/index.html">
+ <span class="dropdown-text">Overview</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../about/trees.html">
+ <span class="dropdown-text">Stochastic Tree Ensembles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bart.html">
+ <span class="dropdown-text">BART</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bcf.html">
+ <span class="dropdown-text">BCF</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/R_docs/pkgdown/index.html"> 
+    <a class="nav-link" href="../docs/R_docs/pkgdown/index.html"> 
 <span class="menu-text">R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./python-api/reference/index.html"> 
+    <a class="nav-link" href="../python-api/reference/index.html"> 
 <span class="menu-text">Python API</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/cpp_docs/doxygen/index.html"> 
+    <a class="nav-link" href="../docs/cpp_docs/doxygen/index.html"> 
 <span class="menu-text">C++ API</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./vignettes/index.html"> 
+    <a class="nav-link" href="../vignettes/index.html"> 
 <span class="menu-text">Vignettes</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -158,23 +145,23 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-development">    
         <li>
-    <a class="dropdown-item" href="./development/index.html">
+    <a class="dropdown-item" href="../development/index.html">
  <span class="dropdown-text">Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./development/contributing.html">
+    <a class="dropdown-item" href="../development/contributing.html">
  <span class="dropdown-text">Contributing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./development/new-models.html">
+    <a class="dropdown-item" href="../development/new-models.html">
  <span class="dropdown-text">Adding New Models</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./development/changelog.html">
+    <a class="dropdown-item" href="../development/changelog.html">
  <span class="dropdown-text">Changelog</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./development/roadmap.html">
+    <a class="dropdown-item" href="../development/roadmap.html">
  <span class="dropdown-text">Roadmap</span></a>
   </li>  
     </ul>
@@ -190,29 +177,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#notation" id="toc-notation" class="nav-link active" data-scroll-target="#notation">Notation</a></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees">Decision Trees</a></li>
-  <li><a href="#boosted-decision-tree-ensembles" id="toc-boosted-decision-tree-ensembles" class="nav-link" data-scroll-target="#boosted-decision-tree-ensembles">Boosted Decision Tree Ensembles</a></li>
-  <li><a href="#stochastic-tree-ensembles" id="toc-stochastic-tree-ensembles" class="nav-link" data-scroll-target="#stochastic-tree-ensembles">Stochastic Tree Ensembles</a>
-  <ul class="collapse">
-  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
-  <li><a href="#causal-inference" id="toc-causal-inference" class="nav-link" data-scroll-target="#causal-inference">Causal Inference</a></li>
-  <li><a href="#additional-modeling-features" id="toc-additional-modeling-features" class="nav-link" data-scroll-target="#additional-modeling-features">Additional Modeling Features</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Overview of Stochastic Tree Models</h1>
+<h1 class="title">Understanding StochTree</h1>
 </div>
 
 
@@ -230,77 +203,14 @@ window.Quarto = {
 
 
 <p>Stochastic tree models are a powerful addition to your modeling toolkit. As with many machine learning methods, understanding these models in depth is an involved task.</p>
-<p>There are many excellent published papers on stochastic tree models (to name a few, the <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">original BART paper</a>, <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">the XBART paper</a>, and <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full">the BCF paper</a>). Here, we aim to build up an abbreviated intuition for these models from their conceptually-simple building blocks.</p>
-<section id="notation" class="level2">
-<h2 class="anchored" data-anchor-id="notation">Notation</h2>
-<p>We’re going to introduce some notation to make these concepts precise. In a traditional supervised learning setting, we hope to predict some <strong>outcome</strong> from <strong>features</strong> in a training dataset. We’ll call the outcome <span class="math inline">\(y\)</span> and the features <span class="math inline">\(X\)</span>. Our goal is to come up with a function <span class="math inline">\(f\)</span> that predicts the outcome <span class="math inline">\(y\)</span> as well as possible from <span class="math inline">\(X\)</span> alone.</p>
-</section>
-<section id="decision-trees" class="level2">
-<h2 class="anchored" data-anchor-id="decision-trees">Decision Trees</h2>
-<p><a href="https://en.wikipedia.org/wiki/Decision_tree_learning">Decision tree learning</a> is a simple machine learning method that constructs a function <span class="math inline">\(f\)</span> from a series of conditional statements. Consider the tree below.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">stateDiagram-v2
-    state split_one &lt;&lt;choice&gt;&gt;
-    state split_two &lt;&lt;choice&gt;&gt;
-    split_one --&gt; split_two: if x1 &lt;= 1
-    split_one --&gt; c : if x1 &gt; 1
-    split_two --&gt; a: if x2 &lt;= -2
-    split_two --&gt; b : if x2 &gt; -2
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>We evaluate two conditional statements (<code>X[,1] &gt; 1</code> and <code>X[,2] &gt; -2</code>), arranged in a tree-like sequence of branches, which determine whether the model predicts <code>a</code>, <code>b</code>, or <code>c</code>. We could similarly express this tree in math notation as</p>
-<p><span class="math display">\[
-f(X_i) = \begin{cases}
-a &amp; ; \;\;\; X_{i,1} \leq 1, \;\; X_{i,2} \leq -2\\
-b &amp; ; \;\;\; X_{i,1} \leq 1, \;\; X_{i,2} &gt; -2\\
-c &amp; ; \;\;\; X_{i,1} &gt; 1
-\end{cases}
-\]</span></p>
-<p>We won’t belabor the discussion of trees as there are many good textbooks and online articles on the topic, but we’ll close by noting that training decision trees introduces a delicate balance between <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting and underfitting</a>. Simple trees like the one above do not capture much complexity in a dataset and may potentially be underfit while deep, complex trees are vulnerable to overfitting and tend to have high variance.</p>
-</section>
-<section id="boosted-decision-tree-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="boosted-decision-tree-ensembles">Boosted Decision Tree Ensembles</h2>
-<p>One way to address the overfitting-underfitting tradeoff of decision trees is to build an “ensemble” of decision trees, so that the function <span class="math inline">\(f\)</span> is defined by a sum of <span class="math inline">\(k\)</span> individual decision trees <span class="math inline">\(g_i\)</span></p>
-<p><span class="math display">\[
-f(X_i) = g_1(X_i) + \dots + g_k(X_i)
-\]</span></p>
-<p>There are several ways to train an ensemble of decision trees (sometimes called “forests”), the most popular of which are <a href="https://en.wikipedia.org/wiki/Random_forest">random forests</a> and <a href="https://en.wikipedia.org/wiki/Gradient_boosting">gradient boosting</a>. Their main difference is that random forests train all <span class="math inline">\(m\)</span> trees independently of one another, while boosting trains trees sequentially, so that tree <span class="math inline">\(j\)</span> depends on the result of training trees 1 through <span class="math inline">\(j-1\)</span>. Libraries like <a href="https://xgboost.readthedocs.io/en/stable/">xgboost</a> and <a href="https://lightgbm.readthedocs.io/en/latest/">LightGBM</a> are popular examples of boosted tree ensembles.</p>
-<p>Tree ensembles often <a href="https://arxiv.org/abs/2207.08815">outperform neural networks and other machine learning methods on tabular datasets</a>, but classic tree ensemble methods return a single estimated function <span class="math inline">\(f\)</span>, without expressing uncertainty around its estimates.</p>
-</section>
-<section id="stochastic-tree-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="stochastic-tree-ensembles">Stochastic Tree Ensembles</h2>
-<p><a href="https://en.wikipedia.org/wiki/Stochastic">Stochastic</a> tree ensembles differ from their classical counterparts in their use of randomness in learning a function. Rather than returning a single “best” tree ensemble, stochastic tree ensembles return a range of tree ensembles that fit the data well. Mechanically, it’s useful to think of “sampling” – rather than “fitting” – a stochastic tree ensemble model.</p>
-<p>Why is this useful? Suppose we’ve sampled <span class="math inline">\(m\)</span> forests. For each observation <span class="math inline">\(i\)</span>, we obtain <span class="math inline">\(m\)</span> predictions: <span class="math inline">\([f_1(X_i), \dots, f_m(X_i)]\)</span>. From this “dataset” of predictions, we can compute summary statistics, where a mean or median would give something akin to the predictions of an xgboost or lightgbm model, and the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(1-\alpha\)</span> quantiles give a <a href="https://en.wikipedia.org/wiki/Credible_interval">credible interval</a>.</p>
-<p>Rather than explain each of the models that <code>stochtree</code> supports in depth here, we provide a high-level overview, with pointers to the relevant literature.</p>
-<section id="supervised-learning" class="level3">
-<h3 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h3>
-<p>The <a href="docs/R_docs/pkgdown/reference/bart.html"><code>bart</code></a> R function and the <a href="./python-api/reference/bart.BARTModel.html"><code>BARTModel</code></a> Python class are the primary interface for supervised prediction tasks in <code>stochtree</code>. The primary references for these models are <a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full">BART (Chipman, George, McCulloch 2010)</a> and <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">XBART (He and Hahn 2021)</a>.</p>
-<p>In addition to the standard BART / XBART models, in which each tree’s leaves return a constant prediction, <code>stochtree</code> also supports arbitrary leaf regression on a user-provided basis (i.e.&nbsp;an expanded version of <a href="https://link.springer.com/article/10.1023/A:1013916107446">Chipman et al 2002</a> and <a href="https://www.tandfonline.com/doi/abs/10.1198/016214508000000689">Gramacy and Lee 2012</a>).</p>
-</section>
-<section id="causal-inference" class="level3">
-<h3 class="anchored" data-anchor-id="causal-inference">Causal Inference</h3>
-<p>The <a href="docs/R_docs/pkgdown/reference/bcf.html"><code>bcf</code></a> R function and the <a href="./python-api/reference/bcf.BCFModel.html"><code>BCFModel</code></a> Python class are the primary interface for causal effect estimation in <code>stochtree</code>. The primary references for these models are <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full">BCF (Hahn, Murray, Carvalho 2021)</a> and <a href="https://arxiv.org/abs/2209.06998">XBCF (Krantsevich, He, Hahn 2022)</a>.</p>
-</section>
-<section id="additional-modeling-features" class="level3">
-<h3 class="anchored" data-anchor-id="additional-modeling-features">Additional Modeling Features</h3>
-<p>Both the BART and BCF interfaces in <code>stochtree</code> support the following extensions:</p>
+<p>We provide some high-level explanations of the core concepts and models supported by <code>stochtree</code>, with pointers to specific software settings / config and to the underlying literature.</p>
 <ul>
-<li>Accelerated / “warm-start” sampling of forests (i.e.&nbsp;<a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012">He and Hahn 2021</a>)</li>
-<li>Forest-based heteroskedasticity (i.e.&nbsp;<a href="https://www.tandfonline.com/doi/abs/10.1080/01621459.2020.1813587">Murray 2021</a>)</li>
-<li>Additive random effects (i.e.&nbsp;<a href="https://www.tandfonline.com/doi/abs/10.1198/106186008X287337">Gelman et al 2008</a>)</li>
+<li><a href="../about/trees.html">Overview of Stochastic Trees</a>: high-level intro to stochastic decision tree ensembles</li>
+<li><a href="../about/bart.html">BART</a>: review of the supervised learning models supported by <code>stochtree</code>’s BART interface in R and Python</li>
+<li><a href="../about/bcf.html">BCF</a>: review of the causal models supported by <code>stochtree</code>’s BCF interface in R and Python</li>
 </ul>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -708,4 +618,4 @@ f(X_i) = g_1(X_i) + \dots + g_k(X_i)
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
