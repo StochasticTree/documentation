@@ -90,8 +90,9 @@ Both of the above models are homoskedastic, where each observation is assumed to
 
 $$
 \begin{aligned}
-y_i \mid X_i = x_i &\sim \mathcal{N}\left(f(x_i), \sigma^2_0 \exp{h(x_i)}\right)\\
-f &\sim \text{BART}(\alpha_f, \beta_f, m_f) \\
+y_i \mid X_i = x_i &\sim \mathcal{N}\left(f_0(x_i) + z_i \tau(x_i), \sigma^2_0 \exp{h(x_i)}\right)\\
+f_0 &\sim \text{BART}(\alpha_0, \beta_0, m_0) \\
+\tau &\sim \text{BART}(\alpha_{\tau}, \beta_{\tau}, m_{\tau}) \\
 h &\sim \text{logBART}(\alpha_h, \beta_h, m_h)
 \end{aligned}
 $$
@@ -111,8 +112,9 @@ Random effects models are a massive topic with lots of field-specific notation a
 
 $$
 \begin{aligned}
-y_{i,j} \mid X_{i,j} = x_{i,j} &\sim \mathcal{N}\left(W_{i,j} \vec{\gamma}_j + f(x_{i,j}), \sigma^2\right)\\
-f(x_{i,j}) &= \sum_{s = 1}^m g_s(x_{i,j})\\
+y_{i,j} \mid X_{i,j} = x_{i,j} &\sim \mathcal{N}\left(W_{i,j} \vec{\gamma}_j + f_0(x_{i,j}) + \tau(x_{i,j}) z_{i,j}, \sigma^2\right)\\
+f_0 &\sim \text{BART}(\alpha_0, \beta_0, m_0) \\
+\tau &\sim \text{BART}(\alpha_{\tau}, \beta_{\tau}, m_{\tau}) \\
 \sigma^2 &\sim \text{IG}(a,b)\\
 \vec{\gamma}_j &\sim \mathrm{N}(\vec{0}, \sigma^2_{\gamma} I),\\
 \end{aligned}
@@ -134,6 +136,7 @@ Fitting a model with additive random effects requires passing group labels ($j$ 
 | Data | R | Python |
 | --- | --- | --- |
 | $X$ | `X_train` | `X_train` |
+| $Z$ | `Z_train` | `Z_train` |
 | $j$ | `rfx_group_ids_train` | `rfx_group_ids_train` |
 | $W$ | `rfx_basis_train` | `rfx_basis_train` |
 | $y$ | `y_train` | `y_train` |
@@ -149,7 +152,7 @@ Each of $\mu_{\alpha}$, $\sigma^2_{\alpha}$, $\mu_{\xi,j}$, $\sigma^2_{\xi}$, $a
 | $a_{\xi}$ | `variance_prior_shape` | `variance_prior_shape` |
 | $b_{\xi}$ | `variance_prior_scale` | `variance_prior_scale` |
 
-Finally, a common enough use case for additive random effects in BART is to model "random intercepts", where $\vec{\gamma}_j = \gamma_j$ is a single group-specific intercept (and $W = \vec{1}$), so we allow users to skip manually constructing a basis of ones and instead set `model_spec` to `intercept_only` in the `random_effects_params` list / dictionary. This setting propagates through to the `predict.bartmodel()` / `BARTModel.predict()` methods so that users do not have to pass a basis when predicting from a model fit this way (group IDs are still required, of course).
+Finally, two common enough use cases for additive random effects in BCF is to model "random intercepts", where $\vec{\gamma}_j = \gamma_j$ is a single group-specific intercept (and $W = \vec{1}$), or "random intercept plus random slope on the treatment". We allow users to skip manually constructing bases in either of these two cases, and instead set `model_spec` to `intercept_only` or `intercept_plus_treatment` in the `random_effects_params` list / dictionary. This setting propagates through to the `predict.bcfmodel()` / `BCFModel.predict()` methods so that users do not have to pass a basis when predicting from a model fit this way (group IDs are still required, of course).
 
 ## Binary Outcomes with a Probit Link
 
