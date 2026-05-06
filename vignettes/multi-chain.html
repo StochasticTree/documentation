@@ -260,7 +260,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/serialization.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/multi-chain.html">Running and Combining Multiple MCMC Chains</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/prediction.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/multi-chain.html">Running and Combining Multiple MCMC Chains</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -334,6 +334,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Prediction and Parameter Extraction</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../vignettes/serialization.html" class="sidebar-item-text sidebar-link">
@@ -450,7 +456,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/serialization.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/multi-chain.html">Running and Combining Multiple MCMC Chains</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/prediction.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/multi-chain.html">Running and Combining Multiple MCMC Chains</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Running and Combining Multiple MCMC Chains</h1>
 </div>
@@ -704,9 +710,9 @@ window.Quarto = {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.355, Lag 5: 0.137, Lag 10: 0.073, Lag 50: 0.003
-Total effective sample size across chains: 1494
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</code></pre>
+Lag 0: 1, Lag 1: 0.36, Lag 5: 0.146, Lag 10: 0.08, Lag 50: 0.027
+Total effective sample size across chains: 1703.3
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.005</code></pre>
 </div>
 </div>
 </div>
@@ -735,7 +741,7 @@ Total effective sample size across chains: 1494
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 465.2</code></pre>
+        sigma2   float64 8B 240.6</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -743,7 +749,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.015</code></pre>
+        sigma2   float64 8B 1.021</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1006,9 +1012,9 @@ Group: /posterior
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.361, Lag 5: 0.135, Lag 10: 0.089, Lag 50: 0.019
-Total effective sample size across chains: 1278.4
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</code></pre>
+Lag 0: 1, Lag 1: 0.364, Lag 5: 0.13, Lag 10: 0.074, Lag 50: 0.02
+Total effective sample size across chains: 1889.2
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</code></pre>
 </div>
 </div>
 </div>
@@ -1035,7 +1041,7 @@ Total effective sample size across chains: 1278.4
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 277.0</code></pre>
+        sigma2   float64 8B 204.3</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1043,7 +1049,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.022</code></pre>
+        sigma2   float64 8B 1.016</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

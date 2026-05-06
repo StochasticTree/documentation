@@ -61,7 +61,11 @@
 
 
 <dt id="arg-terms">terms<a class="anchor" aria-label="anchor" href="#arg-terms"></a></dt>
-<dd><p>A character string specifying the model term(s) for which to compute intervals. Options for BCF models are <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, or <code>"y_hat"</code>. Note that <code>"mu"</code> is only different from <code>"prognostic_function"</code> if random effects are included with a model spec of <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code> and <code>"tau"</code> is only different from <code>"cate"</code> if random effects are included with a model spec of <code>"intercept_plus_treatment"</code>.</p></dd>
+<dd><p>A character string specifying the model term(s) for which to compute intervals. Options are <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, or <code>"y_hat"</code>.</p>
+<p>The treatment effect terms follow a three-level hierarchy:</p><ul><li><p><code>"tau"</code> returns <code>tau_0 + tau(X)</code>: the parametric treatment intercept (if sampled) plus the treatment forest. This matches <code>model$tau_hat_train</code> / <code>model$tau_hat_test</code>.</p></li>
+<li><p><code>"cate"</code> additionally folds in the random slope on treatment when random effects are fit with <code>rfx_model_spec = "intercept_plus_treatment"</code>; otherwise it is identical to <code>"tau"</code>.</p></li>
+<li><p>The raw forest-only component (without <code>tau_0</code>) is not directly returned by this method; use <code>model$forests_tau</code> to access it.</p></li>
+</ul><p>Similarly for the prognostic term: <code>"mu"</code> returns the prognostic forest only, while <code>"prognostic_function"</code> additionally folds in the random intercept when <code>rfx_model_spec</code> is <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>; otherwise the two are identical.</p></dd>
 
 
 <dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>

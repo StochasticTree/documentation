@@ -274,7 +274,7 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>The <a href="docs/R_docs/pkgdown/reference/bcf.html"><code>bcf</code></a> R function and the <a href="python-api/reference/bcf.BCFModel.qmd"><code>BCFModel</code></a> Python class are the primary interface for causal effect estimation in <code>stochtree</code>. The primary references for these models are <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full">the original BCF paper</a> (<span class="citation" data-cites="hahn2020bayesian">Hahn et al. (<a href="#ref-hahn2020bayesian" role="doc-biblioref">2020</a>)</span>) and <a href="https://arxiv.org/abs/2209.06998">the XBCF paper</a> (<span class="citation" data-cites="krantsevich2023stochastic">Krantsevich et al. (<a href="#ref-krantsevich2023stochastic" role="doc-biblioref">2023</a>)</span>), which adapts the BCF Metropolis-Hastings sampler to use the “grow-from-root” algorithm.</p>
+<p>The <a href="../docs/R_docs/pkgdown/reference/bcf.html"><code>bcf</code></a> R function and the <a href="../python-api/reference/bcf.BCFModel.html"><code>BCFModel</code></a> Python class are the primary interface for causal effect estimation in <code>stochtree</code>. The primary references for these models are <a href="https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full">the original BCF paper</a> (<span class="citation" data-cites="hahn2020bayesian">Hahn et al. (<a href="#ref-hahn2020bayesian" role="doc-biblioref">2020</a>)</span>) and <a href="https://arxiv.org/abs/2209.06998">the XBCF paper</a> (<span class="citation" data-cites="krantsevich2023stochastic">Krantsevich et al. (<a href="#ref-krantsevich2023stochastic" role="doc-biblioref">2023</a>)</span>), which adapts the BCF Metropolis-Hastings sampler to use the “grow-from-root” algorithm.</p>
 </section>
 <section id="model" class="level1">
 <h1>Model</h1>
@@ -320,7 +320,7 @@ f_0 &amp;\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
 </section>
 <section id="propensities-as-covariates" class="level2">
 <h2 class="anchored" data-anchor-id="propensities-as-covariates">Propensities as Covariates</h2>
-<p><span class="citation" data-cites="hahn2020bayesian">Hahn et al. (<a href="#ref-hahn2020bayesian" role="doc-biblioref">2020</a>)</span> recommend using a propensity score (i.e.&nbsp;the conditional probability of being treated, given covariates, <span class="math inline">\(p(Z=1 \mid X)\)</span>) as a covariate in the <span class="math inline">\(f_0\)</span> model to guard against regularization-induced confounding and this is the default in <code>stochtree</code>, though it can be modified by setting <code>propensity_covariate</code> in the <code>general_params</code> list to any of</p>
+<p><span class="citation" data-cites="hahn2020bayesian">Hahn et al. (<a href="#ref-hahn2020bayesian" role="doc-biblioref">2020</a>)</span> recommend using a propensity score (i.e.&nbsp;the conditional probability of being treated <span class="math inline">\(p(Z=1 \mid X)\)</span>) as a covariate in the <span class="math inline">\(f_0\)</span> model to guard against regularization-induced confounding and this is the default in <code>stochtree</code>, though it can be modified by setting <code>propensity_covariate</code> in the <code>general_params</code> list to any of</p>
 <ol type="1">
 <li><code>"none"</code>: Propensity score used in neither <span class="math inline">\(f_0\)</span> nor <span class="math inline">\(\tau\)</span></li>
 <li><code>"prognostic"</code>: Propensity score used in <span class="math inline">\(f_0\)</span> but not <span class="math inline">\(\tau\)</span> (<strong>this is the default</strong> in <code>stochtree</code>)</li>
@@ -340,7 +340,7 @@ f_0 &amp;\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
 \sigma^2 &amp;\sim \text{IG}(a,b).\\
 \end{aligned}
 \]</span></p>
-<p>Specifying prior of <span class="math inline">\(b_0, b_1 \sim \mathcal{N}(0,1/2)\)</span> ensures the CATE function <span class="math inline">\((b_1 - b_0) \tau(X)\)</span> effectively scales the <span class="math inline">\(\tau\)</span> forest by a standard normal parameter. <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> can be updated, conditional on <span class="math inline">\(f_0\)</span>, <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma^2\)</span>, as a simple linear regression of <span class="math inline">\(y - f_0\)</span> on <span class="math inline">\(\left[z \tau, (1-z)\tau\right]\)</span>.</p>
+<p>Specifying prior of <span class="math inline">\(b_0, b_1 \sim \mathcal{N}(0,1/2)\)</span> ensures the CATE function <span class="math inline">\((b_1 - b_0) \tau(X)\)</span> effectively scales the <span class="math inline">\(\tau\)</span> forest by an <em>a priori</em> standard normal random variable. <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> can be updated, conditional on <span class="math inline">\(f_0\)</span>, <span class="math inline">\(\tau\)</span> and <span class="math inline">\(\sigma^2\)</span>, as a simple linear regression of <span class="math inline">\(y - f_0\)</span> on <span class="math inline">\(\left[z \tau, (1-z)\tau\right]\)</span>.</p>
 <p>This option is only available for binary treatments and can be enabled by setting <code>adaptive_coding = T</code> / <code>"adaptive_coding": True</code> in the <code>general_params</code> list / dictionary (it is switched off by default).</p>
 </section>
 <section id="parametric-treatment-effect-term" class="level2">
@@ -352,7 +352,7 @@ f_0 &amp;\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
 \tau &amp;\sim \text{BART}(\alpha_{\tau}, \beta_{\tau}, m_{\tau})\\
 \sigma^2 &amp;\sim \text{IG}(a,b),\\
 \end{aligned}
-\]</span> we can decomposite the treatment effect function, <span class="math inline">\(\tau\)</span>, into a parametric homogeneous treatment effect and a covariate-driven, heterogeneous treatment effect <span class="math display">\[
+\]</span> we can decompose the treatment effect function, <span class="math inline">\(\tau\)</span>, into a parametric homogeneous treatment effect and a covariate-driven, heterogeneous treatment effect <span class="math display">\[
 \begin{aligned}
 y_i \mid X_i = x_i, Z_i = z_i &amp;\sim \mathcal{N}\left(f_0(x_i) + \left[\tau_0 + t(x_i)\right] z_i, \sigma^2\right)\\
 f_0 &amp;\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
@@ -361,7 +361,7 @@ t &amp;\sim \text{BART}(\alpha_{\tau}, \beta_{\tau}, m_{\tau})\\
 \sigma^2 &amp;\sim \text{IG}(a,b),\\
 \end{aligned}
 \]</span></p>
-<p><span class="math inline">\(\tau_0\)</span> is sampled via a straightforward Gibbs update, regressing <span class="math inline">\(y - f_0 - t(X) Z\)</span> on Z. This “treatment intercept” option is enabled by default in <code>stochtree</code> and is controlled by the <code>sample_intercept</code> option in <code>treatment_effect_forest_params</code>. <span class="math inline">\(\sigma^2_{\tau}\)</span> is automatically calibrated internally based on the outcome variance, but can be directly specified via the <code>tau_0_prior_var</code> parameter in <code>treatment_effect_forest_params</code>.</p>
+<p><span class="math inline">\(\tau_0\)</span> is sampled via a straightforward Gibbs update, regressing <span class="math inline">\(y - f_0 - t(X) Z\)</span> on <span class="math inline">\(Z\)</span>. This “treatment intercept” option is enabled by default in <code>stochtree</code> and is controlled by the <code>sample_intercept</code> option in <code>treatment_effect_forest_params</code>. <span class="math inline">\(\sigma^2_{\tau}\)</span> is automatically calibrated internally based on the outcome variance, but can be directly specified via the <code>tau_0_prior_var</code> parameter in <code>treatment_effect_forest_params</code>.</p>
 </section>
 <section id="forest-based-heteroskedasticity" class="level2">
 <h2 class="anchored" data-anchor-id="forest-based-heteroskedasticity">Forest-based Heteroskedasticity</h2>
@@ -516,8 +516,8 @@ f_0 &amp;\sim \text{BART}(\alpha_0, \beta_0, m_0) \\
 </section>
 <section id="grow-from-root" class="level2">
 <h2 class="anchored" data-anchor-id="grow-from-root">Grow-From-Root</h2>
-<p>“Burn-in” is a common practice with complex MCMC samplers (such as BART) to allow for convergence. <span class="citation" data-cites="he2023stochastic">He and Hahn (<a href="#ref-he2023stochastic" role="doc-biblioref">2023</a>)</span> developed the “grow-from-root” (GFR) algorithm as an alternative to BART’s Metropolis-Hastings sampler. On it’s own, the GFR algorithm sampling the classic BART model defines a new method called “XBART”, but <span class="citation" data-cites="he2023stochastic">He and Hahn (<a href="#ref-he2023stochastic" role="doc-biblioref">2023</a>)</span> note that XBART samples can be used to initialize an MCMC chain, and samples taken via GFR tend to converge to high probability regions much faster than an MCMC chain.</p>
-<p><code>stochtree</code> is built to support this “warm-start” BART procedure out of the box, and number of GFR iterations to run before MCMC chains is specified by the <code>num_gfr</code> argument. If a user specifies <code>num_chains &gt; 1</code>, then different GFR samples will be used to initialize each GFR iteration.</p>
+<p>“Burn-in” is a common practice with complex MCMC samplers (such as BART / BCF) to allow for convergence. <span class="citation" data-cites="krantsevich2023stochastic">Krantsevich et al. (<a href="#ref-krantsevich2023stochastic" role="doc-biblioref">2023</a>)</span> adapted the “grow-from-root” (GFR) algorithm to BCF. On it’s own, the GFR algorithm sampling the classic BCF model defines a new method called “XBCF”, but the authors note that XBCF can be used to initialize an MCMC chain, and samples taken via GFR tend to converge to high probability regions much faster than an MCMC chain.</p>
+<p><code>stochtree</code> is built to support this “warm-start” BCF procedure out of the box, and number of GFR iterations to run before MCMC chains is specified by the <code>num_gfr</code> argument. If a user specifies <code>num_chains &gt; 1</code>, then different GFR samples will be used to initialize each GFR iteration.</p>
 </section>
 </section>
 <section id="references" class="level1">
@@ -536,9 +536,6 @@ Gelman, Andrew, John B Carlin, Hal S Stern, David B Dunson, Aki Vehtari, and Don
 </div>
 <div id="ref-hahn2020bayesian" class="csl-entry" role="listitem">
 Hahn, P Richard, Jared S Murray, and Carlos M Carvalho. 2020. <span>“Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects (with Discussion).”</span> <em>Bayesian Analysis</em> 15 (3): 965–1056.
-</div>
-<div id="ref-he2023stochastic" class="csl-entry" role="listitem">
-He, Jingyu, and P Richard Hahn. 2023. <span>“Stochastic Tree Ensembles for Regularized Nonlinear Regression.”</span> <em>Journal of the American Statistical Association</em> 118 (541): 551–70.
 </div>
 <div id="ref-krantsevich2023stochastic" class="csl-entry" role="listitem">
 Krantsevich, Nikolay, Jingyu He, and P Richard Hahn. 2023. <span>“Stochastic Tree Ensembles for Estimating Heterogeneous Effects.”</span> <em>International Conference on Artificial Intelligence and Statistics</em>, 6120–31.

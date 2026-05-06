@@ -241,7 +241,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/serialization.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/sklearn.html">Using Stochtree via Sklearn-Compatible Estimators in Python</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/prediction.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/sklearn.html">Using Stochtree via Sklearn-Compatible Estimators in Python</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -315,6 +315,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Prediction and Parameter Extraction</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../vignettes/serialization.html" class="sidebar-item-text sidebar-link">
@@ -429,7 +435,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/serialization.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/sklearn.html">Using Stochtree via Sklearn-Compatible Estimators in Python</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/prediction.html">Practical Topics</a></li><li class="breadcrumb-item"><a href="../vignettes/sklearn.html">Using Stochtree via Sklearn-Compatible Estimators in Python</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Using Stochtree via Sklearn-Compatible Estimators in Python</h1>
 </div>
@@ -2738,8 +2744,8 @@ Default value was changed from ``True`` to ``False``</span></a></td>
             </details>
         </div>
     </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1},
-                       mean_forest_params={'alpha': 0.95, 'beta': 2.0,
-                                           'num_trees': 50},
+                       mean_forest_params={'alpha': 0.9, 'beta': 1.5,
+                                           'num_trees': 100},
                        num_gfr=40, num_mcmc=0)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
         <div class="estimator-table">
             <details>
@@ -2770,7 +2776,7 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 <tr class="user-set odd">
 <td><em></em></td>
 <td class="param">mean_forest_params</td>
-<td class="value">{'alpha': 0.95, 'beta': 2.0, 'num_trees': 50}</td>
+<td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
@@ -2928,9 +2934,9 @@ forceTheme('sk-container-id-3');</script>
 Hyperparameters chosen by grid search:
   num_gfr: 40
   num_mcmc: 0
-  num_trees: 50
-  alpha: 0.95
-  beta: 2.0</code></pre>
+  num_trees: 100
+  alpha: 0.9
+  beta: 1.5</code></pre>
 </div>
 </div>
 </section>

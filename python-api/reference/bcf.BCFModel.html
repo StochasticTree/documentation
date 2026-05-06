@@ -806,7 +806,7 @@ t(X) &amp;\sim \text{BART}()\\
 <table class="caption-top table">
 <colgroup>
 <col style="width: 1%">
-<col style="width: 2%">
+<col style="width: 1%">
 <col style="width: 95%">
 <col style="width: 1%">
 </colgroup>
@@ -858,7 +858,7 @@ t(X) &amp;\sim \text{BART}()\\
 <tr class="odd">
 <td>terms</td>
 <td>str</td>
-<td>Which model terms to include in the prediction. This can be a single term or a list of model terms. Options include “y_hat”, “prognostic_function”, “mu”, “cate”, “tau”, “rfx”, “variance_forest”, or “all”. If a model has random effects fit with either “intercept_only” or “intercept_plus_treatment” model_spec, then “prognostic_function” refers to the predictions of the prognostic forest plus the random intercept and “cate” refers to the predictions of the treatment effect forest plus the random slope on the treatment variable. For these models, the forest predictions alone can be requested via “mu” (prognostic forest) and “tau” (treatment effect forest). In all other cases, “mu” will return exactly the same result as “prognostic_function” and “tau” will return exactly the same result as “cate”. If a model doesn’t have mean forest, random effects, or variance forest predictions, but one of those terms is request, the request will simply be ignored. If none of the requested terms are present in a model, this function will return <code>NULL</code> along with a warning. Default: “all”.</td>
+<td>Which model terms to include in the prediction. This can be a single term or a list of model terms. Options include “y_hat”, “prognostic_function”, “mu”, “cate”, “tau”, “rfx”, “variance_forest”, or “all”. The treatment effect terms follow a three-level hierarchy: - <code>"tau"</code> returns <code>tau_0 + tau(X)</code>: the parametric treatment intercept (if sampled) plus the treatment forest. This matches <code>model.tau_hat_train</code> / <code>model.tau_hat_test</code>. - <code>"cate"</code> additionally folds in the random slope on treatment when random effects are fit with <code>rfx_model_spec="intercept_plus_treatment"</code>; otherwise it is identical to <code>"tau"</code>. - The raw forest-only component (without <code>tau_0</code>) is not directly returned by this method; use <code>model.forest_container_tau</code> to access it. Similarly for the prognostic term: <code>"mu"</code> returns the prognostic forest only, while <code>"prognostic_function"</code> additionally folds in the random intercept when <code>rfx_model_spec</code> is <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>; otherwise the two are identical. If a model doesn’t have mean forest, random effects, or variance forest predictions, but one of those terms is requested, the request will simply be ignored. If none of the requested terms are present in a model, this function will return <code>None</code> along with a warning. Default: “all”.</td>
 <td><code>'all'</code></td>
 </tr>
 <tr class="even">
@@ -1047,9 +1047,9 @@ t(X) &amp;\sim \text{BART}()\\
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 2%">
 <col style="width: 1%">
-<col style="width: 94%">
+<col style="width: 0%">
+<col style="width: 96%">
 <col style="width: 1%">
 </colgroup>
 <thead>
@@ -1094,7 +1094,7 @@ t(X) &amp;\sim \text{BART}()\\
 <tr class="even">
 <td>terms</td>
 <td>str</td>
-<td>Character string specifying the model term(s) for which to compute intervals. Options for BCF models are <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"tau_0"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, or <code>"y_hat"</code>. Defaults to <code>"all"</code>. Note that <code>"mu"</code> is only different from <code>"prognostic_function"</code> if random effects are included with a model spec of <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code> and <code>"tau"</code> is only different from <code>"cate"</code> if random effects are included with a model spec of <code>"intercept_plus_treatment"</code>. <code>"tau_0"</code> is only available when the model was fit with <code>sample_intercept = True</code>.</td>
+<td>Which model terms to include in the interval. This can be a single term or a list of model terms. Options include <code>"y_hat"</code>, <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"rfx"</code>, <code>"variance_forest"</code>, or <code>"all"</code>. The treatment effect terms follow a three-level hierarchy: - <code>"tau"</code> returns <code>tau_0 + tau(X)</code>: the parametric treatment intercept (if sampled) plus the treatment forest. This matches <code>model.tau_hat_train</code> / <code>model.tau_hat_test</code>. - <code>"cate"</code> additionally folds in the random slope on treatment when random effects are fit with <code>rfx_model_spec="intercept_plus_treatment"</code>; otherwise it is identical to <code>"tau"</code>. - The raw forest-only component (without <code>tau_0</code>) is not directly returned by this method; use <code>model.forest_container_tau</code> to access it. Similarly for the prognostic term: <code>"mu"</code> returns the prognostic forest only, while <code>"prognostic_function"</code> additionally folds in the random intercept when <code>rfx_model_spec</code> is <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>; otherwise the two are identical. Default: <code>"all"</code>.</td>
 <td><code>'all'</code></td>
 </tr>
 <tr class="odd">
