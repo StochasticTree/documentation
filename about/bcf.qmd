@@ -5,7 +5,7 @@ bibliography: about.bib
 
 # Introduction
 
-The [`bcf`](docs/R_docs/pkgdown/reference/bcf.html) R function and the [`BCFModel`](python-api/reference/bcf.BCFModel.qmd) Python class are the primary interface for causal effect estimation in `stochtree`. The primary references for these models are [the original BCF paper](https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full) (@hahn2020bayesian) and [the XBCF paper](https://arxiv.org/abs/2209.06998) (@krantsevich2023stochastic), which adapts the BCF Metropolis-Hastings sampler to use the "grow-from-root" algorithm.
+The [`bcf`](../docs/R_docs/pkgdown/reference/bcf.html) R function and the [`BCFModel`](../python-api/reference/bcf.BCFModel.qmd) Python class are the primary interface for causal effect estimation in `stochtree`. The primary references for these models are [the original BCF paper](https://projecteuclid.org/journals/bayesian-analysis/volume-15/issue-3/Bayesian-Regression-Tree-Models-for-Causal-Inference--Regularization-Confounding/10.1214/19-BA1195.full) (@hahn2020bayesian) and [the XBCF paper](https://arxiv.org/abs/2209.06998) (@krantsevich2023stochastic), which adapts the BCF Metropolis-Hastings sampler to use the "grow-from-root" algorithm.
 
 # Model
 
@@ -34,7 +34,7 @@ $$
 
 ## Propensities as Covariates
 
-@hahn2020bayesian recommend using a propensity score (i.e. the conditional probability of being treated, given covariates, $p(Z=1 \mid X)$) as a covariate in the $f_0$ model to guard against regularization-induced confounding and this is the default in `stochtree`, though it can be modified by setting `propensity_covariate` in the `general_params` list to any of
+@hahn2020bayesian recommend using a propensity score (i.e. the conditional probability of being treated $p(Z=1 \mid X)$) as a covariate in the $f_0$ model to guard against regularization-induced confounding and this is the default in `stochtree`, though it can be modified by setting `propensity_covariate` in the `general_params` list to any of
 
 1. `"none"`: Propensity score used in neither $f_0$ nor $\tau$
 2. `"prognostic"`: Propensity score used in $f_0$ but not $\tau$ (**this is the default** in `stochtree`)
@@ -56,7 +56,7 @@ f_0 &\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
 \end{aligned}
 $$
 
-Specifying prior of $b_0, b_1 \sim \mathcal{N}(0,1/2)$ ensures the CATE function $(b_1 - b_0) \tau(X)$ effectively scales the $\tau$ forest by a standard normal parameter. $b_0$ and $b_1$ can be updated, conditional on $f_0$, $\tau$ and $\sigma^2$, as a simple linear regression of $y - f_0$ on $\left[z \tau, (1-z)\tau\right]$.
+Specifying prior of $b_0, b_1 \sim \mathcal{N}(0,1/2)$ ensures the CATE function $(b_1 - b_0) \tau(X)$ effectively scales the $\tau$ forest by an *a priori* standard normal random variable. $b_0$ and $b_1$ can be updated, conditional on $f_0$, $\tau$ and $\sigma^2$, as a simple linear regression of $y - f_0$ on $\left[z \tau, (1-z)\tau\right]$.
 
 This option is only available for binary treatments and can be enabled by setting `adaptive_coding = T` / `"adaptive_coding": True` in the `general_params` list / dictionary (it is switched off by default).
 
@@ -71,7 +71,7 @@ f_0 &\sim \text{BART}(\alpha_0, \beta_0, m_0)\\
 \sigma^2 &\sim \text{IG}(a,b),\\
 \end{aligned}
 $$
-we can decomposite the treatment effect function, $\tau$, into a parametric homogeneous treatment effect and a covariate-driven, heterogeneous treatment effect
+we can decompose the treatment effect function, $\tau$, into a parametric homogeneous treatment effect and a covariate-driven, heterogeneous treatment effect
 $$
 \begin{aligned}
 y_i \mid X_i = x_i, Z_i = z_i &\sim \mathcal{N}\left(f_0(x_i) + \left[\tau_0 + t(x_i)\right] z_i, \sigma^2\right)\\
@@ -82,7 +82,7 @@ t &\sim \text{BART}(\alpha_{\tau}, \beta_{\tau}, m_{\tau})\\
 \end{aligned}
 $$
 
-$\tau_0$ is sampled via a straightforward Gibbs update, regressing $y - f_0 - t(X) Z$ on Z. This "treatment intercept" option is enabled by default in `stochtree` and is controlled by the `sample_intercept` option in `treatment_effect_forest_params`. $\sigma^2_{\tau}$ is automatically calibrated internally based on the outcome variance, but can be directly specified via the `tau_0_prior_var` parameter in `treatment_effect_forest_params`.
+$\tau_0$ is sampled via a straightforward Gibbs update, regressing $y - f_0 - t(X) Z$ on $Z$. This "treatment intercept" option is enabled by default in `stochtree` and is controlled by the `sample_intercept` option in `treatment_effect_forest_params`. $\sigma^2_{\tau}$ is automatically calibrated internally based on the outcome variance, but can be directly specified via the `tau_0_prior_var` parameter in `treatment_effect_forest_params`.
 
 ## Forest-based Heteroskedasticity
 
@@ -183,8 +183,8 @@ Taken together, these parameters tell us that a sampler will run for `num_burnin
 
 ## Grow-From-Root
 
-"Burn-in" is a common practice with complex MCMC samplers (such as BART) to allow for convergence. @he2023stochastic developed the "grow-from-root" (GFR) algorithm as an alternative to BART's Metropolis-Hastings sampler. On it's own, the GFR algorithm sampling the classic BART model defines a new method called "XBART", but @he2023stochastic note that XBART samples can be used to initialize an MCMC chain, and samples taken via GFR tend to converge to high probability regions much faster than an MCMC chain.
+"Burn-in" is a common practice with complex MCMC samplers (such as BART / BCF) to allow for convergence. @krantsevich2023stochastic  adapted the "grow-from-root" (GFR) algorithm to BCF. On it's own, the GFR algorithm sampling the classic BCF model defines a new method called "XBCF", but the authors note that XBCF can be used to initialize an MCMC chain, and samples taken via GFR tend to converge to high probability regions much faster than an MCMC chain.
 
-`stochtree` is built to support this "warm-start" BART procedure out of the box, and number of GFR iterations to run before MCMC chains is specified by the `num_gfr` argument. If a user specifies `num_chains > 1`, then different GFR samples will be used to initialize each GFR iteration.
+`stochtree` is built to support this "warm-start" BCF procedure out of the box, and number of GFR iterations to run before MCMC chains is specified by the `num_gfr` argument. If a user specifies `num_chains > 1`, then different GFR samples will be used to initialize each GFR iteration.
 
 # References

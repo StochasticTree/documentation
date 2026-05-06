@@ -5,13 +5,13 @@ bibliography: about.bib
 
 # Introduction
 
-The [`bart`](docs/R_docs/pkgdown/reference/bart.html) R function and the [`BARTModel`](python-api/reference/bart.BARTModel.qmd) Python class are the primary interface for supervised prediction tasks in `stochtree`. The primary references for these models are [the original BART paper](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full) (@chipman2010bart) and [the XBART paper](https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012) (@he2023stochastic), which replaces the original BART Metropolis-Hastings sampler with a greedy "grow-from-root" sampler for the same underlying model.
+The [`bart`](../docs/R_docs/pkgdown/reference/bart.html) R function and the [`BARTModel`](../python-api/reference/bart.BARTModel.qmd) Python class are the primary interface for supervised prediction tasks in `stochtree`. The primary references for these models are [the original BART paper](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-4/issue-1/BART-Bayesian-additive-regression-trees/10.1214/09-AOAS285.full) (@chipman2010bart) and [the XBART paper](https://www.tandfonline.com/doi/full/10.1080/01621459.2021.1942012) (@he2023stochastic), which replaces the original BART Metropolis-Hastings sampler with a greedy "grow-from-root" sampler for the same underlying model.
 
 # Model
 
 ## Classic BART
 
-The "classic" BART model of @chipman2010bart models every observation (indexed by $i$) as i.i.d. normal with a covariate-dependent mean $f(x_i)$ and parametric variance $\sigma^2$ with an inverse-gamma prior.
+The "classic" BART model of @chipman2010bart models every outcome observation $y_i$ as i.i.d. normal with a mean $f(x_i)$ expressed as a function of covariates $x_i$ and global error variance $\sigma^2$ with an inverse-gamma prior.
 
 $$
 \begin{aligned}
