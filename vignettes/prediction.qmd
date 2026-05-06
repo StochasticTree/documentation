@@ -8,6 +8,8 @@ code-annotations: hover
 
 ```{r}
 #| include: false
+Sys.setenv(OMP_NUM_THREADS = "1")
+Sys.setenv(OPENBLAS_NUM_THREADS = "1")     
 reticulate::use_python(
   Sys.getenv(
     "RETICULATE_PYTHON",
@@ -24,7 +26,7 @@ reticulate::use_python(
 
 # Introduction
 
-The vignettes in @sec-core-models demonstrate how to **fit** different types of models in `stochtree`. 
+The vignettes in the [Core Models](index.qmd#sec-core-models) section demonstrate how to **fit** different types of models in `stochtree`.
 This vignette walks through the interfaces for querying and extracting parameters from fitted `stochtree` models.
 
 There are two primary interfaces for interacting with trained BART / BCF models:
@@ -50,6 +52,7 @@ The BART Prediction API differs stylistically in R and Python but provides the s
 
 ```{r}
 #| eval: false
+#| code-copy: false
 predict(
   object, # <1>
   X, # <2>
@@ -75,6 +78,7 @@ predict(
 
 ```{python}
 #| eval: false
+#| code-copy: false
 bart.BARTModel.predict(     # <1>
   X,                        # <2>
   leaf_basis=None,          # <3>
@@ -169,6 +173,7 @@ The multilingual BCF Prediction API is annotated below as with the BART API
 
 ```{r}
 #| eval: false
+#| code-copy: false
 predict(
   object, # <1>
   X, # <2>
@@ -196,6 +201,7 @@ predict(
 
 ```{python}
 #| eval: false
+#| code-copy: false
 bcf.BCFModel.predict(       # <1>
   X,                        # <2>
   Z,                        # <3>
@@ -306,6 +312,7 @@ The BART parameter extraction API differs stylistically in R and Python but prov
 
 ```{r}
 #| eval: false
+#| code-copy: false
 extractParameter(
   object, # <1>
   term, # <2>
@@ -319,6 +326,7 @@ extractParameter(
 
 ```{python}
 #| eval: false
+#| code-copy: false
 bart.BARTModel.extract_parameter(     # <1>
   term,                               # <2>
 )
@@ -349,6 +357,7 @@ The multilingual BCF parameter extraction API is annotated below as with the BAR
 
 ```{r}
 #| eval: false
+#| code-copy: false
 extractParameter(
   object, # <1>
   term, # <2>
@@ -362,6 +371,7 @@ extractParameter(
 
 ```{python}
 #| eval: false
+#| code-copy: false
 bcf.BCFModel.extract_parameter(     # <1>
   term,                             # <2>
 )
@@ -532,8 +542,7 @@ bart_model <- stochtree::bart(
   y_train = y_train,
   num_gfr = num_gfr,
   num_burnin = num_burnin,
-  num_mcmc = num_mcmc,
-  general_params = list(num_threads = 1)
+  num_mcmc = num_mcmc
 )
 ```
 
@@ -550,7 +559,6 @@ bart_model.sample(
     num_gfr=num_gfr,
     num_burnin=num_burnin,
     num_mcmc=num_mcmc,
-    general_params={"num_threads": 1},
 )
 ```
 
@@ -623,8 +631,7 @@ bart_model <- stochtree::bart(
   rfx_basis_train = rfx_basis_train,
   num_gfr = num_gfr,
   num_burnin = num_burnin,
-  num_mcmc = num_mcmc,
-  general_params = list(num_threads = 1)
+  num_mcmc = num_mcmc
 )
 ```
 
@@ -644,7 +651,6 @@ bart_model.sample(
     num_gfr=num_gfr,
     num_burnin=num_burnin,
     num_mcmc=num_mcmc,
-    general_params={"num_threads": 1},
 )
 ```
 
