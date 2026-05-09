@@ -342,6 +342,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../vignettes/calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibrating StochTree Model Parameters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../vignettes/serialization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Saving and Loading Fitted Models</span></a>
   </div>
@@ -710,9 +716,9 @@ window.Quarto = {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.379, Lag 5: 0.185, Lag 10: 0.123, Lag 50: 0.047
-Total effective sample size across chains: 1094.3
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.008</code></pre>
+Lag 0: 1, Lag 1: 0.383, Lag 5: 0.144, Lag 10: 0.109, Lag 50: 0.06
+Total effective sample size across chains: 1347
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.003</code></pre>
 </div>
 </div>
 </div>
@@ -741,7 +747,7 @@ Total effective sample size across chains: 1094.3
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 317.4</code></pre>
+        sigma2   float64 8B 635.5</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -749,7 +755,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.019</code></pre>
+        sigma2   float64 8B 1.01</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1012,9 +1018,9 @@ Group: /posterior
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.365, Lag 5: 0.133, Lag 10: 0.089, Lag 50: 0.037
-Total effective sample size across chains: 1387.1
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.004</code></pre>
+Lag 0: 1, Lag 1: 0.385, Lag 5: 0.182, Lag 10: 0.098, Lag 50: 0
+Total effective sample size across chains: 1295
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.013</code></pre>
 </div>
 </div>
 </div>
@@ -1041,7 +1047,7 @@ Total effective sample size across chains: 1387.1
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 622.3</code></pre>
+        sigma2   float64 8B 302.2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1049,7 +1055,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.01</code></pre>
+        sigma2   float64 8B 1.022</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
