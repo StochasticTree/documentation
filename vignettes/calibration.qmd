@@ -93,7 +93,6 @@ from typing import Union
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
 from stochtree import BARTModel
 ```
 
@@ -145,7 +144,22 @@ where $a$ is a scaling factor that determines the signal-to-noise ratio.
 ## R
 
 ```{r}
-generate_data <- function(n, p, snr) {
+continuous_dgp <- function(X) {
+  g <- function(x) {
+    ifelse(
+      x[, 2] <= 0.5 & x[, 3] <= 0.5,
+      -3,
+      ifelse(
+        x[, 2] <= 0.5 & x[, 3] > 0.5,
+        -1,
+        ifelse(x[, 2] > 0.5 & x[, 3] <= 0.5, -1, 3)
+      )
+    )
+  }
+  5 * sin(2 * pi * X[, 1]) + g(X) - 2 * X[, 4] * X[, 5]
+}
+
+generate_data <- function(n, p, snr, mean_fn) {
   if (p < 5) {
     stop("p must be at least 5")
   }
@@ -156,36 +170,17 @@ generate_data <- function(n, p, snr) {
     stop("snr must be positive")
   }
   X <- matrix(runif(n * p), ncol = p)
-  g <- function(x) {
-    return(ifelse(
-      x[, 2] <= 0.5 & x[, 3] <= 0.5,
-      -3,
-      ifelse(
-        x[, 2] <= 0.5 & x[, 3] > 0.5,
-        -1,
-        ifelse(x[, 2] > 0.5 & x[, 3] <= 0.5, -1, 3)
-      )
-    ))
-  }
-  f_X <- 5 * sin(2 * pi * X[, 1]) + g(X) - 2 * X[, 4] * X[, 5]
+  f_X <- mean_fn(X)
   eps <- rnorm(n, mean = 0, sd = sqrt(var(f_X) / snr))
   y <- f_X + eps
-  return(list(X = X, f_X = f_X, y = y))
+  list(X = X, f_X = f_X, y = y)
 }
 ```
 
 ## Python
 
 ```{python}
-def generate_data(n, p, snr):
-    if p < 5:
-        raise ValueError("p must be at least 5")
-    if n < 1:
-        raise ValueError("n must be at least 1")
-    if snr <= 0:
-        raise ValueError("snr must be positive")
-    X = rng.uniform(size=(n, p))
-
+def continuous_dgp(X):
     def g(x):
         return np.where(
             (x[:, 1] <= 0.5) & (x[:, 2] <= 0.5),
@@ -197,7 +192,18 @@ def generate_data(n, p, snr):
             ),
         )
 
-    f_X = 5 * np.sin(2 * np.pi * X[:, 0]) + g(X) - 2 * X[:, 3] * X[:, 4]
+    return 5 * np.sin(2 * np.pi * X[:, 0]) + g(X) - 2 * X[:, 3] * X[:, 4]
+
+
+def generate_data(n, p, snr, mean_fn):
+    if p < 5:
+        raise ValueError("p must be at least 5")
+    if n < 1:
+        raise ValueError("n must be at least 1")
+    if snr <= 0:
+        raise ValueError("snr must be positive")
+    X = rng.uniform(size=(n, p))
+    f_X = mean_fn(X)
     eps = rng.normal(loc=0, scale=np.sqrt(np.var(f_X) / snr), size=n)
     y = f_X + eps
     return X, f_X, y
@@ -231,13 +237,11 @@ subset_data <- function(data, subset_inds) {
 ## Python
 
 ```{python}
-def compute_test_train_indices(
-    n: int, test_set_pct: float, random_seed: int = None
-) -> tuple:
-    train_inds, test_inds = train_test_split(
-        np.arange(n), test_size=test_set_pct, random_state=random_seed
-    )
-    return (test_inds, train_inds)
+def compute_test_train_indices(n, test_set_pct):
+    n_test = round(test_set_pct * n)
+    test_inds = np.sort(rng.choice(n, size=n_test, replace=False))
+    train_inds = np.setdiff1d(np.arange(n), test_inds)
+    return test_inds, train_inds
 
 
 def subset_data(
@@ -274,9 +278,8 @@ run_coverage_simulation <- function(
   num_trees,
   max_depth,
   mc,
-  interval_levels, 
-  sample_sigma2 = TRUE, 
-  sigma2_init = NULL
+  interval_levels,
+  mean_fn
 ) {
   # Simulation
   coverage_results <- matrix(
@@ -286,7 +289,7 @@ run_coverage_simulation <- function(
   )
   for (i in 1:mc) {
     # Generate data
-    data <- generate_data(n, p, snr)
+    data <- generate_data(n, p, snr, mean_fn = mean_fn)
     X <- data$X
     f_X <- data$f_X
     y <- data$y
@@ -309,11 +312,7 @@ run_coverage_simulation <- function(
       num_gfr = num_gfr,
       num_burnin = num_burnin,
       num_mcmc = num_mcmc,
-      general_params = list(
-        random_seed = random_seed + i,
-        sample_sigma2_global = sample_sigma2,
-        sigma2_init = sigma2_init
-      ),
+      general_params = list(random_seed = random_seed + i),
       mean_forest_params = list(num_trees = num_trees, max_depth = max_depth)
     )
 
@@ -355,15 +354,14 @@ def run_coverage_simulation(
     max_depth,
     mc,
     interval_levels,
-    sample_sigma2=True,
-    sigma2_init=None,
+    mean_fn,
 ):
     coverage_results = np.empty((mc, len(interval_levels)))
 
     # Simulation
     for i in range(mc):
         # Generate data
-        X, f_X, y = generate_data(n, p, snr)
+        X, f_X, y = generate_data(n, p, snr, mean_fn=mean_fn)
 
         # Split into train and test sets
         test_inds, train_inds = compute_test_train_indices(n, test_set_pct=0.2)
@@ -382,11 +380,7 @@ def run_coverage_simulation(
             num_gfr=num_gfr,
             num_burnin=num_burnin,
             num_mcmc=num_mcmc,
-            general_params={
-                "random_seed": random_seed + i,
-                "sample_sigma2_global": sample_sigma2,
-                "sigma2_init": sigma2_init,
-            },
+            general_params={"random_seed": random_seed + i},
             mean_forest_params={"num_trees": num_trees, "max_depth": max_depth},
         )
 
@@ -409,7 +403,6 @@ def run_coverage_simulation(
 ```
 
 ::::
-
 
 We start with a simple BART model with 10 decision trees each with a maximum depth of 3.
 
@@ -445,7 +438,8 @@ average_coverage_rates <- run_coverage_simulation(
   num_trees,
   max_depth,
   mc,
-  interval_levels
+  interval_levels,
+  mean_fn = continuous_dgp
 )
 ```
 
@@ -469,7 +463,19 @@ mc = 50
 interval_levels = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
 
 # Run simulation
-average_coverage_rates = run_coverage_simulation(n, p, snr, num_gfr, num_burnin, num_mcmc, num_trees, max_depth, mc, interval_levels)
+average_coverage_rates = run_coverage_simulation(
+    n,
+    p,
+    snr,
+    num_gfr,
+    num_burnin,
+    num_mcmc,
+    num_trees,
+    max_depth,
+    mc,
+    interval_levels,
+    mean_fn=continuous_dgp,
+)
 ```
 
 ::::
@@ -507,7 +513,7 @@ plt.show()
 
 ::::
 
-Clearly, this is quite off. Let's try increasing the number of trees to its default (200) and the max depth to its default (10)
+Clearly, this is quite off. The posterior intervals are too narrow at every nominal coverage probability. Let's try increasing the number of trees to 200 and the max depth to 10.
 
 ::::{.panel-tabset group="language"}
 
@@ -541,7 +547,8 @@ average_coverage_rates <- run_coverage_simulation(
   num_trees,
   max_depth,
   mc,
-  interval_levels
+  interval_levels,
+  mean_fn = continuous_dgp
 )
 ```
 
@@ -576,6 +583,7 @@ average_coverage_rates = run_coverage_simulation(
     max_depth,
     mc,
     interval_levels,
+    mean_fn=continuous_dgp,
 )
 ```
 
@@ -613,3 +621,116 @@ plt.show()
 ```
 
 ::::
+
+This is much better but now we have the opposite problem — intervals are slightly conservative (wider than their nominal coverage probability). Let's try reducing the number of trees to 50.
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+# Data generating process parameters
+n <- 250
+p <- 50
+snr <- 2
+
+# Modeling parameters
+num_gfr <- 5
+num_burnin <- 100
+num_mcmc <- 500
+num_trees <- 50
+max_depth <- 10
+
+# Simulation setup
+mc <- 50
+interval_levels <- c(0.5, 0.6, 0.7, 0.8, 0.9, 0.95)
+
+# Run simulation
+average_coverage_rates <- run_coverage_simulation(
+  n,
+  p,
+  snr,
+  num_gfr,
+  num_burnin,
+  num_mcmc,
+  num_trees,
+  max_depth,
+  mc,
+  interval_levels,
+  mean_fn = continuous_dgp
+)
+```
+
+## Python
+
+```{python}
+# Data generating process parameters
+n = 250
+p = 50
+snr = 2
+
+# Modeling parameters
+num_gfr = 5
+num_burnin = 100
+num_mcmc = 500
+num_trees = 50
+max_depth = 10
+
+# Simulation setup
+mc = 50
+interval_levels = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
+
+# Run simulation
+average_coverage_rates = run_coverage_simulation(
+    n,
+    p,
+    snr,
+    num_gfr,
+    num_burnin,
+    num_mcmc,
+    num_trees,
+    max_depth,
+    mc,
+    interval_levels,
+    mean_fn=continuous_dgp,
+)
+```
+
+::::
+
+Now, we plot the average observed coverage against the nominal coverage level
+
+::::{.panel-tabset group="language"}
+
+## R
+
+```{r}
+plot(
+  interval_levels,
+  average_coverage_rates,
+  type = "b",
+  xlab = "Nominal Coverage Level",
+  ylab = "Average Observed Coverage",
+  main = "Calibration Plot"
+)
+abline(0, 1, lty = 2)
+```
+
+## Python
+
+```{python}
+fig, ax = plt.subplots()
+ax.plot(interval_levels, average_coverage_rates, marker='o')
+ax.set_xlabel("Nominal Coverage Level")
+ax.set_ylabel("Average Observed Coverage")
+ax.set_title("Calibration Plot")
+lims = [max(ax.get_xlim()[0], ax.get_ylim()[0]), min(ax.get_xlim()[1], ax.get_ylim()[1])]
+ax.plot(lims, lims, linestyle='--', color='gray')
+plt.show()
+```
+
+::::
+
+With 50 trees, coverage is nearly perfect — this configuration is well-calibrated for this DGP.
+
+This is a relatively straightforward demo of how we can calibrate priors based on a target data generating process.
