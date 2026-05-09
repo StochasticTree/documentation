@@ -31,12 +31,12 @@ reticulate::use_python(
 1. how many trees in the forest, 
 2. prior split parameters $\alpha$ and $\beta$, 
 3. how to initialize the leaf scale parameter and whether to sample it,
-4. max depth of each tree (default: unlimited), and 
+4. max depth of each tree, and 
 5. minimum size of a leaf node.
 
-We have made every effort to set experience-informed defaults or calibration procedures for each of these options so that stochtree with largely work "out of the box," but it's nonetheless reasonable to wonder how good these parameters are for a given dataset. 
+We have made every effort to set experience-informed defaults or calibration procedures for each of these options so that `stochtree` will largely work "out of the box," but it's nonetheless reasonable to wonder how good these parameters are for a given data-generating process.
 
-In this vignette, we'll walkthrough a simple (scaled-down) example of how one might go about evaluating (and updating) their BART model's hyperparameters.
+In this vignette, we'll walkthrough a simple example of how one might go about evaluating (and updating) their BART model's hyperparameters.
 
 # Framework
 
