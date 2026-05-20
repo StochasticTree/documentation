@@ -244,6 +244,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="bug-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h2>
 <ul>
+<li>Fix ordinal cloglog probability transform for K&gt;=4 categories <a href="https://github.com/StochasticTree/stochtree/pull/382">#382</a></li>
+<li>Fixed bug that separated homogeneous parametric treatment effect term (<code>tau_0</code>) from treatment effect forest predictions (<code>tau(x)</code>), only including the latter in <code>tau</code> for BCF predictions when a parametric term is included in the model <a href="https://github.com/StochasticTree/stochtree/pull/377">#377</a></li>
 <li>Fixed BCF prediction bug for prognostic function and mu(X) when adaptive coding is used and the tau(x) forest is not also requested by a prediction call <a href="https://github.com/StochasticTree/stochtree/pull/377">#377</a></li>
 <li>Fixed R BCF prediction bug when covariates are passed as dataframes and an internal propensity is sampled <a href="https://github.com/StochasticTree/stochtree/issues/374">#374</a></li>
 </ul>

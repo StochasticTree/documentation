@@ -39,7 +39,11 @@
 </div>
 <div class="section level3">
 <h3 id="bug-fixes-0-4-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-3"></a></h3>
-<ul><li>Fixed BCF prediction bug for prognostic function and mu(X) when adaptive coding is used and the tau(x) forest is not also requested by a prediction call <a href="https://github.com/StochasticTree/stochtree/pull/377" class="external-link">#377</a>
+<ul><li>Fix ordinal cloglog probability transform for K&gt;=4 categories <a href="https://github.com/StochasticTree/stochtree/pull/382" class="external-link">#382</a>
+</li>
+<li>Fixed bug that separated homogeneous parametric treatment effect term (<code>tau_0</code>) from treatment effect forest predictions (<code>tau(x)</code>), only including the latter in <code>tau</code> for BCF predictions when a parametric term is included in the model <a href="https://github.com/StochasticTree/stochtree/pull/377" class="external-link">#377</a>
+</li>
+<li>Fixed BCF prediction bug for prognostic function and mu(X) when adaptive coding is used and the tau(x) forest is not also requested by a prediction call <a href="https://github.com/StochasticTree/stochtree/pull/377" class="external-link">#377</a>
 </li>
 <li>Fixed R BCF prediction bug when covariates are passed as dataframes and an internal propensity is sampled <a href="https://github.com/StochasticTree/stochtree/issues/374" class="external-link">#374</a>
 </li>
