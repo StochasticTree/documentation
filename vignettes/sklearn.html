@@ -501,7 +501,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> StochTreeBARTRegressor(general_params<span class="op">=</span>{<span class="st">"random_seed"</span>: random_seed, <span class="st">"num_threads"</span>: <span class="dv">1</span>})</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reg.fit(X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<style>#sk-container-id-1 {
+<style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -518,7 +518,7 @@ window.Quarto = {
   --sklearn-color-fitted-level-3: cornflowerblue;
 }
 
-#sk-container-id-1.light {
+.sk-global.light {
   /* Specific color for light theme */
   --sklearn-color-text-on-default-background: black;
   --sklearn-color-background: white;
@@ -526,25 +526,24 @@ window.Quarto = {
   --sklearn-color-icon: #696969;
 }
 
-#sk-container-id-1.dark {
+.sk-global.dark {
   --sklearn-color-text-on-default-background: white;
   --sklearn-color-background: #111;
   --sklearn-color-border-box: white;
   --sklearn-color-icon: #878787;
 }
 
-#sk-container-id-1 {
+.sk-global {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-1 pre {
+.sk-global pre {
   padding: 0;
 }
 
-#sk-container-id-1 input.sk-hidden--visually {
+.sk-global input.sk-hidden--visually {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -553,7 +552,7 @@ window.Quarto = {
   width: 1px;
 }
 
-#sk-container-id-1 div.sk-dashed-wrapped {
+.sk-global div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -561,7 +560,7 @@ window.Quarto = {
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-1 div.sk-container {
+.sk-global div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -571,7 +570,7 @@ window.Quarto = {
   position: relative;
 }
 
-#sk-container-id-1 div.sk-text-repr-fallback {
+.sk-global div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -587,14 +586,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-1 div.sk-parallel-item::after {
+.sk-global div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-1 div.sk-parallel {
+.sk-global div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -602,28 +601,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-1 div.sk-parallel-item {
+.sk-global div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
+.sk-global div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
+.sk-global div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
+.sk-global div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-1 div.sk-serial {
+.sk-global div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -641,14 +640,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-1 div.sk-toggleable {
+.sk-global div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-1 label.sk-toggleable__label {
+.sk-global label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -661,13 +660,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-1 label.sk-toggleable__label .caption {
+.sk-global label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+.sk-global label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -675,25 +674,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+.sk-global label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-1 div.sk-toggleable__content {
+.sk-global div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted {
+.sk-global div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content pre {
+.sk-global div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -701,78 +700,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+.sk-global div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+.sk-global div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-1 div.sk-label label {
+.sk-global div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   line-height: 1.2em;
 }
 
-#sk-container-id-1 div.sk-label-container {
+.sk-global div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-1 div.sk-estimator {
+.sk-global div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -782,18 +781,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted {
+.sk-global div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-1 div.sk-estimator:hover {
+.sk-global div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted:hover {
+.sk-global div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -884,7 +883,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-1 a.estimator_doc_link {
+.sk-global a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -899,7 +898,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted {
+.sk-global a.estimator_doc_link.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
@@ -907,16 +906,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 
 /* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
+.sk-global a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+.sk-global a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
 }
 
 .estimator-table {
@@ -952,11 +959,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: #f6f6f6;
 }
 
-.estimator-table .parameters-table tr:hover {
+.estimator-table .parameters-table tr:hover td {
     background-color: #e0e0e0;
 }
 
-.estimator-table table td {
+.estimator-table table :is(td, th) {
     border: 1px solid rgba(106, 105, 104, 0.232);
 }
 
@@ -980,7 +987,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: transparent;
 }
 
-.default td {
+.default td, .estimator-table th {
     color: black;
     text-align: left !important;
 }
@@ -988,6 +995,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .user-set td i,
 .default td i {
     color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
 }
 
 /*
@@ -1002,6 +1013,14 @@ a.param-doc-link:visited {
     color: inherit;
     display: block;
     padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
 }
 
 /* "hack" to make the entire area of the cell containing the link clickable */
@@ -1030,6 +1049,14 @@ a.param-doc-link::before {
     border: thin solid var(--sklearn-color-unfitted-level-3);
 }
 
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
 /* Fitted state for parameter tooltips */
 .fitted .param-doc-description {
     /* fitted */
@@ -1051,32 +1078,153 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1, 'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-width: 15em;
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><div id="sk-container-id-1" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1, 'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
 <tbody>
-<tr class="default odd">
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param">general_params</td>
+<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
+</tr>
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
-<tr class="default even">
+<tr class="default odd">
 <td><em></em></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
-<tr class="default odd">
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
-<td class="param">general_params</td>
-<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
@@ -1098,7 +1246,63 @@ a.param-doc-link::before {
 
             </details>
         </div>
-    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">X_</span></td>
+<td class="fitted-att-type">ndarray[float64](100, 10)</td>
+<td>[[-1.6 , 0.06, 0.74,..., 0.95,-1.67, 0.34], [-0.51, 1.32,-0.86,..., 1.73, 0.52,-1. ], [ 0.27, 0.77, 1.19,..., 0.01,-0.68,-0.62], ..., [ 0.25, 0.85,-0.8 ,...,-0.07,-1.26,-0.48], [-1.05,-0.3 , 2.9 ,..., 1.08, 0.89, 1.04], [-0.18,-0.47, 0.05,..., 0.07, 0.37,-0.66]]</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">leaf_regression_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">model_</span></td>
+<td class="fitted-att-type">BARTModel</td>
+<td>BARTModel run... no thinning)</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">n_features_in_</span></td>
+<td class="fitted-att-type">int</td>
+<td>10</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_group_ids_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">y_</span></td>
+<td class="fitted-att-type">ndarray[float64](100,)</td>
+<td>[-4.68,-0.61, 1.8 ,..., 0.46,-3.28,-0.9 ]</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -1135,6 +1339,13 @@ a.param-doc-link::before {
 document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
     const paramName = element.parentElement.nextElementSibling
         .textContent.trim().split(' ')[0];
     const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
@@ -1142,7 +1353,51 @@ document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     element.setAttribute('title', fullParamName);
 });
 
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
 
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
 /**
  * Adapted from Skrub
  * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
@@ -1236,7 +1491,7 @@ forceTheme('sk-container-id-1');</script>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="op">=</span> StochTreeBARTRegressor(general_params<span class="op">=</span>{<span class="st">"random_seed"</span>: random_seed, <span class="st">"num_threads"</span>: <span class="dv">1</span>})</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>reg2.fit(X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<style>#sk-container-id-2 {
+<style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -1253,7 +1508,7 @@ forceTheme('sk-container-id-1');</script>
   --sklearn-color-fitted-level-3: cornflowerblue;
 }
 
-#sk-container-id-2.light {
+.sk-global.light {
   /* Specific color for light theme */
   --sklearn-color-text-on-default-background: black;
   --sklearn-color-background: white;
@@ -1261,25 +1516,24 @@ forceTheme('sk-container-id-1');</script>
   --sklearn-color-icon: #696969;
 }
 
-#sk-container-id-2.dark {
+.sk-global.dark {
   --sklearn-color-text-on-default-background: white;
   --sklearn-color-background: #111;
   --sklearn-color-border-box: white;
   --sklearn-color-icon: #878787;
 }
 
-#sk-container-id-2 {
+.sk-global {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-2 pre {
+.sk-global pre {
   padding: 0;
 }
 
-#sk-container-id-2 input.sk-hidden--visually {
+.sk-global input.sk-hidden--visually {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -1288,7 +1542,7 @@ forceTheme('sk-container-id-1');</script>
   width: 1px;
 }
 
-#sk-container-id-2 div.sk-dashed-wrapped {
+.sk-global div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -1296,7 +1550,7 @@ forceTheme('sk-container-id-1');</script>
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-2 div.sk-container {
+.sk-global div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -1306,7 +1560,7 @@ forceTheme('sk-container-id-1');</script>
   position: relative;
 }
 
-#sk-container-id-2 div.sk-text-repr-fallback {
+.sk-global div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1322,14 +1576,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-2 div.sk-parallel-item::after {
+.sk-global div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-2 div.sk-parallel {
+.sk-global div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1337,28 +1591,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-2 div.sk-parallel-item {
+.sk-global div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-2 div.sk-parallel-item:first-child::after {
+.sk-global div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-2 div.sk-parallel-item:last-child::after {
+.sk-global div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-2 div.sk-parallel-item:only-child::after {
+.sk-global div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-2 div.sk-serial {
+.sk-global div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1376,14 +1630,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-2 div.sk-toggleable {
+.sk-global div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-2 label.sk-toggleable__label {
+.sk-global label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -1396,13 +1650,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-2 label.sk-toggleable__label .caption {
+.sk-global label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+.sk-global label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1410,25 +1664,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+.sk-global label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-2 div.sk-toggleable__content {
+.sk-global div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content.fitted {
+.sk-global div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content pre {
+.sk-global div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1436,78 +1690,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+.sk-global div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label label.sk-toggleable__label,
-#sk-container-id-2 div.sk-label label {
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+.sk-global div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-2 div.sk-label label {
+.sk-global div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   line-height: 1.2em;
 }
 
-#sk-container-id-2 div.sk-label-container {
+.sk-global div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-2 div.sk-estimator {
+.sk-global div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1517,18 +1771,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted {
+.sk-global div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-2 div.sk-estimator:hover {
+.sk-global div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted:hover {
+.sk-global div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1619,7 +1873,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-2 a.estimator_doc_link {
+.sk-global a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1634,7 +1888,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted {
+.sk-global a.estimator_doc_link.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
@@ -1642,16 +1896,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 
 /* On hover */
-#sk-container-id-2 a.estimator_doc_link:hover {
+.sk-global a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+.sk-global a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
 }
 
 .estimator-table {
@@ -1687,11 +1949,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: #f6f6f6;
 }
 
-.estimator-table .parameters-table tr:hover {
+.estimator-table .parameters-table tr:hover td {
     background-color: #e0e0e0;
 }
 
-.estimator-table table td {
+.estimator-table table :is(td, th) {
     border: 1px solid rgba(106, 105, 104, 0.232);
 }
 
@@ -1715,7 +1977,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: transparent;
 }
 
-.default td {
+.default td, .estimator-table th {
     color: black;
     text-align: left !important;
 }
@@ -1723,6 +1985,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .user-set td i,
 .default td i {
     color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
 }
 
 /*
@@ -1737,6 +2003,14 @@ a.param-doc-link:visited {
     color: inherit;
     display: block;
     padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
 }
 
 /* "hack" to make the entire area of the cell containing the link clickable */
@@ -1765,6 +2039,14 @@ a.param-doc-link::before {
     border: thin solid var(--sklearn-color-unfitted-level-3);
 }
 
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
 /* Fitted state for parameter tooltips */
 .fitted .param-doc-description {
     /* fitted */
@@ -1786,32 +2068,153 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1, 'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-width: 15em;
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><div id="sk-container-id-2" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1, 'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
 <tbody>
-<tr class="default odd">
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param">general_params</td>
+<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
+</tr>
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
-<tr class="default even">
+<tr class="default odd">
 <td><em></em></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
-<tr class="default odd">
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
-<td class="param">general_params</td>
-<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
@@ -1833,7 +2236,63 @@ a.param-doc-link::before {
 
             </details>
         </div>
-    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">X_</span></td>
+<td class="fitted-att-type">ndarray[float64](100, 10)</td>
+<td>[[-1.6 , 0.06, 0.74,..., 0.95,-1.67, 0.34], [-0.51, 1.32,-0.86,..., 1.73, 0.52,-1. ], [ 0.27, 0.77, 1.19,..., 0.01,-0.68,-0.62], ..., [ 0.25, 0.85,-0.8 ,...,-0.07,-1.26,-0.48], [-1.05,-0.3 , 2.9 ,..., 1.08, 0.89, 1.04], [-0.18,-0.47, 0.05,..., 0.07, 0.37,-0.66]]</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">leaf_regression_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">model_</span></td>
+<td class="fitted-att-type">BARTModel</td>
+<td>BARTModel run... no thinning)</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">n_features_in_</span></td>
+<td class="fitted-att-type">int</td>
+<td>10</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_group_ids_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">y_</span></td>
+<td class="fitted-att-type">ndarray[float64](100,)</td>
+<td>[-4.68,-0.61, 1.8 ,..., 0.46,-3.28,-0.9 ]</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -1870,6 +2329,13 @@ a.param-doc-link::before {
 document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
     const paramName = element.parentElement.nextElementSibling
         .textContent.trim().split(' ')[0];
     const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
@@ -1877,7 +2343,51 @@ document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     element.setAttribute('title', fullParamName);
 });
 
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
 
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
 /**
  * Adapted from Skrub
  * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
@@ -1991,7 +2501,7 @@ forceTheme('sk-container-id-2');</script>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>grid_search.fit(X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<style>#sk-container-id-3 {
+<style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -2008,7 +2518,7 @@ forceTheme('sk-container-id-2');</script>
   --sklearn-color-fitted-level-3: cornflowerblue;
 }
 
-#sk-container-id-3.light {
+.sk-global.light {
   /* Specific color for light theme */
   --sklearn-color-text-on-default-background: black;
   --sklearn-color-background: white;
@@ -2016,25 +2526,24 @@ forceTheme('sk-container-id-2');</script>
   --sklearn-color-icon: #696969;
 }
 
-#sk-container-id-3.dark {
+.sk-global.dark {
   --sklearn-color-text-on-default-background: white;
   --sklearn-color-background: #111;
   --sklearn-color-border-box: white;
   --sklearn-color-icon: #878787;
 }
 
-#sk-container-id-3 {
+.sk-global {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-3 pre {
+.sk-global pre {
   padding: 0;
 }
 
-#sk-container-id-3 input.sk-hidden--visually {
+.sk-global input.sk-hidden--visually {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -2043,7 +2552,7 @@ forceTheme('sk-container-id-2');</script>
   width: 1px;
 }
 
-#sk-container-id-3 div.sk-dashed-wrapped {
+.sk-global div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -2051,7 +2560,7 @@ forceTheme('sk-container-id-2');</script>
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-3 div.sk-container {
+.sk-global div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -2061,7 +2570,7 @@ forceTheme('sk-container-id-2');</script>
   position: relative;
 }
 
-#sk-container-id-3 div.sk-text-repr-fallback {
+.sk-global div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -2077,14 +2586,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-3 div.sk-parallel-item::after {
+.sk-global div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-3 div.sk-parallel {
+.sk-global div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -2092,28 +2601,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-3 div.sk-parallel-item {
+.sk-global div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-3 div.sk-parallel-item:first-child::after {
+.sk-global div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-3 div.sk-parallel-item:last-child::after {
+.sk-global div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-3 div.sk-parallel-item:only-child::after {
+.sk-global div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-3 div.sk-serial {
+.sk-global div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2131,14 +2640,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-3 div.sk-toggleable {
+.sk-global div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-3 label.sk-toggleable__label {
+.sk-global label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -2151,13 +2660,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-3 label.sk-toggleable__label .caption {
+.sk-global label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-3 label.sk-toggleable__label-arrow:before {
+.sk-global label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -2165,25 +2674,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
+.sk-global label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-3 div.sk-toggleable__content {
+.sk-global div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-3 div.sk-toggleable__content.fitted {
+.sk-global div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-3 div.sk-toggleable__content pre {
+.sk-global div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -2191,78 +2700,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-3 div.sk-toggleable__content.fitted pre {
+.sk-global div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-3 div.sk-label label.sk-toggleable__label,
-#sk-container-id-3 div.sk-label label {
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
+.sk-global div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-3 div.sk-label label {
+.sk-global div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   line-height: 1.2em;
 }
 
-#sk-container-id-3 div.sk-label-container {
+.sk-global div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-3 div.sk-estimator {
+.sk-global div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -2272,18 +2781,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-3 div.sk-estimator.fitted {
+.sk-global div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-3 div.sk-estimator:hover {
+.sk-global div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-3 div.sk-estimator.fitted:hover {
+.sk-global div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -2374,7 +2883,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-3 a.estimator_doc_link {
+.sk-global a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -2389,7 +2898,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-3 a.estimator_doc_link.fitted {
+.sk-global a.estimator_doc_link.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
@@ -2397,16 +2906,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 
 /* On hover */
-#sk-container-id-3 a.estimator_doc_link:hover {
+.sk-global a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-3 a.estimator_doc_link.fitted:hover {
+.sk-global a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
 }
 
 .estimator-table {
@@ -2442,11 +2959,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: #f6f6f6;
 }
 
-.estimator-table .parameters-table tr:hover {
+.estimator-table .parameters-table tr:hover td {
     background-color: #e0e0e0;
 }
 
-.estimator-table table td {
+.estimator-table table :is(td, th) {
     border: 1px solid rgba(106, 105, 104, 0.232);
 }
 
@@ -2470,7 +2987,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: transparent;
 }
 
-.default td {
+.default td, .estimator-table th {
     color: black;
     text-align: left !important;
 }
@@ -2478,6 +2995,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .user-set td i,
 .default td i {
     color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
 }
 
 /*
@@ -2492,6 +3013,14 @@ a.param-doc-link:visited {
     color: inherit;
     display: block;
     padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
 }
 
 /* "hack" to make the entire area of the cell containing the link clickable */
@@ -2520,6 +3049,14 @@ a.param-doc-link::before {
     border: thin solid var(--sklearn-color-unfitted-level-3);
 }
 
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
 /* Fitted state for parameter tooltips */
 .fitted .param-doc-description {
     /* fitted */
@@ -2541,7 +3078,128 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=5,
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-width: 15em;
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><div id="sk-container-id-3" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=5,
              estimator=StochTreeBARTRegressor(general_params={'num_threads': 1}),
              n_jobs=1,
              param_grid={'mean_forest_params': [{'alpha': 0.95, 'beta': 2.0,
@@ -2551,7 +3209,7 @@ a.param-doc-link::before {
                                                 {'alpha': 0.85, 'beta': 1.0,
                                                  'num_trees': 200}],
                          'num_gfr': [10, 40], 'num_mcmc': [0, 1000]},
-             scoring='r2')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GridSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html">?<span>Documentation for GridSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+             scoring='r2')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GridSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html">?<span>Documentation for GridSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -2565,7 +3223,7 @@ a.param-doc-link::before {
 <tbody>
 <tr class="user-set odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=estimator,-estimator%20object" class="param-doc-link" rel="noreferrer" target="_blank">estimator <span class="param-doc-description">estimator: estimator object<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=estimator,-estimator%20object" class="param-doc-link" style="anchor-name: --doc-link-estimator;" rel="noreferrer" target="_blank">estimator <span class="param-doc-description" style="position-anchor: --doc-link-estimator;"> estimator: estimator object<br>
 <br>
 This is assumed to implement the scikit-learn estimator interface.<br>
 Either estimator needs to provide a ``score`` function,<br>
@@ -2574,7 +3232,7 @@ or ``scoring`` must be passed.</span></a></td>
 </tr>
 <tr class="user-set even">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=param_grid,-dict%20or%20list%20of%20dictionaries" class="param-doc-link" rel="noreferrer" target="_blank">param_grid <span class="param-doc-description">param_grid: dict or list of dictionaries<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=param_grid,-dict%20or%20list%20of%20dictionaries" class="param-doc-link" style="anchor-name: --doc-link-param_grid;" rel="noreferrer" target="_blank">param_grid <span class="param-doc-description" style="position-anchor: --doc-link-param_grid;"> param_grid: dict or list of dictionaries<br>
 <br>
 Dictionary with parameters names (`str`) as keys and lists of<br>
 parameter settings to try as values, or a list of such<br>
@@ -2585,7 +3243,7 @@ of parameter settings.</span></a></td>
 </tr>
 <tr class="user-set odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scoring,-str%2C%20callable%2C%20list%2C%20tuple%20or%20dict%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">scoring <span class="param-doc-description">scoring: str, callable, list, tuple or dict, default=None<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scoring,-str%2C%20callable%2C%20list%2C%20tuple%20or%20dict%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-scoring;" rel="noreferrer" target="_blank">scoring <span class="param-doc-description" style="position-anchor: --doc-link-scoring;"> scoring: str, callable, list, tuple or dict, default=None<br>
 <br>
 Strategy to evaluate the performance of the cross-validated model on<br>
 the test set.<br>
@@ -2595,7 +3253,7 @@ If `scoring` represents a single score, one can use:<br>
 - a single string (see :ref:`scoring_string_names`);<br>
 - a callable (see :ref:`scoring_callable`) that returns a single value;<br>
 - `None`, the `estimator`'s<br>
-:ref:`default evaluation criterion <scoring_api_overview>` is used.<br>
+:ref:`default evaluation criterion &lt;scoring_api_overview&gt;` is used.<br>
 <br>
 If `scoring` represents multiple scores, one can use:<br>
 <br>
@@ -2604,25 +3262,49 @@ If `scoring` represents multiple scores, one can use:<br>
 names and the values are the metric scores;<br>
 - a dictionary with metric names as keys and callables as values.<br>
 <br>
-See :ref:`multimetric_grid_search` for an example.</scoring_api_overview></span></a></td>
+See :ref:`multimetric_grid_search` for an example.</span></a></td>
 <td class="value">'r2'</td>
 </tr>
 <tr class="user-set even">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description">n_jobs: int, default=None<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_jobs;" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description" style="position-anchor: --doc-link-n_jobs;"> n_jobs: int, default=None<br>
 <br>
 Number of jobs to run in parallel.<br>
 ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.<br>
-``-1`` means using all processors. See :term:`Glossary <n_jobs>`<br>
+``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`<br>
 for more details.<br>
 <br>
 .. versionchanged:: v0.20<br>
-`n_jobs` default changed from 1 to None</n_jobs></span></a></td>
+`n_jobs` default changed from 1 to None</span></a></td>
 <td class="value">1</td>
 </tr>
-<tr class="default odd">
+<tr class="user-set odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=refit,-bool%2C%20str%2C%20or%20callable%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">refit <span class="param-doc-description">refit: bool, str, or callable, default=True<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=cv,-int%2C%20cross-validation%20generator%20or%20an%20iterable%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-cv;" rel="noreferrer" target="_blank">cv <span class="param-doc-description" style="position-anchor: --doc-link-cv;"> cv: int, cross-validation generator or an iterable, default=None<br>
+<br>
+Determines the cross-validation splitting strategy.<br>
+Possible inputs for cv are:<br>
+<br>
+- None, to use the default 5-fold cross validation,<br>
+- integer, to specify the number of folds in a `(Stratified)KFold`,<br>
+- :term:`CV splitter`,<br>
+- an iterable yielding (train, test) splits as arrays of indices.<br>
+<br>
+For integer/None inputs, if the estimator is a classifier and ``y`` is<br>
+either binary or multiclass, :class:`StratifiedKFold` is used. In all<br>
+other cases, :class:`KFold` is used. These splitters are instantiated<br>
+with `shuffle=False` so the splits will be the same across calls.<br>
+<br>
+Refer :ref:`User Guide &lt;cross_validation&gt;` for the various<br>
+cross-validation strategies that can be used here.<br>
+<br>
+.. versionchanged:: 0.22<br>
+``cv`` default value if None changed from 3-fold to 5-fold.</span></a></td>
+<td class="value">5</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=refit,-bool%2C%20str%2C%20or%20callable%2C%20default%3DTrue" class="param-doc-link" style="anchor-name: --doc-link-refit;" rel="noreferrer" target="_blank">refit <span class="param-doc-description" style="position-anchor: --doc-link-refit;"> refit: bool, str, or callable, default=True<br>
 <br>
 Refit an estimator using the best found parameters on the whole<br>
 dataset.<br>
@@ -2655,54 +3337,31 @@ to see how to design a custom selection strategy using a callable<br>
 via `refit`.<br>
 <br>
 See :ref:`this example<br>
-<sphx_glr_auto_examples_model_selection_plot_grid_search_refit_callable.py>`<br>
+&lt;sphx_glr_auto_examples_model_selection_plot_grid_search_refit_callable.py&gt;`<br>
 for an example of how to use ``refit=callable`` to balance model<br>
 complexity and cross-validated score.<br>
 <br>
 .. versionchanged:: 0.20<br>
-Support for callable added.</sphx_glr_auto_examples_model_selection_plot_grid_search_refit_callable.py></span></a></td>
+Support for callable added.</span></a></td>
 <td class="value">True</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=cv,-int%2C%20cross-validation%20generator%20or%20an%20iterable%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">cv <span class="param-doc-description">cv: int, cross-validation generator or an iterable, default=None<br>
-<br>
-Determines the cross-validation splitting strategy.<br>
-Possible inputs for cv are:<br>
-<br>
-- None, to use the default 5-fold cross validation,<br>
-- integer, to specify the number of folds in a `(Stratified)KFold`,<br>
-- :term:`CV splitter`,<br>
-- An iterable yielding (train, test) splits as arrays of indices.<br>
-<br>
-For integer/None inputs, if the estimator is a classifier and ``y`` is<br>
-either binary or multiclass, :class:`StratifiedKFold` is used. In all<br>
-other cases, :class:`KFold` is used. These splitters are instantiated<br>
-with `shuffle=False` so the splits will be the same across calls.<br>
-<br>
-Refer :ref:`User Guide <cross_validation>` for the various<br>
-cross-validation strategies that can be used here.<br>
-<br>
-.. versionchanged:: 0.22<br>
-``cv`` default value if None changed from 3-fold to 5-fold.</cross_validation></span></a></td>
-<td class="value">5</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=verbose,-int" class="param-doc-link" rel="noreferrer" target="_blank">verbose <span class="param-doc-description">verbose: int<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-verbose;" rel="noreferrer" target="_blank">verbose <span class="param-doc-description" style="position-anchor: --doc-link-verbose;"> verbose: int, default=0<br>
 <br>
-Controls the verbosity: the higher, the more messages.<br>
+Controls the verbosity of information printed during fitting, with higher<br>
+values yielding more detailed logging.<br>
 <br>
-- &gt;1 : the computation time for each fold and parameter candidate is<br>
-displayed;<br>
-- &gt;2 : the score is also displayed;<br>
-- &gt;3 : the fold and candidate parameter indexes are also displayed<br>
-together with the starting time of the computation.</span></a></td>
+- 0 : no messages are printed;<br>
+- &gt;=1 : summary of the total number of fits;<br>
+- &gt;=2 : computation time for each fold and parameter candidate;<br>
+- &gt;=3 : fold indices and scores;<br>
+- &gt;=10 : parameter candidate indices and START messages before each fit.</span></a></td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=pre_dispatch,-int%2C%20or%20str%2C%20default%3D%272%2An_jobs%27" class="param-doc-link" rel="noreferrer" target="_blank">pre_dispatch <span class="param-doc-description">pre_dispatch: int, or str, default='2*n_jobs'<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=pre_dispatch,-int%2C%20or%20str%2C%20default%3D%272%2An_jobs%27" class="param-doc-link" style="anchor-name: --doc-link-pre_dispatch;" rel="noreferrer" target="_blank">pre_dispatch <span class="param-doc-description" style="position-anchor: --doc-link-pre_dispatch;"> pre_dispatch: int, or str, default='2*n_jobs'<br>
 <br>
 Controls the number of jobs that get dispatched during parallel<br>
 execution. Reducing this number can be useful to avoid an<br>
@@ -2718,7 +3377,7 @@ spawning of the jobs<br>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=error_score,-%27raise%27%20or%20numeric%2C%20default%3Dnp.nan" class="param-doc-link" rel="noreferrer" target="_blank">error_score <span class="param-doc-description">error_score: 'raise' or numeric, default=np.nan<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=error_score,-%27raise%27%20or%20numeric%2C%20default%3Dnp.nan" class="param-doc-link" style="anchor-name: --doc-link-error_score;" rel="noreferrer" target="_blank">error_score <span class="param-doc-description" style="position-anchor: --doc-link-error_score;"> error_score: 'raise' or numeric, default=np.nan<br>
 <br>
 Value to assign to the score if an error occurs in estimator fitting.<br>
 If set to 'raise', the error is raised. If a numeric value is given,<br>
@@ -2728,7 +3387,7 @@ step, which will always raise the error.</span></a></td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=return_train_score,-bool%2C%20default%3DFalse" class="param-doc-link" rel="noreferrer" target="_blank">return_train_score <span class="param-doc-description">return_train_score: bool, default=False<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=return_train_score,-bool%2C%20default%3DFalse" class="param-doc-link" style="anchor-name: --doc-link-return_train_score;" rel="noreferrer" target="_blank">return_train_score <span class="param-doc-description" style="position-anchor: --doc-link-return_train_score;"> return_train_score: bool, default=False<br>
 <br>
 If ``False``, the ``cv_results_`` attribute will not include training<br>
 scores.<br>
@@ -2749,10 +3408,191 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 
             </details>
         </div>
-    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1},
-                       mean_forest_params={'alpha': 0.95, 'beta': 2.0,
-                                           'num_trees': 50},
-                       num_gfr=40, num_mcmc=1000)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_estimator_,-estimator" class="param-doc-link" style="anchor-name: --doc-link-best_estimator_;" rel="noreferrer" target="_blank">best_estimator_ <span class="param-doc-description" style="position-anchor: --doc-link-best_estimator_;"> best_estimator_: estimator<br>
+<br>
+Estimator that was chosen by the search, i.e. estimator<br>
+which gave highest score (or smallest loss if specified)<br>
+on the left out data. Not available if ``refit=False``.<br>
+<br>
+See ``refit`` parameter for more information on allowed values.</span></a></td>
+<td class="fitted-att-type">StochTreeBARTRegressor</td>
+<td>StochTreeBART...0, num_mcmc=0)</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_index_,-int" class="param-doc-link" style="anchor-name: --doc-link-best_index_;" rel="noreferrer" target="_blank">best_index_ <span class="param-doc-description" style="position-anchor: --doc-link-best_index_;"> best_index_: int<br>
+<br>
+The index (of the ``cv_results_`` arrays) which corresponds to the best<br>
+candidate parameter setting.<br>
+<br>
+The dict at ``search.cv_results_['params'][search.best_index_]`` gives<br>
+the parameter setting for the best model, that gives the highest<br>
+mean score (``search.best_score_``).<br>
+<br>
+For multi-metric evaluation, this is present only if ``refit`` is<br>
+specified.</span></a></td>
+<td class="fitted-att-type">int64</td>
+<td>np.int64(6)</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_params_,-dict" class="param-doc-link" style="anchor-name: --doc-link-best_params_;" rel="noreferrer" target="_blank">best_params_ <span class="param-doc-description" style="position-anchor: --doc-link-best_params_;"> best_params_: dict<br>
+<br>
+Parameter setting that gave the best results on the hold out data.<br>
+<br>
+For multi-metric evaluation, this is present only if ``refit`` is<br>
+specified.</span></a></td>
+<td class="fitted-att-type">dict</td>
+<td>{'me...ms': {'alpha': 0.9, 'beta': 1.5, 'nu...es': 100}, 'num_gfr': 40, 'nu...mc': 0}</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_score_,-float" class="param-doc-link" style="anchor-name: --doc-link-best_score_;" rel="noreferrer" target="_blank">best_score_ <span class="param-doc-description" style="position-anchor: --doc-link-best_score_;"> best_score_: float<br>
+<br>
+Mean cross-validated score of the best_estimator<br>
+<br>
+For multi-metric evaluation, this is present only if ``refit`` is<br>
+specified.<br>
+<br>
+This attribute is not available if ``refit`` is a function.</span></a></td>
+<td class="fitted-att-type">float64</td>
+<td>0.8843</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=cv_results_,-dict%20of%20numpy%20%28masked%29%20ndarrays" class="param-doc-link" style="anchor-name: --doc-link-cv_results_;" rel="noreferrer" target="_blank">cv_results_ <span class="param-doc-description" style="position-anchor: --doc-link-cv_results_;"> cv_results_: dict of numpy (masked) ndarrays<br>
+<br>
+A dict with keys as column headers and values as columns, that can be<br>
+imported into a pandas ``DataFrame``.<br>
+<br>
+For instance the below given table<br>
+<br>
++------------+-----------+------------+-----------------+---+---------+<br>
+|param_kernel|param_gamma|param_degree|split0_test_score|...|rank_t...|<br>
++============+===========+============+=================+===+=========+<br>
+| 'poly' | -- | 2 | 0.80 |...| 2 |<br>
++------------+-----------+------------+-----------------+---+---------+<br>
+| 'poly' | -- | 3 | 0.70 |...| 4 |<br>
++------------+-----------+------------+-----------------+---+---------+<br>
+| 'rbf' | 0.1 | -- | 0.80 |...| 3 |<br>
++------------+-----------+------------+-----------------+---+---------+<br>
+| 'rbf' | 0.2 | -- | 0.93 |...| 1 |<br>
++------------+-----------+------------+-----------------+---+---------+<br>
+<br>
+will be represented by a ``cv_results_`` dict of::<br>
+<br>
+{<br>
+'param_kernel': masked_array(data = ['poly', 'poly', 'rbf', 'rbf'],<br>
+mask = [False False False False]...)<br>
+'param_gamma': masked_array(data = [-- -- 0.1 0.2],<br>
+mask = [ True True False False]...),<br>
+'param_degree': masked_array(data = [2.0 3.0 -- --],<br>
+mask = [False False True True]...),<br>
+'split0_test_score' : [0.80, 0.70, 0.80, 0.93],<br>
+'split1_test_score' : [0.82, 0.50, 0.70, 0.78],<br>
+'mean_test_score' : [0.81, 0.60, 0.75, 0.85],<br>
+'std_test_score' : [0.01, 0.10, 0.05, 0.08],<br>
+'rank_test_score' : [2, 4, 3, 1],<br>
+'split0_train_score' : [0.80, 0.92, 0.70, 0.93],<br>
+'split1_train_score' : [0.82, 0.55, 0.70, 0.87],<br>
+'mean_train_score' : [0.81, 0.74, 0.70, 0.90],<br>
+'std_train_score' : [0.01, 0.19, 0.00, 0.03],<br>
+'mean_fit_time' : [0.73, 0.63, 0.43, 0.49],<br>
+'std_fit_time' : [0.01, 0.02, 0.01, 0.01],<br>
+'mean_score_time' : [0.01, 0.06, 0.04, 0.04],<br>
+'std_score_time' : [0.00, 0.00, 0.00, 0.01],<br>
+'params' : [{'kernel': 'poly', 'degree': 2}, ...],<br>
+}<br>
+<br>
+For an example of visualization and interpretation of GridSearch results,<br>
+see :ref:`sphx_glr_auto_examples_model_selection_plot_grid_search_stats.py`.<br>
+<br>
+NOTE<br>
+<br>
+The key ``'params'`` is used to store a list of parameter<br>
+settings dicts for all the parameter candidates.<br>
+<br>
+The ``mean_fit_time``, ``std_fit_time``, ``mean_score_time`` and<br>
+``std_score_time`` are all in seconds.<br>
+<br>
+For multi-metric evaluation, the scores for all the scorers are<br>
+available in the ``cv_results_`` dict at the keys ending with that<br>
+scorer's name (``'_&lt;scorer_name&gt;'``) instead of ``'_score'`` shown<br>
+above. ('split0_test_precision', 'mean_train_precision' etc.)</span></a></td>
+<td class="fitted-att-type">dict</td>
+<td>{'me...me': array([0.0520..., 1.56257153]), 'me...me': array([0.0007..., 0.03600049]), 'me...re': array([0.8400..., 0.86590078]), 'pa...ms': masked_array(... dtype=object), ...}</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=multimetric_,-bool" class="param-doc-link" style="anchor-name: --doc-link-multimetric_;" rel="noreferrer" target="_blank">multimetric_ <span class="param-doc-description" style="position-anchor: --doc-link-multimetric_;"> multimetric_: bool<br>
+<br>
+Whether or not the scorers compute several metrics.</span></a></td>
+<td class="fitted-att-type">bool</td>
+<td>False</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=n_features_in_,-int" class="param-doc-link" style="anchor-name: --doc-link-n_features_in_;" rel="noreferrer" target="_blank">n_features_in_ <span class="param-doc-description" style="position-anchor: --doc-link-n_features_in_;"> n_features_in_: int<br>
+<br>
+Number of features seen during :term:`fit`. Only defined if<br>
+`best_estimator_` is defined (see the documentation for the `refit`<br>
+parameter for more details) and that `best_estimator_` exposes<br>
+`n_features_in_` when fit.<br>
+<br>
+.. versionadded:: 0.24</span></a></td>
+<td class="fitted-att-type">int</td>
+<td>10</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=n_splits_,-int" class="param-doc-link" style="anchor-name: --doc-link-n_splits_;" rel="noreferrer" target="_blank">n_splits_ <span class="param-doc-description" style="position-anchor: --doc-link-n_splits_;"> n_splits_: int<br>
+<br>
+The number of cross-validation splits (folds/iterations).</span></a></td>
+<td class="fitted-att-type">int</td>
+<td>5</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=refit_time_,-float" class="param-doc-link" style="anchor-name: --doc-link-refit_time_;" rel="noreferrer" target="_blank">refit_time_ <span class="param-doc-description" style="position-anchor: --doc-link-refit_time_;"> refit_time_: float<br>
+<br>
+Seconds used for refitting the best model on the whole dataset.<br>
+<br>
+This is present only if ``refit`` is not False.<br>
+<br>
+.. versionadded:: 0.20</span></a></td>
+<td class="fitted-att-type">float</td>
+<td>0.5018</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scorer_,-function%20or%20a%20dict" class="param-doc-link" style="anchor-name: --doc-link-scorer_;" rel="noreferrer" target="_blank">scorer_ <span class="param-doc-description" style="position-anchor: --doc-link-scorer_;"> scorer_: function or a dict<br>
+<br>
+Scorer function used on the held out data to choose the best<br>
+parameters for the model.<br>
+<br>
+For multi-metric evaluation, this attribute holds the validated<br>
+``scoring`` dict which maps the scorer key to the scorer callable.</span></a></td>
+<td class="fitted-att-type">_Scorer</td>
+<td>make_scorer(r...hod='predict')</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1},
+                       mean_forest_params={'alpha': 0.9, 'beta': 1.5,
+                                           'num_trees': 100},
+                       num_gfr=40, num_mcmc=0)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -2764,25 +3604,25 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 <td class="param">num_gfr</td>
 <td class="value">40</td>
 </tr>
-<tr class="default even">
+<tr class="user-set even">
 <td><em></em></td>
-<td class="param">num_burnin</td>
+<td class="param">num_mcmc</td>
 <td class="value">0</td>
 </tr>
 <tr class="user-set odd">
 <td><em></em></td>
-<td class="param">num_mcmc</td>
-<td class="value">1000</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1}</td>
 </tr>
-<tr class="user-set odd">
+<tr class="user-set even">
 <td><em></em></td>
 <td class="param">mean_forest_params</td>
-<td class="value">{'alpha': 0.95, 'beta': 2.0, 'num_trees': 50}</td>
+<td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param">num_burnin</td>
+<td class="value">0</td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
@@ -2799,7 +3639,63 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 
             </details>
         </div>
-    </div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">X_</span></td>
+<td class="fitted-att-type">ndarray[float64](100, 10)</td>
+<td>[[-1.6 , 0.06, 0.74,..., 0.95,-1.67, 0.34], [-0.51, 1.32,-0.86,..., 1.73, 0.52,-1. ], [ 0.27, 0.77, 1.19,..., 0.01,-0.68,-0.62], ..., [ 0.25, 0.85,-0.8 ,...,-0.07,-1.26,-0.48], [-1.05,-0.3 , 2.9 ,..., 1.08, 0.89, 1.04], [-0.18,-0.47, 0.05,..., 0.07, 0.37,-0.66]]</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">leaf_regression_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">model_</span></td>
+<td class="fitted-att-type">BARTModel</td>
+<td>BARTModel run... no thinning)</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">n_features_in_</span></td>
+<td class="fitted-att-type">int</td>
+<td>10</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_group_ids_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">y_</span></td>
+<td class="fitted-att-type">ndarray[float64](100,)</td>
+<td>[-4.68,-0.61, 1.8 ,..., 0.46,-3.28,-0.9 ]</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -2836,6 +3732,13 @@ Default value was changed from ``True`` to ``False``</span></a></td>
 document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
     const paramName = element.parentElement.nextElementSibling
         .textContent.trim().split(' ')[0];
     const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
@@ -2843,7 +3746,51 @@ document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     element.setAttribute('title', fullParamName);
 });
 
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
 
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
 /**
  * Adapted from Skrub
  * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
@@ -2939,10 +3886,10 @@ forceTheme('sk-container-id-3');</script>
 <pre><code>
 Hyperparameters chosen by grid search:
   num_gfr: 40
-  num_mcmc: 1000
-  num_trees: 50
-  alpha: 0.95
-  beta: 2.0</code></pre>
+  num_mcmc: 0
+  num_trees: 100
+  alpha: 0.9
+  beta: 1.5</code></pre>
 </div>
 </div>
 </section>
@@ -2961,7 +3908,7 @@ Hyperparameters chosen by grid search:
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> StochTreeBARTBinaryClassifier(general_params<span class="op">=</span>{<span class="st">"random_seed"</span>: random_seed, <span class="st">"num_threads"</span>: <span class="dv">1</span>})</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>clf.fit(X<span class="op">=</span>X, y<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<style>#sk-container-id-4 {
+<style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -2978,7 +3925,7 @@ Hyperparameters chosen by grid search:
   --sklearn-color-fitted-level-3: cornflowerblue;
 }
 
-#sk-container-id-4.light {
+.sk-global.light {
   /* Specific color for light theme */
   --sklearn-color-text-on-default-background: black;
   --sklearn-color-background: white;
@@ -2986,25 +3933,24 @@ Hyperparameters chosen by grid search:
   --sklearn-color-icon: #696969;
 }
 
-#sk-container-id-4.dark {
+.sk-global.dark {
   --sklearn-color-text-on-default-background: white;
   --sklearn-color-background: #111;
   --sklearn-color-border-box: white;
   --sklearn-color-icon: #878787;
 }
 
-#sk-container-id-4 {
+.sk-global {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-4 pre {
+.sk-global pre {
   padding: 0;
 }
 
-#sk-container-id-4 input.sk-hidden--visually {
+.sk-global input.sk-hidden--visually {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -3013,7 +3959,7 @@ Hyperparameters chosen by grid search:
   width: 1px;
 }
 
-#sk-container-id-4 div.sk-dashed-wrapped {
+.sk-global div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -3021,7 +3967,7 @@ Hyperparameters chosen by grid search:
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-4 div.sk-container {
+.sk-global div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -3031,7 +3977,7 @@ Hyperparameters chosen by grid search:
   position: relative;
 }
 
-#sk-container-id-4 div.sk-text-repr-fallback {
+.sk-global div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -3047,14 +3993,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-4 div.sk-parallel-item::after {
+.sk-global div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-4 div.sk-parallel {
+.sk-global div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -3062,28 +4008,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-4 div.sk-parallel-item {
+.sk-global div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-4 div.sk-parallel-item:first-child::after {
+.sk-global div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-4 div.sk-parallel-item:last-child::after {
+.sk-global div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-4 div.sk-parallel-item:only-child::after {
+.sk-global div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-4 div.sk-serial {
+.sk-global div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3101,14 +4047,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-4 div.sk-toggleable {
+.sk-global div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-4 label.sk-toggleable__label {
+.sk-global label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -3121,13 +4067,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-4 label.sk-toggleable__label .caption {
+.sk-global label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-4 label.sk-toggleable__label-arrow:before {
+.sk-global label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -3135,25 +4081,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {
+.sk-global label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-4 div.sk-toggleable__content {
+.sk-global div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-4 div.sk-toggleable__content.fitted {
+.sk-global div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-4 div.sk-toggleable__content pre {
+.sk-global div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -3161,78 +4107,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-4 div.sk-toggleable__content.fitted pre {
+.sk-global div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-4 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-4 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-4 div.sk-label label.sk-toggleable__label,
-#sk-container-id-4 div.sk-label label {
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {
+.sk-global div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-4 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-4 div.sk-label label {
+.sk-global div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   line-height: 1.2em;
 }
 
-#sk-container-id-4 div.sk-label-container {
+.sk-global div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-4 div.sk-estimator {
+.sk-global div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -3242,18 +4188,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-4 div.sk-estimator.fitted {
+.sk-global div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-4 div.sk-estimator:hover {
+.sk-global div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-4 div.sk-estimator.fitted:hover {
+.sk-global div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -3344,7 +4290,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-4 a.estimator_doc_link {
+.sk-global a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -3359,7 +4305,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-4 a.estimator_doc_link.fitted {
+.sk-global a.estimator_doc_link.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
@@ -3367,16 +4313,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 
 /* On hover */
-#sk-container-id-4 a.estimator_doc_link:hover {
+.sk-global a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-4 a.estimator_doc_link.fitted:hover {
+.sk-global a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
 }
 
 .estimator-table {
@@ -3412,11 +4366,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: #f6f6f6;
 }
 
-.estimator-table .parameters-table tr:hover {
+.estimator-table .parameters-table tr:hover td {
     background-color: #e0e0e0;
 }
 
-.estimator-table table td {
+.estimator-table table :is(td, th) {
     border: 1px solid rgba(106, 105, 104, 0.232);
 }
 
@@ -3440,7 +4394,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: transparent;
 }
 
-.default td {
+.default td, .estimator-table th {
     color: black;
     text-align: left !important;
 }
@@ -3448,6 +4402,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .user-set td i,
 .default td i {
     color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
 }
 
 /*
@@ -3462,6 +4420,14 @@ a.param-doc-link:visited {
     color: inherit;
     display: block;
     padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
 }
 
 /* "hack" to make the entire area of the cell containing the link clickable */
@@ -3490,6 +4456,14 @@ a.param-doc-link::before {
     border: thin solid var(--sklearn-color-unfitted-level-3);
 }
 
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
 /* Fitted state for parameter tooltips */
 .fitted .param-doc-description {
     /* fitted */
@@ -3511,33 +4485,154 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
-                                              'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked=""><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTBinaryClassifier</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-width: 15em;
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><div id="sk-container-id-4" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
+                                              'random_seed': 1234})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-6" type="checkbox" checked=""><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTBinaryClassifier</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
 <tbody>
-<tr class="default odd">
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param">general_params</td>
+<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
+</tr>
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
-<tr class="default even">
+<tr class="default odd">
 <td><em></em></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
-<tr class="default odd">
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
-<td class="param">general_params</td>
-<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
@@ -3559,7 +4654,68 @@ a.param-doc-link::before {
 
             </details>
         </div>
-    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">X_</span></td>
+<td class="fitted-att-type">ndarray[float64](569, 30)</td>
+<td>[[ 17.99, 10.38,122.8 ,..., 0.27, 0.46, 0.12], [ 20.57, 17.77,132.9 ,..., 0.19, 0.28, 0.09], [ 19.69, 21.25,130. ,..., 0.24, 0.36, 0.09], ..., [ 16.6 , 28.08,108.3 ,..., 0.14, 0.22, 0.08], [ 20.6 , 29.33,140.1 ,..., 0.27, 0.41, 0.12], [ 7.76, 24.54, 47.92,..., 0. , 0.29, 0.07]]</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">classes_</span></td>
+<td class="fitted-att-type">ndarray[int64](2,)</td>
+<td>[0,1]</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">leaf_regression_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">model_</span></td>
+<td class="fitted-att-type">BARTModel</td>
+<td>BARTModel run... no thinning)</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">n_features_in_</span></td>
+<td class="fitted-att-type">int</td>
+<td>30</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_basis_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default even">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">rfx_group_ids_</span></td>
+<td class="fitted-att-type">NoneType</td>
+<td>None</td>
+</tr>
+<tr class="default odd">
+<td class="param"><span class="param-doc-link" style="text-decoration:none;">y_</span></td>
+<td class="fitted-att-type">ndarray[int64](569,)</td>
+<td>[0,0,0,...,0,0,1]</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -3596,6 +4752,13 @@ a.param-doc-link::before {
 document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
     const paramName = element.parentElement.nextElementSibling
         .textContent.trim().split(' ')[0];
     const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
@@ -3603,7 +4766,51 @@ document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     element.setAttribute('title', fullParamName);
 });
 
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
 
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
 /**
  * Adapted from Skrub
  * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
@@ -3707,7 +4914,7 @@ forceTheme('sk-container-id-4');</script>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>clf.fit(X<span class="op">=</span>X, y<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<style>#sk-container-id-5 {
+<style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -3724,7 +4931,7 @@ forceTheme('sk-container-id-4');</script>
   --sklearn-color-fitted-level-3: cornflowerblue;
 }
 
-#sk-container-id-5.light {
+.sk-global.light {
   /* Specific color for light theme */
   --sklearn-color-text-on-default-background: black;
   --sklearn-color-background: white;
@@ -3732,25 +4939,24 @@ forceTheme('sk-container-id-4');</script>
   --sklearn-color-icon: #696969;
 }
 
-#sk-container-id-5.dark {
+.sk-global.dark {
   --sklearn-color-text-on-default-background: white;
   --sklearn-color-background: #111;
   --sklearn-color-border-box: white;
   --sklearn-color-icon: #878787;
 }
 
-#sk-container-id-5 {
+.sk-global {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-5 pre {
+.sk-global pre {
   padding: 0;
 }
 
-#sk-container-id-5 input.sk-hidden--visually {
+.sk-global input.sk-hidden--visually {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -3759,7 +4965,7 @@ forceTheme('sk-container-id-4');</script>
   width: 1px;
 }
 
-#sk-container-id-5 div.sk-dashed-wrapped {
+.sk-global div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -3767,7 +4973,7 @@ forceTheme('sk-container-id-4');</script>
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-5 div.sk-container {
+.sk-global div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -3777,7 +4983,7 @@ forceTheme('sk-container-id-4');</script>
   position: relative;
 }
 
-#sk-container-id-5 div.sk-text-repr-fallback {
+.sk-global div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -3793,14 +4999,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-5 div.sk-parallel-item::after {
+.sk-global div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-5 div.sk-parallel {
+.sk-global div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -3808,28 +5014,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-5 div.sk-parallel-item {
+.sk-global div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-5 div.sk-parallel-item:first-child::after {
+.sk-global div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-5 div.sk-parallel-item:last-child::after {
+.sk-global div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-5 div.sk-parallel-item:only-child::after {
+.sk-global div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-5 div.sk-serial {
+.sk-global div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3847,14 +5053,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-5 div.sk-toggleable {
+.sk-global div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-5 label.sk-toggleable__label {
+.sk-global label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -3867,13 +5073,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-5 label.sk-toggleable__label .caption {
+.sk-global label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-5 label.sk-toggleable__label-arrow:before {
+.sk-global label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -3881,25 +5087,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {
+.sk-global label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-5 div.sk-toggleable__content {
+.sk-global div.sk-toggleable__content {
   display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content.fitted {
+.sk-global div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content pre {
+.sk-global div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -3907,78 +5113,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content.fitted pre {
+.sk-global div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+.sk-global input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   display: block;
   width: 100%;
   overflow: visible;
 }
 
-#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+.sk-global input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+.sk-global div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-5 div.sk-label label.sk-toggleable__label,
-#sk-container-id-5 div.sk-label label {
+.sk-global div.sk-label label.sk-toggleable__label,
+.sk-global div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {
+.sk-global div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-5 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+.sk-global div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-5 div.sk-label label {
+.sk-global div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   line-height: 1.2em;
 }
 
-#sk-container-id-5 div.sk-label-container {
+.sk-global div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-5 div.sk-estimator {
+.sk-global div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -3988,18 +5194,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted {
+.sk-global div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-5 div.sk-estimator:hover {
+.sk-global div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted:hover {
+.sk-global div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -4090,7 +5296,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-5 a.estimator_doc_link {
+.sk-global a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -4105,7 +5311,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-5 a.estimator_doc_link.fitted {
+.sk-global a.estimator_doc_link.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
@@ -4113,16 +5319,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 }
 
 /* On hover */
-#sk-container-id-5 a.estimator_doc_link:hover {
+.sk-global a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-5 a.estimator_doc_link.fitted:hover {
+.sk-global a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-top-container.sk-global {
+  /* pydata-sphinx-theme hides overflow, so scrolling is disabled.
+   We need to set it to !important and add tabindex="0" in the HTML
+   to allow keyboard-only users to navigate the display. */
+  overflow-x: scroll !important;
+  max-width: 100%;
 }
 
 .estimator-table {
@@ -4158,11 +5372,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: #f6f6f6;
 }
 
-.estimator-table .parameters-table tr:hover {
+.estimator-table .parameters-table tr:hover td {
     background-color: #e0e0e0;
 }
 
-.estimator-table table td {
+.estimator-table table :is(td, th) {
     border: 1px solid rgba(106, 105, 104, 0.232);
 }
 
@@ -4186,7 +5400,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
     background-color: transparent;
 }
 
-.default td {
+.default td, .estimator-table th {
     color: black;
     text-align: left !important;
 }
@@ -4194,6 +5408,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .user-set td i,
 .default td i {
     color: black;
+}
+
+td.fitted-att-type {
+    white-space: preserve nowrap;
 }
 
 /*
@@ -4208,6 +5426,14 @@ a.param-doc-link:visited {
     color: inherit;
     display: block;
     padding: .5em;
+}
+
+@supports(anchor-name: --doc-link) {
+    a.param-doc-link,
+    a.param-doc-link:link,
+    a.param-doc-link:visited {
+    anchor-name: --doc-link;
+    }
 }
 
 /* "hack" to make the entire area of the cell containing the link clickable */
@@ -4236,6 +5462,14 @@ a.param-doc-link::before {
     border: thin solid var(--sklearn-color-unfitted-level-3);
 }
 
+@supports(position-area: center right) {
+    .param-doc-description {
+    position-area: center right;
+    position: fixed;
+    margin-left: 0;
+    }
+}
+
 /* Fitted state for parameter tooltips */
 .fitted .param-doc-description {
     /* fitted */
@@ -4257,8 +5491,129 @@ a.param-doc-link::before {
     height: 14px;
     cursor: pointer;
 }
-</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>OneVsRestClassifier(estimator=StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
-                                                                            'random_seed': 1234}))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneVsRestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.multiclass.OneVsRestClassifier.html">?<span>Documentation for OneVsRestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+
+.features {
+  font-family: monospace;
+  cursor: pointer;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: .20em;
+  margin-bottom: 0.5em;
+  font-size: inherit; /* Needed for jupyter */
+}
+
+.features.fitted {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features summary {
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: .25em;
+}
+
+.features details[open] > summary {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features.fitted details[open] > summary {
+  background-color: var(--sklearn-color-fitted-level-2);
+  border-radius: .20em 0 0 0;
+}
+
+.features details > summary .arrow::before {
+  content: "▸";
+  color: grey;
+}
+
+.features details[open] > summary .arrow::before {
+  content: "▾";
+}
+
+.features details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+.features.fitted details:hover > summary {
+  margin: 0;
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+.features .features-container {
+  max-width: 15em;
+  max-height: 10em;
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: .25em 0.1rem;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 0 0 .5em .5em;
+}
+
+.features.fitted .features-container {
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+.features .image-container {
+  block-size: 1em;
+  inline-size: 1em;
+  padding: 0;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features .copy-paste-icon {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+  filter: grayscale(100%) opacity(60%);
+}
+
+.features .features-container table {
+  width: 100%;
+  margin: 0.01em;
+}
+
+.features .features-container table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.features .features-container table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.features .features-container table tr:hover {
+  background-color: #e0e0e0;
+}
+
+.features .features-container table {
+  table-layout: inherit;
+}
+
+.features .features-container table td {
+  text-align: left;
+  padding: 0 0.5em;
+  border: 1px solid rgba(106, 105, 104, 0.232);
+  white-space: nowrap;
+  color: var(--sklearn-color-text);
+}
+
+.total_features {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+</style><div id="sk-container-id-5" tabindex="0" class="sk-top-container sk-global"><div class="sk-text-repr-fallback"><pre>OneVsRestClassifier(estimator=StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
+                                                                            'random_seed': 1234}))</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneVsRestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html">?<span>Documentation for OneVsRestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -4272,7 +5627,7 @@ a.param-doc-link::before {
 <tbody>
 <tr class="user-set odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=estimator,-estimator%20object" class="param-doc-link" rel="noreferrer" target="_blank">estimator <span class="param-doc-description">estimator: estimator object<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=estimator,-estimator%20object" class="param-doc-link" style="anchor-name: --doc-link-estimator;" rel="noreferrer" target="_blank">estimator <span class="param-doc-description" style="position-anchor: --doc-link-estimator;"> estimator: estimator object<br>
 <br>
 A regressor or a classifier that implements :term:`fit`.<br>
 When a classifier is passed, :term:`decision_function` will be used<br>
@@ -4283,22 +5638,22 @@ When a regressor is passed, :term:`predict` is used.</span></a></td>
 </tr>
 <tr class="default even">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description">n_jobs: int, default=None<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_jobs;" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description" style="position-anchor: --doc-link-n_jobs;"> n_jobs: int, default=None<br>
 <br>
 The number of jobs to use for the computation: the `n_classes`<br>
 one-vs-rest problems are computed in parallel.<br>
 <br>
 ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.<br>
-``-1`` means using all processors. See :term:`Glossary <n_jobs>`<br>
+``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`<br>
 for more details.<br>
 <br>
 .. versionchanged:: 0.20<br>
-`n_jobs` default changed from 1 to None</n_jobs></span></a></td>
+`n_jobs` default changed from 1 to None</span></a></td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
-<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" rel="noreferrer" target="_blank">verbose <span class="param-doc-description">verbose: int, default=0<br>
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-verbose;" rel="noreferrer" target="_blank">verbose <span class="param-doc-description" style="position-anchor: --doc-link-verbose;"> verbose: int, default=0<br>
 <br>
 The verbosity level, if non zero, progress messages are printed.<br>
 Below 50, the output is sent to stderr. Otherwise, the output is sent<br>
@@ -4314,33 +5669,101 @@ more details.<br>
 
             </details>
         </div>
-    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>estimator: StochTreeBARTBinaryClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__"><pre>StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
-                                              'random_seed': 1234})</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox"><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTBinaryClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__">
+    
+        <div class="estimator-table">
+            <details>
+                <summary>Fitted attributes</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=classes_,-array%2C%20shape%20%3D%20%5Bn_classes%5D" class="param-doc-link" style="anchor-name: --doc-link-classes_;" rel="noreferrer" target="_blank">classes_ <span class="param-doc-description" style="position-anchor: --doc-link-classes_;"> classes_: array, shape = [`n_classes`]<br>
+<br>
+Class labels.</span></a></td>
+<td class="fitted-att-type">ndarray[int64](3,)</td>
+<td>[0,1,2]</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=estimators_,-list%20of%20n_classes%20estimators" class="param-doc-link" style="anchor-name: --doc-link-estimators_;" rel="noreferrer" target="_blank">estimators_ <span class="param-doc-description" style="position-anchor: --doc-link-estimators_;"> estimators_: list of `n_classes` estimators<br>
+<br>
+Estimators used for predictions.</span></a></td>
+<td class="fitted-att-type">list</td>
+<td>[StochTreeBART..._seed': 1234}), StochTreeBART..._seed': 1234}), StochTreeBART..._seed': 1234})]</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=label_binarizer_,-LabelBinarizer%20object" class="param-doc-link" style="anchor-name: --doc-link-label_binarizer_;" rel="noreferrer" target="_blank">label_binarizer_ <span class="param-doc-description" style="position-anchor: --doc-link-label_binarizer_;"> label_binarizer_: LabelBinarizer object<br>
+<br>
+Object used to transform multiclass labels to binary labels and<br>
+vice-versa.</span></a></td>
+<td class="fitted-att-type">LabelBinarizer</td>
+<td>LabelBinarize...e_output=True)</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=multilabel_,-boolean" class="param-doc-link" style="anchor-name: --doc-link-multilabel_;" rel="noreferrer" target="_blank">multilabel_ <span class="param-doc-description" style="position-anchor: --doc-link-multilabel_;"> multilabel_: boolean<br>
+<br>
+Whether a OneVsRestClassifier is a multilabel classifier.</span></a></td>
+<td class="fitted-att-type">bool</td>
+<td>False</td>
+</tr>
+<tr class="default even">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=n_classes_,-int" class="param-doc-link" style="anchor-name: --doc-link-n_classes_;" rel="noreferrer" target="_blank">n_classes_ <span class="param-doc-description" style="position-anchor: --doc-link-n_classes_;"> n_classes_: int<br>
+<br>
+Number of classes.</span></a></td>
+<td class="fitted-att-type">int</td>
+<td>3</td>
+</tr>
+<tr class="default odd">
+<td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=n_features_in_,-int" class="param-doc-link" style="anchor-name: --doc-link-n_features_in_;" rel="noreferrer" target="_blank">n_features_in_ <span class="param-doc-description" style="position-anchor: --doc-link-n_features_in_;"> n_features_in_: int<br>
+<br>
+Number of features seen during :term:`fit`. Only defined if the<br>
+underlying estimator exposes such an attribute when fit.<br>
+<br>
+.. versionadded:: 0.24</span></a></td>
+<td class="fitted-att-type">int</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>estimator: StochTreeBARTBinaryClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__"><pre>StochTreeBARTBinaryClassifier(general_params={'num_threads': 1,
+                                              'random_seed': 1234})</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-9" type="checkbox"><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTBinaryClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
 <tbody>
-<tr class="default odd">
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param">general_params</td>
+<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
+</tr>
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
-<tr class="default even">
+<tr class="default odd">
 <td><em></em></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
-<tr class="default odd">
+<tr class="default even">
 <td><em></em></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
-<td class="param">general_params</td>
-<td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
@@ -4362,7 +5785,11 @@ more details.<br>
 
             </details>
         </div>
-    </div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    </div></div></div></div></div></div></div></div></div></div><script>/*  Authors: The scikit-learn developers
+ SPDX-License-Identifier: BSD-3-Clause
+*/
+
+function copyToClipboard(text, element) {
     // Get the parameter prefix from the closest toggleable content
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
@@ -4399,6 +5826,13 @@ more details.<br>
 document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     const toggleableContent = element.closest('.sk-toggleable__content');
     const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+
+    const parent = element.parentElement;
+    if (!parent || !parent.nextElementSibling) {
+        console.warn('Expected copy-paste icon is missing from the DOM structure');
+        return;
+    }
+
     const paramName = element.parentElement.nextElementSibling
         .textContent.trim().split(' ')[0];
     const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
@@ -4406,7 +5840,51 @@ document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
     element.setAttribute('title', fullParamName);
 });
 
+/**
+ * Copy the list of feature names formatted as a Python list.
+ *
+ * @param {HTMLElement} element - The copy button inside a `.features` block; its siblings
+ *   contain a `details` element and a table containing feature named.
+ * @returns {boolean} Always returns `false` so callers can prevent the default click behavior.
+ */
+function copyFeatureNamesToClipboard(element) {
+    var detailsElem = element.closest('.features').querySelector('details');
+    var wasOpen = detailsElem.open;
+    detailsElem.open = true;
+    var content = element.closest('.features').querySelector('tbody')
+                  .innerText.trim();
+    if (!wasOpen) detailsElem.open = false;
+    const rows = content.split('\n').map(row => `    "${row}"`);
+    const formattedText = `[\n${rows.join(',\n')},\n]`;
+    const originalHTML = element.innerHTML.replace('✔', '');
+    const originalStyle = element.style;
+    const copyMark = document.createElement('span');
+    copyMark.innerHTML = '✔';
+    copyMark.style.color = 'blue';
+    copyMark.style.fontSize = '1em';
 
+    navigator.clipboard.writeText(formattedText)
+        .then(() => {
+            element.style.display = 'none';
+            element.parentElement.appendChild(copyMark);
+
+            setTimeout(() => {
+                copyMark.remove();
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'orange';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 1000);
+        });
+    return false;
+}
 /**
  * Adapted from Skrub
  * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
