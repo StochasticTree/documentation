@@ -182,7 +182,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#stochtree-0.4.3" id="toc-stochtree-0.4.3" class="nav-link active" data-scroll-target="#stochtree-0.4.3">stochtree 0.4.3</a>
+  <li><a href="#stochtree-0.4.4" id="toc-stochtree-0.4.4" class="nav-link active" data-scroll-target="#stochtree-0.4.4">stochtree 0.4.4</a>
+  <ul class="collapse">
+  <li><a href="#documentation-and-other-maintenance" id="toc-documentation-and-other-maintenance" class="nav-link" data-scroll-target="#documentation-and-other-maintenance">Documentation and Other Maintenance</a></li>
+  </ul></li>
+  <li><a href="#stochtree-0.4.3" id="toc-stochtree-0.4.3" class="nav-link" data-scroll-target="#stochtree-0.4.3">stochtree 0.4.3</a>
   <ul class="collapse">
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug Fixes</a></li>
   </ul></li>
@@ -190,11 +194,11 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">New Features</a></li>
   <li><a href="#bug-fixes-1" id="toc-bug-fixes-1" class="nav-link" data-scroll-target="#bug-fixes-1">Bug Fixes</a></li>
-  <li><a href="#documentation-and-other-maintenance" id="toc-documentation-and-other-maintenance" class="nav-link" data-scroll-target="#documentation-and-other-maintenance">Documentation and Other Maintenance</a></li>
+  <li><a href="#documentation-and-other-maintenance-1" id="toc-documentation-and-other-maintenance-1" class="nav-link" data-scroll-target="#documentation-and-other-maintenance-1">Documentation and Other Maintenance</a></li>
   </ul></li>
   <li><a href="#stochtree-0.4.1" id="toc-stochtree-0.4.1" class="nav-link" data-scroll-target="#stochtree-0.4.1">stochtree 0.4.1</a>
   <ul class="collapse">
-  <li><a href="#documentation-and-other-maintenance-1" id="toc-documentation-and-other-maintenance-1" class="nav-link" data-scroll-target="#documentation-and-other-maintenance-1">Documentation and Other Maintenance</a></li>
+  <li><a href="#documentation-and-other-maintenance-2" id="toc-documentation-and-other-maintenance-2" class="nav-link" data-scroll-target="#documentation-and-other-maintenance-2">Documentation and Other Maintenance</a></li>
   </ul></li>
   <li><a href="#stochtree-0.4.0" id="toc-stochtree-0.4.0" class="nav-link" data-scroll-target="#stochtree-0.4.0">stochtree 0.4.0</a>
   <ul class="collapse">
@@ -234,11 +238,21 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="stochtree-0.4.4" class="level1">
+<h1>stochtree 0.4.4</h1>
+<section id="documentation-and-other-maintenance" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-other-maintenance">Documentation and Other Maintenance</h2>
+<ul>
+<li>Switch sampling default to single-threaded execution (<code>num_threads = 1</code>) in both R and Python <a href="https://github.com/StochasticTree/stochtree/pull/396">#396</a>. This prevents CRAN pre-checks from failing due to limitations on core usage and also avoid unintentional default interaction with users’ own multi-core setups.</li>
+</ul>
+</section>
+</section>
 <section id="stochtree-0.4.3" class="level1">
 <h1>stochtree 0.4.3</h1>
 <section id="bug-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h2>
 <ul>
+<li>Fix serialization / deserialization roundtrip bugs in BART and BCF <a href="https://github.com/StochasticTree/stochtree/issues/393">#393</a></li>
 <li>Safely handle / cast <code>float32</code> inputs in python BART / BCF <a href="https://github.com/StochasticTree/stochtree/issues/389">#389</a></li>
 <li>Fix ordinal cloglog probability transform for K&gt;=4 categories <a href="https://github.com/StochasticTree/stochtree/pull/382">#382</a></li>
 <li>Fixed bug that separated homogeneous parametric treatment effect term (<code>tau_0</code>) from treatment effect forest predictions (<code>tau(x)</code>), only including the latter in <code>tau</code> for BCF predictions when a parametric term is included in the model <a href="https://github.com/StochasticTree/stochtree/pull/377">#377</a></li>
@@ -272,8 +286,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Convert binary factor-valued treatments to 0/1 binary numeric treatment in <code>bcf()</code> R function <a href="https://github.com/StochasticTree/stochtree/pull/332">#332</a></li>
 </ul>
 </section>
-<section id="documentation-and-other-maintenance" class="level2">
-<h2 class="anchored" data-anchor-id="documentation-and-other-maintenance">Documentation and Other Maintenance</h2>
+<section id="documentation-and-other-maintenance-1" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-other-maintenance-1">Documentation and Other Maintenance</h2>
 <ul>
 <li>Add support for python 3.14 and drop 3.8 and 3.9 <a href="https://github.com/StochasticTree/stochtree/pull/363">#363</a></li>
 </ul>
@@ -281,8 +295,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.4.1" class="level1">
 <h1>stochtree 0.4.1</h1>
-<section id="documentation-and-other-maintenance-1" class="level2">
-<h2 class="anchored" data-anchor-id="documentation-and-other-maintenance-1">Documentation and Other Maintenance</h2>
+<section id="documentation-and-other-maintenance-2" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-and-other-maintenance-2">Documentation and Other Maintenance</h2>
 <ul>
 <li>Converted all R man page titles to title case <a href="https://github.com/StochasticTree/stochtree/pull/310">#310</a></li>
 <li>Updated Python <code>summary()</code> methods to print directly to console rather than return a summary string <a href="https://github.com/StochasticTree/stochtree/pull/310">#310</a></li>

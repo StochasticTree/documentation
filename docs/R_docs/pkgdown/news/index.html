@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">stochtree</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +33,19 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.4" id="stochtree-044">stochtree 0.4.4<a class="anchor" aria-label="anchor" href="#stochtree-044"></a></h2>
+<div class="section level3">
+<h3 id="documentation-and-other-maintenance-0-4-4">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-4"></a></h3>
+<ul><li>Switch sampling default to single-threaded execution (<code>num_threads = 1</code>) in both R and Python <a href="https://github.com/StochasticTree/stochtree/pull/396" class="external-link">#396</a>. This prevents CRAN pre-checks from failing due to limitations on core usage and also avoid unintentional default interaction with users’ own multi-core setups.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.3" id="stochtree-043">stochtree 0.4.3<a class="anchor" aria-label="anchor" href="#stochtree-043"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-4-3">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-3"></a></h3>
-<ul><li>Safely handle / cast <code>float32</code> inputs in python BART / BCF <a href="https://github.com/StochasticTree/stochtree/issues/389" class="external-link">#389</a>
+<ul><li>Fix serialization / deserialization roundtrip bugs in BART and BCF <a href="https://github.com/StochasticTree/stochtree/issues/393" class="external-link">#393</a>
+</li>
+<li>Safely handle / cast <code>float32</code> inputs in python BART / BCF <a href="https://github.com/StochasticTree/stochtree/issues/389" class="external-link">#389</a>
 </li>
 <li>Fix ordinal cloglog probability transform for K&gt;=4 categories <a href="https://github.com/StochasticTree/stochtree/pull/382" class="external-link">#382</a>
 </li>
