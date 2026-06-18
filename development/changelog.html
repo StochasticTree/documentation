@@ -247,6 +247,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="bug-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="bug-fixes">Bug Fixes</h2>
 <ul>
+<li>Fix <code>IndexError</code> when sampling a mean-only Python BART model with categorical covariates; the excluded-variable weight zero-out is now guarded by the forest-inclusion flags, matching the R implementation <a href="https://github.com/StochasticTree/stochtree/pull/411">#411</a></li>
 <li>Fix ordinal class prediction bug in R BART <a href="https://github.com/StochasticTree/stochtree/issues/399">#399</a></li>
 </ul>
 </section>
