@@ -622,19 +622,19 @@ Continuous outcome was modeled as Gaussian with a leaf regression prior with 1 b
 Outcome was standardized
 The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) 
 Summary of sigma^2 posterior: 
-3000 samples, mean = 0.890, standard deviation = 0.046, quantiles:
+3000 samples, mean = 0.895, standard deviation = 0.047, quantiles:
      2.5%       10%       25%       50%       75%       90%     97.5% 
-0.8024700 0.8321615 0.8581550 0.8898091 0.9197545 0.9483768 0.9819929 
+0.8063860 0.8342479 0.8627263 0.8933477 0.9263859 0.9560846 0.9927900 
 Summary of leaf scale posterior: 
-3000 samples, mean = 0.007, standard deviation = 0.002, quantiles:
+3000 samples, mean = 0.007, standard deviation = 0.001, quantiles:
        2.5%         10%         25%         50%         75%         90% 
-0.004658056 0.005201044 0.005815184 0.006629588 0.007924919 0.009335225 
+0.005026602 0.005842544 0.006459241 0.007207941 0.008106946 0.008969726 
       97.5% 
-0.010860428 
+0.010222878 
 Summary of in-sample posterior mean predictions: 
-1000 observations, mean = -0.064, standard deviation = 3.286, quantiles:
+1000 observations, mean = -0.064, standard deviation = 3.285, quantiles:
       2.5%        10%        25%        50%        75%        90%      97.5% 
--6.8408866 -4.9234557 -1.8270862 -0.1218003  2.0614384  4.2879280  6.5612567 </code></pre>
+-6.8547958 -4.9399922 -1.8267427 -0.1216305  2.0136691  4.2814669  6.4690016 </code></pre>
 </div>
 </div>
 </div>
@@ -649,31 +649,31 @@ Outcome was modeled as gaussian with a leaf regression prior with 1 bases for th
 Outcome was standardized
 The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning)
 
-Summary of sigma^2 posterior: 3000 samples, mean = 0.940, standard deviation = 0.046, quantiles:
-    2.5%: 0.854
-   10.0%: 0.881
-   25.0%: 0.908
-   50.0%: 0.939
-   75.0%: 0.970
-   90.0%: 0.999
-   97.5%: 1.037
-Summary of leaf scale posterior: 3000 samples, mean = 0.007, standard deviation = 0.001, quantiles:
+Summary of sigma^2 posterior: 3000 samples, mean = 0.944, standard deviation = 0.049, quantiles:
+    2.5%: 0.852
+   10.0%: 0.883
+   25.0%: 0.911
+   50.0%: 0.943
+   75.0%: 0.975
+   90.0%: 1.005
+   97.5%: 1.045
+Summary of leaf scale posterior: 3000 samples, mean = 0.006, standard deviation = 0.001, quantiles:
     2.5%: 0.005
    10.0%: 0.005
    25.0%: 0.006
-   50.0%: 0.007
-   75.0%: 0.008
+   50.0%: 0.006
+   75.0%: 0.007
    90.0%: 0.008
    97.5%: 0.009
 Summary of in-sample posterior mean predictions: 
-1000 observations, mean = 0.106, standard deviation = 3.287, quantiles:
-    2.5%: -6.726
-   10.0%: -4.320
-   25.0%: -1.936
-   50.0%: 0.181
-   75.0%: 2.088
-   90.0%: 4.421
-   97.5%: 6.661
+1000 observations, mean = 0.106, standard deviation = 3.286, quantiles:
+    2.5%: -6.706
+   10.0%: -4.318
+   25.0%: -1.942
+   50.0%: 0.169
+   75.0%: 2.077
+   90.0%: 4.387
+   97.5%: 6.639
 
 None</code></pre>
 </div>
@@ -896,41 +896,39 @@ outcome was standardized
 An internal propensity model was fit using stochtree::bart() in lieu of user-provided propensity scores
 The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning) 
 Summary of sigma^2 posterior: 
-3000 samples, mean = 0.950, standard deviation = 0.044, quantiles:
+3000 samples, mean = 0.947, standard deviation = 0.045, quantiles:
      2.5%       10%       25%       50%       75%       90%     97.5% 
-0.8653579 0.8942583 0.9197561 0.9481156 0.9803205 1.0072633 1.0416611 
+0.8635187 0.8896838 0.9151508 0.9445945 0.9772447 1.0065667 1.0366189 
 Summary of prognostic forest leaf scale posterior: 
 3000 samples, mean = 0.002, standard deviation = 0.000, quantiles:
         2.5%          10%          25%          50%          75%          90% 
-0.0009687932 0.0011056219 0.0012560386 0.0014858898 0.0017437826 0.0020199932 
+0.0009861954 0.0011416246 0.0013475612 0.0016285527 0.0019149985 0.0022570609 
        97.5% 
-0.0023594823 
+0.0026434376 
 Summary of adaptive coding parameters: 
-3000 samples, mean (control) = -0.484, mean (treated) = 0.996, standard deviation (control) = 0.334, standard deviation (treated) = 0.329
+3000 samples, mean (control) = -0.466, mean (treated) = 1.002, standard deviation (control) = 0.359, standard deviation (treated) = 0.340
 quantiles (control):
        2.5%         10%         25%         50%         75%         90% 
--1.17075868 -0.93376332 -0.70508770 -0.45885878 -0.24167610 -0.07789862 
+-1.22095814 -0.93872100 -0.69032346 -0.43506393 -0.20841454 -0.04029032 
       97.5% 
- 0.11555756 
+ 0.15353839 
 quantiles (treated):
      2.5%       10%       25%       50%       75%       90%     97.5% 
-0.4026360 0.5900105 0.7642362 0.9780066 1.2067452 1.4147348 1.6865822 
+0.3624430 0.5909235 0.7740309 0.9917401 1.2220621 1.4188456 1.7070820 
 Summary of treatment effect intercept (tau_0) posterior: 
-3000 samples, mean = 0.087, standard deviation = 0.705, quantiles:
-       2.5%         10%         25%         50%         75%         90% 
--1.49687198 -0.83079619 -0.33339297  0.09941164  0.68031243  0.93377495 
-      97.5% 
- 1.20243793 
+3000 samples, mean = 0.191, standard deviation = 0.830, quantiles:
+      2.5%        10%        25%        50%        75%        90%      97.5% 
+-1.5044924 -1.0983138 -0.2698141  0.1819891  0.8192890  1.1916470  1.7408574 
 Summary of in-sample posterior mean predictions: 
-1000 observations, mean = 3.487, standard deviation = 0.943, quantiles:
+1000 observations, mean = 3.487, standard deviation = 0.946, quantiles:
     2.5%      10%      25%      50%      75%      90%    97.5% 
-1.639874 2.282579 2.823404 3.490034 4.142571 4.740276 5.415715 
+1.642338 2.276479 2.813601 3.492991 4.141257 4.712091 5.425508 
 Summary of in-sample posterior mean CATEs: 
-1000 observations, mean = 0.074, standard deviation = 0.523, quantiles:
-       2.5%         10%         25%         50%         75%         90% 
--0.72766973 -0.56248855 -0.38969574 -0.00144017  0.58025646  0.78113605 
-      97.5% 
- 0.91049942 </code></pre>
+1000 observations, mean = 0.075, standard deviation = 0.522, quantiles:
+        2.5%          10%          25%          50%          75%          90% 
+-0.725758016 -0.555750985 -0.389701031 -0.004463012  0.581478411  0.784408143 
+       97.5% 
+ 0.906040724 </code></pre>
 </div>
 </div>
 </div>
@@ -947,14 +945,14 @@ Outcome was standardized
 User-provided propensity scores were included in the model
 The sampler was run for 10 GFR iterations, with 3 chains of 0 burn-in iterations and 1000 MCMC iterations, retaining every iteration (i.e. no thinning)
 
-Summary of sigma^2 posterior: 3000 samples, mean = 0.870, standard deviation = 0.042, quantiles:
-    2.5%: 0.793
-   10.0%: 0.817
-   25.0%: 0.841
-   50.0%: 0.870
-   75.0%: 0.899
-   90.0%: 0.924
-   97.5%: 0.954
+Summary of sigma^2 posterior: 3000 samples, mean = 0.874, standard deviation = 0.042, quantiles:
+    2.5%: 0.794
+   10.0%: 0.821
+   25.0%: 0.845
+   50.0%: 0.872
+   75.0%: 0.901
+   90.0%: 0.929
+   97.5%: 0.959
 Summary of prognostic forest leaf scale posterior: 3000 samples, mean = 0.002, standard deviation = 0.000, quantiles:
     2.5%: 0.001
    10.0%: 0.001
@@ -964,50 +962,50 @@ Summary of prognostic forest leaf scale posterior: 3000 samples, mean = 0.002, s
    90.0%: 0.002
    97.5%: 0.003
 Summary of adaptive coding parameters: 
-3000 samples, mean (control) = -0.571, mean (treated) = 1.129, standard deviation (control) = 0.357, standard deviation (treated) = 0.379
+3000 samples, mean (control) = -0.457, mean (treated) = 1.227, standard deviation (control) = 0.332, standard deviation (treated) = 0.351
 quantiles (control):
-    2.5%: -1.286
-   10.0%: -1.028
-   25.0%: -0.818
-   50.0%: -0.562
-   75.0%: -0.329
-   90.0%: -0.118
-   97.5%: 0.119
+    2.5%: -1.185
+   10.0%: -0.865
+   25.0%: -0.652
+   50.0%: -0.443
+   75.0%: -0.235
+   90.0%: -0.061
+   97.5%: 0.146
 
 quantiles (treated):
-    2.5%: 0.450
-   10.0%: 0.675
-   25.0%: 0.870
-   50.0%: 1.104
-   75.0%: 1.353
-   90.0%: 1.637
-   97.5%: 1.967
-Summary of treatment effect intercept (tau_0) posterior: 3000 samples, mean = 0.101, standard deviation = 0.381, quantiles:
-    2.5%: -0.559
-   10.0%: -0.382
-   25.0%: -0.205
-   50.0%: 0.071
-   75.0%: 0.438
-   90.0%: 0.621
-   97.5%: 0.754
+    2.5%: 0.592
+   10.0%: 0.791
+   25.0%: 0.970
+   50.0%: 1.210
+   75.0%: 1.455
+   90.0%: 1.691
+   97.5%: 1.971
+Summary of treatment effect intercept (tau_0) posterior: 3000 samples, mean = 0.123, standard deviation = 0.356, quantiles:
+    2.5%: -0.552
+   10.0%: -0.354
+   25.0%: -0.129
+   50.0%: 0.128
+   75.0%: 0.376
+   90.0%: 0.574
+   97.5%: 0.828
 Summary of in-sample posterior mean predictions: 
-1000 observations, mean = 3.482, standard deviation = 0.961, quantiles:
-    2.5%: 1.830
-   10.0%: 2.209
-   25.0%: 2.772
+1000 observations, mean = 3.481, standard deviation = 0.960, quantiles:
+    2.5%: 1.850
+   10.0%: 2.210
+   25.0%: 2.780
    50.0%: 3.469
-   75.0%: 4.160
-   90.0%: 4.769
-   97.5%: 5.333
+   75.0%: 4.165
+   90.0%: 4.766
+   97.5%: 5.327
 Summary of in-sample posterior mean CATEs: 
-1000 observations, mean = -0.029, standard deviation = 0.627, quantiles:
-    2.5%: -1.080
-   10.0%: -0.924
-   25.0%: -0.582
-   50.0%: 0.074
-   75.0%: 0.543
-   90.0%: 0.740
-   97.5%: 0.912
+1000 observations, mean = -0.026, standard deviation = 0.625, quantiles:
+    2.5%: -1.077
+   10.0%: -0.911
+   25.0%: -0.575
+   50.0%: 0.067
+   75.0%: 0.541
+   90.0%: 0.755
+   97.5%: 0.924
 
 None</code></pre>
 </div>
