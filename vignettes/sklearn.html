@@ -3449,7 +3449,7 @@ mean score (``search.best_score_``).<br>
 For multi-metric evaluation, this is present only if ``refit`` is<br>
 specified.</span></a></td>
 <td class="fitted-att-type">int64</td>
-<td>np.int64(7)</td>
+<td>np.int64(5)</td>
 </tr>
 <tr class="default even">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_params_,-dict" class="param-doc-link" style="anchor-name: --doc-link-best_params_;" rel="noreferrer" target="_blank">best_params_ <span class="param-doc-description" style="position-anchor: --doc-link-best_params_;"> best_params_: dict<br>
@@ -3459,7 +3459,7 @@ Parameter setting that gave the best results on the hold out data.<br>
 For multi-metric evaluation, this is present only if ``refit`` is<br>
 specified.</span></a></td>
 <td class="fitted-att-type">dict</td>
-<td>{'me...ms': {'alpha': 0.9, 'beta': 1.5, 'nu...es': 100}, 'num_gfr': 40, 'nu...mc': 1000}</td>
+<td>{'me...ms': {'alpha': 0.9, 'beta': 1.5, 'nu...es': 100}, 'num_gfr': 10, 'nu...mc': 1000}</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=best_score_,-float" class="param-doc-link" style="anchor-name: --doc-link-best_score_;" rel="noreferrer" target="_blank">best_score_ <span class="param-doc-description" style="position-anchor: --doc-link-best_score_;"> best_score_: float<br>
@@ -3471,7 +3471,7 @@ specified.<br>
 <br>
 This attribute is not available if ``refit`` is a function.</span></a></td>
 <td class="fitted-att-type">float64</td>
-<td>0.8856</td>
+<td>0.8953</td>
 </tr>
 <tr class="default even">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=cv_results_,-dict%20of%20numpy%20%28masked%29%20ndarrays" class="param-doc-link" style="anchor-name: --doc-link-cv_results_;" rel="noreferrer" target="_blank">cv_results_ <span class="param-doc-description" style="position-anchor: --doc-link-cv_results_;"> cv_results_: dict of numpy (masked) ndarrays<br>
@@ -3534,7 +3534,7 @@ available in the ``cv_results_`` dict at the keys ending with that<br>
 scorer's name (``'_&lt;scorer_name&gt;'``) instead of ``'_score'`` shown<br>
 above. ('split0_test_precision', 'mean_train_precision' etc.)</span></a></td>
 <td class="fitted-att-type">dict</td>
-<td>{'me...me': array([0.0579..., 1.72093916]), 'me...me': array([0.0011..., 0.04069023]), 'me...re': array([0.8650..., 0.87574107]), 'pa...ms': masked_array(... dtype=object), ...}</td>
+<td>{'me...me': array([0.0426..., 1.33027377]), 'me...me': array([0.0007..., 0.03340993]), 'me...re': array([0.8498..., 0.8197843 ]), 'pa...ms': masked_array(... dtype=object), ...}</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=multimetric_,-bool" class="param-doc-link" style="anchor-name: --doc-link-multimetric_;" rel="noreferrer" target="_blank">multimetric_ <span class="param-doc-description" style="position-anchor: --doc-link-multimetric_;"> multimetric_: bool<br>
@@ -3571,7 +3571,7 @@ This is present only if ``refit`` is not False.<br>
 <br>
 .. versionadded:: 0.20</span></a></td>
 <td class="fitted-att-type">float</td>
-<td>0.9465</td>
+<td>0.4785</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scorer_,-function%20or%20a%20dict" class="param-doc-link" style="anchor-name: --doc-link-scorer_;" rel="noreferrer" target="_blank">scorer_ <span class="param-doc-description" style="position-anchor: --doc-link-scorer_;"> scorer_: function or a dict<br>
@@ -3592,7 +3592,7 @@ For multi-metric evaluation, this attribute holds the validated<br>
     </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>StochTreeBARTRegressor(general_params={'num_threads': 1},
                        mean_forest_params={'alpha': 0.9, 'beta': 1.5,
                                            'num_trees': 100},
-                       num_gfr=40, num_mcmc=1000)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
+                       num_mcmc=1000)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually sk-global" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StochTreeBARTRegressor</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
         <div class="estimator-table">
             <details>
                 <summary>Parameters</summary>
@@ -3601,23 +3601,23 @@ For multi-metric evaluation, this attribute holds the validated<br>
 <tbody>
 <tr class="user-set odd">
 <td><em></em></td>
-<td class="param">num_gfr</td>
-<td class="value">40</td>
-</tr>
-<tr class="user-set even">
-<td><em></em></td>
 <td class="param">num_mcmc</td>
 <td class="value">1000</td>
 </tr>
-<tr class="user-set odd">
+<tr class="user-set even">
 <td><em></em></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1}</td>
 </tr>
-<tr class="user-set even">
+<tr class="user-set odd">
 <td><em></em></td>
 <td class="param">mean_forest_params</td>
 <td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param">num_gfr</td>
+<td class="value">10</td>
 </tr>
 <tr class="default odd">
 <td><em></em></td>
@@ -3885,7 +3885,7 @@ forceTheme('sk-container-id-3');</script>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Hyperparameters chosen by grid search:
-  num_gfr: 40
+  num_gfr: 10
   num_mcmc: 1000
   num_trees: 100
   alpha: 0.9
