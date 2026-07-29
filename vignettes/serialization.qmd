@@ -256,10 +256,10 @@ Check that the predictions align with those of the original model.
 
 ```{r}
 bart_preds_reload <- predict(bart_model_reload, X_train)
-plot(rowMeans(bart_model$y_hat_train), rowMeans(bart_preds_reload$y_hat),
+plot(rowMeans(extractParameter(bart_model, "y_hat_train")), rowMeans(bart_preds_reload$y_hat),
      xlab = "Original", ylab = "Deserialized", main = "Conditional Mean Estimates")
 abline(0,1,col="red",lwd=3,lty=3)
-plot(rowMeans(bart_model$sigma2_x_hat_train), rowMeans(bart_preds_reload$variance_forest_predictions),
+plot(rowMeans(extractParameter(bart_model, "sigma2_x_train")), rowMeans(bart_preds_reload$variance_forest_predictions),
      xlab = "Original", ylab = "Deserialized", main = "Conditional Variance Estimates")
 abline(0,1,col="red",lwd=3,lty=3)
 ```
@@ -509,13 +509,13 @@ Check that the predictions align with those of the original model.
 
 ```{r}
 bcf_preds_reload <- predict(bcf_model_reload, X_train, Z_train, pi_train, rfx_group_ids_train, rfx_basis_train)
-plot(rowMeans(bcf_model$mu_hat_train), rowMeans(bcf_preds_reload$mu_hat),
+plot(rowMeans(extractParameter(bcf_model, "mu_hat_train")), rowMeans(bcf_preds_reload$mu_hat),
      xlab = "Original", ylab = "Deserialized", main = "Prognostic forest")
 abline(0,1,col="red",lwd=3,lty=3)
-plot(rowMeans(bcf_model$tau_hat_train), rowMeans(bcf_preds_reload$tau_hat),
+plot(rowMeans(extractParameter(bcf_model, "tau_hat_train")), rowMeans(bcf_preds_reload$tau_hat),
      xlab = "Original", ylab = "Deserialized", main = "Treatment forest")
 abline(0,1,col="red",lwd=3,lty=3)
-plot(rowMeans(bcf_model$y_hat_train), rowMeans(bcf_preds_reload$y_hat),
+plot(rowMeans(extractParameter(bcf_model, "y_hat_train")), rowMeans(bcf_preds_reload$y_hat),
      xlab = "Original", ylab = "Deserialized", main = "Overall outcome")
 abline(0,1,col="red",lwd=3,lty=3)
 ```

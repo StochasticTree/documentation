@@ -246,7 +246,7 @@ sigma2_coda_list <- coda::as.mcmc.list(lapply(
     offset <- (chain_idx - 1) * num_mcmc
     inds_start <- offset + 1
     inds_end <- offset + num_mcmc
-    coda::mcmc(bart_model$sigma2_global_samples[inds_start:inds_end])
+    coda::mcmc(extractParameter(bart_model, "sigma2_global")[inds_start:inds_end])
   }
 ))
 traceplot(sigma2_coda_list, ylab = expression(sigma^2))
@@ -491,7 +491,7 @@ sigma2_coda_list <- coda::as.mcmc.list(lapply(
     offset <- (chain_idx - 1) * num_mcmc
     inds_start <- offset + 1
     inds_end <- offset + num_mcmc
-    coda::mcmc(bart_model$sigma2_global_samples[inds_start:inds_end])
+    coda::mcmc(extractParameter(bart_model, "sigma2_global")[inds_start:inds_end])
   }
 ))
 traceplot(sigma2_coda_list, ylab = expression(sigma^2))
@@ -682,7 +682,7 @@ bart_model_outputs <- foreach(i = 1:num_chains) %dopar%
       mean_forest_params = mean_forest_params
     )
     bart_model_string <- stochtree::saveBARTModelToJsonString(bart_model)
-    y_hat_test <- bart_model$y_hat_test
+    y_hat_test <- extractParameter(bart_model, "y_hat_test")
     list(model = bart_model_string, yhat = y_hat_test)
   }
 ```
