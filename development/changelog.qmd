@@ -1,1 +1,22 @@
-{{< include ../stochtree_repo/CHANGELOG.md >}}
+---
+title: "Changelog"
+execute:
+  freeze: false
+---
+
+```{r}
+#| echo: false
+#| results: asis
+# Render the changelog directly from the stochtree package's NEWS.md at build
+# time (converting R-style dev suffixes .9000 -> -dev). Done as a code chunk
+# rather than a static include so `quarto render` is self-contained: no
+# pre-generated file and no pre-render ordering dependency. Tolerates a missing
+# NEWS.md. Path candidates cover both execute-dir modes (file vs project root).
+candidates <- c("../stochtree_repo/NEWS.md", "stochtree_repo/NEWS.md")
+news_path <- candidates[file.exists(candidates)]
+if (length(news_path) > 0) {
+  cat(gsub("\\.9000", "-dev", readLines(news_path[1], warn = FALSE)), sep = "\n")
+} else {
+  cat("_No changelog available for this build._\n")
+}
+```
