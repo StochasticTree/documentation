@@ -224,13 +224,13 @@ Below we query this vector for the final GFR sample (1-indexed as 10 in R, 0-ind
 ## R
 
 ```{r}
-bart_model$mean_forests$get_forest_split_counts(10, p_x)
+extractForest(bart_model, "mean")$get_forest_split_counts(10, p_x)
 ```
 
 ## Python
 
 ```{python}
-bart_model.forest_container_mean.get_forest_split_counts(9, p_x)
+bart_model.extract_forest("mean").get_forest_split_counts(9, p_x)
 ```
 
 ::::
@@ -242,13 +242,13 @@ We can also compute split counts for each feature aggregated over all forests
 ## R
 
 ```{r}
-bart_model$mean_forests$get_aggregate_split_counts(p_x)
+extractForest(bart_model, "mean")$get_aggregate_split_counts(p_x)
 ```
 
 ## Python
 
 ```{python}
-bart_model.forest_container_mean.get_overall_split_counts(p_x)
+bart_model.extract_forest("mean").get_overall_split_counts(p_x)
 ```
 
 ::::
@@ -267,14 +267,14 @@ Below we compute the split count for all features in the first tree of the last 
 ## R
 
 ```{r}
-splits = bart_model$mean_forests$get_granular_split_counts(p_x)
+splits = extractForest(bart_model, "mean")$get_granular_split_counts(p_x)
 splits[10,1,]
 ```
 
 ## Python
 
 ```{python}
-splits = bart_model.forest_container_mean.get_granular_split_counts(p_x)
+splits = bart_model.extract_forest("mean").get_granular_split_counts(p_x)
 splits[9, 0, :]
 ```
 
@@ -349,21 +349,22 @@ Now, let's inspect the first tree for the last GFR sample in more depth, followi
 ```{r}
 forest_num <- 9
 tree_num <- 0
-nodes <- sort(bart_model$mean_forests$nodes(forest_num, tree_num))
+mean_forest <- extractForest(bart_model, "mean")
+nodes <- sort(mean_forest$nodes(forest_num, tree_num))
 for (nid in nodes) {
-    if (bart_model$mean_forests$is_leaf_node(forest_num, tree_num, nid)) {
-        node_depth <- bart_model$mean_forests$node_depth(forest_num, tree_num, nid)
+    if (mean_forest$is_leaf_node(forest_num, tree_num, nid)) {
+        node_depth <- mean_forest$node_depth(forest_num, tree_num, nid)
         space_text <- rep("\t", node_depth)
-        leaf_values <- bart_model$mean_forests$node_leaf_values(forest_num, tree_num, nid)
+        leaf_values <- mean_forest$node_leaf_values(forest_num, tree_num, nid)
         cat(space_text, "node=", nid, " is a leaf node with value=",
             format(leaf_values, digits = 3), "\n", sep = "")
     } else {
-        node_depth <- bart_model$mean_forests$node_depth(forest_num, tree_num, nid)
+        node_depth <- mean_forest$node_depth(forest_num, tree_num, nid)
         space_text <- rep("\t", node_depth)
-        left <- bart_model$mean_forests$left_child_node(forest_num, tree_num, nid)
-        feature <- bart_model$mean_forests$node_split_index(forest_num, tree_num, nid)
-        threshold <- bart_model$mean_forests$node_split_threshold(forest_num, tree_num, nid)
-        right <- bart_model$mean_forests$right_child_node(forest_num, tree_num, nid)
+        left <- mean_forest$left_child_node(forest_num, tree_num, nid)
+        feature <- mean_forest$node_split_index(forest_num, tree_num, nid)
+        threshold <- mean_forest$node_split_threshold(forest_num, tree_num, nid)
+        right <- mean_forest$right_child_node(forest_num, tree_num, nid)
         cat(space_text, "node=", nid, " is a split node, which tells us to go to node ",
             left, " if X[:, ", feature, "] <= ", format(threshold, digits = 3),
             " else to node ", right, "\n", sep = "")
@@ -376,7 +377,7 @@ for (nid in nodes) {
 ```{python}
 forest_num = 9
 tree_num = 0
-fc = bart_model.forest_container_mean
+fc = bart_model.extract_forest("mean")
 nodes = np.sort(fc.nodes(forest_num, tree_num))
 for nid in nodes:
     depth = fc.node_depth(forest_num, tree_num, nid)
