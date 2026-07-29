@@ -4,7 +4,7 @@ project:
   # Generate stochtree_repo/CHANGELOG.md before rendering so development/changelog.qmd
   # can include it. Runs on every `quarto render` (local and CI), so a bare render no
   # longer fails when the changelog hasn't been generated separately.
-  pre-render: generate_changelog.sh
+  pre-render: ./generate_changelog.sh
   render:
     - "*.qmd"
     - "vignettes/*.qmd"
