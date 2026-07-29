@@ -76,19 +76,32 @@ jobs:
           path: 'stochtree_repo_py'
           submodules: 'recursive'
 
+      # C++ core source for Doxygen. Only some versions ship the C++ core +
+      # Doxyfile (e.g. the monorepo default branch); single-language packaged
+      # branches (r-rc-*, py-rc-*) do not, so this is gated on `build_cpp` and
+      # uses its own ref.
+      - name: Checkout stochtree C++ source (${{ matrix.cpp_ref || 'default' }})
+        if: ${{ matrix.build_cpp }}
+        uses: actions/checkout@v4
+        with:
+          repository: 'StochasticTree/stochtree'
+          ref: ${{ matrix.cpp_ref }}
+          path: 'stochtree_repo_cpp'
+          submodules: 'recursive'
+
       - name: Install doxygen and graphviz
+        if: ${{ matrix.build_cpp }}
         run: |
           sudo apt-get install doxygen graphviz -y
 
-      # C++ core is shared between the R and Python branches; build it from the
-      # R checkout.
       - name: Build the C++ doxygen output
+        if: ${{ matrix.build_cpp }}
         run: |
-          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/Doxyfile
-          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/Doxyfile
-          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/Doxyfile
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo_cpp/Doxyfile
+          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo_cpp/Doxyfile
+          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo_cpp/Doxyfile
           mkdir -p docs/cpp_docs/
-          cd stochtree_repo
+          cd stochtree_repo_cpp
           doxygen Doxyfile
           cd ..
 
@@ -127,18 +140,26 @@ jobs:
           extra-packages: any::latex2exp, any::ggplot2, any::decor, any::pkgdown, any::reticulate, any::bayesplot, any::coda, any::doParallel, any::foreach, any::mvtnorm, any::rpart, any::rpart.plot, any::tgp, any::rprojroot
           needs: website
 
-      - name: Build R doc site
+      # The monorepo default branch assembles a CRAN-friendly package into
+      # stochtree_cran; pre-packaged branches (r-rc-*) already are that package,
+      # so they skip the bootstrap and point r_pkg_path at the checkout root.
+      - name: Assemble CRAN-friendly R package
+        if: ${{ matrix.r_bootstrap }}
         run: |
           cd stochtree_repo
           Rscript cran-bootstrap.R 0 1 0
           cd ..
+
+      - name: Build R doc site
+        run: |
           mkdir -p docs/R_docs/pkgdown
-          Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo/stochtree_cran", dest_dir = "../../docs/R_docs/pkgdown", install = TRUE)'
+          Rscript -e 'pkgdown::build_site_github_pages("${{ matrix.r_pkg_path }}", dest_dir = file.path(getwd(), "docs/R_docs/pkgdown"), install = TRUE)'
 
       - name: Install stochtree R package for vignettes
-        run: Rscript -e 'install.packages("stochtree_repo/stochtree_cran", repos = NULL, type = "source")'
+        run: Rscript -e 'install.packages("${{ matrix.r_pkg_path }}", repos = NULL, type = "source")'
 
       - name: Clean up the temporary stochtree_cran directory created
+        if: ${{ matrix.r_bootstrap }}
         run: |
           cd stochtree_repo
           Rscript cran-cleanup.R
