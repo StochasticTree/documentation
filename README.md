@@ -126,3 +126,71 @@ This requires pkgdown and Doxygen output to already exist at `docs/R_docs/pkgdow
 **Freeze cache note:** The vignette `.qmd` files use `freeze: auto`, so re-renders only re-execute cells whose source has changed. The freeze cache lives at `_freeze/vignettes/` (top-level render) or `vignettes/_freeze/` (standalone vignette render). If you switch between the two render modes, copy the cache to the appropriate location before rendering to avoid unnecessary re-execution.
 
 The CI workflow (`.github/workflows/docs.yml`) handles the full build and deploys the output `_site/` directory to the `gh-pages` branch.
+
+### Building a versioned sub-site (release candidates)
+
+The site is published in multiple versions from a single `gh-pages` branch: the latest release at the root (`stochtree.ai/`) and versioned sub-sites at `stochtree.ai/v/<name>/` (e.g. the `0.5.0` release candidate at `stochtree.ai/v/rc-0.5.0/`). Each version is a **branch** of this documentation repo, and its build recipe is one entry in [`versions.json`](versions.json):
+
+```json
+{
+  "name": "rc-0.5.0",
+  "docs_ref": "rc-0.5.0",          // documentation branch to build
+  "cpp_ref": "main", "build_cpp": true,   // C++ core source (+ whether to build Doxygen)
+  "r_ref": "r-rc-0.5.0",           // R package source branch
+  "r_bootstrap": false,            // run cran-bootstrap.R? (false = already packaged)
+  "r_pkg_path": "stochtree_repo",  // installable package location
+  "py_ref": "py-rc-0.5.0",         // Python package source branch
+  "target": "v/rc-0.5.0"           // gh-pages sub-folder to deploy into
+}
+```
+
+The steps below are that `rc-0.5.0` recipe made explicit for a local build. The key differences from the default build above: the R and Python sources come from packaged, single-language branches (`r-rc-0.5.0` / `py-rc-0.5.0`) rather than the monorepo; the R branch is **already** a CRAN-friendly package at its root, so there is no `cran-bootstrap.R` step and `pkgdown` builds from the checkout root; and because those branches carry no C++ core, Doxygen is built from a separate checkout of the monorepo (`cpp_ref`).
+
+```bash
+# 1. Check out the documentation branch for this version
+git checkout rc-0.5.0
+
+# 2. R package source (already packaged at the checkout root — no cran-bootstrap)
+git clone --recurse-submodules -b r-rc-0.5.0 \
+  https://github.com/StochasticTree/stochtree.git stochtree_repo
+
+# 3. Python package source, installed into the venv
+git clone --recurse-submodules -b py-rc-0.5.0 \
+  https://github.com/StochasticTree/stochtree.git stochtree_repo_py
+source .venv/bin/activate
+pip install ./stochtree_repo_py
+
+# 4. C++ core for Doxygen, reused from the monorepo default branch (cpp_ref)
+git clone --recurse-submodules -b main \
+  https://github.com/StochasticTree/stochtree.git stochtree_repo_cpp
+```
+
+Then build each component. Note `pkgdown` builds from `r_pkg_path` (the checkout root here) with an **absolute** `dest_dir`, and Doxygen runs against the `stochtree_repo_cpp` checkout:
+
+```bash
+# R API (pkgdown) — no cran-bootstrap; package is the checkout root
+mkdir -p docs/R_docs/pkgdown
+Rscript -e 'pkgdown::build_site_github_pages("stochtree_repo", dest_dir = file.path(getwd(), "docs/R_docs/pkgdown"), install = TRUE)'
+
+# Install the RC R package so the vignettes can render against it
+Rscript -e 'install.packages("stochtree_repo", repos = NULL, type = "source")'
+
+# C++ API (Doxygen) — from the separate monorepo checkout
+sed -i '' 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo_cpp/Doxyfile
+sed -i '' 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo_cpp/Doxyfile
+sed -i '' 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo_cpp/Doxyfile
+mkdir -p docs/cpp_docs/
+cd stochtree_repo_cpp && doxygen Doxyfile && cd ..
+
+# Python API reference + the full site
+quartodoc build
+quarto render
+```
+
+`quarto render` writes the built site to `_site/`, which you can open directly to preview. The `v/rc-0.5.0/` URL prefix is applied only at deploy time by CI (the `target-folder` in the deploy step), so a local render does not need it. To build a different version, read its entry in `versions.json` and substitute the corresponding refs, `r_pkg_path`, and `r_bootstrap`/`build_cpp` behavior.
+
+CI does all of the above automatically for every entry in `versions.json` on each nightly run (and on release / manual dispatch); see "How CI builds every version" below.
+
+#### How CI builds every version
+
+`.github/workflows/docs.yml` reads `versions.json` and runs the build once per entry as a matrix job, deploying each into its `target` sub-folder with `clean-exclude: v/**` so the root build never wipes the sub-sites. Because GitHub Actions only fires scheduled/dispatch workflows from the **default branch**, the workflow on `main` is the one that drives all versions — a version branch's own copy of the workflow is not used for nightly builds. To add a version, add an entry to `versions.json` on `main` (and create the corresponding documentation branch and package source branches).
