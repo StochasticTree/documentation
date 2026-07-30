@@ -76,10 +76,11 @@ jobs:
           path: 'stochtree_repo_py'
           submodules: 'recursive'
 
-      # C++ core source for Doxygen. Only some versions ship the C++ core +
-      # Doxyfile (e.g. the monorepo default branch); single-language packaged
-      # branches (r-rc-*, py-rc-*) do not, so this is gated on `build_cpp` and
-      # uses its own ref.
+      # C++ core source for Doxygen. Only monorepo branches ship the C++ core +
+      # Doxyfile; a version pinned to a single-language packaged branch (r-rc-*,
+      # py-rc-*) would not, so this stays gated on `build_cpp` and keeps its own
+      # ref. Every current version builds from a monorepo branch, so `cpp_ref`
+      # matches the R/Python refs.
       - name: Checkout stochtree C++ source (${{ matrix.cpp_ref || 'default' }})
         if: ${{ matrix.build_cpp }}
         uses: actions/checkout@v4
@@ -140,9 +141,11 @@ jobs:
           extra-packages: any::latex2exp, any::ggplot2, any::decor, any::pkgdown, any::reticulate, any::bayesplot, any::coda, any::doParallel, any::foreach, any::mvtnorm, any::rpart, any::rpart.plot, any::tgp, any::rprojroot
           needs: website
 
-      # The monorepo default branch assembles a CRAN-friendly package into
-      # stochtree_cran; pre-packaged branches (r-rc-*) already are that package,
-      # so they skip the bootstrap and point r_pkg_path at the checkout root.
+      # Monorepo branches assemble a CRAN-friendly package into stochtree_cran,
+      # which is also what carries _pkgdown.yml into the package pkgdown builds
+      # from (cran-bootstrap.R's second argument). A version pinned to a
+      # pre-packaged branch (r-rc-*) is already that package, so it would set
+      # r_bootstrap: false and point r_pkg_path at the checkout root instead.
       - name: Assemble CRAN-friendly R package
         if: ${{ matrix.r_bootstrap }}
         run: |
