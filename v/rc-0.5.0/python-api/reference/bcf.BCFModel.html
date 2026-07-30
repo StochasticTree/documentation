@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bcf.bcfmodel – StochTree</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-122b0afa9ad5bb7a5480bcdf6a865abd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/api.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">StochTree</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../getting-started.html"> 
+<span class="menu-text">Getting Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../../about/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../about/trees.html">
+ <span class="dropdown-text">Stochastic Tree Ensembles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../about/bart.html">
+ <span class="dropdown-text">BART</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../about/bcf.html">
+ <span class="dropdown-text">BCF</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/R_docs/pkgdown/index.html"> 
+<span class="menu-text">R Package</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../python-api/reference/index.html" aria-current="page"> 
+<span class="menu-text">Python API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/cpp_docs/doxygen/index.html"> 
+<span class="menu-text">C++ API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../vignettes/index.html"> 
+<span class="menu-text">Vignettes</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-development" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Development</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-development">    
+        <li>
+    <a class="dropdown-item" href="../../development/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../development/design.html">
+ <span class="dropdown-text">Design Principles &amp; Proposals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../development/contributing.html">
+ <span class="dropdown-text">Contributing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../development/new-models.html">
+ <span class="dropdown-text">Adding New Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../development/changelog.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../development/roadmap.html">
+ <span class="dropdown-text">Roadmap</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-rc-0.5.0" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: rc-0.5.0</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-rc-0.5.0">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../python-api/reference/bart.BARTModel.html">Core Models</a></li><li class="breadcrumb-item"><a href="../../python-api/reference/bcf.BCFModel.html">bcf.BCFModel</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Function reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Core Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/bart.BARTModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">bart.BARTModel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/bcf.BCFModel.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">bcf.BCFModel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Scikit-Learn Interface</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/sklearn.StochTreeBARTRegressor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">sklearn.StochTreeBARTRegressor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/sklearn.StochTreeBARTBinaryClassifier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">sklearn.StochTreeBARTBinaryClassifier</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Low-Level API</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/data.Dataset.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">data.Dataset</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/data.Residual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">data.Residual</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/forest.Forest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">forest.Forest</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/forest.ForestContainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">forest.ForestContainer</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/kernel.compute_forest_leaf_indices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">kernel.compute_forest_leaf_indices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/kernel.compute_forest_max_leaf_index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">kernel.compute_forest_max_leaf_index</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/sampler.ForestSampler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">sampler.ForestSampler</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/sampler.GlobalVarianceModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">sampler.GlobalVarianceModel</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../python-api/reference/sampler.LeafVarianceModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">sampler.LeafVarianceModel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#stochtree.bcf.BCFModel" id="toc-stochtree.bcf.BCFModel" class="nav-link active" data-scroll-target="#stochtree.bcf.BCFModel">bcf.BCFModel</a>
+  <ul class="collapse">
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#stochtree.bcf.BCFModel.extract_forest" id="toc-stochtree.bcf.BCFModel.extract_forest" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.extract_forest">extract_forest</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.extract_random_effect_samples" id="toc-stochtree.bcf.BCFModel.extract_random_effect_samples" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.extract_random_effect_samples">extract_random_effect_samples</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.sample" id="toc-stochtree.bcf.BCFModel.sample" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.sample">sample</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.continue_sampling" id="toc-stochtree.bcf.BCFModel.continue_sampling" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.continue_sampling">continue_sampling</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.predict" id="toc-stochtree.bcf.BCFModel.predict" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.predict">predict</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.compute_contrast" id="toc-stochtree.bcf.BCFModel.compute_contrast" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.compute_contrast">compute_contrast</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.compute_posterior_interval" id="toc-stochtree.bcf.BCFModel.compute_posterior_interval" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.compute_posterior_interval">compute_posterior_interval</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.sample_posterior_predictive" id="toc-stochtree.bcf.BCFModel.sample_posterior_predictive" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.sample_posterior_predictive">sample_posterior_predictive</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.to_json" id="toc-stochtree.bcf.BCFModel.to_json" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.to_json">to_json</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.from_json" id="toc-stochtree.bcf.BCFModel.from_json" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.from_json">from_json</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.from_json_string_list" id="toc-stochtree.bcf.BCFModel.from_json_string_list" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.from_json_string_list">from_json_string_list</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.is_sampled" id="toc-stochtree.bcf.BCFModel.is_sampled" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.is_sampled">is_sampled</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.has_term" id="toc-stochtree.bcf.BCFModel.has_term" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.has_term">has_term</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.extract_parameter" id="toc-stochtree.bcf.BCFModel.extract_parameter" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.extract_parameter">extract_parameter</a></li>
+  <li><a href="#stochtree.bcf.BCFModel.summary" id="toc-stochtree.bcf.BCFModel.summary" class="nav-link" data-scroll-target="#stochtree.bcf.BCFModel.summary">summary</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../python-api/reference/bart.BARTModel.html">Core Models</a></li><li class="breadcrumb-item"><a href="../../python-api/reference/bcf.BCFModel.html">bcf.BCFModel</a></li></ol></nav></header>
+
+
+
+
+<section id="stochtree.bcf.BCFModel" class="level1">
+<h1>bcf.BCFModel</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Class that handles sampling, storage, and serialization of stochastic forest models for causal effect estimation. The class takes its name from Bayesian Causal Forests, an MCMC sampler originally developed in Hahn, Murray, Carvalho (2020), but supports several sampling algorithms:</p>
+<ul>
+<li>MCMC: The “classic” sampler defined in Hahn, Murray, Carvalho (2020). In order to run the MCMC sampler, set <code>num_gfr = 0</code> (explained below) and then define a sampler according to several parameters:
+<ul>
+<li><code>num_burnin</code>: the number of iterations to run before “retaining” samples for further analysis. These “burned in” samples are helpful for allowing a sampler to converge before retaining samples.</li>
+<li><code>num_chains</code>: the number of independent sequences of MCMC samples to generate (typically referred to in the literature as “chains”)</li>
+<li><code>num_mcmc</code>: the number of “retained” samples of the posterior distribution</li>
+<li><code>keep_every</code>: after a sampler has “burned in”, we will run the sampler for <code>keep_every</code> * <code>num_mcmc</code> iterations, retaining one of each <code>keep_every</code> iteration in a chain.</li>
+</ul></li>
+<li>GFR (Grow-From-Root): A fast, greedy approximation of the BART MCMC sampling algorithm introduced in Krantsevich, He, and Hahn (2023). GFR sampler iterations are governed by the <code>num_gfr</code> parameter, and there are two primary ways to use this sampler:
+<ul>
+<li>Standalone: setting <code>num_gfr &gt; 0</code> and both <code>num_burnin = 0</code> and <code>num_mcmc = 0</code> will only run and retain GFR samples of the posterior. This is typically referred to as “XBART” (accelerated BART).</li>
+<li>Initializer for MCMC: setting <code>num_gfr &gt; 0</code> and <code>num_mcmc &gt; 0</code> will use ensembles from the GFR algorithm to initialize <code>num_chains</code> independent MCMC BART samplers, which are run for <code>num_mcmc</code> iterations. This is typically referred to as “warm start BART”.</li>
+</ul></li>
+</ul>
+<p>In addition to enabling multiple samplers, we support a broad set of models. First, note that the original BCF model of Hahn, Murray, Carvalho (2020) is</p>
+<p><span class="math display">\[\begin{equation*}
+\begin{aligned}
+y &amp;= a(X) + b_z(X) + \epsilon\\
+b_z(X) &amp;= (b_1 Z + b_0 (1-Z)) t(X)\\
+b_0, b_1 &amp;\sim N\left(0, \frac{1}{2}\right)\\\\
+a(X) &amp;\sim \text{BART}()\\
+t(X) &amp;\sim \text{BART}()\\
+\epsilon &amp;\sim N(0, \sigma^2)\\
+\sigma^2 &amp;\sim IG(a, b)
+\end{aligned}
+\end{equation*}\]</span></p>
+<p>for continuous outcome <span class="math inline">\(y\)</span>, binary treatment <span class="math inline">\(Z\)</span>, and covariates <span class="math inline">\(X\)</span>.</p>
+<p>In words, there are two nonparametric mean functions – a “prognostic” function and a “treatment effect” function – governed by tree ensembles with BART priors and an additive (mean-zero) Gaussian error term, whose variance is parameterized with an inverse gamma prior.</p>
+<p>The <code>BCFModel</code> class supports the following extensions of this model:</p>
+<ul>
+<li>Continuous Treatment: If <span class="math inline">\(Z\)</span> is continuous rather than binary, we define <span class="math inline">\(b_z(X) = \tau(X, Z) = Z \tau(X)\)</span>, where the “leaf model” for the <span class="math inline">\(\tau\)</span> forest is essentially a regression on continuous <span class="math inline">\(Z\)</span>.</li>
+<li>Heteroskedasticity: Rather than define <span class="math inline">\(\epsilon\)</span> parameterically, we can let a forest <span class="math inline">\(\sigma^2(X)\)</span> model a conditional error variance function. This can be done by setting <code>num_trees_variance &gt; 0</code> in the <code>params</code> dictionary passed to the <code>sample</code> method.</li>
+</ul>
+<section id="attributes" class="level2">
+<h2 class="anchored" data-anchor-id="attributes">Attributes</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.samples">samples</a></td>
+<td>The single-owner <code>BCFSamplesCpp</code> holding the sampled forests and parameter traces.</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.tau_hat_train">tau_hat_train</a></td>
+<td>In-sample CATE draws, shaped <code>(num_train, num_samples, treatment_dim)</code> for</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.tau_hat_test">tau_hat_test</a></td>
+<td>Test-set CATE draws, shaped <code>(num_test, num_samples, treatment_dim)</code> for</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.extract_forest">extract_forest</a></td>
+<td>Return a standalone deep copy of a sampled forest as a <code>ForestContainer</code>.</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.extract_random_effect_samples">extract_random_effect_samples</a></td>
+<td>Extract the sampled random-effects parameters, scaled to the original outcome scale.</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.sample">sample</a></td>
+<td>Runs a BCF sampler on provided training set. Outcome predictions and estimates of the prognostic and treatment effect functions</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.continue_sampling">continue_sampling</a></td>
+<td>Continue (warm-start) MCMC sampling from an already-fit BCF model, appending</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.predict">predict</a></td>
+<td>Predict outcome model components (CATE function and prognostic function) as well as overall outcome for every provided observation.</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.compute_contrast">compute_contrast</a></td>
+<td>Compute a contrast using a BCF model by making two sets of outcome predictions and taking their</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.compute_posterior_interval">compute_posterior_interval</a></td>
+<td>Compute posterior credible intervals for specified terms from a fitted BART model. It supports intervals for mean functions, variance functions, random effects, and overall predictions.</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.sample_posterior_predictive">sample_posterior_predictive</a></td>
+<td>Sample from the posterior predictive distribution for outcomes modeled by BART</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.to_json">to_json</a></td>
+<td>Converts a sampled BART model to JSON string representation (which can then be saved to a file or</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.from_json">from_json</a></td>
+<td>Converts a JSON string to an in-memory BART model.</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.from_json_string_list">from_json_string_list</a></td>
+<td>Convert a list of (in-memory) JSON strings that represent BCF models to a single combined BCF model object</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.is_sampled">is_sampled</a></td>
+<td>Whether or not a BCF model has been sampled.</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.has_term">has_term</a></td>
+<td>Whether or not a model includes a term.</td>
+</tr>
+<tr class="even">
+<td><a href="#stochtree.bcf.BCFModel.extract_parameter">extract_parameter</a></td>
+<td>Extract a vector, matrix or array of parameter samples from a BCF model by name.</td>
+</tr>
+<tr class="odd">
+<td><a href="#stochtree.bcf.BCFModel.summary">summary</a></td>
+<td>Summarize a BCF fit with a description of the model that was fit and numeric summaries of any sampled quantities</td>
+</tr>
+</tbody>
+</table>
+<section id="stochtree.bcf.BCFModel.extract_forest" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.extract_forest">extract_forest</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.extract_forest(forest<span class="op">=</span><span class="st">'prognostic'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return a standalone deep copy of a sampled forest as a <code>ForestContainer</code>.</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 73%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>forest</td>
+<td>str</td>
+<td>Which forest to extract: <code>"prognostic"</code> (mu), <code>"treatment"</code> (tau), or <code>"variance"</code>.</td>
+<td><code>'prognostic'</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 21%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>ForestContainer or None</td>
+<td>A deep copy independent of the model, or <code>None</code> if that forest was not sampled.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.extract_random_effect_samples" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.extract_random_effect_samples">extract_random_effect_samples</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.extract_random_effect_samples()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Extract the sampled random-effects parameters, scaled to the original outcome scale.</p>
+<p>Mirrors R <code>extractRandomEffectSamples</code>. Returns a dict with <code>beta_samples</code> / <code>xi_samples</code> / <code>alpha_samples</code> / <code>sigma_samples</code> (see <code>RandomEffectsContainer.extract_parameter_samples</code>). Returns an empty dict (with a warning) if the model has no random effects term.</p>
+</section>
+<section id="stochtree.bcf.BCFModel.sample" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.sample">sample</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.sample(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    Z_train,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    propensity_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    rfx_basis_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    X_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Z_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    propensity_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    rfx_basis_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    observation_weights_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    observation_weights<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    num_gfr<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    num_burnin<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    num_mcmc<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    previous_model_json<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    previous_model_warmstart_sample_num<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    general_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    prognostic_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    treatment_effect_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    variance_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    random_effects_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Runs a BCF sampler on provided training set. Outcome predictions and estimates of the prognostic and treatment effect functions will be cached for the training set and (if provided) the test set.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 92%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X_train</td>
+<td>np.array or pd.DataFrame</td>
+<td>Covariates used to split trees in the ensemble. Can be passed as either a matrix or dataframe.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>Z_train</td>
+<td>np.array</td>
+<td>Array of (continuous or binary; univariate or multivariate) treatment assignments.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>y_train</td>
+<td>np.array</td>
+<td>Outcome to be modeled by the ensemble.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>propensity_train</td>
+<td>np.array</td>
+<td>Optional vector of propensity scores. If not provided, this will be estimated from the data. If <code>None</code> and <code>previous_model_json</code> is provided with an internally estimated propensity model, that model’s propensity estimates are re-used rather than re-fitted.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_group_ids_train</td>
+<td>np.array</td>
+<td>Optional group labels used for an additive random effects model.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_basis_train</td>
+<td>np.array</td>
+<td>Optional basis for “random-slope” regression in an additive random effects model.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>X_test</td>
+<td>np.array</td>
+<td>Optional test set of covariates used to define “out of sample” evaluation data.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>Z_test</td>
+<td>np.array</td>
+<td>Optional test set of (continuous or binary) treatment assignments. Must be provided if <code>X_test</code> is provided.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>propensity_test</td>
+<td>np.array</td>
+<td>Optional test set vector of propensity scores. If not provided (but <code>X_test</code> and <code>Z_test</code> are), this will be estimated from the data.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids_test</td>
+<td>np.array</td>
+<td>Optional test set group labels used for an additive random effects model. We do not currently support (but plan to in the near future), test set evaluation for group labels that were not in the training set.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis_test</td>
+<td>np.array</td>
+<td>Optional test set basis for “random-slope” regression in additive random effects model.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>observation_weights_train</td>
+<td>np.array</td>
+<td>Optional vector of observation weights of length <code>n_train</code>. Weights are applied as <code>y_i \| - ~ N(mu(X_i), sigma^2 / w_i)</code>, so larger weights increase an observation’s influence on the fit. All weights must be non-negative. Defaults to <code>None</code> (all observations equally weighted). Applied to both the prognostic and treatment effect forests. Compatible with Gaussian (continuous/identity) and probit outcome models; not compatible with cloglog link functions. Note: these are referred to internally in the C++ layer as “variance weights” (<code>var_weights</code>), since they scale the residual variance.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>observation_weights</td>
+<td>np.array</td>
+<td>Deprecated alias for <code>observation_weights_train</code>; will be removed in a future release.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>num_gfr</td>
+<td>int</td>
+<td>Number of “warm-start” iterations run using the grow-from-root algorithm (He and Hahn, 2021). Defaults to <code>5</code>.</td>
+<td><code>5</code></td>
+</tr>
+<tr class="odd">
+<td>num_burnin</td>
+<td>int</td>
+<td>Number of “burn-in” iterations of the MCMC sampler. Defaults to <code>0</code>. Ignored if <code>num_gfr &gt; 0</code>.</td>
+<td><code>0</code></td>
+</tr>
+<tr class="even">
+<td>num_mcmc</td>
+<td>int</td>
+<td>Number of “retained” iterations of the MCMC sampler. Defaults to <code>100</code>. If this is set to 0, GFR (XBART) samples will be retained.</td>
+<td><code>100</code></td>
+</tr>
+<tr class="odd">
+<td>general_params</td>
+<td>dict</td>
+<td>Dictionary of general model parameters, each of which has a default value processed internally. See Notes for supported keys.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>prognostic_forest_params</td>
+<td>dict</td>
+<td>Dictionary of prognostic forest model parameters, each of which has a default value processed internally. See Notes for supported keys.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>treatment_effect_forest_params</td>
+<td>dict</td>
+<td>Dictionary of treatment effect forest model parameters, each of which has a default value processed internally. See Notes for supported keys.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>variance_forest_params</td>
+<td>dict</td>
+<td>Dictionary of variance forest model parameters, each of which has a default value processed internally. See Notes for supported keys.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>random_effects_params</td>
+<td>dict</td>
+<td>Dictionary of random effects parameters, each of which has a default value processed internally. See Notes for supported keys.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>previous_model_json</td>
+<td>str</td>
+<td>JSON string containing a previous BCF model. This can be used to “continue” a sampler interactively after inspecting the samples or to run parallel chains “warm-started” from existing forest samples. If the previous model used an internally estimated propensity score (i.e.&nbsp;<code>propensity_train</code> was not supplied to that run), the fitted propensity model is carried forward and re-used rather than being re-estimated. This ensures that multi-chain warm-starts remain consistent with the propensity scores used in the initial run. Defaults to <code>None</code>.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>previous_model_warmstart_sample_num</td>
+<td>int</td>
+<td>Sample number from <code>previous_model_json</code> that will be used to warmstart this BCF sampler. Zero-indexed (so that the first sample is used for warm-start by setting <code>previous_model_warmstart_sample_num = 0</code>). Defaults to <code>None</code>. If <code>num_chains</code> in the <code>general_params</code> list is &gt; 1, then each successive chain will be initialized from a different sample, counting backwards from <code>previous_model_warmstart_sample_num</code>. That is, if <code>previous_model_warmstart_sample_num = 10</code> and <code>num_chains = 4</code>, then chain 1 will be initialized from sample 10, chain 2 from sample 9, chain 3 from sample 8, and chain 4 from sample 7. If <code>previous_model_json</code> is provided but <code>previous_model_warmstart_sample_num</code> is NULL, the last sample in the previous model will be used to initialize the first chain, counting backwards as noted before. If more chains are requested than there are samples in <code>previous_model_json</code>, a warning will be raised and only the last sample will be used.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-1" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-1">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>self</td>
+<td>BCFModel</td>
+<td>Sampled BCF Model.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h4>
+<p><strong>general_params keys</strong></p>
+<ul>
+<li><strong>cutpoint_grid_size</strong> (<em>int</em>): Maximum number of cutpoints to consider for each feature. Defaults to <code>100</code>.</li>
+<li><strong>standardize</strong> (<em>bool</em>): Whether or not to standardize the outcome (and store the offset / scale in the model object). Defaults to <code>True</code>.</li>
+<li><strong>sample_sigma2_global</strong> (<em>bool</em>): Whether or not to update the <code>sigma^2</code> global error variance parameter based on <code>IG(sigma2_global_shape, sigma2_global_scale)</code>. Defaults to <code>True</code>.</li>
+<li><strong>sigma2_global_init</strong> (<em>float</em>): Starting value of global variance parameter. Set internally to the outcome variance (standardized if <code>standardize = True</code>) if not set here.</li>
+<li><strong>sigma2_global_shape</strong> (<em>float</em>): Shape parameter in the <code>IG(sigma2_global_shape, sigma2_global_scale)</code> global error variance model. Defaults to <code>0</code>.</li>
+<li><strong>sigma2_global_scale</strong> (<em>float</em>): Scale parameter in the <code>IG(sigma2_global_shape, sigma2_global_scale)</code> global error variance model. Defaults to <code>0</code>.</li>
+<li><strong>variable_weights</strong> (<em>np.array</em>): Numeric weights reflecting the relative probability of splitting on each variable in each of the forests. Does not need to sum to 1 but cannot be negative. Defaults to <code>np.repeat(1/X_train.shape[1], X_train.shape[1])</code>. Note that if the propensity score is included as a covariate in either forest, its weight defaults to <code>1/X_train.shape[1]</code>. To assign a custom weight to the propensity score, include it as a column in <code>X_train</code>, set <code>propensity_covariate = "none"</code>, and adjust <code>keep_vars</code> accordingly.</li>
+<li><strong>propensity_covariate</strong> (<em>str</em>): Whether to include the propensity score as a covariate in either or both forests. Options: <code>"none"</code>, <code>"prognostic"</code>, <code>"treatment_effect"</code>, or <code>"both"</code>. If not <code>"none"</code> and no propensity score is provided, it will be estimated from (<code>X_train</code>, <code>Z_train</code>) using <code>BARTModel</code>. Defaults to <code>"prognostic"</code>.</li>
+<li><strong>adaptive_coding</strong> (<em>bool</em>): Whether to use an “adaptive coding” scheme in which a binary treatment is not coded as (0,1) or (-1,1) but learned via parameters <code>b_0</code> and <code>b_1</code> that attach to the outcome model <code>[b_0 (1-Z) + b_1 Z] tau(X)</code>. Ignored when <code>Z</code> is not binary. Defaults to <code>False</code>.</li>
+<li><strong>control_coding_init</strong> (<em>float</em>): Initial value of the “control” group coding parameter. Ignored when <code>Z</code> is not binary. Default: <code>-0.5</code>.</li>
+<li><strong>treated_coding_init</strong> (<em>float</em>): Initial value of the “treated” group coding parameter. Ignored when <code>Z</code> is not binary. Default: <code>0.5</code>.</li>
+<li><strong>random_seed</strong> (<em>int</em>): Integer parameterizing the C++ random number generator. If not specified, seeded according to <code>std::random_device</code>.</li>
+<li><strong>keep_burnin</strong> (<em>bool</em>): Whether or not “burnin” samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
+<li><strong>keep_gfr</strong> (<em>bool</em>): Whether or not “warm-start” / grow-from-root samples should be included in predictions. Defaults to <code>False</code>. Ignored if <code>num_mcmc == 0</code>.</li>
+<li><strong>keep_every</strong> (<em>int</em>): How many iterations of the burned-in MCMC sampler should be run before forests and parameters are retained. Defaults to <code>1</code>. Setting <code>keep_every = k</code> for some <code>k &gt; 1</code> will “thin” the MCMC samples by retaining every <code>k</code>-th sample, which can reduce autocorrelation.</li>
+<li><strong>num_chains</strong> (<em>int</em>): How many independent MCMC chains should be sampled. If <code>num_mcmc = 0</code>, this is ignored. If <code>num_gfr = 0</code>, each chain is run from root for <code>num_mcmc * keep_every + num_burnin</code> iterations with <code>num_mcmc</code> samples retained. If <code>num_gfr &gt; 0</code>, each chain is initialized from a separate GFR ensemble, requiring <code>num_gfr &gt;= num_chains</code>. Defaults to <code>1</code>. When <code>num_chains &gt; 1</code>, samples from all chains are stored consecutively (chain 1 first, then chain 2, etc.). See the multi-chain vignettes for details.</li>
+<li><strong>outcome_model</strong> (<em>stochtree.OutcomeModel</em>): An object of class <code>OutcomeModel</code> specifying the outcome model. Default: <code>OutcomeModel(outcome="continuous", link="identity")</code>. Pre-empts the deprecated <code>probit_outcome_model</code> parameter if specified.</li>
+<li><strong>probit_outcome_model</strong> (<em>bool</em>): Deprecated in favor of <code>outcome_model</code>. Whether or not the outcome should be modeled as explicitly binary via a probit link. If <code>True</code>, <code>y</code> must only contain the values <code>0</code> and <code>1</code>. Default: <code>False</code>.</li>
+<li><strong>num_threads</strong> (<em>int</em>): Number of threads to use in the GFR and MCMC algorithms, as well as prediction. Defaults to <code>1</code> (single-threaded). Set to <code>-1</code> to use the maximum number of available threads, or a positive integer for a specific count. OpenMP must be available for values other than <code>1</code>.</li>
+<li><strong>verbose</strong> (<em>bool</em>): Whether to print sampler progress (GFR / MCMC iteration updates) to the console during sampling. Defaults to <code>False</code>.</li>
+</ul>
+<p><strong>prognostic_forest_params keys</strong></p>
+<ul>
+<li><strong>num_trees</strong> (<em>int</em>): Number of trees in the prognostic forest. Defaults to <code>250</code>. Must be a positive integer.</li>
+<li><strong>alpha</strong> (<em>float</em>): Prior probability of splitting for a tree of depth 0 in the prognostic forest. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>0.95</code>.</li>
+<li><strong>beta</strong> (<em>float</em>): Exponent that decreases split probabilities for nodes of depth &gt; 0 in the prognostic forest. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>2</code>.</li>
+<li><strong>min_samples_leaf</strong> (<em>int</em>): Minimum allowable size of a leaf, in terms of training samples, in the prognostic forest. Defaults to <code>5</code>.</li>
+<li><strong>max_depth</strong> (<em>int</em>): Maximum depth of any tree in the prognostic forest. Defaults to <code>10</code>. Can be overridden with <code>-1</code> to impose no depth limit.</li>
+<li><strong>variable_weights</strong> (<em>np.array</em>): Numeric weights reflecting the relative probability of splitting on each variable in the prognostic forest. Does not need to sum to 1 but cannot be negative. Defaults to uniform over the columns of <code>X_train</code>.</li>
+<li><strong>sample_sigma2_leaf</strong> (<em>bool</em>): Whether or not to update the <code>tau</code> leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>. Cannot currently be set to <code>True</code> if <code>basis_train</code> has more than one column. Defaults to <code>True</code>.</li>
+<li><strong>sigma2_leaf_init</strong> (<em>float</em>): Starting value of leaf node scale parameter. Calibrated internally as <code>1/num_trees</code> if not set here.</li>
+<li><strong>sigma2_leaf_shape</strong> (<em>float</em>): Shape parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Defaults to <code>3</code>.</li>
+<li><strong>sigma2_leaf_scale</strong> (<em>float</em>): Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</li>
+<li><strong>keep_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to include in the prognostic (<code>mu(X)</code>) forest. Defaults to <code>None</code>.</li>
+<li><strong>drop_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to exclude from the prognostic (<code>mu(X)</code>) forest. Defaults to <code>None</code>. Ignored if <code>keep_vars</code> is also set.</li>
+<li><strong>num_features_subsample</strong> (<em>int</em>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
+</ul>
+<p><strong>treatment_effect_forest_params keys</strong></p>
+<ul>
+<li><strong>num_trees</strong> (<em>int</em>): Number of trees in the treatment effect forest. Defaults to <code>100</code>. Must be a positive integer.</li>
+<li><strong>alpha</strong> (<em>float</em>): Prior probability of splitting for a tree of depth 0 in the treatment effect forest. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>0.25</code>.</li>
+<li><strong>beta</strong> (<em>float</em>): Exponent that decreases split probabilities for nodes of depth &gt; 0 in the treatment effect forest. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>3</code>.</li>
+<li><strong>min_samples_leaf</strong> (<em>int</em>): Minimum allowable size of a leaf, in terms of training samples, in the treatment effect forest. Defaults to <code>5</code>.</li>
+<li><strong>max_depth</strong> (<em>int</em>): Maximum depth of any tree in the treatment effect forest. Defaults to <code>5</code>. Can be overridden with <code>-1</code> to impose no depth limit.</li>
+<li><strong>sample_sigma2_leaf</strong> (<em>bool</em>): Whether or not to update the <code>tau</code> leaf scale variance parameter based on <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code>. Cannot currently be set to <code>True</code> if <code>basis_train</code> has more than one column. Defaults to <code>False</code>.</li>
+<li><strong>sigma2_leaf_init</strong> (<em>float</em>): Starting value of leaf node scale parameter. Calibrated internally as <code>0.5 * np.var(y) / num_trees</code> if not set here (<code>0.5 / num_trees</code> if <code>y</code> is continuous and <code>standardize = True</code>).</li>
+<li><strong>sigma2_leaf_shape</strong> (<em>float</em>): Shape parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Defaults to <code>3</code>.</li>
+<li><strong>sigma2_leaf_scale</strong> (<em>float</em>): Scale parameter in the <code>IG(sigma2_leaf_shape, sigma2_leaf_scale)</code> leaf node parameter variance model. Calibrated internally as <code>0.5/num_trees</code> if not set here.</li>
+<li><strong>delta_max</strong> (<em>float</em>): Maximum plausible conditional distributional treatment effect (<code>P(Y(1)=1|X) - P(Y(0)=1|X)</code>) for binary outcomes under a probit model. Must be &gt; 0 and &lt; 1. Defaults to <code>0.9</code>. Ignored if <code>sigma2_leaf_init</code> is set directly.</li>
+<li><strong>keep_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to include in the treatment effect (<code>tau(X)</code>) forest. Defaults to <code>None</code>.</li>
+<li><strong>drop_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to exclude from the treatment effect (<code>tau(X)</code>) forest. Defaults to <code>None</code>. Ignored if <code>keep_vars</code> is also set.</li>
+<li><strong>num_features_subsample</strong> (<em>int</em>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
+<li><strong>sample_intercept</strong> (<em>bool</em>): Whether to sample a global treatment effect intercept <code>tau_0</code> so the full CATE is <code>tau_0 + tau(X)</code>. Compatible with <code>adaptive_coding = True</code>. Defaults to <code>True</code>.</li>
+<li><strong>tau_0_prior_var</strong> (<em>float</em>): Variance of the normal prior on <code>tau_0</code> (applied independently to each treatment dimension). Auto-calibrated to outcome variance when <code>None</code> and outcome is continuous. Only used when <code>sample_intercept = True</code>.</li>
+</ul>
+<p><strong>variance_forest_params keys</strong></p>
+<ul>
+<li><strong>num_trees</strong> (<em>int</em>): Number of trees in the conditional variance model. Defaults to <code>0</code>. Variance is only modeled using a forest if <code>num_trees &gt; 0</code>.</li>
+<li><strong>alpha</strong> (<em>float</em>): Prior probability of splitting for a tree of depth 0 in the conditional variance model. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>0.95</code>.</li>
+<li><strong>beta</strong> (<em>float</em>): Exponent that decreases split probabilities for nodes of depth &gt; 0 in the conditional variance model. Tree split prior combines <code>alpha</code> and <code>beta</code> via <code>alpha*(1+node_depth)^-beta</code>. Defaults to <code>2</code>.</li>
+<li><strong>min_samples_leaf</strong> (<em>int</em>): Minimum allowable size of a leaf, in terms of training samples, in the conditional variance model. Defaults to <code>5</code>.</li>
+<li><strong>max_depth</strong> (<em>int</em>): Maximum depth of any tree in the conditional variance model. Defaults to <code>10</code>. Can be overridden with <code>-1</code> to impose no depth limit.</li>
+<li><strong>leaf_prior_calibration_param</strong> (<em>float</em>): Hyperparameter used to calibrate the <code>IG(var_forest_prior_shape, var_forest_prior_scale)</code> conditional error variance model. Used to set <code>var_forest_prior_shape = num_trees / leaf_prior_calibration_param^2 + 0.5</code> and <code>var_forest_prior_scale = num_trees / leaf_prior_calibration_param^2</code> when those are not set directly. Defaults to <code>1.5</code>.</li>
+<li><strong>var_forest_leaf_init</strong> (<em>float</em>): Starting value of root forest prediction in the heteroskedastic error variance model. Calibrated internally as <code>np.log(0.6*np.var(y_train))/num_trees_variance</code> if not set.</li>
+<li><strong>var_forest_prior_shape</strong> (<em>float</em>): Shape parameter in the <code>IG(var_forest_prior_shape, var_forest_prior_scale)</code> conditional error variance forest (only sampled if <code>num_trees &gt; 0</code>). Calibrated internally as <code>num_trees / 1.5^2 + 0.5</code> if not set here.</li>
+<li><strong>var_forest_prior_scale</strong> (<em>float</em>): Scale parameter in the <code>IG(var_forest_prior_shape, var_forest_prior_scale)</code> conditional error variance forest (only sampled if <code>num_trees &gt; 0</code>). Calibrated internally as <code>num_trees / 1.5^2</code> if not set here.</li>
+<li><strong>keep_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to include in the variance forest. Defaults to <code>None</code>.</li>
+<li><strong>drop_vars</strong> (<em>list</em> or <em>np.array</em>): Variable names or column indices to exclude from the variance forest. Defaults to <code>None</code>. Ignored if <code>keep_vars</code> is also set.</li>
+<li><strong>num_features_subsample</strong> (<em>int</em>): How many features to subsample when growing each tree for the GFR algorithm. Defaults to the number of features in the training dataset.</li>
+</ul>
+<p><strong>random_effects_params keys</strong></p>
+<ul>
+<li><strong>model_spec</strong> (<em>str</em>): Specification of the random effects model. Options are <code>"custom"</code>, <code>"intercept_only"</code>, and <code>"intercept_plus_treatment"</code>. If <code>"custom"</code>, a user-provided basis must be passed through <code>rfx_basis_train</code>. If <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>, a basis is dispatched internally and <code>rfx_basis_train</code> / <code>rfx_basis_test</code> are ignored. Default: <code>"custom"</code>.</li>
+<li><strong>working_parameter_prior_mean</strong>: Prior mean for the random effects “working parameter”. Default: <code>None</code>. Must be a 1D numpy array matching the number of random effects bases, or a scalar expanded to a vector.</li>
+<li><strong>group_parameter_prior_mean</strong>: Prior mean for the random effects “group parameters”. Default: <code>None</code>. Must be a 1D numpy array matching the number of random effects bases, or a scalar expanded to a vector.</li>
+<li><strong>working_parameter_prior_cov</strong>: Prior covariance matrix for the random effects “working parameter”. Default: <code>None</code>. Must be a square numpy matrix matching the number of random effects bases, or a scalar expanded to a diagonal matrix.</li>
+<li><strong>group_parameter_prior_cov</strong>: Prior covariance matrix for the random effects “group parameters”. Default: <code>None</code>. Must be a square numpy matrix matching the number of random effects bases, or a scalar expanded to a diagonal matrix.</li>
+<li><strong>variance_prior_shape</strong> (<em>float</em>): Shape parameter for the inverse-gamma prior on the variance of the random effects “group parameter”. Default: <code>1</code>.</li>
+<li><strong>variance_prior_scale</strong> (<em>float</em>): Scale parameter for the inverse-gamma prior on the variance of the random effects “group parameter”. Default: <code>1</code>.</li>
+</ul>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.continue_sampling" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.continue_sampling">continue_sampling</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.continue_sampling(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    Z_train,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    propensity_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    rfx_basis_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    X_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    Z_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    propensity_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    rfx_basis_test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    num_burnin<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    num_mcmc<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    general_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    prognostic_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    treatment_effect_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    variance_forest_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    random_effects_params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    observation_weights_train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Continue (warm-start) MCMC sampling from an already-fit BCF model, appending additional samples to the existing posterior draws.</p>
+<p>The training data must be re-supplied (it is not retained on the model). The warm-start initializes the sampler from the last retained sample so that the new draws form a continuous chain with the existing ones.</p>
+<p>Changeable parameters are supplied through the same dictionaries used by :meth:<code>sample</code> (<code>general_params</code> and the three forest-parameter dictionaries). Only the subset of parameters that can be changed mid-chain is honored; any others are ignored with a warning. This includes the split-variable configuration: <code>variable_weights</code> (in <code>general_params</code>) and per-forest <code>keep_vars</code> / <code>drop_vars</code>. When omitted, the fit-time values are reused.</p>
+<p>.. note:: Supported for Gaussian (identity-link) and probit, univariate-treatment models. cloglog is not supported. A model fit with a test set has its cached test predictions dropped (with a warning), since continuation takes no test set.</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 81%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X_train</td>
+<td>np.array or pd.DataFrame</td>
+<td>Training covariates (re-supplied; must match the structure used to fit the model).</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>Z_train</td>
+<td>np.array</td>
+<td>Training treatment assignments (re-supplied).</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>y_train</td>
+<td>np.array</td>
+<td>Training outcome (re-supplied).</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>propensity_train</td>
+<td>np.array</td>
+<td>Training propensity scores. Required if the model was fit with a propensity covariate and an internal propensity model is not available to re-derive them.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_group_ids_train</td>
+<td>np.array</td>
+<td>Training random effects group labels (required if the model has random effects).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_basis_train</td>
+<td>np.array</td>
+<td>Training random effects basis (required for a custom random effects model).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>X_test</td>
+<td>np.array or pd.DataFrame</td>
+<td>Test-set covariates. When supplied, test-set predictions are recomputed in full from all retained forests, so the test set need not match any test set used in the original fit (the model may have been fit with none). When omitted, any cached test predictions are dropped.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>Z_test</td>
+<td>np.array</td>
+<td>Test-set treatment assignments (required when <code>X_test</code> is provided).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>propensity_test</td>
+<td>np.array</td>
+<td>Test-set propensity scores. Required if the model used a propensity covariate and no internal propensity model is available to re-derive them.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids_test</td>
+<td>np.array</td>
+<td>Test-set random effects group labels (required when <code>X_test</code> is provided and the model has rfx).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis_test</td>
+<td>np.array</td>
+<td>Test-set random effects basis (required for a custom rfx model when <code>X_test</code> is provided).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>num_burnin</td>
+<td>int</td>
+<td>Number of additional burn-in iterations to discard before retaining. Defaults to <code>0</code>.</td>
+<td><code>0</code></td>
+</tr>
+<tr class="odd">
+<td>num_mcmc</td>
+<td>int</td>
+<td>Number of additional retained MCMC samples. Defaults to <code>100</code>.</td>
+<td><code>100</code></td>
+</tr>
+<tr class="even">
+<td>general_params</td>
+<td>dict</td>
+<td>Changeable general parameters. Honored keys: <code>random_seed</code>, <code>keep_every</code>, <code>keep_burnin</code>, <code>cutpoint_grid_size</code>, <code>sigma2_global_shape</code>, <code>sigma2_global_scale</code>, <code>num_threads</code>, <code>verbose</code>, and <code>variable_weights</code> (per-covariate split weights; if omitted, the fit-time weights are reused).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>prognostic_forest_params</td>
+<td>dict</td>
+<td>Changeable prognostic (mu) forest parameters. Honored keys: <code>alpha</code>, <code>beta</code>, <code>min_samples_leaf</code>, <code>max_depth</code>, <code>num_features_subsample</code>, <code>sigma2_leaf_shape</code>, <code>sigma2_leaf_scale</code>, and <code>keep_vars</code> / <code>drop_vars</code> (split-variable subset; if omitted, the fit-time subset is reused).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>treatment_effect_forest_params</td>
+<td>dict</td>
+<td>Changeable treatment (tau) forest parameters (same keys as <code>prognostic_forest_params</code>).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>variance_forest_params</td>
+<td>dict</td>
+<td>Changeable variance forest parameters. Honored keys: <code>alpha</code>, <code>beta</code>, <code>min_samples_leaf</code>, <code>max_depth</code>, <code>num_features_subsample</code>, <code>var_forest_prior_shape</code>, <code>var_forest_prior_scale</code>, and <code>keep_vars</code> / <code>drop_vars</code>.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>random_effects_params</td>
+<td>dict</td>
+<td>Changeable random effects parameters. Honored keys: <code>variance_prior_shape</code> and <code>variance_prior_scale</code> (the inverse-gamma prior on the random effects group-parameter variance). Ignored if the model has no random effects.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>observation_weights_train</td>
+<td>np.array</td>
+<td>Optional training observation weights (must match those used to fit the model).</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-2" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-2">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>self</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.predict" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.predict">predict</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.predict(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    Z,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    propensity<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    rfx_basis<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span><span class="op">=</span><span class="st">'posterior'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    terms<span class="op">=</span><span class="st">'all'</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    scale<span class="op">=</span><span class="st">'linear'</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Predict outcome model components (CATE function and prognostic function) as well as overall outcome for every provided observation. Predicted outcomes are computed as <code>yhat = mu_x + Z*tau_x</code> where mu_x is a sample of the prognostic function and tau_x is a sample of the treatment effect (CATE) function. When random effects are present, they are either included in yhat additively if <code>rfx_model_spec == "custom"</code>. They are included in mu_x if <code>rfx_model_spec == "intercept_only"</code> or partially included in mu_x and partially included in tau_x <code>rfx_model_spec == "intercept_plus_treatment"</code>.</p>
+<section id="parameters-3" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 95%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>np.array or pd.DataFrame</td>
+<td>Test set covariates.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>np.array</td>
+<td>Test set treatment indicators.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>propensity</td>
+<td><code>np.array</code></td>
+<td>Optional test set propensities. Must be provided if propensities were provided when the model was sampled.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids</td>
+<td>np.array</td>
+<td>Optional group labels used for an additive random effects model.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis</td>
+<td>np.array</td>
+<td>Optional basis for “random-slope” regression in an additive random effects model. Not necessary if <code>rfx_model_spec</code> is “intercept_only” or “intercept_plus_treatment”, but if rfx_basis is provided, it will supercede the basis implied by <code>rfx_model_spec</code>.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>type</td>
+<td>str</td>
+<td>Type of prediction to return. Options are “mean”, which averages the predictions from every draw of a BART model, and “posterior”, which returns the entire matrix of posterior predictions. Default: “posterior”.</td>
+<td><code>'posterior'</code></td>
+</tr>
+<tr class="odd">
+<td>terms</td>
+<td>str</td>
+<td>Which model terms to include in the prediction. This can be a single term or a list of model terms. Options include “y_hat”, “prognostic_function”, “mu”, “cate”, “tau”, “rfx”, “variance_forest”, or “all”. The treatment effect terms follow a three-level hierarchy: - <code>"tau"</code> returns <code>tau_0 + tau(X)</code>: the parametric treatment intercept (if sampled) plus the treatment forest. This matches <code>model.tau_hat_train</code> / <code>model.tau_hat_test</code>. - <code>"cate"</code> additionally folds in the random slope on treatment when random effects are fit with <code>rfx_model_spec="intercept_plus_treatment"</code>; otherwise it is identical to <code>"tau"</code>. - The raw forest-only component (without <code>tau_0</code>) is not directly returned by this method; use <code>model.forest_container_tau</code> to access it. Similarly for the prognostic term: <code>"mu"</code> returns the prognostic forest only, while <code>"prognostic_function"</code> additionally folds in the random intercept when <code>rfx_model_spec</code> is <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>; otherwise the two are identical. If a model doesn’t have mean forest, random effects, or variance forest predictions, but one of those terms is requested, the request will simply be ignored. If none of the requested terms are present in a model, this function will return <code>None</code> along with a warning. Default: “all”.</td>
+<td><code>'all'</code></td>
+</tr>
+<tr class="even">
+<td>scale</td>
+<td>str</td>
+<td>Scale on which to return predictions. Options are “linear” (the default), which returns predictions on the original outcome scale, and “probit”, which returns predictions on the probit (latent) scale. Only applicable for models fit with probit link.</td>
+<td><code>'linear'</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-3" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-3">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 81%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Dict of numpy arrays for each prediction term, or a simple numpy array if a single term is requested.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>With <code>type=\"posterior\"</code>, most terms are shaped <code>(num_observations, num_samples)</code>. The</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>\"tau\"</code> and <code>\"cate\"</code> terms are shaped <code>(num_observations, num_samples, treatment_dim)</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>for multivariate treatments and <code>(num_observations, num_samples)</code> for univariate ones. With</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>type=\"mean\"</code> the sample axis is dropped, giving <code>(num_observations,)</code> or, for</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>multivariate <code>\"tau\"</code> / <code>\"cate\"</code>, <code>(num_observations, treatment_dim)</code>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>The treatment dimension is the trailing axis, so contracting a multivariate CATE against a</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>treatment matrix <code>Z</code> is</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>np.multiply(np.atleast_3d(Z).swapaxes(1, 2), cate).sum(axis=2)</code>. Note that the R package</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>returns the transposed layout, <code>(num_observations, treatment_dim, num_samples)</code>.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.compute_contrast" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.compute_contrast">compute_contrast</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.compute_contrast(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    X_0,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    X_1,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    Z_0,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    Z_1,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    propensity_0<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    propensity_1<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_0<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids_1<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    rfx_basis_0<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    rfx_basis_1<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span><span class="op">=</span><span class="st">'posterior'</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    scale<span class="op">=</span><span class="st">'linear'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compute a contrast using a BCF model by making two sets of outcome predictions and taking their difference. This function provides the flexibility to compute any contrast of interest by specifying covariates, leaf basis, and random effects bases / IDs for both sides of a two term contrast. For simplicity, we refer to the subtrahend of the contrast as the “control” or <code>Y0</code> term and the minuend of the contrast as the <code>Y1</code> term, though the requested contrast need not match the “control vs treatment” terminology of a classic two-treatment causal inference problem. We mirror the function calls and terminology of the <code>predict.bartmodel</code> function, labeling each prediction data term with a <code>1</code> to denote its contribution to the treatment prediction of a contrast and <code>0</code> to denote inclusion in the control prediction.</p>
+<section id="parameters-4" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-4">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 85%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X_0</td>
+<td>np.array or pd.DataFrame</td>
+<td>Covariates used for prediction in the “control” case. Must be a numpy array or dataframe.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>X_1</td>
+<td>np.array or pd.DataFrame</td>
+<td>Covariates used for prediction in the “treatment” case. Must be a numpy array or dataframe.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>Z_0</td>
+<td>np.array</td>
+<td>Treatments used for prediction in the “control” case. Must be a numpy array or vector.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>Z_1</td>
+<td>np.array</td>
+<td>Treatments used for prediction in the “treatment” case. Must be a numpy array or vector.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>propensity_0</td>
+<td><code>np.array</code></td>
+<td>Propensities used for prediction in the “control” case. Must be a numpy array or vector.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>propensity_1</td>
+<td><code>np.array</code></td>
+<td>Propensities used for prediction in the “treatment” case. Must be a numpy array or vector.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_group_ids_0</td>
+<td>np.array</td>
+<td>Test set group labels used for prediction from an additive random effects model in the “control” case. We do not currently support (but plan to in the near future), test set evaluation for group labels that were not in the training set. Must be a numpy array.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids_1</td>
+<td>np.array</td>
+<td>Test set group labels used for prediction from an additive random effects model in the “control” case. We do not currently support (but plan to in the near future), test set evaluation for group labels that were not in the training set. Must be a numpy array.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis_0</td>
+<td>np.array</td>
+<td>Test set basis for used for prediction from an additive random effects model in the “control” case. Must be a numpy array.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_basis_1</td>
+<td>np.array</td>
+<td>Test set basis for used for prediction from an additive random effects model in the “treatment” case. Must be a numpy array.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>type</td>
+<td>str</td>
+<td>Aggregation level of the contrast. Options are “mean”, which averages the contrast evaluations over every draw of a BCF model, and “posterior”, which returns the entire matrix of posterior contrast estimates. Default: “posterior”.</td>
+<td><code>'posterior'</code></td>
+</tr>
+<tr class="even">
+<td>scale</td>
+<td>str</td>
+<td>Scale of the contrast. Options are “linear”, which returns a contrast on the original scale of the mean forest / RFX terms, and “probability”, which transforms each contrast term into a probability of observing <code>y == 1</code> before taking their difference. “probability” is only valid for models fit with a probit outcome model. Default: “linear”.</td>
+<td><code>'linear'</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-4" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-4">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 77%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Array, either 1d or 2d depending on whether type = "mean" or "posterior".</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.compute_posterior_interval" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.compute_posterior_interval">compute_posterior_interval</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.compute_posterior_interval(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    Z<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    propensity<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    rfx_basis<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    terms<span class="op">=</span><span class="st">'all'</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    scale<span class="op">=</span><span class="st">'linear'</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compute posterior credible intervals for specified terms from a fitted BART model. It supports intervals for mean functions, variance functions, random effects, and overall predictions.</p>
+<section id="parameters-5" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-5">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 96%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>np.array</td>
+<td>Optional array or data frame of covariates at which to compute the intervals. Required if the requested term depends on covariates (e.g., prognostic forest, treatment effect forest, variance forest, or overall predictions).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>np.array</td>
+<td>Optional array of treatment assignments. Required if the requested term is <code>"y_hat"</code> (overall predictions).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>propensity</td>
+<td>np.array</td>
+<td>Optional array of propensity scores. Required if the underlying model depends on user-provided propensities.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids</td>
+<td>np.array</td>
+<td>Optional vector of group IDs for random effects. Required if the requested term includes random effects.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis</td>
+<td>np.array</td>
+<td>Optional matrix of basis function evaluations for random effects. Required if the requested term includes random effects.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>terms</td>
+<td>str</td>
+<td>Which model terms to include in the interval. This can be a single term or a list of model terms. Options include <code>"y_hat"</code>, <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"rfx"</code>, <code>"variance_forest"</code>, or <code>"all"</code>. The treatment effect terms follow a three-level hierarchy: - <code>"tau"</code> returns <code>tau_0 + tau(X)</code>: the parametric treatment intercept (if sampled) plus the treatment forest. This matches <code>model.tau_hat_train</code> / <code>model.tau_hat_test</code>. - <code>"cate"</code> additionally folds in the random slope on treatment when random effects are fit with <code>rfx_model_spec="intercept_plus_treatment"</code>; otherwise it is identical to <code>"tau"</code>. - The raw forest-only component (without <code>tau_0</code>) is not directly returned by this method; use <code>model.forest_container_tau</code> to access it. Similarly for the prognostic term: <code>"mu"</code> returns the prognostic forest only, while <code>"prognostic_function"</code> additionally folds in the random intercept when <code>rfx_model_spec</code> is <code>"intercept_only"</code> or <code>"intercept_plus_treatment"</code>; otherwise the two are identical. Default: <code>"all"</code>.</td>
+<td><code>'all'</code></td>
+</tr>
+<tr class="odd">
+<td>scale</td>
+<td>str</td>
+<td>Scale of mean function predictions. Options are “linear”, which returns predictions on the original scale of the mean forest / RFX terms, and “probability”, which transforms predictions into a probability of observing <code>y == 1</code>. “probability” is only valid for models fit with a probit outcome model. Defaults to <code>"linear"</code>.</td>
+<td><code>'linear'</code></td>
+</tr>
+<tr class="even">
+<td>level</td>
+<td>float</td>
+<td>A numeric value between 0 and 1 specifying the credible interval level. Defaults to 0.95 for a 95% credible interval.</td>
+<td><code>0.95</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-5" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-5">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 91%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>dict</td>
+<td>A dict containing the lower and upper bounds of the credible interval for the specified term. If multiple terms are requested, a dict with intervals for each term is returned.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.sample_posterior_predictive" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.sample_posterior_predictive">sample_posterior_predictive</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.sample_posterior_predictive(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    Z,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    propensity<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    rfx_group_ids<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    rfx_basis<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    num_draws_per_sample<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sample from the posterior predictive distribution for outcomes modeled by BART</p>
+<section id="parameters-6" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-6">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 88%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>np.array</td>
+<td>An array or data frame of covariates.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>Z</td>
+<td>np.array</td>
+<td>An array of treatment assignments.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>propensity</td>
+<td>np.array</td>
+<td>Optional array of propensity scores. Required if the underlying model depends on user-provided propensities.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>rfx_group_ids</td>
+<td>np.array</td>
+<td>Optional vector of group IDs for random effects. Required if the requested term includes random effects.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>rfx_basis</td>
+<td>np.array</td>
+<td>Optional matrix of basis function evaluations for random effects. Required if the requested term includes random effects.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>num_draws_per_sample</td>
+<td>int</td>
+<td>The number of posterior predictive samples to draw for each posterior sample. Defaults to a heuristic based on the number of samples in a BCF model (i.e.&nbsp;if the BCF model has &gt;1000 draws, we use 1 draw from the likelihood per sample, otherwise we upsample to ensure intervals are based on at least 1000 posterior predictive draws).</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-6" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-6">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>np.array</td>
+<td>A matrix of posterior predictive samples. If <code>num_draws = 1</code>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.to_json" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.to_json">to_json</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.to_json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Converts a sampled BART model to JSON string representation (which can then be saved to a file or processed using the <code>json</code> library)</p>
+<section id="returns-7" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-7">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 86%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>str</td>
+<td>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.from_json" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.from_json">from_json</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.from_json(json_string)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Converts a JSON string to an in-memory BART model.</p>
+<section id="parameters-7" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-7">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 75%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>json_string</td>
+<td>str</td>
+<td>JSON string representing model metadata (hyperparameters), sampled parameters, and sampled forests</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.from_json_string_list" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.from_json_string_list">from_json_string_list</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.from_json_string_list(json_string_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Convert a list of (in-memory) JSON strings that represent BCF models to a single combined BCF model object which can be used for prediction, etc…</p>
+<section id="parameters-8" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-8">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 74%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>json_string_list</td>
+<td>list of str</td>
+<td>List of JSON strings which can be parsed to objects of type <code>JSONSerializer</code> containing Json representation of a BCF model</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.is_sampled" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.is_sampled">is_sampled</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.is_sampled()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Whether or not a BCF model has been sampled.</p>
+<section id="returns-8" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-8">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>bool</td>
+<td><code>True</code> if a BCF model has been sampled, <code>False</code> otherwise</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.has_term" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.has_term">has_term</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.has_term(term)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Whether or not a model includes a term.</p>
+<section id="parameters-9" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-9">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 87%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>term</td>
+<td>str</td>
+<td>Character string specifying the model term to check for. Options for BCF models are <code>"prognostic_function"</code>, <code>"mu"</code>, <code>"cate"</code>, <code>"tau"</code>, <code>"variance_forest"</code>, <code>"rfx"</code>, <code>"y_hat"</code>, or <code>"all"</code>.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-9" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-9">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>bool</td>
+<td><code>True</code> if the model includes the specified term, <code>False</code> otherwise</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.extract_parameter" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.extract_parameter">extract_parameter</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.extract_parameter(term)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Extract a vector, matrix or array of parameter samples from a BCF model by name. Random effects are handled by a separate <code>extract_parameter_samples</code> method attached to the underlying <code>RandomEffectsContainer</code> object due to the complexity of the random effects parameters. If the requested model term is not found, an error is thrown. The following conventions are used for parameter names:</p>
+<ul>
+<li>Global error variance: <code>"sigma2"</code>, <code>"global_error_scale"</code>, <code>"sigma2_global"</code></li>
+<li>Prognostic forest leaf scale: <code>"sigma2_leaf_mu"</code>, <code>"leaf_scale_mu"</code>, <code>"mu_leaf_scale"</code></li>
+<li>Treatment effect forest leaf scale: <code>"sigma2_leaf_tau"</code>, <code>"leaf_scale_tau"</code>, <code>"tau_leaf_scale"</code></li>
+<li>Adaptive coding parameters: <code>"adaptive_coding"</code> (returns both the control and treated parameters jointly, with control in the first row and treated in the second row)</li>
+<li>In-sample mean function predictions: <code>"y_hat_train"</code></li>
+<li>Test set mean function predictions: <code>"y_hat_test"</code></li>
+<li>In-sample treatment effect forest predictions: <code>"tau_hat_train"</code></li>
+<li>Test set treatment effect forest predictions: <code>"tau_hat_test"</code></li>
+<li>Treatment effect intercept: <code>"tau_0"</code>, <code>"treatment_intercept"</code>, <code>"tau_intercept"</code></li>
+<li>In-sample variance forest predictions: <code>"sigma2_x_train"</code>, <code>"var_x_train"</code></li>
+<li>Test set variance forest predictions: <code>"sigma2_x_test"</code>, <code>"var_x_test"</code></li>
+</ul>
+<section id="parameters-10" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-10">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 73%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>term</td>
+<td>str</td>
+<td>Name of the parameter to extract (e.g., <code>"sigma2"</code>, <code>"y_hat_train"</code>, etc.)</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-10" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-10">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 95%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>np.array</td>
+<td>Array of parameter samples. If the underlying parameter is a scalar, this will be a vector of length <code>num_samples</code>. If the underlying parameter is vector-valued, this will be (<code>parameter_dimension</code> x <code>num_samples</code>) matrix, and if the underlying parameter is multidimensional, this will be an array of dimension (<code>parameter_dimension_1</code> x <code>parameter_dimension_2</code> x … x <code>num_samples</code>).</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="stochtree.bcf.BCFModel.summary" class="level3">
+<h3 class="anchored" data-anchor-id="stochtree.bcf.BCFModel.summary">summary</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bcf.BCFModel.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Summarize a BCF fit with a description of the model that was fit and numeric summaries of any sampled quantities</p>
+<p>Prints summary directly to the console with no return type.</p>
+<section id="returns-11" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-11">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stochtree\.ai\/v\/rc-0\.5\.0\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Instrumental Variables (IV) with StochTree – StochTree</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-122b0afa9ad5bb7a5480bcdf6a865abd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/api.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">StochTree</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../getting-started.html"> 
+<span class="menu-text">Getting Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../about/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/trees.html">
+ <span class="dropdown-text">Stochastic Tree Ensembles</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bart.html">
+ <span class="dropdown-text">BART</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../about/bcf.html">
+ <span class="dropdown-text">BCF</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/R_docs/pkgdown/index.html"> 
+<span class="menu-text">R Package</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../python-api/reference/index.html"> 
+<span class="menu-text">Python API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/cpp_docs/doxygen/index.html"> 
+<span class="menu-text">C++ API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../vignettes/index.html" aria-current="page"> 
+<span class="menu-text">Vignettes</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-development" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Development</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-development">    
+        <li>
+    <a class="dropdown-item" href="../development/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../development/design.html">
+ <span class="dropdown-text">Design Principles &amp; Proposals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../development/contributing.html">
+ <span class="dropdown-text">Contributing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../development/new-models.html">
+ <span class="dropdown-text">Adding New Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../development/changelog.html">
+ <span class="dropdown-text">Changelog</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../development/roadmap.html">
+ <span class="dropdown-text">Roadmap</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-rc-0.5.0" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: rc-0.5.0</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-rc-0.5.0">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/targeted-smoothing.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="../vignettes/iv.html">Instrumental Variables (IV) with StochTree</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">StochTree Vignettes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Core Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/bart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Additive Regression Trees for Supervised Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/bcf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian Causal Forests for Treatment Effect Estimation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/probit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probit BART for Binary Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/heteroskedastic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BART with a Forest-based Variance Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/ordinal-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BART with the Complementary Log-Log Link for Ordinal Outcomes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/multivariate-bcf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BCF with Vector-valued Treatments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Practical Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Prediction and Parameter Extraction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibrating StochTree Model Parameters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/serialization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Saving and Loading Fitted Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/multi-chain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Running and Combining Multiple MCMC Chains</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/tree-inspection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examining Individual Trees in a Fitted Ensemble</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/summary-plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Posterior Summary and Visualization Utilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/prior-calibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calibrating Leaf Node Scale Parameter Priors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/sklearn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Stochtree via Sklearn-Compatible Estimators in Python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Low-Level Interface</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/custom-sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building a Custom Gibbs Sampler with Stochtree Primitives</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/ensemble-kernel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using Shared Leaf Membership as a Kernel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Advanced Methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/targeted-smoothing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Targeted Smooth BART Approximation via Leaf Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/rdd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regression Discontinuity Design (RDD) with StochTree</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../vignettes/iv.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Instrumental Variables (IV) with StochTree</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#notation" id="toc-notation" class="nav-link" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#the-causal-diagram" id="toc-the-causal-diagram" class="nav-link" data-scroll-target="#the-causal-diagram">The Causal Diagram</a></li>
+  <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link" data-scroll-target="#potential-outcomes">Potential Outcomes</a></li>
+  <li><a href="#estimands-and-identification" id="toc-estimands-and-identification" class="nav-link" data-scroll-target="#estimands-and-identification">Estimands and Identification</a></li>
+  </ul></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#data-generation" id="toc-data-generation" class="nav-link" data-scroll-target="#data-generation">Data Generation</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting">Model Fitting</a></li>
+  <li><a href="#extracting-estimates-and-plotting" id="toc-extracting-estimates-and-plotting" class="nav-link" data-scroll-target="#extracting-estimates-and-plotting">Extracting Estimates and Plotting</a>
+  <ul class="collapse">
+  <li><a href="#prediction-grid-and-truth" id="toc-prediction-grid-and-truth" class="nav-link" data-scroll-target="#prediction-grid-and-truth">Prediction Grid and Truth</a></li>
+  <li><a href="#extract-posterior-predictions" id="toc-extract-posterior-predictions" class="nav-link" data-scroll-target="#extract-posterior-predictions">Extract Posterior Predictions</a></li>
+  <li><a href="#model-fit-diagnostics" id="toc-model-fit-diagnostics" class="nav-link" data-scroll-target="#model-fit-diagnostics">Model Fit Diagnostics</a></li>
+  <li><a href="#construct-and-plot-the-itt_c" id="toc-construct-and-plot-the-itt_c" class="nav-link" data-scroll-target="#construct-and-plot-the-itt_c">Construct and Plot the <span class="math inline">\(ITT_c\)</span></a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../vignettes/targeted-smoothing.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="../vignettes/iv.html">Instrumental Variables (IV) with StochTree</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Instrumental Variables (IV) with StochTree</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Here we consider a causal inference problem with a binary treatment and a binary outcome where there is unobserved confounding, but an exogenous instrument is available (also binary). This problem requires several extensions to the basic BART model, all of which can be implemented as Gibbs samplers using <code>stochtree</code>. Our analysis follows the Bayesian nonparametric approach described in the supplement to <span class="citation" data-cites="hahn2016bayesian">Hahn et al. (<a href="#ref-hahn2016bayesian" role="doc-biblioref">2016</a>)</span>.</p>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>To be concrete, suppose we wish to measure the effect of receiving a flu vaccine on the probability of getting the flu. Individuals who opt to get a flu shot differ in many ways from those that don’t, and these lifestyle differences presumably also affect their respective chances of getting the flu. However, a randomized encouragement design — where some individuals are selected at random to receive extra incentive to get a flu shot — allows us to tease apart the impact of the vaccine from the confounding factors. This exact problem has been studied in <span class="citation" data-cites="mcdonald1992effects">McDonald et al. (<a href="#ref-mcdonald1992effects" role="doc-biblioref">1992</a>)</span>, with follow-on analyses by <span class="citation" data-cites="hirano2000assessing">Hirano et al. (<a href="#ref-hirano2000assessing" role="doc-biblioref">2000</a>)</span>, <span class="citation" data-cites="richardson2011transparent">Richardson et al. (<a href="#ref-richardson2011transparent" role="doc-biblioref">2011</a>)</span>, and <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.</p>
+<section id="notation" class="level2">
+<h2 class="anchored" data-anchor-id="notation">Notation</h2>
+<p>Let <span class="math inline">\(V\)</span> denote the treatment variable (vaccine). Let <span class="math inline">\(Y\)</span> denote the response (getting the flu), <span class="math inline">\(Z\)</span> the instrument (encouragement), and <span class="math inline">\(X\)</span> an additional observable covariate (patient age).</p>
+<p>Let <span class="math inline">\(S\)</span> denote the <em>principal strata</em>, an exhaustive characterization of how individuals are affected by the encouragement. Some people will get a flu shot no matter what: <em>always takers</em> (<span class="math inline">\(a\)</span>). Some will not get the shot no matter what: <em>never takers</em> (<span class="math inline">\(n\)</span>). <em>Compliers</em> (<span class="math inline">\(c\)</span>) would not have gotten the shot but for the encouragement. We assume no <em>defiers</em> (<span class="math inline">\(d\)</span>).</p>
+</section>
+<section id="the-causal-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="the-causal-diagram">The Causal Diagram</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="R/IV/IV_CDAG.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>The causal directed acyclic graph (CDAG) for the IV flu example. The dashed red arrow represents a potential direct effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span>, whose absence is the exclusion restriction.</figcaption>
+</figure>
+</div>
+<p>The biggest question about this graph concerns the dashed red arrow from the putative instrument <span class="math inline">\(Z\)</span> to the outcome. If that arrow is present, <span class="math inline">\(Z\)</span> is not a valid instrument. The assumption that there is no such arrow is the <em>exclusion restriction</em>. We will explore what inferences are possible when we remain agnostic about its presence.</p>
+</section>
+<section id="potential-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="potential-outcomes">Potential Outcomes</h2>
+<p>There are six distinct random variables: <span class="math inline">\(V(0)\)</span>, <span class="math inline">\(V(1)\)</span>, <span class="math inline">\(Y(0,0)\)</span>, <span class="math inline">\(Y(1,0)\)</span>, <span class="math inline">\(Y(0,1)\)</span>, and <span class="math inline">\(Y(1,1)\)</span>. The fundamental problem of causal inference is that some of these are never simultaneously observed:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(i\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Z_i\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(V_i(0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(V_i(1)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y_i(0,0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y_i(1,0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y_i(0,1)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y_i(1,1)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The principal strata are defined by which potential treatment <span class="math inline">\(V(z)\)</span> is observed:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(V_i(0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(V_i(1)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(S_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">Never Taker (<span class="math inline">\(n\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">Always Taker (<span class="math inline">\(a\)</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">Complier (<span class="math inline">\(c\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">Defier (<span class="math inline">\(d\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="estimands-and-identification" class="level2">
+<h2 class="anchored" data-anchor-id="estimands-and-identification">Estimands and Identification</h2>
+<p>Let <span class="math inline">\(\pi_s(x) = \Pr(S=s \mid X=x)\)</span> and <span class="math inline">\(\gamma_s^{vz}(x) = \Pr(Y(v,z)=1 \mid S=s, X=x)\)</span>. The complier conditional average treatment effect <span class="math inline">\(\gamma_c^{1,z}(x) - \gamma_c^{0,z}(x)\)</span> is our ultimate goal.</p>
+<p>Under the monotonicity assumption (<span class="math inline">\(\pi_d(x) = 0\)</span>), the observed data imply:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_{1 \mid 00}(x) &amp;= \frac{\pi_c(x)}{\pi_c(x)+\pi_n(x)} \gamma_c^{00}(x)
+  + \frac{\pi_n(x)}{\pi_c(x)+\pi_n(x)} \gamma_n^{00}(x) \\
+p_{1 \mid 11}(x) &amp;= \frac{\pi_c(x)}{\pi_c(x)+\pi_a(x)} \gamma_c^{11}(x)
+  + \frac{\pi_a(x)}{\pi_c(x)+\pi_a(x)} \gamma_a^{11}(x) \\
+p_{1 \mid 01}(x) &amp;= \gamma_n^{01}(x) \\
+p_{1 \mid 10}(x) &amp;= \gamma_a^{10}(x)
+\end{aligned}
+\]</span></p>
+<p>and the strata probabilities satisfy:</p>
+<p><span class="math display">\[
+\Pr(V=1 \mid Z=0, X=x) = \pi_a(x), \qquad
+\Pr(V=1 \mid Z=1, X=x) = \pi_a(x) + \pi_c(x).
+\]</span></p>
+<p>Under the exclusion restriction, <span class="math inline">\(\gamma_c^{11}(x)\)</span> and <span class="math inline">\(\gamma_c^{00}(x)\)</span> are point-identified. Without it, they are partially identified:</p>
+<p><span class="math display">\[
+\max\!\left(0,\, \frac{\pi_c+\pi_n}{\pi_c} p_{1\mid 00} - \frac{\pi_n}{\pi_c}\right)
+\leq \gamma_c^{00}(x) \leq
+\min\!\left(1,\, \frac{\pi_c+\pi_n}{\pi_c} p_{1\mid 00}\right),
+\]</span></p>
+<p>and analogously for <span class="math inline">\(\gamma_c^{11}(x)\)</span>.</p>
+</section>
+</section>
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<p>We load all necessary libraries</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stochtree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stochtree <span class="im">import</span> (</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    RNG, Dataset, Forest, ForestContainer,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    ForestSampler, Residual, ForestModelConfig, GlobalModelConfig,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>And set a seed for reproducibility</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>random_seed <span class="ot">&lt;-</span> <span class="dv">1234</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(random_seed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>random_seed <span class="op">=</span> <span class="dv">1234</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(random_seed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<section id="data-generation" class="level2">
+<h2 class="anchored" data-anchor-id="data-generation">Data Generation</h2>
+<p>Data size</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>Generate the Instrument</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> rng.binomial(n<span class="op">=</span><span class="dv">1</span>, p<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>We conceptualize a covariate <span class="math inline">\(X\)</span> as patient age, drawn from a uniform distribution on <span class="math inline">\([0, 3]\)</span> (pre-standardized for illustration purposes) and generate the covariate</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p_X <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X   <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">runif</span>(n <span class="sc">*</span> p_X, <span class="dv">0</span>, <span class="dv">3</span>), <span class="at">ncol =</span> p_X)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x   <span class="ot">&lt;-</span> X[, <span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_X <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X   <span class="op">=</span> rng.uniform(low<span class="op">=</span><span class="fl">0.</span>, high<span class="op">=</span><span class="fl">3.</span>, size<span class="op">=</span>(n, p_X))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>x   <span class="op">=</span> X[:, <span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>We generate principal strata <span class="math inline">\(S\)</span> from a logistic model in <span class="math inline">\(X\)</span>, parameterized so that the probability of being a never taker decreases with age</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alpha_a <span class="ot">&lt;-</span> <span class="dv">0</span>;  beta_a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>alpha_n <span class="ot">&lt;-</span> <span class="dv">1</span>;  beta_n <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>alpha_c <span class="ot">&lt;-</span> <span class="dv">1</span>;  beta_c <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>pi_s <span class="ot">&lt;-</span> <span class="cf">function</span>(xval) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  w_a <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha_a <span class="sc">+</span> beta_a <span class="sc">*</span> xval)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  w_n <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha_n <span class="sc">+</span> beta_n <span class="sc">*</span> xval)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  w_c <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha_c <span class="sc">+</span> beta_c <span class="sc">*</span> xval)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  w   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(w_a, w_n, w_c)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  w <span class="sc">/</span> <span class="fu">rowSums</span>(w)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n), <span class="cf">function</span>(j)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"n"</span>, <span class="st">"c"</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">pi_s</span>(X[j, <span class="dv">1</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alpha_a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  beta_a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha_n <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  beta_n <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>alpha_c <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  beta_c <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pi_s(xval, alpha_a, beta_a, alpha_n, beta_n, alpha_c, beta_c):</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> np.column_stack([</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        np.exp(alpha_a <span class="op">+</span> beta_a <span class="op">*</span> xval),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        np.exp(alpha_n <span class="op">+</span> beta_n <span class="op">*</span> xval),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        np.exp(alpha_c <span class="op">+</span> beta_c <span class="op">*</span> xval),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w <span class="op">/</span> w.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>strata_probs <span class="op">=</span> pi_s(X[:, <span class="dv">0</span>], alpha_a, beta_a, alpha_n, beta_n, alpha_c, beta_c)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.empty(n, dtype<span class="op">=</span><span class="bu">str</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    s[i] <span class="op">=</span> rng.choice([<span class="st">'a'</span>, <span class="st">'n'</span>, <span class="st">'c'</span>], p<span class="op">=</span>strata_probs[i, :])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The treatment <span class="math inline">\(V\)</span> is generated as a deterministic function of <span class="math inline">\(S\)</span> and <span class="math inline">\(Z\)</span> — this is what gives the principal strata their meaning</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>(s <span class="sc">==</span> <span class="st">"a"</span>) <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>(s <span class="sc">==</span> <span class="st">"n"</span>) <span class="sc">+</span> z<span class="sc">*</span>(s <span class="sc">==</span> <span class="st">"c"</span>) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">-</span>z)<span class="sc">*</span>(s <span class="sc">==</span> <span class="st">"d"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>(s <span class="op">==</span> <span class="st">'a'</span>) <span class="op">+</span> <span class="dv">0</span><span class="op">*</span>(s <span class="op">==</span> <span class="st">'n'</span>) <span class="op">+</span> z<span class="op">*</span>(s <span class="op">==</span> <span class="st">"c"</span>) <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>z)<span class="op">*</span>(s <span class="op">==</span> <span class="st">"d"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The outcome is generated according to the structural model below. By varying this function we can alter the identification conditions. Setting it to depend on <code>zval</code> violates the exclusion restriction, and we do so here to illustrate partial identification.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gamfun <span class="ot">&lt;-</span> <span class="cf">function</span>(xval, vval, zval, sval) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  baseline <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">2</span> <span class="sc">-</span> xval <span class="sc">-</span> <span class="fl">2.5</span><span class="sc">*</span>(xval <span class="sc">-</span> <span class="fl">1.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="fl">0.5</span><span class="sc">*</span>zval</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>(sval <span class="sc">==</span> <span class="st">"n"</span>) <span class="sc">-</span> <span class="dv">1</span><span class="sc">*</span>(sval <span class="sc">==</span> <span class="st">"a"</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  baseline <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> vval <span class="sc">*</span> baseline</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fu">gamfun</span>(X[, <span class="dv">1</span>], v, z, s))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gamfun(xval, vval, zval, sval):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    baseline <span class="op">=</span> norm.cdf(<span class="dv">2</span> <span class="op">-</span> xval <span class="op">-</span> <span class="fl">2.5</span><span class="op">*</span>(xval <span class="op">-</span> <span class="fl">1.5</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span>zval</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                        <span class="op">+</span> <span class="dv">1</span><span class="op">*</span>(sval <span class="op">==</span> <span class="st">"n"</span>) <span class="op">-</span> <span class="dv">1</span><span class="op">*</span>(sval <span class="op">==</span> <span class="st">"a"</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> baseline <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> vval <span class="op">*</span> baseline</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.binomial(n<span class="op">=</span><span class="dv">1</span>, p<span class="op">=</span>gamfun(X[:, <span class="dv">0</span>], v, z, s), size<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-fitting" class="level2">
+<h2 class="anchored" data-anchor-id="model-fitting">Model Fitting</h2>
+<p>In order to fit a monotone probit model, the observations must be sorted so that <span class="math inline">\(Z=1\)</span> cases come first.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Xall  <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, v, z)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p_X   <span class="ot">&lt;-</span> p_X <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sort</span>(z, <span class="at">decreasing =</span> <span class="cn">TRUE</span>, <span class="at">index.return =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>X     <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X[index<span class="sc">$</span>ix, ], <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Xall  <span class="ot">&lt;-</span> Xall[index<span class="sc">$</span>ix, ]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>z     <span class="ot">&lt;-</span> z[index<span class="sc">$</span>ix]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>v     <span class="ot">&lt;-</span> v[index<span class="sc">$</span>ix]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>s     <span class="ot">&lt;-</span> s[index<span class="sc">$</span>ix]</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>y     <span class="ot">&lt;-</span> y[index<span class="sc">$</span>ix]</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>x     <span class="ot">&lt;-</span> x[index<span class="sc">$</span>ix]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Xall       <span class="op">=</span> np.concatenate((X, np.column_stack((v, z))), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>p_X        <span class="op">=</span> p_X <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sort_index <span class="op">=</span> np.argsort(z)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>X          <span class="op">=</span> X[sort_index, :]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Xall       <span class="op">=</span> Xall[sort_index, :]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>z          <span class="op">=</span> z[sort_index]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>v          <span class="op">=</span> v[sort_index]</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>s          <span class="op">=</span> s[sort_index]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>y          <span class="op">=</span> y[sort_index]</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>x          <span class="op">=</span> x[sort_index]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>We fit a probit BART model for <span class="math inline">\(\Pr(Y=1 \mid V=1, Z=1, X=x)\)</span> using the Albert–Chib <span class="citation" data-cites="albert1993bayesian">(<a href="#ref-albert1993bayesian" role="doc-biblioref">Albert and Chib 1993</a>)</span> data augmentation Gibbs sampler. We initialize the forest, enter the main loop (alternating: sample forest | sample latent utilities), and retain all post-warmstart draws.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>num_warmstart <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>num_mcmc      <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>num_samples   <span class="ot">&lt;-</span> num_warmstart <span class="sc">+</span> num_mcmc</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span>;  beta <span class="ot">&lt;-</span> <span class="dv">2</span>;  min_samples_leaf <span class="ot">&lt;-</span> <span class="dv">1</span>;  max_depth <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>num_trees <span class="ot">&lt;-</span> <span class="dv">50</span>;  cutpoint_grid_size <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>tau_init  <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>leaf_prior_scale <span class="ot">&lt;-</span> <span class="fu">matrix</span>(tau_init, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>feature_types <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, p_X <span class="sc">-</span> <span class="dv">2</span>), <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>var_weights   <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, p_X) <span class="sc">/</span> p_X</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>outcome_model_type <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.null</span>(random_seed)) {</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  rng_r <span class="ot">&lt;-</span> <span class="fu">createCppRNG</span>(<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  rng_r <span class="ot">&lt;-</span> <span class="fu">createCppRNG</span>(random_seed)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>forest_dataset <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(Xall)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>forest_model_config <span class="ot">&lt;-</span> <span class="fu">createForestModelConfig</span>(</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">feature_types =</span> feature_types, <span class="at">num_trees =</span> num_trees,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_features =</span> p_X, <span class="at">num_observations =</span> n,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_weights =</span> var_weights, <span class="at">leaf_dimension =</span> <span class="dv">1</span>,</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> alpha, <span class="at">beta =</span> beta, <span class="at">min_samples_leaf =</span> min_samples_leaf,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> max_depth, <span class="at">leaf_model_type =</span> outcome_model_type,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">leaf_model_scale =</span> leaf_prior_scale,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutpoint_grid_size =</span> cutpoint_grid_size</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>global_model_config <span class="ot">&lt;-</span> <span class="fu">createGlobalModelConfig</span>(<span class="at">global_error_variance =</span> <span class="dv">1</span>)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>forest_model    <span class="ot">&lt;-</span> <span class="fu">createForestModel</span>(forest_dataset, forest_model_config,</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>                                     global_model_config)</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>forest_samples  <span class="ot">&lt;-</span> <span class="fu">createForestSamples</span>(num_trees, <span class="dv">1</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>active_forest   <span class="ot">&lt;-</span> <span class="fu">createForest</span>(num_trees, <span class="dv">1</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>n1  <span class="ot">&lt;-</span> <span class="fu">sum</span>(y)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>zed <span class="ot">&lt;-</span> <span class="fl">0.25</span> <span class="sc">*</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">as.numeric</span>(y) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="fu">createOutcome</span>(zed)</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>active_forest<span class="sc">$</span><span class="fu">prepare_for_sampler</span>(forest_dataset, outcome, forest_model,</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>                                   outcome_model_type, <span class="fl">0.0</span>)</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>active_forest<span class="sc">$</span><span class="fu">adjust_residual</span>(forest_dataset, outcome, forest_model,</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>                               <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>gfr_flag <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(num_samples)) {</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> num_warmstart) gfr_flag <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  forest_model<span class="sc">$</span><span class="fu">sample_one_iteration</span>(</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    forest_dataset, outcome, forest_samples, active_forest,</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    rng_r, forest_model_config, global_model_config,</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">keep_forest =</span> <span class="cn">TRUE</span>, <span class="at">gfr =</span> gfr_flag, <span class="at">num_threads =</span> <span class="dv">1</span></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>  eta <span class="ot">&lt;-</span> forest_samples<span class="sc">$</span><span class="fu">predict_raw_single_forest</span>(forest_dataset, i <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>  U1  <span class="ot">&lt;-</span> <span class="fu">runif</span>(n1, <span class="fu">pnorm</span>(<span class="dv">0</span>, eta[y <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>), <span class="dv">1</span>)</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>  zed[y <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U1, eta[y <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>  U0  <span class="ot">&lt;-</span> <span class="fu">runif</span>(n <span class="sc">-</span> n1, <span class="dv">0</span>, <span class="fu">pnorm</span>(<span class="dv">0</span>, eta[y <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>  zed[y <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U0, eta[y <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>)</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>  outcome<span class="sc">$</span><span class="fu">update_data</span>(zed)</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>  forest_model<span class="sc">$</span><span class="fu">propagate_residual_update</span>(outcome)</span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>num_warmstart <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>num_mcmc      <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>num_samples   <span class="op">=</span> num_warmstart <span class="op">+</span> num_mcmc</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.95</span><span class="op">;</span>  beta <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  min_samples_leaf <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  max_depth <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>num_trees <span class="op">=</span> <span class="dv">50</span><span class="op">;</span>  cutpoint_grid_size <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>tau_init  <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>leaf_prior_scale  <span class="op">=</span> np.array([[tau_init]])</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>feature_types <span class="op">=</span> np.append(np.repeat(<span class="dv">0</span>, p_X <span class="op">-</span> <span class="dv">2</span>), [<span class="dv">1</span>, <span class="dv">1</span>]).astype(<span class="bu">int</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>var_weights   <span class="op">=</span> np.repeat(<span class="fl">1.0</span> <span class="op">/</span> p_X, p_X)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>outcome_model_type <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>cpp_rng <span class="op">=</span> RNG(random_seed) <span class="cf">if</span> random_seed <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> RNG()</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>forest_dataset <span class="op">=</span> Dataset()</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>forest_dataset.add_covariates(Xall)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>forest_model_config <span class="op">=</span> ForestModelConfig(</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    feature_types<span class="op">=</span>feature_types, num_trees<span class="op">=</span>num_trees,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    num_features<span class="op">=</span>p_X, num_observations<span class="op">=</span>n,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    variable_weights<span class="op">=</span>var_weights, leaf_dimension<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>alpha, beta<span class="op">=</span>beta, min_samples_leaf<span class="op">=</span>min_samples_leaf,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span>max_depth, leaf_model_type<span class="op">=</span>outcome_model_type,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    leaf_model_scale<span class="op">=</span>leaf_prior_scale,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    cutpoint_grid_size<span class="op">=</span>cutpoint_grid_size,</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>global_model_config <span class="op">=</span> GlobalModelConfig(global_error_variance<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>forest_sampler <span class="op">=</span> ForestSampler(forest_dataset, global_model_config,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>                                forest_model_config)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>forest_samples <span class="op">=</span> ForestContainer(num_trees, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>active_forest  <span class="op">=</span> Forest(num_trees, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>n1  <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(y))</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>zed <span class="op">=</span> <span class="fl">0.25</span> <span class="op">*</span> (<span class="fl">2.0</span> <span class="op">*</span> y <span class="op">-</span> <span class="fl">1.0</span>)</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>outcome <span class="op">=</span> Residual(zed)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>forest_sampler.prepare_for_sampler(forest_dataset, outcome, active_forest,</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>                                    outcome_model_type, np.array([<span class="fl">0.0</span>]))</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>gfr_flag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_samples):</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;=</span> num_warmstart:</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>        gfr_flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>    forest_sampler.sample_one_iteration(</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>        forest_samples, active_forest, forest_dataset, outcome, cpp_rng,</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>        global_model_config, forest_model_config,</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>        keep_forest<span class="op">=</span><span class="va">True</span>, gfr<span class="op">=</span>gfr_flag, num_threads<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    eta  <span class="op">=</span> np.squeeze(forest_samples.predict_raw_single_forest(forest_dataset, i))</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>    mu0  <span class="op">=</span> eta[y <span class="op">==</span> <span class="dv">0</span>]<span class="op">;</span>  mu1 <span class="op">=</span> eta[y <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    u0   <span class="op">=</span> rng.uniform(<span class="dv">0</span>, norm.cdf(<span class="op">-</span>mu0), size<span class="op">=</span>n <span class="op">-</span> n1)</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    u1   <span class="op">=</span> rng.uniform(norm.cdf(<span class="op">-</span>mu1), <span class="dv">1</span>, size<span class="op">=</span>n1)</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    zed[y <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> mu0 <span class="op">+</span> norm.ppf(u0)</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    zed[y <span class="op">==</span> <span class="dv">1</span>] <span class="op">=</span> mu1 <span class="op">+</span> norm.ppf(u1)</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    outcome.update_data(np.squeeze(zed) <span class="op">-</span> eta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+<p>The monotonicity constraint <span class="math inline">\(\Pr(V=1 \mid Z=0, X=x) \leq \Pr(V=1 \mid Z=1, X=x)\)</span> is enforced via the data augmentation of <span class="citation" data-cites="papakostas2023forecasts">Papakostas et al. (<a href="#ref-papakostas2023forecasts" role="doc-biblioref">2023</a>)</span>. We parameterize</p>
+<p><span class="math display">\[
+\Pr(V=1 \mid Z=0, X=x) = \Phi_f(x)\,\Phi_h(x), \qquad
+\Pr(V=1 \mid Z=1, X=x) = \Phi_f(x),
+\]</span></p>
+<p>where <span class="math inline">\(\Phi_\mu(x)\)</span> is the normal CDF with mean <span class="math inline">\(\mu(x)\)</span> and variance 1.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X_h  <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(X[z <span class="sc">==</span> <span class="dv">0</span>, ])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>n0   <span class="ot">&lt;-</span> <span class="fu">sum</span>(z <span class="sc">==</span> <span class="dv">0</span>);  n1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(z <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>num_trees_f <span class="ot">&lt;-</span> <span class="dv">50</span>;  num_trees_h <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>feature_types_mono <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>var_weights_mono   <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>tau_h <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> num_trees_h</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>leaf_scale_h <span class="ot">&lt;-</span> <span class="fu">matrix</span>(tau_h, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>leaf_scale_f <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span> <span class="sc">/</span> num_trees_f, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>forest_dataset_f <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>forest_dataset_h <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X_h)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>fmc_f <span class="ot">&lt;-</span> <span class="fu">createForestModelConfig</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">feature_types =</span> feature_types_mono, <span class="at">num_trees =</span> num_trees_f,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_features =</span> <span class="fu">ncol</span>(X), <span class="at">num_observations =</span> <span class="fu">nrow</span>(X),</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_weights =</span> var_weights_mono, <span class="at">leaf_dimension =</span> <span class="dv">1</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> alpha, <span class="at">beta =</span> beta, <span class="at">min_samples_leaf =</span> min_samples_leaf,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> max_depth, <span class="at">leaf_model_type =</span> <span class="dv">0</span>,</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">leaf_model_scale =</span> leaf_scale_f, <span class="at">cutpoint_grid_size =</span> cutpoint_grid_size</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>fmc_h <span class="ot">&lt;-</span> <span class="fu">createForestModelConfig</span>(</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">feature_types =</span> feature_types_mono, <span class="at">num_trees =</span> num_trees_h,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">num_features =</span> <span class="fu">ncol</span>(X_h), <span class="at">num_observations =</span> <span class="fu">nrow</span>(X_h),</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_weights =</span> var_weights_mono, <span class="at">leaf_dimension =</span> <span class="dv">1</span>,</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> alpha, <span class="at">beta =</span> beta, <span class="at">min_samples_leaf =</span> min_samples_leaf,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_depth =</span> max_depth, <span class="at">leaf_model_type =</span> <span class="dv">0</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">leaf_model_scale =</span> leaf_scale_h, <span class="at">cutpoint_grid_size =</span> cutpoint_grid_size</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>gmc_mono <span class="ot">&lt;-</span> <span class="fu">createGlobalModelConfig</span>(<span class="at">global_error_variance =</span> <span class="dv">1</span>)</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>fm_f <span class="ot">&lt;-</span> <span class="fu">createForestModel</span>(forest_dataset_f, fmc_f, gmc_mono)</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>fm_h <span class="ot">&lt;-</span> <span class="fu">createForestModel</span>(forest_dataset_h, fmc_h, gmc_mono)</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>fs_f <span class="ot">&lt;-</span> <span class="fu">createForestSamples</span>(num_trees_f, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>fs_h <span class="ot">&lt;-</span> <span class="fu">createForestSamples</span>(num_trees_h, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>af_f <span class="ot">&lt;-</span> <span class="fu">createForest</span>(num_trees_f, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>af_h <span class="ot">&lt;-</span> <span class="fu">createForest</span>(num_trees_h, <span class="dv">1</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> v[z <span class="sc">==</span> <span class="dv">1</span>];  v0 <span class="ot">&lt;-</span> v[z <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>R1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n0);  R0 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n0)</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>R1[v0 <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>;   R0[v0 <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>R1[v0 <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span>;   R0[v0 <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="fu">sum</span>(v0 <span class="sc">==</span> <span class="dv">0</span>), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>vaug <span class="ot">&lt;-</span> <span class="fu">c</span>(v1, R1)</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>z_f <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">as.numeric</span>(vaug) <span class="sc">-</span> <span class="dv">1</span>);  z_f <span class="ot">&lt;-</span> z_f <span class="sc">/</span> <span class="fu">sd</span>(z_f)</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>z_h <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">*</span> <span class="fu">as.numeric</span>(R0)  <span class="sc">-</span> <span class="dv">1</span>);   z_h <span class="ot">&lt;-</span> z_h <span class="sc">/</span> <span class="fu">sd</span>(z_h)</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>out_f <span class="ot">&lt;-</span> <span class="fu">createOutcome</span>(z_f);  out_h <span class="ot">&lt;-</span> <span class="fu">createOutcome</span>(z_h)</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>af_f<span class="sc">$</span><span class="fu">prepare_for_sampler</span>(forest_dataset_f, out_f, fm_f, <span class="dv">0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>af_h<span class="sc">$</span><span class="fu">prepare_for_sampler</span>(forest_dataset_h, out_h, fm_h, <span class="dv">0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>af_f<span class="sc">$</span><span class="fu">adjust_residual</span>(forest_dataset_f, out_f, fm_f, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>af_h<span class="sc">$</span><span class="fu">adjust_residual</span>(forest_dataset_h, out_h, fm_h, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>gfr_flag <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(num_samples)) {</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> num_warmstart) gfr_flag <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>  fm_f<span class="sc">$</span><span class="fu">sample_one_iteration</span>(forest_dataset_f, out_f, fs_f, af_f,</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>    rng_r, fmc_f, gmc_mono, <span class="at">keep_forest =</span> <span class="cn">TRUE</span>, <span class="at">gfr =</span> gfr_flag, <span class="at">num_threads =</span> <span class="dv">1</span>)</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>  fm_h<span class="sc">$</span><span class="fu">sample_one_iteration</span>(forest_dataset_h, out_h, fs_h, af_h,</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>    rng_r, fmc_h, gmc_mono, <span class="at">keep_forest =</span> <span class="cn">TRUE</span>, <span class="at">gfr =</span> gfr_flag, <span class="at">num_threads =</span> <span class="dv">1</span>)</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>  eta_f <span class="ot">&lt;-</span> fs_f<span class="sc">$</span><span class="fu">predict_raw_single_forest</span>(forest_dataset_f, i <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>  eta_h <span class="ot">&lt;-</span> fs_h<span class="sc">$</span><span class="fu">predict_raw_single_forest</span>(forest_dataset_h, i <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>  idx0  <span class="ot">&lt;-</span> <span class="fu">which</span>(v0 <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>  w1 <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(eta_h[idx0])) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(eta_f[n1 <span class="sc">+</span> idx0]))</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>  w2 <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(eta_h[idx0])) <span class="sc">*</span>      <span class="fu">pnorm</span>(eta_f[n1 <span class="sc">+</span> idx0])</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>  w3 <span class="ot">&lt;-</span>      <span class="fu">pnorm</span>(eta_h[idx0])  <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(eta_f[n1 <span class="sc">+</span> idx0]))</span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>  s_w <span class="ot">&lt;-</span> w1 <span class="sc">+</span> w2 <span class="sc">+</span> w3</span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>  u   <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">length</span>(idx0))</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>(u <span class="sc">&lt;</span> w1<span class="sc">/</span>s_w) <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>(u <span class="sc">&gt;</span> w1<span class="sc">/</span>s_w <span class="sc">&amp;</span> u <span class="sc">&lt;</span> (w1<span class="sc">+</span>w2)<span class="sc">/</span>s_w) <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>(u <span class="sc">&gt;</span> (w1<span class="sc">+</span>w2)<span class="sc">/</span>s_w)</span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>  R1[v0 <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>(temp <span class="sc">==</span> <span class="dv">2</span>);  R0[v0 <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>(temp <span class="sc">==</span> <span class="dv">3</span>)</span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>  vaug <span class="ot">&lt;-</span> <span class="fu">c</span>(v1, R1)</span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>  U1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">sum</span>(R0),    <span class="fu">pnorm</span>(<span class="dv">0</span>, eta_h[R0 <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>), <span class="dv">1</span>)</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>  z_h[R0 <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U1, eta_h[R0 <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>  U0 <span class="ot">&lt;-</span> <span class="fu">runif</span>(n0 <span class="sc">-</span> <span class="fu">sum</span>(R0), <span class="dv">0</span>, <span class="fu">pnorm</span>(<span class="dv">0</span>, eta_h[R0 <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>  z_h[R0 <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U0, eta_h[R0 <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>)</span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>  U1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">sum</span>(vaug),    <span class="fu">pnorm</span>(<span class="dv">0</span>, eta_f[vaug <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>), <span class="dv">1</span>)</span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>  z_f[vaug <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U1, eta_f[vaug <span class="sc">==</span> <span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>  U0 <span class="ot">&lt;-</span> <span class="fu">runif</span>(n <span class="sc">-</span> <span class="fu">sum</span>(vaug), <span class="dv">0</span>, <span class="fu">pnorm</span>(<span class="dv">0</span>, eta_f[vaug <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>))</span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>  z_f[vaug <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U0, eta_f[vaug <span class="sc">==</span> <span class="dv">0</span>], <span class="dv">1</span>)</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>  out_h<span class="sc">$</span><span class="fu">update_data</span>(z_h);  fm_h<span class="sc">$</span><span class="fu">propagate_residual_update</span>(out_h)</span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>  out_f<span class="sc">$</span><span class="fu">update_data</span>(z_f);  fm_f<span class="sc">$</span><span class="fu">propagate_residual_update</span>(out_f)</span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X_h  <span class="op">=</span> X[z <span class="op">==</span> <span class="dv">0</span>, :]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>n0   <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(z <span class="op">==</span> <span class="dv">0</span>))<span class="op">;</span>  n1 <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(z <span class="op">==</span> <span class="dv">1</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>num_trees_f <span class="op">=</span> <span class="dv">50</span><span class="op">;</span>  num_trees_h <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>feature_types_mono <span class="op">=</span> np.repeat(<span class="dv">0</span>, p_X <span class="op">-</span> <span class="dv">2</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>var_weights_mono   <span class="op">=</span> np.repeat(<span class="fl">1.0</span> <span class="op">/</span> (p_X <span class="op">-</span> <span class="fl">2.0</span>), p_X <span class="op">-</span> <span class="dv">2</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>leaf_scale_f <span class="op">=</span> np.array([[<span class="fl">1.0</span> <span class="op">/</span> num_trees_f]])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>leaf_scale_h <span class="op">=</span> np.array([[<span class="fl">1.0</span> <span class="op">/</span> num_trees_h]])</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>forest_dataset_f <span class="op">=</span> Dataset()<span class="op">;</span>  forest_dataset_f.add_covariates(X)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>forest_dataset_h <span class="op">=</span> Dataset()<span class="op">;</span>  forest_dataset_h.add_covariates(X_h)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>fmc_f <span class="op">=</span> ForestModelConfig(</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    feature_types<span class="op">=</span>feature_types_mono, num_trees<span class="op">=</span>num_trees_f,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    num_features<span class="op">=</span>X.shape[<span class="dv">1</span>], num_observations<span class="op">=</span>n,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    variable_weights<span class="op">=</span>var_weights_mono, leaf_dimension<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>alpha, beta<span class="op">=</span>beta, min_samples_leaf<span class="op">=</span>min_samples_leaf,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span>max_depth, leaf_model_type<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    leaf_model_scale<span class="op">=</span>leaf_scale_f, cutpoint_grid_size<span class="op">=</span>cutpoint_grid_size,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>fmc_h <span class="op">=</span> ForestModelConfig(</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    feature_types<span class="op">=</span>feature_types_mono, num_trees<span class="op">=</span>num_trees_h,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    num_features<span class="op">=</span>X_h.shape[<span class="dv">1</span>], num_observations<span class="op">=</span>n0,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    variable_weights<span class="op">=</span>var_weights_mono, leaf_dimension<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>alpha, beta<span class="op">=</span>beta, min_samples_leaf<span class="op">=</span>min_samples_leaf,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span>max_depth, leaf_model_type<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    leaf_model_scale<span class="op">=</span>leaf_scale_h, cutpoint_grid_size<span class="op">=</span>cutpoint_grid_size,</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>gmc_mono <span class="op">=</span> GlobalModelConfig(global_error_variance<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>fs_f <span class="op">=</span> ForestSampler(forest_dataset_f, gmc_mono, fmc_f)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>fs_h <span class="op">=</span> ForestSampler(forest_dataset_h, gmc_mono, fmc_h)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>forest_samples_f <span class="op">=</span> ForestContainer(num_trees_f, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>forest_samples_h <span class="op">=</span> ForestContainer(num_trees_h, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>af_f <span class="op">=</span> Forest(num_trees_f, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>af_h <span class="op">=</span> Forest(num_trees_h, <span class="dv">1</span>, <span class="va">True</span>, <span class="va">False</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> v[z <span class="op">==</span> <span class="dv">1</span>]<span class="op">;</span>  v0 <span class="op">=</span> v[z <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>R1 <span class="op">=</span> np.empty(n0)<span class="op">;</span>  R0 <span class="op">=</span> np.empty(n0)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>R1[v0 <span class="op">==</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>    R0[v0 <span class="op">==</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>nv0 <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(v0 <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>R1[v0 <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>    R0[v0 <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> rng.choice([<span class="dv">0</span>, <span class="dv">1</span>], size<span class="op">=</span>nv0)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>vaug <span class="op">=</span> np.append(v1, R1)</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>z_f  <span class="op">=</span> (<span class="fl">2.0</span> <span class="op">*</span> vaug <span class="op">-</span> <span class="fl">1.0</span>)<span class="op">;</span>  z_f <span class="op">=</span> z_f <span class="op">/</span> np.std(z_f)</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>z_h  <span class="op">=</span> (<span class="fl">2.0</span> <span class="op">*</span> R0   <span class="op">-</span> <span class="fl">1.0</span>)<span class="op">;</span>  z_h <span class="op">=</span> z_h <span class="op">/</span> np.std(z_h)</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>out_f <span class="op">=</span> Residual(z_f)<span class="op">;</span>  out_h <span class="op">=</span> Residual(z_h)</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>fs_f.prepare_for_sampler(forest_dataset_f, out_f, af_f, <span class="dv">0</span>, np.array([<span class="fl">0.0</span>]))</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>fs_h.prepare_for_sampler(forest_dataset_h, out_h, af_h, <span class="dv">0</span>, np.array([<span class="fl">0.0</span>]))</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>gfr_flag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_samples):</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;=</span> num_warmstart:</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>        gfr_flag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>    fs_f.sample_one_iteration(forest_samples_f, af_f, forest_dataset_f, out_f,</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>        cpp_rng, gmc_mono, fmc_f, keep_forest<span class="op">=</span><span class="va">True</span>, gfr<span class="op">=</span>gfr_flag, num_threads<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    fs_h.sample_one_iteration(forest_samples_h, af_h, forest_dataset_h, out_h,</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>        cpp_rng, gmc_mono, fmc_h, keep_forest<span class="op">=</span><span class="va">True</span>, gfr<span class="op">=</span>gfr_flag, num_threads<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    eta_f <span class="op">=</span> np.squeeze(forest_samples_f.predict_raw_single_forest(forest_dataset_f, i))</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>    eta_h <span class="op">=</span> np.squeeze(forest_samples_h.predict_raw_single_forest(forest_dataset_h, i))</span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>    idx0 <span class="op">=</span> np.where(v0 <span class="op">==</span> <span class="dv">0</span>)[<span class="dv">0</span>]</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(eta_h[idx0])) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(eta_f[n1 <span class="op">+</span> idx0]))</span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>    w2 <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(eta_h[idx0])) <span class="op">*</span>      norm.cdf(eta_f[n1 <span class="op">+</span> idx0])</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>    w3 <span class="op">=</span>      norm.cdf(eta_h[idx0])  <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> norm.cdf(eta_f[n1 <span class="op">+</span> idx0]))</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>    s_w <span class="op">=</span> w1 <span class="op">+</span> w2 <span class="op">+</span> w3</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>    u   <span class="op">=</span> rng.uniform(size<span class="op">=</span><span class="bu">len</span>(idx0))</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="dv">1</span><span class="op">*</span>(u <span class="op">&lt;</span> w1<span class="op">/</span>s_w) <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>((u <span class="op">&gt;</span> w1<span class="op">/</span>s_w) <span class="op">&amp;</span> (u <span class="op">&lt;</span> (w1<span class="op">+</span>w2)<span class="op">/</span>s_w)) <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>(u <span class="op">&gt;</span> (w1<span class="op">+</span>w2)<span class="op">/</span>s_w)</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>    R1[v0 <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> (temp <span class="op">==</span> <span class="dv">2</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>    R0[v0 <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> (temp <span class="op">==</span> <span class="dv">3</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>    vaug <span class="op">=</span> np.append(v1, R1)</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>    mu1 <span class="op">=</span> eta_h[R0 <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>    z_h[R0 <span class="op">==</span> <span class="dv">1</span>] <span class="op">=</span> mu1 <span class="op">+</span> norm.ppf(rng.uniform(norm.cdf(<span class="op">-</span>mu1), <span class="dv">1</span>, size<span class="op">=</span><span class="bu">int</span>(np.<span class="bu">sum</span>(R0))))</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>    mu0 <span class="op">=</span> eta_h[R0 <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a>    z_h[R0 <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> mu0 <span class="op">+</span> norm.ppf(rng.uniform(<span class="dv">0</span>, norm.cdf(<span class="op">-</span>mu0), size<span class="op">=</span>n0 <span class="op">-</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(R0))))</span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>    mu1 <span class="op">=</span> eta_f[vaug <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>    z_f[vaug <span class="op">==</span> <span class="dv">1</span>] <span class="op">=</span> mu1 <span class="op">+</span> norm.ppf(rng.uniform(norm.cdf(<span class="op">-</span>mu1), <span class="dv">1</span>, size<span class="op">=</span><span class="bu">int</span>(np.<span class="bu">sum</span>(vaug))))</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>    mu0 <span class="op">=</span> eta_f[vaug <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>    z_f[vaug <span class="op">==</span> <span class="dv">0</span>] <span class="op">=</span> mu0 <span class="op">+</span> norm.ppf(rng.uniform(<span class="dv">0</span>, norm.cdf(<span class="op">-</span>mu0), size<span class="op">=</span>n <span class="op">-</span> <span class="bu">int</span>(np.<span class="bu">sum</span>(vaug))))</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>    out_h.update_data(np.squeeze(z_h) <span class="op">-</span> eta_h)</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>    out_f.update_data(np.squeeze(z_f) <span class="op">-</span> eta_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="extracting-estimates-and-plotting" class="level2">
+<h2 class="anchored" data-anchor-id="extracting-estimates-and-plotting">Extracting Estimates and Plotting</h2>
+<p>We compute the true <span class="math inline">\(ITT_c\)</span> and LATE functions on a prediction grid, then extract posterior predictions and plot credible bands.</p>
+<section id="prediction-grid-and-truth" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-grid-and-truth">Prediction Grid and Truth</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ngrid  <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>xgrid  <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">2.5</span>, <span class="at">length.out =</span> ngrid)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>X_11   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(xgrid, <span class="fu">rep</span>(<span class="dv">1</span>, ngrid), <span class="fu">rep</span>(<span class="dv">1</span>, ngrid))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>X_00   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(xgrid, <span class="fu">rep</span>(<span class="dv">0</span>, ngrid), <span class="fu">rep</span>(<span class="dv">0</span>, ngrid))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>X_01   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(xgrid, <span class="fu">rep</span>(<span class="dv">0</span>, ngrid), <span class="fu">rep</span>(<span class="dv">1</span>, ngrid))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>X_10   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(xgrid, <span class="fu">rep</span>(<span class="dv">1</span>, ngrid), <span class="fu">rep</span>(<span class="dv">0</span>, ngrid))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>pi_strat <span class="ot">&lt;-</span> <span class="fu">pi_s</span>(xgrid)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>w_a <span class="ot">&lt;-</span> pi_strat[, <span class="dv">1</span>];  w_n <span class="ot">&lt;-</span> pi_strat[, <span class="dv">2</span>];  w_c <span class="ot">&lt;-</span> pi_strat[, <span class="dv">3</span>]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>p11_true    <span class="ot">&lt;-</span> (w_c<span class="sc">/</span>(w_a<span class="sc">+</span>w_c))<span class="sc">*</span><span class="fu">gamfun</span>(xgrid,<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">"c"</span>) <span class="sc">+</span> (w_a<span class="sc">/</span>(w_a<span class="sc">+</span>w_c))<span class="sc">*</span><span class="fu">gamfun</span>(xgrid,<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">"a"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>p00_true    <span class="ot">&lt;-</span> (w_c<span class="sc">/</span>(w_n<span class="sc">+</span>w_c))<span class="sc">*</span><span class="fu">gamfun</span>(xgrid,<span class="dv">0</span>,<span class="dv">0</span>,<span class="st">"c"</span>) <span class="sc">+</span> (w_n<span class="sc">/</span>(w_n<span class="sc">+</span>w_c))<span class="sc">*</span><span class="fu">gamfun</span>(xgrid,<span class="dv">0</span>,<span class="dv">0</span>,<span class="st">"n"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>itt_c_true  <span class="ot">&lt;-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"c"</span>) <span class="sc">-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"c"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>LATE_true0  <span class="ot">&lt;-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">1</span>, <span class="dv">0</span>, <span class="st">"c"</span>) <span class="sc">-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"c"</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>LATE_true1  <span class="ot">&lt;-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"c"</span>) <span class="sc">-</span> <span class="fu">gamfun</span>(xgrid, <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">"c"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ngrid <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>xgrid <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="fl">2.5</span>, ngrid)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X_11  <span class="op">=</span> np.column_stack((xgrid, np.ones(ngrid),  np.ones(ngrid)))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>X_00  <span class="op">=</span> np.column_stack((xgrid, np.zeros(ngrid), np.zeros(ngrid)))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>X_01  <span class="op">=</span> np.column_stack((xgrid, np.zeros(ngrid), np.ones(ngrid)))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>X_10  <span class="op">=</span> np.column_stack((xgrid, np.ones(ngrid),  np.zeros(ngrid)))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>pi_strat   <span class="op">=</span> pi_s(xgrid, alpha_a, beta_a, alpha_n, beta_n, alpha_c, beta_c)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>w_a <span class="op">=</span> pi_strat[:, <span class="dv">0</span>]<span class="op">;</span>  w_n <span class="op">=</span> pi_strat[:, <span class="dv">1</span>]<span class="op">;</span>  w_c <span class="op">=</span> pi_strat[:, <span class="dv">2</span>]</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>p11_true   <span class="op">=</span> (w_c<span class="op">/</span>(w_a<span class="op">+</span>w_c))<span class="op">*</span>gamfun(xgrid,<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">"c"</span>) <span class="op">+</span> (w_a<span class="op">/</span>(w_a<span class="op">+</span>w_c))<span class="op">*</span>gamfun(xgrid,<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">"a"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>p00_true   <span class="op">=</span> (w_c<span class="op">/</span>(w_n<span class="op">+</span>w_c))<span class="op">*</span>gamfun(xgrid,<span class="dv">0</span>,<span class="dv">0</span>,<span class="st">"c"</span>) <span class="op">+</span> (w_n<span class="op">/</span>(w_n<span class="op">+</span>w_c))<span class="op">*</span>gamfun(xgrid,<span class="dv">0</span>,<span class="dv">0</span>,<span class="st">"n"</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>itt_c_true <span class="op">=</span> gamfun(xgrid, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"c"</span>) <span class="op">-</span> gamfun(xgrid, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"c"</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>LATE_true0 <span class="op">=</span> gamfun(xgrid, <span class="dv">1</span>, <span class="dv">0</span>, <span class="st">"c"</span>) <span class="op">-</span> gamfun(xgrid, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"c"</span>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>LATE_true1 <span class="op">=</span> gamfun(xgrid, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"c"</span>) <span class="op">-</span> gamfun(xgrid, <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">"c"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-posterior-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="extract-posterior-predictions">Extract Posterior Predictions</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fd_grid <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(<span class="fu">as.matrix</span>(xgrid))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fd_11   <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X_11)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>fd_00   <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X_00)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>fd_01   <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X_01)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>fd_10   <span class="ot">&lt;-</span> <span class="fu">createForestDataset</span>(X_10)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>phat_11 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(forest_samples<span class="sc">$</span><span class="fu">predict</span>(fd_11))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>phat_00 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(forest_samples<span class="sc">$</span><span class="fu">predict</span>(fd_00))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>phat_01 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(forest_samples<span class="sc">$</span><span class="fu">predict</span>(fd_01))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>phat_10 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(forest_samples<span class="sc">$</span><span class="fu">predict</span>(fd_10))</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>phat_ac <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(fs_f<span class="sc">$</span><span class="fu">predict</span>(fd_grid))</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>phat_a  <span class="ot">&lt;-</span> phat_ac <span class="sc">*</span> <span class="fu">pnorm</span>(fs_h<span class="sc">$</span><span class="fu">predict</span>(fd_grid))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>phat_c  <span class="ot">&lt;-</span> phat_ac <span class="sc">-</span> phat_a</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>phat_n  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> phat_ac</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_dataset(mat):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> Dataset()</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    ds.add_covariates(mat)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ds</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>fd_grid <span class="op">=</span> make_dataset(np.expand_dims(xgrid, <span class="dv">1</span>))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>fd_11   <span class="op">=</span> make_dataset(X_11)<span class="op">;</span>  fd_00 <span class="op">=</span> make_dataset(X_00)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>fd_01   <span class="op">=</span> make_dataset(X_01)<span class="op">;</span>  fd_10 <span class="op">=</span> make_dataset(X_10)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>phat_11 <span class="op">=</span> norm.cdf(forest_samples.predict(fd_11))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>phat_00 <span class="op">=</span> norm.cdf(forest_samples.predict(fd_00))</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>phat_01 <span class="op">=</span> norm.cdf(forest_samples.predict(fd_01))</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>phat_10 <span class="op">=</span> norm.cdf(forest_samples.predict(fd_10))</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>phat_ac <span class="op">=</span> norm.cdf(forest_samples_f.predict(fd_grid))</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>phat_a  <span class="op">=</span> phat_ac <span class="op">*</span> norm.cdf(forest_samples_h.predict(fd_grid))</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>phat_c  <span class="op">=</span> phat_ac <span class="op">-</span> phat_a</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>phat_n  <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> phat_ac</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-fit-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="model-fit-diagnostics">Model Fit Diagnostics</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p11_true, <span class="fu">rowMeans</span>(phat_11), <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"True p11"</span>, <span class="at">ylab =</span> <span class="st">"Fitted p11"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p00_true, <span class="fu">rowMeans</span>(phat_00), <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"True p00"</span>, <span class="at">ylab =</span> <span class="st">"Fitted p00"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="iv_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Fitted vs.&nbsp;true conditional outcome probabilities.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ax1.scatter(p11_true, np.mean(phat_11, axis<span class="op">=</span><span class="dv">1</span>), color<span class="op">=</span><span class="st">"black"</span>, s<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ax1.axline((<span class="dv">0</span>, <span class="dv">0</span>), slope<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">3</span>, <span class="dv">3</span>)))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>ax2.scatter(p00_true, np.mean(phat_00, axis<span class="op">=</span><span class="dv">1</span>), color<span class="op">=</span><span class="st">"black"</span>, s<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>ax2.axline((<span class="dv">0</span>, <span class="dv">0</span>), slope<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">3</span>, <span class="dv">3</span>)))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="iv_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Fitted vs.&nbsp;true conditional outcome probabilities.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="construct-and-plot-the-itt_c" class="level3">
+<h3 class="anchored" data-anchor-id="construct-and-plot-the-itt_c">Construct and Plot the <span class="math inline">\(ITT_c\)</span></h3>
+<p>We center the posterior on the identified interval at the value implied by a valid exclusion restriction, then construct credible bands for the <span class="math inline">\(ITT_c\)</span> and compare to the LATE.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>itt_c <span class="ot">&lt;-</span> late <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, ngrid, <span class="fu">ncol</span>(phat_c))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(phat_c))) {</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  gamest11 <span class="ot">&lt;-</span> ((phat_a[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_11[,j] <span class="sc">-</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>               phat_10[,j]<span class="sc">*</span>phat_a[,j]<span class="sc">/</span>phat_c[,j]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  lower11  <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="dv">0</span>, ((phat_a[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_11[,j] <span class="sc">-</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                       phat_a[,j]<span class="sc">/</span>phat_c[,j])</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  upper11  <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="dv">1</span>, ((phat_a[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_11[,j])</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  m11 <span class="ot">&lt;-</span> (gamest11 <span class="sc">-</span> lower11)<span class="sc">/</span>(upper11 <span class="sc">-</span> lower11)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  a1 <span class="ot">&lt;-</span> ss<span class="sc">*</span>m11;  b1 <span class="ot">&lt;-</span> ss<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> m11)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  a1[m11 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>;  b1[m11 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  a1[m11 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span>;  b1[m11 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  gamest00 <span class="ot">&lt;-</span> ((phat_n[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_00[,j] <span class="sc">-</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>               phat_01[,j]<span class="sc">*</span>phat_n[,j]<span class="sc">/</span>phat_c[,j]</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  lower00  <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="dv">0</span>, ((phat_n[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_00[,j] <span class="sc">-</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>                       phat_n[,j]<span class="sc">/</span>phat_c[,j])</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  upper00  <span class="ot">&lt;-</span> <span class="fu">pmin</span>(<span class="dv">1</span>, ((phat_n[,j]<span class="sc">+</span>phat_c[,j])<span class="sc">/</span>phat_c[,j])<span class="sc">*</span>phat_00[,j])</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  m00 <span class="ot">&lt;-</span> (gamest00 <span class="sc">-</span> lower00)<span class="sc">/</span>(upper00 <span class="sc">-</span> lower00)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  a0 <span class="ot">&lt;-</span> ss<span class="sc">*</span>m00;  b0 <span class="ot">&lt;-</span> ss<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> m00)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  a0[m00 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>;  b0[m00 <span class="sc">&lt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  a0[m00 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">5</span>;  b0[m00 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  itt_c[,j] <span class="ot">&lt;-</span> lower11 <span class="sc">+</span> (upper11<span class="sc">-</span>lower11)<span class="sc">*</span><span class="fu">rbeta</span>(ngrid, a1, b1) <span class="sc">-</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>               (lower00 <span class="sc">+</span> (upper00<span class="sc">-</span>lower00)<span class="sc">*</span><span class="fu">rbeta</span>(ngrid, a0, b0))</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>  late[,j]  <span class="ot">&lt;-</span> gamest11 <span class="sc">-</span> gamest00</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>upperq    <span class="ot">&lt;-</span> <span class="fu">apply</span>(itt_c, <span class="dv">1</span>, quantile, <span class="fl">0.975</span>)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>lowerq    <span class="ot">&lt;-</span> <span class="fu">apply</span>(itt_c, <span class="dv">1</span>, quantile, <span class="fl">0.025</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>upperq_er <span class="ot">&lt;-</span> <span class="fu">apply</span>(late,  <span class="dv">1</span>, quantile, <span class="fl">0.975</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>lowerq_er <span class="ot">&lt;-</span> <span class="fu">apply</span>(late,  <span class="dv">1</span>, quantile, <span class="fl">0.025</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xgrid, itt_c_true, <span class="at">type =</span> <span class="st">"n"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.75</span>, <span class="fl">0.05</span>), <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"Treatment effect"</span>)</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(xgrid, <span class="fu">rev</span>(xgrid)), <span class="fu">c</span>(lowerq, <span class="fu">rev</span>(upperq)),</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>), <span class="at">border =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(xgrid, <span class="fu">rev</span>(xgrid)), <span class="fu">c</span>(lowerq_er, <span class="fu">rev</span>(upperq_er)),</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>), <span class="at">border =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xgrid, <span class="fu">rowMeans</span>(late),  <span class="at">col =</span> <span class="st">"slategray"</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xgrid, <span class="fu">rowMeans</span>(itt_c), <span class="at">col =</span> <span class="st">"goldenrod1"</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xgrid, LATE_true0, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xgrid, LATE_true1, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xgrid, itt_c_true, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="iv_files/figure-html/unnamed-chunk-30-3.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Posterior credible bands for the ITT_c (gold/brown) and LATE (gray/blue) compared to the true ITT_c (solid black), LATE_z0 (dotted), and LATE_z1 (dashed).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>itt_c <span class="op">=</span> np.empty((ngrid, phat_c.shape[<span class="dv">1</span>]))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>late  <span class="op">=</span> np.empty((ngrid, phat_c.shape[<span class="dv">1</span>]))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(phat_c.shape[<span class="dv">1</span>]):</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    gamest11 <span class="op">=</span> ((phat_a[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_11[:,j] <span class="op">-</span> <span class="op">\</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                phat_10[:,j]<span class="op">*</span>phat_a[:,j]<span class="op">/</span>phat_c[:,j]</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    lower11 <span class="op">=</span> np.maximum(<span class="fl">0.</span>, ((phat_a[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_11[:,j] <span class="op">-</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>                              phat_a[:,j]<span class="op">/</span>phat_c[:,j])</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    upper11 <span class="op">=</span> np.minimum(<span class="fl">1.</span>, ((phat_a[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_11[:,j])</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    m11 <span class="op">=</span> (gamest11 <span class="op">-</span> lower11) <span class="op">/</span> (upper11 <span class="op">-</span> lower11)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    a1 <span class="op">=</span> ss <span class="op">*</span> m11<span class="op">;</span>  b1 <span class="op">=</span> ss <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> m11)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    a1[m11 <span class="op">&lt;</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  b1[m11 <span class="op">&lt;</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    a1[m11 <span class="op">&gt;</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  b1[m11 <span class="op">&gt;</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    gamest00 <span class="op">=</span> ((phat_n[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_00[:,j] <span class="op">-</span> <span class="op">\</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>                phat_01[:,j]<span class="op">*</span>phat_n[:,j]<span class="op">/</span>phat_c[:,j]</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    lower00 <span class="op">=</span> np.maximum(<span class="fl">0.</span>, ((phat_n[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_00[:,j] <span class="op">-</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>                              phat_n[:,j]<span class="op">/</span>phat_c[:,j])</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    upper00 <span class="op">=</span> np.minimum(<span class="fl">1.</span>, ((phat_n[:,j]<span class="op">+</span>phat_c[:,j])<span class="op">/</span>phat_c[:,j])<span class="op">*</span>phat_00[:,j])</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    m00 <span class="op">=</span> (gamest00 <span class="op">-</span> lower00) <span class="op">/</span> (upper00 <span class="op">-</span> lower00)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    a0 <span class="op">=</span> ss <span class="op">*</span> m00<span class="op">;</span>  b0 <span class="op">=</span> ss <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> m00)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    a0[m00 <span class="op">&lt;</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  b0[m00 <span class="op">&lt;</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    a0[m00 <span class="op">&gt;</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  b0[m00 <span class="op">&gt;</span> <span class="dv">1</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    itt_c[:, j] <span class="op">=</span> lower11 <span class="op">+</span> (upper11<span class="op">-</span>lower11)<span class="op">*</span>rng.beta(a1, b1, ngrid) <span class="op">-</span> <span class="op">\</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>                  (lower00 <span class="op">+</span> (upper00<span class="op">-</span>lower00)<span class="op">*</span>rng.beta(a0, b0, ngrid))</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    late[:, j]  <span class="op">=</span> gamest11 <span class="op">-</span> gamest00</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>upperq    <span class="op">=</span> np.quantile(itt_c, <span class="fl">0.975</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>lowerq    <span class="op">=</span> np.quantile(itt_c, <span class="fl">0.025</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>upperq_er <span class="op">=</span> np.quantile(late,  <span class="fl">0.975</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>lowerq_er <span class="op">=</span> np.quantile(late,  <span class="fl">0.025</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>plt.plot(xgrid, itt_c_true, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">0.75</span>, <span class="fl">0.05</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(-0.75, 0.05)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.fill(np.append(xgrid, xgrid[::<span class="op">-</span><span class="dv">1</span>]), np.append(lowerq, upperq[::<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plt.fill(np.append(xgrid, xgrid[::<span class="op">-</span><span class="dv">1</span>]), np.append(lowerq_er, upperq_er[::<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>         color<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>plt.plot(xgrid, np.mean(late,  axis<span class="op">=</span><span class="dv">1</span>), color<span class="op">=</span><span class="st">"darkgrey"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>plt.plot(xgrid, np.mean(itt_c, axis<span class="op">=</span><span class="dv">1</span>), color<span class="op">=</span><span class="st">"gold"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>plt.plot(xgrid, LATE_true0, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>plt.plot(xgrid, LATE_true1, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span>(<span class="dv">0</span>, (<span class="dv">4</span>, <span class="dv">4</span>)))</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="iv_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Posterior credible bands for ITT_c and LATE compared to the true functions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>With a valid exclusion restriction the three black curves would all be identical. Without it, the direct effect of <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> causes them to diverge. Specifically, the <span class="math inline">\(ITT_c\)</span> (gold) compares getting the vaccine <em>and</em> the reminder to not getting either — when both reduce risk, we see a larger overall reduction. The two LATE effects compare the isolated impact of the vaccine among those who did and did not receive the reminder, respectively.</p>
+</section>
+</section>
+<section id="references" class="level2">
+
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-albert1993bayesian" class="csl-entry" role="listitem">
+Albert, James H, and Siddhartha Chib. 1993. <span>“Bayesian Analysis of Binary and Polychotomous Response Data.”</span> <em>Journal of the American Statistical Association</em> 88 (422): 669–79.
+</div>
+<div id="ref-hahn2016bayesian" class="csl-entry" role="listitem">
+Hahn, P Richard, Jared S Murray, and Ioanna Manolopoulou. 2016. <span>“A Bayesian Partial Identification Approach to Inferring the Prevalence of Accounting Misconduct.”</span> <em>Journal of the American Statistical Association</em> 111 (513): 14–26.
+</div>
+<div id="ref-hirano2000assessing" class="csl-entry" role="listitem">
+Hirano, Keisuke, Guido W. Imbens, Donald B. Rubin, and Xiao-Hua Zhou. 2000. <span>“Assessing the Effect of an Influenza Vaccine in an Encouragement Design.”</span> <em>Biostatistics</em> 1 (1): 69–88. <a href="https://doi.org/10.1093/biostatistics/1.1.69">https://doi.org/10.1093/biostatistics/1.1.69</a>.
+</div>
+<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
+Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge university press.
+</div>
+<div id="ref-mcdonald1992effects" class="csl-entry" role="listitem">
+McDonald, Clement J, Siu L Hui, and William M Tierney. 1992. <span>“Effects of Computer Reminders for Influenza Vaccination on Morbidity During Influenza Epidemics.”</span> <em>MD Computing: Computers in Medical Practice</em> 9 (5): 304–12.
+</div>
+<div id="ref-papakostas2023forecasts" class="csl-entry" role="listitem">
+Papakostas, Demetrios, P Richard Hahn, Jared Murray, Frank Zhou, and Joseph Gerakos. 2023. <span>“Do Forecasts of Bankruptcy Cause Bankruptcy? A Machine Learning Sensitivity Analysis.”</span> <em>The Annals of Applied Statistics</em> 17 (1): 711–39.
+</div>
+<div id="ref-richardson2011transparent" class="csl-entry" role="listitem">
+Richardson, Thomas S., Robin J. Evans, and James M. Robins. 2011. <span>“Transparent Parametrizations of Models for Potential Outcomes.”</span> In <em>Bayesian Statistics 9</em>. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780199694587.003.0019">https://doi.org/10.1093/acprof:oso/9780199694587.003.0019</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/stochtree\.ai\/v\/rc-0\.5\.0\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/StochasticTree/stochtree/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
