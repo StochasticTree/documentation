@@ -58,36 +58,19 @@ jobs:
         with:
           ref: ${{ matrix.docs_ref }}
 
-      # R package source (pkgdown + R vignette install). Blank ref = default branch.
-      - name: Checkout stochtree R source (${{ matrix.r_ref || 'default' }})
+      # stochtree source, shared by every language's docs: the R package (pkgdown
+      # + vignette install), the Python package (pip install + quartodoc), and the
+      # C++ core (Doxygen). All three used to be checked out separately so a
+      # version could pin a different ref per language, which mattered when the RC
+      # built from the single-language packaged branches (r-rc-*, py-rc-*). Every
+      # version now builds from one monorepo branch, so a single `code_ref` and a
+      # single checkout covers all three. Blank ref = default branch.
+      - name: Checkout stochtree source (${{ matrix.code_ref || 'default' }})
         uses: actions/checkout@v4
         with:
           repository: 'StochasticTree/stochtree'
-          ref: ${{ matrix.r_ref }}
+          ref: ${{ matrix.code_ref }}
           path: 'stochtree_repo'
-          submodules: 'recursive'
-
-      # Python package source (pip install + quartodoc). Blank ref = default branch.
-      - name: Checkout stochtree Python source (${{ matrix.py_ref || 'default' }})
-        uses: actions/checkout@v4
-        with:
-          repository: 'StochasticTree/stochtree'
-          ref: ${{ matrix.py_ref }}
-          path: 'stochtree_repo_py'
-          submodules: 'recursive'
-
-      # C++ core source for Doxygen. Only monorepo branches ship the C++ core +
-      # Doxyfile; a version pinned to a single-language packaged branch (r-rc-*,
-      # py-rc-*) would not, so this stays gated on `build_cpp` and keeps its own
-      # ref. Every current version builds from a monorepo branch, so `cpp_ref`
-      # matches the R/Python refs.
-      - name: Checkout stochtree C++ source (${{ matrix.cpp_ref || 'default' }})
-        if: ${{ matrix.build_cpp }}
-        uses: actions/checkout@v4
-        with:
-          repository: 'StochasticTree/stochtree'
-          ref: ${{ matrix.cpp_ref }}
-          path: 'stochtree_repo_cpp'
           submodules: 'recursive'
 
       - name: Install doxygen and graphviz
@@ -95,14 +78,16 @@ jobs:
         run: |
           sudo apt-get install doxygen graphviz -y
 
+      # Gated on `build_cpp` rather than on its own checkout: a version pinned to a
+      # branch that ships no C++ core / Doxyfile opts out here.
       - name: Build the C++ doxygen output
         if: ${{ matrix.build_cpp }}
         run: |
-          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo_cpp/Doxyfile
-          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo_cpp/Doxyfile
-          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo_cpp/Doxyfile
+          sed -i 's|^OUTPUT_DIRECTORY *=.*|OUTPUT_DIRECTORY = ../docs/cpp_docs/|' stochtree_repo/Doxyfile
+          sed -i 's|^GENERATE_XML *=.*|GENERATE_XML = NO|' stochtree_repo/Doxyfile
+          sed -i 's|^GENERATE_HTML *=.*|GENERATE_HTML = YES|' stochtree_repo/Doxyfile
           mkdir -p docs/cpp_docs/
-          cd stochtree_repo_cpp
+          cd stochtree_repo
           doxygen Doxyfile
           cd ..
 
@@ -117,9 +102,11 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Runs before the CRAN bootstrap below, so `pip install .` never sees the
+      # temporary stochtree_cran/ subdirectory that step creates.
       - name: Install local copy of the stochtree python package
         run: |
-          cd stochtree_repo_py
+          cd stochtree_repo
           pip install .
           cd ..
 
