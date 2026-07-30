@@ -190,6 +190,10 @@ jobs:
           # Empty for "latest" (root); "v/rc-0.5.0" etc. for versioned builds.
           target-folder: ${{ matrix.target }}
           # A root deploy must not wipe the versioned sub-sites; a versioned
-          # deploy already scopes its clean to its own target folder.
+          # deploy already scopes its clean to its own target folder. Both
+          # entries are needed: rsync's `v/**` protects the contents but not the
+          # `v` directory entry itself, so `--delete` would try (and noisily
+          # fail) to remove it.
           clean-exclude: |
+            v
             v/**
