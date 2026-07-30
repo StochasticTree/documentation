@@ -366,6 +366,8 @@ abline(0, 1, col = "black", lty = 3)
 tau_hat_test = bcf_model.predict(
     X=X_test, Z=Z_test, propensity=pi_test, terms="cate", type="posterior"
 )
+# tau_hat_test has shape (n, num_samples, treatment_dim), so the treatment
+# dimension is summed over on axis 2
 treatment_term_mcmc_test = np.multiply(
     np.atleast_3d(Z_test).swapaxes(1, 2), tau_hat_test
 ).sum(axis=2)
