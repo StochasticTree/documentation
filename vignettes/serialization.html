@@ -224,6 +224,23 @@ div.csl-indent {
     </ul>
   </li>
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-latest" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: latest</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-latest">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -682,7 +699,7 @@ div.csl-indent {
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bart_preds_reload <span class="ot">&lt;-</span> <span class="fu">predict</span>(bart_model_reload, X_train)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bart_model<span class="sc">$</span>y_hat_train), <span class="fu">rowMeans</span>(bart_preds_reload<span class="sc">$</span>y_hat),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"y_hat_train"</span>)), <span class="fu">rowMeans</span>(bart_preds_reload<span class="sc">$</span>y_hat),</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Original"</span>, <span class="at">ylab =</span> <span class="st">"Deserialized"</span>, <span class="at">main =</span> <span class="st">"Conditional Mean Estimates"</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -692,7 +709,7 @@ div.csl-indent {
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bart_model<span class="sc">$</span>sigma2_x_hat_train), <span class="fu">rowMeans</span>(bart_preds_reload<span class="sc">$</span>variance_forest_predictions),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"sigma2_x_train"</span>)), <span class="fu">rowMeans</span>(bart_preds_reload<span class="sc">$</span>variance_forest_predictions),</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Original"</span>, <span class="at">ylab =</span> <span class="st">"Deserialized"</span>, <span class="at">main =</span> <span class="st">"Conditional Variance Estimates"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -947,7 +964,7 @@ div.csl-indent {
 <div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bcf_preds_reload <span class="ot">&lt;-</span> <span class="fu">predict</span>(bcf_model_reload, X_train, Z_train, pi_train, rfx_group_ids_train, rfx_basis_train)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bcf_model<span class="sc">$</span>mu_hat_train), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>mu_hat),</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bcf_model, <span class="st">"mu_hat_train"</span>)), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>mu_hat),</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Original"</span>, <span class="at">ylab =</span> <span class="st">"Deserialized"</span>, <span class="at">main =</span> <span class="st">"Prognostic forest"</span>)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -957,7 +974,7 @@ div.csl-indent {
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bcf_model<span class="sc">$</span>tau_hat_train), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>tau_hat),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bcf_model, <span class="st">"tau_hat_train"</span>)), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>tau_hat),</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Original"</span>, <span class="at">ylab =</span> <span class="st">"Deserialized"</span>, <span class="at">main =</span> <span class="st">"Treatment forest"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -967,7 +984,7 @@ div.csl-indent {
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bcf_model<span class="sc">$</span>y_hat_train), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>y_hat),</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bcf_model, <span class="st">"y_hat_train"</span>)), <span class="fu">rowMeans</span>(bcf_preds_reload<span class="sc">$</span>y_hat),</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Original"</span>, <span class="at">ylab =</span> <span class="st">"Deserialized"</span>, <span class="at">main =</span> <span class="st">"Overall outcome"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

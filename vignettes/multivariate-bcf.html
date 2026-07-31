@@ -234,6 +234,23 @@ window.Quarto = {
     </ul>
   </li>
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-latest" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: latest</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-latest">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -709,7 +726,7 @@ Y_i = \mu(X_i) + \tau(X_i)^\top Z_i + \epsilon_i
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(np.mean(np.power(y_hat_test <span class="op">-</span> y_test, <span class="dv">2</span>)))</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test-set RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test-set RMSE: 0.90</code></pre>
+<pre><code>Test-set RMSE: 0.98</code></pre>
 </div>
 </div>
 </div>
@@ -849,23 +866,25 @@ Y_i = \mu(X_i) + \tau(X_i)^\top Z_i + \epsilon_i
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tau_hat_test <span class="op">=</span> bcf_model.predict(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_test, Z<span class="op">=</span>Z_test, propensity<span class="op">=</span>pi_test, terms<span class="op">=</span><span class="st">"cate"</span>, <span class="bu">type</span><span class="op">=</span><span class="st">"posterior"</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>treatment_term_mcmc_test <span class="op">=</span> np.multiply(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    np.atleast_3d(Z_test).swapaxes(<span class="dv">1</span>, <span class="dv">2</span>), tau_hat_test</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>treatment_term_test <span class="op">=</span> np.multiply(tau_test, Z_test).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>treatment_term_hat_test <span class="op">=</span> np.squeeze(treatment_term_mcmc_test).mean(</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>lo, hi <span class="op">=</span> (</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span>((treatment_term_hat_test).<span class="bu">min</span>(), (treatment_term_test).<span class="bu">min</span>()),</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span>((treatment_term_hat_test).<span class="bu">max</span>(), (treatment_term_test).<span class="bu">max</span>()),</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(treatment_term_test, treatment_term_hat_test, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"True value"</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average estimated value"</span>)</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Treatment Term"</span>)</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># tau_hat_test has shape (n, num_samples, treatment_dim), so the treatment</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dimension is summed over on axis 2</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>treatment_term_mcmc_test <span class="op">=</span> np.multiply(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    np.atleast_3d(Z_test).swapaxes(<span class="dv">1</span>, <span class="dv">2</span>), tau_hat_test</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>treatment_term_test <span class="op">=</span> np.multiply(tau_test, Z_test).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>treatment_term_hat_test <span class="op">=</span> np.squeeze(treatment_term_mcmc_test).mean(</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>lo, hi <span class="op">=</span> (</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span>((treatment_term_hat_test).<span class="bu">min</span>(), (treatment_term_test).<span class="bu">min</span>()),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span>((treatment_term_hat_test).<span class="bu">max</span>(), (treatment_term_test).<span class="bu">max</span>()),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(treatment_term_test, treatment_term_hat_test, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"True value"</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average estimated value"</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Treatment Term"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

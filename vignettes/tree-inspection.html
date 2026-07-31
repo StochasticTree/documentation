@@ -234,6 +234,23 @@ window.Quarto = {
     </ul>
   </li>
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-latest" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: latest</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-latest">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -671,6 +688,24 @@ window.Quarto = {
 <section id="variable-split-counts" class="level2">
 <h2 class="anchored" data-anchor-id="variable-split-counts">Variable Split Counts</h2>
 <p>The <code>get_forest_split_counts</code> method of a BART model’s internal forest objects allows us to compute the number of times each variable was used in a split rule across all trees in a given forest.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Forest access changes in stochtree 0.5.0
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The rest of this page reaches the sampled forests directly, through <code>bart_model$mean_forests</code> (R) and <code>bart_model.forest_container_mean</code> (Python). Those fields are removed in stochtree 0.5.0 — the forests become part of a single C++-based samples object, and accessing the old names raises an error rather than silently returning something different.</p>
+<p>From 0.5.0 onward, extract a standalone copy of the forest instead, and call the same methods on it:</p>
+<ul>
+<li>R: <code>extractForest(bart_model, "mean")</code></li>
+<li>Python: <code>bart_model.extract_forest("mean")</code></li>
+</ul>
+</div>
+</div>
 <p>Below we query this vector for the final GFR sample (1-indexed as 10 in R, 0-indexed as 9 in Python), where the second argument is the dimensionality of the covariates.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Python</a></li></ul>
@@ -679,7 +714,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bart_model<span class="sc">$</span>mean_forests<span class="sc">$</span><span class="fu">get_forest_split_counts</span>(<span class="dv">10</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 23 24 21 24 26 31 26 34 19 33</code></pre>
+<pre><code> [1] 21 25 29 27 21 15 22 30 25 38</code></pre>
 </div>
 </div>
 </div>
@@ -687,7 +722,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bart_model.forest_container_mean.get_forest_split_counts(<span class="dv">9</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([29, 27, 38, 33, 30, 30, 26, 34, 20, 31], dtype=int32)</code></pre>
+<pre><code>array([30, 34, 23, 26, 21, 22, 26, 26, 24, 29], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -701,7 +736,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bart_model<span class="sc">$</span>mean_forests<span class="sc">$</span><span class="fu">get_aggregate_split_counts</span>(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2886 2544 2323 2373 3070 3370 2712 2607 2063 3373</code></pre>
+<pre><code> [1] 2223 2465 2847 2169 2598 2293 2956 2595 2616 3424</code></pre>
 </div>
 </div>
 </div>
@@ -709,7 +744,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bart_model.forest_container_mean.get_overall_split_counts(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([2192, 3171, 2704, 2787, 2800, 2502, 2808, 2877, 2411, 3791],
+<pre><code>array([2733, 3124, 2848, 2631, 2693, 2423, 2367, 2318, 2242, 4251],
       dtype=int32)</code></pre>
 </div>
 </div>
@@ -737,7 +772,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> bart_model.forest_container_mean.get_granular_split_counts(p_x)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">9</span>, <span class="dv">0</span>, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 3], dtype=int32)</code></pre>
+<pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -759,7 +794,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">9</span>, <span class="dv">1</span>, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([0, 0, 1, 0, 0, 0, 0, 1, 0, 1], dtype=int32)</code></pre>
+<pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -773,7 +808,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">20</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 1 0 0 0 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 1 0</code></pre>
 </div>
 </div>
 </div>
@@ -781,7 +816,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">9</span>, <span class="dv">19</span>, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([0, 0, 0, 0, 0, 0, 1, 0, 0, 0], dtype=int32)</code></pre>
+<pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 1], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -794,7 +829,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">30</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 0 0 0 0 0 0 0 0 1</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 1 0 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -802,7 +837,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">9</span>, <span class="dv">29</span>, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>array([0, 0, 0, 0, 0, 0, 0, 1, 0, 0], dtype=int32)</code></pre>
+<pre><code>array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0], dtype=int32)</code></pre>
 </div>
 </div>
 </div>
@@ -842,8 +877,8 @@ window.Quarto = {
 <span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.497 else to node 2
-    node=1 is a leaf node with value=-0.456
-    node=2 is a leaf node with value=0.378</code></pre>
+    node=1 is a leaf node with value=-0.417
+    node=2 is a leaf node with value=0.473</code></pre>
 </div>
 </div>
 </div>
@@ -868,13 +903,9 @@ window.Quarto = {
 <span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}</span><span class="ss">node=</span><span class="sc">{</span>nid<span class="sc">}</span><span class="ss"> is a split node, which tells us to go to node "</span></span>
 <span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>              <span class="ss">f"</span><span class="sc">{</span>left<span class="sc">}</span><span class="ss"> if X[:, </span><span class="sc">{</span>feature<span class="sc">}</span><span class="ss">] &lt;= </span><span class="sc">{</span>threshold<span class="sc">}</span><span class="ss"> else to node </span><span class="sc">{</span>right<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.509 else to node 2
-    node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.502 else to node 4
-    node=2 is a split node, which tells us to go to node 5 if X[:, 9] &lt;= 0.749 else to node 6
-        node=3 is a leaf node with value=[-0.376]
-        node=4 is a leaf node with value=[-0.064]
-        node=5 is a leaf node with value=[-0.04]
-        node=6 is a leaf node with value=[0.295]</code></pre>
+<pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.488 else to node 2
+    node=1 is a leaf node with value=[-0.286]
+    node=2 is a leaf node with value=[0.388]</code></pre>
 </div>
 </div>
 </div>

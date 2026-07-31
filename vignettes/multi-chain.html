@@ -253,6 +253,23 @@ window.Quarto = {
     </ul>
   </li>
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-latest" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: latest</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-latest">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -694,7 +711,7 @@ window.Quarto = {
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    offset <span class="ot">&lt;-</span> (chain_idx <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> num_mcmc</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    inds_start <span class="ot">&lt;-</span> offset <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    inds_end <span class="ot">&lt;-</span> offset <span class="sc">+</span> num_mcmc</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    coda<span class="sc">::</span><span class="fu">mcmc</span>(bart_model<span class="sc">$</span>sigma2_global_samples[inds_start<span class="sc">:</span>inds_end])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    coda<span class="sc">::</span><span class="fu">mcmc</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"sigma2_global"</span>)[inds_start<span class="sc">:</span>inds_end])</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(sigma2_coda_list, <span class="at">ylab =</span> <span class="fu">expression</span>(sigma<span class="sc">^</span><span class="dv">2</span>))</span>
@@ -719,9 +736,9 @@ window.Quarto = {
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.386, Lag 5: 0.15, Lag 10: 0.108, Lag 50: 0.055
-Total effective sample size across chains: 1321.7
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.008</code></pre>
+Lag 0: 1, Lag 1: 0.373, Lag 5: 0.135, Lag 10: 0.104, Lag 50: 0.036
+Total effective sample size across chains: 1488.9
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.01</code></pre>
 </div>
 </div>
 </div>
@@ -750,7 +767,7 @@ Total effective sample size across chains: 1321.7
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 199.4</code></pre>
+        sigma2   float64 8B 366.1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -996,7 +1013,7 @@ Group: /posterior
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    offset <span class="ot">&lt;-</span> (chain_idx <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> num_mcmc</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    inds_start <span class="ot">&lt;-</span> offset <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    inds_end <span class="ot">&lt;-</span> offset <span class="sc">+</span> num_mcmc</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    coda<span class="sc">::</span><span class="fu">mcmc</span>(bart_model<span class="sc">$</span>sigma2_global_samples[inds_start<span class="sc">:</span>inds_end])</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    coda<span class="sc">::</span><span class="fu">mcmc</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"sigma2_global"</span>)[inds_start<span class="sc">:</span>inds_end])</span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(sigma2_coda_list, <span class="at">ylab =</span> <span class="fu">expression</span>(sigma<span class="sc">^</span><span class="dv">2</span>))</span>
@@ -1021,9 +1038,9 @@ Group: /posterior
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average autocorrelation across chains:
-Lag 0: 1, Lag 1: 0.362, Lag 5: 0.161, Lag 10: 0.099, Lag 50: 0.041
-Total effective sample size across chains: 1637.4
-'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.006</code></pre>
+Lag 0: 1, Lag 1: 0.368, Lag 5: 0.15, Lag 10: 0.118, Lag 50: 0.041
+Total effective sample size across chains: 1038.8
+'R-hat' potential scale reduction factor of Gelman and Rubin (1992)): 1.002</code></pre>
 </div>
 </div>
 </div>
@@ -1050,7 +1067,7 @@ Total effective sample size across chains: 1637.4
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 529.9</code></pre>
+        sigma2   float64 8B 381.1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"R-hat:"</span>, az.rhat(idata))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1058,7 +1075,7 @@ Group: /posterior
 Group: /posterior
     Dimensions:  ()
     Data variables:
-        sigma2   float64 8B 1.008</code></pre>
+        sigma2   float64 8B 1.009</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_autocorr(idata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1230,7 +1247,7 @@ Group: /posterior
 <span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_forest_params =</span> mean_forest_params</span>
 <span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    bart_model_string <span class="ot">&lt;-</span> stochtree<span class="sc">::</span><span class="fu">saveBARTModelToJsonString</span>(bart_model)</span>
-<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    y_hat_test <span class="ot">&lt;-</span> bart_model<span class="sc">$</span>y_hat_test</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    y_hat_test <span class="ot">&lt;-</span> <span class="fu">extractParameter</span>(bart_model, <span class="st">"y_hat_test"</span>)</span>
 <span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">model =</span> bart_model_string, <span class="at">yhat =</span> y_hat_test)</span>
 <span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">

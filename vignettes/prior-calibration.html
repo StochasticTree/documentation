@@ -253,6 +253,23 @@ window.Quarto = {
     </ul>
   </li>
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-version-latest" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Version: latest</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-version-latest">    
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/">
+ <span class="dropdown-text">latest</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://stochtree.ai/v/rc-0.5.0/">
+ <span class="dropdown-text">rc-0.5.0</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -671,7 +688,7 @@ f(X) &amp;\sim \text{BART}\left(\alpha, \beta\right)\\
 <div class="tab-content" data-group="language">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(bart_model<span class="sc">$</span>y_hat_test), y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rowMeans</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"y_hat_test"</span>)), y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -709,7 +726,7 @@ f(X) &amp;\sim \text{BART}\left(\alpha, \beta\right)\\
 <div class="tab-content" data-group="language">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bart_model<span class="sc">$</span>sigma2_global_samples, <span class="at">ylab =</span> <span class="st">"sigma^2"</span>, <span class="at">xlab =</span> <span class="st">"iteration"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">extractParameter</span>(bart_model, <span class="st">"sigma2_global"</span>), <span class="at">ylab =</span> <span class="st">"sigma^2"</span>, <span class="at">xlab =</span> <span class="st">"iteration"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> noise_sd<span class="sc">^</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
