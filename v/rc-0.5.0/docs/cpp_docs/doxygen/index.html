@@ -28,7 +28,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">StochTree<span id="projectnumber">&#160;0.4.6.9000</span>
+   <div id="projectname">StochTree<span id="projectnumber">&#160;0.5.0.9000</span>
    </div>
   </td>
  </tr>
@@ -106,22 +106,22 @@ Custom Leaf Models</h2>
 <p>Suppose, for the sake of illustration, that the newest custom leaf model is a multinomial logit model.</p>
 <p>First, add an entry to the <a class="el" href="group__leaf__model__group.html#ga8cbfe035085adfd1a05335cf6f543a07">ModelType</a> enumeration for this new model type</p>
 <div class="fragment"><div class="line"><span class="keyword">enum</span> ModelType {</div>
-<div class="line">   kConstantLeafGaussian, </div>
-<div class="line">   kUnivariateRegressionLeafGaussian, </div>
-<div class="line">   kMultivariateRegressionLeafGaussian, </div>
-<div class="line">   kLogLinearVariance, </div>
-<div class="line">   kMultinomialLogit, </div>
+<div class="line">   kConstantLeafGaussian,</div>
+<div class="line">   kUnivariateRegressionLeafGaussian,</div>
+<div class="line">   kMultivariateRegressionLeafGaussian,</div>
+<div class="line">   kLogLinearVariance,</div>
+<div class="line">   kMultinomialLogit,</div>
 <div class="line">};</div>
 </div><!-- fragment --><p>Next, add entries to the <code>std::variants</code> that bundle related <code>SuffStat</code> and <code>LeafModel</code> classes</p>
-<div class="fragment"><div class="line"><span class="keyword">using </span>SuffStatVariant = std::variant&lt;GaussianConstantSuffStat, </div>
-<div class="line">                                     GaussianUnivariateRegressionSuffStat, </div>
-<div class="line">                                     GaussianMultivariateRegressionSuffStat, </div>
-<div class="line">                                     LogLinearVarianceSuffStat, </div>
+<div class="fragment"><div class="line"><span class="keyword">using </span>SuffStatVariant = std::variant&lt;GaussianConstantSuffStat,</div>
+<div class="line">                                     GaussianUnivariateRegressionSuffStat,</div>
+<div class="line">                                     GaussianMultivariateRegressionSuffStat,</div>
+<div class="line">                                     LogLinearVarianceSuffStat,</div>
 <div class="line">                                     MultinomialLogitSuffStat&gt;;</div>
-</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">using </span>LeafModelVariant = std::variant&lt;GaussianConstantLeafModel, </div>
-<div class="line">                                      GaussianUnivariateRegressionLeafModel, </div>
-<div class="line">                                      GaussianMultivariateRegressionLeafModel, </div>
-<div class="line">                                      LogLinearVarianceLeafModel, </div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">using </span>LeafModelVariant = std::variant&lt;GaussianConstantLeafModel,</div>
+<div class="line">                                      GaussianUnivariateRegressionLeafModel,</div>
+<div class="line">                                      GaussianMultivariateRegressionLeafModel,</div>
+<div class="line">                                      LogLinearVarianceLeafModel,</div>
 <div class="line">                                      MultinomialLogitLeafModel&gt;;</div>
 </div><!-- fragment --><p>Finally, update the <a class="el" href="group__leaf__model__group.html#ga1f479f37cb7892d7d9a4fe2c9fca9ed3">suffStatFactory</a> and <a class="el" href="group__leaf__model__group.html#gaaba5f1e9af5724f79d1387fc97f7fc09">leafModelFactory</a> functions to add a logic branch registering these new objects</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> SuffStatVariant suffStatFactory(ModelType model_type, <span class="keywordtype">int</span> basis_dim = 0) {</div>

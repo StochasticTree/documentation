@@ -9,10 +9,10 @@ var searchData=
   ['getcovariates_6',['GetCovariates',['../classStochTree_1_1ForestDataset.html#a5cf05dca90f04719b3086d6a4adca31c',1,'StochTree::ForestDataset']]],
   ['getdata_7',['getdata',['../classStochTree_1_1ColumnMatrix.html#a72e66461b39243b0072e56f9394a9e1c',1,'StochTree::ColumnMatrix::GetData()'],['../classStochTree_1_1ColumnVector.html#a7426ca932d779a60add5b27f791ff2c0',1,'StochTree::ColumnVector::GetData()']]],
   ['getdepth_8',['GetDepth',['../classStochTree_1_1Tree.html#af42c55f528ffb05c71554447b6b750f9',1,'StochTree::Tree']]],
-  ['getelement_9',['getelement',['../classStochTree_1_1ColumnMatrix.html#a736f676bd33dca4ff875e421396a588e',1,'StochTree::ColumnMatrix::GetElement()'],['../classStochTree_1_1ColumnVector.html#a85df3d993ef659b639b6727d31eda6e8',1,'StochTree::ColumnVector::GetElement()']]],
+  ['getelement_9',['getelement',['../classStochTree_1_1ColumnMatrix.html#aaef1b643634c4ce9b678928996a8ec8a',1,'StochTree::ColumnMatrix::GetElement()'],['../classStochTree_1_1ColumnVector.html#a85df3d993ef659b639b6727d31eda6e8',1,'StochTree::ColumnVector::GetElement()']]],
   ['getfeaturepartition_10',['GetFeaturePartition',['../classStochTree_1_1UnsortedNodeSampleTracker.html#adfb46f25638f43e83b7b70fafd600b89',1,'StochTree::UnsortedNodeSampleTracker']]],
   ['getfeaturetype_11',['GetFeatureType',['../classStochTree_1_1FeaturePresortPartition.html#a653c6dcd9aeb086c840954451dd13d6c',1,'StochTree::FeaturePresortPartition']]],
-  ['getgrouplabels_12',['GetGroupLabels',['../classStochTree_1_1RandomEffectsDataset.html#a583ecd9a63af29ad5c4a57ca82153cbb',1,'StochTree::RandomEffectsDataset']]],
+  ['getgrouplabels_12',['GetGroupLabels',['../classStochTree_1_1RandomEffectsDataset.html#a133b8fdf70890bdb35550a60f0cdfec0',1,'StochTree::RandomEffectsDataset']]],
   ['getinternalnodes_13',['GetInternalNodes',['../classStochTree_1_1Tree.html#aa0e55d968010ce930424ef18dff05cdb',1,'StochTree::Tree']]],
   ['getleafparents_14',['GetLeafParents',['../classStochTree_1_1Tree.html#aa179bc27f05aea0d9ddab01dce996d7b',1,'StochTree::Tree']]],
   ['getleaves_15',['GetLeaves',['../classStochTree_1_1Tree.html#ae09f688520a63e7a863f93b2c81cafd7',1,'StochTree::Tree']]],
@@ -22,7 +22,7 @@ var searchData=
   ['getvarweights_19',['getvarweights',['../classStochTree_1_1ForestDataset.html#a634dcd4bb7f2a86a9f5e4d680405e383',1,'StochTree::ForestDataset::GetVarWeights()'],['../classStochTree_1_1RandomEffectsDataset.html#aace6cedd13ecdaf112f7c8cd150ca5e1',1,'StochTree::RandomEffectsDataset::GetVarWeights()']]],
   ['getworkingparameter_20',['GetWorkingParameter',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a6f03df0122da3d636d6804c8a06f786f',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
   ['gfrsampleoneiter_21',['GFRSampleOneIter',['../group__sampling__group.html#ga717bf353b6f97738c7d72cfcdcb91a71',1,'StochTree']]],
-  ['groupid_22',['GroupId',['../classStochTree_1_1RandomEffectsDataset.html#a7b9060b9dc0de42f3d79978e43da6450',1,'StochTree::RandomEffectsDataset']]],
-  ['groupparametermean_23',['GroupParameterMean',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a4acc081f531015866b775ca7cc2c5378',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
-  ['groupparametervariance_24',['GroupParameterVariance',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#a98d5c9c448c34f245cb18d621d52d3d4',1,'StochTree::MultivariateRegressionRandomEffectsModel']]]
+  ['groupid_22',['GroupId',['../classStochTree_1_1RandomEffectsDataset.html#a5e0ebf25effd73ae8db850a78486b7a2',1,'StochTree::RandomEffectsDataset']]],
+  ['groupparametermean_23',['GroupParameterMean',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#abe4aa4f7c1a8823b0558eb59435cf48e',1,'StochTree::MultivariateRegressionRandomEffectsModel']]],
+  ['groupparametervariance_24',['GroupParameterVariance',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html#ac671f8b478cde4148ba2755fd9b204ae',1,'StochTree::MultivariateRegressionRandomEffectsModel']]]
 ];

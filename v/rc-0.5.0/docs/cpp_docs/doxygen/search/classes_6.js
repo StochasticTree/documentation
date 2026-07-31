@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nodecutpointtracker_0',['NodeCutpointTracker',['../classStochTree_1_1NodeCutpointTracker.html',1,'StochTree']]],
-  ['nodeoffsetsize_1',['NodeOffsetSize',['../classStochTree_1_1NodeOffsetSize.html',1,'StochTree']]]
+  ['multivariatenormalsampler_0',['MultivariateNormalSampler',['../classStochTree_1_1MultivariateNormalSampler.html',1,'StochTree']]],
+  ['multivariateregressionrandomeffectsmodel_1',['MultivariateRegressionRandomEffectsModel',['../classStochTree_1_1MultivariateRegressionRandomEffectsModel.html',1,'StochTree']]]
 ];

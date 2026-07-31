@@ -206,7 +206,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#stochtree-0.4.6-dev" id="toc-stochtree-0.4.6-dev" class="nav-link active" data-scroll-target="#stochtree-0.4.6-dev">stochtree 0.4.6-dev</a></li>
+  <li><a href="#stochtree-0.5.0-rc0" id="toc-stochtree-0.5.0-rc0" class="nav-link active" data-scroll-target="#stochtree-0.5.0-rc0">stochtree 0.5.0-rc0</a>
+  <ul class="collapse">
+  <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">New Features</a></li>
+  <li><a href="#deprecation" id="toc-deprecation" class="nav-link" data-scroll-target="#deprecation">Deprecation</a></li>
+  </ul></li>
   <li><a href="#stochtree-0.4.5" id="toc-stochtree-0.4.5" class="nav-link" data-scroll-target="#stochtree-0.4.5">stochtree 0.4.5</a>
   <ul class="collapse">
   <li><a href="#bug-fixes" id="toc-bug-fixes" class="nav-link" data-scroll-target="#bug-fixes">Bug Fixes</a></li>
@@ -221,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#stochtree-0.4.2" id="toc-stochtree-0.4.2" class="nav-link" data-scroll-target="#stochtree-0.4.2">stochtree 0.4.2</a>
   <ul class="collapse">
-  <li><a href="#new-features" id="toc-new-features" class="nav-link" data-scroll-target="#new-features">New Features</a></li>
+  <li><a href="#new-features-1" id="toc-new-features-1" class="nav-link" data-scroll-target="#new-features-1">New Features</a></li>
   <li><a href="#bug-fixes-2" id="toc-bug-fixes-2" class="nav-link" data-scroll-target="#bug-fixes-2">Bug Fixes</a></li>
   <li><a href="#documentation-and-other-maintenance-1" id="toc-documentation-and-other-maintenance-1" class="nav-link" data-scroll-target="#documentation-and-other-maintenance-1">Documentation and Other Maintenance</a></li>
   </ul></li>
@@ -231,16 +235,16 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#stochtree-0.4.0" id="toc-stochtree-0.4.0" class="nav-link" data-scroll-target="#stochtree-0.4.0">stochtree 0.4.0</a>
   <ul class="collapse">
-  <li><a href="#new-features-1" id="toc-new-features-1" class="nav-link" data-scroll-target="#new-features-1">New Features</a></li>
+  <li><a href="#new-features-2" id="toc-new-features-2" class="nav-link" data-scroll-target="#new-features-2">New Features</a></li>
   <li><a href="#bug-fixes-3" id="toc-bug-fixes-3" class="nav-link" data-scroll-target="#bug-fixes-3">Bug Fixes</a></li>
   </ul></li>
   <li><a href="#stochtree-0.3.1" id="toc-stochtree-0.3.1" class="nav-link" data-scroll-target="#stochtree-0.3.1">stochtree 0.3.1</a>
   <ul class="collapse">
-  <li><a href="#new-features-2" id="toc-new-features-2" class="nav-link" data-scroll-target="#new-features-2">New Features</a></li>
+  <li><a href="#new-features-3" id="toc-new-features-3" class="nav-link" data-scroll-target="#new-features-3">New Features</a></li>
   </ul></li>
   <li><a href="#stochtree-0.3.0" id="toc-stochtree-0.3.0" class="nav-link" data-scroll-target="#stochtree-0.3.0">stochtree 0.3.0</a>
   <ul class="collapse">
-  <li><a href="#new-features-3" id="toc-new-features-3" class="nav-link" data-scroll-target="#new-features-3">New Features</a></li>
+  <li><a href="#new-features-4" id="toc-new-features-4" class="nav-link" data-scroll-target="#new-features-4">New Features</a></li>
   <li><a href="#bug-fixes-4" id="toc-bug-fixes-4" class="nav-link" data-scroll-target="#bug-fixes-4">Bug Fixes</a></li>
   </ul></li>
   <li><a href="#stochtree-0.2.1" id="toc-stochtree-0.2.1" class="nav-link" data-scroll-target="#stochtree-0.2.1">stochtree 0.2.1</a>
@@ -250,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#stochtree-0.2.0" id="toc-stochtree-0.2.0" class="nav-link" data-scroll-target="#stochtree-0.2.0">stochtree 0.2.0</a>
   <ul class="collapse">
-  <li><a href="#new-features-4" id="toc-new-features-4" class="nav-link" data-scroll-target="#new-features-4">New Features</a></li>
+  <li><a href="#new-features-5" id="toc-new-features-5" class="nav-link" data-scroll-target="#new-features-5">New Features</a></li>
   <li><a href="#computational-improvements" id="toc-computational-improvements" class="nav-link" data-scroll-target="#computational-improvements">Computational Improvements</a></li>
   <li><a href="#bug-fixes-6" id="toc-bug-fixes-6" class="nav-link" data-scroll-target="#bug-fixes-6">Bug Fixes</a></li>
   <li><a href="#documentation-improvements" id="toc-documentation-improvements" class="nav-link" data-scroll-target="#documentation-improvements">Documentation Improvements</a></li>
@@ -283,8 +287,31 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="stochtree-0.4.6-dev" class="level1">
-<h1>stochtree 0.4.6-dev</h1>
+<section id="stochtree-0.5.0-rc0" class="level1">
+<h1>stochtree 0.5.0-rc0</h1>
+<p>This is a <strong>RELEASE CANDIDATE</strong> that constitutes a major overhaul of <code>stochtree</code>’s internals. Most prominently, the “core” MCMC and GFR samplers have been ported entirely into C++ (rather than R / Python objects that iteratively call C++ code). The primary user-facing change is that sampler artifacts now reside entirely in a C++ based <code>BARTSamples</code> / <code>BCFSamples</code> object, which is exposed as a pointer to C++ in R and Python.</p>
+<p>Access to parameter traces, forests, and random effects terms takes place through wrapper methods (i.e.&nbsp;<code>extractParameter</code> / <code>extractForest</code> / <code>extractRandomEffectSamples</code> in R, <code>extract_parameter</code> / <code>extract_forest</code> / <code>extract_random_effect_samples</code> in Python).</p>
+<p>While most of the changes are internal, there are several user-facing changes in both the R and Python APIs, both new and deprecated functionality.</p>
+<section id="new-features" class="level2">
+<h2 class="anchored" data-anchor-id="new-features">New Features</h2>
+<ul>
+<li>Continuing to run a GFR / MCMC sampler for BART or BCF is now supported with a dedicated method that does not require JSON deserialization. In R, this functionality is exposed as a generic <code>continueSampling</code> method that runs on either <code>bartmodel</code> or <code>bcfmodel</code> objects. In Python, the <code>BARTModel</code> and <code>BCFModel</code> objects both contain a <code>continue_sampling</code> method.</li>
+<li>Forest sample objects can be extracted from the underlying <code>BARTSamples</code> or <code>BCFSamples</code> C++ object via <code>extractForest</code> generics in R or <code>extract_forest</code> methods in Python, both of which run on a BART or BCF model.</li>
+<li>Random effects objects can be extracted from the underlying <code>BARTSamples</code> or <code>BCFSamples</code> C++ object via <code>extractRandomEffectSamples</code> generics in R or <code>extract_random_effect_samples</code> methods in Python, both of which run on a BART or BCF model.</li>
+</ul>
+</section>
+<section id="deprecation" class="level2">
+<h2 class="anchored" data-anchor-id="deprecation">Deprecation</h2>
+<ul>
+<li>Direct access sampler outputs (either external pointers to C++ objects like forest containers or arrays with parameter traces) is no longer supported.
+<ul>
+<li>Any code which accesses parameter traces like <code>bart_model$sigma2_global_samples</code> in R or <code>bart_model.global_var_samples</code> in Python must be converted to <code>extractParameter(bart_model, "sigma2_global")</code> or <code>bart_model.extract_parameter("sigma2_global")</code>. [<em>Note that member-based parameter access (i.e.&nbsp;<code>bart_model.global_var_samples</code>) is still technically supported in Python, but will be removed in future releases and we encourage users to migrate to method-based parameter acceess.</em>]</li>
+<li>Any code which accesses forest pointers directly as in <code>bart_model$mean_forests</code> in R or <code>bart_model.forest_container_mean</code> in Python must be converted to <code>extractForest(bart_model, "mean")</code> or <code>bart_model.extract_forest("mean")</code></li>
+<li>Any code which accesses random effects pointers directly as in <code>bart_model$rfx_samples</code> in R or <code>bart_model.rfx_container</code> in Python must be converted to <code>extractRandomEffectSamples(bart_model)</code> or <code>bart_model.extract_random_effect_samples()</code></li>
+</ul></li>
+<li>The generic <code>getRandomEffectSamples</code> in R still runs, but is a wrapper around <code>extractRandomEffectSamples</code>, which was created for API consistency and should be used going forward.</li>
+</ul>
+</section>
 </section>
 <section id="stochtree-0.4.5" class="level1">
 <h1>stochtree 0.4.5</h1>
@@ -321,8 +348,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.4.2" class="level1">
 <h1>stochtree 0.4.2</h1>
-<section id="new-features" class="level2">
-<h2 class="anchored" data-anchor-id="new-features">New Features</h2>
+<section id="new-features-1" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-1">New Features</h2>
 <ul>
 <li>Added support for parametric treatment effect term in BCF <a href="https://github.com/StochasticTree/stochtree/pull/309/">#309</a></li>
 <li>Added support for observation-level weights passed as data arguments to BART and BCF <a href="https://github.com/StochasticTree/stochtree/pull/333">#333</a></li>
@@ -364,8 +391,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.4.0" class="level1">
 <h1>stochtree 0.4.0</h1>
-<section id="new-features-1" class="level2">
-<h2 class="anchored" data-anchor-id="new-features-1">New Features</h2>
+<section id="new-features-2" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-2">New Features</h2>
 <ul>
 <li>Added support for ordinal outcome modeling through complementary log-log link function in the BART models (<a href="https://github.com/StochasticTree/stochtree/pull/196">#196</a>)</li>
 <li>Added <code>__str__</code>, <code>__repr__</code>, <code>summary</code>, and <code>extract_parameter</code> methods in Python for the <code>BARTModel</code> and <code>BCFModel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/298">#298</a>)</li>
@@ -404,8 +431,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.3.1" class="level1">
 <h1>stochtree 0.3.1</h1>
-<section id="new-features-2" class="level2">
-<h2 class="anchored" data-anchor-id="new-features-2">New Features</h2>
+<section id="new-features-3" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-3">New Features</h2>
 <ul>
 <li>Replaced C++ standard library distributions (<code>discrete_distribution</code>, <code>uniform_real_distribution</code>, <code>normal_distribution</code>, and <code>gamma_distribution</code>) with custom implementations for cross-platform reproducibility.</li>
 <li>Substituted custom implementations for base R <code>mean()</code>, <code>var()</code>, and <code>sd()</code> in the preprocessing logic of the R <code>bart()</code> and <code>bcf()</code> functions for enhanced numeric stability across platforms.</li>
@@ -414,8 +441,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.3.0" class="level1">
 <h1>stochtree 0.3.0</h1>
-<section id="new-features-3" class="level2">
-<h2 class="anchored" data-anchor-id="new-features-3">New Features</h2>
+<section id="new-features-4" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-4">New Features</h2>
 <ul>
 <li>Added <code>print</code>, <code>summary</code>, <code>plot</code>, and <code>extract_parameter</code> generic functions in R for the <code>bartmodel</code> and <code>bcfmodel</code> classes (<a href="https://github.com/StochasticTree/stochtree/pull/271">#271</a>)</li>
 <li>Added sklearn-compatible estimator wrapper for <code>BARTModel</code> in Python (<a href="https://github.com/StochasticTree/stochtree/pull/270">#270</a>)</li>
@@ -448,8 +475,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="stochtree-0.2.0" class="level1">
 <h1>stochtree 0.2.0</h1>
-<section id="new-features-4" class="level2">
-<h2 class="anchored" data-anchor-id="new-features-4">New Features</h2>
+<section id="new-features-5" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-5">New Features</h2>
 <ul>
 <li>Support for multithreading in various elements of the GFR and MCMC algorithms (<a href="https://github.com/StochasticTree/stochtree/pull/182">#182</a>)</li>
 <li>Support for binary outcomes in BART and BCF with a probit link (<a href="https://github.com/StochasticTree/stochtree/pull/164">#164</a>)</li>

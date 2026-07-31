@@ -5,7 +5,7 @@ var searchData=
   ['addbasisfromcsv_2',['AddBasisFromCSV',['../classStochTree_1_1ForestDataset.html#a678e315bd0580b6d76d50d6428069fac',1,'StochTree::ForestDataset']]],
   ['addcovariates_3',['AddCovariates',['../classStochTree_1_1ForestDataset.html#a3e5ce66ca3564d06609c78a7b88bb99e',1,'StochTree::ForestDataset']]],
   ['addcovariatesfromcsv_4',['AddCovariatesFromCSV',['../classStochTree_1_1ForestDataset.html#acaad118407769d72ed01057d50a6189f',1,'StochTree::ForestDataset']]],
-  ['addgrouplabels_5',['AddGroupLabels',['../classStochTree_1_1RandomEffectsDataset.html#a3f55645a9a76194e7ddfb0f09a33d416',1,'StochTree::RandomEffectsDataset']]],
+  ['addgrouplabels_5',['addgrouplabels',['../classStochTree_1_1RandomEffectsDataset.html#a89c91703a18ef90fe0daf6797f7b9a31',1,'StochTree::RandomEffectsDataset::AddGroupLabels(std::vector&lt; int &gt; &amp;group_labels)'],['../classStochTree_1_1RandomEffectsDataset.html#ae2bf0e0c905fdf7f99bdfcf082b2795f',1,'StochTree::RandomEffectsDataset::AddGroupLabels(int *group_labels, int num_rows)']]],
   ['addsample_6',['AddSample',['../classStochTree_1_1ForestContainer.html#aff5c3b2d76e621175d3cdb0d7c1f79a0',1,'StochTree::ForestContainer']]],
   ['addsamples_7',['AddSamples',['../classStochTree_1_1ForestContainer.html#af32a8984219be2086ecb1088f515c098',1,'StochTree::ForestContainer']]],
   ['addsuffstat_8',['addsuffstat',['../classStochTree_1_1GaussianConstantSuffStat.html#a8693648d0cb2b666503d8f3e8568f6ce',1,'StochTree::GaussianConstantSuffStat::AddSuffStat()'],['../classStochTree_1_1GaussianUnivariateRegressionSuffStat.html#ad1d16787392896a466e90fa730f5333c',1,'StochTree::GaussianUnivariateRegressionSuffStat::AddSuffStat()'],['../classStochTree_1_1GaussianMultivariateRegressionSuffStat.html#aac4b45baf39f24e18e36ff7bc879a7ce',1,'StochTree::GaussianMultivariateRegressionSuffStat::AddSuffStat()'],['../classStochTree_1_1LogLinearVarianceSuffStat.html#affb6e240934598c320715a5f1f0fb585',1,'StochTree::LogLinearVarianceSuffStat::AddSuffStat()'],['../classStochTree_1_1CloglogOrdinalSuffStat.html#a5335107a7460c56f37dd810600ddbb05',1,'StochTree::CloglogOrdinalSuffStat::AddSuffStat()']]],
@@ -14,7 +14,9 @@ var searchData=
   ['addtoforest_11',['AddToForest',['../classStochTree_1_1ForestContainer.html#afb79480c8741aebeee5a66fd378770ac',1,'StochTree::ForestContainer']]],
   ['addvaluetoleaves_12',['addvaluetoleaves',['../classStochTree_1_1TreeEnsemble.html#a73b43adc55dc926ffde7e1e75161a335',1,'StochTree::TreeEnsemble::AddValueToLeaves()'],['../classStochTree_1_1Tree.html#a29336c6db8d1d536689d7faf237a26d1',1,'StochTree::Tree::AddValueToLeaves()']]],
   ['addvarianceweights_13',['addvarianceweights',['../classStochTree_1_1ForestDataset.html#a23ada50f67a513ba692e2c23b4933199',1,'StochTree::ForestDataset::AddVarianceWeights()'],['../classStochTree_1_1RandomEffectsDataset.html#a28ab010b86d093d5aa7359373c31eeab',1,'StochTree::RandomEffectsDataset::AddVarianceWeights()']]],
-  ['addvarianceweightsfromcsv_14',['AddVarianceWeightsFromCSV',['../classStochTree_1_1ForestDataset.html#a39f5e0f48128c7674a582e2076a64d08',1,'StochTree::ForestDataset']]],
+  ['addvarianceweightsfromcsv_14',['AddVarianceWeightsFromCSV',['../classStochTree_1_1ForestDataset.html#ab1b9edcc210e0882a54e8584a95c847a',1,'StochTree::ForestDataset']]],
   ['allocnode_15',['AllocNode',['../classStochTree_1_1Tree.html#a2aaad319d1f0b2d59ddfcea3f5f243f1',1,'StochTree::Tree']]],
-  ['append_5ffrom_5fjson_16',['append_from_json',['../classStochTree_1_1ForestContainer.html#aafa4ee75bcf2c6d64ed0506d868fbf19',1,'StochTree::ForestContainer']]]
+  ['append_5ffrom_5fjson_16',['append_from_json',['../classStochTree_1_1ForestContainer.html#aafa4ee75bcf2c6d64ed0506d868fbf19',1,'StochTree::ForestContainer']]],
+  ['appendforestcontainersamples_17',['AppendForestContainerSamples',['../namespaceStochTree.html#a82832c5a377ce686e3fc5644fca0630f',1,'StochTree']]],
+  ['appendrandomeffectscontainersamples_18',['AppendRandomEffectsContainerSamples',['../namespaceStochTree.html#a08eac2d6576f90104977022719c2d730',1,'StochTree']]]
 ];

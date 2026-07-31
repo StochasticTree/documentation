@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['gamma_5fsampler_0',['gamma_sampler',['../classStochTree_1_1gamma__sampler.html',1,'StochTree']]],
-  ['gammasampler_1',['GammaSampler',['../classStochTree_1_1GammaSampler.html',1,'StochTree']]],
-  ['gaussianconstantleafmodel_2',['GaussianConstantLeafModel',['../classStochTree_1_1GaussianConstantLeafModel.html',1,'StochTree']]],
-  ['gaussianconstantsuffstat_3',['GaussianConstantSuffStat',['../classStochTree_1_1GaussianConstantSuffStat.html',1,'StochTree']]],
-  ['gaussianmultivariateregressionleafmodel_4',['GaussianMultivariateRegressionLeafModel',['../classStochTree_1_1GaussianMultivariateRegressionLeafModel.html',1,'StochTree']]],
-  ['gaussianmultivariateregressionsuffstat_5',['GaussianMultivariateRegressionSuffStat',['../classStochTree_1_1GaussianMultivariateRegressionSuffStat.html',1,'StochTree']]],
-  ['gaussianunivariateregressionleafmodel_6',['GaussianUnivariateRegressionLeafModel',['../classStochTree_1_1GaussianUnivariateRegressionLeafModel.html',1,'StochTree']]],
-  ['gaussianunivariateregressionsuffstat_7',['GaussianUnivariateRegressionSuffStat',['../classStochTree_1_1GaussianUnivariateRegressionSuffStat.html',1,'StochTree']]],
-  ['globalhomoskedasticvariancemodel_8',['GlobalHomoskedasticVarianceModel',['../classStochTree_1_1GlobalHomoskedasticVarianceModel.html',1,'StochTree']]]
+  ['featurecutpointgrid_0',['FeatureCutpointGrid',['../classStochTree_1_1FeatureCutpointGrid.html',1,'StochTree']]],
+  ['featurepresortpartition_1',['FeaturePresortPartition',['../classStochTree_1_1FeaturePresortPartition.html',1,'StochTree']]],
+  ['featurepresortroot_2',['FeaturePresortRoot',['../classStochTree_1_1FeaturePresortRoot.html',1,'StochTree']]],
+  ['featurepresortrootcontainer_3',['FeaturePresortRootContainer',['../classStochTree_1_1FeaturePresortRootContainer.html',1,'StochTree']]],
+  ['featureunsortedpartition_4',['FeatureUnsortedPartition',['../classStochTree_1_1FeatureUnsortedPartition.html',1,'StochTree']]],
+  ['forestcontainer_5',['ForestContainer',['../classStochTree_1_1ForestContainer.html',1,'StochTree']]],
+  ['forestdataset_6',['ForestDataset',['../classStochTree_1_1ForestDataset.html',1,'StochTree']]],
+  ['foresttracker_7',['ForestTracker',['../classStochTree_1_1ForestTracker.html',1,'StochTree']]]
 ];
