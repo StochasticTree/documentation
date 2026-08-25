@@ -1878,20 +1878,18 @@ forceTheme('sk-container-id-1');</script>
 <span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>Sigma_tilde <span class="op">+=</span> <span class="fl">1e-8</span> <span class="op">*</span> np.eye(n_test_1)  <span class="co"># small jitter for numerical stability</span></span>
 <span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from f(X_test) | X_test, X_train, f(X_train)</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>gp_samples_1 <span class="op">=</span> rng.multivariate_normal(mu_tilde, Sigma_tilde, size<span class="op">=</span><span class="dv">1000</span>, method<span class="op">=</span><span class="st">"eigh"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;string&gt;:3: RuntimeWarning: covariance is not symmetric positive-semidefinite.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior mean predictions</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>yhat_mean_test_1 <span class="op">=</span> gp_samples_1.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(yhat_mean_test_1.<span class="bu">min</span>(), y_test_1.<span class="bu">min</span>())</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(yhat_mean_test_1.<span class="bu">max</span>(), y_test_1.<span class="bu">max</span>())</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(yhat_mean_test_1, y_test_1, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"BART Gaussian process"</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>gp_samples_1 <span class="op">=</span> rng.multivariate_normal(mu_tilde, Sigma_tilde, size<span class="op">=</span><span class="dv">1000</span>, method<span class="op">=</span><span class="st">"eigh"</span>)</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior mean predictions</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>yhat_mean_test_1 <span class="op">=</span> gp_samples_1.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(yhat_mean_test_1.<span class="bu">min</span>(), y_test_1.<span class="bu">min</span>())</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(yhat_mean_test_1.<span class="bu">max</span>(), y_test_1.<span class="bu">max</span>())</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>plt.scatter(yhat_mean_test_1, y_test_1, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"BART Gaussian process"</span>)</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1909,17 +1907,17 @@ forceTheme('sk-container-id-1');</script>
 <div class="tab-content" data-group="language">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08085215</code></pre>
+<pre><code>[1] 0.08488585</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_1 <span class="op">-</span> y_test_1)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_1 <span class="op">-</span> y_test_1)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>RMSE: 0.1064</code></pre>
+<pre><code>RMSE: 0.1108</code></pre>
 </div>
 </div>
 </div>
@@ -1937,23 +1935,23 @@ forceTheme('sk-container-id-1');</script>
 <div class="tab-content" data-group="language">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the data, add many "noise variables"</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>friedman.df <span class="ot">&lt;-</span> <span class="fu">friedman.1.data</span>(<span class="at">n=</span>n)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>train_inds <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">floor</span>(<span class="fl">0.8</span><span class="sc">*</span>n), <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>test_inds <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span>n)[<span class="sc">!</span>((<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">%in%</span> train_inds)]</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span><span class="dv">10</span>), <span class="at">ncol =</span> <span class="dv">10</span>))</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">12</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">*</span>(<span class="fu">sd</span>(<span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">11</span>])<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> X[train_inds,]</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> X[test_inds,]</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> y[train_inds]</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> y[test_inds]</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the GP</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>model_gp <span class="ot">&lt;-</span> <span class="fu">bgp</span>(<span class="at">X=</span>X_train, <span class="at">Z=</span>y_train, <span class="at">XX=</span>X_test)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_gp<span class="sc">$</span>ZZ.mean, y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>, <span class="at">main =</span> <span class="st">"Gaussian process"</span>)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">2.5</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the data, add many "noise variables"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>friedman.df <span class="ot">&lt;-</span> <span class="fu">friedman.1.data</span>(<span class="at">n=</span>n)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>train_inds <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">floor</span>(<span class="fl">0.8</span><span class="sc">*</span>n), <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>test_inds <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span>n)[<span class="sc">!</span>((<span class="dv">1</span><span class="sc">:</span>n) <span class="sc">%in%</span> train_inds)]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, <span class="fu">matrix</span>(<span class="fu">runif</span>(n<span class="sc">*</span><span class="dv">10</span>), <span class="at">ncol =</span> <span class="dv">10</span>))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">12</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n,<span class="dv">0</span>,<span class="dv">1</span>)<span class="sc">*</span>(<span class="fu">sd</span>(<span class="fu">as.matrix</span>(friedman.df)[,<span class="dv">11</span>])<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> X[train_inds,]</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> X[test_inds,]</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> y[train_inds]</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>y_test <span class="ot">&lt;-</span> y[test_inds]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the GP</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>model_gp <span class="ot">&lt;-</span> <span class="fu">bgp</span>(<span class="at">X=</span>X_train, <span class="at">Z=</span>y_train, <span class="at">XX=</span>X_test)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model_gp<span class="sc">$</span>ZZ.mean, y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>, <span class="at">main =</span> <span class="st">"Gaussian process"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">2.5</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1965,23 +1963,23 @@ forceTheme('sk-container-id-1');</script>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the data: 10 Friedman features + 10 noise features</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>X_raw, y_friedman <span class="op">=</span> make_friedman1(n_samples<span class="op">=</span>n, n_features<span class="op">=</span><span class="dv">10</span>, noise<span class="op">=</span><span class="fl">1.0</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                                    random_state<span class="op">=</span>random_seed)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>X_2 <span class="op">=</span> np.hstack([X_raw, rng.uniform(size<span class="op">=</span>(n, <span class="dv">10</span>))])  <span class="co"># 20 features total</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> y_friedman</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>train_inds_2 <span class="op">=</span> rng.choice(n, <span class="bu">int</span>(<span class="fl">0.8</span> <span class="op">*</span> n), replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>test_inds_2  <span class="op">=</span> np.setdiff1d(np.arange(n), train_inds_2)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>X_train_2, X_test_2 <span class="op">=</span> X_2[train_inds_2], X_2[test_inds_2]</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>y_train_2, y_test_2 <span class="op">=</span> y_2[train_inds_2], y_2[test_inds_2]</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn's GaussianProcessRegressor is used here in place of R's tgp::bgp</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>gp_kernel_2 <span class="op">=</span> RBF(length_scale<span class="op">=</span><span class="fl">1.0</span>) <span class="op">+</span> WhiteKernel(noise_level<span class="op">=</span><span class="fl">1.0</span>)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>model_gp_2 <span class="op">=</span> GaussianProcessRegressor(kernel<span class="op">=</span>gp_kernel_2, n_restarts_optimizer<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>                                       random_state<span class="op">=</span>random_seed)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>model_gp_2.fit(X_train_2, y_train_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the data: 10 Friedman features + 10 noise features</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>X_raw, y_friedman <span class="op">=</span> make_friedman1(n_samples<span class="op">=</span>n, n_features<span class="op">=</span><span class="dv">10</span>, noise<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                                    random_state<span class="op">=</span>random_seed)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>X_2 <span class="op">=</span> np.hstack([X_raw, rng.uniform(size<span class="op">=</span>(n, <span class="dv">10</span>))])  <span class="co"># 20 features total</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> y_friedman</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>train_inds_2 <span class="op">=</span> rng.choice(n, <span class="bu">int</span>(<span class="fl">0.8</span> <span class="op">*</span> n), replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>test_inds_2  <span class="op">=</span> np.setdiff1d(np.arange(n), train_inds_2)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>X_train_2, X_test_2 <span class="op">=</span> X_2[train_inds_2], X_2[test_inds_2]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>y_train_2, y_test_2 <span class="op">=</span> y_2[train_inds_2], y_2[test_inds_2]</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn's GaussianProcessRegressor is used here in place of R's tgp::bgp</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>gp_kernel_2 <span class="op">=</span> RBF(length_scale<span class="op">=</span><span class="fl">1.0</span>) <span class="op">+</span> WhiteKernel(noise_level<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>model_gp_2 <span class="op">=</span> GaussianProcessRegressor(kernel<span class="op">=</span>gp_kernel_2, n_restarts_optimizer<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                                       random_state<span class="op">=</span>random_seed)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>model_gp_2.fit(X_train_2, y_train_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
@@ -3092,16 +3090,16 @@ function forceTheme(elementId) {
 
 forceTheme('sk-container-id-2');</script>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gp_pred_2 <span class="op">=</span> model_gp_2.predict(X_test_2)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(gp_pred_2.<span class="bu">min</span>(), y_test_2.<span class="bu">min</span>())</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(gp_pred_2.<span class="bu">max</span>(), y_test_2.<span class="bu">max</span>())</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(gp_pred_2, y_test_2, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Gaussian process"</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>gp_pred_2 <span class="op">=</span> model_gp_2.predict(X_test_2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(gp_pred_2.<span class="bu">min</span>(), y_test_2.<span class="bu">min</span>())</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(gp_pred_2.<span class="bu">max</span>(), y_test_2.<span class="bu">max</span>())</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(gp_pred_2, y_test_2, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Gaussian process"</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3119,7 +3117,7 @@ forceTheme('sk-container-id-2');</script>
 <div class="tab-content" data-group="language">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((model_gp<span class="sc">$</span>ZZ.mean <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((model_gp<span class="sc">$</span>ZZ.mean <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.39143</code></pre>
 </div>
@@ -3127,7 +3125,7 @@ forceTheme('sk-container-id-2');</script>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((gp_pred_2 <span class="op">-</span> y_test_2)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((gp_pred_2 <span class="op">-</span> y_test_2)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE: 8.2192</code></pre>
 </div>
@@ -3143,40 +3141,40 @@ forceTheme('sk-container-id-2');</script>
 <div class="tab-content" data-group="language">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run BART on the data</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>num_trees <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>sigma_leaf <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>num_trees</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X_train)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X_test)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>general_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">num_threads=</span><span class="dv">1</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>mean_forest_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">num_trees=</span>num_trees, <span class="at">sigma2_leaf_init=</span>sigma_leaf)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>bart_model <span class="ot">&lt;-</span> <span class="fu">bart</span>(<span class="at">X_train=</span>X_train, <span class="at">y_train=</span>y_train, <span class="at">X_test=</span>X_test, </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">general_params =</span> general_params, <span class="at">mean_forest_params =</span> mean_forest_params)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract kernels needed for kriging</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>leaf_mat_train <span class="ot">&lt;-</span> <span class="fu">computeForestLeafIndices</span>(bart_model, X_train, <span class="at">forest_type =</span> <span class="st">"mean"</span>,</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">forest_inds =</span> bart_model<span class="sc">$</span>model_params<span class="sc">$</span>num_samples <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>leaf_mat_test <span class="ot">&lt;-</span> <span class="fu">computeForestLeafIndices</span>(bart_model, X_test, <span class="at">forest_type =</span> <span class="st">"mean"</span>,</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">forest_inds =</span> bart_model<span class="sc">$</span>model_params<span class="sc">$</span>num_samples <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>W_train <span class="ot">&lt;-</span> <span class="fu">sparseMatrix</span>(<span class="at">i=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(y_train),num_trees), <span class="at">j=</span>leaf_mat_train <span class="sc">+</span> <span class="dv">1</span>, <span class="at">x=</span><span class="dv">1</span>)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>W_test <span class="ot">&lt;-</span> <span class="fu">sparseMatrix</span>(<span class="at">i=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(y_test),num_trees), <span class="at">j=</span>leaf_mat_test <span class="sc">+</span> <span class="dv">1</span>, <span class="at">x=</span><span class="dv">1</span>)</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>Sigma_11 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_test) <span class="sc">/</span> num_trees</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>Sigma_12 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_test, W_train) <span class="sc">/</span> num_trees</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>Sigma_22 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_train) <span class="sc">/</span> num_trees</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>Sigma_22_inv <span class="ot">&lt;-</span> <span class="fu">ginv</span>(<span class="fu">as.matrix</span>(Sigma_22))</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>Sigma_21 <span class="ot">&lt;-</span> <span class="fu">t</span>(Sigma_12)</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean and covariance for the test set posterior</span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>mu_tilde <span class="ot">&lt;-</span> Sigma_12 <span class="sc">%*%</span> Sigma_22_inv <span class="sc">%*%</span> y_train</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>Sigma_tilde <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>((sigma_leaf)<span class="sc">*</span>(Sigma_11 <span class="sc">-</span> Sigma_12 <span class="sc">%*%</span> Sigma_22_inv <span class="sc">%*%</span> Sigma_21))</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from f(X_test) | X_test, X_train, f(X_train)</span></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>gp_samples <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> mu_tilde, <span class="at">sigma =</span> Sigma_tilde)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute posterior mean predictions for f(X_test)</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>yhat_mean_test <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(gp_samples)</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat_mean_test, y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>, <span class="at">main =</span> <span class="st">"BART Gaussian process"</span>)</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">2.5</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run BART on the data</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>num_trees <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sigma_leaf <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>num_trees</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X_train)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X_test)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>general_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">num_threads=</span><span class="dv">1</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>mean_forest_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">num_trees=</span>num_trees, <span class="at">sigma2_leaf_init=</span>sigma_leaf)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>bart_model <span class="ot">&lt;-</span> <span class="fu">bart</span>(<span class="at">X_train=</span>X_train, <span class="at">y_train=</span>y_train, <span class="at">X_test=</span>X_test, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">general_params =</span> general_params, <span class="at">mean_forest_params =</span> mean_forest_params)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract kernels needed for kriging</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>leaf_mat_train <span class="ot">&lt;-</span> <span class="fu">computeForestLeafIndices</span>(bart_model, X_train, <span class="at">forest_type =</span> <span class="st">"mean"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">forest_inds =</span> bart_model<span class="sc">$</span>model_params<span class="sc">$</span>num_samples <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>leaf_mat_test <span class="ot">&lt;-</span> <span class="fu">computeForestLeafIndices</span>(bart_model, X_test, <span class="at">forest_type =</span> <span class="st">"mean"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">forest_inds =</span> bart_model<span class="sc">$</span>model_params<span class="sc">$</span>num_samples <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>W_train <span class="ot">&lt;-</span> <span class="fu">sparseMatrix</span>(<span class="at">i=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(y_train),num_trees), <span class="at">j=</span>leaf_mat_train <span class="sc">+</span> <span class="dv">1</span>, <span class="at">x=</span><span class="dv">1</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>W_test <span class="ot">&lt;-</span> <span class="fu">sparseMatrix</span>(<span class="at">i=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(y_test),num_trees), <span class="at">j=</span>leaf_mat_test <span class="sc">+</span> <span class="dv">1</span>, <span class="at">x=</span><span class="dv">1</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>Sigma_11 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_test) <span class="sc">/</span> num_trees</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>Sigma_12 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_test, W_train) <span class="sc">/</span> num_trees</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>Sigma_22 <span class="ot">&lt;-</span> <span class="fu">tcrossprod</span>(W_train) <span class="sc">/</span> num_trees</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>Sigma_22_inv <span class="ot">&lt;-</span> <span class="fu">ginv</span>(<span class="fu">as.matrix</span>(Sigma_22))</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>Sigma_21 <span class="ot">&lt;-</span> <span class="fu">t</span>(Sigma_12)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean and covariance for the test set posterior</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>mu_tilde <span class="ot">&lt;-</span> Sigma_12 <span class="sc">%*%</span> Sigma_22_inv <span class="sc">%*%</span> y_train</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>Sigma_tilde <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>((sigma_leaf)<span class="sc">*</span>(Sigma_11 <span class="sc">-</span> Sigma_12 <span class="sc">%*%</span> Sigma_22_inv <span class="sc">%*%</span> Sigma_21))</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample from f(X_test) | X_test, X_train, f(X_train)</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>gp_samples <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> mu_tilde, <span class="at">sigma =</span> Sigma_tilde)</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute posterior mean predictions for f(X_test)</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>yhat_mean_test <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(gp_samples)</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat_mean_test, y_test, <span class="at">xlab =</span> <span class="st">"predicted"</span>, <span class="at">ylab =</span> <span class="st">"actual"</span>, <span class="at">main =</span> <span class="st">"BART Gaussian process"</span>)</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">2.5</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3188,58 +3186,58 @@ forceTheme('sk-container-id-2');</script>
 </div>
 <div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>num_trees <span class="op">=</span> <span class="dv">200</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sigma_leaf <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> num_trees</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>general_params <span class="op">=</span> {<span class="st">"num_threads"</span>: <span class="dv">1</span>}</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mean_forest_params <span class="op">=</span> {<span class="st">"num_trees"</span>: num_trees, <span class="st">"sigma2_leaf_init"</span>: sigma_leaf}</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>bart_model_2 <span class="op">=</span> BARTModel()</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>bart_model_2.sample(X_train<span class="op">=</span>X_train_2, y_train<span class="op">=</span>y_train_2, X_test<span class="op">=</span>X_test_2,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                    general_params<span class="op">=</span>general_params, mean_forest_params<span class="op">=</span>mean_forest_params)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>last_sample_2 <span class="op">=</span> bart_model_2.num_samples <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>leaf_mat_train_2 <span class="op">=</span> compute_forest_leaf_indices(bart_model_2, X_train_2,</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                                               forest_type<span class="op">=</span><span class="st">"mean"</span>, forest_inds<span class="op">=</span>last_sample_2)</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>leaf_mat_test_2  <span class="op">=</span> compute_forest_leaf_indices(bart_model_2, X_test_2,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>                                               forest_type<span class="op">=</span><span class="st">"mean"</span>, forest_inds<span class="op">=</span>last_sample_2)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>n_train_2, n_test_2 <span class="op">=</span> <span class="bu">len</span>(y_train_2), <span class="bu">len</span>(y_test_2)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>col_inds_train_2 <span class="op">=</span> leaf_mat_train_2.flatten()</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>col_inds_test_2  <span class="op">=</span> leaf_mat_test_2.flatten()</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>max_col_2 <span class="op">=</span> <span class="bu">max</span>(col_inds_train_2.<span class="bu">max</span>(), col_inds_test_2.<span class="bu">max</span>()) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>W_train_2 <span class="op">=</span> csr_matrix(</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    (np.ones(<span class="bu">len</span>(col_inds_train_2)),</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>     (np.tile(np.arange(n_train_2), num_trees), col_inds_train_2)),</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span>(n_train_2, max_col_2),</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>W_test_2 <span class="op">=</span> csr_matrix(</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    (np.ones(<span class="bu">len</span>(col_inds_test_2)),</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>     (np.tile(np.arange(n_test_2), num_trees), col_inds_test_2)),</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span>(n_test_2, max_col_2),</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>W_tr2 <span class="op">=</span> W_train_2.toarray()</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>W_te2 <span class="op">=</span> W_test_2.toarray()</span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>Sigma_22_2   <span class="op">=</span> (W_tr2 <span class="op">@</span> W_tr2.T) <span class="op">/</span> num_trees</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>Sigma_11_2   <span class="op">=</span> (W_te2 <span class="op">@</span> W_te2.T) <span class="op">/</span> num_trees</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>Sigma_12_2   <span class="op">=</span> (W_te2 <span class="op">@</span> W_tr2.T) <span class="op">/</span> num_trees</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>Sigma_21_2   <span class="op">=</span> Sigma_12_2.T</span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>Sigma_22_inv_2 <span class="op">=</span> np.linalg.pinv(Sigma_22_2)</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>mu_tilde_2    <span class="op">=</span> Sigma_12_2 <span class="op">@</span> Sigma_22_inv_2 <span class="op">@</span> y_train_2</span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>Sigma_tilde_2 <span class="op">=</span> sigma_leaf <span class="op">*</span> (Sigma_11_2 <span class="op">-</span> Sigma_12_2 <span class="op">@</span> Sigma_22_inv_2 <span class="op">@</span> Sigma_21_2)</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>Sigma_tilde_2 <span class="op">+=</span> <span class="fl">1e-8</span> <span class="op">*</span> np.eye(n_test_2)</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>gp_samples_2 <span class="op">=</span> rng.multivariate_normal(mu_tilde_2, Sigma_tilde_2, size<span class="op">=</span><span class="dv">1000</span>, method<span class="op">=</span><span class="st">"eigh"</span>)</span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>yhat_mean_test_2 <span class="op">=</span> gp_samples_2.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(yhat_mean_test_2.<span class="bu">min</span>(), y_test_2.<span class="bu">min</span>())</span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(yhat_mean_test_2.<span class="bu">max</span>(), y_test_2.<span class="bu">max</span>())</span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>plt.scatter(yhat_mean_test_2, y_test_2, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"BART Gaussian process"</span>)</span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>num_trees <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sigma_leaf <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> num_trees</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>general_params <span class="op">=</span> {<span class="st">"num_threads"</span>: <span class="dv">1</span>}</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>mean_forest_params <span class="op">=</span> {<span class="st">"num_trees"</span>: num_trees, <span class="st">"sigma2_leaf_init"</span>: sigma_leaf}</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>bart_model_2 <span class="op">=</span> BARTModel()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>bart_model_2.sample(X_train<span class="op">=</span>X_train_2, y_train<span class="op">=</span>y_train_2, X_test<span class="op">=</span>X_test_2,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                    general_params<span class="op">=</span>general_params, mean_forest_params<span class="op">=</span>mean_forest_params)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>last_sample_2 <span class="op">=</span> bart_model_2.num_samples <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>leaf_mat_train_2 <span class="op">=</span> compute_forest_leaf_indices(bart_model_2, X_train_2,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                                               forest_type<span class="op">=</span><span class="st">"mean"</span>, forest_inds<span class="op">=</span>last_sample_2)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>leaf_mat_test_2  <span class="op">=</span> compute_forest_leaf_indices(bart_model_2, X_test_2,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                                               forest_type<span class="op">=</span><span class="st">"mean"</span>, forest_inds<span class="op">=</span>last_sample_2)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>n_train_2, n_test_2 <span class="op">=</span> <span class="bu">len</span>(y_train_2), <span class="bu">len</span>(y_test_2)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>col_inds_train_2 <span class="op">=</span> leaf_mat_train_2.flatten()</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>col_inds_test_2  <span class="op">=</span> leaf_mat_test_2.flatten()</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>max_col_2 <span class="op">=</span> <span class="bu">max</span>(col_inds_train_2.<span class="bu">max</span>(), col_inds_test_2.<span class="bu">max</span>()) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>W_train_2 <span class="op">=</span> csr_matrix(</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    (np.ones(<span class="bu">len</span>(col_inds_train_2)),</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>     (np.tile(np.arange(n_train_2), num_trees), col_inds_train_2)),</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span>(n_train_2, max_col_2),</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>W_test_2 <span class="op">=</span> csr_matrix(</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    (np.ones(<span class="bu">len</span>(col_inds_test_2)),</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>     (np.tile(np.arange(n_test_2), num_trees), col_inds_test_2)),</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span>(n_test_2, max_col_2),</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>W_tr2 <span class="op">=</span> W_train_2.toarray()</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>W_te2 <span class="op">=</span> W_test_2.toarray()</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>Sigma_22_2   <span class="op">=</span> (W_tr2 <span class="op">@</span> W_tr2.T) <span class="op">/</span> num_trees</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>Sigma_11_2   <span class="op">=</span> (W_te2 <span class="op">@</span> W_te2.T) <span class="op">/</span> num_trees</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>Sigma_12_2   <span class="op">=</span> (W_te2 <span class="op">@</span> W_tr2.T) <span class="op">/</span> num_trees</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>Sigma_21_2   <span class="op">=</span> Sigma_12_2.T</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>Sigma_22_inv_2 <span class="op">=</span> np.linalg.pinv(Sigma_22_2)</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>mu_tilde_2    <span class="op">=</span> Sigma_12_2 <span class="op">@</span> Sigma_22_inv_2 <span class="op">@</span> y_train_2</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>Sigma_tilde_2 <span class="op">=</span> sigma_leaf <span class="op">*</span> (Sigma_11_2 <span class="op">-</span> Sigma_12_2 <span class="op">@</span> Sigma_22_inv_2 <span class="op">@</span> Sigma_21_2)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>Sigma_tilde_2 <span class="op">+=</span> <span class="fl">1e-8</span> <span class="op">*</span> np.eye(n_test_2)</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>gp_samples_2 <span class="op">=</span> rng.multivariate_normal(mu_tilde_2, Sigma_tilde_2, size<span class="op">=</span><span class="dv">1000</span>, method<span class="op">=</span><span class="st">"eigh"</span>)</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>yhat_mean_test_2 <span class="op">=</span> gp_samples_2.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>lo <span class="op">=</span> <span class="bu">min</span>(yhat_mean_test_2.<span class="bu">min</span>(), y_test_2.<span class="bu">min</span>())</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>hi <span class="op">=</span> <span class="bu">max</span>(yhat_mean_test_2.<span class="bu">max</span>(), y_test_2.<span class="bu">max</span>())</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>plt.scatter(yhat_mean_test_2, y_test_2, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>plt.plot([lo, hi], [lo, hi], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"dashed"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted"</span>)</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Actual"</span>)</span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"BART Gaussian process"</span>)</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3257,17 +3255,17 @@ forceTheme('sk-container-id-2');</script>
 <div class="tab-content" data-group="language">
 <div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.127205</code></pre>
+<pre><code>[1] 4.238369</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_2 <span class="op">-</span> y_test_2)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_2 <span class="op">-</span> y_test_2)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>RMSE: 2.9464</code></pre>
+<pre><code>RMSE: 2.4898</code></pre>
 </div>
 </div>
 </div>
