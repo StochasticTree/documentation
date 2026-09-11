@@ -1204,6 +1204,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -1262,7 +1270,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -1340,7 +1347,9 @@ a.param-doc-link::before {
 </colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel to clipboard" onclick="copyToClipboard('kernel',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=kernel,-kernel%20instance%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-kernel;" rel="noreferrer" target="_blank">kernel <span class="param-doc-description" style="position-anchor: --doc-link-kernel;"> kernel: kernel instance, default=None<br>
 <br>
 The kernel specifying the covariance function of the GP.<br>
@@ -1353,7 +1362,9 @@ or the argument `optimizer` is set to `None`.</span></a></td>
 <td class="value">RBF(length_sc...se_level=0.01)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_restarts_optimizer to clipboard" onclick="copyToClipboard('n_restarts_optimizer',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=n_restarts_optimizer,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-n_restarts_optimizer;" rel="noreferrer" target="_blank">n_restarts_optimizer <span class="param-doc-description" style="position-anchor: --doc-link-n_restarts_optimizer;"> n_restarts_optimizer: int, default=0<br>
 <br>
 The number of restarts of the optimizer for finding the kernel's<br>
@@ -1366,7 +1377,9 @@ run is performed.</span></a></td>
 <td class="value">5</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy random_state to clipboard" onclick="copyToClipboard('random_state',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=random_state,-int%2C%20RandomState%20instance%20or%20None%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-random_state;" rel="noreferrer" target="_blank">random_state <span class="param-doc-description" style="position-anchor: --doc-link-random_state;"> random_state: int, RandomState instance or None, default=None<br>
 <br>
 Determines random number generation used to initialize the centers.<br>
@@ -1375,37 +1388,51 @@ See :term:`Glossary &lt;random_state&gt;`.</span></a></td>
 <td class="value">101</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1 to clipboard" onclick="copyToClipboard('kernel__k1',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1</td>
 <td class="value">RBF(length_scale=1)</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2 to clipboard" onclick="copyToClipboard('kernel__k2',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2</td>
 <td class="value">WhiteKernel(noise_level=0.01)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1__length_scale to clipboard" onclick="copyToClipboard('kernel__k1__length_scale',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1__length_scale</td>
 <td class="value">1.0</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1__length_scale_bounds to clipboard" onclick="copyToClipboard('kernel__k1__length_scale_bounds',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1__length_scale_bounds</td>
 <td class="value">(1e-05, ...)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2__noise_level to clipboard" onclick="copyToClipboard('kernel__k2__noise_level',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2__noise_level</td>
 <td class="value">0.01</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2__noise_level_bounds to clipboard" onclick="copyToClipboard('kernel__k2__noise_level_bounds',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2__noise_level_bounds</td>
 <td class="value">(1e-05, ...)</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy alpha to clipboard" onclick="copyToClipboard('alpha',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=alpha,-float%20or%20ndarray%20of%20shape%20%28n_samples%2C%29%2C%20default%3D1e-10" class="param-doc-link" style="anchor-name: --doc-link-alpha;" rel="noreferrer" target="_blank">alpha <span class="param-doc-description" style="position-anchor: --doc-link-alpha;"> alpha: float or ndarray of shape (n_samples,), default=1e-10<br>
 <br>
 Value added to the diagonal of the kernel matrix during fitting.<br>
@@ -1424,7 +1451,9 @@ the noise variance in Gaussian Process Regression, see<br>
 <td class="value">1e-10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy optimizer to clipboard" onclick="copyToClipboard('optimizer',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=optimizer,-%22fmin_l_bfgs_b%22%2C%20callable%20or%20None%2C%20default%3D%22fmin_l_bfgs_b%22" class="param-doc-link" style="anchor-name: --doc-link-optimizer;" rel="noreferrer" target="_blank">optimizer <span class="param-doc-description" style="position-anchor: --doc-link-optimizer;"> optimizer: "fmin_l_bfgs_b", callable or None, default="fmin_l_bfgs_b"<br>
 <br>
 Can either be one of the internally supported optimizers for optimizing<br>
@@ -1451,7 +1480,9 @@ Available internal optimizers are: `{'fmin_l_bfgs_b'}`.</span></a></td>
 <td class="value">'fmin_l_bfgs_b'</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy normalize_y to clipboard" onclick="copyToClipboard('normalize_y',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=normalize_y,-bool%2C%20default%3DFalse" class="param-doc-link" style="anchor-name: --doc-link-normalize_y;" rel="noreferrer" target="_blank">normalize_y <span class="param-doc-description" style="position-anchor: --doc-link-normalize_y;"> normalize_y: bool, default=False<br>
 <br>
 Whether or not to normalize the target values `y` by removing the mean<br>
@@ -1464,7 +1495,9 @@ are reported.<br>
 <td class="value">False</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy copy_X_train to clipboard" onclick="copyToClipboard('copy_X_train',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=copy_X_train,-bool%2C%20default%3DTrue" class="param-doc-link" style="anchor-name: --doc-link-copy_X_train;" rel="noreferrer" target="_blank">copy_X_train <span class="param-doc-description" style="position-anchor: --doc-link-copy_X_train;"> copy_X_train: bool, default=True<br>
 <br>
 If True, a persistent copy of the training data is stored in the<br>
@@ -1474,7 +1507,9 @@ externally.</span></a></td>
 <td class="value">True</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_targets to clipboard" onclick="copyToClipboard('n_targets',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=n_targets,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_targets;" rel="noreferrer" target="_blank">n_targets <span class="param-doc-description" style="position-anchor: --doc-link-n_targets;"> n_targets: int, default=None<br>
 <br>
 The number of dimensions of the target values. Used to decide the number<br>
@@ -1911,7 +1946,7 @@ forceTheme('sk-container-id-1');</script>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08489732</code></pre>
+<pre><code>[1] 0.08800235</code></pre>
 </div>
 </div>
 </div>
@@ -1919,7 +1954,7 @@ forceTheme('sk-container-id-1');</script>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_1 <span class="op">-</span> y_test_1)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>RMSE: 0.0970</code></pre>
+<pre><code>RMSE: 0.1075</code></pre>
 </div>
 </div>
 </div>
@@ -2559,6 +2594,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -2617,7 +2660,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -2695,7 +2737,9 @@ a.param-doc-link::before {
 </colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel to clipboard" onclick="copyToClipboard('kernel',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=kernel,-kernel%20instance%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-kernel;" rel="noreferrer" target="_blank">kernel <span class="param-doc-description" style="position-anchor: --doc-link-kernel;"> kernel: kernel instance, default=None<br>
 <br>
 The kernel specifying the covariance function of the GP.<br>
@@ -2708,7 +2752,9 @@ or the argument `optimizer` is set to `None`.</span></a></td>
 <td class="value">RBF(length_sc...noise_level=1)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_restarts_optimizer to clipboard" onclick="copyToClipboard('n_restarts_optimizer',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=n_restarts_optimizer,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-n_restarts_optimizer;" rel="noreferrer" target="_blank">n_restarts_optimizer <span class="param-doc-description" style="position-anchor: --doc-link-n_restarts_optimizer;"> n_restarts_optimizer: int, default=0<br>
 <br>
 The number of restarts of the optimizer for finding the kernel's<br>
@@ -2721,7 +2767,9 @@ run is performed.</span></a></td>
 <td class="value">1</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy random_state to clipboard" onclick="copyToClipboard('random_state',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=random_state,-int%2C%20RandomState%20instance%20or%20None%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-random_state;" rel="noreferrer" target="_blank">random_state <span class="param-doc-description" style="position-anchor: --doc-link-random_state;"> random_state: int, RandomState instance or None, default=None<br>
 <br>
 Determines random number generation used to initialize the centers.<br>
@@ -2730,37 +2778,51 @@ See :term:`Glossary &lt;random_state&gt;`.</span></a></td>
 <td class="value">101</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1 to clipboard" onclick="copyToClipboard('kernel__k1',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1</td>
 <td class="value">RBF(length_scale=1)</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2 to clipboard" onclick="copyToClipboard('kernel__k2',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2</td>
 <td class="value">WhiteKernel(noise_level=1)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1__length_scale to clipboard" onclick="copyToClipboard('kernel__k1__length_scale',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1__length_scale</td>
 <td class="value">1.0</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k1__length_scale_bounds to clipboard" onclick="copyToClipboard('kernel__k1__length_scale_bounds',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k1__length_scale_bounds</td>
 <td class="value">(1e-05, ...)</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2__noise_level to clipboard" onclick="copyToClipboard('kernel__k2__noise_level',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2__noise_level</td>
 <td class="value">1.0</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy kernel__k2__noise_level_bounds to clipboard" onclick="copyToClipboard('kernel__k2__noise_level_bounds',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">kernel__k2__noise_level_bounds</td>
 <td class="value">(1e-05, ...)</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy alpha to clipboard" onclick="copyToClipboard('alpha',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=alpha,-float%20or%20ndarray%20of%20shape%20%28n_samples%2C%29%2C%20default%3D1e-10" class="param-doc-link" style="anchor-name: --doc-link-alpha;" rel="noreferrer" target="_blank">alpha <span class="param-doc-description" style="position-anchor: --doc-link-alpha;"> alpha: float or ndarray of shape (n_samples,), default=1e-10<br>
 <br>
 Value added to the diagonal of the kernel matrix during fitting.<br>
@@ -2779,7 +2841,9 @@ the noise variance in Gaussian Process Regression, see<br>
 <td class="value">1e-10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy optimizer to clipboard" onclick="copyToClipboard('optimizer',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=optimizer,-%22fmin_l_bfgs_b%22%2C%20callable%20or%20None%2C%20default%3D%22fmin_l_bfgs_b%22" class="param-doc-link" style="anchor-name: --doc-link-optimizer;" rel="noreferrer" target="_blank">optimizer <span class="param-doc-description" style="position-anchor: --doc-link-optimizer;"> optimizer: "fmin_l_bfgs_b", callable or None, default="fmin_l_bfgs_b"<br>
 <br>
 Can either be one of the internally supported optimizers for optimizing<br>
@@ -2806,7 +2870,9 @@ Available internal optimizers are: `{'fmin_l_bfgs_b'}`.</span></a></td>
 <td class="value">'fmin_l_bfgs_b'</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy normalize_y to clipboard" onclick="copyToClipboard('normalize_y',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=normalize_y,-bool%2C%20default%3DFalse" class="param-doc-link" style="anchor-name: --doc-link-normalize_y;" rel="noreferrer" target="_blank">normalize_y <span class="param-doc-description" style="position-anchor: --doc-link-normalize_y;"> normalize_y: bool, default=False<br>
 <br>
 Whether or not to normalize the target values `y` by removing the mean<br>
@@ -2819,7 +2885,9 @@ are reported.<br>
 <td class="value">False</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy copy_X_train to clipboard" onclick="copyToClipboard('copy_X_train',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=copy_X_train,-bool%2C%20default%3DTrue" class="param-doc-link" style="anchor-name: --doc-link-copy_X_train;" rel="noreferrer" target="_blank">copy_X_train <span class="param-doc-description" style="position-anchor: --doc-link-copy_X_train;"> copy_X_train: bool, default=True<br>
 <br>
 If True, a persistent copy of the training data is stored in the<br>
@@ -2829,7 +2897,9 @@ externally.</span></a></td>
 <td class="value">True</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_targets to clipboard" onclick="copyToClipboard('n_targets',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#:~:text=n_targets,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_targets;" rel="noreferrer" target="_blank">n_targets <span class="param-doc-description" style="position-anchor: --doc-link-n_targets;"> n_targets: int, default=None<br>
 <br>
 The number of dimensions of the target values. Used to decide the number<br>
@@ -3259,7 +3329,7 @@ forceTheme('sk-container-id-2');</script>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">mean</span>((yhat_mean_test <span class="sc">-</span> y_test)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.938836</code></pre>
+<pre><code>[1] 4.041927</code></pre>
 </div>
 </div>
 </div>
@@ -3267,7 +3337,7 @@ forceTheme('sk-container-id-2');</script>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: </span><span class="sc">{</span>np<span class="sc">.</span>sqrt(np.mean((yhat_mean_test_2 <span class="op">-</span> y_test_2)<span class="op">**</span><span class="dv">2</span>))<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>RMSE: 2.9907</code></pre>
+<pre><code>RMSE: 2.0889</code></pre>
 </div>
 </div>
 </div>
