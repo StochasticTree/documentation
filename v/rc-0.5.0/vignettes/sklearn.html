@@ -1101,6 +1101,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -1159,7 +1167,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -1229,39 +1236,58 @@ a.param-doc-link::before {
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy general_params to clipboard" onclick="copyToClipboard('general_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_gfr to clipboard" onclick="copyToClipboard('num_gfr',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_burnin to clipboard" onclick="copyToClipboard('num_burnin',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_mcmc to clipboard" onclick="copyToClipboard('num_mcmc',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy mean_forest_params to clipboard" onclick="copyToClipboard('mean_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">mean_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy variance_forest_params to clipboard" onclick="copyToClipboard('variance_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">variance_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy rfx_params to clipboard" onclick="copyToClipboard('rfx_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">rfx_params</td>
 <td class="value">None</td>
 </tr>
@@ -2091,6 +2117,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -2149,7 +2183,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -2219,39 +2252,58 @@ a.param-doc-link::before {
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy general_params to clipboard" onclick="copyToClipboard('general_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_gfr to clipboard" onclick="copyToClipboard('num_gfr',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_burnin to clipboard" onclick="copyToClipboard('num_burnin',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_mcmc to clipboard" onclick="copyToClipboard('num_mcmc',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy mean_forest_params to clipboard" onclick="copyToClipboard('mean_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">mean_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy variance_forest_params to clipboard" onclick="copyToClipboard('variance_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">variance_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy rfx_params to clipboard" onclick="copyToClipboard('rfx_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">rfx_params</td>
 <td class="value">None</td>
 </tr>
@@ -3101,6 +3153,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -3159,7 +3219,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -3246,7 +3305,9 @@ a.param-doc-link::before {
 </colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy estimator to clipboard" onclick="copyToClipboard('estimator',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=estimator,-estimator%20object" class="param-doc-link" style="anchor-name: --doc-link-estimator;" rel="noreferrer" target="_blank">estimator <span class="param-doc-description" style="position-anchor: --doc-link-estimator;"> estimator: estimator object<br>
 <br>
 This is assumed to implement the scikit-learn estimator interface.<br>
@@ -3255,7 +3316,9 @@ or ``scoring`` must be passed.</span></a></td>
 <td class="value">StochTreeBART..._threads': 1})</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy param_grid to clipboard" onclick="copyToClipboard('param_grid',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=param_grid,-dict%20or%20list%20of%20dictionaries" class="param-doc-link" style="anchor-name: --doc-link-param_grid;" rel="noreferrer" target="_blank">param_grid <span class="param-doc-description" style="position-anchor: --doc-link-param_grid;"> param_grid: dict or list of dictionaries<br>
 <br>
 Dictionary with parameters names (`str`) as keys and lists of<br>
@@ -3266,7 +3329,9 @@ of parameter settings.</span></a></td>
 <td class="value">{'mean_forest_params': [{'alpha': 0.95, 'beta': 2.0, 'num_trees': 50}, {'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}, ...], 'num_gfr': [10, 40], 'num_mcmc': [0, 1000]}</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy scoring to clipboard" onclick="copyToClipboard('scoring',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scoring,-str%2C%20callable%2C%20list%2C%20tuple%20or%20dict%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-scoring;" rel="noreferrer" target="_blank">scoring <span class="param-doc-description" style="position-anchor: --doc-link-scoring;"> scoring: str, callable, list, tuple or dict, default=None<br>
 <br>
 Strategy to evaluate the performance of the cross-validated model on<br>
@@ -3290,7 +3355,9 @@ See :ref:`multimetric_grid_search` for an example.</span></a></td>
 <td class="value">'r2'</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_jobs to clipboard" onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_jobs;" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description" style="position-anchor: --doc-link-n_jobs;"> n_jobs: int, default=None<br>
 <br>
 Number of jobs to run in parallel.<br>
@@ -3303,7 +3370,9 @@ for more details.<br>
 <td class="value">1</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy cv to clipboard" onclick="copyToClipboard('cv',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=cv,-int%2C%20cross-validation%20generator%20or%20an%20iterable%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-cv;" rel="noreferrer" target="_blank">cv <span class="param-doc-description" style="position-anchor: --doc-link-cv;"> cv: int, cross-validation generator or an iterable, default=None<br>
 <br>
 Determines the cross-validation splitting strategy.<br>
@@ -3327,7 +3396,9 @@ cross-validation strategies that can be used here.<br>
 <td class="value">5</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy refit to clipboard" onclick="copyToClipboard('refit',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=refit,-bool%2C%20str%2C%20or%20callable%2C%20default%3DTrue" class="param-doc-link" style="anchor-name: --doc-link-refit;" rel="noreferrer" target="_blank">refit <span class="param-doc-description" style="position-anchor: --doc-link-refit;"> refit: bool, str, or callable, default=True<br>
 <br>
 Refit an estimator using the best found parameters on the whole<br>
@@ -3370,7 +3441,9 @@ Support for callable added.</span></a></td>
 <td class="value">True</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy verbose to clipboard" onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-verbose;" rel="noreferrer" target="_blank">verbose <span class="param-doc-description" style="position-anchor: --doc-link-verbose;"> verbose: int, default=0<br>
 <br>
 Controls the verbosity of information printed during fitting, with higher<br>
@@ -3384,7 +3457,9 @@ values yielding more detailed logging.<br>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy pre_dispatch to clipboard" onclick="copyToClipboard('pre_dispatch',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=pre_dispatch,-int%2C%20or%20str%2C%20default%3D%272%2An_jobs%27" class="param-doc-link" style="anchor-name: --doc-link-pre_dispatch;" rel="noreferrer" target="_blank">pre_dispatch <span class="param-doc-description" style="position-anchor: --doc-link-pre_dispatch;"> pre_dispatch: int, or str, default='2*n_jobs'<br>
 <br>
 Controls the number of jobs that get dispatched during parallel<br>
@@ -3400,7 +3475,9 @@ spawning of the jobs<br>
 <td class="value">'2*n_jobs'</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy error_score to clipboard" onclick="copyToClipboard('error_score',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=error_score,-%27raise%27%20or%20numeric%2C%20default%3Dnp.nan" class="param-doc-link" style="anchor-name: --doc-link-error_score;" rel="noreferrer" target="_blank">error_score <span class="param-doc-description" style="position-anchor: --doc-link-error_score;"> error_score: 'raise' or numeric, default=np.nan<br>
 <br>
 Value to assign to the score if an error occurs in estimator fitting.<br>
@@ -3410,7 +3487,9 @@ step, which will always raise the error.</span></a></td>
 <td class="value">nan</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy return_train_score to clipboard" onclick="copyToClipboard('return_train_score',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=return_train_score,-bool%2C%20default%3DFalse" class="param-doc-link" style="anchor-name: --doc-link-return_train_score;" rel="noreferrer" target="_blank">return_train_score <span class="param-doc-description" style="position-anchor: --doc-link-return_train_score;"> return_train_score: bool, default=False<br>
 <br>
 If ``False``, the ``cv_results_`` attribute will not include training<br>
@@ -3558,7 +3637,7 @@ available in the ``cv_results_`` dict at the keys ending with that<br>
 scorer's name (``'_&lt;scorer_name&gt;'``) instead of ``'_score'`` shown<br>
 above. ('split0_test_precision', 'mean_train_precision' etc.)</span></a></td>
 <td class="fitted-att-type">dict</td>
-<td>{'me...me': array([0.0603..., 1.78518362]), 'me...me': array([0.0010..., 0.03927574]), 'me...re': array([0.8295..., 0.84746846]), 'pa...ms': masked_array(... dtype=object), ...}</td>
+<td>{'me...me': array([0.0603..., 1.78127136]), 'me...me': array([0.0008..., 0.03851199]), 'me...re': array([0.8295..., 0.84746846]), 'pa...ms': masked_array(... dtype=object), ...}</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=multimetric_,-bool" class="param-doc-link" style="anchor-name: --doc-link-multimetric_;" rel="noreferrer" target="_blank">multimetric_ <span class="param-doc-description" style="position-anchor: --doc-link-multimetric_;"> multimetric_: bool<br>
@@ -3622,39 +3701,58 @@ For multi-metric evaluation, this attribute holds the validated<br>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_gfr to clipboard" onclick="copyToClipboard('num_gfr',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_gfr</td>
 <td class="value">40</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_mcmc to clipboard" onclick="copyToClipboard('num_mcmc',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_mcmc</td>
 <td class="value">0</td>
 </tr>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy general_params to clipboard" onclick="copyToClipboard('general_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1}</td>
 </tr>
 <tr class="user-set even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy mean_forest_params to clipboard" onclick="copyToClipboard('mean_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">mean_forest_params</td>
 <td class="value">{'alpha': 0.9, 'beta': 1.5, 'num_trees': 100}</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_burnin to clipboard" onclick="copyToClipboard('num_burnin',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy variance_forest_params to clipboard" onclick="copyToClipboard('variance_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">variance_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy rfx_params to clipboard" onclick="copyToClipboard('rfx_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">rfx_params</td>
 <td class="value">None</td>
 </tr>
@@ -4508,6 +4606,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -4566,7 +4672,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -4637,39 +4742,58 @@ a.param-doc-link::before {
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy general_params to clipboard" onclick="copyToClipboard('general_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_gfr to clipboard" onclick="copyToClipboard('num_gfr',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_burnin to clipboard" onclick="copyToClipboard('num_burnin',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_mcmc to clipboard" onclick="copyToClipboard('num_mcmc',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy mean_forest_params to clipboard" onclick="copyToClipboard('mean_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">mean_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy variance_forest_params to clipboard" onclick="copyToClipboard('variance_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">variance_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy rfx_params to clipboard" onclick="copyToClipboard('rfx_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">rfx_params</td>
 <td class="value">None</td>
 </tr>
@@ -5514,6 +5638,14 @@ a.param-doc-link::before {
     width: 14px;
     height: 14px;
     cursor: pointer;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.copy-paste-icon:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 1px;
 }
 
 .features {
@@ -5572,7 +5704,6 @@ a.param-doc-link::before {
 }
 
 .features .features-container {
-  max-width: 15em;
   max-height: 10em;
   overflow: auto;
   scrollbar-width: thin;
@@ -5650,7 +5781,9 @@ a.param-doc-link::before {
 </colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy estimator to clipboard" onclick="copyToClipboard('estimator',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=estimator,-estimator%20object" class="param-doc-link" style="anchor-name: --doc-link-estimator;" rel="noreferrer" target="_blank">estimator <span class="param-doc-description" style="position-anchor: --doc-link-estimator;"> estimator: estimator object<br>
 <br>
 A regressor or a classifier that implements :term:`fit`.<br>
@@ -5661,7 +5794,9 @@ When a regressor is passed, :term:`predict` is used.</span></a></td>
 <td class="value">StochTreeBART..._seed': 1234})</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy n_jobs to clipboard" onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" style="anchor-name: --doc-link-n_jobs;" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description" style="position-anchor: --doc-link-n_jobs;"> n_jobs: int, default=None<br>
 <br>
 The number of jobs to use for the computation: the `n_classes`<br>
@@ -5676,7 +5811,9 @@ for more details.<br>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy verbose to clipboard" onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" style="anchor-name: --doc-link-verbose;" rel="noreferrer" target="_blank">verbose <span class="param-doc-description" style="position-anchor: --doc-link-verbose;"> verbose: int, default=0<br>
 <br>
 The verbosity level, if non zero, progress messages are printed.<br>
@@ -5768,39 +5905,58 @@ underlying estimator exposes such an attribute when fit.<br>
                 <summary>Parameters</summary>
                 
 <table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <tbody>
 <tr class="user-set odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy general_params to clipboard" onclick="copyToClipboard('general_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">general_params</td>
 <td class="value">{'num_threads': 1, 'random_seed': 1234}</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_gfr to clipboard" onclick="copyToClipboard('num_gfr',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_gfr</td>
 <td class="value">10</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_burnin to clipboard" onclick="copyToClipboard('num_burnin',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_burnin</td>
 <td class="value">0</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy num_mcmc to clipboard" onclick="copyToClipboard('num_mcmc',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">num_mcmc</td>
 <td class="value">100</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy mean_forest_params to clipboard" onclick="copyToClipboard('mean_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">mean_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default even">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy variance_forest_params to clipboard" onclick="copyToClipboard('variance_forest_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">variance_forest_params</td>
 <td class="value">None</td>
 </tr>
 <tr class="default odd">
-<td><em></em></td>
+<td><button type="button" class="copy-paste-icon" aria-label="Copy rfx_params to clipboard" onclick="copyToClipboard('rfx_params',
+                          this.parentElement.nextElementSibling)">
+</button></td>
 <td class="param">rfx_params</td>
 <td class="value">None</td>
 </tr>
