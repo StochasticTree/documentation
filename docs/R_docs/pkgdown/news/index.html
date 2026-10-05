@@ -34,6 +34,24 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.6.9000" id="stochtree-0469000">stochtree 0.4.6.9000<a class="anchor" aria-label="anchor" href="#stochtree-0469000"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-4-6-9000">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-6-9000"></a></h3>
+<ul><li>Fix the covariate range used to propose MCMC split points, which was computed incorrectly when all of a node’s values for a feature were negative or when the node’s first observation held its largest value, causing grow proposals to be rejected or drawn from the wrong range <a href="https://github.com/StochasticTree/stochtree/pull/425" class="external-link">#425</a>
+</li>
+<li>Fix the move-type and node-selection probabilities in the MCMC grow / prune Metropolis-Hastings acceptance ratios, so that the tree sampler targets the correct posterior over trees <a href="https://github.com/StochasticTree/stochtree/pull/426" class="external-link">#426</a>
+</li>
+<li>Fix ordering of missing (<code>NaN</code>) covariate values when presorting features for the grow-from-root (GFR) sampler, which now sorts <code>NaN</code>s last, consistent with how numeric splits route them <a href="https://github.com/StochasticTree/stochtree/pull/427" class="external-link">#427</a>
+</li>
+<li>Fix the conditional posterior of the random effects variance components, which was missing factors of one half in its inverse gamma shape and scale <a href="https://github.com/StochasticTree/stochtree/pull/428" class="external-link">#428</a>
+</li>
+</ul><p>Fixes in <a href="https://github.com/StochasticTree/stochtree/pull/425" class="external-link">#425</a>, <a href="https://github.com/StochasticTree/stochtree/pull/426" class="external-link">#426</a>, and <a href="https://github.com/StochasticTree/stochtree/pull/428" class="external-link">#428</a> change sampler output, as does <a href="https://github.com/StochasticTree/stochtree/pull/427" class="external-link">#427</a> for covariates with missing values, so results for a given random seed will differ from previous versions.</p>
+</div>
+<div class="section level3">
+<h3 id="documentation-and-other-maintenance-0-4-6-9000">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-6-9000"></a></h3>
+<ul><li>Add absolute tolerance to several python floating point comparison tests <a href="https://github.com/StochasticTree/stochtree/pull/430" class="external-link">#430</a>.</li>
+<li>Add exact-posterior tests of the MCMC tree sampler in R and Python, which check that a long chain on a small problem reproduces the analytically enumerated posterior over trees <a href="https://github.com/StochasticTree/stochtree/pull/431" class="external-link">#431</a>
+</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.5" id="stochtree-045">stochtree 0.4.5<a class="anchor" aria-label="anchor" href="#stochtree-045"></a></h2><p class="text-muted">CRAN release: 2026-06-30</p>
