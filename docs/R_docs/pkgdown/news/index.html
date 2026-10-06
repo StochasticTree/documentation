@@ -44,11 +44,23 @@
 </li>
 <li>Fix the conditional posterior of the random effects variance components, which was missing factors of one half in its inverse gamma shape and scale <a href="https://github.com/StochasticTree/stochtree/pull/428" class="external-link">#428</a>
 </li>
+<li>Fix an uninitialized starting value when initializing cloglog forests in R, which could crash or corrupt the outcome data for binary and ordinal models with a cloglog link <a href="https://github.com/StochasticTree/stochtree/pull/420" class="external-link">#420</a>
+</li>
 </ul><p>Fixes in <a href="https://github.com/StochasticTree/stochtree/pull/425" class="external-link">#425</a>, <a href="https://github.com/StochasticTree/stochtree/pull/426" class="external-link">#426</a>, and <a href="https://github.com/StochasticTree/stochtree/pull/428" class="external-link">#428</a> change sampler output, as does <a href="https://github.com/StochasticTree/stochtree/pull/427" class="external-link">#427</a> for covariates with missing values, so results for a given random seed will differ from previous versions.</p>
 </div>
 <div class="section level3">
 <h3 id="documentation-and-other-maintenance-0-4-6-9000">Documentation and Other Maintenance<a class="anchor" aria-label="anchor" href="#documentation-and-other-maintenance-0-4-6-9000"></a></h3>
-<ul><li>Add absolute tolerance to several python floating point comparison tests <a href="https://github.com/StochasticTree/stochtree/pull/430" class="external-link">#430</a>.</li>
+<ul><li>Remove unused variables flagged by compiler warnings <a href="https://github.com/StochasticTree/stochtree/pull/417" class="external-link">#417</a>
+</li>
+<li>Mark <code>Log::Fatal</code> as <code>[[noreturn]]</code>, which silences “may be used uninitialized” compiler warnings <a href="https://github.com/StochasticTree/stochtree/pull/418" class="external-link">#418</a>
+</li>
+<li>Explicitly initialize variables in the R forest initialization and sampling code <a href="https://github.com/StochasticTree/stochtree/pull/421" class="external-link">#421</a>
+</li>
+<li>Use shallow clones and canonical <code>.git</code> URLs for git submodules <a href="https://github.com/StochasticTree/stochtree/pull/422" class="external-link">#422</a>
+</li>
+<li>Updated Eigen version to 5.0.1, which also fixes builds on PowerPC without VSX support <a href="https://github.com/StochasticTree/stochtree/pull/424" class="external-link">#424</a>
+</li>
+<li>Add absolute tolerance to several python floating point comparison tests <a href="https://github.com/StochasticTree/stochtree/pull/430" class="external-link">#430</a>.</li>
 <li>Add exact-posterior tests of the MCMC tree sampler in R and Python, which check that a long chain on a small problem reproduces the analytically enumerated posterior over trees <a href="https://github.com/StochasticTree/stochtree/pull/431" class="external-link">#431</a>
 </li>
 </ul></div>
