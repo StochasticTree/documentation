@@ -706,7 +706,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_forest_split_counts</span>(<span class="dv">10</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 21 35 19 29 23 22 21 21 22 33</code></pre>
+<pre><code> [1] 29 20 21 33 27 27 28 19 16 33</code></pre>
 </div>
 </div>
 </div>
@@ -728,7 +728,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_aggregate_split_counts</span>(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2200 2736 2458 2915 2456 2421 1795 2584 2407 3335</code></pre>
+<pre><code> [1] 2744 2281 2257 2912 2579 2460 2556 2626 2133 3428</code></pre>
 </div>
 </div>
 </div>
@@ -778,7 +778,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
+<pre><code> [1] 0 0 0 2 0 0 0 0 0 1</code></pre>
 </div>
 </div>
 </div>
@@ -800,7 +800,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">20</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 1 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 1 0 0 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -821,7 +821,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">30</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 1 0 0 0 0 0 1 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
 </div>
 </div>
 </div>
@@ -870,12 +870,12 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.508 else to node 2
-    node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.243 else to node 4
+    node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.402 else to node 4
     node=2 is a split node, which tells us to go to node 5 if X[:, 9] &lt;= 0.729 else to node 6
-        node=3 is a leaf node with value=-0.953
-        node=4 is a leaf node with value=-0.416
-        node=5 is a leaf node with value=0.255
-        node=6 is a leaf node with value=1.04</code></pre>
+        node=3 is a leaf node with value=-0.699
+        node=4 is a leaf node with value=-0.518
+        node=5 is a leaf node with value=0.368
+        node=6 is a leaf node with value=1.11</code></pre>
 </div>
 </div>
 </div>
