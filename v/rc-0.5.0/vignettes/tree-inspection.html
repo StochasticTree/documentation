@@ -695,7 +695,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_forest_split_counts</span>(<span class="dv">10</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 22 30 28 29 23 33 19 23 26 29</code></pre>
+<pre><code> [1] 15 36 18 17 29 26 26 21 28 34</code></pre>
 </div>
 </div>
 </div>
@@ -717,7 +717,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_aggregate_split_counts</span>(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2939 2828 2318 2361 1887 3344 2257 2152 2655 3167</code></pre>
+<pre><code> [1] 2148 3082 1995 2083 2779 2635 2335 2728 2630 3417</code></pre>
 </div>
 </div>
 </div>
@@ -767,7 +767,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 1 0 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
 </div>
 </div>
 </div>
@@ -789,7 +789,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">20</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 1 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 1 0 0 1 0 0 0 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -810,7 +810,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">30</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 0 0 0 1 0 0 0 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 1 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -860,11 +860,11 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell-output cell-output-stdout">
 <pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.508 else to node 2
     node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.243 else to node 4
-    node=2 is a split node, which tells us to go to node 5 if X[:, 9] &lt;= 0.742 else to node 6
-        node=3 is a leaf node with value=-0.96
-        node=4 is a leaf node with value=-0.262
-        node=5 is a leaf node with value=0.347
-        node=6 is a leaf node with value=1.13</code></pre>
+    node=2 is a split node, which tells us to go to node 5 if X[:, 9] &lt;= 0.751 else to node 6
+        node=3 is a leaf node with value=-1.03
+        node=4 is a leaf node with value=-0.19
+        node=5 is a leaf node with value=0.355
+        node=6 is a leaf node with value=0.994</code></pre>
 </div>
 </div>
 </div>
