@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stochtree_20c_20documentation_0',['stochtree C++ Documentation',['../index.html',1,'']]]
+  ['extending_20stochtree_0',['Extending stochtree',['../index.html#extending-stochtree',1,'']]]
 ];
