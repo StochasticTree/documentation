@@ -7,7 +7,7 @@ var searchData=
   ['bartpredterms_4',['BARTPredTerms',['../structStochTree_1_1BARTPredTerms.html',1,'StochTree']]],
   ['bartsampler_5',['BARTSampler',['../classStochTree_1_1BARTSampler.html',1,'StochTree']]],
   ['bartsamples_6',['BARTSamples',['../structStochTree_1_1BARTSamples.html',1,'StochTree']]],
-  ['basisvalue_7',['basisvalue',['../classStochTree_1_1RandomEffectsDataset.html#a834dc8cb1ff3307d2c48ed436306112b',1,'StochTree::RandomEffectsDataset::BasisValue()'],['../classStochTree_1_1ForestDataset.html#a0cac77110b0e22ac64b38480941346d5',1,'StochTree::ForestDataset::BasisValue()']]],
+  ['basisvalue_7',['BasisValue',['../classStochTree_1_1ForestDataset.html#a0cac77110b0e22ac64b38480941346d5',1,'StochTree::ForestDataset::BasisValue()'],['../classStochTree_1_1RandomEffectsDataset.html#a834dc8cb1ff3307d2c48ed436306112b',1,'StochTree::RandomEffectsDataset::BasisValue()']]],
   ['bcfconfig_8',['BCFConfig',['../structStochTree_1_1BCFConfig.html',1,'StochTree']]],
   ['bcfdata_9',['BCFData',['../structStochTree_1_1BCFData.html',1,'StochTree']]],
   ['bcfpredictionmetadata_10',['BCFPredictionMetadata',['../structStochTree_1_1BCFPredictionMetadata.html',1,'StochTree']]],
@@ -15,7 +15,7 @@ var searchData=
   ['bcfpredterms_12',['BCFPredTerms',['../structStochTree_1_1BCFPredTerms.html',1,'StochTree']]],
   ['bcfsampler_13',['BCFSampler',['../classStochTree_1_1BCFSampler.html',1,'StochTree']]],
   ['bcfsamples_14',['BCFSamples',['../structStochTree_1_1BCFSamples.html',1,'StochTree']]],
-  ['binendindex_15',['binendindex',['../classStochTree_1_1FeatureCutpointGrid.html#ac3e0ca869a321ed6a3db4551b507a7bb',1,'StochTree::FeatureCutpointGrid::BinEndIndex()'],['../classStochTree_1_1CutpointGridContainer.html#ae8845de9ffc6b4909549c46ee179a567',1,'StochTree::CutpointGridContainer::BinEndIndex()']]],
-  ['binlength_16',['binlength',['../classStochTree_1_1FeatureCutpointGrid.html#a845d00ba871e1000509991bb46030a3b',1,'StochTree::FeatureCutpointGrid::BinLength()'],['../classStochTree_1_1CutpointGridContainer.html#a548a0efaa344ed0cde7ef310bd9b2670',1,'StochTree::CutpointGridContainer::BinLength()']]],
-  ['binstartindex_17',['binstartindex',['../classStochTree_1_1FeatureCutpointGrid.html#af57b6ee8c35184386bfc08de747d8d96',1,'StochTree::FeatureCutpointGrid::BinStartIndex()'],['../classStochTree_1_1CutpointGridContainer.html#a52afebb9c5bc20167ccf40c47a2680dd',1,'StochTree::CutpointGridContainer::BinStartIndex()']]]
+  ['binendindex_15',['BinEndIndex',['../classStochTree_1_1FeatureCutpointGrid.html#ac3e0ca869a321ed6a3db4551b507a7bb',1,'StochTree::FeatureCutpointGrid::BinEndIndex()'],['../classStochTree_1_1CutpointGridContainer.html#ae8845de9ffc6b4909549c46ee179a567',1,'StochTree::CutpointGridContainer::BinEndIndex()']]],
+  ['binlength_16',['BinLength',['../classStochTree_1_1FeatureCutpointGrid.html#a845d00ba871e1000509991bb46030a3b',1,'StochTree::FeatureCutpointGrid::BinLength()'],['../classStochTree_1_1CutpointGridContainer.html#a548a0efaa344ed0cde7ef310bd9b2670',1,'StochTree::CutpointGridContainer::BinLength()']]],
+  ['binstartindex_17',['BinStartIndex',['../classStochTree_1_1FeatureCutpointGrid.html#af57b6ee8c35184386bfc08de747d8d96',1,'StochTree::FeatureCutpointGrid::BinStartIndex()'],['../classStochTree_1_1CutpointGridContainer.html#a52afebb9c5bc20167ccf40c47a2680dd',1,'StochTree::CutpointGridContainer::BinStartIndex()']]]
 ];
