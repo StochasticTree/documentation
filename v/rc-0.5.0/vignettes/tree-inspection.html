@@ -81,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3b63789b54881a8be0fbe5b6efedc783.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fb19562740d8c867bd08061fa6e5d079.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -695,7 +695,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_forest_split_counts</span>(<span class="dv">10</span>, p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 26 28 23 23 26 29 20 26 15 29</code></pre>
+<pre><code> [1] 21 27 25 25 23 24 24 20 31 32</code></pre>
 </div>
 </div>
 </div>
@@ -717,7 +717,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_aggregate_split_counts</span>(p_x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2693 2898 2663 2354 2721 2743 2470 2563 2047 3192</code></pre>
+<pre><code> [1] 2733 2357 2814 2685 2511 2444 2452 2002 2404 3553</code></pre>
 </div>
 </div>
 </div>
@@ -744,7 +744,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>splits <span class="ot">=</span> <span class="fu">extractForest</span>(bart_model, <span class="st">"mean"</span>)<span class="sc">$</span><span class="fu">get_granular_split_counts</span>(p_x)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">1</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 1 0 0 0 3</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 3</code></pre>
 </div>
 </div>
 </div>
@@ -789,7 +789,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">20</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 0 0 1 0 0</code></pre>
+<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
 </div>
 </div>
 </div>
@@ -810,7 +810,7 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>splits[<span class="dv">10</span>,<span class="dv">30</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 0 0 0 0 0 0 0 1</code></pre>
+<pre><code> [1] 0 1 0 0 1 0 0 0 0 0</code></pre>
 </div>
 </div>
 </div>
@@ -858,15 +858,13 @@ The sampler was run for 10 GFR iterations, with 1 chain of 0 burn-in iterations 
 <span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.497 else to node 2
+<pre><code>node=0 is a split node, which tells us to go to node 1 if X[:, 9] &lt;= 0.508 else to node 2
     node=1 is a split node, which tells us to go to node 3 if X[:, 9] &lt;= 0.243 else to node 4
-    node=2 is a split node, which tells us to go to node 7 if X[:, 9] &lt;= 0.742 else to node 8
-        node=3 is a leaf node with value=-0.811
-        node=4 is a split node, which tells us to go to node 5 if X[:, 5] &lt;= 0.253 else to node 6
-            node=5 is a leaf node with value=0.0349
-            node=6 is a leaf node with value=-0.0242
-        node=7 is a leaf node with value=0.541
-        node=8 is a leaf node with value=1.05</code></pre>
+    node=2 is a split node, which tells us to go to node 5 if X[:, 9] &lt;= 0.722 else to node 6
+        node=3 is a leaf node with value=-0.823
+        node=4 is a leaf node with value=-0.209
+        node=5 is a leaf node with value=0.388
+        node=6 is a leaf node with value=0.739</code></pre>
 </div>
 </div>
 </div>
