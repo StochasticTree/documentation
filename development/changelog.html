@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fb19562740d8c867bd08061fa6e5d079.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3b63789b54881a8be0fbe5b6efedc783.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -294,6 +294,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Fix ordering of missing (<code>NaN</code>) covariate values when presorting features for the grow-from-root (GFR) sampler, which now sorts <code>NaN</code>s last, consistent with how numeric splits route them <a href="https://github.com/StochasticTree/stochtree/pull/427">#427</a></li>
 <li>Fix the conditional posterior of the random effects variance components, which was missing factors of one half in its inverse gamma shape and scale <a href="https://github.com/StochasticTree/stochtree/pull/428">#428</a></li>
 <li>Fix an uninitialized starting value when initializing cloglog forests in R, which could crash or corrupt the outcome data for binary and ordinal models with a cloglog link <a href="https://github.com/StochasticTree/stochtree/pull/420">#420</a></li>
+<li>Fix cumulative residual and cached-prediction corruption in <code>UpdateResidualEntireForest</code> (and duplicate initial residual subtraction in R <code>bcf()</code>), which caused unstandardized (<code>standardize = FALSE</code>) models with nonzero outcome means to diverge <a href="https://github.com/StochasticTree/stochtree/issues/437">#437</a></li>
 </ul>
 <p>Fixes in <a href="https://github.com/StochasticTree/stochtree/pull/425">#425</a>, <a href="https://github.com/StochasticTree/stochtree/pull/426">#426</a>, and <a href="https://github.com/StochasticTree/stochtree/pull/428">#428</a> change sampler output, as does <a href="https://github.com/StochasticTree/stochtree/pull/427">#427</a> for covariates with missing values, so results for a given random seed will differ from previous versions.</p>
 </section>
@@ -307,6 +308,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Updated Eigen version to 5.0.1, which also fixes builds on PowerPC without VSX support <a href="https://github.com/StochasticTree/stochtree/pull/424">#424</a></li>
 <li>Add absolute tolerance to several python floating point comparison tests <a href="https://github.com/StochasticTree/stochtree/pull/430">#430</a>.</li>
 <li>Add exact-posterior tests of the MCMC tree sampler in R and Python, which check that a long chain on a small problem reproduces the analytically enumerated posterior over trees <a href="https://github.com/StochasticTree/stochtree/pull/431">#431</a></li>
+<li>Add wheel builds and package metadata support for Python 3.15 and migrate Apple Silicon wheel CI off deprecated <code>macos-14</code> to <code>macos-15</code> <a href="https://github.com/StochasticTree/stochtree/issues/432">#432</a></li>
 </ul>
 </section>
 </section>

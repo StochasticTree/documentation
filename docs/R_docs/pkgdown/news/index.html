@@ -46,6 +46,8 @@
 </li>
 <li>Fix an uninitialized starting value when initializing cloglog forests in R, which could crash or corrupt the outcome data for binary and ordinal models with a cloglog link <a href="https://github.com/StochasticTree/stochtree/pull/420" class="external-link">#420</a>
 </li>
+<li>Fix cumulative residual and cached-prediction corruption in <code>UpdateResidualEntireForest</code> (and duplicate initial residual subtraction in R <code><a href="../reference/bcf.html">bcf()</a></code>), which caused unstandardized (<code>standardize = FALSE</code>) models with nonzero outcome means to diverge <a href="https://github.com/StochasticTree/stochtree/issues/437" class="external-link">#437</a>
+</li>
 </ul><p>Fixes in <a href="https://github.com/StochasticTree/stochtree/pull/425" class="external-link">#425</a>, <a href="https://github.com/StochasticTree/stochtree/pull/426" class="external-link">#426</a>, and <a href="https://github.com/StochasticTree/stochtree/pull/428" class="external-link">#428</a> change sampler output, as does <a href="https://github.com/StochasticTree/stochtree/pull/427" class="external-link">#427</a> for covariates with missing values, so results for a given random seed will differ from previous versions.</p>
 </div>
 <div class="section level3">
@@ -62,6 +64,8 @@
 </li>
 <li>Add absolute tolerance to several python floating point comparison tests <a href="https://github.com/StochasticTree/stochtree/pull/430" class="external-link">#430</a>.</li>
 <li>Add exact-posterior tests of the MCMC tree sampler in R and Python, which check that a long chain on a small problem reproduces the analytically enumerated posterior over trees <a href="https://github.com/StochasticTree/stochtree/pull/431" class="external-link">#431</a>
+</li>
+<li>Add wheel builds and package metadata support for Python 3.15 and migrate Apple Silicon wheel CI off deprecated <code>macos-14</code> to <code>macos-15</code> <a href="https://github.com/StochasticTree/stochtree/issues/432" class="external-link">#432</a>
 </li>
 </ul></div>
 </div>
